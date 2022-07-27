@@ -1,0 +1,203 @@
+/* index */
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css";
+@import "../assets/admin/plugins/bootstrap/css/bootstrap.min.css";
+@import "../assets/admin/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css";
+@import "../assets/admin/plugins/charts-c3/plugin.css";
+@import "../assets/admin/plugins/morrisjs/morris.min.css";
+@import "../assets/admin/plugins/sweetalert/sweetalert.css";
+@import "../assets/admin/plugins/dropify/css/dropify.min.css";
+@import "../assets/admin/plugins/jquery-steps/jquery.steps.css";
+@import "../assets/admin/plugins/light-gallery/css/lightgallery.css";
+@import "../assets/admin/plugins/select2/select2.css";
+@import "~lightbox2/dist/css/lightbox.css";
+@import "../assets/admin/css/style.min.css";
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+
+/* select2 */
+.select2-container .select2-search--inline .select2-search__field {
+    font: inherit;
+}
+
+.select2-container--default .select2-selection--single {
+    display: flex;
+    align-items: center;
+    height: calc(2.25rem + 2px);
+}
+
+.select2-container--default .select2-selection--multiple {
+    min-height: calc(2.25rem + 2px);
+}
+
+.select2-container--default[dir="rtl"] .select2-selection--single .select2-selection__arrow {
+    top: 5px;
+}
+
+.select2-results__option {
+    text-align: right;
+}
+
+/* bootstrap select */
+.bootstrap-select.btn-group .dropdown-toggle .filter-option {
+    white-space: nowrap;
+}
+
+.bootstrap-select.btn-group.show-tick .dropdown-menu li.selected a span.check-mark {
+    position: absolute;
+    display: inline-block;
+    left: 15px;
+    right: unset;
+    margin-top: 5px;
+}
+
+/* toggle input css */
+.switchToggle input[type="checkbox"] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+    position: absolute;
+}
+
+.switchToggle label {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 90px;
+    max-width: 90px;
+    height: 30px;
+    background: #00b89e;
+
+    display: block;
+    border-radius: 100px;
+    position: relative;
+}
+
+.switchToggle label:after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 26px;
+    height: 26px;
+    background: #fff;
+    border-radius: 90px;
+    transition: 0.3s;
+}
+
+.switchToggle input:checked+label,
+.switchToggle input:checked+input+label {
+    background: #d1d1d1;
+}
+
+.switchToggle input+label:before,
+.switchToggle input+input+label:before {
+    content: "فعال";
+    position: absolute;
+    top: 5px;
+    left: 45px;
+    width: fit-content;
+    height: 26px;
+    border-radius: 90px;
+    transition: 0.3s;
+    text-indent: 0;
+    color: #fff;
+}
+
+.switchToggle input:checked+label:before,
+.switchToggle input:checked+input+label:before {
+    content: "غیرفعال";
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    width: fit-content;
+    height: 26px;
+    border-radius: 90px;
+    transition: 0.3s;
+    text-indent: 0;
+    color: #7f7777;
+}
+
+.switchToggle input:checked+label:after,
+.switchToggle input:checked+input+label:after {
+    left: calc(100% - 2px);
+    transform: translateX(-100%);
+}
+
+.switchToggle label:active:after {
+    width: 60px;
+}
+
+.toggle-switchArea {
+    margin: 10px 0 10px 0;
+}
+
+.mds-bootstrap-persian-datetime-picker-popover {
+    max-width: fit-content !important;
+}
+
+/* input type number without marker */
+input.without-spin::-webkit-inner-spin-button,
+input.without-spin::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+/* collapse spin */
+a[aria-expanded="true"] span {
+    transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    /*  for IE  */
+    /* 	for browsers supporting webkit (such as chrome, firefox, safari etc.). */
+    -webkit-transform: rotate(270deg);
+    display: inline-block;
+
+}
+
+.bg-ghostwhite {
+    background-color: #f9f9fd;
+}
+
+
+/*
+*  input with addon
+* enable absolute positioning
+ */
+.inner-addon {
+    position: relative;
+}
+
+/* style icon */
+.inner-addon .input-icon {
+    position: absolute;
+    /* padding: 10px; */
+    pointer-events: none;
+}
+
+/* align icon */
+.left-addon .input-icon {
+    left: 10px;
+    top: 10px;
+}
+
+.right-addon .input-icon {
+    right: 0px;
+}
+
+/* add padding  */
+.left-addon input {
+    padding-left: 30px;
+}
+
+.right-addon input {
+    padding-right: 30px;
+}
+
+/* widget_2 bring text to front */
+.widget_2 {
+    background: #fff;
+}
+
+.widget_2 .body {
+    background: none;
+    position: relative;
+}
