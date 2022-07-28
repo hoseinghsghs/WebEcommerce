@@ -473,6 +473,10 @@
     @stack('scripts')
 
 </body>
-<link rel="stylesheet" href="{{asset('js/home.js')}}">
+
+<script type="text/javascript" src="{{asset('js/home.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.3.2/js/lightgallery.js"></script>;
+
+
 
 </html>
