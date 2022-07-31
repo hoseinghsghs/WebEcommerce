@@ -91,7 +91,7 @@
     // }
     // 
     </script>
-    // <script>
+    <script>
     // window.addEventListener('say-goodbye', event => {
     //     $("#header-cart-count").html(
     //         parseInt(

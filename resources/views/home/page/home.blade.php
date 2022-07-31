@@ -1262,3 +1262,12 @@
 </div>
 <!-- footer------------------------------------------->
 @endsection
+@push('styles')
+<style>
+.owl-carousel {
+    -ms-touch-action: none;
+    touch-action: none;
+}
+</style>
+
+@endpush
