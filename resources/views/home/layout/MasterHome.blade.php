@@ -13,10 +13,7 @@
 
     @include('home.partial.Header')
     @include('home.partial.Modal')
-    @include('home.partial.SliderMain')
-    @include('home.partial.Adplacement')
-
-
+    
     @yield('content')
 
     @include('home.partial.Footer')
@@ -89,7 +86,7 @@
     //         console.log(status)
     //     })
     // }
-    // 
+    //
     </script>
     <script>
     // window.addEventListener('say-goodbye', event => {

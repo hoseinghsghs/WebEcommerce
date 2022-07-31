@@ -16,8 +16,7 @@
                                 <div class="header-search row text-right">
                                     <div class="header-search-box">
                                         <form action="#" class="form-search">
-                                            <input type="search" class="header-search-input" name="search-input"
-                                                placeholder="نام کالا، برند و یا دسته مورد نظر خود را جستجو کنید…">
+                                            <input type="search" class="header-search-input" name="search-input" placeholder="نام کالا، برند و یا دسته مورد نظر خود را جستجو کنید…">
                                             <div class="action-btns">
                                                 <button class="btn btn-search" type="submit">
                                                     <img src="assets/home/images/search.png" alt="search">
@@ -762,10 +761,8 @@
                                                                         <a href="#" class="mini-cart-item-close">
                                                                             <i class="mdi mdi-close"></i>
                                                                         </a>
-                                                                        <a href="#"
-                                                                            class="mini-cart-item-image d-block">
-                                                                            <img
-                                                                                src="assets/home/images/menu-main/img-card.jpg">
+                                                                        <a href="#" class="mini-cart-item-image d-block">
+                                                                            <img src="assets/home/images/menu-main/img-card.jpg">
                                                                         </a>
                                                                         <span class="product-name-card">لپ تاپ چووی
                                                                             الترابوک 14
@@ -775,8 +772,7 @@
                                                                             </span>
                                                                             <p class="mb-0">کالامارکت </p>
                                                                         </div>
-                                                                        <div
-                                                                            class="header-basket-list-item-color-badge">
+                                                                        <div class="header-basket-list-item-color-badge">
                                                                             رنگ:
                                                                             <span style="background: #000"></span>
                                                                         </div>
@@ -793,10 +789,8 @@
                                                                         <a href="#" class="mini-cart-item-close">
                                                                             <i class="mdi mdi-close"></i>
                                                                         </a>
-                                                                        <a href="#"
-                                                                            class="mini-cart-item-image d-block">
-                                                                            <img
-                                                                                src="assets/home/images/menu-main/img-card-2.jpg">
+                                                                        <a href="#" class="mini-cart-item-image d-block">
+                                                                            <img src="assets/home/images/menu-main/img-card-2.jpg">
                                                                         </a>
                                                                         <span class="product-name-card">هواوای میت
                                                                             بوک X پرو
@@ -806,8 +800,7 @@
                                                                             </span>
                                                                             <p class="mb-0">کالامارکت </p>
                                                                         </div>
-                                                                        <div
-                                                                            class="header-basket-list-item-color-badge">
+                                                                        <div class="header-basket-list-item-color-badge">
                                                                             رنگ:
                                                                             <span style="background: #ccc"></span>
                                                                         </div>
@@ -846,17 +839,13 @@
                     <div class="nav-header">
                         <div class="header-cover"></div>
                         <div class="logo-wrap">
-                            <a class="logo-icon" href="#"><img alt="logo-icon" src="assets/home/images/logo.png"
-                                    width="40"></a>
+                            <a class="logo-icon" href="#"><img alt="logo-icon" src="assets/home/images/logo.png" width="40"></a>
                         </div>
                     </div>
                     <ul class="nav-categories ul-base">
                         <li>
-                            <a href="#" class="collapsed" type="button" data-toggle="collapse"
-                                data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne"><i
-                                    class="mdi mdi-chevron-down"></i>کالای دیجیتال</a>
-                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
-                                data-parent="#accordionExample" style="">
+                            <a href="#" class="collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne"><i class="mdi mdi-chevron-down"></i>کالای دیجیتال</a>
+                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample" style="">
                                 <ul>
                                     <li class="has-sub"><a href="#" class="category-level-2">لوازم جانبی گوشی</a>
                                         <ul>
@@ -887,11 +876,8 @@
                                 </ul>
                             </div>
                         </li>
-                        <li><a href="#" class="collapsed" type="button" data-toggle="collapse"
-                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><i
-                                    class="mdi mdi-chevron-down"></i>آرایشی و بهداشتی</a>
-                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-                                data-parent="#accordionExample" style="">
+                        <li><a href="#" class="collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><i class="mdi mdi-chevron-down"></i>آرایشی و بهداشتی</a>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample" style="">
                                 <ul>
                                     <li class="has-sub"><a href="#" class="category-level-2">لوازم جانبی گوشی</a>
                                         <ul>
@@ -924,11 +910,8 @@
                         </li>
                         <li><a href="#">ابزار و اداری</a></li>
                         <li><a href="#">مد و پوشاک</a></li>
-                        <li><a href="#" class="collapsed" type="button" data-toggle="collapse"
-                                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><i
-                                    class="mdi mdi-chevron-down"></i>خانه و آشپزخانه</a>
-                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
-                                data-parent="#accordionExample" style="">
+                        <li><a href="#" class="collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><i class="mdi mdi-chevron-down"></i>خانه و آشپزخانه</a>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample" style="">
                                 <ul>
                                     <li class="has-sub"><a href="#" class="category-level-2">لوازم جانبی گوشی</a>
                                         <ul>
@@ -1011,4 +994,3 @@
             </div>
         </div>
     </header>
-    <!-- Modal -->

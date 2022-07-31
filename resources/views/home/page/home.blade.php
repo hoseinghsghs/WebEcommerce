@@ -1,6 +1,9 @@
 @extends('home.layout.MasterHome')
 @section('title','خانه')
+
 @section('content')
+@include('home.partial.SliderMain')
+@include('home.partial.Adplacement')
 <!-- slidre-product------------------------>
 <div class="container-main">
     <div class="d-block">
@@ -1271,3 +1274,4 @@
 </style>
 
 @endpush
+@endsection
