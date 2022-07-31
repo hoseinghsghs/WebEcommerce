@@ -1,6 +1,9 @@
 @extends('home.layout.MasterHome')
 @section('title','خانه')
+
 @section('content')
+@include('home.partial.SliderMain')
+@include('home.partial.Adplacement')
 <!-- slidre-product------------------------>
 <div class="container-main">
     <div class="d-block">
@@ -13,14 +16,11 @@
                     </header>
                     <div class="product-carousel owl-carousel owl-theme owl-rtl owl-loaded owl-drag">
                         <div class="owl-stage-outer">
-                            <div class="owl-stage"
-                                style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 2234px;">
+                            <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 2234px;">
                                 <div class="owl-item active" style="width: 309.083px; margin-left: 10px;">
                                     <div class="item">
-                                        <a href="#" class="d-block hover-img-link" data-toggle="modal"
-                                            data-target="#exampleModal">
-                                            <img src="assets/home/images/slider-product/camera-canon-4000D.jpg"
-                                                class="img-fluid" alt="">
+                                        <a href="#" class="d-block hover-img-link" data-toggle="modal" data-target="#exampleModal">
+                                            <img src="assets/home/images/slider-product/camera-canon-4000D.jpg" class="img-fluid" alt="">
                                             <span class="icon-view">
                                                 <strong><i class="fa fa-eye"></i></strong>
                                             </span>
@@ -57,10 +57,8 @@
                                 </div>
                                 <div class="owl-item active" style="width: 309.083px; margin-left: 10px;">
                                     <div class="item">
-                                        <a href="#" class="d-block hover-img-link" data-toggle="modal"
-                                            data-target="#exampleModal">
-                                            <img src="assets/home/images/slider-product/camera-samsung.jpg"
-                                                class="img-fluid" alt="">
+                                        <a href="#" class="d-block hover-img-link" data-toggle="modal" data-target="#exampleModal">
+                                            <img src="assets/home/images/slider-product/camera-samsung.jpg" class="img-fluid" alt="">
                                             <span class="icon-view">
                                                 <strong><i class="fa fa-eye"></i></strong>
                                             </span>
@@ -77,9 +75,7 @@
                                         <div class="actions">
                                             <ul>
                                                 <li class="action-item like">
-                                                    <button class="btn btn-light add-product-wishes" type="submit"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        title="Tooltip on top">
+                                                    <button class="btn btn-light add-product-wishes" type="submit" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
                                                         <i class="fa fa-heart-o"></i>
                                                     </button>
                                                 </li>
@@ -99,10 +95,8 @@
                                 </div>
                                 <div class="owl-item active" style="width: 309.083px; margin-left: 10px;">
                                     <div class="item">
-                                        <a href="#" class="d-block hover-img-link" data-toggle="modal"
-                                            data-target="#exampleModal">
-                                            <img src="assets/home/images/slider-product/camera-nikon-3500D.jpg"
-                                                class="img-fluid" alt="">
+                                        <a href="#" class="d-block hover-img-link" data-toggle="modal" data-target="#exampleModal">
+                                            <img src="assets/home/images/slider-product/camera-nikon-3500D.jpg" class="img-fluid" alt="">
                                             <span class="icon-view">
                                                 <strong><i class="fa fa-eye"></i></strong>
                                             </span>
@@ -119,9 +113,7 @@
                                         <div class="actions">
                                             <ul>
                                                 <li class="action-item like">
-                                                    <button class="btn btn-light add-product-wishes" type="submit"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        title="Tooltip on top">
+                                                    <button class="btn btn-light add-product-wishes" type="submit" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
                                                         <i class="fa fa-heart-o"></i>
                                                     </button>
                                                 </li>
@@ -141,10 +133,8 @@
                                 </div>
                                 <div class="owl-item active" style="width: 309.083px; margin-left: 10px;">
                                     <div class="item">
-                                        <a href="#" class="d-block hover-img-link" data-toggle="modal"
-                                            data-target="#exampleModal">
-                                            <img src="assets/home/images/slider-product/camera-instax-mini-70.jpg"
-                                                class="img-fluid" alt="">
+                                        <a href="#" class="d-block hover-img-link" data-toggle="modal" data-target="#exampleModal">
+                                            <img src="assets/home/images/slider-product/camera-instax-mini-70.jpg" class="img-fluid" alt="">
                                             <span class="icon-view">
                                                 <strong><i class="fa fa-eye"></i></strong>
                                             </span>
@@ -161,9 +151,7 @@
                                         <div class="actions">
                                             <ul>
                                                 <li class="action-item like">
-                                                    <button class="btn btn-light add-product-wishes" type="submit"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        title="Tooltip on top">
+                                                    <button class="btn btn-light add-product-wishes" type="submit" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
                                                         <i class="fa fa-heart-o"></i>
                                                     </button>
                                                 </li>
@@ -183,10 +171,8 @@
                                 </div>
                                 <div class="owl-item" style="width: 309.083px; margin-left: 10px;">
                                     <div class="item">
-                                        <a href="#" class="d-block hover-img-link" data-toggle="modal"
-                                            data-target="#exampleModal">
-                                            <img src="assets/home/images/slider-product/camera-nikon.jpg"
-                                                class="img-fluid" alt="">
+                                        <a href="#" class="d-block hover-img-link" data-toggle="modal" data-target="#exampleModal">
+                                            <img src="assets/home/images/slider-product/camera-nikon.jpg" class="img-fluid" alt="">
                                             <span class="icon-view">
                                                 <strong><i class="fa fa-eye"></i></strong>
                                             </span>
@@ -204,9 +190,7 @@
                                         <div class="actions">
                                             <ul>
                                                 <li class="action-item like">
-                                                    <button class="btn btn-light add-product-wishes" type="submit"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        title="Tooltip on top">
+                                                    <button class="btn btn-light add-product-wishes" type="submit" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
                                                         <i class="fa fa-heart-o"></i>
                                                     </button>
                                                 </li>
@@ -229,8 +213,7 @@
                     </div>
                 </div>
                 <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -242,18 +225,14 @@
                                 <div class="col-lg-6 pr">
                                     <div class="thum-img">
                                         <div class="widget widget-product card mb-0">
-                                            <div
-                                                class="product-carousel-more owl-carousel owl-theme owl-rtl owl-loaded owl-drag">
+                                            <div class="product-carousel-more owl-carousel owl-theme owl-rtl owl-loaded owl-drag">
                                                 <div class="owl-stage-outer">
-                                                    <div class="owl-stage"
-                                                        style="transform: translate3d(1652px, 0px, 0px); transition: all 0.25s ease 0s; width: 2065px;">
+                                                    <div class="owl-stage" style="transform: translate3d(1652px, 0px, 0px); transition: all 0.25s ease 0s; width: 2065px;">
                                                         <div class="owl-item" style="width: 403px; margin-left: 10px;">
                                                             <div class="item">
-                                                                <a href="#" class="d-block hover-img-link"
-                                                                    data-toggle="modal" data-target="#exampleModal">
+                                                                <a href="#" class="d-block hover-img-link" data-toggle="modal" data-target="#exampleModal">
                                                                     <div class="zoom-box">
-                                                                        <img src="assets/home/images/slider-product/computer-appel.jpg"
-                                                                            width="200" height="150" />
+                                                                        <img src="assets/home/images/slider-product/computer-appel.jpg" width="200" height="150" />
                                                                         <div class="discount-m">
                                                                             <span>10%</span>
                                                                         </div>
@@ -263,11 +242,9 @@
                                                         </div>
                                                         <div class="owl-item" style="width: 403px; margin-left: 10px;">
                                                             <div class="item">
-                                                                <a href="#" class="d-block hover-img-link"
-                                                                    data-toggle="modal" data-target="#exampleModal">
+                                                                <a href="#" class="d-block hover-img-link" data-toggle="modal" data-target="#exampleModal">
                                                                     <div class="zoom-box">
-                                                                        <img src="assets/home/images/slider-product/computer-appel.jpg"
-                                                                            width="200" height="150" />
+                                                                        <img src="assets/home/images/slider-product/computer-appel.jpg" width="200" height="150" />
                                                                         <div class="discount-m">
                                                                             <span>10%</span>
                                                                         </div>
@@ -277,11 +254,9 @@
                                                         </div>
                                                         <div class="owl-item" style="width: 403px; margin-left: 10px;">
                                                             <div class="item">
-                                                                <a href="#" class="d-block hover-img-link"
-                                                                    data-toggle="modal" data-target="#exampleModal">
+                                                                <a href="#" class="d-block hover-img-link" data-toggle="modal" data-target="#exampleModal">
                                                                     <div class="zoom-box">
-                                                                        <img src="assets/home/images/slider-product/computer-appel.jpg"
-                                                                            width="200" height="150" />
+                                                                        <img src="assets/home/images/slider-product/computer-appel.jpg" width="200" height="150" />
                                                                         <div class="discount-m">
                                                                             <span>10%</span>
                                                                         </div>
@@ -291,11 +266,9 @@
                                                         </div>
                                                         <div class="owl-item" style="width: 403px; margin-left: 10px;">
                                                             <div class="item">
-                                                                <a href="#" class="d-block hover-img-link"
-                                                                    data-toggle="modal" data-target="#exampleModal">
+                                                                <a href="#" class="d-block hover-img-link" data-toggle="modal" data-target="#exampleModal">
                                                                     <div class="zoom-box">
-                                                                        <img src="assets/home/images/slider-product/computer-appel.jpg"
-                                                                            width="200" height="150" />
+                                                                        <img src="assets/home/images/slider-product/computer-appel.jpg" width="200" height="150" />
                                                                         <div class="discount-m">
                                                                             <span>10%</span>
                                                                         </div>
@@ -303,14 +276,11 @@
                                                                 </a>
                                                             </div>
                                                         </div>
-                                                        <div class="owl-item active"
-                                                            style="width: 403px; margin-left: 10px;">
+                                                        <div class="owl-item active" style="width: 403px; margin-left: 10px;">
                                                             <div class="item">
-                                                                <a href="#" class="d-block hover-img-link"
-                                                                    data-toggle="modal" data-target="#exampleModal">
+                                                                <a href="#" class="d-block hover-img-link" data-toggle="modal" data-target="#exampleModal">
                                                                     <div class="zoom-box">
-                                                                        <img src="assets/home/images/slider-product/computer-appel.jpg"
-                                                                            width="200" height="150" />
+                                                                        <img src="assets/home/images/slider-product/computer-appel.jpg" width="200" height="150" />
                                                                         <div class="discount-m">
                                                                             <span>10%</span>
                                                                         </div>
@@ -345,8 +315,7 @@
                                         <div class="small-gutters">
                                             <div class="col-lg-12 mb-8 pr-0 pl-0 pr mt-3">
                                                 <div class="product-box_action">
-                                                    <button class="btn btn-gradient-primary add-to-cart"
-                                                        type="submit">افزودن به سبد</button>
+                                                    <button class="btn btn-gradient-primary add-to-cart" type="submit">افزودن به سبد</button>
                                                     <a href="#" class="btn btn-outline-dark btn-block">مشاهده
                                                         جزئیات</a>
                                                 </div>
@@ -369,8 +338,7 @@
                     </header>
                     <div id="suggestion-slider" class="owl-carousel owl-theme owl-rtl owl-loaded owl-drag">
                         <div class="owl-stage-outer">
-                            <div class="owl-stage"
-                                style="transform: translate3d(1369px, 0px, 0px); transition: all 0.25s ease 0s; width: 2190px;">
+                            <div class="owl-stage" style="transform: translate3d(1369px, 0px, 0px); transition: all 0.25s ease 0s; width: 2190px;">
                                 <div class="owl-item cloned" style="width: 273.75px;">
                                     <div class="item">
                                         <a href="#">
@@ -470,14 +438,11 @@
                     </header>
                     <div class="product-carousel owl-carousel owl-theme owl-rtl owl-loaded owl-drag">
                         <div class="owl-stage-outer">
-                            <div class="owl-stage"
-                                style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 2234px;">
+                            <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 2234px;">
                                 <div class="owl-item active" style="width: 309.083px; margin-left: 10px;">
                                     <div class="item">
-                                        <a href="#" class="d-block hover-img-link" data-toggle="modal"
-                                            data-target="#exampleModal">
-                                            <img src="assets/home/images/slider-product/Samsung-S10Plus.jpg"
-                                                class="img-fluid" alt="">
+                                        <a href="#" class="d-block hover-img-link" data-toggle="modal" data-target="#exampleModal">
+                                            <img src="assets/home/images/slider-product/Samsung-S10Plus.jpg" class="img-fluid" alt="">
                                             <span class="icon-view">
                                                 <strong><i class="fa fa-eye"></i></strong>
                                             </span>
@@ -494,9 +459,7 @@
                                         <div class="actions">
                                             <ul>
                                                 <li class="action-item like">
-                                                    <button class="btn btn-light add-product-wishes" type="submit"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        title="Tooltip on top">
+                                                    <button class="btn btn-light add-product-wishes" type="submit" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
                                                         <i class="fa fa-heart-o"></i>
                                                     </button>
                                                 </li>
@@ -516,10 +479,8 @@
                                 </div>
                                 <div class="owl-item active" style="width: 309.083px; margin-left: 10px;">
                                     <div class="item">
-                                        <a href="#" class="d-block hover-img-link" data-toggle="modal"
-                                            data-target="#exampleModal">
-                                            <img src="assets/home/images/slider-product/huawei-p-smart.jpg"
-                                                class="img-fluid" alt="">
+                                        <a href="#" class="d-block hover-img-link" data-toggle="modal" data-target="#exampleModal">
+                                            <img src="assets/home/images/slider-product/huawei-p-smart.jpg" class="img-fluid" alt="">
                                             <span class="icon-view">
                                                 <strong><i class="fa fa-eye"></i></strong>
                                             </span>
@@ -536,9 +497,7 @@
                                         <div class="actions">
                                             <ul>
                                                 <li class="action-item like">
-                                                    <button class="btn btn-light add-product-wishes" type="submit"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        title="Tooltip on top">
+                                                    <button class="btn btn-light add-product-wishes" type="submit" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
                                                         <i class="fa fa-heart-o"></i>
                                                     </button>
                                                 </li>
@@ -558,10 +517,8 @@
                                 </div>
                                 <div class="owl-item active" style="width: 309.083px; margin-left: 10px;">
                                     <div class="item">
-                                        <a href="#" class="d-block hover-img-link" data-toggle="modal"
-                                            data-target="#exampleModal">
-                                            <img src="assets/home/images/slider-product/iphone-xs-max-space.jpg"
-                                                class="img-fluid" alt="">
+                                        <a href="#" class="d-block hover-img-link" data-toggle="modal" data-target="#exampleModal">
+                                            <img src="assets/home/images/slider-product/iphone-xs-max-space.jpg" class="img-fluid" alt="">
                                             <span class="icon-view">
                                                 <strong><i class="fa fa-eye"></i></strong>
                                             </span>
@@ -578,9 +535,7 @@
                                         <div class="actions">
                                             <ul>
                                                 <li class="action-item like">
-                                                    <button class="btn btn-light add-product-wishes" type="submit"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        title="Tooltip on top">
+                                                    <button class="btn btn-light add-product-wishes" type="submit" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
                                                         <i class="fa fa-heart-o"></i>
                                                     </button>
                                                 </li>
@@ -600,10 +555,8 @@
                                 </div>
                                 <div class="owl-item active" style="width: 309.083px; margin-left: 10px;">
                                     <div class="item">
-                                        <a href="#" class="d-block hover-img-link" data-toggle="modal"
-                                            data-target="#exampleModal">
-                                            <img src="assets/home/images/slider-product/honer.jpg" class="img-fluid"
-                                                alt="">
+                                        <a href="#" class="d-block hover-img-link" data-toggle="modal" data-target="#exampleModal">
+                                            <img src="assets/home/images/slider-product/honer.jpg" class="img-fluid" alt="">
                                             <span class="icon-view">
                                                 <strong><i class="fa fa-eye"></i></strong>
                                             </span>
@@ -620,9 +573,7 @@
                                         <div class="actions">
                                             <ul>
                                                 <li class="action-item like">
-                                                    <button class="btn btn-light add-product-wishes" type="submit"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        title="Tooltip on top">
+                                                    <button class="btn btn-light add-product-wishes" type="submit" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
                                                         <i class="fa fa-heart-o"></i>
                                                     </button>
                                                 </li>
@@ -642,10 +593,8 @@
                                 </div>
                                 <div class="owl-item" style="width: 309.083px; margin-left: 10px;">
                                     <div class="item">
-                                        <a href="#" class="d-block hover-img-link" data-toggle="modal"
-                                            data-target="#exampleModal">
-                                            <img src="assets/home/images/slider-product/huawei.jpg" class="img-fluid"
-                                                alt="">
+                                        <a href="#" class="d-block hover-img-link" data-toggle="modal" data-target="#exampleModal">
+                                            <img src="assets/home/images/slider-product/huawei.jpg" class="img-fluid" alt="">
                                             <span class="icon-view">
                                                 <strong><i class="fa fa-eye"></i></strong>
                                             </span>
@@ -662,9 +611,7 @@
                                         <div class="actions">
                                             <ul>
                                                 <li class="action-item like">
-                                                    <button class="btn btn-light add-product-wishes" type="submit"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        title="Tooltip on top">
+                                                    <button class="btn btn-light add-product-wishes" type="submit" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
                                                         <i class="fa fa-heart-o"></i>
                                                     </button>
                                                 </li>
@@ -733,14 +680,11 @@
                     </header>
                     <div class="product-carousel owl-carousel owl-theme owl-rtl owl-loaded owl-drag">
                         <div class="owl-stage-outer">
-                            <div class="owl-stage"
-                                style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 2234px;">
+                            <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 2234px;">
                                 <div class="owl-item active" style="width: 309.083px; margin-left: 10px;">
                                     <div class="item">
-                                        <a href="#" class="d-block hover-img-link" data-toggle="modal"
-                                            data-target="#exampleModal">
-                                            <img src="assets/home/images/slider-product/Stove-lopez.jpg"
-                                                class="img-fluid" alt="">
+                                        <a href="#" class="d-block hover-img-link" data-toggle="modal" data-target="#exampleModal">
+                                            <img src="assets/home/images/slider-product/Stove-lopez.jpg" class="img-fluid" alt="">
                                             <span class="icon-view">
                                                 <strong><i class="fa fa-eye"></i></strong>
                                             </span>
@@ -757,9 +701,7 @@
                                         <div class="actions">
                                             <ul>
                                                 <li class="action-item like">
-                                                    <button class="btn btn-light add-product-wishes" type="submit"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        title="Tooltip on top">
+                                                    <button class="btn btn-light add-product-wishes" type="submit" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
                                                         <i class="fa fa-heart-o"></i>
                                                     </button>
                                                 </li>
@@ -779,10 +721,8 @@
                                 </div>
                                 <div class="owl-item active" style="width: 309.083px; margin-left: 10px;">
                                     <div class="item">
-                                        <a href="#" class="d-block hover-img-link" data-toggle="modal"
-                                            data-target="#exampleModal">
-                                            <img src="assets/home/images/slider-product/SWF-40R.jpg" class="img-fluid"
-                                                alt="">
+                                        <a href="#" class="d-block hover-img-link" data-toggle="modal" data-target="#exampleModal">
+                                            <img src="assets/home/images/slider-product/SWF-40R.jpg" class="img-fluid" alt="">
                                             <span class="icon-view">
                                                 <strong><i class="fa fa-eye"></i></strong>
                                             </span>
@@ -799,9 +739,7 @@
                                         <div class="actions">
                                             <ul>
                                                 <li class="action-item like">
-                                                    <button class="btn btn-light add-product-wishes" type="submit"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        title="Tooltip on top">
+                                                    <button class="btn btn-light add-product-wishes" type="submit" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
                                                         <i class="fa fa-heart-o"></i>
                                                     </button>
                                                 </li>
@@ -821,10 +759,8 @@
                                 </div>
                                 <div class="owl-item active" style="width: 309.083px; margin-left: 10px;">
                                     <div class="item">
-                                        <a href="#" class="d-block hover-img-link" data-toggle="modal"
-                                            data-target="#exampleModal">
-                                            <img src="assets/home/images/slider-product/ECM2013.jpg" class="img-fluid"
-                                                alt="">
+                                        <a href="#" class="d-block hover-img-link" data-toggle="modal" data-target="#exampleModal">
+                                            <img src="assets/home/images/slider-product/ECM2013.jpg" class="img-fluid" alt="">
                                             <span class="icon-view">
                                                 <strong><i class="fa fa-eye"></i></strong>
                                             </span>
@@ -841,9 +777,7 @@
                                         <div class="actions">
                                             <ul>
                                                 <li class="action-item like">
-                                                    <button class="btn btn-light add-product-wishes" type="submit"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        title="Tooltip on top">
+                                                    <button class="btn btn-light add-product-wishes" type="submit" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
                                                         <i class="fa fa-heart-o"></i>
                                                     </button>
                                                 </li>
@@ -863,10 +797,8 @@
                                 </div>
                                 <div class="owl-item active" style="width: 309.083px; margin-left: 10px;">
                                     <div class="item">
-                                        <a href="#" class="d-block hover-img-link" data-toggle="modal"
-                                            data-target="#exampleModal">
-                                            <img src="assets/home/images/slider-product/DNR 290T-366T.jpg"
-                                                class="img-fluid" alt="">
+                                        <a href="#" class="d-block hover-img-link" data-toggle="modal" data-target="#exampleModal">
+                                            <img src="assets/home/images/slider-product/DNR 290T-366T.jpg" class="img-fluid" alt="">
                                             <span class="icon-view">
                                                 <strong><i class="fa fa-eye"></i></strong>
                                             </span>
@@ -883,9 +815,7 @@
                                         <div class="actions">
                                             <ul>
                                                 <li class="action-item like">
-                                                    <button class="btn btn-light add-product-wishes" type="submit"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        title="Tooltip on top">
+                                                    <button class="btn btn-light add-product-wishes" type="submit" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
                                                         <i class="fa fa-heart-o"></i>
                                                     </button>
                                                 </li>
@@ -905,10 +835,8 @@
                                 </div>
                                 <div class="owl-item" style="width: 309.083px; margin-left: 10px;">
                                     <div class="item">
-                                        <a href="#" class="d-block hover-img-link" data-toggle="modal"
-                                            data-target="#exampleModal">
-                                            <img src="assets/home/images/slider-product/Avocado.jpg" class="img-fluid"
-                                                alt="">
+                                        <a href="#" class="d-block hover-img-link" data-toggle="modal" data-target="#exampleModal">
+                                            <img src="assets/home/images/slider-product/Avocado.jpg" class="img-fluid" alt="">
                                             <span class="icon-view">
                                                 <strong><i class="fa fa-eye"></i></strong>
                                             </span>
@@ -925,9 +853,7 @@
                                         <div class="actions">
                                             <ul>
                                                 <li class="action-item like">
-                                                    <button class="btn btn-light add-product-wishes" type="submit"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        title="Tooltip on top">
+                                                    <button class="btn btn-light add-product-wishes" type="submit" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
                                                         <i class="fa fa-heart-o"></i>
                                                     </button>
                                                 </li>
@@ -960,14 +886,11 @@
                     </header>
                     <div class="product-carousel owl-carousel owl-theme owl-rtl owl-loaded owl-drag">
                         <div class="owl-stage-outer">
-                            <div class="owl-stage"
-                                style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 2234px;">
+                            <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 2234px;">
                                 <div class="owl-item active" style="width: 309.083px; margin-left: 10px;">
                                     <div class="item">
-                                        <a href="#" class="d-block hover-img-link" data-toggle="modal"
-                                            data-target="#exampleModal">
-                                            <img src="assets/home/images/slider-product/mitbook.jpg" class="img-fluid"
-                                                alt="">
+                                        <a href="#" class="d-block hover-img-link" data-toggle="modal" data-target="#exampleModal">
+                                            <img src="assets/home/images/slider-product/mitbook.jpg" class="img-fluid" alt="">
                                             <span class="icon-view">
                                                 <strong><i class="fa fa-eye"></i></strong>
                                             </span>
@@ -984,9 +907,7 @@
                                         <div class="actions">
                                             <ul>
                                                 <li class="action-item like">
-                                                    <button class="btn btn-light add-product-wishes" type="submit"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        title="Tooltip on top">
+                                                    <button class="btn btn-light add-product-wishes" type="submit" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
                                                         <i class="fa fa-heart-o"></i>
                                                     </button>
                                                 </li>
@@ -1006,10 +927,8 @@
                                 </div>
                                 <div class="owl-item active" style="width: 309.083px; margin-left: 10px;">
                                     <div class="item">
-                                        <a href="#" class="d-block hover-img-link" data-toggle="modal"
-                                            data-target="#exampleModal">
-                                            <img src="assets/home/images/slider-product/SL1200_-300x300.jpg"
-                                                class="img-fluid" alt="">
+                                        <a href="#" class="d-block hover-img-link" data-toggle="modal" data-target="#exampleModal">
+                                            <img src="assets/home/images/slider-product/SL1200_-300x300.jpg" class="img-fluid" alt="">
                                             <span class="icon-view">
                                                 <strong><i class="fa fa-eye"></i></strong>
                                             </span>
@@ -1026,9 +945,7 @@
                                         <div class="actions">
                                             <ul>
                                                 <li class="action-item like">
-                                                    <button class="btn btn-light add-product-wishes" type="submit"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        title="Tooltip on top">
+                                                    <button class="btn btn-light add-product-wishes" type="submit" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
                                                         <i class="fa fa-heart-o"></i>
                                                     </button>
                                                 </li>
@@ -1048,10 +965,8 @@
                                 </div>
                                 <div class="owl-item" style="width: 309.083px; margin-left: 10px;">
                                     <div class="item">
-                                        <a href="#" class="d-block hover-img-link" data-toggle="modal"
-                                            data-target="#exampleModal">
-                                            <img src="assets/home/images/slider-product/zenbook.jpg" class="img-fluid"
-                                                alt="">
+                                        <a href="#" class="d-block hover-img-link" data-toggle="modal" data-target="#exampleModal">
+                                            <img src="assets/home/images/slider-product/zenbook.jpg" class="img-fluid" alt="">
                                             <span class="icon-view">
                                                 <strong><i class="fa fa-eye"></i></strong>
                                             </span>
@@ -1068,9 +983,7 @@
                                         <div class="actions">
                                             <ul>
                                                 <li class="action-item like">
-                                                    <button class="btn btn-light add-product-wishes" type="submit"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        title="Tooltip on top">
+                                                    <button class="btn btn-light add-product-wishes" type="submit" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
                                                         <i class="fa fa-heart-o"></i>
                                                     </button>
                                                 </li>
@@ -1090,10 +1003,8 @@
                                 </div>
                                 <div class="owl-item active" style="width: 309.083px; margin-left: 10px;">
                                     <div class="item">
-                                        <a href="#" class="d-block hover-img-link" data-toggle="modal"
-                                            data-target="#exampleModal">
-                                            <img src="assets/home/images/slider-product/computer-appel.jpg"
-                                                class="img-fluid" alt="">
+                                        <a href="#" class="d-block hover-img-link" data-toggle="modal" data-target="#exampleModal">
+                                            <img src="assets/home/images/slider-product/computer-appel.jpg" class="img-fluid" alt="">
                                             <span class="icon-view">
                                                 <strong><i class="fa fa-eye"></i></strong>
                                             </span>
@@ -1111,9 +1022,7 @@
                                         <div class="actions">
                                             <ul>
                                                 <li class="action-item like">
-                                                    <button class="btn btn-light add-product-wishes" type="submit"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        title="Tooltip on top">
+                                                    <button class="btn btn-light add-product-wishes" type="submit" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
                                                         <i class="fa fa-heart-o"></i>
                                                     </button>
                                                 </li>
@@ -1133,10 +1042,8 @@
                                 </div>
                                 <div class="owl-item active" style="width: 309.083px; margin-left: 10px;">
                                     <div class="item">
-                                        <a href="#" class="d-block hover-img-link" data-toggle="modal"
-                                            data-target="#exampleModal">
-                                            <img src="assets/home/images/slider-product/asus-laptop.jpg"
-                                                class="img-fluid" alt="">
+                                        <a href="#" class="d-block hover-img-link" data-toggle="modal" data-target="#exampleModal">
+                                            <img src="assets/home/images/slider-product/asus-laptop.jpg" class="img-fluid" alt="">
                                             <span class="icon-view">
                                                 <strong><i class="fa fa-eye"></i></strong>
                                             </span>
@@ -1153,9 +1060,7 @@
                                         <div class="actions">
                                             <ul>
                                                 <li class="action-item like">
-                                                    <button class="btn btn-light add-product-wishes" type="submit"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        title="Tooltip on top">
+                                                    <button class="btn btn-light add-product-wishes" type="submit" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
                                                         <i class="fa fa-heart-o"></i>
                                                     </button>
                                                 </li>
@@ -1185,69 +1090,60 @@
                 <div class="widget widget-product card mb-0">
                     <div class="product-carousel-brand owl-carousel owl-theme owl-rtl owl-loaded owl-drag">
                         <div class="owl-stage-outer">
-                            <div class="owl-stage"
-                                style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 2234px;">
+                            <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 2234px;">
                                 <div class="owl-item active" style="width: 190.75px; margin-left: 10px;">
                                     <div class="item">
                                         <a href="#" class="d-block hover-img-link">
-                                            <img src="assets/home/images/brand/shahab.png" class="img-fluid img-brand"
-                                                alt="">
+                                            <img src="assets/home/images/brand/shahab.png" class="img-fluid img-brand" alt="">
                                         </a>
                                     </div>
                                 </div>
                                 <div class="owl-item active" style="width: 190.75px; margin-left: 10px;">
                                     <div class="item">
                                         <a href="#" class="d-block hover-img-link mt-0">
-                                            <img src="assets/home/images/brand/adata.png" class="img-fluid img-brand"
-                                                alt="">
+                                            <img src="assets/home/images/brand/adata.png" class="img-fluid img-brand" alt="">
                                         </a>
                                     </div>
                                 </div>
                                 <div class="owl-item active" style="width: 190.75px; margin-left: 10px;">
                                     <div class="item">
                                         <a href="#" class="d-block hover-img-link mt-0">
-                                            <img src="assets/home/images/brand/huawei.png" class="img-fluid img-brand"
-                                                alt="">
+                                            <img src="assets/home/images/brand/huawei.png" class="img-fluid img-brand" alt="">
                                         </a>
                                     </div>
                                 </div>
                                 <div class="owl-item active" style="width: 190.75px; margin-left: 10px;">
                                     <div class="item">
                                         <a href="#" class="d-block hover-img-link mt-0">
-                                            <img src="assets/home/images/brand/nokia.png" class="img-fluid img-brand"
-                                                alt="">
+                                            <img src="assets/home/images/brand/nokia.png" class="img-fluid img-brand" alt="">
                                         </a>
                                     </div>
                                 </div>
                                 <div class="owl-item active" style="width: 190.75px; margin-left: 10px;">
                                     <div class="item">
                                         <a href="#" class="d-block hover-img-link mt-0">
-                                            <img src="assets/home/images/brand/panasonic.png"
-                                                class="img-fluid img-brand" alt="">
+                                            <img src="assets/home/images/brand/panasonic.png" class="img-fluid img-brand" alt="">
                                         </a>
                                     </div>
                                 </div>
                                 <div class="owl-item active" style="width: 190.75px; margin-left: 10px;">
                                     <div class="item">
                                         <a href="#" class="d-block hover-img-link mt-0">
-                                            <img src="assets/home/images/brand/parskhazar.png"
-                                                class="img-fluid img-brand" alt="">
+                                            <img src="assets/home/images/brand/parskhazar.png" class="img-fluid img-brand" alt="">
                                         </a>
                                     </div>
                                 </div>
                                 <div class="owl-item active" style="width: 190.75px; margin-left: 10px;">
                                     <div class="item">
                                         <a href="#" class="d-block hover-img-link mt-0">
-                                            <img src="assets/home/images/brand/samsung.png" class="img-fluid img-brand"
-                                                alt="">
+                                            <img src="assets/home/images/brand/samsung.png" class="img-fluid img-brand" alt="">
                                         </a>
                                     </div>
                                 </div>
                                 <div class="owl-item active" style="width: 190.75px; margin-left: 10px;">
                                     <div class="item">
                                         <a href="#" class="d-block hover-img-link mt-0">
-                                            <img src="assets/home/images/brand/xvison.png" class="img-fluid img-brand"
-                                                alt="">
+                                            <img src="assets/home/images/brand/xvison.png" class="img-fluid img-brand" alt="">
                                         </a>
                                     </div>
                                 </div>
@@ -1260,5 +1156,4 @@
         <!-- brand----------------------------------------->
     </div>
 </div>
-<!-- footer------------------------------------------->
 @endsection

@@ -68,7 +68,7 @@
             <!-- adplacement--------------------------->
 
             <!-- slider-amazing------------------------>
-            <div class="col-12">
+            <div class="col-12 d-inline">
                 <div class="slider-widget-products slider-content-tabs slider-amazing-product">
                     <div class="widget widget-product card slider-content-tabs">
                         <header class="card-header">

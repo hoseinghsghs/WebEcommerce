@@ -1,4 +1,4 @@
-@media (max-width: 1300px){
+@media (max-width: 992px){
     .header-main-nav ul.menu-ul li.menu-item{
         display: none;
     }
@@ -48,7 +48,7 @@
     .slider-main-container .carousel-indicators-ul{
         background: none;
     }
-    
+
     .slider-main-container .carousel-indicators-ul > li.carousel-indicators-item{
         width: 10px;
         height: 10px;
@@ -733,7 +733,7 @@
         width: 100%;
         font-size: 12px;
     }
-    
+
     .post-item-profile .profile-content .profile-stats .table-orders .collapse .profile-orders-item .profile-orders-header a.profile-orders-header-details .profile-orders-header-state{
         margin-right: 0;
         margin-top: 5px;
