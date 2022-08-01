@@ -1264,7 +1264,7 @@
     </div>
 </div>
 <!-- footer------------------------------------------->
-@endsection
+
 @push('styles')
 <style>
 .owl-carousel {
