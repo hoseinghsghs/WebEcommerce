@@ -5,28 +5,17 @@
                 <div class="slider-main-container d-block">
                     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
-                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+                            @foreach ($sliders as $slider)
+                            <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
+                            @endforeach
                         </ol>
                         <div class="carousel-inner">
+                            @foreach ($sliders as $slider)
                             <div class="carousel-item active">
-                                <img src="assets/home/images/slider-main/sm-1.jpg" class="d-block w-100" alt="...">
+                                <img src="{{url(env('BANNER_IMAGES_PATCH').$slider->image)}}" class="d-block w-100"
+                                    alt="{{$slider->title}}">
                             </div>
-                            <div class="carousel-item">
-                                <img src="assets/home/images/slider-main/sm-2.jpg" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="assets/home/images/slider-main/sm-3.jpg" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="assets/home/images/slider-main/sm-4.jpg" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="assets/home/images/slider-main/sm-5.jpg" class="d-block w-100" alt="...">
-                            </div>
+                            @endforeach
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
                             data-slide="prev">

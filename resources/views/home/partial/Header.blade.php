@@ -7,9 +7,11 @@
                         <div class="header-right">
                             <div class="col-lg-3 pr">
                                 <div class="header-logo row text-right">
-                                    <a href="#">
-                                        <img src="assets/home/images/logo.png" alt="دیجی اسمارت">
+                                    @isset($setting->logo)
+                                    <a href="{{route('home')}}">
+                                        <img src="{{asset('storage/logo/'.$setting->logo)}}" alt="logo" />
                                     </a>
+                                    @endisset
                                 </div>
                             </div>
                             <div class="col-lg-8 pr">
@@ -104,6 +106,7 @@
                                 <div class="d-block">
                                     <div class="account-box">
                                         <div class="nav-account d-block pl">
+                                            @auth
                                             <span class="icon-account">
                                                 <img src="assets/home/images/man.png" class="avator">
                                             </span>
@@ -111,19 +114,33 @@
                                             <div class="dropdown-menu">
                                                 <ul class="account-uls mb-0">
                                                     <li class="account-item">
-                                                        <a href="#" class="account-link">پنل کاربری</a>
+                                                        <a href="{{auth()->user()->hasRole('super-admin') ? route('admin.home'):'#'}}"
+                                                            class="account-link">{{Auth::user()->name ?? auth()->user()->cellphone}}</a>
                                                     </li>
                                                     <li class="account-item">
-                                                        <a href="#" class="account-link">سفارشات من</a>
+                                                        <a href="{{route('home.user_profile')}}"
+                                                            class="account-link">پنل کاربری</a>
                                                     </li>
                                                     <li class="account-item">
-                                                        <a href="#" class="account-link">تنظیمات</a>
+                                                        <a href="{{route('logout')}}" class="account-link"
+                                                            onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">خروج</a>
                                                     </li>
-                                                    <li class="account-item">
-                                                        <a href="#" class="account-link">خروج</a>
-                                                    </li>
+                                                    <form id="frm-logout" action="{{ route('logout') }}" method="POST"
+                                                        style="display: none;">
+                                                        {{ csrf_field() }}
+                                                    </form>
                                                 </ul>
                                             </div>
+                                            @endauth
+                                            @guest
+                                            @if (!request()->routeIs('login') && !request()->routeIs('register'))
+                                            <a href="#login-popup" class="btn btn-secondary btn-sm"
+                                                style="background-color:#651fff ;border-color:#651fff"><i
+                                                    class="fa fa-sign-in" aria-hidden="true"></i> ثبت
+                                                نام / ورود
+                                            </a>
+                                            @endif
+                                            @endguest
                                         </div>
                                     </div>
                                 </div>
@@ -165,90 +182,67 @@
 
                                             <span class="count-cart">{{Cart::getContent()->count()}}</span>
                                         </a>
+                                        @if (! \Cart::isEmpty())
                                         <div class="widget-shopping-cart">
                                             <div class="widget-shopping-cart-content">
+
                                                 <div class="wrapper">
                                                     <div class="scrollbar" id="style-1">
                                                         <div class="force-overflow">
                                                             <ul class="product-list-widget">
-                                                                <li class="mini-cart-item">
+                                                                @foreach (\Cart::getContent() as $item)
+                                                                <li class="mini-cart-item" id="{{$item->id}}">
                                                                     <div class="mini-cart-item-content">
-                                                                        <a href="#" class="mini-cart-item-close">
+                                                                        <a onclick="return delete_product_cart('{{$item->id}}')"
+                                                                            class="mini-cart-item-close">
                                                                             <i class="mdi mdi-close"></i>
                                                                         </a>
-                                                                        <a href="#"
+                                                                        <a href="{{route('home.products.show',['product'=>$item->associatedModel->slug])}}"
                                                                             class="mini-cart-item-image d-block">
                                                                             <img
-                                                                                src="assets/home/images/menu-main/img-card.jpg">
+                                                                                src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$item->associatedModel->primary_image)}}">
                                                                         </a>
-                                                                        <span class="product-name-card">لپ تاپ چووی
-                                                                            الترابوک 14
-                                                                            اینچ پرو</span>
+                                                                        <span class="product-name-card">{{$item->name}}
+                                                                            {{$item->attributes->value}}</span>
                                                                         <div class="variation">
                                                                             <span class="variation-n">فروشنده :
                                                                             </span>
-                                                                            <p class="mb-0">کالامارکت </p>
+                                                                            <p class="mb-0">{{env('APP_NAME')}}</p>
                                                                         </div>
-                                                                        <div
+                                                                        <!-- <div
                                                                             class="header-basket-list-item-color-badge">
                                                                             رنگ:
                                                                             <span style="background: #000"></span>
-                                                                        </div>
+                                                                        </div> -->
                                                                         <div class="quantity">
                                                                             <span class="quantity-Price-amount">
-                                                                                15,000,000
+                                                                                {{$item->quantity}} *
+                                                                                {{number_format($item->price)}}
                                                                                 <span>تومان</span>
                                                                             </span>
                                                                         </div>
                                                                     </div>
                                                                 </li>
-                                                                <li class="mini-cart-item">
-                                                                    <div class="mini-cart-item-content">
-                                                                        <a href="#" class="mini-cart-item-close">
-                                                                            <i class="mdi mdi-close"></i>
-                                                                        </a>
-                                                                        <a href="#"
-                                                                            class="mini-cart-item-image d-block">
-                                                                            <img
-                                                                                src="assets/home/images/menu-main/img-card-2.jpg">
-                                                                        </a>
-                                                                        <span class="product-name-card">هواوای میت
-                                                                            بوک X پرو
-                                                                            13.9 اینچ</span>
-                                                                        <div class="variation">
-                                                                            <span class="variation-n">فروشنده :
-                                                                            </span>
-                                                                            <p class="mb-0">کالامارکت </p>
-                                                                        </div>
-                                                                        <div
-                                                                            class="header-basket-list-item-color-badge">
-                                                                            رنگ:
-                                                                            <span style="background: #ccc"></span>
-                                                                        </div>
-                                                                        <div class="quantity">
-                                                                            <span class="quantity-Price-amount">
-                                                                                10,000,000
-                                                                                <span>تومان</span>
-                                                                            </span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
+                                                                @endforeach
                                                             </ul>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="mini-card-total">
                                                     <strong>قیمت کل : </strong>
-                                                    <span class="price-total"> 25,000,000
+                                                    <span class="price-total"> {{number_format(\Cart::getTotal())}}
                                                         <span>تومان</span>
                                                     </span>
                                                 </div>
                                                 <div class="mini-card-button">
-                                                    <a href="cart.html" class="view-card">مشاهده سبد خرید</a>
-                                                    <a href="checkout.html" class="card-checkout">تسویه حساب</a>
+                                                    <a href="{{route('home.cart.index')}}" class="view-card">مشاهده سبد
+                                                        خرید</a>
+                                                    <a href="{{route('home.orders.checkout')}}"
+                                                        class="card-checkout">تسویه حساب</a>
                                                 </div>
                                             </div>
                                         </div>
+                                        @endif
                                     </div>
                                 </li>
                             </ul>
@@ -260,8 +254,11 @@
                     <div class="nav-header">
                         <div class="header-cover"></div>
                         <div class="logo-wrap">
-                            <a class="logo-icon" href="#"><img alt="logo-icon" src="assets/home/images/logo.png"
-                                    width="40"></a>
+                            @isset($setting->logo)
+                            <a href="{{route('home')}}" class="logo-icon">
+                                <img src="{{asset('storage/logo/'.$setting->logo)}}" alt="logo" width="40" />
+                            </a>
+                            @endisset
                         </div>
                     </div>
 
