@@ -104,9 +104,10 @@
                         <div class="header-left">
                             <div class="header-account text-left">
                                 <div class="d-block">
+
+                                    @auth
                                     <div class="account-box">
                                         <div class="nav-account d-block pl">
-                                            @auth
                                             <span class="icon-account">
                                                 <img src="assets/home/images/man.png" class="avator">
                                             </span>
@@ -134,19 +135,21 @@
                                             @endauth
                                             @guest
                                             @if (!request()->routeIs('login') && !request()->routeIs('register'))
-                                            <a href="#login-popup" class="btn btn-secondary btn-sm"
-                                                style="background-color:#651fff ;border-color:#651fff"><i
-                                                    class="fa fa-sign-in" aria-hidden="true"></i> ثبت
-                                                نام / ورود
-                                            </a>
-                                            @endif
-                                            @endguest
+                                            <div class="account-box" style="padding-left:8px;">
+                                                <div class="nav-account d-block pl">
+                                                    <a href="#login-popup" class="btn btn-secondary btn-sm"
+                                                        style="background-color:#651fff ;border-color:#651fff;"><i
+                                                            class="fa fa-sign-in" aria-hidden="true"></i> ثبت
+                                                        نام | ورود
+                                                    </a>
+                                                    @endif
+                                                    @endguest
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
                 </section>
                 <nav class="header-main-nav">
                     <div class="d-block">

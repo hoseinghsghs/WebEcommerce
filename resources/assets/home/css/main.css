@@ -543,6 +543,7 @@ header.header-main {
     margin-top: 10px;
     border-bottom: 1px solid #e0e0e0;
     border-top: 1px solid #f5f5f5;
+    box-shadow: 0 1px 5px 0 rgb(0 0 0 / 30%);
 }
 
 .header-main-nav ul.menu-ul {
@@ -1945,10 +1946,10 @@ header.header-main {
     height: auto;
     background: #fff;
     overflow: hidden;
-    border-radius: 20px;
-    margin-top: 20px;
+    border-radius: 0px;
+    margin-top: 0px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-    border: 1px solid #ececec;
+
     cursor: pointer;
 }
 
@@ -1958,7 +1959,7 @@ header.header-main {
 
 .slider-main-container .carousel-inner .carousel-item img.h-four-img {
     max-width: 100%;
-    height: 400px;
+    height: 450px;
 }
 
 .slider-main-container .carousel-inner .carousel-item .carousel-caption {
@@ -1975,16 +1976,6 @@ header.header-main {
     border-radius: 50px;
     color: #fff;
     font-size: 14px;
-}
-
-.slider-main-container .carousel-inner .carousel-item-h4::before {
-    content: "";
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.4);
 }
 
 .slider-main-container .carousel-indicators-ul {
@@ -3166,18 +3157,22 @@ header.header-main {
     position: absolute;
     right: 5px;
     top: 50%;
-    color: #a8a8a8;
-    box-shadow: -1px 0 4px 0 rgba(0, 0, 0, 0.15);
+    color: #000000;
+    box-shadow: -1px 0 10px 0 rgba(0, 0, 0, 0.3);
     border-radius: 50px;
+    height: 29px;
+    width: 30px;
 }
 
 .widget-product .owl-carousel .owl-nav .owl-next {
     position: absolute;
     left: 5px;
     top: 50%;
-    color: #a8a8a8;
-    box-shadow: 1px 0 4px 0 rgba(0, 0, 0, 0.15);
+    color: #000000;
+    box-shadow: -1px 0 10px 0 rgba(0, 0, 0, 0.3);
     border-radius: 50px;
+    height: 29px;
+    width: 30px;
 }
 
 .widget-product .owl-carousel .owl-nav .disabled {

@@ -433,6 +433,7 @@ $(document).ready(function (e) {
     // wishes
     $(".add-product-wishes").on("click", function (event) {
         event.preventDefault();
+        console.log("sdgosin");
         const Toast = Swal.mixin({
             toast: true,
             position: "top-end",

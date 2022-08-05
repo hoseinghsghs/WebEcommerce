@@ -13,6 +13,7 @@ require("../assets/home/js/vendor/nouislider.min.js");
 
 require("../assets/home/js/vendor/jquery.nice-select.min.js");
 require("../assets/home/js/vendor/jquery.jqZoom.js");
-require("../assets/home/js/vendor/sweetalert2.all.min.js");
+window.Swal =
+    window.swal = require("../assets/home/js/vendor/sweetalert2.all.min.js");
 require("../assets/home/js/main.js");
 require("../assets/home/js/vendor/cloudflar.js");

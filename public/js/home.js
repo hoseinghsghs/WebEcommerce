@@ -395,6 +395,7 @@ $(document).ready(function (e) {
 
   $(".add-product-wishes").on("click", function (event) {
     event.preventDefault();
+    console.log("sdgosin");
     var Toast = Swal.mixin({
       toast: true,
       position: "top-end",
@@ -28425,7 +28426,7 @@ __webpack_require__(/*! ../assets/home/js/vendor/jquery.nice-select.min.js */ ".
 
 __webpack_require__(/*! ../assets/home/js/vendor/jquery.jqZoom.js */ "./resources/assets/home/js/vendor/jquery.jqZoom.js");
 
-__webpack_require__(/*! ../assets/home/js/vendor/sweetalert2.all.min.js */ "./resources/assets/home/js/vendor/sweetalert2.all.min.js");
+window.Swal = window.swal = __webpack_require__(/*! ../assets/home/js/vendor/sweetalert2.all.min.js */ "./resources/assets/home/js/vendor/sweetalert2.all.min.js");
 
 __webpack_require__(/*! ../assets/home/js/main.js */ "./resources/assets/home/js/main.js");
 

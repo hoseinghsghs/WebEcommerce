@@ -13,7 +13,7 @@
 
     @include('home.partial.Header')
     @include('home.partial.Modal')
-    
+
     @yield('content')
 
     @include('home.partial.Footer')
@@ -471,6 +471,7 @@
 
 </body>
 
+<script type="text/javascript" src="{{asset('js/main.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/home.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.3.2/js/lightgallery.js"></script>;
 

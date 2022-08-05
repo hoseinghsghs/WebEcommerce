@@ -55,6 +55,7 @@ class HomeController extends Controller
 
         $Products_auction_today =        Product::active()->where('position', 'تخفیف روزانه')->get();
         $Products_our_suggestion =       Product::active()->where('position', 'پیشنهاد ما')->get();
+        $Products_special =              Product::active()->where('position', 'فروش ویژه')->get();
 
 
         $Products_our_suggestion_unit =  Product::active()->where('position', 'تک محصول')->get()->first();
@@ -79,6 +80,7 @@ class HomeController extends Controller
                 'Products_auction_today',
                 'Products_our_suggestion',
                 'Products_our_suggestion_unit',
+                'Products_special',
                 'brands',
                 'posts'
 

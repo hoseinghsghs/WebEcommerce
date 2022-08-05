@@ -4,7 +4,51 @@
 @section('content')
 @include('home.partial.SliderMain')
 @include('home.partial.Adplacement')
+
 <!-- slidre-product------------------------>
+<!-- محصولات شگفت انگیز -->
+<section class="section-slider amazing-section pt-3">
+    <div class="container-amazing col-12">
+        <div class="col-lg-3 display-md-none pull-right">
+            <div class="amazing-product text-center">
+                <a href="#">
+                    <img src="assets/home/images/slider-amazing/shopping-cart.svg" alt="">
+                </a>
+                <h3 class="amazing-heading-title amazing-size-default">محصولات شگفت انگیز</h3>
+
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-12 pull-left">
+            <div class="slider-widget-products mb-0">
+                <div class="widget widget-product card">
+                    <header class="card-header">
+                        <span class="title-one">محصولات شگفت انگیز</span>
+                        <h3 class="card-title">مشاهده همه</h3>
+                    </header>
+                    <div class="product-carousel owl-carousel owl-theme owl-rtl owl-loaded owl-drag">
+                        <div class="owl-stage-outer">
+                            <div class="owl-stage"
+                                style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 827px;">
+
+                                @each('home.components.ProductCart1', $Products_special,
+                                'Product_special')
+
+                            </div>
+                        </div>
+                        <div class="owl-nav"><button type="button" role="presentation"
+                                class="owl-prev disabled">&#10094</button><button type="button" role="presentation"
+                                class="owl-next">
+                                &#10095</button>
+                        </div>
+                        <div class="owl-dots disabled"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--  پایان محصولات شگفت انگیز -->
+
 <div class="container-main">
     <div class="d-block">
         <div class="col-lg-9 col-md-9 col-xs-12 pr order-1 d-block">
