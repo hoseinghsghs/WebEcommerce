@@ -86,10 +86,7 @@ $(document).ready(function (e) {
         rtl: true,
         margin: 10,
         nav: true,
-        navText: [
-            '<i class="fa fa-angle-right"></i>',
-            '<i class="fa fa-angle-left"></i>',
-        ],
+        navText: ["&#10094", "&#10095"],
         dots: false,
         responsiveClass: true,
         responsive: {
@@ -366,11 +363,6 @@ $(document).ready(function (e) {
     });
     // checkout-coupon-------------------------------
 
-    // add-product-wishes----------------------------
-    $(".add-product-wishes").on("click", function () {
-        $(this).toggleClass("active");
-    });
-    // add-product-wishes----------------------------
     // SweetAlert -----------------------------------
     // cart-item-close
     $(".mini-cart-item-close").on("click", function () {
@@ -392,28 +384,124 @@ $(document).ready(function (e) {
             }
         });
     });
+
     // add-to-cart
-    $(".btn-add-to-cart").on("click", function (event) {
-        event.preventDefault();
-        const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 2000,
-            didOpen: (toast) => {
-                toast.addEventListener("mouseenter", Swal.stopTimer);
-                toast.addEventListener("mouseleave", Swal.resumeTimer);
+    $(".btn-add-to-cart").on("click", function (e) {
+        //تازه
+        e.preventDefault();
+        var a = $(this);
+        let url = window.location.origin + "/add-to-cart";
+        a.find("i").removeClass("fa fa-shopping-cart");
+        a.find("i").addClass("fa fa-circle-o-notch fa-spin");
+        $.post(
+            url,
+            {
+                _token: $('meta[name="csrf-token"]').attr("content"),
+                product: $("#product_id").val(),
+                variation: $("#variation_value").val(),
+                qtybutton: 1,
             },
-        });
+            function (response, status, xhr) {
+                if (xhr.status == 200) {
+                    a.css("color", "red");
+                    let pro = response.product;
+                    let rowid = response.rowId;
+                    let image_url =
+                        window.location.origin +
+                        "/storage/primary_image/" +
+                        pro.primary_image;
+                    let href_product =
+                        window.location.origin + "/product/" + pro.slug;
 
-        Toast.fire({
-            icon: "success",
-            title: "به سبد خرید خود اضافه شد",
-        });
+                    if ($("#shopping-bag-item").html == 0) {
+                        $("#shopping-bag-item").value(1);
+                    } else {
+                        $("#shopping-bag-item").html(
+                            parseInt($("#shopping-bag-item").html(), 10) + 1
+                        );
+                    }
+                    if ($("#count-cart").html == 0) {
+                        $("#count-cart").value(1);
+                    } else {
+                        $("#count-cart").html(
+                            parseInt($("#count-cart").html(), 10) + 1
+                        );
+                    }
+
+                    $("#product-list-widget").append(
+                        `<li class="mini-cart-item" id="` +
+                            rowid +
+                            `">
+                          <div class="mini-cart-item-content">
+                              <a onclick="return delete_product_cart('` +
+                            rowid +
+                            `')"
+                                  class="mini-cart-item-close">
+                                  <i class="mdi mdi-close"></i>
+                              </a>
+                              <a href="  ` +
+                            href_product +
+                            ` "
+                                  class="mini-cart-item-image d-block">
+                                  <img
+                                      src="` +
+                            image_url +
+                            `">
+                              </a>
+                              <span class="product-name-card">` +
+                            pro.name +
+                            `-
+                                  ` +
+                            response.cart[rowid].attributes.value +
+                            `</span>
+                              <div class="quantity">
+                                  <span class="quantity-Price-amount">
+                                      ` +
+                            response.cart[rowid].quantity +
+                            ` *
+                                      ` +
+                            number_format(response.cart[rowid].price) +
+                            `
+                                      <span>تومان</span>
+                                  </span>
+                              </div>
+                          </div>
+                      </li>`
+                    );
+                    $(".price-total").html(
+                        number_format(response.all_cart) + "تومان"
+                    );
+
+                    Swal.fire({
+                        title: "حله",
+                        text: "محصول به سبد خرید اضافه شد",
+                        icon: "success",
+                        timer: 1500,
+                        ConfirmButton: "باشه",
+                    });
+                }
+                if (xhr.status == 201) {
+                    Swal.fire({
+                        text: "محصول قبلا به سبد خرید اضافه شده",
+                        icon: "warning",
+                        timer: 1500,
+                        ConfirmButton: "باشه",
+                    });
+                }
+            }
+        )
+            .fail(function (response) {
+                alert(response);
+            })
+            .always(function () {
+                a.find("i").removeClass("fa fa-circle-o-notch fa-spin");
+                a.find("i").addClass("fa fa-shopping-cart");
+            });
     });
-    // compare
-    $(".btn-compare").on("click", function (event) {
-        event.preventDefault();
+    //مقایسه صفحه اصلی
+
+    $(".btn-compare").on("click", function (n) {
+        n.preventDefault();
         const Toast = Swal.mixin({
             toast: true,
             position: "top-end",
@@ -425,15 +513,44 @@ $(document).ready(function (e) {
             },
         });
 
-        Toast.fire({
-            icon: "success",
-            title: "محصول برای مقایسه اضافه شد",
-        });
+        var s = $(this);
+        let id = this.dataset.product;
+        console.log(id);
+        let url = window.location.origin + "/add-to-compare" + "/" + [id];
+        console.log(url);
+        n.preventDefault();
+        s.find("i").removeClass("fa fa-random");
+        s.find("i").addClass("fa fa-circle-o-notch fa-spin");
+        $.get(url, function (response, status) {
+            if (response.errors == "deleted") {
+                s.css("color", "rgb(31, 30, 30)"),
+                    Toast.fire({
+                        icon: "success",
+                        title: "محصول از لیست مقایسه حذف شد",
+                    });
+            } else if (response.errors == "saved") {
+                s.css("color", "#651fff"),
+                    Toast.fire({
+                        icon: "success",
+                        title: "محصول برای مقایسه اضافه شد",
+                    });
+            }
+        })
+            .fail(function (jqXHR, exception) {
+                Toast.fire({
+                    icon: "error",
+                    title: "اتصال شما قطع است",
+                });
+            })
+            .always(function () {
+                s.find("i").removeClass("fa fa-circle-o-notch fa-spin");
+
+                s.find("i").addClass("fa fa-random");
+            });
     });
     // wishes
-    $(".add-product-wishes").on("click", function (event) {
-        event.preventDefault();
-        console.log("sdgosin");
+    $(".add-product-wishes").on("click", function (e) {
+        e.preventDefault();
         const Toast = Swal.mixin({
             toast: true,
             position: "top-end",
@@ -444,11 +561,48 @@ $(document).ready(function (e) {
                 toast.addEventListener("mouseleave", Swal.resumeTimer);
             },
         });
-
-        Toast.fire({
-            icon: "success",
-            title: "به لیست علاقه مندی خود اضافه شد",
-        });
+        var a = $(this);
+        let id = this.dataset.product;
+        let product = JSON.parse(id);
+        let url =
+            window.location.origin +
+            "/profile/add-to-wishlist" +
+            "/" +
+            [product];
+        a.find("i").removeClass("fa fa-heart-o");
+        a.find("i").addClass("fa fa-circle-o-notch fa-spin");
+        $.get(url, function (response, status) {
+            console.log(response);
+            if (response.errors == "deleted") {
+                e.preventDefault(), a.removeClass("active");
+                Toast.fire({
+                    icon: "success",
+                    title: "از لیست علاقه مندی ها حذف شد",
+                });
+            } else if (response.errors == "saved") {
+                e.preventDefault(),
+                    a.addClass("active"),
+                    Toast.fire({
+                        icon: "success",
+                        title: "به لیست علاقه مندی خود اضافه شد",
+                    });
+            } else if (response.errors == "sign") {
+                Toast.fire({
+                    icon: "warning",
+                    title: "ابتدا وارد شوید",
+                });
+            }
+        })
+            .fail(function (jqXHR, exception) {
+                Toast.fire({
+                    icon: "warning",
+                    title: "ابتدا وارد شوید",
+                });
+            })
+            .always(function () {
+                a.find("i").removeClass("fa fa-circle-o-notch fa-spin");
+                a.find("i").addClass("fa fa-heart-o");
+            });
     });
     // SweetAlert -----------------------------------
     // nice-select-----------------------------------

@@ -31,6 +31,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Admin\Tags\TagControll;
 use App\Http\Livewire\Home\Cart\ShowCart;
 use App\Http\Livewire\Home\ProductsList;
+use Illuminate\Support\Facades\Session;
 
 //admin routes
 Route::prefix('Admin-panel/managment')->name('admin.')->middleware(['auth','has_role','has_free_plan'])->group(function () {
@@ -139,3 +140,8 @@ Route::get('/payment-verify/{gatewayName}', [PaymentController::class, 'paymentV
 
 
 Route::get('/get-province-cities-list', [AddressController::class, 'getProvinceCitiesList']);
+
+Route::get('/test', function(){
+
+Session::flush();
+} );

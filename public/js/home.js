@@ -84,7 +84,7 @@ $(document).ready(function (e) {
     rtl: true,
     margin: 10,
     nav: true,
-    navText: ['<i class="fa fa-angle-right"></i>', '<i class="fa fa-angle-left"></i>'],
+    navText: ["&#10094", "&#10095"],
     dots: false,
     responsiveClass: true,
     responsive: {
@@ -329,11 +329,6 @@ $(document).ready(function (e) {
   $(".showcoupon").on("click", function () {
     $(".checkout-coupon").slideToggle(200);
   }); // checkout-coupon-------------------------------
-  // add-product-wishes----------------------------
-
-  $(".add-product-wishes").on("click", function () {
-    $(this).toggleClass("active");
-  }); // add-product-wishes----------------------------
   // SweetAlert -----------------------------------
   // cart-item-close
 
@@ -357,26 +352,67 @@ $(document).ready(function (e) {
     });
   }); // add-to-cart
 
-  $(".btn-add-to-cart").on("click", function (event) {
-    event.preventDefault();
-    var Toast = Swal.mixin({
-      toast: true,
-      position: "top-end",
-      showConfirmButton: false,
-      timer: 2000,
-      didOpen: function didOpen(toast) {
-        toast.addEventListener("mouseenter", Swal.stopTimer);
-        toast.addEventListener("mouseleave", Swal.resumeTimer);
-      }
-    });
-    Toast.fire({
-      icon: "success",
-      title: "به سبد خرید خود اضافه شد"
-    });
-  }); // compare
+  $(".btn-add-to-cart").on("click", function (e) {
+    //تازه
+    e.preventDefault();
+    var a = $(this);
+    var url = window.location.origin + "/add-to-cart";
+    a.find("i").removeClass("fa fa-shopping-cart");
+    a.find("i").addClass("fa fa-circle-o-notch fa-spin");
+    $.post(url, {
+      _token: $('meta[name="csrf-token"]').attr("content"),
+      product: $("#product_id").val(),
+      variation: $("#variation_value").val(),
+      qtybutton: 1
+    }, function (response, status, xhr) {
+      if (xhr.status == 200) {
+        a.css("color", "red");
+        var pro = response.product;
+        var rowid = response.rowId;
+        var image_url = window.location.origin + "/storage/primary_image/" + pro.primary_image;
+        var href_product = window.location.origin + "/product/" + pro.slug;
 
-  $(".btn-compare").on("click", function (event) {
-    event.preventDefault();
+        if ($("#shopping-bag-item").html == 0) {
+          $("#shopping-bag-item").value(1);
+        } else {
+          $("#shopping-bag-item").html(parseInt($("#shopping-bag-item").html(), 10) + 1);
+        }
+
+        if ($("#count-cart").html == 0) {
+          $("#count-cart").value(1);
+        } else {
+          $("#count-cart").html(parseInt($("#count-cart").html(), 10) + 1);
+        }
+
+        $("#product-list-widget").append("<li class=\"mini-cart-item\" id=\"" + rowid + "\">\n                          <div class=\"mini-cart-item-content\">\n                              <a onclick=\"return delete_product_cart('" + rowid + "')\"\n                                  class=\"mini-cart-item-close\">\n                                  <i class=\"mdi mdi-close\"></i>\n                              </a>\n                              <a href=\"  " + href_product + " \"\n                                  class=\"mini-cart-item-image d-block\">\n                                  <img\n                                      src=\"" + image_url + "\">\n                              </a>\n                              <span class=\"product-name-card\">" + pro.name + "-\n                                  " + response.cart[rowid].attributes.value + "</span>\n                              <div class=\"quantity\">\n                                  <span class=\"quantity-Price-amount\">\n                                      " + response.cart[rowid].quantity + " *\n                                      " + number_format(response.cart[rowid].price) + "\n                                      <span>\u062A\u0648\u0645\u0627\u0646</span>\n                                  </span>\n                              </div>\n                          </div>\n                      </li>");
+        $(".price-total").html(number_format(response.all_cart) + "تومان");
+        Swal.fire({
+          title: "حله",
+          text: "محصول به سبد خرید اضافه شد",
+          icon: "success",
+          timer: 1500,
+          ConfirmButton: "باشه"
+        });
+      }
+
+      if (xhr.status == 201) {
+        Swal.fire({
+          text: "محصول قبلا به سبد خرید اضافه شده",
+          icon: "warning",
+          timer: 1500,
+          ConfirmButton: "باشه"
+        });
+      }
+    }).fail(function (response) {
+      alert(response);
+    }).always(function () {
+      a.find("i").removeClass("fa fa-circle-o-notch fa-spin");
+      a.find("i").addClass("fa fa-shopping-cart");
+    });
+  }); //مقایسه صفحه اصلی
+
+  $(".btn-compare").on("click", function (n) {
+    n.preventDefault();
     var Toast = Swal.mixin({
       toast: true,
       position: "top-end",
@@ -387,15 +423,39 @@ $(document).ready(function (e) {
         toast.addEventListener("mouseleave", Swal.resumeTimer);
       }
     });
-    Toast.fire({
-      icon: "success",
-      title: "محصول برای مقایسه اضافه شد"
+    var s = $(this);
+    var id = this.dataset.product;
+    console.log(id);
+    var url = window.location.origin + "/add-to-compare" + "/" + [id];
+    console.log(url);
+    n.preventDefault();
+    s.find("i").removeClass("fa fa-random");
+    s.find("i").addClass("fa fa-circle-o-notch fa-spin");
+    $.get(url, function (response, status) {
+      if (response.errors == "deleted") {
+        s.css("color", "rgb(31, 30, 30)"), Toast.fire({
+          icon: "success",
+          title: "محصول از لیست مقایسه حذف شد"
+        });
+      } else if (response.errors == "saved") {
+        s.css("color", "#651fff"), Toast.fire({
+          icon: "success",
+          title: "محصول برای مقایسه اضافه شد"
+        });
+      }
+    }).fail(function (jqXHR, exception) {
+      Toast.fire({
+        icon: "error",
+        title: "اتصال شما قطع است"
+      });
+    }).always(function () {
+      s.find("i").removeClass("fa fa-circle-o-notch fa-spin");
+      s.find("i").addClass("fa fa-random");
     });
   }); // wishes
 
-  $(".add-product-wishes").on("click", function (event) {
-    event.preventDefault();
-    console.log("sdgosin");
+  $(".add-product-wishes").on("click", function (e) {
+    e.preventDefault();
     var Toast = Swal.mixin({
       toast: true,
       position: "top-end",
@@ -406,9 +466,40 @@ $(document).ready(function (e) {
         toast.addEventListener("mouseleave", Swal.resumeTimer);
       }
     });
-    Toast.fire({
-      icon: "success",
-      title: "به لیست علاقه مندی خود اضافه شد"
+    var a = $(this);
+    var id = this.dataset.product;
+    var product = JSON.parse(id);
+    var url = window.location.origin + "/profile/add-to-wishlist" + "/" + [product];
+    a.find("i").removeClass("fa fa-heart-o");
+    a.find("i").addClass("fa fa-circle-o-notch fa-spin");
+    $.get(url, function (response, status) {
+      console.log(response);
+
+      if (response.errors == "deleted") {
+        e.preventDefault(), a.removeClass("active");
+        Toast.fire({
+          icon: "success",
+          title: "از لیست علاقه مندی ها حذف شد"
+        });
+      } else if (response.errors == "saved") {
+        e.preventDefault(), a.addClass("active"), Toast.fire({
+          icon: "success",
+          title: "به لیست علاقه مندی خود اضافه شد"
+        });
+      } else if (response.errors == "sign") {
+        Toast.fire({
+          icon: "warning",
+          title: "ابتدا وارد شوید"
+        });
+      }
+    }).fail(function (jqXHR, exception) {
+      Toast.fire({
+        icon: "warning",
+        title: "ابتدا وارد شوید"
+      });
+    }).always(function () {
+      a.find("i").removeClass("fa fa-circle-o-notch fa-spin");
+      a.find("i").addClass("fa fa-heart-o");
     });
   }); // SweetAlert -----------------------------------
   // nice-select-----------------------------------

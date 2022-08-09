@@ -183,17 +183,19 @@
                                                 <i class="mdi mdi-shopping"></i>
                                             </span>
 
-                                            <span class="count-cart">{{Cart::getContent()->count()}}</span>
+                                            <span class="count-cart"
+                                                id="count-cart">{{Cart::getContent()->count()}}</span>
                                         </a>
-                                        @if (! \Cart::isEmpty())
+
                                         <div class="widget-shopping-cart">
                                             <div class="widget-shopping-cart-content">
 
                                                 <div class="wrapper">
                                                     <div class="scrollbar" id="style-1">
                                                         <div class="force-overflow">
-                                                            <ul class="product-list-widget">
+                                                            <ul class="product-list-widget" id="product-list-widget">
                                                                 @foreach (\Cart::getContent() as $item)
+                                                                @if (! \Cart::isEmpty())
                                                                 <li class="mini-cart-item" id="{{$item->id}}">
                                                                     <div class="mini-cart-item-content">
                                                                         <a onclick="return delete_product_cart('{{$item->id}}')"
@@ -226,6 +228,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </li>
+                                                                @endif
                                                                 @endforeach
                                                             </ul>
                                                         </div>
@@ -245,7 +248,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        @endif
+
                                     </div>
                                 </li>
                             </ul>
@@ -266,7 +269,7 @@
                     </div>
 
                     <!-- لیست دسته بندی ها در حالت موبایل در دو سطح -->
-                    <ul class="nav-categories ul-base">
+                    <ul class="nav-categories ul-base mt-4">
                         @foreach ($categories as $category)
                         <li>
                             <a href="{{route('home.products.search',['slug'=>$category->slug])}}" class="collapsed"
@@ -316,7 +319,8 @@
                             <a href="{{route('home.cart.index')}}">
                                 <i class="fa fa-shopping-cart"></i>
                                 سبد خرید
-                                <div class="shopping-bag-item">{{Cart::getContent()->count()}}</div>
+                                <div class="shopping-bag-item" id="shopping-bag-item">{{Cart::getContent()->count()}}
+                                </div>
                             </a>
                         </li>
                         <li>
