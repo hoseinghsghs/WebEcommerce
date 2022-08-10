@@ -178,7 +178,7 @@
                                 @endforeach
                                 <li class="divider-space-card d-block">
                                     <div class="header-cart-basket">
-                                        <a href="#" class="cart-basket-box">
+                                        <a href="{{route('home.cart.index')}}" class="cart-basket-box">
                                             <span class="icon-cart">
                                                 <i class="mdi mdi-shopping"></i>
                                             </span>
@@ -187,7 +187,8 @@
                                                 id="count-cart">{{Cart::getContent()->count()}}</span>
                                         </a>
 
-                                        <div class="widget-shopping-cart">
+                                        <div class="widget-shopping-cart" id="widget-shopping-cart"
+                                            style={{\Cart::isEmpty() ? 'display:none' : ''}}>
                                             <div class="widget-shopping-cart-content">
 
                                                 <div class="wrapper">
@@ -195,7 +196,6 @@
                                                         <div class="force-overflow">
                                                             <ul class="product-list-widget" id="product-list-widget">
                                                                 @foreach (\Cart::getContent() as $item)
-                                                                @if (! \Cart::isEmpty())
                                                                 <li class="mini-cart-item" id="{{$item->id}}">
                                                                     <div class="mini-cart-item-content">
                                                                         <a onclick="return delete_product_cart('{{$item->id}}')"
@@ -222,14 +222,16 @@
                                                                         <div class="quantity">
                                                                             <span class="quantity-Price-amount">
                                                                                 {{$item->quantity}} *
-                                                                                {{number_format($item->price)}}
+                                                                                {{number_format($item->price)}} =
+                                                                                {{number_format($item->quantity*$item->price)}}
                                                                                 <span>تومان</span>
                                                                             </span>
                                                                         </div>
                                                                     </div>
                                                                 </li>
-                                                                @endif
+
                                                                 @endforeach
+
                                                             </ul>
                                                         </div>
                                                     </div>

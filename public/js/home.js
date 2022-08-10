@@ -332,43 +332,27 @@ $(document).ready(function (e) {
   // SweetAlert -----------------------------------
   // cart-item-close
 
-  $(".mini-cart-item-close").on("click", function () {
-    Swal.fire({
-      text: "آیا مطمئن هستید حذف شود؟",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "بله",
-      cancelButtonText: "خیر"
-    }).then(function (result) {
-      if (result.isConfirmed) {
-        Swal.fire({
-          title: "حذف شد!",
-          confirmButtonText: "باشه",
-          icon: "success"
-        });
-      }
-    });
-  }); // add-to-cart
+  $(".mini-cart-item-close").on("click", function () {}); // add-to-cart
 
   $(".btn-add-to-cart").on("click", function (e) {
     //تازه
     e.preventDefault();
     var a = $(this);
+    console.log(a.attr("data-product"));
     var url = window.location.origin + "/add-to-cart";
     a.find("i").removeClass("fa fa-shopping-cart");
     a.find("i").addClass("fa fa-circle-o-notch fa-spin");
     $.post(url, {
       _token: $('meta[name="csrf-token"]').attr("content"),
-      product: $("#product_id").val(),
-      variation: $("#variation_value").val(),
+      product: a.attr("data-product"),
+      variation: a.attr("data-varition"),
       qtybutton: 1
     }, function (response, status, xhr) {
       if (xhr.status == 200) {
-        a.css("color", "red");
+        $("#widget-shopping-cart").css("display", "block");
         var pro = response.product;
         var rowid = response.rowId;
+        var app_name = response.app_name;
         var image_url = window.location.origin + "/storage/primary_image/" + pro.primary_image;
         var href_product = window.location.origin + "/product/" + pro.slug;
 
@@ -384,7 +368,7 @@ $(document).ready(function (e) {
           $("#count-cart").html(parseInt($("#count-cart").html(), 10) + 1);
         }
 
-        $("#product-list-widget").append("<li class=\"mini-cart-item\" id=\"" + rowid + "\">\n                          <div class=\"mini-cart-item-content\">\n                              <a onclick=\"return delete_product_cart('" + rowid + "')\"\n                                  class=\"mini-cart-item-close\">\n                                  <i class=\"mdi mdi-close\"></i>\n                              </a>\n                              <a href=\"  " + href_product + " \"\n                                  class=\"mini-cart-item-image d-block\">\n                                  <img\n                                      src=\"" + image_url + "\">\n                              </a>\n                              <span class=\"product-name-card\">" + pro.name + "-\n                                  " + response.cart[rowid].attributes.value + "</span>\n                              <div class=\"quantity\">\n                                  <span class=\"quantity-Price-amount\">\n                                      " + response.cart[rowid].quantity + " *\n                                      " + number_format(response.cart[rowid].price) + "\n                                      <span>\u062A\u0648\u0645\u0627\u0646</span>\n                                  </span>\n                              </div>\n                          </div>\n                      </li>");
+        $("#product-list-widget").append("<li class=\"mini-cart-item\" id=\"" + rowid + "\">\n                          <div class=\"mini-cart-item-content\">\n                              <a onclick=\"return delete_product_cart('" + rowid + "')\"\n                                  class=\"mini-cart-item-close\">\n                                  <i class=\"mdi mdi-close\"></i>\n                              </a>\n                              <a href=\"  " + href_product + " \"\n                                  class=\"mini-cart-item-image d-block\">\n                                  <img\n                                      src=\"" + image_url + "\">\n                              </a>\n                              <span class=\"product-name-card\">" + pro.name + "-\n                                  " + response.cart[rowid].attributes.value + "</span>\n                            <div class=\"variation\">\n                            <span class=\"variation-n\">\u0641\u0631\u0648\u0634\u0646\u062F\u0647 :\n                            </span>\n                            <p class=\"mb-0\">" + app_name + "</p>\n                            </div>\n                              <div class=\"quantity\">\n                                  <span class=\"quantity-Price-amount\">\n                                      " + response.cart[rowid].quantity + " *\n                                      " + number_format(response.cart[rowid].price) + "\n                            " + number_format(response.cart[rowid].quantity * response.cart[rowid].price) + "\n                                      <span>\u062A\u0648\u0645\u0627\u0646</span>\n                                  </span>\n                              </div>\n                          </div>\n                      </li>");
         $(".price-total").html(number_format(response.all_cart) + "تومان");
         Swal.fire({
           title: "حله",

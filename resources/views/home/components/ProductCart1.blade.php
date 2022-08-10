@@ -68,22 +68,16 @@
                 @endphp
 
                 <form class="cart-form" style="display:inline">
-                    <input type="hidden" id="product_id" name="product" value="{{$Product_special->id}}">
-                    <input type="hidden" id="variation_value" name="product"
-                        value="{{ json_encode($variation->only(['id' , 'sku' , 'quantity','is_sale' , 'sale_price' , 'price'])) }}">
+                    <input type="hidden" id="product_id" name="productid">
+                    <input type="hidden" id="variation_value" name="productvar">
 
                     <li class="action-item add-to-cart">
-                        @if (!\Cart::getContent($rowId)->count())
                         <button class="btn btn-link btn-add-to-cart" data-product="{{$Product_special->id}}"
-                            data-varition="{{$Product_special->id}}" type="submit">
+                            data-varition="{{ json_encode($variation->only(['id' , 'sku' , 'quantity','is_sale' , 'sale_price' , 'price'])) }}"
+                            type="submit">
                             <i class="fa fa-shopping-cart"></i>
                         </button>
-                        @else
-                        <button class="btn btn-link btn-add-to-cart" data-product="{{$Product_special->id}}"
-                            data-varition="{{$Product_special->id}}" style="color: red;" type="submit">
-                            <i class="fa fa-shopping-cart"></i>
-                        </button>
-                        @endif
+
                     </li>
                 </form>
 

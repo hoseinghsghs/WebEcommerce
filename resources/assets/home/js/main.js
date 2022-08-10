@@ -365,31 +365,16 @@ $(document).ready(function (e) {
 
     // SweetAlert -----------------------------------
     // cart-item-close
-    $(".mini-cart-item-close").on("click", function () {
-        Swal.fire({
-            text: "آیا مطمئن هستید حذف شود؟",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "بله",
-            cancelButtonText: "خیر",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire({
-                    title: "حذف شد!",
-                    confirmButtonText: "باشه",
-                    icon: "success",
-                });
-            }
-        });
-    });
+    $(".mini-cart-item-close").on("click", function () {});
 
     // add-to-cart
     $(".btn-add-to-cart").on("click", function (e) {
         //تازه
         e.preventDefault();
         var a = $(this);
+
+        console.log(a.attr("data-product"));
+
         let url = window.location.origin + "/add-to-cart";
         a.find("i").removeClass("fa fa-shopping-cart");
         a.find("i").addClass("fa fa-circle-o-notch fa-spin");
@@ -397,15 +382,16 @@ $(document).ready(function (e) {
             url,
             {
                 _token: $('meta[name="csrf-token"]').attr("content"),
-                product: $("#product_id").val(),
-                variation: $("#variation_value").val(),
+                product: a.attr("data-product"),
+                variation: a.attr("data-varition"),
                 qtybutton: 1,
             },
             function (response, status, xhr) {
                 if (xhr.status == 200) {
-                    a.css("color", "red");
+                    $("#widget-shopping-cart").css("display", "block");
                     let pro = response.product;
                     let rowid = response.rowId;
+                    let app_name = response.app_name;
                     let image_url =
                         window.location.origin +
                         "/storage/primary_image/" +
@@ -454,6 +440,13 @@ $(document).ready(function (e) {
                                   ` +
                             response.cart[rowid].attributes.value +
                             `</span>
+                            <div class="variation">
+                            <span class="variation-n">فروشنده :
+                            </span>
+                            <p class="mb-0">` +
+                            app_name +
+                            `</p>
+                            </div>
                               <div class="quantity">
                                   <span class="quantity-Price-amount">
                                       ` +
@@ -461,6 +454,12 @@ $(document).ready(function (e) {
                             ` *
                                       ` +
                             number_format(response.cart[rowid].price) +
+                            `
+                            ` +
+                            number_format(
+                                response.cart[rowid].quantity *
+                                    response.cart[rowid].price
+                            ) +
                             `
                                       <span>تومان</span>
                                   </span>

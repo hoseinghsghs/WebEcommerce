@@ -47,46 +47,56 @@
         return s.join(dec);
     }
 
-    // function delete_product_cart(id) {
+    function delete_product_cart(id) {
 
-    //     let url =
-    //         window.location.origin +
-    //         "/remove-from-cart" +
-    //         "/" + id;
-    //     console.log(url);
+        let url =
+            window.location.origin +
+            "/remove-from-cart" +
+            "/" + id;
+        Swal.fire({
+            text: "آیا مطمئن هستید حذف شود؟",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "بله",
+            cancelButtonText: "خیر",
+        }).then((result) => {
+            if (result.isConfirmed) {
 
-    //     $.get(url,
-    //         function(response, status, xyz) {
-    //             console.log(status);
-    //             if (status == 'success') {
 
 
-    //                 let price = number_format(response);
-    //                 $(".price").html(price + ' ' + 'تومان');
-    //                 $("#" + id).remove();
-    //                 $("#header-cart-count").html(
-    //                     parseInt(
-    //                         $(
-    //                             "#header-cart-count"
-    //                         ).html(),
-    //                         10
-    //                     ) - 1
-    //                 );
-    //                 Swal.fire({
-    //                     title: "حله",
-    //                     text: " محصول حذف شد",
-    //                     icon: "success",
-    //                     timer: 1500,
-    //                     ConfirmButton: "باشه",
+                $.get(url,
+                    function(response, status, xyz) {
+                        console.log(status);
+                        if (status == 'success') {
+                            let price = number_format(response);
+                            $(".price-total").html(price + ' ' + 'تومان');
+                            $("#" + id).remove();
+                            $("#shopping-bag-item").html(
+                                parseInt($("#shopping-bag-item").html(), 10) - 1
+                            );
+                            $("#count-cart").html(
+                                parseInt($("#count-cart").html(), 10) - 1
+                            );
 
-    //                 });
-    //                 Livewire.emit('delete', id);
-    //             }
-    //         }).fail(function() {
-    //         console.log(status)
-    //     })
-    // }
-    //
+                            Livewire.emit('delete', id);
+                        }
+                    }).fail(function() {
+                    Swal.fire({
+                        title: "مشکل",
+                        text: " اینترنت شما قطع است",
+                        icon: "error",
+                        timer: 1500,
+                        ConfirmButton: "باشه",
+
+                    });
+                })
+            } else {
+
+            }
+        });
+    }
     </script>
     <script>
     // window.addEventListener('say-goodbye', event => {
