@@ -40,6 +40,8 @@ class HomeController extends Controller
         $services =                      Service::orderBy('service_order')->get();
 
         $sliders =                       Banner::active()->where('type', 'اسلایدر')->get();
+        $headers =                       Banner::active()->where('type', 'هدر')->get()->sortBy('priority')->take(4);
+
         $banner_left_top =               Banner::active()->where('type', 'هدر-چپ-بالا')->get()->first();
         $banner_left_bottom =            Banner::active()->where('type', 'هدر-چپ-پایین')->get()->first();
 
@@ -53,12 +55,12 @@ class HomeController extends Controller
         $banner_end_left_bottom_1 =      Banner::active()->where('type', 'آخر-چپ-پایین-1')->get()->first();
         $banner_end_left_bottom_2 =      Banner::active()->where('type', 'آخر-چپ-پایین-2')->get()->first();
 
-        $Products_auction_today =        Product::active()->where('position', 'تخفیف روزانه')->get();
-        $Products_our_suggestion =       Product::active()->where('position', 'پیشنهاد ما')->get();
-        $Products_special =              Product::active()->where('position', 'فروش ویژه')->get();
+        $Products_auction_today =        Product::active()->where('position', 'تخفیف روزانه')->get()->take(15);
+        $Products_our_suggestion =       Product::active()->where('position', 'پیشنهاد ما')->get()->take(15);
+        $Products_special =              Product::active()->where('position', 'فروش ویژه')->get()->take(15);
 
 
-        $Products_our_suggestion_unit =  Product::active()->where('position', 'تک محصول')->get()->first();
+        $Products_our_suggestion_units =  Product::active()->where('position', 'تک محصول')->get()->take(15);
 
         return view(
             'home.page.home',
@@ -79,10 +81,11 @@ class HomeController extends Controller
                 'services',
                 'Products_auction_today',
                 'Products_our_suggestion',
-                'Products_our_suggestion_unit',
+                'Products_our_suggestion_units',
                 'Products_special',
                 'brands',
-                'posts'
+                'posts',
+                'headers',
 
             )
         );

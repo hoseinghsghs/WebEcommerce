@@ -91,8 +91,8 @@ $(document).ready(function (e) {
         responsiveClass: true,
         responsive: {
             0: {
-                items: 1,
-                slideBy: 1,
+                items: 2,
+                slideBy: 2,
             },
             576: {
                 items: 1,
@@ -103,11 +103,11 @@ $(document).ready(function (e) {
                 slideBy: 2,
             },
             992: {
-                items: 4,
+                items: 5,
                 slideBy: 2,
             },
             1400: {
-                items: 4,
+                items: 5,
                 slideBy: 3,
             },
         },

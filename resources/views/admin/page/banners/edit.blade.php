@@ -74,6 +74,8 @@
                                             class="form-control ms select2">
                                             <option></option>
                                             <option {{$banner->type == 'اسلایدر' ? 'selected' : ''}}>اسلایدر</option>
+                                            <option {{$banner->type == 'هدر' ? 'selected' : ''}}>هدر
+                                            </option>
                                             <option {{$banner->type == 'هدر-چپ-بالا' ? 'selected' : ''}}>هدر-چپ-بالا
                                             </option>
                                             <option {{$banner->type == 'هدر-چپ-پایین' ? 'selected' : ''}}>هدر-چپ-پایین
@@ -179,6 +181,10 @@ $(document).ready(function(e) {
         $('.position_message').html('(سایز تصویر 509*730)').css('color', 'red');
         $(".bone").attr("src", "/assets/images/position/top/1.png");
     }
+    if ($('#positionSelect').val() == 'هدر') {
+        $('.position_message').html('(سایز تصویر 400*300)').css('color', 'red');
+        $(".bone").attr("src", "/assets/images/position/1.png");
+    }
     if ($('#positionSelect').val() == 'هدر-چپ-بالا') {
         $('.position_message').html('(سایز تصویر 239*330)').css('color', 'red');
         $(".bone").attr("src", "/assets/images/position/top/2.png");
@@ -236,6 +242,10 @@ $(document).ready(function(e) {
         if ($(this).val() == 'اسلایدر') {
             $('.position_message').html('(سایز تصویر 509*730)').css('color', 'red');
             $(".bone").attr("src", "/assets/images/position/top/1.png");
+        }
+        if ($(this).val() == 'هدر') {
+            $('.position_message').html('(سایز تصویر 400*300)').css('color', 'red');
+            $(".bone").attr("src", "/assets/images/position/1.png");
         }
         if ($(this).val() == 'هدر-چپ-بالا') {
             $('.position_message').html('(سایز تصویر 239*330)').css('color', 'red');

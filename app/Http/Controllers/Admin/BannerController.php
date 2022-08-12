@@ -61,8 +61,13 @@ class BannerController extends Controller
         switch ($request->type) {
 
             case 'اسلایدر':
-                $height=630;
+                $height=640;
                 $width=1200;
+                break;
+
+            case 'هدر':
+                $height=300;
+                $width=400;
                 break;
                 
             case 'هدر-چپ-بالا':
@@ -188,8 +193,13 @@ class BannerController extends Controller
             switch ($request->type) {
 
                 case 'اسلایدر':
-                    $height=630;
+                    $height=640;
                     $width=1200;
+                    break;
+    
+                case 'هدر':
+                    $height=300;
+                    $width=400;
                     break;
                     
                 case 'هدر-چپ-بالا':

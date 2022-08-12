@@ -477,14 +477,54 @@
 
     @include('sweetalert::alert')
     @livewireScripts()
-    @stack('scripts')
+
 
 </body>
 
 <script type="text/javascript" src="{{asset('js/main.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/home.js')}}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.3.2/js/lightgallery.js"></script>;
+@stack('scripts')
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.6/src/jquery.ez-plus.js">
+</script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.19/jquery.touchSwipe.min.js"></script>
+
+
+<script>
+$(document).ready(function() {
+
+    $(".carousel").carousel({
+        interval: false,
+        pause: true,
+        touch: true
+    });
+
+    $(".carousel .carousel-inner").swipe({
+        swipeLeft: function(event, direction, distance, duration, fingerCount) {
+            this.parent().carousel("next");
+        },
+        swipeRight: function() {
+            this.parent().carousel("prev");
+        },
+        threshold: 0,
+        tap: function(event, target) {
+            window.location = $(this).find(".carousel-item.active a").attr("href");
+        },
+        excludedElements: "label, button, input, select, textarea, .noSwipe"
+    });
+
+    $(".carousel .carousel-control-prev").on("click", function() {
+        $(".carousel").carousel("prev");
+    });
+
+    $(".carousel .carousel-control-next").on("click", function() {
+        $(".carousel").carousel("next");
+    });
+
+});
+</script>
 
 
 </html>

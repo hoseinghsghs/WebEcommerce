@@ -1,7 +1,7 @@
 <div class="owl-item active" style="width: 100.25px; margin-left: 10px;">
     <div class="item">
 
-        <div style="position: absolute;left:.2rem;top:.5rem">
+        <div style="position: absolute;left:.2rem;top:-.5rem">
             <ul>
                 <!-- علاقه مندی -->
                 @if (Auth::check())

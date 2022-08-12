@@ -1,36 +1,17 @@
 <!-- adplacement--------------------------->
-<!-- <div class="container-main">
-    <div class="d-block">
+<div class="container-fluid">
+    <div class="row">
         <div class="adplacement-container-row">
+            @foreach ($headers as $header )
             <div class="col-6 col-lg-3 pr">
-                <a href="#" class="adplacement-item">
+                <a href="{{$header->link}}" class="adplacement-item">
                     <div class="adplacement-sponsored_box">
-                        <img src="assets/home/images/adplacement/a-4.jpg">
+                        <img src="{{url(env('BANNER_IMAGES_PATCH').$header->image)}}">
                     </div>
                 </a>
             </div>
-            <div class="col-6 col-lg-3 pr">
-                <a href="#" class="adplacement-item">
-                    <div class="adplacement-sponsored_box">
-                        <img src="assets/home/images/adplacement/a-5.jpg">
-                    </div>
-                </a>
-            </div>
-            <div class="col-6 col-lg-3 pr">
-                <a href="#" class="adplacement-item">
-                    <div class="adplacement-sponsored_box">
-                        <img src="assets/home/images/adplacement/a-6.jpg">
-                    </div>
-                </a>
-            </div>
-            <div class="col-6 col-lg-3 pr">
-                <a href="#" class="adplacement-item">
-                    <div class="adplacement-sponsored_box">
-                        <img src="assets/home/images/adplacement/a-7.jpg">
-                    </div>
-                </a>
-            </div>
+            @endforeach
         </div>
     </div>
-</div> -->
+</div>
 <!-- adplacement--------------------------->

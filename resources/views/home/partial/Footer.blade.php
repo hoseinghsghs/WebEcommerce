@@ -6,7 +6,7 @@
                  <div class="col-12">
                      <div class="item">
                          <span class="icon-shopping">
-                             <img src="assets/home/images/footer/features/delivery-truck.svg" width="50"
+                             <img src="/assets/home/images/footer/features/delivery-truck.svg" width="50"
                                  alt="تحویل اکسپرس" class="img-shopping">
                          </span>
                          <span class="title-shopping">تحویل اکسپرس</span>
@@ -14,7 +14,7 @@
                      </div>
                      <div class="item">
                          <span class="icon-shopping">
-                             <img src="assets/home/images/footer/features/24-hours-support.svg" width="50"
+                             <img src="/assets/home/images/footer/features/24-hours-support.svg" width="50"
                                  alt="پشتیبانی ۲۴ ساعته" class="img-shopping">
                          </span>
                          <span class="title-shopping">پشتیبانی ۲۴ ساعته</span>
@@ -22,7 +22,7 @@
                      </div>
                      <div class="item">
                          <span class="icon-shopping">
-                             <img src="assets/home/images/footer/features/income.svg" width="50" alt="پرداخت در محل"
+                             <img src="/assets/home/images/footer/features/income.svg" width="50" alt="پرداخت در محل"
                                  class="img-shopping">
                          </span>
                          <span class="title-shopping">پرداخت در محل</span>
@@ -30,7 +30,7 @@
                      </div>
                      <div class="item">
                          <span class="icon-shopping">
-                             <img src="assets/home/images/footer/features/easy-return.svg" width="50"
+                             <img src="/assets/home/images/footer/features/easy-return.svg" width="50"
                                  alt="۷ روز ضمانت بازگشت" class="img-shopping">
                          </span>
                          <span class="title-shopping">۷ روز ضمانت بازگشت</span>
@@ -38,7 +38,7 @@
                      </div>
                      <div class="item">
                          <span class="icon-shopping">
-                             <img src="assets/home/images/footer/features/original.svg" width="50"
+                             <img src="/assets/home/images/footer/features/original.svg" width="50"
                                  alt="ضمانت اصل‌بودن کالا" class="img-shopping">
                          </span>
                          <span class="title-shopping">ضمانت اصل‌بودن کالا</span>
@@ -191,7 +191,7 @@
                                                      style="width: 300.75px; margin-left: 10px;">
                                                      <div class="item">
                                                          <a href="#" class="d-block hover-img-link">
-                                                             <img src="assets/home/images/footer/license/L-1.png"
+                                                             <img src="/assets/home/images/footer/license/L-1.png"
                                                                  class="img-fluid img-brand" alt="">
                                                          </a>
                                                      </div>
@@ -200,7 +200,7 @@
                                                      style="width: 300.75px; margin-left: 10px;">
                                                      <div class="item">
                                                          <a href="#" class="d-block hover-img-link mt-0">
-                                                             <img src="assets/home/images/footer/license/L-2.png"
+                                                             <img src="/assets/home/images/footer/license/L-2.png"
                                                                  class="img-fluid img-brand" alt="">
                                                          </a>
                                                      </div>

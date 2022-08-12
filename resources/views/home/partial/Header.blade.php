@@ -22,7 +22,7 @@
                                                 placeholder="نام کالا، برند و یا دسته مورد نظر خود را جستجو کنید…">
                                             <div class="action-btns">
                                                 <button class="btn btn-search" type="submit">
-                                                    <img src="assets/home/images/search.png" alt="search">
+                                                    <img src="/assets/home/images/search.png" alt="search">
                                                 </button>
                                                 <div class="search-filter">
                                                     <div class="form-ui">
@@ -109,7 +109,7 @@
                                     <div class="account-box">
                                         <div class="nav-account d-block pl">
                                             <span class="icon-account">
-                                                <img src="assets/home/images/man.png" class="avator">
+                                                <img src="/assets/home/images/man.png" class="avator">
                                             </span>
                                             <span class="title-account">حساب کاربری</span>
                                             <div class="dropdown-menu">

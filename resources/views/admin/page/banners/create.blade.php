@@ -72,6 +72,7 @@
                                                 class="form-control ms select2" required>
                                                 <option></option>
                                                 <option value="اسلایدر">اسلایدر</option>
+                                                <option value="هدر">هدر</option>
                                                 <option value="هدر-چپ-بالا">هدر-چپ-بالا</option>
                                                 <option value="هدر-چپ-پایین">هدر-چپ-پایین</option>
                                                 <option value="راست-دسته بندی">راست-دسته بندی</option>
@@ -162,6 +163,10 @@ $("#positionSelect").change(function() {
     if ($(this).val() == 'اسلایدر') {
         $('.position_message').html('(سایز تصویر 509*730)').css('color', 'red');
         $(".bone").attr("src", "/assets/images/position/top/1.png");
+    }
+    if ($(this).val() == 'هدر') {
+        $('.position_message').html('(سایز تصویر 300*400)').css('color', 'red');
+        $(".bone").attr("src", "/assets/images/position/1.png");
     }
     if ($(this).val() == 'هدر-چپ-بالا') {
         $('.position_message').html('(سایز تصویر 239*330)').css('color', 'red');

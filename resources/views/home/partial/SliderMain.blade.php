@@ -3,13 +3,14 @@
       <div class="d-block">
           <div class="col-lg-12 col-xs-12 pr mb-4 p-0">
               <div class="slider-main-container d-block">
-                  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                  <div id="carouselExampleIndicators" class="carousel slide" data-interval="5000" data-touch="true"
+                      data-ride="carousel">
                       <ol class="carousel-indicators">
-                          @foreach ($sliders as $slider)
+                          @foreach ($sliders as $key=>$slider)
                           @if ($loop->first)
                           <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                           @else
-                          <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
+                          <li data-target="#carouselExampleIndicators" data-slide-to="{{$key}}"></li>
                           @endif
                           @endforeach
                       </ol>
@@ -30,8 +31,8 @@
                                                   class="btn btn-warning btn-buy mt-4">{{$slider->button_text}}</a>
                                           </div>
                                       </div>
-
-                                      @endforeach
+                                  </a>
+                                  @endforeach
                               </div>
                               <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
                                   data-slide="prev">
