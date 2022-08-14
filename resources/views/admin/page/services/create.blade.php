@@ -65,7 +65,8 @@
                                         <label class="form-label">آیکن </label>
                                         </br>
                                         <small> برای گرفتن نام آیکن ها روی این لینک کلیک کنید و نام آیکن را در فیلد زیر
-                                            قرار دهید <a href="https://fontawesome.com/v3/icons/" target="_blank">
+                                            قرار دهید <a href="https://fontawesome.com/v4/icon/address-book"
+                                                target="_blank">
                                                 Icon</a></small>
                                         <input type="text" name="icon" required class="form-control"
                                             value="{{old('icon')}}">

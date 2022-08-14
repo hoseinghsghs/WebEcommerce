@@ -4,46 +4,15 @@
          <div class="footer-shopping-features">
              <div class="container-fluid">
                  <div class="col-12">
+                     @foreach ($services as $service)
                      <div class="item">
                          <span class="icon-shopping">
-                             <img src="/assets/home/images/footer/features/delivery-truck.svg" width="50"
-                                 alt="تحویل اکسپرس" class="img-shopping">
+                             <i class="fa fa-font-awesome"></i>
                          </span>
-                         <span class="title-shopping">تحویل اکسپرس</span>
-                         <span class="desc-shopping">در کمترین زمان دریافت کنید</span>
+                         <span class="title-shopping">{{$service->title}}</span>
+                         <span class="desc-shopping">{{$service->description}}</span>
                      </div>
-                     <div class="item">
-                         <span class="icon-shopping">
-                             <img src="/assets/home/images/footer/features/24-hours-support.svg" width="50"
-                                 alt="پشتیبانی ۲۴ ساعته" class="img-shopping">
-                         </span>
-                         <span class="title-shopping">پشتیبانی ۲۴ ساعته</span>
-                         <span class="desc-shopping">پشتیبانی هفت روز هفته</span>
-                     </div>
-                     <div class="item">
-                         <span class="icon-shopping">
-                             <img src="/assets/home/images/footer/features/income.svg" width="50" alt="پرداخت در محل"
-                                 class="img-shopping">
-                         </span>
-                         <span class="title-shopping">پرداخت در محل</span>
-                         <span class="desc-shopping">هنگام دریافت پرداخت کنید</span>
-                     </div>
-                     <div class="item">
-                         <span class="icon-shopping">
-                             <img src="/assets/home/images/footer/features/easy-return.svg" width="50"
-                                 alt="۷ روز ضمانت بازگشت" class="img-shopping">
-                         </span>
-                         <span class="title-shopping">۷ روز ضمانت بازگشت</span>
-                         <span class="desc-shopping">هفت روز مهلت دارید </span>
-                     </div>
-                     <div class="item">
-                         <span class="icon-shopping">
-                             <img src="/assets/home/images/footer/features/original.svg" width="50"
-                                 alt="ضمانت اصل‌بودن کالا" class="img-shopping">
-                         </span>
-                         <span class="title-shopping">ضمانت اصل‌بودن کالا</span>
-                         <span class="desc-shopping">تایید اصالت کالا</span>
-                     </div>
+                     @endforeach
                  </div>
              </div>
          </div>

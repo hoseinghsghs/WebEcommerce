@@ -17,6 +17,7 @@ class CreateBrandsTable extends Migration
             $table->id();
 
             $table->string('name');
+            $table->string('link')->nullable();
             $table->string('image')->nullable();
             $table->tinyInteger('index')->nullable();
             $table->string('slug')->unique()->nullable();

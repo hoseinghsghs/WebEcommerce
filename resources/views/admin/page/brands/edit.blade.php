@@ -11,7 +11,7 @@
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href={{route('admin.home')}}><i class="zmdi zmdi-home"></i>
                                 خانه</a></li>
-                        <li class="breadcrumb-item"><a href="javascript:void(0);">برند ها</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('admin.brands.index')}}">برند ها</a></li>
                         <li class="breadcrumb-item active">ایجاد برند</li>
                     </ul>
                     <button class="btn btn-primary btn-icon mobile_menu" type="button"><i
@@ -69,6 +69,17 @@
                                                 class="form-control">
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="row clearfix mt-3">
+                                    <div class="col-lg-12 col-md-12">
+                                        <label class="form-label">لینک *</label>
+                                        <div class="form-group">
+                                            <input type="text" name="link" class="form-control" maxlength="50"
+                                                value="{{ $brand->link}}" required>
+                                        </div>
+                                    </div>
+
                                 </div>
 
 

@@ -69,7 +69,12 @@ class BannerController extends Controller
                 $height=300;
                 $width=400;
                 break;
-                
+
+            case 'وسط':
+                $height=300;
+                $width=800;
+                break;   
+
             case 'هدر-چپ-بالا':
                 $height=428;
                 $width=856;
@@ -202,6 +207,11 @@ class BannerController extends Controller
                     $width=400;
                     break;
                     
+                case 'وسط':
+                    $height=300;
+                    $width=800;
+                    break;   
+
                 case 'هدر-چپ-بالا':
                     $height=428;
                     $width=856;

@@ -52,6 +52,11 @@ class CategoryController extends Controller
         }, function () use ($request) {
             $request['is_active'] = true;
         });
+        if (isset($request->is_show)) {
+            $request['is_show'] = true;
+        } else {
+            $request['is_show'] = false;
+        };
         $data = $request->validate([
             'name' => ['required', Rule::unique('categories')->where(function ($query) use ($request) {
                 $query->where('parent_id', $request->input('parent_id'));
@@ -59,6 +64,7 @@ class CategoryController extends Controller
             'slug' => 'required|unique:categories,slug',
             'parent_id' => 'required',
             'is_active' => 'nullable',
+            'is_show' => 'nullable',
             'description' => 'nullable|string',
             'icon' => 'nullable|string',
             'attribute_ids' => 'required',
@@ -132,6 +138,11 @@ class CategoryController extends Controller
         }, function () use ($request) {
             $request['is_active'] = true;
         });
+        if (isset($request->is_show)) {
+            $request['is_show'] = true;
+        } else {
+            $request['is_show'] = false;
+        };
 
         $data = $request->validate([
             'name' => ['required', Rule::unique('categories')->ignore($category)->where(function ($query) use ($request) {
@@ -140,6 +151,7 @@ class CategoryController extends Controller
             'slug' => ['required', Rule::unique('categories')->ignore($category)],
             'parent_id' => 'required',
             'is_active' => 'nullable',
+            'is_show' => 'nullable',
             'description' => 'nullable|string',
             'icon' => 'nullable|string',
             'attribute_ids' => 'required',

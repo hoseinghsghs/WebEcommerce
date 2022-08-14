@@ -116,7 +116,7 @@ $(document).ready(function (e) {
     rtl: true,
     margin: 10,
     nav: true,
-    navText: ['<i class="fa fa-angle-right"></i>', '<i class="fa fa-angle-left"></i>'],
+    navText: ["&#10094", "&#10095"],
     dots: false,
     responsiveClass: true,
     responsive: {

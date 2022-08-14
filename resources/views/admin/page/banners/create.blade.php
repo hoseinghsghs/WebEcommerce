@@ -73,16 +73,17 @@
                                                 <option></option>
                                                 <option value="اسلایدر">اسلایدر</option>
                                                 <option value="هدر">هدر</option>
-                                                <option value="هدر-چپ-بالا">هدر-چپ-بالا</option>
-                                                <option value="هدر-چپ-پایین">هدر-چپ-پایین</option>
-                                                <option value="راست-دسته بندی">راست-دسته بندی</option>
-                                                <option value="چپ-دسته بندی">چپ-دسته بندی</option>
-                                                <option value="عرضی">عرضی</option>
-                                                <option value="آخر-راست">آخر-راست</option>
-                                                <option value="آخر-چپ-بالا">آخر-چپ-بالا</option>
-                                                <option value="آخر-چپ-پایین-1">آخر-چپ-پایین-1</option>
-                                                <option value="آخر-چپ-پایین-2">آخر-چپ-پایین-2</option>
-                                                <option value="محصول">محصول</option>
+                                                <option value="وسط">وسط</option>
+                                                <option value="هدر-چپ-بالا" disabled>هدر-چپ-بالا</option>
+                                                <option value="هدر-چپ-پایین" disabled>هدر-چپ-پایین</option>
+                                                <option value="راست-دسته بندی" disabled>راست-دسته بندی</option>
+                                                <option value="چپ-دسته بندی" disabled>چپ-دسته بندی</option>
+                                                <option value="عرضی" disabled>عرضی</option>
+                                                <option value="آخر-راست" disabled>آخر-راست</option>
+                                                <option value="آخر-چپ-بالا" disabled>آخر-چپ-بالا</option>
+                                                <option value="آخر-چپ-پایین-1" disabled>آخر-چپ-پایین-1</option>
+                                                <option value="آخر-چپ-پایین-2" disabled>آخر-چپ-پایین-2</option>
+                                                <option value="محصول" disabled>محصول</option>
                                             </select>
                                         </div>
                                     </div>
@@ -167,6 +168,10 @@ $("#positionSelect").change(function() {
     if ($(this).val() == 'هدر') {
         $('.position_message').html('(سایز تصویر 300*400)').css('color', 'red');
         $(".bone").attr("src", "/assets/images/position/1.png");
+    }
+    if ($(this).val() == 'وسط') {
+        $('.position_message').html('(سایز تصویر 300*820)').css('color', 'red');
+        $(".bone").attr("src", "/assets/images/position/2.png");
     }
     if ($(this).val() == 'هدر-چپ-بالا') {
         $('.position_message').html('(سایز تصویر 239*330)').css('color', 'red');

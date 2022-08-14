@@ -76,25 +76,33 @@
                                             <option {{$banner->type == 'اسلایدر' ? 'selected' : ''}}>اسلایدر</option>
                                             <option {{$banner->type == 'هدر' ? 'selected' : ''}}>هدر
                                             </option>
-                                            <option {{$banner->type == 'هدر-چپ-بالا' ? 'selected' : ''}}>هدر-چپ-بالا
+                                            <option {{$banner->type == 'وسط' ? 'selected' : ''}}>وسط
                                             </option>
-                                            <option {{$banner->type == 'هدر-چپ-پایین' ? 'selected' : ''}}>هدر-چپ-پایین
+                                            <option {{$banner->type == 'هدر-چپ-بالا' ? 'selected' : ''}} disabled>
+                                                هدر-چپ-بالا
                                             </option>
-                                            <option {{$banner->type == 'راست-دسته بندی' ? 'selected' : ''}}>راست-دسته
+                                            <option {{$banner->type == 'هدر-چپ-پایین' ? 'selected' : ''}} disabled>
+                                                هدر-چپ-پایین
+                                            </option>
+                                            <option {{$banner->type == 'راست-دسته بندی' ? 'selected' : ''}} disabled>
+                                                راست-دسته
                                                 بندی
                                             </option>
-                                            <option {{$banner->type == 'چپ-دسته بندی' ? 'selected' : ''}}>
+                                            <option {{$banner->type == 'چپ-دسته بندی' ? 'selected' : ''}} disabled>
                                                 چپ-دسته بندی
                                             </option>
-                                            <option {{$banner->type == 'عرضی' ? 'selected' : ''}}>عرضی</option>
-                                            <option {{$banner->type == 'آخر-راست' ? 'selected' : ''}}>آخر-راست</option>
-                                            <option {{$banner->type == 'آخر-چپ-بالا' ? 'selected' : ''}}>آخر-چپ-بالا
+                                            <option {{$banner->type == 'عرضی' ? 'selected' : ''}} disabled>عرضی</option>
+                                            <option {{$banner->type == 'آخر-راست' ? 'selected' : ''}} disabled>آخر-راست
                                             </option>
-                                            <option {{$banner->type == 'آخر-چپ-پایین-1' ? 'selected' : ''}}>
+                                            <option {{$banner->type == 'آخر-چپ-بالا' ? 'selected' : ''}} disabled>
+                                                آخر-چپ-بالا
+                                            </option>
+                                            <option {{$banner->type == 'آخر-چپ-پایین-1' ? 'selected' : ''}} disabled>
                                                 آخر-چپ-پایین-1</option>
-                                            <option {{$banner->type == 'آخر-چپ-پایین-2' ? 'selected' : ''}}>
+                                            <option {{$banner->type == 'آخر-چپ-پایین-2' ? 'selected' : ''}} disabled>
                                                 آخر-چپ-پایین-2</option>
-                                            <option {{$banner->type == 'محصول' ? 'selected' : ''}}>محصول</option>
+                                            <option {{$banner->type == 'محصول' ? 'selected' : ''}} disabled>محصول
+                                            </option>
 
                                         </select>
                                         @error('position')
@@ -182,8 +190,12 @@ $(document).ready(function(e) {
         $(".bone").attr("src", "/assets/images/position/top/1.png");
     }
     if ($('#positionSelect').val() == 'هدر') {
-        $('.position_message').html('(سایز تصویر 400*300)').css('color', 'red');
+        $('.position_message').html('(سایز تصویر 300*400)').css('color', 'red');
         $(".bone").attr("src", "/assets/images/position/1.png");
+    }
+    if ($('#positionSelect').val() == 'وسط') {
+        $('.position_message').html('(سایز تصویر 300*820)').css('color', 'red');
+        $(".bone").attr("src", "/assets/images/position/2.png");
     }
     if ($('#positionSelect').val() == 'هدر-چپ-بالا') {
         $('.position_message').html('(سایز تصویر 239*330)').css('color', 'red');
@@ -244,8 +256,12 @@ $(document).ready(function(e) {
             $(".bone").attr("src", "/assets/images/position/top/1.png");
         }
         if ($(this).val() == 'هدر') {
-            $('.position_message').html('(سایز تصویر 400*300)').css('color', 'red');
+            $('.position_message').html('(سایز تصویر 300*400)').css('color', 'red');
             $(".bone").attr("src", "/assets/images/position/1.png");
+        }
+        if ($(this).val() == 'وسط') {
+            $('.position_message').html('(سایز تصویر 300*820)').css('color', 'red');
+            $(".bone").attr("src", "/assets/images/position/2.png");
         }
         if ($(this).val() == 'هدر-چپ-بالا') {
             $('.position_message').html('(سایز تصویر 239*330)').css('color', 'red');

@@ -127,41 +127,21 @@
             </div>
         </div>
         <!-- adplacement--------------------------->
-        <div class="container-fluid">
-            <div class="row">
-                <div class="adplacement-container-row">
-                    <div class="col-6 col-lg-3 pr">
-                        <a href="#" class="adplacement-item">
-                            <div class="adplacement-sponsored_box">
-                                <img src="assets/home/images/adplacement/a-4.jpg">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-6 col-lg-3 pr">
-                        <a href="#" class="adplacement-item">
-                            <div class="adplacement-sponsored_box">
-                                <img src="assets/home/images/adplacement/a-5.jpg">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-6 col-lg-3 pr">
-                        <a href="#" class="adplacement-item">
-                            <div class="adplacement-sponsored_box">
-                                <img src="assets/home/images/adplacement/a-6.jpg">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-6 col-lg-3 pr">
-                        <a href="#" class="adplacement-item">
-                            <div class="adplacement-sponsored_box">
-                                <img src="assets/home/images/adplacement/a-7.jpg">
-                            </div>
-                        </a>
-                    </div>
+
+        <div class="container-main">
+            <div class="adplacement-container-row">
+                @foreach ($centers as $center)
+                <div class="col-6 col-lg-6 pr">
+                    <a href="{{$center->link}}" class="adplacement-item">
+                        <div class="adplacement-sponsored_box">
+                            <img src="{{url(env('BANNER_IMAGES_PATCH').$center->image)}}">
+                        </div>
+                    </a>
                 </div>
+                @endforeach
             </div>
         </div>
-        <!-- adplacement--------------------------->
+        <!-- slider-product------------------------------->
         <div class="col-lg-12 col-md-12 col-xs-12 pr order-1 d-block">
             <div class="slider-widget-products">
                 <div class="widget widget-product card">
@@ -625,70 +605,16 @@
                         <div class="owl-stage-outer">
                             <div class="owl-stage"
                                 style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 2234px;">
+                                @foreach ( $brands as $brand )
                                 <div class="owl-item active" style="width: 190.75px; margin-left: 10px;">
                                     <div class="item">
-                                        <a href="#" class="d-block hover-img-link">
-                                            <img src="assets/home/images/brand/shahab.png" class="img-fluid img-brand"
-                                                alt="">
+                                        <a href="{{$brand->link}}" class="d-block hover-img-link">
+                                            <img src="{{url(env('BRAND_IMAGES_PATCH').$brand->image)}}"
+                                                class="img-fluid img-brand" alt="{{$brand->slug}}">
                                         </a>
                                     </div>
                                 </div>
-                                <div class="owl-item active" style="width: 190.75px; margin-left: 10px;">
-                                    <div class="item">
-                                        <a href="#" class="d-block hover-img-link mt-0">
-                                            <img src="assets/home/images/brand/adata.png" class="img-fluid img-brand"
-                                                alt="">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="owl-item active" style="width: 190.75px; margin-left: 10px;">
-                                    <div class="item">
-                                        <a href="#" class="d-block hover-img-link mt-0">
-                                            <img src="assets/home/images/brand/huawei.png" class="img-fluid img-brand"
-                                                alt="">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="owl-item active" style="width: 190.75px; margin-left: 10px;">
-                                    <div class="item">
-                                        <a href="#" class="d-block hover-img-link mt-0">
-                                            <img src="assets/home/images/brand/nokia.png" class="img-fluid img-brand"
-                                                alt="">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="owl-item active" style="width: 190.75px; margin-left: 10px;">
-                                    <div class="item">
-                                        <a href="#" class="d-block hover-img-link mt-0">
-                                            <img src="assets/home/images/brand/panasonic.png"
-                                                class="img-fluid img-brand" alt="">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="owl-item active" style="width: 190.75px; margin-left: 10px;">
-                                    <div class="item">
-                                        <a href="#" class="d-block hover-img-link mt-0">
-                                            <img src="assets/home/images/brand/parskhazar.png"
-                                                class="img-fluid img-brand" alt="">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="owl-item active" style="width: 190.75px; margin-left: 10px;">
-                                    <div class="item">
-                                        <a href="#" class="d-block hover-img-link mt-0">
-                                            <img src="assets/home/images/brand/samsung.png" class="img-fluid img-brand"
-                                                alt="">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="owl-item active" style="width: 190.75px; margin-left: 10px;">
-                                    <div class="item">
-                                        <a href="#" class="d-block hover-img-link mt-0">
-                                            <img src="assets/home/images/brand/xvison.png" class="img-fluid img-brand"
-                                                alt="">
-                                        </a>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>

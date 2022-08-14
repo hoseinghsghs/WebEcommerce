@@ -41,6 +41,7 @@ class HomeController extends Controller
 
         $sliders =                       Banner::active()->where('type', 'اسلایدر')->get();
         $headers =                       Banner::active()->where('type', 'هدر')->get()->sortBy('priority')->take(4);
+        $centers =                       Banner::active()->where('type', 'وسط')->get()->sortBy('priority')->take(2);
 
         $banner_left_top =               Banner::active()->where('type', 'هدر-چپ-بالا')->get()->first();
         $banner_left_bottom =            Banner::active()->where('type', 'هدر-چپ-پایین')->get()->first();
@@ -86,6 +87,7 @@ class HomeController extends Controller
                 'brands',
                 'posts',
                 'headers',
+                'centers',
 
             )
         );
