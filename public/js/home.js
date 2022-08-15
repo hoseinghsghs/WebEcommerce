@@ -109,7 +109,8 @@ $(document).ready(function (e) {
         slideBy: 3
       }
     }
-  }); // brand---------------------------------------
+  }); // slider-product------------------------پیشنهاد ویژه
+  // brand---------------------------------------
 
   $(".product-carousel-brand").owlCarousel({
     items: 4,

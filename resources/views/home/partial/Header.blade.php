@@ -138,7 +138,7 @@
                                             <div class="account-box" style="padding-left:8px;">
                                                 <div class="nav-account d-block pl">
                                                     <a href="#login-popup" class="btn btn-secondary btn-sm"
-                                                        style="background-color:#651fff ;border-color:#651fff;"><i
+                                                        style="background-color:white ;border-color:#dddddd; color: gray; border-radius: 0.6rem;"><i
                                                             class="fa fa-sign-in" aria-hidden="true"></i> ثبت
                                                         نام | ورود
                                                     </a>

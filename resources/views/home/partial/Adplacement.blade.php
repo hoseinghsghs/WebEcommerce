@@ -6,7 +6,7 @@
             <div class="col-6 col-lg-3 pr">
                 <a href="{{$header->link}}" class="adplacement-item">
                     <div class="adplacement-sponsored_box">
-                        <img src="{{url(env('BANNER_IMAGES_PATCH').$header->image)}}">
+                        <img src="{{url(env('BANNER_IMAGES_PATCH').$header->image)}}" alt="{{$header->title}}">
                     </div>
                 </a>
             </div>

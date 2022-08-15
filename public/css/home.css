@@ -31501,7 +31501,7 @@ header.header-main {
 
 .widget-suggestion .promo-single-headline {
     background: #fff;
-    padding-bottom: 15px !important;
+    padding-bottom: 8px !important;
     margin-bottom: -1px !important;
 }
 
@@ -32309,7 +32309,7 @@ header.header-main {
     color: #535353;
     font-weight: bold;
     font-size: 13px;
-    margin-top: 40px;
+    margin-top: 7px;
 }
 
 .slider-moments #suggestion-slider .item .price {
@@ -32317,7 +32317,7 @@ header.header-main {
     height: auto;
     font-size: 20px;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 7px;
 }
 
 .slider-moments #suggestion-slider .item .price span.amount span {

@@ -112,6 +112,7 @@ $(document).ready(function (e) {
             },
         },
     });
+    // slider-product------------------------پیشنهاد ویژه
 
     // brand---------------------------------------
     $(".product-carousel-brand").owlCarousel({

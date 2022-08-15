@@ -34,8 +34,8 @@ class HomeController extends Controller
         $posts =                         Post::active()->get()->take(5);
 
         $categories =                    Category::where('parent_id', 0)->where('is_active', 1)->get();
-        $category_mobile =               Category::where('name', 'موبایل')->get()->first();
-        $category_laptap =               Category::where('name', 'لپ تاپ')->get()->first();
+        $products_is_show =               Category::where('parent_id','!=', 0)->where('is_active', 1)->where('is_show', 1)->get();
+        
 
         $services =                      Service::orderBy('service_order')->get();
 
@@ -67,18 +67,7 @@ class HomeController extends Controller
             'home.page.home',
             compact(
                 'categories',
-                'category_mobile',
-                'category_laptap',
                 'sliders',
-                'banner_left_top',
-                'banner_left_bottom',
-                'banner_left_category',
-                'banner_right_category',
-                'banner_width',
-                'banner_end_right',
-                'banner_end_left_top',
-                'banner_end_left_bottom_1',
-                'banner_end_left_bottom_2',
                 'services',
                 'Products_auction_today',
                 'Products_our_suggestion',
@@ -88,6 +77,7 @@ class HomeController extends Controller
                 'posts',
                 'headers',
                 'centers',
+                'products_is_show'
 
             )
         );
