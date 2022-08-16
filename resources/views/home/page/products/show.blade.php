@@ -9,11 +9,10 @@
                     <i class="mdi mdi-home"></i>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">خانه</a></li>
-                            <li class="breadcrumb-item"><a href="#">کالای دیجیتال</a></li>
-                            <li class="breadcrumb-item"><a href="#">موبایل</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">گوشی موبایل سامسونگ مدل Galaxy
-                                Note 10 SM-N970F/DS دو سیم‌کارت ظرفیت 256 گیگابایت</li>
+                            <li class="breadcrumb-item"><a href="{{route('home')}}">خانه</a></li>
+                            <li class="breadcrumb-item"><a href="#">{{$product->category->parent->name}}</a></li>
+                            <li class="breadcrumb-item"><a href="#"> {{$product->category->name}}</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{$product->name}}</li>
                         </ol>
                     </nav>
                 </div>
@@ -26,10 +25,28 @@
                                         <div>
                                             <ul class="gallery-actions">
                                                 <li>
-                                                    <a href="#" class="btn-option add-product-wishes">
+                                                    @if (Auth::check())
+                                                    @if ($product->checkUserWishlist(1))
+                                                    <a href="#" data-product="{{$product->id}}"
+                                                        class="btn-option add-product-wishes active">
                                                         <i class="mdi mdi-heart-outline"></i>
                                                         <span>محبوب</span>
                                                     </a>
+                                                    @else
+                                                    <a href="#" data-product="{{$product->id}}"
+                                                        class="btn-option add-product-wishes ">
+                                                        <i class="mdi mdi-heart-outline"></i>
+                                                        <span>محبوب</span>
+                                                    </a>
+                                                    @endif
+                                                    @else
+                                                    <a href="#" data-product="{{$product->id}}"
+                                                        class="btn-option add-product-wishes ">
+                                                        <i class="mdi mdi-heart-outline"></i>
+                                                        <span>محبوب</span>
+                                                    </a>
+                                                    @endif
+
                                                 </li>
                                                 <li class="option-social">
                                                     <a href="#" class="btn-option btn-option-social" data-toggle="modal"
@@ -224,10 +241,33 @@
                                                     </div>
                                                 </li>
                                                 <li class="Three-dimensional">
-                                                    <a href="product-comparison.html" class="btn-option btn-compare">
+
+                                                    @if (session()->has('compareProducts'))
+
+                                                    @if (in_array($product->id,
+                                                    session()->get('compareProducts')) )
+                                                    <a href="product-comparison.html" data-product="{{$product->id}}"
+                                                        class="btn-option btn-compare" style="color: #651fff;">
                                                         <i class="mdi mdi-compare"></i>
                                                         <span>مقایسه</span>
                                                     </a>
+
+                                                    @else
+                                                    <a href="product-comparison.html" data-product="{{$product->id}}"
+                                                        class="btn-option btn-compare">
+                                                        <i class="mdi mdi-compare"></i>
+                                                        <span>مقایسه</span>
+                                                    </a>
+                                                    @endif
+
+                                                    @else
+                                                    <a href="product-comparison.html" data-product="{{$product->id}}"
+                                                        class="btn-option btn-compare">
+                                                        <i class="mdi mdi-compare"></i>
+                                                        <span>مقایسه</span>
+                                                    </a>
+                                                    @endif
+
                                                 </li>
                                             </ul>
                                         </div>
@@ -236,49 +276,21 @@
                                         <div class="gallery-img">
                                             <a href="#">
                                                 <img class="zoom-img" id="img-product-zoom"
-                                                    src="/assets/home/images/page-single-product/product-img/product-img-note10.jpg"
-                                                    data-zoom-image="/assets/home/images/page-single-product/product-img/product-img-note10.jpg"
+                                                    src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}"
+                                                    data-zoom-image="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}"
                                                     width="411" />
                                                 <div id="gallery_01f" style="width:420px;float:right;">
                                             </a>
                                             <ul class="gallery-items owl-carousel owl-theme" id="gallery-slider">
+                                                @foreach ($product->images as $image_value )
                                                 <li class="item">
                                                     <a href="#" class="elevatezoom-gallery active" data-update=""
-                                                        data-image="/assets/home/images/page-single-product/product-img/product-img-note10-big-1.jpg"
-                                                        data-zoom-image="/assets/home/images/page-single-product/product-img/product-img-note10-big-1.jpg">
-                                                        <img src="/assets/home/images/page-single-product/product-img/product-img-note10-big-1.jpg"
+                                                        data-image="{{url(env('PRODUCT_IMAGES_UPLOAD_PATCH').$image_value->image)}}"
+                                                        data-zoom-image="{{url(env('PRODUCT_IMAGES_UPLOAD_PATCH').$image_value->image)}}">
+                                                        <img src="{{url(env('PRODUCT_IMAGES_UPLOAD_PATCH').$image_value->image)}}"
                                                             width="100" /></a>
                                                 </li>
-                                                <li class="item">
-                                                    <a href="#" class="elevatezoom-gallery active" data-update=""
-                                                        data-image="/assets/home/images/page-single-product/product-img/product-img-note10-big-2.jpg"
-                                                        data-zoom-image="/assets/home/images/page-single-product/product-img/product-img-note10-big-2.jpg">
-                                                        <img src="/assets/home/images/page-single-product/product-img/product-img-note10-big-2.jpg"
-                                                            width="100" /></a>
-                                                </li>
-                                                <li class="item">
-                                                    <a href="#" class="elevatezoom-gallery"
-                                                        data-image="/assets/home/images/page-single-product/product-img/product-img-note10-big-3.jpg"
-                                                        data-zoom-image="/assets/home/images/page-single-product/product-img/product-img-note10-big-3.jpg">
-                                                        <img src="/assets/home/images/page-single-product/product-img/product-img-note10-big-3.jpg"
-                                                            width="100" />
-                                                    </a>
-                                                </li>
-                                                <li class="item">
-                                                    <a href="#" class="elevatezoom-gallery"
-                                                        data-image="/assets/home/images/page-single-product/product-img/product-img-note10-big-4.jpg"
-                                                        data-zoom-image="/assets/home/images/page-single-product/product-img/product-img-note10-big-4.jpg">
-                                                        <img src="/assets/home/images/page-single-product/product-img/product-img-note10-big-4.jpg"
-                                                            width="100" /></a>
-                                                </li>
-                                                <li class="item">
-                                                    <a href="#" class="elevatezoom-gallery"
-                                                        data-image="/assets/home/images/page-single-product/product-img/product-img-note10-big-5.jpg"
-                                                        data-zoom-image="/assets/home/images/page-single-product/product-img/product-img-note10-big-5.jpg">
-                                                        <img src="/assets/home/images/page-single-product/product-img/product-img-note10-big-5.jpg"
-                                                            width="100" />
-                                                    </a>
-                                                </li>
+                                                @endforeach
                                             </ul>
                                         </div>
                                     </div>
@@ -290,24 +302,26 @@
                         <section class="product-info">
                             <div class="product-headline">
                                 <h1 class="product-title">
-                                    سامسونگ مدل Galaxy Note 10 SM-N970F/DS دو سیم‌کارت ظرفیت 256 گیگابایت
+                                    {{$product->name}}
                                 </h1>
-                                <div class="product-guaranteed text-success">
+                                <!-- <div class="product-guaranteed text-success">
                                     12
                                     <span>فروش موفق</span>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="product-attributes">
                                 <div class="product-config">
-                                    <span class="product-title-en">Samsung Galaxy Note 10 Dual SIM 256GB Mobile
-                                        Phone</span>
-                                    <div class="product-rate">
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                    </div>
+
+                                    <span>امتیاز :</span>
+
+                                    <span data-rating-stars="5" data-rating-readonly="true"
+                                        data-rating-value="{{ceil($product->rates->avg('rate'))}}">
+                                    </span>
+                                    <span class="product-title-en">کد محصول: </span><span
+                                        class="sku product-title-en"></span>
+
+
+
                                 </div>
                             </div>
                             <div class="product-config-wrapper">
@@ -317,100 +331,95 @@
                                             <span>
                                                 <i class="fa fa-archive"></i> دسته:
                                             </span>
-                                            <a href="#" class="product-link product-cat-title">کالای دیجیتال</a>
+                                            <a href="#"
+                                                class="product-link product-cat-title">{{$product->category->name}}</a>
                                             ,
-                                            <a href="#" class="product-link product-cat-title">موبایل</a>
+                                            <a href="#"
+                                                class="product-link product-cat-title">{{$product->category->parent->name}}</a>
                                         </li>
                                         <li>
                                             <span>
                                                 <i class="fa fa-tags"></i> برچسب:
                                             </span>
-                                            <a href="#" class="product-link product-tag-title">سامسونگ</a>
+                                            @foreach ($product->tags as $tag )
+
+                                            <a href="#" class="product-link product-tag-title">{{$tag->name}} ،</a>
+                                            @endforeach
+
                                         </li>
                                         <li>
                                             <span>
                                                 برند:
                                             </span>
-                                            <a href="#" class="product-link product-tag-title">سامسونگ</a>
+                                            <a href="#"
+                                                class="product-link product-tag-title">{{$product->brand->slug}}</a>
+                                        </li>
+                                        <li>
+                                            <span>
+                                                ({{$product->approvedComments()->count()}}) نظر
+                                            </span>
                                         </li>
                                     </ul>
                                 </div>
+                                @php
+                                if($product->sale_check)
+                                {
+                                $variationProductSelected = $product->sale_check;
+                                }else{
+                                $variationProductSelected = $product->price_check;
+                                }
+                                @endphp
                                 <div class="col=lg-6 col-md-6 col-xs-12 pr">
-                                    <div class="product-variants">
-                                        <span>رنگ بندی: </span>
-                                        <ul class="js-product-variants">
-                                            <li class="ui-variant">
-                                                <label for="#" class="ui-variant-color">
-                                                    <span class="ui-variant-shape"
-                                                        style="background-color: #56abef"></span>
-                                                    <input type="radio" value="4" name="color" id="variant"
-                                                        class="js-variant-selector" checked="">
-                                                    <span class="ui-variant-check"></span>
-                                                </label>
-                                            </li>
-                                            <li class="ui-variant">
-                                                <label for="#" class="ui-variant-color">
-                                                    <span class="ui-variant-shape"
-                                                        style="background-color: #a97eca"></span>
-                                                    <input type="radio" value="4" name="color" id="variant"
-                                                        class="js-variant-selector">
-                                                    <span class="ui-variant-check"></span>
-                                                </label>
-                                            </li>
-                                            <li class="ui-variant">
-                                                <label for="#" class="ui-variant-color">
-                                                    <span class="ui-variant-shape"
-                                                        style="background-color: #4e4c4c"></span>
-                                                    <input type="radio" value="4" name="color" id="variant"
-                                                        class="js-variant-selector">
-                                                    <span class="ui-variant-check"></span>
-                                                </label>
-                                            </li>
-                                        </ul>
+                                    <div class="product-variants mb-2">
+
                                     </div>
                                     <div class="product-params pt-3">
                                         <ul data-title="ویژگی‌های محصول">
+                                            @foreach ($product->attributes()->with('attribute')->get() as $attribute )
                                             <li>
-                                                <span>سیستم عامل: </span>
-                                                <span>Android</span>
+                                                <span>{{$attribute->attribute->name}}:</span>
+                                                <span>{{$attribute->value}}</span>
                                             </li>
-                                            <li>
-                                                <span>شبکه های ارتباطی: </span>
-                                                <span>2G، 3G، 4G</span>
-                                            </li>
-                                            <li>
-                                                <span>مقدار RAM: </span>
-                                                <span> 8 گیگابایت</span>
-                                            </li>
-                                            <li>
-                                                <span>ویژگی‌های خاص: </span>
-                                                <span> مقاوم در برابر آب
-                                                    دارای بدنه مقاوم
-                                                    فبلت
-                                                    مجهز به حس‌گر اثرانگشت
-                                                    مناسب عکاسی سلفی
-                                                    مناسب بازی
-                                                    دارای قلم
-                                                </span>
-                                            </li>
+                                            @endforeach
+                                        </ul>
+
+                                        <ul
+                                            data-title="{{App\Models\Attribute::find($product->variations->first()->attribute_id)->name}}:">
+
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-lg-8 col-md-8 col-xs-12 pr">
+
+
+                                                        <select name="variation" id="var-select"
+                                                            style="display: inline; width: 75%;"
+                                                            class="select-var form-control form-control-sm"
+                                                            id="varition">
+                                                            @foreach ($product->variations()->where('quantity', '>'
+                                                            ,
+                                                            0)->get()
+                                                            as
+                                                            $variation )
+                                                            <option
+                                                                value="{{ json_encode($variation->only(['id' , 'sku' , 'quantity','is_sale' , 'sale_price' , 'price'])) }}"
+                                                                {{ $variationProductSelected->id == $variation->id ? 'selected' : '' }}>
+                                                                {{$variation->value}}</option>
+                                                            @endforeach
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </ul>
                                     </div>
-                                    <div class="product-price-survey-question">
-                                        آیا قیمت مناسب‌تری سراغ دارید؟
-                                        <div class="answers">
-                                            <a href="#"
-                                                class="product-price-survery-answer price-yes btn btn-secondary">بلی</a>
-                                            <a href="#"
-                                                class="product-price-survery-answer price-no btn btn-secondary">خیر</a>
-                                        </div>
-                                    </div>
+
                                 </div>
                                 <div class="col=lg-6 col-md-6 col-xs-12 pr">
                                     <div class="product-seller-info">
                                         <div class="seller-info-changable">
                                             <div class="product-seller-row vendor">
                                                 <span class="title"> فروشنده:</span>
-                                                <a href="#" class="product-name">دیجی اسمارت</a>
+                                                <a href="#" class="product-name">{{env('APP_NAME')}}</a>
                                             </div>
                                             <div class="product-seller-row guarantee">
                                                 <span class="title"> گارانتی:</span>
@@ -418,25 +427,45 @@
                                             </div>
                                             <div class="product-seller-row price">
                                                 <span class="title"> قیمت:</span>
-                                                <a href="#" class="product-name">
-                                                    <span class="amount">
-                                                        14,350,000
-                                                        <span>تومان</span>
-                                                    </span>
+                                                <a href="#" class="product-name variation-price">
+                                                    @if ($product->quantity_check)
+
+                                                    @if ($product->sale_check)
+
+                                                    <span
+                                                        class="amount">{{number_format($product->sale_check->sale_price)}}
+                                                        تومان</span>
+
+                                                    <del>{{number_format($product->sale_check->price)}}
+                                                        تومان</del>
+                                                    @else
+                                                    <span
+                                                        class="amount">{{ number_format($product->price_check->price) }}
+                                                        تومان</span>
+                                                    @endif
+                                                    @else
+                                                    <span class="amount">نا موجود</span>
+
+                                                    @endif
+
                                                 </a>
                                             </div>
                                             <div class="product-seller-row guarantee">
                                                 <span class="title mt-3"> تعداد:</span>
                                                 <div class="quantity pl">
-                                                    <input type="number" min="1" max="100" step="1" value="1">
+                                                    <input type="number" class="numberstyle" min="1" step="1"
+                                                        name="qtybutton" id="qtybutton" readonly value="1">
                                                     <div class="quantity-nav">
                                                         <div class="quantity-button quantity-up">+</div>
                                                         <div class="quantity-button quantity-down">-</div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <input type="hidden" id="product_id" name="product"
+                                                value="{{$product->id}}">
                                             <div class="product-seller-row add-to-cart">
-                                                <a href="#" class="btn-add-to-cart btn btn-primary">
+                                                <a href="#" class="btn-add-to-cart btn btn-primary" data-ishome="0">
+                                                    <i class="fa fa-shopping-cart"></i>
                                                     <span class="btn-add-to-cart-txt">افزودن به سبد خرید</span>
                                                 </a>
                                             </div>
@@ -446,48 +475,6 @@
                             </div>
                         </section>
                     </div>
-                    <div class="product-usp">
-                        <div class="product-feature">
-                            <div class="product-feature-col">
-                                <a href="#" class="product-feature-item">
-                                    <img src="/assets/home/images/page-single-product/delivery.svg">
-                                    امکان تحویل
-                                    <br>
-                                    اکسپرس
-                                </a>
-                            </div>
-                            <div class="product-feature-col">
-                                <a href="#" class="product-feature-item">
-                                    <img src="/assets/home/images/page-single-product/contact-us.svg">
-                                    ۷ روز هفته
-                                    <br>
-                                    ۲۴ ساعته
-                                </a>
-                            </div>
-                            <div class="product-feature-col">
-                                <a href="#" class="product-feature-item">
-                                    <img src="/assets/home/images/page-single-product/payment-terms.svg">
-                                    امکان
-                                    <br>
-                                    پرداخت در محل
-                                </a>
-                            </div>
-                            <div class="product-feature-col">
-                                <a href="#" class="product-feature-item">
-                                    <img src="/assets/home/images/page-single-product/return-policy.svg">
-                                    هفت روز ضمانت بازگشت کالا
-                                </a>
-                            </div>
-                            <div class="product-feature-col">
-                                <a href="#" class="product-feature-item">
-                                    <img src="/assets/home/images/page-single-product/origin-guarantee.svg">
-                                    ضمانت
-                                    <br>
-                                    اصل بودن کالا
-                                </a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -495,8 +482,8 @@
             <div class="tab-box">
                 <ul class="tab nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="Review-tab" data-toggle="tab" href="#Review" role="tab"
-                            aria-controls="Review" aria-selected="true">
+                        <a class="nav-link {{ count($errors) > 0 ? '' : 'active' }}" id="Review-tab" data-toggle="tab"
+                            href="#Review" role="tab" aria-controls="Review" aria-selected="true">
                             <i class="mdi mdi-glasses"></i>
                             نقد و بررسی
                         </a>
@@ -516,8 +503,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="question-and-answer-tab" data-toggle="tab" href="#question-and-answer"
-                            role="tab" aria-controls="question-and-answer" aria-selected="false">
+                        <a class="nav-link {{ count($errors) > 0 ? 'active' : '' }}" id="question-and-answer-tab"
+                            data-toggle="tab" href="#question-and-answer" role="tab" aria-controls="question-and-answer"
+                            aria-selected="false">
                             <i class="mdi mdi-comment-question-outline"></i>
                             پرسش و پاسخ
                         </a>
@@ -532,33 +520,9 @@
                             <section class="content-expert-summary">
                                 <div class="mask pm-3">
                                     <div class="mask-text">
-                                        <p>اولین گوشی همراه سری گلکسی نوت در سال 2011 روانه بازار شد تا خانواده
-                                            افسانه‌ای نوت را برای اولین بار به دنیا معرفی و تعریفی نو برای محصولات
-                                            «فبلت‌» ارائه کند. حدود 8 سال پس از آن، سامسونگ برای عرضه عضو جدید
-                                            خانواده نوت (Galaxy Note 10) با چالش‌های جدیدی مواجه است؛ این چالش‌ها
-                                            ویژگی‌های مدرنی هستند که در محصولات رقیب دیده می‌شوند. گلکسی نوت‌ها
-                                            به‌طور عمومی شبیه سری Galaxy S هستند؛ با این تفاوت که صفحه‌نمایش بزرگ‌تر
-                                            و یک قلم دیجیتال S Pen دارند. گوشی موبایل Samsung Galaxy Note10 با
-                                            دوربین سه گانه در قاب پشتی روانه بازار شده است؛ این سه سنسور با داشتن
-                                            ویژگی‌هایی مانند لرزشگیر تصویر و قابلیت فیلم‌برداری 4K خروجی تصویر
-                                            مطلوبی را برای جدیدترین عضو خانواده Note به همراه دارند. پردازش محاسبات
-                                            در این تازه‌وارد از طریق تراشه‌ی Exynos 9825 انجام می‌شود که در رده
-                                            تراشه‌های 7 نانومتری قرار می‌گیرد و با سرعت بالای خود، گلکسی نوت 10 را
-                                            برای انجام کارهای بسیار سنگین کاربردی کرده است. تراشه‌ی گرافیکی Mali-G76
-                                            هم در اجرای بازی‌های سنگین و پردازش‌های گرافیکی، گلکسی نوت 10 را سربلند
-                                            خواهد بود. صفحه‌نمایش سوپر آمولد با رزولوشن 1080 در 2280 و قابلیت نمایش
-                                            401 پیکسل در هر اینچ، تجربه‌ی تصویری شفاف و بسیار مطلوب را برای کاربران
-                                            فراهم می‌کند. نسخه 256 گیگابایتی گوشی گلکسی نوت 10 با 8 گیگابایت رم عرضه
-                                            شده است&nbsp; تا میزان مطلوبی از فضا و حافظه تصادفی را در اختیار کاربر
-                                            قرار دهد. حسگر اثرانگشت زیرصفحه‌نمایش، حسگر فشارسنج و ژیروسکوپ تنها
-                                            تعدادی از امکانات این دستگاه قدرتمند است و کار را برای رقبای این محصول
-                                            بزرگ سخت کرده است. البته در این محصول خبری از سنسور عنبیه چشم و خروجی
-                                            3.5 میلی‌متری صدا نیست که دلیل آن را می‌توان در بزرگ شدن قاب و ظرافت در
-                                            طراحی و ساخت جست‌وجو کرد. گفتنی است، باتری این محصول از نوع غیرقابل
-                                            تعویض و لیتیوم‌یون با ظرفیت 3500 میلی‌آمپر ساعت است که از فناوری‌های
-                                            شارژ سریع و شارژ بی‌سیم پشتیبانی می‌کند. این محصول قادر است دستگاه‌های
-                                            دیگر را هم به‌صورت بی‌سیم شارژ کند و از این طریق نقش یک پاوربانک را هم
-                                            ایفا کند.</p>
+                                        <p>
+                                            {{$product->description}}
+                                        </p>
                                     </div>
                                     <a href="#" class="mask-handler">
                                         <span class="show-more">+ ادامه مطلب</span>
@@ -567,173 +531,7 @@
                                     <div class="shadow-box"></div>
                                 </div>
                             </section>
-                            <section class="content-expert-stats">
-                                <div class="content-expert-evaluation">
-                                    <div class="col-lg-4 col-md-4 col-xs-12 d-inline-block pr">
-                                        <div class="positive">
-                                            <span class="plus">نقاط قوت</span>
-                                            <ul>
-                                                <li>
-                                                    <i class="fa fa-plus-circle"></i>
-                                                    صفحه نمایش OLED از نوع Infinity-O
-                                                </li>
-                                                <li>
-                                                    <i class="fa fa-plus-circle"></i>
-                                                    طراحی فشرده
-                                                </li>
-                                                <li>
-                                                    <i class="fa fa-plus-circle"></i>
-                                                    عمر بالای باتری
-                                                </li>
-                                                <li>
-                                                    <i class="fa fa-plus-circle"></i>
-                                                    S-Pen با قابلیت های ویژه
-                                                </li>
-                                                <li>
-                                                    <i class="fa fa-plus-circle"></i>
-                                                    اسپیکر با صدای بلند و استریو
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-xs-12 d-inline-block pr">
-                                        <div class="negative">
-                                            <span class="neg">نقاط قوت</span>
-                                            <ul>
-                                                <li>
-                                                    <i class="fa fa-minus-circle"></i>
-                                                    نداشتن جک 3.5 میلی متری
-                                                </li>
-                                                <li>
-                                                    <i class="fa fa-minus-circle"></i>
-                                                    نداشتن فوکس خودکار در دوربین فوق عریض
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                            <div class="content-expert-articles">
-                                <section class="content-expert-article">
-                                    <button class="content-expert-button">
-                                        <span class="show-more"><i class="mdi mdi-plus"></i></span>
-                                        <span class="show-less"><i class="mdi mdi-minus"></i></span>
-                                    </button>
-                                    <h3 class="content-expert-title">طراحی و ساخت؛ زیبای خاص</h3>
-                                    <div class="content-expert-text">
-                                        <p style="text-align:right">باید در همین ابتدا اعتراف کنیم Galaxy Note 10 یک
-                                            گوشی بسیار زیباست. البته شاید این تعریف کمی شخصی به نظر برسد اما ظاهر
-                                            این گوشی آن‌قدر زیباست که جایی را برای گله و شکایت باقی نمی‌گذارد. در
-                                            این گوشی دوست‌داشتنی صفحه‌نمایش تقریباً تمام قاب جلویی را پوشانده است.
-                                            این گوشی ابعاد بزرگی دارد و با صفحه‌نمایش 6.3 که تقریبا 0.2 اینچ بزرگتر
-                                            از S10 است، در گروه فبلت‌ها جای می‌گیرد. اگر به دنبال خرید این گوشی
-                                            هوشمند هستید، احتمالاً قبلاً هم گوشی بزرگی داشته‌اید و اندازه آن برایتان
-                                            آزاردهنده نخواهد بود. اولین راه‌حل موفق برای ساده کردن فرمول زیبایی و
-                                            کارایی بیشتر، تغییر مکان حسگر اثرانگشت در گلکسی نوت 10 است. با توجه به
-                                            امنیت بالای این راه برای باز کردن گوشی، حذف آن چندان منطقی به نظر
-                                            نمی‌رسد. در این گوشی خبری از حسگر اثرانگشت روی قاب جلویی نیست و در عوض
-                                            این حسگر زیر صفحه‌نمایش قرار گرفته است تا Galaxy Note 10 از همه نظر به
-                                            گوشی مدرن تبدیل شود. تفاوت دیگری که امسال گلکسی سری نوت با گلسی سری S
-                                            &nbsp;داشته اند محل قرار گرفتن دوربین سلفی آن ها است. به طوری که دوربین
-                                            سلفی در S10 در قسمت بالای سمت راست قرار گرفته و در نوت 10 در مرکز بالای
-                                            صفحه نمایش تعبیه شده است.</p>
-                                        <div class="content-expert-img">
-                                            <img src="/assets/home/images/page-single-product/tab-content/note10-1.jpg">
-                                        </div>
-                                    </div>
-                                </section>
-                                <section class="content-expert-article">
-                                    <button class="content-expert-button">
-                                        <span class="show-more"><i class="mdi mdi-plus"></i></span>
-                                        <span class="show-less"><i class="mdi mdi-minus"></i></span>
-                                    </button>
-                                    <h3 class="content-expert-title">صفحه‌نمایش؛ همان خیره‌کننده‌ی همیشگی</h3>
-                                    <div class="content-expert-text">
-                                        <p style="text-align:right">مثل همیشه یکی از نقاط قوت گوشی سری محصولات
-                                            Galaxy Note صفحه‌نمایش آن‌هاست. فناوری Super AMOLED به معنی تصاویر زنده
-                                            و شفافیت خیره‌کننده در کنار پشتیبانی از نمایش ویدئوهای HDR است. گلکسی
-                                            نوت 10 از یک صفحه نمایش 6.3 اینچی بهره می برد، که تقریبا تمام قاب جلویی
-                                            را پوشانده است. سامسونگ مدت ها است که برای پرچمداران خود از صفحه نمایش
-                                            هایی با لبه های منحنی شکل استفاده می کند؛ کاری که با تولید S8 آغاز کرد و
-                                            گوشی Note 10 هم از این قاعده مستثنی نیست. انحنای لبه‌ها باعث می‌شود حس
-                                            کنید فضای بسیار بیشتری در اختیار دارید. این نمایشگر، تراکم پیکسلی
-                                            فوق‌العاده 401 در هر اینچ دارد روی نوت 10 قرار داده شده است؛ می‌توان
-                                            این‌گونه در نظر گرفت که سامسونگ احتمالاً استفاده از تعداد پیکسل بالاتر
-                                            را به علت مصرف باتری بیشتر و اندازه‌ی بزرگ‌تر را به علت بزرگ‌ترشدن سایز
-                                            گوشی کنار گذاشته است.</p>
-                                        <div class="content-expert-img">
-                                            <img src="/assets/home/images/page-single-product/tab-content/note10-2.jpg">
-                                        </div>
-                                        <p style="text-align:right">به دلیل O شکل بودن بریدگی قسمت بالای آن، نام
-                                            Infinity-O برای آن انتخاب شده است. نمایشگرهای Infinity در واقع از ویژگی
-                                            های صفحه نمایش های سامسونگ است که بدون هیچ بریدگی یا Bezel تولید می شوند
-                                            و برای اولین بار با به کار گیری در گوشی های&nbsp; Galaxy S8 و&nbsp;
-                                            Galaxy S8+ معرفی شد.</p>
-                                        <div class="content-expert-img">
-                                            <img src="/assets/home/images/page-single-product/tab-content/note10-3.jpg">
-                                        </div>
-                                        <p style="text-align:right">نمایشگر نوت 10 هم از فناوری همیشه روشن سود
-                                            می‌برد که با استفاده از بخش تنظیمات حالا می‌توانید شخصی‌سازی‌های بیشتری
-                                            را برای آن در نظر بگیرید. سامسونگ موفق شده است برای این گوشی نسبت
-                                            صفحه‌نمایش به بدنه 90.9 درصد را به دست آورد که برای یک گوشی امروزی هم
-                                            میزان بسیار مطلوبی به‌حساب می‌آید. تراز سفیدی مناسب، نور کافی برای دیدن
-                                            محتویات زیر نور‌های شدید، تراکم پیکسلی بالا که هنگام دیدن تصویر یا
-                                            خواندن متن کمک می‌کند تا جزییات بیشتری را ببینید، از مشخصات نمایشگر نوت
-                                            10 هستند.</p>
-                                        <div class="content-expert-img">
-                                            <img src="/assets/home/images/page-single-product/tab-content/note10-4.jpg">
-                                        </div>
-                                    </div>
-                                </section>
-                                <section class="content-expert-article">
-                                    <button class="content-expert-button">
-                                        <span class="show-more"><i class="mdi mdi-plus"></i></span>
-                                        <span class="show-less"><i class="mdi mdi-minus"></i></span>
-                                    </button>
-                                    <h3 class="content-expert-title">سخت‌افزار، سیستم‌عامل و کارایی</h3>
-                                    <div class="content-expert-text">
-                                        <p style="text-align:right">چیپست اگزونوس 9825 از چیپست‌های 7 نانومتری
-                                            سامسونگ در قلب اس نوت 10 قرار گرفته است. چیپست 7 نانومتری به معنی قدرت
-                                            بالا و مصرف بهینه باتری گوشی است. هرساله سخت‌افزارهای نسل جدیدتر برای
-                                            گوشی‌های موبایل در نظر گرفته می‌شوند که این سخت‌افزار شامل چیپست هم
-                                            می‌شود. واضح است که چیپست نسل جدید سامسونگ بسیار سریع است اما در عمل
-                                            سرعت‌بالای آن را نمی‌توان انقلابی دانست. سری‌های قبلی محصولات گلکسی
-                                            سامسونگ که از تراشه اگزونوس استفاده می‌کردند گاهی اوقات در زمان استفاده
-                                            بسیار سنگین خاموش می‌شدند. به نظر می‌رسد در گلکسی جدید به خاطر وجود رم 8
-                                            گیگابیتی، خبری از این مشکل نباشد.</p>
-                                        <div class="content-expert-img">
-                                            <img src="/assets/home/images/page-single-product/tab-content/note10-5.jpg">
-                                        </div>
-                                        <p style="text-align:right">نتیجه‌ی این لیست، سخت‌افزاری است که جای هیچ
-                                            انتقادی را باقی نمی‌گذارد و در هر حالی بهترین بازده ممکن را دارد.
-                                            سامسونگ در هر حالتی بهترین استفاده‌ی ممکن را از این سخت‌افزار کرده است.
-                                            باید اطمینان داشته باشیم وقتی این سخت‌افزار برای پردازش واقعیت افزوده،
-                                            فیلم‌برداری 2160 فریم بر ثانیه، تطبیق چهره و عنبیه برای بازکردن قفل گوشی
-                                            طراحی و ساخته شده؛ دیگر در مورد بازی‌هایی که نهایتاً چند فریم خروجی
-                                            دارند یا برنامه‌هایی که مقدار کمی از رم را اشغال می‌کنند، همچنین اجرای
-                                            اندروید و رابط کاربری سامسونگ، هیچ مشکلی نخواهد داشت. پس خیالتان راحت
-                                            باشد که هیچ عملیاتی وجود ندارد که گلکسی نوت 10 از پس انجام دادن آن
-                                            برنیاید یا در انجام دادن آن کم‌کاری کند.</p>
-                                        <div class="content-expert-img">
-                                            <img src="/assets/home/images/page-single-product/tab-content/note10-6.jpg">
-                                        </div>
-                                        <p style="text-align:right">اندازه بزرگ‌تر در بیشتر گوشی‌های موبایل نوید
-                                            باتری با ظرفیت بیشتر را می‌دهد؛ البته باتری در گوشی نوت 10 تفاوت چشمگیری
-                                            را به خود ندیده است و ظرفیت آن برابر با 3500 میلی‌آمپر است که با توجه به
-                                            چیپست مدرن این گوشی باید تا مدت‌زمان مطلوبی انرژی را در خود نگه دارد.
-                                            البته رزولوشن بالای صفحه‌نمایش باعث شده است که باتری به میزان بیشتری
-                                            مصرف شود و از باتری گوشی انتظار روشن نگه‌داشتن آن تا بیش از یک روز را
-                                            نداشته باشیم. این گوشی مانند پاوربانکی پرقدرت امکان شارژ بی‌سیم دیگر
-                                            دستگاه‌ها را دارد. اما این نکته را نباید فراموش کنیم که گلکسی نوت 10
-                                            شارژ بی‌سیم گوشی‌های دیگر را با سرعت بسیار بالا (با توان 9 واتی) انجام
-                                            می‌دهد. همان‌طور که گفتیم این گوشی می‌تواند دیگر گوشی‌ها و گجت‌های دارای
-                                            فناوری شارژ بی‌سیم را شارژ کند. یکی از ویژگی‌های خاص و البته دوست‌داشتنی
-                                            در مورد گوشی‌های سامسونگ امکان صفحه‌نمایش همیشه روشن است. این امکان
-                                            نوتیفیکیشن‌ها را بدون نیاز به باز کردن گوشی برای کاربر به نمایش در
-                                            می‌آورد.</p>
-                                    </div>
-                                </section>
-                            </div>
+
                         </div>
                         <div class="tab-pane fade" id="Specifications" role="tabpanel"
                             aria-labelledby="Specifications-tab">
@@ -743,170 +541,21 @@
                                 </h2>
                                 <section>
                                     <ul class="params-list">
+                                        @foreach ($product->attributes()->with('attribute')->get() as $attribute )
                                         <li class="params-list-item">
                                             <div class="params-list-key">
-                                                <span class="block">ابعاد</span>
+                                                <span class="block">{{$attribute->attribute->name}}</span>
                                             </div>
                                             <div class="params-list-value">
                                                 <span class="block">
-                                                    7.9 × 71.8 × 151 میلی‌متر
+                                                    {{$attribute->value}}
                                                 </span>
                                             </div>
                                         </li>
-                                        <li class="params-list-item">
-                                            <div class="params-list-key">
-                                                <span class="block">توضیحات سیم کارت</span>
-                                            </div>
-                                            <div class="params-list-value">
-                                                <span class="block">
-                                                    سایز نانو (8.8 × 12.3 میلی‌متر)
-                                                </span>
-                                            </div>
-                                        </li>
-                                        <li class="params-list-item">
-                                            <div class="params-list-key">
-                                                <span class="block">وزن</span>
-                                            </div>
-                                            <div class="params-list-value">
-                                                <span class="block">
-                                                    168 گرم
-                                                </span>
-                                            </div>
-                                        </li>
-                                        <li class="params-list-item">
-                                            <div class="params-list-key">
-                                                <span class="block">ساختار بدنه</span>
-                                            </div>
-                                            <div class="params-list-value">
-                                                <span class="block">
-                                                    فلز و شیشه (محافظ گوریلا گلس روی قاب پشتی و جلویی + قاب فولادی)
-                                                </span>
-                                            </div>
-                                        </li>
+                                        @endforeach
                                     </ul>
                                 </section>
-                                <section>
-                                    <ul class="params-list">
-                                        <li class="params-list-item">
-                                            <div class="params-list-key">
-                                                <span class="block">تراشه</span>
-                                            </div>
-                                            <div class="params-list-value">
-                                                <span class="block">
-                                                    Exynos 9825 (7 nm) Chipset
-                                                </span>
-                                            </div>
-                                        </li>
-                                        <li class="params-list-item">
-                                            <div class="params-list-key">
-                                                <span class="block">نوع پردازنده</span>
-                                            </div>
-                                            <div class="params-list-value">
-                                                <span class="block">
-                                                    64 بیت
-                                                </span>
-                                            </div>
-                                        </li>
-                                        <li class="params-list-item">
-                                            <div class="params-list-key">
-                                                <span class="block">فرکانس پردازنده‌ی مرکزی</span>
-                                            </div>
-                                            <div class="params-list-value">
-                                                <span class="block">
-                                                    2.73, 2.4 و 1.9 گیگاهرتز
-                                                </span>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </section>
-                                <section>
-                                    <ul class="params-list">
-                                        <li class="params-list-item">
-                                            <div class="params-list-key">
-                                                <span class="block">حافظه داخلی</span>
-                                            </div>
-                                            <div class="params-list-value">
-                                                <span class="block">
-                                                    256 گیگابایت
-                                                </span>
-                                            </div>
-                                        </li>
-                                        <li class="params-list-item">
-                                            <div class="params-list-key">
-                                                <span class="block">مقدار RAM</span>
-                                            </div>
-                                            <div class="params-list-value">
-                                                <span class="block">
-                                                    8 گیگابایت
-                                                </span>
-                                            </div>
-                                        </li>
-                                        <li class="params-list-item">
-                                            <div class="params-list-key">
-                                                <span class="block">پشتیبانی از کارت حافظه جانبی</span>
-                                            </div>
-                                            <div class="params-list-value">
-                                                <span class="block">
-                                                    ندارد
-                                                </span>
-                                            </div>
-                                        </li>
-                                        <li class="params-list-item">
-                                            <div class="params-list-key">
-                                                <span class="block">حداکثر ظرفیت کارت حافظه</span>
-                                            </div>
-                                            <div class="params-list-value">
-                                                <span class="block">
-                                                    1 ترابایت
-                                                </span>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </section>
-                                <section>
-                                    <ul class="params-list">
-                                        <li class="params-list-item">
-                                            <div class="params-list-key">
-                                                <span class="block">صفحه نمایش رنگی</span>
-                                            </div>
-                                            <div class="params-list-value">
-                                                <span class="block"> بله </span>
-                                            </div>
-                                        </li>
-                                        <li class="params-list-item">
-                                            <div class="params-list-key">
-                                                <span class="block">صفحه نمایش لمسی</span>
-                                            </div>
-                                            <div class="params-list-value">
-                                                <span class="block">بله</span>
-                                            </div>
-                                        </li>
-                                        <li class="params-list-item">
-                                            <div class="params-list-key">
-                                                <span class="block">فناوری</span>
-                                            </div>
-                                            <div class="params-list-value">
-                                                <span class="block">Dynamic AMOLED</span>
-                                            </div>
-                                        </li>
-                                        <li class="params-list-item">
-                                            <div class="params-list-key">
-                                                <span class="block">بازه‌ی اندازه صفحه نمایش</span>
-                                            </div>
-                                            <div class="params-list-value">
-                                                <span class="block">6.0 اینچ و بزرگتر</span>
-                                            </div>
-                                        </li>
-                                        <li class="params-list-item">
-                                            <div class="params-list-key">
-                                                <span class="block">اندازه</span>
-                                            </div>
-                                            <div class="params-list-value">
-                                                <span class="block">6.3 اینچ</span>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </section>
+
                             </article>
                         </div>
                         <div class="tab-pane fade" id="User-comments" role="tabpanel"
@@ -1310,20 +959,20 @@ $(document).ready(function(e) {
     $('.sku').html(variation.sku)
 
     if (variation.is_sale) {
-        let spanSale = $('<ins />', {
-            class: 'new-price',
+        let spanSale = $('<span />', {
+            class: 'amount',
             text: number_format(variation.sale_price) + ' تومان'
         });
         let spanPrice = $('<del />', {
-            class: 'old-price',
+            class: 'amount',
             text: number_format(variation.price) + ' تومان'
         });
 
         variationPriceDiv.append(spanSale);
         variationPriceDiv.append(spanPrice);
     } else {
-        let spanPrice = $('<ins />', {
-            class: 'new-price',
+        let spanPrice = $('<span />', {
+            class: 'amount',
             text: number_format(variation.price) + ' تومان'
         });
         variationPriceDiv.append(spanPrice);
@@ -1343,20 +992,20 @@ $('#var-select').on('change', function() {
     $('.sku').html(variation.sku)
 
     if (variation.is_sale) {
-        let spanSale = $('<ins />', {
-            class: 'new-price',
+        let spanSale = $('<span />', {
+            class: 'amount',
             text: number_format(variation.sale_price) + ' تومان'
         });
         let spanPrice = $('<del />', {
-            class: 'old-price',
+            class: 'amount',
             text: number_format(variation.price) + ' تومان'
         });
 
         variationPriceDiv.append(spanSale);
         variationPriceDiv.append(spanPrice);
     } else {
-        let spanPrice = $('<ins />', {
-            class: 'new-price',
+        let spanPrice = $('<span />', {
+            class: 'amount',
             text: number_format(variation.price) + ' تومان'
         });
         variationPriceDiv.append(spanPrice);
@@ -1406,19 +1055,6 @@ function reply(id) {
             /*
              * Add new DOM
              */
-            var container = document.createElement('div'),
-                btnAdd = document.createElement('div'),
-                btnRem = document.createElement('div'),
-                min = (settings.min) ? settings.min : input.attr('min'),
-                max = (settings.max) ? settings.max : input.attr('max'),
-                value = (settings.value) ? settings.value : parseFloat(input.val());
-            container.className = 'numberstyle-qty';
-            btnAdd.className = (max && value >= max) ? 'qty-btn qty-add disabled' : 'qty-btn qty-add';
-            btnAdd.innerHTML = '+';
-            btnRem.className = (min && value <= min) ? 'qty-btn qty-rem disabled' : 'qty-btn qty-rem';
-            btnRem.innerHTML = '-';
-            input.wrap(container);
-            input.closest('.numberstyle-qty').prepend(btnRem).append(btnAdd);
 
             /*
              * Attach events

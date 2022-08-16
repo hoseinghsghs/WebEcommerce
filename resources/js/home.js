@@ -17,3 +17,4 @@ window.Swal =
     window.swal = require("../assets/home/js/vendor/sweetalert2.all.min.js");
 require("../assets/home/js/main.js");
 require("../assets/home/js/vendor/cloudflar.js");
+require("../assets/admin/js/rating.js");

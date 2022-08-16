@@ -370,19 +370,29 @@ $(document).ready(function (e) {
         //تازه
         e.preventDefault();
         var a = $(this);
+        var ishome = a.attr("data-ishome");
+        console.log(ishome);
+        if (ishome == 1) {
+            producth = a.attr("data-product");
+            variationh = a.attr("data-varition");
+            qtybuttonh = $("#qtybutton").val();
+        } else {
+            producth = $("#product_id").val();
+            variationh = $("#var-select").val();
+            qtybuttonh = $("#qtybutton").val();
+        }
 
-        console.log(a.attr("data-product"));
-
-        let url = window.location.origin + "/add-to-cart";
         a.find("i").removeClass("fa fa-shopping-cart");
         a.find("i").addClass("fa fa-circle-o-notch fa-spin");
+        let url = window.location.origin + "/add-to-cart";
+
         $.post(
             url,
             {
                 _token: $('meta[name="csrf-token"]').attr("content"),
-                product: a.attr("data-product"),
-                variation: a.attr("data-varition"),
-                qtybutton: 1,
+                product: producth,
+                variation: variationh,
+                qtybutton: qtybuttonh,
             },
             function (response, status, xhr) {
                 if (xhr.status == 200) {

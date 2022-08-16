@@ -72,7 +72,8 @@
                     <input type="hidden" id="variation_value" name="productvar">
 
                     <li class="action-item add-to-cart">
-                        <button class="btn btn-link btn-add-to-cart" data-product="{{$Product_special->id}}"
+                        <button class="btn btn-link btn-add-to-cart" data-ishome="1"
+                            data-product="{{$Product_special->id}}"
                             data-varition="{{ json_encode($variation->only(['id' , 'sku' , 'quantity','is_sale' , 'sale_price' , 'price'])) }}"
                             type="submit">
                             <i class="fa fa-shopping-cart"></i>

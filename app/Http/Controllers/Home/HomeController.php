@@ -43,18 +43,18 @@ class HomeController extends Controller
         $headers =                       Banner::active()->where('type', 'هدر')->get()->sortBy('priority')->take(4);
         $centers =                       Banner::active()->where('type', 'وسط')->get()->sortBy('priority')->take(2);
 
-        $banner_left_top =               Banner::active()->where('type', 'هدر-چپ-بالا')->get()->first();
-        $banner_left_bottom =            Banner::active()->where('type', 'هدر-چپ-پایین')->get()->first();
+        // $banner_left_top =               Banner::active()->where('type', 'هدر-چپ-بالا')->get()->first();
+        // $banner_left_bottom =            Banner::active()->where('type', 'هدر-چپ-پایین')->get()->first();
 
-        $banner_left_category =          Banner::active()->where('type', 'چپ-دسته بندی')->get()->first();
-        $banner_right_category =         Banner::active()->where('type', 'راست-دسته بندی')->get()->first();
+        // $banner_left_category =          Banner::active()->where('type', 'چپ-دسته بندی')->get()->first();
+        // $banner_right_category =         Banner::active()->where('type', 'راست-دسته بندی')->get()->first();
 
-        $banner_width =                  Banner::active()->where('type', 'عرضی')->get()->first();
+        // $banner_width =                  Banner::active()->where('type', 'عرضی')->get()->first();
 
-        $banner_end_right =              Banner::active()->where('type', 'آخر-راست')->get()->first();
-        $banner_end_left_top =           Banner::active()->where('type', 'آخر-چپ-بالا')->get()->first();
-        $banner_end_left_bottom_1 =      Banner::active()->where('type', 'آخر-چپ-پایین-1')->get()->first();
-        $banner_end_left_bottom_2 =      Banner::active()->where('type', 'آخر-چپ-پایین-2')->get()->first();
+        // $banner_end_right =              Banner::active()->where('type', 'آخر-راست')->get()->first();
+        // $banner_end_left_top =           Banner::active()->where('type', 'آخر-چپ-بالا')->get()->first();
+        // $banner_end_left_bottom_1 =      Banner::active()->where('type', 'آخر-چپ-پایین-1')->get()->first();
+        // $banner_end_left_bottom_2 =      Banner::active()->where('type', 'آخر-چپ-پایین-2')->get()->first();
 
         $Products_auction_today =        Product::active()->where('position', 'تخفیف روزانه')->get()->take(15);
         $Products_our_suggestion =       Product::active()->where('position', 'پیشنهاد ما')->get()->take(15);

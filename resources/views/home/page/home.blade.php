@@ -79,6 +79,7 @@
         </div>
         @endif
         <!-- پایان پیشنهاد ما -->
+        <input type="hidden" value="1" id="qtybutton">
         <!-- slider-moment پیشنهاد لحظه ای------------------------->
         @if ($Products_our_suggestion_units->count())
         <div class="col-lg-3 col-md-3 col-xs-12 pl order-1 d-block">
