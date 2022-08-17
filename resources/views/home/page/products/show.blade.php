@@ -29,20 +29,20 @@
                                                     @if ($product->checkUserWishlist(1))
                                                     <a href="#" data-product="{{$product->id}}"
                                                         class="btn-option add-product-wishes active">
-                                                        <i class="mdi mdi-heart-outline"></i>
+                                                        <i class="fa fa-heart-o" style="padding:11px"></i>
                                                         <span>محبوب</span>
                                                     </a>
                                                     @else
                                                     <a href="#" data-product="{{$product->id}}"
                                                         class="btn-option add-product-wishes ">
-                                                        <i class="mdi mdi-heart-outline"></i>
+                                                        <i class="fa fa-heart-o" style="padding:11px"></i>
                                                         <span>محبوب</span>
                                                     </a>
                                                     @endif
                                                     @else
                                                     <a href="#" data-product="{{$product->id}}"
                                                         class="btn-option add-product-wishes ">
-                                                        <i class="mdi mdi-heart-outline"></i>
+                                                        <i class="fa fa-heart-o" style="padding:11px"></i>
                                                         <span>محبوب</span>
                                                     </a>
                                                     @endif
@@ -73,18 +73,7 @@
                                                                     <div class="title">با استفاده از روش‌های زیر
                                                                         می‌توانید این صفحه را با دوستان خود به
                                                                         اشتراک بگذارید.</div>
-                                                                    <form action="#" class="email-sharing">
-                                                                        <h5 class="share-title">ارسال از طریق ایمیل
-                                                                        </h5>
-                                                                        <div class="input-group-sharing">
-                                                                            <input type="email"
-                                                                                class="share-email-address form-control"
-                                                                                id="share-email">
-                                                                            <button
-                                                                                class="btn-send-email btn btn-primary"
-                                                                                type="submit">ارسال ایمیل</button>
-                                                                        </div>
-                                                                    </form>
+
                                                                     <div class="share-options">
                                                                         <div class="share-social-buttons text-center">
                                                                             <a href="#"
@@ -107,133 +96,8 @@
                                                                     </div>
                                                                     <div class="form-share-col">
                                                                         <input class="ui-url-field" type="url"
-                                                                            value="https://www.digikala.com/product/dkp-1672478"
+                                                                            value="{{route('home.products.show' , ['product' => $product->slug])}}"
                                                                             readonly="">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="option-alarm">
-                                                    <a href="#" class="btn-option btn-option-alarm" data-toggle="modal"
-                                                        data-target="#btn-option-alarm">
-                                                        <i class="mdi mdi-bell-outline"></i>
-                                                        <span>اطلاع‌رسانی</span>
-                                                    </a>
-                                                    <!-- Modal-option-alarm -->
-                                                    <div class="modal fade" id="btn-option-alarm" tabindex="-1"
-                                                        role="dialog" aria-labelledby="exampleModalCenterTitle"
-                                                        aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title"
-                                                                        id="exampleModalCenterTitle">به من اطلاع بده
-                                                                    </h5>
-                                                                    <button type="button" class="close"
-                                                                        data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="form-notification-title">از طریق:
-                                                                    </div>
-                                                                    <div class="form-auth-row">
-                                                                        <label for="#" class="ui-checkbox mt-1">
-                                                                            <input type="checkbox" value="1"
-                                                                                name="login" id="remember">
-                                                                            <span class="ui-checkbox-check"></span>
-                                                                        </label>
-                                                                        <label for="remember"
-                                                                            class="remember-me mr-0">ایمیل به
-                                                                            info@digismart.com</label>
-                                                                    </div>
-                                                                    <div class="form-auth-row">
-                                                                        <label for="#" class="ui-checkbox mt-1">
-                                                                            <input type="checkbox" value="1"
-                                                                                name="login" id="remember">
-                                                                            <span class="ui-checkbox-check"></span>
-                                                                        </label>
-                                                                        <label for="remember"
-                                                                            class="remember-me mr-0">پیامک به
-                                                                            *******0991</label>
-                                                                    </div>
-                                                                    <div class="form-auth-row">
-                                                                        <label for="#" class="ui-checkbox mt-1">
-                                                                            <input type="checkbox" value="1"
-                                                                                name="login" id="remember">
-                                                                            <span class="ui-checkbox-check"></span>
-                                                                        </label>
-                                                                        <label for="remember"
-                                                                            class="remember-me mr-0">سیستم پیام شخصی
-                                                                            دیجی اسمارت</label>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button"
-                                                                        class="btn btn-primary ml-2">ثبت</button>
-                                                                    <button type="button" class="btn btn-secondary"
-                                                                        data-dismiss="modal">بازگشت</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="Three-dimensional">
-                                                    <a href="#" class="btn-option btn-Three-dimensional"
-                                                        data-toggle="modal" data-target="#more-product">
-                                                        <i class="mdi mdi-more"></i>
-                                                        <span>نمایش بیشتر</span>
-                                                    </a>
-                                                    <div class="modal fade" id="more-product" tabindex="-1"
-                                                        role="dialog" aria-labelledby="exampleModalCenterTitle"
-                                                        aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered more-product"
-                                                            role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-body">
-                                                                    <div id="custom-events">
-                                                                        <a
-                                                                            href="/assets/home/images/page-single-product/product-img/product-img-note10.jpg">
-                                                                            <img
-                                                                                src="/assets/home/images/page-single-product/product-img/product-img-note10.jpg" />
-                                                                        </a>
-                                                                        <a
-                                                                            href="/assets/home/images/page-single-product/product-img/product-img-note10-big-1.jpg">
-                                                                            <img
-                                                                                src="/assets/home/images/page-single-product/product-img/product-img-note10-big-1.jpg" />
-                                                                        </a>
-                                                                        <a
-                                                                            href="/assets/home/images/page-single-product/product-img/product-img-note10-big-2.jpg">
-                                                                            <img
-                                                                                src="/assets/home/images/page-single-product/product-img/product-img-note10-big-2.jpg" />
-                                                                        </a>
-                                                                        <a
-                                                                            href="/assets/home/images/page-single-product/product-img/product-img-note10-big-3.jpg">
-                                                                            <img
-                                                                                src="/assets/home/images/page-single-product/product-img/product-img-note10-big-3.jpg" />
-                                                                        </a>
-                                                                        <a
-                                                                            href="/assets/home/images/page-single-product/product-img/product-img-note10-big-4.jpg">
-                                                                            <img
-                                                                                src="/assets/home/images/page-single-product/product-img/product-img-note10-big-4.jpg" />
-                                                                        </a>
-                                                                        <a
-                                                                            href="/assets/home/images/page-single-product/product-img/product-img-note10-big-5.jpg">
-                                                                            <img
-                                                                                src="/assets/home/images/page-single-product/product-img/product-img-note10-big-5.jpg" />
-                                                                        </a>
-                                                                        <a
-                                                                            href="/assets/home/images/page-single-product/product-img/product-img-note10-big-6.jpg">
-                                                                            <img
-                                                                                src="/assets/home/images/page-single-product/product-img/product-img-note10-big-6.jpg" />
-                                                                        </a>
-                                                                        <a
-                                                                            href="/assets/home/images/page-single-product/product-img/product-img-note10-big-7.jpg">
-                                                                            <img
-                                                                                src="/assets/home/images/page-single-product/product-img/product-img-note10-big-7.jpg" />
-                                                                        </a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -248,14 +112,14 @@
                                                     session()->get('compareProducts')) )
                                                     <a href="product-comparison.html" data-product="{{$product->id}}"
                                                         class="btn-option btn-compare" style="color: #651fff;">
-                                                        <i class="mdi mdi-compare"></i>
+                                                        <i class="fa fa-random" style="padding:11px"></i>
                                                         <span>مقایسه</span>
                                                     </a>
 
                                                     @else
                                                     <a href="product-comparison.html" data-product="{{$product->id}}"
                                                         class="btn-option btn-compare">
-                                                        <i class="mdi mdi-compare"></i>
+                                                        <i class="fa fa-random" style="padding:11px"></i>
                                                         <span>مقایسه</span>
                                                     </a>
                                                     @endif
@@ -263,7 +127,7 @@
                                                     @else
                                                     <a href="product-comparison.html" data-product="{{$product->id}}"
                                                         class="btn-option btn-compare">
-                                                        <i class="mdi mdi-compare"></i>
+                                                        <i class="fa fa-random" style="padding:11px"></i>
                                                         <span>مقایسه</span>
                                                     </a>
                                                     @endif
@@ -478,34 +342,36 @@
                 </div>
             </div>
         </div>
-        <div class="tabs">
+        <div class="tabs" id="respon">
             <div class="tab-box">
                 <ul class="tab nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link {{ count($errors) > 0 ? '' : 'active' }}" id="Review-tab" data-toggle="tab"
-                            href="#Review" role="tab" aria-controls="Review" aria-selected="true">
+                        <a class="nav-link {{ count($errors) > 0 ? '' : 'active' }} " id="Review-tab"
+                            style="margin-left: -1.6rem;" data-toggle="tab" href="#Review" role="tab"
+                            aria-controls="Review" aria-selected="{{ count($errors) > 0 ? 'false' : 'true' }}">
                             <i class="mdi mdi-glasses"></i>
                             نقد و بررسی
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="Specifications-tab" data-toggle="tab" href="#Specifications" role="tab"
-                            aria-controls="Specifications" aria-selected="false">
+                        <a class="nav-link" id="Specifications-tab" style="margin-left: -1.6rem;" data-toggle="tab"
+                            href="#Specifications" role="tab" aria-controls="Specifications" aria-selected="false">
                             <i class="mdi mdi-format-list-checks"></i>
                             مشخصات
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="User-comments-tab" data-toggle="tab" href="#User-comments" role="tab"
-                            aria-controls="User-comments" aria-selected="false">
+                        <a class="nav-link" id="User-comments-tab" style="margin-left: -1.6rem;" data-toggle="tab"
+                            href="#User-comments" role="tab" aria-controls="User-comments" aria-selected="false">
                             <i class="mdi mdi-comment-text-multiple-outline"></i>
                             نظرات کاربران
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ count($errors) > 0 ? 'active' : '' }}" id="question-and-answer-tab"
-                            data-toggle="tab" href="#question-and-answer" role="tab" aria-controls="question-and-answer"
-                            aria-selected="false">
+                        <a class="nav-link {{ count($errors) > 0 ? 'active' : '' }}" style="margin-left: -1.6rem;"
+                            id="question-and-answer-tab" data-toggle="tab" href="#question-and-answer" role="tab"
+                            aria-controls="question-and-answer"
+                            aria-selected="{{ count($errors) > 0 ? 'true' : 'false' }}">
                             <i class="mdi mdi-comment-question-outline"></i>
                             پرسش و پاسخ
                         </a>
@@ -515,7 +381,8 @@
             <div class="col-lg">
                 <div class="tabs-content">
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="Review" role="tabpanel" aria-labelledby="Review-tab">
+                        <div class="tab-pane fade {{ count($errors) > 0 ? '' : 'show active' }}" id="Review"
+                            role="tabpanel" aria-labelledby="Review-tab">
                             <h2 class="params-headline">نقد و بررسی اجمالی</h2>
                             <section class="content-expert-summary">
                                 <div class="mask pm-3">
@@ -537,7 +404,7 @@
                             aria-labelledby="Specifications-tab">
                             <article>
                                 <h2 class="params-headline">مشخصات فنی
-                                    <span>Samsung Galaxy Note 10 Dual SIM 256GB Mobile Phone</span>
+                                    <span>{{$product->name}}</span>
                                 </h2>
                                 <section>
                                     <ul class="params-list">
@@ -784,40 +651,72 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="question-and-answer" role="tabpanel"
-                            aria-labelledby="question-and-answer-tab">
+                        <div class="tab-pane fade {{ count($errors) > 0 ? 'show active' : '' }}"
+                            id="question-and-answer" role="tabpanel" aria-labelledby="question-and-answer-tab">
                             <div class="faq">
-                                <h2 class="params-headline">پرسش و پاسخ
-                                    <span>پرسش خود را در مورد محصول مطرح نمایید</span>
-                                </h2>
-                                <form action="#" class="form-faq">
+                                @if ($errors->any())
+                                @foreach ($errors->all() as $error)
+                                <div class=" col-md-6 mb-4">
+                                    <div class="alert alert-icon alert-error alert-bg alert-inline">
+                                        <h4 class="alert-title">
+                                            <i class="w-icon-times-circle"></i>
+                                        </h4> {{ $error }}
+                                    </div>
+                                </div>
+                                @endforeach
+                                @endif
+
+                                <form action="{{route('home.comments.store' , ['product' => $product->id])}}"
+                                    method="POST" class="review-form">
+                                    @csrf
                                     <div class="form-faq-row mt-4">
                                         <div class="form-faq-col">
                                             <div class="ui-textarea">
-                                                <textarea name="qa" title="متن سوال"
-                                                    class="ui-textarea-field"></textarea>
+                                                <label>نام شما</label>
+                                                <input type="text" name="name" class="form-control" id="author"
+                                                    class="ui-textarea-field">
+                                                @error('name')
+                                                <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="form-faq-row mt-4">
+                                        <div class="form-faq-col">
+                                            <div class="ui-textarea">
+                                                <label>ایمیل</label>
+                                                <input type="text" name="email" class="form-control" id="email_1"
+                                                    class="ui-textarea-field">
+                                                @error('email')
+                                                <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-faq-row mt-4">
+                                        <div class="form-faq-col">
+                                            <div class="ui-textarea">
+                                                <textarea title="متن سوال" placeholder="متن پرسش و پاسخ ..... "
+                                                    name="text" cols="30" rows="6" id="review"
+                                                    class="ui-textarea-field"></textarea>
+                                                @error('text')
+                                                <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                     <div class="form-faq-row mt-4">
                                         <div class="form-faq-col form-faq-col-submit">
                                             <button class="btn-tertiary btn btn-secondary" type="submit">ثبت
                                                 پرسش</button>
-                                            <div class="form-faq-col-agreement d-inline-block mr-5">
-                                                <div class="form-auth-row">
-                                                    <label for="#" class="ui-checkbox mt-1">
-                                                        <input type="checkbox" value="1" name="login" id="remember">
-                                                        <span class="ui-checkbox-check"></span>
-                                                    </label>
-                                                    <label for="remember" class="remember-me mr-0">اولین پاسخی که به
-                                                        پرسش من داده شد، از طریق ایمیل به من اطلاع دهید. </label>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </form>
                                 <div id="product-questions-list">
-                                    <div class="questions-list">
+                                    @foreach ($product->approvedComments as $comment )
+                                    <div class="questions-list mb-2">
                                         <ul class="faq-list">
                                             <li class="is-question">
                                                 <div class="section">
@@ -825,21 +724,51 @@
                                                         <span class="icon-faq">?</span>
                                                         <p class="h5">
                                                             پرسش :
-                                                            <span>جلال</span>
+                                                            <span>{{$comment->user->name == null ? "بدون نام" : $comment->user->name }}</span>
                                                         </p>
                                                     </div>
-                                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و
-                                                        با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه
-                                                        و مجله در ستون و سطرآنچنان که لازم است</p>
+                                                    <p>{{$comment->text}}</p>
                                                     <div class="faq-date">
-                                                        <em>۱۴ فروردین ۱۳۹۹</em>
+                                                        <em>{{Hekmatinasser\Verta\Verta::instance($comment->created_at)->format('Y/n/j')}}</em>
                                                     </div>
-                                                    <a href="#" class="js-add-answer-btn">به این پرسش پاسخ
-                                                        دهید </a>
+                                                    <a onclick="reply('{{$comment->id}}')" class="btn btn-link" style="
+                                                        color: #24c0df;
+                                                        padding: 0;
+                                                        line-height: 2;
+                                                        position: absolute;
+                                                        bottom: 0;
+                                                        left: 25px;
+                                                        font-size: 13px;
+                                                        margin-bottom: 15px;">
+                                                        پاسخ
+                                                        <i class="fa fa-reply"></i>
+                                                    </a>
+
                                                 </div>
                                             </li>
                                         </ul>
                                     </div>
+                                    <form style="margin-right: 4rem;margin-left: 4px;display: none;"
+                                        id="reply-form-{{$comment->id}}"
+                                        action="{{route('reply.add' , ['product' => $product->id , 'comment' => $comment->id])}}"
+                                        method="POST" class="review-form ">
+                                        @csrf
+
+                                        <div class="form-faq-col">
+                                            <textarea name="text" cols="30" rows="5"
+                                                style="background-color:#fbfbfb; border-radius: 1rem;"
+                                                placeholder="پاسخ ..." class="form-control mt-2" id="review"></textarea>
+                                            @error('text')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                            <button class="btn-tertiary btn btn-secondary mt-2" type="submit">ثبت
+                                                پاسخ</button>
+                                        </div>
+
+
+                                    </form>
+                                    @foreach ($comment->replies as $reply)
+                                    @if ($reply->approved == 1)
                                     <div class="questions-list answer-questions">
                                         <ul class="faq-list">
                                             <li class="is-question">
@@ -848,94 +777,20 @@
                                                         <span class="icon-faq"><i class="mdi mdi-storefront"></i></span>
                                                         <p class="h5">
                                                             پاسخ فروشنده :
-                                                            <span>حسن</span>
+                                                            <span>{{$reply->user->name == null ? "بدون نام" : $reply->user->name }}</span>
                                                         </p>
                                                     </div>
-                                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و
-                                                        با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه
-                                                        و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی
-                                                        تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای
-                                                        کاربردی می باشد.</p>
+                                                    <p>{{$reply->text}}</p>
                                                     <div class="faq-date">
-                                                        <em>۱۴ فروردین ۱۳۹۹</em>
+                                                        <em>{{Hekmatinasser\Verta\Verta::instance($reply->created_at)->format('Y/n/j')}}</em>
                                                     </div>
-                                                    <a href="#" class="js-add-answer-btn">به این پرسش پاسخ
-                                                        دهید </a>
                                                 </div>
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="questions-list">
-                                        <ul class="faq-list">
-                                            <li class="is-question">
-                                                <div class="section">
-                                                    <div class="faq-header">
-                                                        <span class="icon-faq">?</span>
-                                                        <p class="h5">
-                                                            پرسش :
-                                                            <span>اشکان</span>
-                                                        </p>
-                                                    </div>
-                                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و
-                                                        با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه
-                                                        و مجله در ستون و سطرآنچنان که لازم است</p>
-                                                    <div class="faq-date">
-                                                        <em>۱۴ فروردین ۱۳۹۹</em>
-                                                    </div>
-                                                    <a href="#" class="js-add-answer-btn">به این پرسش پاسخ
-                                                        دهید </a>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="questions-list answer-questions">
-                                        <ul class="faq-list">
-                                            <li class="is-question">
-                                                <div class="section">
-                                                    <div class="faq-header">
-                                                        <span class="icon-faq"><i class="mdi mdi-storefront"></i></span>
-                                                        <p class="h5">
-                                                            پاسخ فروشنده :
-                                                            <span>جواد</span>
-                                                        </p>
-                                                    </div>
-                                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و
-                                                        با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه
-                                                        و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی
-                                                        تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای
-                                                        کاربردی می باشد.</p>
-                                                    <div class="faq-date">
-                                                        <em>۱۴ فروردین ۱۳۹۹</em>
-                                                    </div>
-                                                    <a href="#" class="js-add-answer-btn">به این پرسش پاسخ
-                                                        دهید </a>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="questions-list">
-                                        <ul class="faq-list">
-                                            <li class="is-question">
-                                                <div class="section">
-                                                    <div class="faq-header">
-                                                        <span class="icon-faq">?</span>
-                                                        <p class="h5">
-                                                            پرسش :
-                                                            <span>رضا</span>
-                                                        </p>
-                                                    </div>
-                                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و
-                                                        با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه
-                                                        و مجله در ستون و سطرآنچنان که لازم است</p>
-                                                    <div class="faq-date">
-                                                        <em>۱۴ فروردین ۱۳۹۹</em>
-                                                    </div>
-                                                    <a href="#" class="js-add-answer-btn">به این پرسش پاسخ
-                                                        دهید </a>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                    @endif
+                                    @endforeach
+                                    @endforeach
                                 </div>
                             </div>
                         </div>

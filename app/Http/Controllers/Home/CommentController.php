@@ -14,15 +14,16 @@ class CommentController extends Controller
 {
     public function store(Product $product , Request $request)
     {
+        
         $validator = Validator::make($request->all(), [
             'text' => 'required|min:5|max:7000',
             // 'rate' => 'required|digits_between:0,5', 
         ]);
 
         if ($validator->fails()) {
-            return redirect()->to(url()->previous() . '#comments')->withErrors($validator);
+            return redirect()->to(url()->previous() . '#respon')->withErrors($validator);
         }
-
+        
         if (auth()->check()) {
             try {
                 DB::beginTransaction();
@@ -35,19 +36,20 @@ class CommentController extends Controller
                     'commentable_type' => Product::class,
                  
                 ]);
+               
 
-                if ($product->rates()->where('user_id', auth()->id())->exists()) {
-                    $productRate = $product->rates()->where('user_id', auth()->id())->first();
-                    $productRate->update([
-                        'rate' => $request->rate
-                    ]);
-                } else {
-                    ProductRate::create([
-                        'user_id' => auth()->id(),
-                        'product_id' => $product->id,
-                        'rate' => $request->rate
-                    ]);
-                }
+                // if ($product->rates()->where('user_id', auth()->id())->exists()) {
+                //     $productRate = $product->rates()->where('user_id', auth()->id())->first();
+                //     $productRate->update([
+                //         'rate' => $request->rate
+                //     ]);
+                // } else {
+                //     ProductRate::create([
+                //         'user_id' => auth()->id(),
+                //         'product_id' => $product->id,
+                //         'rate' => $request->rate
+                //     ]);
+                // }
 
                 DB::commit();
             } catch (\Exception $ex) {

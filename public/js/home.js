@@ -610,7 +610,7 @@ $(document).ready(function (e) {
       s.find("i").removeClass("fa fa-circle-o-notch fa-spin");
       s.find("i").addClass("fa fa-random");
     });
-  }); // wishes
+  }); // علاقه مندی ها
 
   $(".add-product-wishes").on("click", function (e) {
     e.preventDefault();

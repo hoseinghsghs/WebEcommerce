@@ -555,7 +555,8 @@ $(document).ready(function (e) {
                 s.find("i").addClass("fa fa-random");
             });
     });
-    // wishes
+
+    // علاقه مندی ها
     $(".add-product-wishes").on("click", function (e) {
         e.preventDefault();
         const Toast = Swal.mixin({
