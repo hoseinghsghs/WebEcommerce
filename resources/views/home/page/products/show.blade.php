@@ -1,745 +1,807 @@
 @extends('home.layout.MasterHome')
 @section('title', "خانه -". $product->slug)
 @section('content')
-<main class="main mb-10 pb-1">
-    <!-- Start of Breadcrumb -->
-    <nav class="breadcrumb-nav container">
-        <ul class="breadcrumb bb-no">
-            <li><a href="{{route('home')}}">صفحه اصلی </a></li>
-            <li><a href="{{route('home')}}">محصولات </a></li>
-            <li>{{$product->name}} </li>
-        </ul>
-    </nav>
-    <!-- End of Breadcrumb -->
-    <!-- Start of Page Content -->
-    <div class="page-content">
-        <div class="container">
-            <div class="row gutter-lg">
-                <div class="main-content">
-                    <div class="product product-single row">
-                        <div class="col-md-6 mb-4 mb-md-8">
-                            <div class="product-gallery product-gallery-sticky">
-                                <div class="product-single-carousel owl-carousel owl-theme owl-nav-inner row cols-1 gutter-no"
-                                    data-owl-options="{
-                                            'nav': true,
-                                            'dots': false,
-                                            'rtl': true,
-                                            'items': 1,
-                                            'margin': 20
-                                        }">
-                                    <figure class="product-image">
-                                        <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}"
-                                            data-zoom-image="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}"
-                                            alt="{{$product->slug}}" width="800" height="900">
-                                    </figure>
-                                    @foreach ($product->images as $image_value )
-                                    <figure class="product-image">
-                                        <img src="{{url(env('PRODUCT_IMAGES_UPLOAD_PATCH').$image_value->image)}}"
-                                            data-zoom-image="{{url(env('PRODUCT_IMAGES_UPLOAD_PATCH').$image_value->image)}}"
-                                            alt="{{$product->slug}}" width="800" height="900">
-                                    </figure>
-                                    @endforeach
-                                </div>
-                                <div class="product-thumbs-wrap">
-                                    <div class="product-thumbs row cols-4 gutter-sm">
-                                        <div class="product-thumb">
-                                            <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}"
-                                                alt="{{$product->slug}}" width="800" height="900">
-                                        </div>
-                                        @foreach ( $product->images as $image_value_second )
-                                        <div class="product-thumb">
-                                            <img src="{{url(env('PRODUCT_IMAGES_UPLOAD_PATCH').$image_value_second->image)}}"
-                                                alt="{{$product->slug}}" width="800" height="900">
-                                        </div>
-                                        @endforeach
-                                    </div>
-                                    <button class="thumb-up disabled"><i class="w-icon-angle-left"></i></button>
-                                    <button class="thumb-down disabled"><i class="w-icon-angle-right"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-6 mb-md-8">
-                            <div class="product-details" data-sticky-options="{'minWidth': 767}">
-
-                                <span>
-
-                                    <div class="social-links-wrapper">
-                                        <div class="product-link-wrapper d-flex">
-                                            <div class="social-links" style="margin-left: 20px;">
-                                                <div class="social-icons social-no-color border-thin">
-                                                    <h1 class="product-title"> {{$product->name}} </h1>
-                                                </div>
-                                            </div>
-                                            <span class="divider d-xs-show" style="margin-left: 20px;"></span>
-
-                                            <a id='wished' data-product="{{$product->id}}"
-                                                class='{{ $product->checkUserWishlist(1) ? "btn-product-icon btn-wishlist added w-icon-heart-full" : "btn-product-icon btn-wishlist w-icon-heart" }}'><span></span></a>
-
-                                            @if (session()->has('compareProducts'))
-                                            @if (in_array($product->id, session()->get('compareProducts')) )
-                                            <a data-product="{{$product->id}}"
-                                                class="btn-product-icon btn-compare added w-icon-check-solid"
-                                                title="افزودن برای مقایسه"></a>
-                                            @else
-                                            <a data-product="{{$product->id}}"
-                                                class="btn-product-icon btn-compare w-icon-compare"
-                                                title="افزودن برای مقایسه"></a>
-                                            @endif
-                                            @else
-                                            <a data-product="{{$product->id}}"
-                                                class="btn-product-icon btn-compare w-icon-compare"
-                                                title="افزودن برای مقایسه"></a>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </span>
-
-                                <div class="product-bm-wrapper">
-                                    <figure class="brand">
-                                        <img src="{{url(env('BRAND_IMAGES_PATCH').$product->brand->image)}}"
-                                            alt="{{$product->brand->slug}}" width="105" height="48" />
-                                    </figure>
-                                    <div class="product-meta">
-                                        <div class="product-categories">
-                                            دسته بندی:
-                                            <span class="product-category"><a
-                                                    href="#">{{$product->category->parent->name}} /
-                                                    {{$product->category->name}}
-                                                </a></span>
-                                        </div>
-                                        <div class="product-sku">
-
-                                            کد: <span class="sku"></span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <hr class="product-divider">
-
-                                <form class="cart-form" style="display:inline">
-
-                                    <div class="product-price variation-price">
-
-                                        @if ($product->quantity_check)
-
-                                        @if ($product->sale_check)
-
-                                        <ins class="new-price">{{number_format($product->sale_check->sale_price)}}
-                                            تومان</ins>
-
-                                        <del class="old-price">{{number_format($product->sale_check->price)}}
-                                            تومان</del>
-                                        @else
-                                        <ins class="new-price">{{ number_format($product->price_check->price) }}
-                                            تومان</ins>
-                                        @endif
-                                        @else
-                                        <ins class="new-price">نا موجود</ins>
-
-                                        @endif
-                                    </div>
-
-                                    <div class="ratings-container">
-                                        <div class="ht-product-ratting-wrap mt-4">
-                                            <div data-rating-stars="5" data-rating-readonly="true"
-                                                data-rating-value="{{ceil($product->rates->avg('rate'))}}">
-                                            </div>
-                                        </div>
-                                        <a href="#product-tab-reviews"
-                                            class="rating-reviews">({{$product->approvedComments()->count()}} نظر )</a>
-                                    </div>
-
-
-
-                                    <div class="product-short-desc">
-                                        <ul class="list-type-check list-style-none">
-
-                                            <li>
-                                                {{$product->description}};
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                    <hr class="product-divider">
-                                    @foreach ($product->attributes()->with('attribute')->get() as $attribute )
-                                    <div class="product-form product-variation-form product-color-swatch">
-                                        <label>{{$attribute->attribute->name}}:</label>
-                                        <div class="d-flex align-items-center product-variations">
-                                            {{$attribute->value}}
-                                        </div>
-                                    </div>
-                                    @endforeach
-
-
-
-                                    @php
-                                    if($product->sale_check)
-                                    {
-                                    $variationProductSelected = $product->sale_check;
-                                    }else{
-                                    $variationProductSelected = $product->price_check;
-                                    }
-                                    @endphp
-
-                                    <div class="product-form product-variation-form product-size-swatch">
-                                        <label
-                                            class="mb-1">{{App\Models\Attribute::find($product->variations->first()->attribute_id)->name}}
-                                            : </label>
-                                        <div class="flex-wrap d-flex align-items-center product-variations">
-                                            <select name="variation" id="var-select" class="select-var">
-                                                @foreach ($product->variations()->where('quantity', '>' , 0)->get() as
-                                                $variation )
-                                                <option
-                                                    value="{{ json_encode($variation->only(['id' , 'sku' , 'quantity','is_sale' , 'sale_price' , 'price'])) }}"
-                                                    {{ $variationProductSelected->id == $variation->id ? 'selected' : '' }}>
-                                                    {{$variation->value}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <input type="hidden" id="product_id" name="product" value="{{$product->id}}">
-
-                                    <div class="fix-bottom product-sticky-content sticky-content">
-                                        <div class="product-form container">
-                                            <input class="numberstyle" name="qtybutton" id="qtybutton"
-                                                style="background-color: #ececec ; color:#666666" type="number" min="1"
-                                                step="1" value="1" readonly>
-                                        </div>
-                                    </div>
-                                    <button id="btn-cart" class="btn btn-primary btn-cart" style="margin-top: 8px; margin-right:20rem"
-                                        type="submit">
-                                        <i class="w-icon-cart"></i>
-                                        <span>افزودن به سبد </span>
-                                    </button>
-                                </form>
-                                <div class="social-links-wrapper">
-                                    <div class="social-links">
-                                        <div class="social-icons social-no-color border-thin">
-                                            <h5>تگ ها :
-                                            </h5>
-
-                                        </div>
-                                    </div>
-                                    <div class="product-link-wrapper d-flex">
-                                        <h6>@foreach ($product->tags as $tag )
-                                            {{$tag->name}}/
-                                            @endforeach</h6>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab tab-nav-boxed tab-nav-underline product-tabs">
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li class="nav-item">
-                                <a href="#product-tab-description"
-                                    class="nav-link {{ count($errors) > 0 ? '' : 'active' }}">توضیحات </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#product-tab-specification" class="nav-link">مشخصات </a>
-                            </li>
-                            <!-- <li class="nav-item">
-                                <a href="#product-tab-vendor" class="nav-link">اطلاعات فروشنده </a>
-                            </li> -->
-                            <li class="nav-item">
-                                <a href="#product-tab-reviews"
-                                    class="nav-link {{ count($errors) > 0 ? 'active' : '' }}">نظرات مشتریان
-                                    ({{$product->approvedComments()->count()}})</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane {{ count($errors) > 0 ? '' : 'active' }}" id="product-tab-description">
-                                <div class="row mb-4">
-                                    <div class="col-md-6 mb-5">
-                                        <h4 class="title tab-pane-title font-weight-bold mb-2">جزئیات </h4>
-                                        <p class="mb-4">{{$product->description}}</p>
-
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane " id="product-tab-specification">
-                                <ul class="list-none">
-                                    @foreach ($product->attributes()->with('attribute')->get() as $attribute )
-                                    <li>
-                                        <label>{{$attribute->attribute->name}} </label>
-                                        <p> {{$attribute->value}}</p>
-                                    </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-
-                            <div class="tab-pane {{ count($errors) > 0 ? 'active' : '' }}" id="product-tab-reviews">
-                                <div class="row mb-4">
-                                    <div class="col-xl-4 col-lg-5 mb-4">
-                                        <div class="ratings-wrapper">
-                                            <div class="avg-rating-container">
-                                                <h4 class="avg-mark font-weight-bolder ls-50">
-                                                    {{ceil($product->rates->avg('rate'))}}</h4>
-                                                <div class="avg-rating">
-                                                    <p class="text-dark mb-1">میانگین امتیاز </p>
-                                                    <div class="ratings-container">
-                                                        <div class="ratings-full">
-                                                            <span class="ratings"
-                                                                style='width: {{(ceil($product->rates->avg('rate'))*100)/5}}%'></span>
-                                                            <span class="tooltiptext tooltip-top"></span>
-                                                        </div>
-                                                        <a href="#"
-                                                            class="rating-reviews">({{(ceil($product->rates->avg('rate'))*100)/5}}%)</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- <div class="ratings-value d-flex align-items-center text-dark ls-25">
-                                                <span class="text-dark font-weight-bold">66.7%</span>توصیه شده <span
-                                                    class="count">(2 از 3)</span>
-                                            </div> -->
-
-                                            <!-- <div class="ratings-list">
-                                                <div class="ratings-container">
-                                                    <div class="ratings-full">
-                                                        <span class="ratings" style="width: 100%;"></span>
-                                                        <span class="tooltiptext tooltip-top"></span>
-                                                    </div>
-                                                    <div class="progress-bar progress-bar-sm ">
-                                                        <span></span>
-                                                    </div>
-                                                    <div class="progress-value">
-                                                        <mark>70%</mark>
-                                                    </div>
-                                                </div>
-                                                <div class="ratings-container">
-                                                    <div class="ratings-full">
-                                                        <span class="ratings" style="width: 80%;"></span>
-                                                        <span class="tooltiptext tooltip-top"></span>
-                                                    </div>
-                                                    <div class="progress-bar progress-bar-sm ">
-                                                        <span></span>
-                                                    </div>
-                                                    <div class="progress-value">
-                                                        <mark>30%</mark>
-                                                    </div>
-                                                </div>
-                                                <div class="ratings-container">
-                                                    <div class="ratings-full">
-                                                        <span class="ratings" style="width: 60%;"></span>
-                                                        <span class="tooltiptext tooltip-top"></span>
-                                                    </div>
-                                                    <div class="progress-bar progress-bar-sm ">
-                                                        <span></span>
-                                                    </div>
-                                                    <div class="progress-value">
-                                                        <mark>40%</mark>
-                                                    </div>
-                                                </div>
-                                                <div class="ratings-container">
-                                                    <div class="ratings-full">
-                                                        <span class="ratings" style="width: 40%;"></span>
-                                                        <span class="tooltiptext tooltip-top"></span>
-                                                    </div>
-                                                    <div class="progress-bar progress-bar-sm ">
-                                                        <span></span>
-                                                    </div>
-                                                    <div class="progress-value">
-                                                        <mark>0%</mark>
-                                                    </div>
-                                                </div>
-                                                <div class="ratings-container">
-                                                    <div class="ratings-full">
-                                                        <span class="ratings" style="width: 20%;"></span>
-                                                        <span class="tooltiptext tooltip-top"></span>
-                                                    </div>
-                                                    <div class="progress-bar progress-bar-sm ">
-                                                        <span></span>
-                                                    </div>
-                                                    <div class="progress-value">
-                                                        <mark>0%</mark>
-                                                    </div>
-                                                </div>
-                                            </div> -->
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-8 col-lg-7 mb-4" id="comments">
-                                        <div class="review-form-wrapper">
-                                            <h3 class="title tab-pane-title font-weight-bold mb-1">ارسال نظر </h3>
-                                            <p class="mb-3">آدرس ایمیل شما منتشر نخواهد شد. فیلدهای مورد نیاز علامت
-                                                گذاری
-                                                شده است *</p>
-
-                                            @if ($errors->any())
-                                            @foreach ($errors->all() as $error)
-                                            <div class="col-md-6 mb-4">
-                                                <div class="alert alert-icon alert-error alert-bg alert-inline">
-                                                    <h4 class="alert-title">
-                                                        <i class="w-icon-times-circle"></i>
-                                                    </h4> {{ $error }}
-                                                </div>
-                                            </div>
-                                            @endforeach
-                                            @endif
-                                            <form
-                                                action="{{route('home.comments.store' , ['product' => $product->id])}}"
-                                                method="POST" class="review-form">
-                                                @csrf
-                                                <div class="rating-form">
-                                                    <label for="rating">رتبه شما از این محصول :</label>
-                                                    <span class="rating-stars">
-                                                        <a class="star-1" href="#">1</a>
-                                                        <a class="star-2" href="#">2</a>
-                                                        <a class="star-3" href="#">3</a>
-                                                        <a class="star-4" href="#">4</a>
-                                                        <a class="star-5" href="#">5</a>
-                                                    </span>
-                                                    <select name="rate" id="rating" style="display: none;">
-                                                        <option value="">امتیاز ... </option>
-                                                        <option value="5">عالی </option>
-                                                        <option value="4">خوب </option>
-                                                        <option value="3">معمولی </option>
-                                                        <option value="2">بد نبود </option>
-                                                        <option value="1">بسیار بد </option>
-                                                    </select>
-                                                </div>
-
-
-                                                <textarea name="text" cols="30" rows="6"
-                                                    placeholder="نظر خود را اینجا بنویسید..." class="form-control"
-                                                    id="review"></textarea>
-
-                                                <div class="row gutter-md">
-                                                    <div class="col-md-6">
-                                                        <input type="text" name="name" class="form-control"
-                                                            placeholder="نام شما" id="author">
-
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <input type="text" name="email" class="form-control"
-                                                            placeholder="ایمیل شما" id="email_1">
-
-                                                    </div>
-                                                </div>
-
-                                                <button type="submit" class="btn btn-dark">ارسال نظر </button>
-                                            </form>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="tab tab-nav-boxed tab-nav-outline tab-nav-center">
-                                    <ul class="nav nav-tabs" role="tablist">
-                                    </ul>
-
-                                    @foreach ($product->approvedComments as $comment )
-                                    <div class="tab-content">
-                                        <div class="tab-pane active" id="show-all">
-                                            <ul class="comments list-style-none">
-                                                <li class="comment">
-                                                    <div class="comment-body">
-                                                        <figure class="comment-avatar">
-                                                            <img src="{{ $comment->user->avatar == null ? asset('/assets/images/agents/01.png') : $comment->user->avatar }}"
-                                                                alt="Commenter Avatar" width="90" height="90">
-                                                        </figure>
-                                                        <div class="comment-content">
-                                                            <h4 class="comment-author">
-                                                                <a
-                                                                    href="#">{{$comment->user->name == null ? "بدون نام" : $comment->user->name }}</a>
-                                                                <span
-                                                                    class="
-                                                                comment-date">{{Hekmatinasser\Verta\Verta::instance($comment->created_at)->format('Y/n/j')}}</span>
-                                                            </h4>
-
-                                                            <div class="ratings-container comment-rating">
-                                                                <div class="ratings-full">
-                                                                    <span class="ratings"
-                                                                        style="width: {{(ceil($comment->commentable->rates->first()->rate)*100)/5}}%'"></span>
-                                                                    <span class="tooltiptext tooltip-top"></span>
-                                                                </div>
-                                                            </div>
-                                                            <p>{{$comment->text}}</p>
-                                                            <div class="comment-action">
-                                                                <a href="#"
-                                                                    class="btn btn-dark btn-link btn-underline sm btn-icon-left font-weight-normal text-capitalize">
-                                                                    <i class="far fa-thumbs-up"></i> مفید (1)
-                                                                </a>
-                                                                <a href="#"
-                                                                    class="btn btn-dark btn-link btn-underline sm btn-icon-left font-weight-normal text-capitalize">
-                                                                    <i class="far fa-thumbs-down"></i>بی فایده
-                                                                    (0)
-                                                                </a>
-                                                                <a style="float: left;"
-                                                                    onclick="reply('{{$comment->id}}')"
-                                                                    class="btn btn-secondary btn-dark btn-link btn-underline sm btn-icon-right font-weight-normal text-capitalize">
-                                                                    پاسخ
-                                                                    <i class="fa fa-reply"></i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <form style="margin-top: 3rem; margin-right: 14rem;" hidden
-                                                        id="reply-form-{{$comment->id}}"
-                                                        action="{{route('reply.add' , ['product' => $product->id , 'comment' => $comment->id])}}"
-                                                        method="POST" class="review-form">
-                                                        @csrf
-
-                                                        <textarea name="text" cols="30" rows="6"
-                                                            placeholder="پاسخ خود را اینجا بنویسید..."
-                                                            class="form-control" id="review"></textarea>
-
-                                                        <button type="submit" class="btn btn-dark">پاسخ
-                                                        </button>
-                                                    </form>
-
-                                                    <!-- پاسخ -->
-                                                    @foreach ($comment->replies as $reply)
-                                                    @if ($reply->approved == 1)
-
-                                                    <div class="comment-body"
-                                                        style="margin-top: 3rem; margin-right:5rem ;">
-                                                        <figure class="comment-avatar">
-                                                            <img src="{{ $reply->user->avatar == null ? asset('/assets/images/agents/01.png') : $reply->user->avatar }}"
-                                                                alt="Commenter Avatar" width="45" height="45">
-                                                        </figure>
-                                                        <div class="comment-content">
-                                                            <h4 class="comment-author">
-                                                                <a
-                                                                    href="#">{{$reply->user->name == null ? "بدون نام" : $reply->user->name }}</a>
-                                                                <span
-                                                                    class="
-                                                                comment-date">{{Hekmatinasser\Verta\Verta::instance($reply->created_at)->format('Y/n/j')}}</span>
-                                                            </h4>
-
-                                                            <p>{{$reply->text}}</p>
-                                                            <div class="comment-action">
-                                                                <a href="#"
-                                                                    class="btn btn-dark btn-link btn-underline sm btn-icon-left font-weight-normal text-capitalize">
-                                                                    <i class="far fa-thumbs-up"></i> مفید (1)
-                                                                </a>
-                                                                <a href="#"
-                                                                    class="btn btn-dark btn-link btn-underline sm btn-icon-left font-weight-normal text-capitalize">
-                                                                    <i class="far fa-thumbs-down"></i>بی فایده
-                                                                    (0)
-                                                                </a>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
+<div class="container-main">
+    <div class="d-block">
+        <div class="page-content page-row">
+            <div class="main-row">
+                <div id="breadcrumb">
+                    <i class="mdi mdi-home"></i>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{route('home')}}">خانه</a></li>
+                            <li class="breadcrumb-item"><a href="#">{{$product->category->parent->name}}</a></li>
+                            <li class="breadcrumb-item"><a href="#"> {{$product->category->name}}</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{$product->name}}</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-lg">
+                    <div class="product type-product">
+                        <div class="col-lg-5 col-xs-12 pr d-block" style="padding: 0;">
+                            <section class="product-gallery">
+                                <div class="gallery">
+                                    <div class="gallery-item">
+                                        <div>
+                                            <ul class="gallery-actions">
+                                                <li>
+                                                    @if (Auth::check())
+                                                    @if ($product->checkUserWishlist(1))
+                                                    <a href="#" data-product="{{$product->id}}"
+                                                        class="btn-option add-product-wishes active">
+                                                        <i class="fa fa-heart-o" style="padding:11px"></i>
+                                                        <span>محبوب</span>
+                                                    </a>
+                                                    @else
+                                                    <a href="#" data-product="{{$product->id}}"
+                                                        class="btn-option add-product-wishes ">
+                                                        <i class="fa fa-heart-o" style="padding:11px"></i>
+                                                        <span>محبوب</span>
+                                                    </a>
+                                                    @endif
+                                                    @else
+                                                    <a href="#" data-product="{{$product->id}}"
+                                                        class="btn-option add-product-wishes ">
+                                                        <i class="fa fa-heart-o" style="padding:11px"></i>
+                                                        <span>محبوب</span>
+                                                    </a>
                                                     @endif
 
-                                                    @endforeach
+                                                </li>
+                                                <li class="option-social">
+                                                    <a href="#" class="btn-option btn-option-social" data-toggle="modal"
+                                                        data-target="#option-social">
+                                                        <i class="mdi mdi-share"></i>
+                                                        <span>اشتراک</span>
+                                                    </a>
+                                                    <!-- Modal-option-social -->
+                                                    <div class="modal fade" id="option-social" tabindex="-1"
+                                                        role="dialog" aria-labelledby="exampleModalCenterTitle"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title"
+                                                                        id="exampleModalCenterTitle">اشتراک گذاری
+                                                                    </h5>
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="title">با استفاده از روش‌های زیر
+                                                                        می‌توانید این صفحه را با دوستان خود به
+                                                                        اشتراک بگذارید.</div>
+
+                                                                    <div class="share-options">
+                                                                        <div class="share-social-buttons text-center">
+                                                                            <a href="#"
+                                                                                class="share-social share-social-twitter">
+                                                                                <i class="mdi mdi-twitter"></i>
+                                                                            </a>
+                                                                            <a href="#"
+                                                                                class="share-social share-social-facebook">
+                                                                                <i class="mdi mdi-facebook"></i>
+                                                                            </a>
+                                                                            <a href="#"
+                                                                                class="share-social share-social-whatsapp">
+                                                                                <i class="mdi mdi-whatsapp"></i>
+                                                                            </a>
+                                                                            <a href="#"
+                                                                                class="share-social share-social-email-outline">
+                                                                                <i class="mdi mdi-email-outline"></i>
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-share-col">
+                                                                        <input class="ui-url-field" type="url"
+                                                                            value="{{route('home.products.show' , ['product' => $product->slug])}}"
+                                                                            readonly="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="Three-dimensional">
+
+                                                    @if (session()->has('compareProducts'))
+
+                                                    @if (in_array($product->id,
+                                                    session()->get('compareProducts')) )
+                                                    <a href="product-comparison.html" data-product="{{$product->id}}"
+                                                        class="btn-option btn-compare" style="color: #651fff;">
+                                                        <i class="fa fa-random" style="padding:11px"></i>
+                                                        <span>مقایسه</span>
+                                                    </a>
+
+                                                    @else
+                                                    <a href="product-comparison.html" data-product="{{$product->id}}"
+                                                        class="btn-option btn-compare">
+                                                        <i class="fa fa-random" style="padding:11px"></i>
+                                                        <span>مقایسه</span>
+                                                    </a>
+                                                    @endif
+
+                                                    @else
+                                                    <a href="product-comparison.html" data-product="{{$product->id}}"
+                                                        class="btn-option btn-compare">
+                                                        <i class="fa fa-random" style="padding:11px"></i>
+                                                        <span>مقایسه</span>
+                                                    </a>
+                                                    @endif
 
                                                 </li>
                                             </ul>
                                         </div>
-                                        <div class="tab-pane" id="helpful-positive">
-
-                                        </div>
-                                        <div class="tab-pane" id="helpful-negative">
-
+                                    </div>
+                                    <div class="gallery-item">
+                                        <div class="gallery-img">
+                                            <a href="#">
+                                                <img class="zoom-img" id="img-product-zoom"
+                                                    src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}"
+                                                    data-zoom-image="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}"
+                                                    width="411" />
+                                                <div id="gallery_01f" style="width:420px;float:right;">
+                                            </a>
+                                            <ul class="gallery-items owl-carousel owl-theme" id="gallery-slider">
+                                                @foreach ($product->images as $image_value )
+                                                <li class="item">
+                                                    <a href="#" class="elevatezoom-gallery active" data-update=""
+                                                        data-image="{{url(env('PRODUCT_IMAGES_UPLOAD_PATCH').$image_value->image)}}"
+                                                        data-zoom-image="{{url(env('PRODUCT_IMAGES_UPLOAD_PATCH').$image_value->image)}}">
+                                                        <img src="{{url(env('PRODUCT_IMAGES_UPLOAD_PATCH').$image_value->image)}}"
+                                                            width="100" /></a>
+                                                </li>
+                                                @endforeach
+                                            </ul>
                                         </div>
                                     </div>
+                                </div>
+                        </div>
+                        </section>
+                    </div>
+                    <div class="col-lg-7 col-xs-12 pl mt-5 d-block">
+                        <section class="product-info">
+                            <div class="product-headline">
+                                <h1 class="product-title">
+                                    {{$product->name}}
+                                </h1>
+                                <!-- <div class="product-guaranteed text-success">
+                                    12
+                                    <span>فروش موفق</span>
+                                </div> -->
+                            </div>
+                            <div class="product-attributes">
+                                <div class="product-config">
 
-                                    @endforeach
+                                    <span>امتیاز :</span>
+
+                                    <span data-rating-stars="5" data-rating-readonly="true"
+                                        data-rating-value="{{ceil($product->rates->avg('rate'))}}">
+                                    </span>
+                                    <span class="product-title-en">کد محصول: </span><span
+                                        class="sku product-title-en"></span>
+
+
 
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                            <div class="product-config-wrapper">
+                                <div class="product-directory">
+                                    <ul>
+                                        <li>
+                                            <span>
+                                                <i class="fa fa-archive"></i> دسته:
+                                            </span>
+                                            <a href="#"
+                                                class="product-link product-cat-title">{{$product->category->name}}</a>
+                                            ,
+                                            <a href="#"
+                                                class="product-link product-cat-title">{{$product->category->parent->name}}</a>
+                                        </li>
+                                        <li>
+                                            <span>
+                                                <i class="fa fa-tags"></i> برچسب:
+                                            </span>
+                                            @foreach ($product->tags as $tag )
 
-                    <section class="related-product-section">
-                        <div class="title-link-wrapper mb-4">
-                            <h4 class="title">محصولات اخیر </h4>
-                            <a href="{{route('home.products.show' , ['product' => $product->slug])}}"
-                                class="btn btn-dark btn-link btn-slide-right btn-icon-right">ادامه محصولات <i
-                                    class="w-icon-long-arrow-left"></i></a>
-                        </div>
-                        <div class="owl-carousel owl-theme row cols-lg-3 cols-md-4 cols-sm-3 cols-2" data-owl-options="{
-                                    'nav': false,
-                                    'dots': false,
-                                    'margin': 20,
-                                    'rtl' : true,
-                                    'responsive': {
-                                        '0': {
-                                            'items': 2
-                                        },
-                                        '576': {
-                                            'items': 3
-                                        },
-                                        '768': {
-                                            'items': 4
-                                        },
-                                        '992': {
-                                            'items': 3
-                                        }
-                                    }
-                                }">
+                                            <a href="#" class="product-link product-tag-title">{{$tag->name}} ،</a>
+                                            @endforeach
 
-                            @foreach ($products_latest as $product_latest )
-                            <div class="product">
-                                <figure class="product-media">
-                                    <a href="{{route('home.products.show' , ['product' => $product->slug])}}">
-                                        <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product_latest->primary_image)}}"
-                                            alt="{{$product->slug}}" width="300" height="338" />
-                                    </a>
-                                </figure>
-                                <div class="product-details">
-                                    <h4 class="product-name"><a
-                                            href="{{route('home.products.show' , ['product' => $product->slug])}}">{{$product_latest->name}}
-                                        </a></h4>
-                                    <div class="ratings-container">
-                                        <div class="ht-product-ratting-wrap mt-4">
-                                            <div data-rating-stars="5" data-rating-readonly="true"
-                                                data-rating-value="{{ceil($product->rates->avg('rate'))}}">
+                                        </li>
+                                        <li>
+                                            <span>
+                                                برند:
+                                            </span>
+                                            <a href="#"
+                                                class="product-link product-tag-title">{{$product->brand->slug}}</a>
+                                        </li>
+                                        <li>
+                                            <span>
+                                                ({{$product->approvedComments()->count()}}) نظر
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                @php
+                                if($product->sale_check)
+                                {
+                                $variationProductSelected = $product->sale_check;
+                                }else{
+                                $variationProductSelected = $product->price_check;
+                                }
+                                @endphp
+                                <div class="col=lg-6 col-md-6 col-xs-12 pr">
+                                    <div class="product-variants mb-2">
+
+                                    </div>
+                                    <div class="product-params pt-3">
+                                        <ul data-title="ویژگی‌های محصول">
+                                            @foreach ($product->attributes()->with('attribute')->get() as $attribute )
+                                            <li>
+                                                <span>{{$attribute->attribute->name}}:</span>
+                                                <span>{{$attribute->value}}</span>
+                                            </li>
+                                            @endforeach
+                                        </ul>
+
+                                        <ul
+                                            data-title="{{App\Models\Attribute::find($product->variations->first()->attribute_id)->name}}:">
+
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-lg-8 col-md-8 col-xs-12 pr">
+
+
+                                                        <select name="variation" id="var-select"
+                                                            style="display: inline; width: 75%;"
+                                                            class="select-var form-control form-control-sm"
+                                                            id="varition">
+                                                            @foreach ($product->variations()->where('quantity', '>'
+                                                            ,
+                                                            0)->get()
+                                                            as
+                                                            $variation )
+                                                            <option
+                                                                value="{{ json_encode($variation->only(['id' , 'sku' , 'quantity','is_sale' , 'sale_price' , 'price'])) }}"
+                                                                {{ $variationProductSelected->id == $variation->id ? 'selected' : '' }}>
+                                                                {{$variation->value}}</option>
+                                                            @endforeach
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                                <div class="col=lg-6 col-md-6 col-xs-12 pr">
+                                    <div class="product-seller-info">
+                                        <div class="seller-info-changable">
+                                            <div class="product-seller-row vendor">
+                                                <span class="title"> فروشنده:</span>
+                                                <a href="#" class="product-name">{{env('APP_NAME')}}</a>
+                                            </div>
+                                            <div class="product-seller-row guarantee">
+                                                <span class="title"> گارانتی:</span>
+                                                <a href="#" class="product-name">۱۸ ماهه دیجی اسمارت</a>
+                                            </div>
+                                            <div class="product-seller-row price">
+                                                <span class="title"> قیمت:</span>
+                                                <a href="#" class="product-name variation-price">
+                                                    @if ($product->quantity_check)
+
+                                                    @if ($product->sale_check)
+
+                                                    <span
+                                                        class="amount">{{number_format($product->sale_check->sale_price)}}
+                                                        تومان</span>
+
+                                                    <del>{{number_format($product->sale_check->price)}}
+                                                        تومان</del>
+                                                    @else
+                                                    <span
+                                                        class="amount">{{ number_format($product->price_check->price) }}
+                                                        تومان</span>
+                                                    @endif
+                                                    @else
+                                                    <span class="amount">نا موجود</span>
+
+                                                    @endif
+
+                                                </a>
+                                            </div>
+                                            <div class="product-seller-row guarantee">
+                                                <span class="title mt-3"> تعداد:</span>
+                                                <div class="quantity pl">
+                                                    <input type="number" class="numberstyle" min="1" step="1"
+                                                        name="qtybutton" id="qtybutton" readonly value="1">
+                                                    <div class="quantity-nav">
+                                                        <div class="quantity-button quantity-up">+</div>
+                                                        <div class="quantity-button quantity-down">-</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" id="product_id" name="product"
+                                                value="{{$product->id}}">
+                                            <div class="product-seller-row add-to-cart">
+                                                <a href="#" class="btn-add-to-cart btn btn-primary" data-ishome="0">
+                                                    <i class="fa fa-shopping-cart"></i>
+                                                    <span class="btn-add-to-cart-txt">افزودن به سبد خرید</span>
+                                                </a>
                                             </div>
                                         </div>
-                                        <a href="" class="rating-reviews">({{$product->approvedComments()->count()}} نظر
-                                            )</a>
-
-                                    </div>
-
-                                    <div class="product-pa-wrapper">
-                                        <div class="product-price">
-                                            @if ($product_latest->quantity_check)
-
-                                            @if ($product_latest->sale_check)
-
-                                            <ins class="new-price">{{number_format($product_latest->sale_check->sale_price)}}
-                                                تومان</ins>
-
-                                            <del class="old-price">{{number_format($product_latest->sale_check->price)}}
-                                                تومان</del>
-                                            @else
-                                            <ins class="new-price">{{ number_format($product_latest->price_check->price) }}
-                                                تومان</ins>
-                                            @endif
-                                            @else
-                                            <ins class="new-price">نا موجود</ins>
-
-                                            @endif
-                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            @endforeach
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tabs" id="respon">
+            <div class="tab-box">
+                <ul class="tab nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link {{ count($errors) > 0 ? '' : 'active' }} " id="Review-tab"
+                            style="margin-left: -1.6rem;" data-toggle="tab" href="#Review" role="tab"
+                            aria-controls="Review" aria-selected="{{ count($errors) > 0 ? 'false' : 'true' }}">
+                            <i class="mdi mdi-glasses"></i>
+                            نقد و بررسی
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="Specifications-tab" style="margin-left: -1.6rem;" data-toggle="tab"
+                            href="#Specifications" role="tab" aria-controls="Specifications" aria-selected="false">
+                            <i class="mdi mdi-format-list-checks"></i>
+                            مشخصات
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="User-comments-tab" style="margin-left: -1.6rem;" data-toggle="tab"
+                            href="#User-comments" role="tab" aria-controls="User-comments" aria-selected="false">
+                            <i class="mdi mdi-comment-text-multiple-outline"></i>
+                            نظرات کاربران
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ count($errors) > 0 ? 'active' : '' }}" style="margin-left: -1.6rem;"
+                            id="question-and-answer-tab" data-toggle="tab" href="#question-and-answer" role="tab"
+                            aria-controls="question-and-answer"
+                            aria-selected="{{ count($errors) > 0 ? 'true' : 'false' }}">
+                            <i class="mdi mdi-comment-question-outline"></i>
+                            پرسش و پاسخ
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg">
+                <div class="tabs-content">
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade {{ count($errors) > 0 ? '' : 'show active' }}" id="Review"
+                            role="tabpanel" aria-labelledby="Review-tab">
+                            <h2 class="params-headline">نقد و بررسی اجمالی</h2>
+                            <section class="content-expert-summary">
+                                <div class="mask pm-3">
+                                    <div class="mask-text">
+                                        <p>
+                                            {{$product->description}}
+                                        </p>
+                                    </div>
+                                    <a href="#" class="mask-handler">
+                                        <span class="show-more">+ ادامه مطلب</span>
+                                        <span class="show-less">- بستن</span>
+                                    </a>
+                                    <div class="shadow-box"></div>
+                                </div>
+                            </section>
 
                         </div>
-                    </section>
-                </div>
-                <!-- End of Main Content -->
-                <aside class="sidebar product-sidebar sidebar-fixed right-sidebar sticky-sidebar-wrapper">
-                    <div class="sidebar-overlay"></div>
-                    <a class="sidebar-close" href="#"><i class="close-icon"></i></a>
-                    <a href="#" class="sidebar-toggle d-flex d-lg-none"><i class="fas fa-chevron-left"></i></a>
-                    <div class="sidebar-content scrollable">
-                        <div class="sticky-sidebar">
-                            <div class="widget widget-icon-box mb-6">
-                                @foreach ( $services as $key => $service )
-                                <div class="icon-box icon-box-side">
-                                    <span class="icon-box-icon text-dark">
-                                        <i class="{{$service->icon}}"></i>
-                                    </span>
-                                    <div class="icon-box-content">
-                                        <h4 class="icon-box-title">{{$service->title}}</h4>
-                                        <p>{{$service->description}}</p>
+                        <div class="tab-pane fade" id="Specifications" role="tabpanel"
+                            aria-labelledby="Specifications-tab">
+                            <article>
+                                <h2 class="params-headline">مشخصات فنی
+                                    <span>{{$product->name}}</span>
+                                </h2>
+                                <section>
+                                    <ul class="params-list">
+                                        @foreach ($product->attributes()->with('attribute')->get() as $attribute )
+                                        <li class="params-list-item">
+                                            <div class="params-list-key">
+                                                <span class="block">{{$attribute->attribute->name}}</span>
+                                            </div>
+                                            <div class="params-list-value">
+                                                <span class="block">
+                                                    {{$attribute->value}}
+                                                </span>
+                                            </div>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                </section>
+
+                            </article>
+                        </div>
+                        <div class="tab-pane fade" id="User-comments" role="tabpanel"
+                            aria-labelledby="User-comments-tab">
+                            <div class="comments">
+                                <h2 class="params-headline">امتیاز کاربران به
+                                    <span>Samsung Galaxy Note 10 Dual SIM 256GB Mobile Phone</span>
+                                </h2>
+                                <div class="comments-summary">
+                                    <div class="col-lg-6 col-md-6 col-xs-12 pr">
+                                        <div class="comments-summary-box">
+                                            <ul class="comments-item-rating">
+                                                <li>
+                                                    <span class="cell-title">کیفیت ساخت:</span>
+                                                    <span class="cell-value">خوب</span>
+                                                    <div class="rating-general">
+                                                        <div class="rating-value"></div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <span class="cell-title">ارزش خرید به نسبت قیمت:</span>
+                                                    <span class="cell-value">خوب</span>
+                                                    <div class="rating-general">
+                                                        <div class="rating-value"></div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <span class="cell-title">نوآوری:</span>
+                                                    <span class="cell-value">خوب</span>
+                                                    <div class="rating-general">
+                                                        <div class="rating-value" style="width: 70%;"></div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <span class="cell-title">امکانات و قابلیت ها:</span>
+                                                    <span class="cell-value">متوسط</span>
+                                                    <div class="rating-general">
+                                                        <div class="rating-value" style="width: 65%;"></div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <span class="cell-title">سهولت استفاده:</span>
+                                                    <span class="cell-value">خوب</span>
+                                                    <div class="rating-general">
+                                                        <div class="rating-value" style="width: 75%;"></div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <span class="cell-title">طراحی و ظاهر:</span>
+                                                    <span class="cell-value">خوب</span>
+                                                    <div class="rating-general">
+                                                        <div class="rating-value"></div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-xs-12 pr">
+                                        <div class="comments-summary-note">
+                                            <h6>شما هم می‌توانید در مورد این کالا نظر بدهید.</h6>
+                                            <p>
+                                                برای ثبت نظر، لازم است ابتدا وارد حساب کاربری خود شوید. اگر این
+                                                محصول را قبلا از دیجی‌کالا خریده باشید،
+                                                نظر
+                                                شما به عنوان مالک محصول ثبت خواهد شد.
+                                            </p>
+                                            <a href="#" class="btn-add-comment btn btn-secondary">افزودن نظر
+                                                جدید</a>
+                                        </div>
+                                    </div>
+                                    <div class="product-comment-list">
+                                        <ul class="comment-list">
+                                            <li>
+                                                <div class="col-lg-3 pr">
+                                                    <section>
+                                                        <div class="comments-user-shopping">حسن شجاعی
+                                                            <div class="cell-date">
+                                                                در تاریخ ۱۸ فروردین ۱۳۹۹
+                                                            </div>
+                                                            <div class="message-light"><i
+                                                                    class="fa fa-thumbs-o-up"></i>خرید این محصول را
+                                                                توصیه می‌کنم</div>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                                <div class="col-lg-9 pl">
+                                                    <div class="article">
+                                                        <ul class="comment-text">
+                                                            <div class="header">
+                                                                <div>بهتر از آیفون</div>
+                                                                <div class="product-rate pl">
+                                                                    <i class="fa fa-star active"></i>
+                                                                    <i class="fa fa-star active"></i>
+                                                                    <i class="fa fa-star active"></i>
+                                                                    <i class="fa fa-star active"></i>
+                                                                    <i class="fa fa-star active"></i>
+                                                                </div>
+                                                                <p>در کل سامسونگ کاربردی تر از آیفون هست ولی از نظر
+                                                                    کیفیت تصویر و سرعت آیفون بهتره و کلاس!</p>
+                                                            </div>
+                                                            <div class="comments-evaluation">
+                                                                <div class="comments-evaluation-positive">
+                                                                    <span>نقاط قوت</span>
+                                                                    <ul>
+                                                                        <li>
+                                                                            سبک
+                                                                        </li>
+                                                                        <li>
+                                                                            سرعت پردازش بالا
+                                                                        </li>
+                                                                        <li>
+                                                                            خوش دست
+                                                                        </li>
+                                                                        <li>
+                                                                            صفحه نمایش عالی
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="comments-evaluation-negative">
+                                                                    <span>نقاط قوت</span>
+                                                                    <ul>
+                                                                        <li>
+                                                                            قیمت زیاد
+                                                                        </li>
+                                                                        <li>
+                                                                            باطری ضعیف
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="footer">
+                                                                    <div class="comments-likes">آیا این نظر برایتان
+                                                                        مفید بود؟
+                                                                        <button class="btn-like js-comment-like"
+                                                                            type="submit">بله
+                                                                            <span class="count">8</span>
+                                                                        </button>
+                                                                        <button class="btn-like js-comment-dislike"
+                                                                            type="submit">خیر
+                                                                            <span class="count">4</span>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="col-lg-3 pr">
+                                                    <section>
+                                                        <div class="comments-user-shopping">جلال بهرامی راد
+                                                            <div class="cell-date">
+                                                                در تاریخ ۱۹ فروردین ۱۳۹۹
+                                                            </div>
+                                                            <div class="message-light"><i
+                                                                    class="fa fa-thumbs-o-up"></i>خرید این محصول را
+                                                                توصیه می‌کنم</div>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                                <div class="col-lg-9 pl">
+                                                    <div class="article">
+                                                        <ul class="comment-text">
+                                                            <div class="header">
+                                                                <div>عالی و صدرصد بهتر از اپل</div>
+                                                                <div class="product-rate pl">
+                                                                    <i class="fa fa-star active"></i>
+                                                                    <i class="fa fa-star active"></i>
+                                                                    <i class="fa fa-star active"></i>
+                                                                    <i class="fa fa-star active"></i>
+                                                                    <i class="fa fa-star active"></i>
+                                                                </div>
+                                                                <p>عالییه بنظرمن اونایی که میرن پول گوشی های ایفون
+                                                                    با اون قیمت رو میدن با استفاده از این گوشی باید
+                                                                    نظرشونو عوض کنن</p>
+                                                            </div>
+                                                            <div class="comments-evaluation">
+                                                                <div class="comments-evaluation-positive">
+                                                                    <span>نقاط قوت</span>
+                                                                    <ul>
+                                                                        <li>
+                                                                            سبک
+                                                                        </li>
+                                                                        <li>
+                                                                            سرعت پردازش بالا
+                                                                        </li>
+                                                                        <li>
+                                                                            خوش دست
+                                                                        </li>
+                                                                        <li>
+                                                                            صفحه نمایش عالی
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="comments-evaluation-negative">
+                                                                    <span>نقاط قوت</span>
+                                                                    <ul>
+                                                                        <li>
+                                                                            قیمت زیاد
+                                                                        </li>
+                                                                        <li>
+                                                                            باطری ضعیف
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="footer">
+                                                                    <div class="comments-likes">آیا این نظر برایتان
+                                                                        مفید بود؟
+                                                                        <button class="btn-like js-comment-like"
+                                                                            type="submit">بله
+                                                                            <span class="count">8</span>
+                                                                        </button>
+                                                                        <button class="btn-like js-comment-dislike"
+                                                                            type="submit">خیر
+                                                                            <span class="count">4</span>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade {{ count($errors) > 0 ? 'show active' : '' }}"
+                            id="question-and-answer" role="tabpanel" aria-labelledby="question-and-answer-tab">
+                            <div class="faq">
+                                @if ($errors->any())
+                                @foreach ($errors->all() as $error)
+                                <div class=" col-md-6 mb-4">
+                                    <div class="alert alert-icon alert-error alert-bg alert-inline">
+                                        <h4 class="alert-title">
+                                            <i class="w-icon-times-circle"></i>
+                                        </h4> {{ $error }}
                                     </div>
                                 </div>
                                 @endforeach
-                            </div>
-                            <!-- End of Widget Icon Box -->
-                            @isset($banner_product)
-                            <div class="widget widget-banner mb-9">
-                                <div class="banner banner-fixed br-sm">
-                                    <figure>
-                                        <img src="{{url(env('BANNER_IMAGES_PATCH').$banner_product->image)}}"
-                                            alt="{{$banner_product->title}}" width="266" height="220"
-                                            style="background-color: #1D2D44" />
-                                    </figure>
-                                    <div class="banner-content">
-                                        <div class="banner-price-info font-weight-bolder text-white lh-1 ls-25">
-                                            {{$banner_product->title}}<sup class="font-weight-bold">%</sup><sub
-                                                class="font-weight-bold text-uppercase ls-25">{{$banner_product->text}}</sub>
-                                        </div>
-                                        <h4 class="banner-subtitle text-white font-weight-bolder text-uppercase mb-0">
-                                            {{$banner_product->button_text}}</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            @endisset
+                                @endif
 
-                            <!-- End of Widget Banner -->
-
-                            <div class="widget widget-products">
-                                <div class="title-link-wrapper mb-2">
-                                    <h4 class="title title-link font-weight-bold">محصولات بیشتر </h4>
-                                </div>
-
-                                <div class="owl-carousel owl-theme owl-nav-top" data-owl-options="{
-                                            'nav': true,
-                                            'dots': false,
-                                            'rtl': true,
-                                            'items': 1,
-                                            'margin': 20
-                                        }">
-
-                                    <div class="widget-col">
-                                        @foreach ($product_simulation as $product )
-
-                                        <div class="product product-widget">
-                                            <figure class="product-media">
-                                                <a
-                                                    href="{{route('home.products.show' , ['product' => $product->slug])}}">
-                                                    <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}"
-                                                        alt="{{$product->slug}}" width="100" height="113" />
-                                                </a>
-                                            </figure>
-                                            <div class="product-details">
-                                                <h4 class="product-name">
-                                                    <a
-                                                        href="{{route('home.products.show' , ['product' => $product->slug])}}">{{$product->name}}
-                                                    </a>
-                                                </h4>
-                                                <div class="ratings-container">
-                                                    <div class="ratings-full">
-                                                        <span class="ratings" style="width: 100%;"></span>
-                                                        <span class="tooltiptext tooltip-top"></span>
-                                                    </div>
-                                                </div>
-                                                @if ($product->quantity_check)
-
-                                                @if ($product->sale_check)
-
-                                                <ins class="new-price">{{number_format($product->sale_check->sale_price)}}
-                                                    تومان</ins>
-
-                                                <del class="old-price">{{number_format($product->sale_check->price)}}
-                                                    تومان</del>
-                                                @else
-                                                <ins class="new-price">{{ number_format($product->price_check->price) }}
-                                                    تومان</ins>
-                                                @endif
-                                                @else
-                                                <ins class="new-price">نا موجود</ins>
-
-                                                @endif
+                                <form action="{{route('home.comments.store' , ['product' => $product->id])}}"
+                                    method="POST" class="review-form">
+                                    @csrf
+                                    <div class="form-faq-row mt-4">
+                                        <div class="form-faq-col">
+                                            <div class="ui-textarea">
+                                                <label>نام شما</label>
+                                                <input type="text" name="name" class="form-control" id="author"
+                                                    class="ui-textarea-field">
+                                                @error('name')
+                                                <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                         </div>
-                                        @endforeach
-
                                     </div>
-                                </div>
+                                    <div class="form-faq-row mt-4">
+                                        <div class="form-faq-col">
+                                            <div class="ui-textarea">
+                                                <label>ایمیل</label>
+                                                <input type="text" name="email" class="form-control" id="email_1"
+                                                    class="ui-textarea-field">
+                                                @error('email')
+                                                <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-faq-row mt-4">
+                                        <div class="form-faq-col">
+                                            <div class="ui-textarea">
+                                                <textarea title="متن سوال" placeholder="متن پرسش و پاسخ ..... "
+                                                    name="text" cols="30" rows="6" id="review"
+                                                    class="ui-textarea-field"></textarea>
+                                                @error('text')
+                                                <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
 
+
+                                    <div class="form-faq-row mt-4">
+                                        <div class="form-faq-col form-faq-col-submit">
+                                            <button class="btn-tertiary btn btn-secondary" type="submit">ثبت
+                                                پرسش</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div id="product-questions-list">
+                                    @foreach ($product->approvedComments as $comment )
+                                    <div class="questions-list mb-2">
+                                        <ul class="faq-list">
+                                            <li class="is-question">
+                                                <div class="section">
+                                                    <div class="faq-header">
+                                                        <span class="icon-faq">?</span>
+                                                        <p class="h5">
+                                                            پرسش :
+                                                            <span>{{$comment->user->name == null ? "بدون نام" : $comment->user->name }}</span>
+                                                        </p>
+                                                    </div>
+                                                    <p>{{$comment->text}}</p>
+                                                    <div class="faq-date">
+                                                        <em>{{Hekmatinasser\Verta\Verta::instance($comment->created_at)->format('Y/n/j')}}</em>
+                                                    </div>
+                                                    <a onclick="reply('{{$comment->id}}')" class="btn btn-link" style="
+                                                        color: #24c0df;
+                                                        padding: 0;
+                                                        line-height: 2;
+                                                        position: absolute;
+                                                        bottom: 0;
+                                                        left: 25px;
+                                                        font-size: 13px;
+                                                        margin-bottom: 15px;">
+                                                        پاسخ
+                                                        <i class="fa fa-reply"></i>
+                                                    </a>
+
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <form style="margin-right: 4rem;margin-left: 4px;display: none;"
+                                        id="reply-form-{{$comment->id}}"
+                                        action="{{route('reply.add' , ['product' => $product->id , 'comment' => $comment->id])}}"
+                                        method="POST" class="review-form ">
+                                        @csrf
+
+                                        <div class="form-faq-col">
+                                            <textarea name="text" cols="30" rows="5"
+                                                style="background-color:#fbfbfb; border-radius: 1rem;"
+                                                placeholder="پاسخ ..." class="form-control mt-2" id="review"></textarea>
+                                            @error('text')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                            <button class="btn-tertiary btn btn-secondary mt-2" type="submit">ثبت
+                                                پاسخ</button>
+                                        </div>
+
+
+                                    </form>
+                                    @foreach ($comment->replies as $reply)
+                                    @if ($reply->approved == 1)
+                                    <div class="questions-list answer-questions">
+                                        <ul class="faq-list">
+                                            <li class="is-question">
+                                                <div class="section">
+                                                    <div class="faq-header">
+                                                        <span class="icon-faq"><i class="mdi mdi-storefront"></i></span>
+                                                        <p class="h5">
+                                                            پاسخ فروشنده :
+                                                            <span>{{$reply->user->name == null ? "بدون نام" : $reply->user->name }}</span>
+                                                        </p>
+                                                    </div>
+                                                    <p>{{$reply->text}}</p>
+                                                    <div class="faq-date">
+                                                        <em>{{Hekmatinasser\Verta\Verta::instance($reply->created_at)->format('Y/n/j')}}</em>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    @endif
+                                    @endforeach
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
                     </div>
-                </aside>
-                <!-- End of Sidebar -->
+                </div>
             </div>
         </div>
     </div>
-    <!-- End of Page Content -->
-</main>
-@endsection
+</div>
+
+
 
 @push('scripts')
 
@@ -752,20 +814,20 @@ $(document).ready(function(e) {
     $('.sku').html(variation.sku)
 
     if (variation.is_sale) {
-        let spanSale = $('<ins />', {
-            class: 'new-price',
+        let spanSale = $('<span />', {
+            class: 'amount',
             text: number_format(variation.sale_price) + ' تومان'
         });
         let spanPrice = $('<del />', {
-            class: 'old-price',
+            class: 'amount',
             text: number_format(variation.price) + ' تومان'
         });
 
         variationPriceDiv.append(spanSale);
         variationPriceDiv.append(spanPrice);
     } else {
-        let spanPrice = $('<ins />', {
-            class: 'new-price',
+        let spanPrice = $('<span />', {
+            class: 'amount',
             text: number_format(variation.price) + ' تومان'
         });
         variationPriceDiv.append(spanPrice);
@@ -785,20 +847,20 @@ $('#var-select').on('change', function() {
     $('.sku').html(variation.sku)
 
     if (variation.is_sale) {
-        let spanSale = $('<ins />', {
-            class: 'new-price',
+        let spanSale = $('<span />', {
+            class: 'amount',
             text: number_format(variation.sale_price) + ' تومان'
         });
         let spanPrice = $('<del />', {
-            class: 'old-price',
+            class: 'amount',
             text: number_format(variation.price) + ' تومان'
         });
 
         variationPriceDiv.append(spanSale);
         variationPriceDiv.append(spanPrice);
     } else {
-        let spanPrice = $('<ins />', {
-            class: 'new-price',
+        let spanPrice = $('<span />', {
+            class: 'amount',
             text: number_format(variation.price) + ' تومان'
         });
         variationPriceDiv.append(spanPrice);
@@ -848,19 +910,6 @@ function reply(id) {
             /*
              * Add new DOM
              */
-            var container = document.createElement('div'),
-                btnAdd = document.createElement('div'),
-                btnRem = document.createElement('div'),
-                min = (settings.min) ? settings.min : input.attr('min'),
-                max = (settings.max) ? settings.max : input.attr('max'),
-                value = (settings.value) ? settings.value : parseFloat(input.val());
-            container.className = 'numberstyle-qty';
-            btnAdd.className = (max && value >= max) ? 'qty-btn qty-add disabled' : 'qty-btn qty-add';
-            btnAdd.innerHTML = '+';
-            btnRem.className = (min && value <= min) ? 'qty-btn qty-rem disabled' : 'qty-btn qty-rem';
-            btnRem.innerHTML = '-';
-            input.wrap(container);
-            input.closest('.numberstyle-qty').prepend(btnRem).append(btnAdd);
 
             /*
              * Attach events
@@ -935,6 +984,13 @@ function reply(id) {
 @endpush
 @push('styles')
 
-<link rel="stylesheet" type="text/css" href="{{asset('assets/css/number.css')}}" />
+<link rel="stylesheet" type="text/css" href="{{asset('/assets/home/css/number.css')}}" />
+<style>
+.owl-carousel {
+    touch-action: manipulation;
+}
+</style>
+
 
 @endpush
+@endsection

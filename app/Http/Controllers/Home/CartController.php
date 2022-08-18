@@ -37,9 +37,10 @@ class CartController extends Controller
                 'price' => $productVariation->is_sale ? $productVariation->sale_price : $productVariation->price,
                 'quantity' => $request->qtybutton,
                 'attributes' => $productVariation->toArray(),
-                'associatedModel' => $product
+                'associatedModel' => $product,
+                
             ));
-           return response()->json(['product'=>$product,'rowId'=>$rowId , 'cart' => Cart::getContent($rowId) , 'rowId' =>$rowId , 'all_cart' => Cart::getTotal()],200);    
+           return response()->json(['product'=>$product,'app_name' => env('APP_NAME'),'rowId'=>$rowId , 'cart' => Cart::getContent($rowId) , 'rowId' =>$rowId , 'all_cart' => Cart::getTotal()],200);    
         } 
         else {
            return response( 'success', 201 );

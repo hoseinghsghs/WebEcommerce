@@ -22,6 +22,7 @@ class CreateCategoriesTable extends Migration
             $table->unsignedInteger('order')->nullable();
             $table->text('description')->nullable();
             $table->boolean('is_active')->default(1);
+            $table->boolean('is_show')->default(0);
             $table->string('icon')->nullable();
 
             $table->timestamps();

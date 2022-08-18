@@ -34,53 +34,50 @@ class HomeController extends Controller
         $posts =                         Post::active()->get()->take(5);
 
         $categories =                    Category::where('parent_id', 0)->where('is_active', 1)->get();
-        $category_mobile =               Category::where('name', 'موبایل')->get()->first();
-        $category_laptap =               Category::where('name', 'لپ تاپ')->get()->first();
+        $products_is_show =               Category::where('parent_id','!=', 0)->where('is_active', 1)->where('is_show', 1)->get();
+        
 
         $services =                      Service::orderBy('service_order')->get();
 
         $sliders =                       Banner::active()->where('type', 'اسلایدر')->get();
-        $banner_left_top =               Banner::active()->where('type', 'هدر-چپ-بالا')->get()->first();
-        $banner_left_bottom =            Banner::active()->where('type', 'هدر-چپ-پایین')->get()->first();
+        $headers =                       Banner::active()->where('type', 'هدر')->get()->sortBy('priority')->take(4);
+        $centers =                       Banner::active()->where('type', 'وسط')->get()->sortBy('priority')->take(2);
 
-        $banner_left_category =          Banner::active()->where('type', 'چپ-دسته بندی')->get()->first();
-        $banner_right_category =         Banner::active()->where('type', 'راست-دسته بندی')->get()->first();
+        // $banner_left_top =               Banner::active()->where('type', 'هدر-چپ-بالا')->get()->first();
+        // $banner_left_bottom =            Banner::active()->where('type', 'هدر-چپ-پایین')->get()->first();
 
-        $banner_width =                  Banner::active()->where('type', 'عرضی')->get()->first();
+        // $banner_left_category =          Banner::active()->where('type', 'چپ-دسته بندی')->get()->first();
+        // $banner_right_category =         Banner::active()->where('type', 'راست-دسته بندی')->get()->first();
 
-        $banner_end_right =              Banner::active()->where('type', 'آخر-راست')->get()->first();
-        $banner_end_left_top =           Banner::active()->where('type', 'آخر-چپ-بالا')->get()->first();
-        $banner_end_left_bottom_1 =      Banner::active()->where('type', 'آخر-چپ-پایین-1')->get()->first();
-        $banner_end_left_bottom_2 =      Banner::active()->where('type', 'آخر-چپ-پایین-2')->get()->first();
+        // $banner_width =                  Banner::active()->where('type', 'عرضی')->get()->first();
 
-        $Products_auction_today =        Product::active()->where('position', 'تخفیف روزانه')->get();
-        $Products_our_suggestion =       Product::active()->where('position', 'پیشنهاد ما')->get();
+        // $banner_end_right =              Banner::active()->where('type', 'آخر-راست')->get()->first();
+        // $banner_end_left_top =           Banner::active()->where('type', 'آخر-چپ-بالا')->get()->first();
+        // $banner_end_left_bottom_1 =      Banner::active()->where('type', 'آخر-چپ-پایین-1')->get()->first();
+        // $banner_end_left_bottom_2 =      Banner::active()->where('type', 'آخر-چپ-پایین-2')->get()->first();
+
+        $Products_auction_today =        Product::active()->where('position', 'تخفیف روزانه')->get()->take(15);
+        $Products_our_suggestion =       Product::active()->where('position', 'پیشنهاد ما')->get()->take(15);
+        $Products_special =              Product::active()->where('position', 'فروش ویژه')->get()->take(15);
 
 
-        $Products_our_suggestion_unit =  Product::active()->where('position', 'تک محصول')->get()->first();
+        $Products_our_suggestion_units =  Product::active()->where('position', 'تک محصول')->get()->take(15);
 
         return view(
             'home.page.home',
             compact(
                 'categories',
-                'category_mobile',
-                'category_laptap',
                 'sliders',
-                'banner_left_top',
-                'banner_left_bottom',
-                'banner_left_category',
-                'banner_right_category',
-                'banner_width',
-                'banner_end_right',
-                'banner_end_left_top',
-                'banner_end_left_bottom_1',
-                'banner_end_left_bottom_2',
                 'services',
                 'Products_auction_today',
                 'Products_our_suggestion',
-                'Products_our_suggestion_unit',
+                'Products_our_suggestion_units',
+                'Products_special',
                 'brands',
-                'posts'
+                'posts',
+                'headers',
+                'centers',
+                'products_is_show'
 
             )
         );

@@ -61,18 +61,28 @@ class BannerController extends Controller
         switch ($request->type) {
 
             case 'اسلایدر':
-                $height=509;
-                $width=730;
+                $height=640;
+                $width=1200;
                 break;
-                
+
+            case 'هدر':
+                $height=300;
+                $width=400;
+                break;
+
+            case 'وسط':
+                $height=300;
+                $width=800;
+                break;   
+
             case 'هدر-چپ-بالا':
-                $height=239;
-                $width=330;
+                $height=428;
+                $width=856;
                 break;
 
             case 'هدر-چپ-پایین':
-                $height=239;
-                $width=330;
+                $height=428;
+                $width=856;
                 break;
 
             case 'راست-دسته بندی':
@@ -188,18 +198,28 @@ class BannerController extends Controller
             switch ($request->type) {
 
                 case 'اسلایدر':
-                    $height=509;
-                    $width=730;
+                    $height=640;
+                    $width=1200;
+                    break;
+    
+                case 'هدر':
+                    $height=300;
+                    $width=400;
                     break;
                     
+                case 'وسط':
+                    $height=300;
+                    $width=800;
+                    break;   
+
                 case 'هدر-چپ-بالا':
-                    $height=239;
-                    $width=330;
+                    $height=428;
+                    $width=856;
                     break;
 
                 case 'هدر-چپ-پایین':
-                    $height=239;
-                    $width=330;
+                    $height=428;
+                    $width=856;
                     break;
 
                 case 'راست-دسته بندی':

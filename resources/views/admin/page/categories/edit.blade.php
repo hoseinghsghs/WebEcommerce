@@ -175,7 +175,16 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-12">
+                                        <div class="checkbox">
+
+                                            <input id="chec" type="checkbox"
+                                                {{ $category->is_show===1 ? 'checked' : '' }} name="is_show" />
+                                            <label for="chec">نمایش در صفحه اصلی </label>
+                                        </div>
+                                    </div>
                                 </div>
+
 
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-raised btn-primary waves-effect">ذخیره</button>

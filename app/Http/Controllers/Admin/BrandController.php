@@ -44,6 +44,7 @@ class BrandController extends Controller
             [
                 'name' => 'unique:brands',
                 'index' => 'unique:brands',
+                'link' => 'required',
             ]
         );
 
@@ -54,9 +55,8 @@ class BrandController extends Controller
         };
 
         if (isset($request->img)) {
-
             $ImageController = new ImageController();
-            $image_name = $ImageController->UploadeImage($request->img, "brands", 180, 310);
+            $image_name = $ImageController->UploadeImage($request->img, "brands", 205, 205);
         } else {
             $image_name = null;
         }
@@ -64,6 +64,7 @@ class BrandController extends Controller
         Brand::create([
             'name' => $request->name,
             'index' => $request->index,
+            'link' => $request->link,
             'image' => $image_name,
             'is_active' => $request->isactive
         ]);
@@ -101,6 +102,14 @@ class BrandController extends Controller
      */
     public function update(Request $request, Brand $brand, ToastrFactory $flasher)
     {
+        $request->validate(
+            [
+                'name' => 'required',
+                'index' => 'required',
+                'link' => 'required',
+            ]
+        );
+        
         if (isset($request->is_active)) {
             $request->isactive = true;
         } else {
@@ -120,6 +129,7 @@ class BrandController extends Controller
         $brand->update([
             'name' => $request->name,
             'index' => $request->index,
+            'link' => $request->link,
             'image' => $image_name,
             'is_active' => $request->isactive
         ]);

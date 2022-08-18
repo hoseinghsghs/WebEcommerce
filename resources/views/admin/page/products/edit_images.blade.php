@@ -97,7 +97,7 @@
     <!-- dropzone script start -->
     <script>
     let variations = @json($product_images);
-
+    console.log(variations);
     Dropzone.options.myDropzone = {
         parallelUploads: 5,
         maxFiles: 5,
@@ -162,6 +162,8 @@
 
         init: function() {
             variations.forEach(variation => {
+                console.log(variation.image);
+
 
                 var thisDropzone = this;
 
@@ -173,7 +175,7 @@
                 thisDropzone.emit("addedfile", mockFile);
                 thisDropzone.emit("success", mockFile);
                 thisDropzone.emit("thumbnail", mockFile,
-                    "{{env('APP_URL')}}" + '/storage/other_product_image/' + +variation.image)
+                    "{{env('APP_URL')}}" + '/storage/other_product_image/' + variation.image)
             }, )
             dzClosure =
                 this; // Makes sure that 'this' is understood inside the functions below.

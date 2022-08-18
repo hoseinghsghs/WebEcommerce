@@ -17,7 +17,7 @@
                                  placeholder="نام کالا، برند و یا دسته مورد نظر خود را جستجو کنید…">
                              <div class="action-btns">
                                  <button class="btn btn-search" type="submit">
-                                     <img src="assets/home/images/search.png" alt="search">
+                                     <img src="/assets/home/images/search.png" alt="search">
                                  </button>
                                  <div class="search-filter">
                                      <div class="form-ui">
