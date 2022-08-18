@@ -37,7 +37,7 @@ class Otp extends Model
      * @param int $codeLength
      * @return string
      */
-    public function generateCode($codeLength = 6)
+    public function generateCode($codeLength = 5)
     {
         $max = pow(10, $codeLength);
         $min = $max / 10 - 1;
@@ -80,7 +80,7 @@ class Otp extends Model
     {
         return $this->updated_at->diffInSeconds(Carbon::now()) > env('OTP_TIME', 2) * 60;
     }
-    public function sendCode($phone = null, $resend = false)
+    public function sendCode($resend = false)
     {
         if (!$this->code || $resend) {
             $this->code = $this->generateCode();
@@ -90,7 +90,7 @@ class Otp extends Model
             if ($this->user) {
                 $this->user->notify(new OtpSms($this->code));
             } else {
-                Notification::route('cellphone', $phone)->notify(new OtpSms($this->code));
+                Notification::route('cellphone', $this->cellphone)->notify(new OtpSms($this->code));
             }
         } catch (\Exception $ex) {
             return false; //enable to send SMS

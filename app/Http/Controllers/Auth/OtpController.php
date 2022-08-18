@@ -11,6 +11,44 @@ use Illuminate\Support\Facades\Auth;
 
 class OtpController extends Controller
 {
+    public function authenticate(Request $request)
+    {
+        if (is_numeric($request->username)) {
+            $data = $request->validate([
+                'username' => 'required|ir_mobile'
+            ]);
+        } else {
+            $data = $request->validate([
+                'username' => 'required|email|exists:users,email'
+            ]);
+        }
+
+        if ($request->expectsJson()) {
+            $user = User::where('cellphone', $data['username'])->orWhere('email', $data['username'])->first();
+            if ($user && isset($user->password) && $request->missing('otp_forget')) {
+                return response()->json(['message' => 'need password']);
+            }
+            $otp = Otp::create([
+                'user_id' => $user->id ?? null,
+                'cellphone' => $user ? $user->cellphone : $data['username'],
+            ]);
+            if ($otp->sendCode()) {
+                $timeToExpire = (env('OTP_TIME', 2) * 60) - ($otp->updated_at->diffInSeconds(Carbon::now()));
+                return response()->json([
+                    'message' => 'code sended',
+                    'id' => $otp->id,
+                    'time_to_expire' => $timeToExpire
+                ], 200);
+            }
+            $otp->delete();
+            return response()->json([
+                'message' => 'error'
+            ], 500);
+        } else {
+            return abort(404);
+        }
+    }
+
     public function sendVerificationCode(Request $request)
     {
         if ($request->expectsJson()) {
@@ -23,7 +61,7 @@ class OtpController extends Controller
                 'user_id' => $user->id ?? null,
                 'cellphone' => $data['phone'],
             ]);
-            if ($otp->sendCode($data['phone'])) {
+            if ($otp->sendCode()) {
                 $timeToExpire = (env('OTP_TIME', 2) * 60) - ($otp->updated_at->diffInSeconds(Carbon::now()));
                 return response()->json([
                     'id' => $otp->id,
@@ -48,7 +86,7 @@ class OtpController extends Controller
 
             $otp = Otp::findOrFail($request->id);
 
-            if ($otp->sendCode($otp->cellphone, true)) {
+            if ($otp->sendCode(true)) {
                 $timeToExpire = (env('OTP_TIME', 2) * 60) - ($otp->updated_at->diffInSeconds(Carbon::now()));
                 return response()->json(['id' => $otp->id, 'time_to_expire' => $timeToExpire], 200);
             }
@@ -66,8 +104,8 @@ class OtpController extends Controller
         if ($request->expectsJson()) {
             $data = $request->validate([
                 'id' => 'required|uuid',
-                'code' => 'required|numeric|digits:6',
-                'remember' => 'boolean',
+                'opt_code' => 'required|numeric|digits:5',
+                'remember' => 'nullable|boolean',
             ]);
 
             $otp = Otp::where('id', $data['id'])->first();
