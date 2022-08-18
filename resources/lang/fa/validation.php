@@ -175,7 +175,7 @@ return array(
         "province_id" => "استان",
         "city_id" => "شهر",
         "postal_code" => "کد پستی",
-        "display_name"=>"نام نمایشی",
-
+        "display_name" => "نام نمایشی",
+        "opt_code" => "کد تایید"
     ),
 );

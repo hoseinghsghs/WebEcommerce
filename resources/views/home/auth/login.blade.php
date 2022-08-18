@@ -13,9 +13,9 @@
                             <div class="Login-to-account mt-4">
                                 <div class="account-box-content">
                                     <!-- auth form -->
-                                    <form id="auth-form" class="form-account text-right">
+                                    <form id="auth-form" class="form-account">
                                         <h4>ورود / ثبت نام</h4>
-                                        <div class="form-account-title">
+                                        <div class="form-account-title text-right">
                                             <label for="username">نام کاربری:</label>
                                             <input type="text" class="number-email-input" placeholder="شماره موبایل یا ایمیل" id="username" name="username">
                                             <small class="text-danger font-weight-bold pr-2 username-error d-block"></small>
@@ -25,8 +25,9 @@
                                         </div>
                                     </form>
                                     <!-- enter password -->
-                                    <form id="login-with-pass" class="form-account text-right" style="display: none;">
-                                        <div class="form-account-title">
+                                    <form id="login-with-pass" class="form-account" style="display: none;">
+                                        <h4>ورود</h4>
+                                        <div class="form-account-title text-right">
                                             <label for="password">رمز عبور:</label>
                                             <input type="password" class="number-email-input" id="password" name="password">
                                             <small class="text-danger font-weight-bold pr-2 username-error d-block"></small>
@@ -40,16 +41,18 @@
                                             <label for="remember" class="remember-me mr-0">مرا به خاطر بسپار</label>
                                         </div>
                                         <div class="form-row-account">
-                                            <button class="btn bg-secondary text-light ml-md-2" id="return-btn" type="button">بازگشت</button>
+                                            <button class="btn bg-secondary text-light ml-md-2 return-btn" type="button">بازگشت</button>
                                             <button class="btn btn-primary btn-login" type="submit">ورود</button>
                                         </div>
                                     </form>
                                     <!-- enter otp code -->
-                                    <form id="verify-otp-code" style="display: none;">
+                                    <form id="verify-otp-code" style="display: none;" autocomplete="off">
+                                        <h4>اعتبارسنجی</h4>
                                         <div class="message-light">
                                             <div class="massege-light-send">
+                                                <div class="message-sended"></div>
                                                 <div class="form-edit-number">
-                                                    <a href="{{route('login')}}" class="edit-number-link">ویرایش شماره</a>
+                                                    <a href="javascript:void(0)" class="edit-number-link return-btn">ویرایش شماره</a>
                                                 </div>
                                             </div>
                                             <div class="account-box-verify-content">
@@ -63,7 +66,6 @@
                                                             <input name="otp-code" type="text" class="line-number-account" maxlength="1">
                                                             <input name="otp-code" type="text" class="line-number-account" maxlength="1">
                                                         </div>
-                                                        <p class="text-danger font-weight-bold code-error"></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -98,7 +100,7 @@
 @endsection
 
 @push('scripts')
-<script src="{{asset('assets/home/js/vendor/countdown.min.js')}}"></script>
+<script src="{{asset('assets/home/js/vendor/jquery.countdown.js')}}"></script>
 <script>
     let opt_id;
 
@@ -119,7 +121,7 @@
                 //show verfy code box
                 form.hide();
                 $('#verify-otp-code').show('slow');
-                $('#verify-otp-code .massege-light-send').prepend(`برای شماره همراه ${$('#username').val()} کد تایید ارسال گردید`)
+                $('#verify-otp-code .message-sended').html(`برای شماره همراه ${$('#username').val()} کد تایید ارسال گردید`)
                 opt_id = response.id;
                 //set timer
                 var secondsToAdd = response.time_to_expire;
@@ -136,14 +138,11 @@
                 Swal.fire({
                     text: "کدتایید به شماره تلفن شما ارسال شد",
                     icon: 'success',
-                    confirmButtonText: 'تایید',
-                    toast: true,
+                    showConfirmButton: false,
                     position: 'top-right',
+                    toast: true,
                     timer: 5000,
                     timerProgressBar: true,
-                    customClass: {
-                        confirmButton: 'content-end'
-                    }
                 })
             }
 
@@ -153,11 +152,8 @@
                     text: response.message,
                     icon: 'error',
                     confirmButtonText: 'تایید',
-                    toast: true,
-                    position: 'top-right',
-                    customClass: {
-                        confirmButton: 'content-end'
-                    },
+                    timer: 5000,
+                    timerProgressBar: true,
                 })
             }
             if (response.responseJSON.errors.username) {
@@ -173,16 +169,17 @@
 
     $('#verify-otp-code').submit(function(event) {
         event.preventDefault();
+        $('#verify-otp-code .btn-login').attr('disabled', true).append(
+            '<span class="mr-1"><i class="fa fa-spinner fa-spin"></i></span>');
+
         var form = $(this);
-        form.find('btn-login').attr('disabled', true).append(
-            '<span class="ml-1"><i class="w-icon-store-seo fa-spin"></i></span>');
         var code = ''
         form.serializeArray().forEach(element => {
             code += element['value']
         });
         $.post("{{route('otp.verify')}}", {
                 '_token': "{{csrf_token()}}",
-                'code': code,
+                'opt_code': code,
                 'id': opt_id,
             },
             function(response, status) {
@@ -191,36 +188,35 @@
                     icon: 'success',
                     showConfirmButton: false
                 });
-                window.location.replace("{{request()->fullUrl()}}");
+                window.location.replace("{{Redirect::intended('/')->getTargetUrl()}}");
 
             }, 'json').fail(function(response) {
             console.log(response.responseJSON.errors);
 
-            if (response.responseJSON.errors.code) {
+            if (response.responseJSON.errors.opt_code) {
                 Swal.fire({
-                    text: response.responseJSON.errors.code[0],
+                    text: response.responseJSON.errors.opt_code[0],
                     icon: 'error',
-                    confirmButtonText: 'تایید',
+                    showConfirmButton: false,
                     toast: true,
                     position: 'top-right',
+                    timer: 5000,
+                    timerProgressBar: true,
                 });
-                $('#verify-otp-code .code-error').html(response.responseJSON.errors.code[
-                    0]);
             }
             if (response.message) {
                 Swal.fire({
                     text: response.message,
                     icon: 'error',
-                    confirmButtonText: 'تایید',
+                    showConfirmButton: false,
                     toast: true,
                     position: 'top-right',
-                    customClass: {
-                        confirmButton: 'content-end'
-                    }
+                    timer: 5000,
+                    timerProgressBar: true,
                 })
             }
         }).always(function() {
-            form.find('btn-login').attr('disabled', false).find('span')
+            form.find('.btn-login').attr('disabled', false).find('span')
                 .remove();
         });
     });
@@ -262,12 +258,17 @@
             $('#login-with-pass .btn-login').attr('disabled', false).find('span').remove();
         });
     });
-    $('#return-btn').click(function() {
+    $('login-with-pass .return-btn').click(function() {
         $('#login-with-pass .password-error').html('');
         $('#login-with-pass .username-error').html('');
         $('#password').val('');
 
         $('#login-with-pass').hide();
+        $('#auth-form').show('slow');
+    })
+    $('#verify-otp-code .return-btn').click(function() {
+        $('#verify-otp-code').hide();
+        $('#verify-otp-code :input').val('');
         $('#auth-form').show('slow');
     })
 </script>
