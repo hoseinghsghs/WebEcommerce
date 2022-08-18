@@ -16,7 +16,7 @@
 
     @yield('content')
 
-    @include('home.partial.Footer')
+    @includeUnless(request()->routeIs('login','register'),'home.partial.Footer')
     @include('home.partial.Scroll')
     @include('home.partial.Loader')
 
@@ -478,8 +478,8 @@
 
 </body>
 
-<script type="text/javascript" src="{{asset('js/main.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/home.js')}}"></script>
+<!-- <script type="text/javascript" src="{{asset('js/main.js')}}"></script> -->
+<!-- <script type="text/javascript" src="{{asset('js/home.js')}}"></script> -->
 @stack('scripts')
 </script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>

@@ -1427,9 +1427,9 @@ body.swal2-toast-shown .swal2-container.swal2-top {
 
 body.swal2-toast-shown .swal2-container.swal2-top-end, body.swal2-toast-shown .swal2-container.swal2-top-right {
     top: 0;
-    left: 0 !important;
+    left: auto !important;
     bottom: auto;
-    right: auto !important;
+    right: 0 !important;
 }
 
 body.swal2-toast-shown .swal2-container.swal2-top-left, body.swal2-toast-shown .swal2-container.swal2-top-start {

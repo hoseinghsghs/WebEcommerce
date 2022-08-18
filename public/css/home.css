@@ -26203,7 +26203,7 @@ a.text-dark:focus {
             format("embedded-opentype"),
         url(/fonts/lg.woff?0392227eb4b4510402ab45dee2ceda73) format("woff"),
         url(/fonts/lg.ttf?269f233c78c029ba7cceefa0dfa3e5af) format("truetype"),
-        url(/fonts/lg.svg?beffdb937a4d533b92aba9ac6a15467c#lg) format("svg");
+        url(/fonts/lg.svg?cabad2e7aafb3ade3fac0da2b2b79b30#lg) format("svg");
     font-weight: normal;
     font-style: normal;
 }
@@ -28680,9 +28680,9 @@ body.swal2-toast-shown .swal2-container.swal2-top {
 
 body.swal2-toast-shown .swal2-container.swal2-top-end, body.swal2-toast-shown .swal2-container.swal2-top-right {
     top: 0;
-    left: 0 !important;
+    left: auto !important;
     bottom: auto;
-    right: auto !important;
+    right: 0 !important;
 }
 
 body.swal2-toast-shown .swal2-container.swal2-top-left, body.swal2-toast-shown .swal2-container.swal2-top-start {
@@ -33828,7 +33828,7 @@ span.shipping-destination {
     display: inline-block;
     padding-bottom: 10px;
     font-weight: 400;
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
     color: #999;
 }
 
@@ -33927,7 +33927,7 @@ span.shipping-destination {
     /* height: 30px; */
     padding: 0.6rem 2rem;
     line-height: 14px;
-    margin-top: 1rem;
+    margin-top: 2rem;
     border-radius: 20px;
     background: #651fff;
     border-color: #651fff;

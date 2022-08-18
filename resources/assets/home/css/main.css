@@ -5088,7 +5088,7 @@ span.shipping-destination {
     display: inline-block;
     padding-bottom: 10px;
     font-weight: 400;
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
     color: #999;
 }
 
@@ -5167,7 +5167,7 @@ span.shipping-destination {
     /* height: 30px; */
     padding: 0.6rem 2rem;
     line-height: 14px;
-    margin-top: 1rem;
+    margin-top: 2rem;
     border-radius: 20px;
     background: #651fff;
     border-color: #651fff;

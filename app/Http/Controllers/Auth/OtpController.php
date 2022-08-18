@@ -113,9 +113,9 @@ class OtpController extends Controller
             if (!$otp || empty($otp->id))
                 return response()->json(['message' => 'Id not found'], 422);
             if (!$otp->isValid())
-                return response()->json(['errors' => ['code' => ['کد تایید منقضی شده است']]], 422);
-            if ($otp->code !== $data['code'])
-                return response()->json(['errors' => ['code' => ['کد تایید نامعتبر است']]], 422);
+                return response()->json(['errors' => ['opt_code' => ['کد تایید منقضی شده است']]], 422);
+            if ($otp->code !== $data['opt_code'])
+                return response()->json(['errors' => ['opt_code' => ['کد تایید نامعتبر است']]], 422);
 
             if ($otp->user_id) {
                 $user = User::findOrFail($otp->user_id);
@@ -124,7 +124,7 @@ class OtpController extends Controller
                     'cellphone' => $otp->cellphone,
                 ]);
             }
-            Auth::login($user, $data['remember']);
+            Auth::login($user, $request->has('remember') ? $data['remember'] : null);
             $otp->delete();
             return response()->json([
                 'message' => 'کد تایید صحیح است'
