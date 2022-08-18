@@ -742,10 +742,10 @@ $(document).ready(function (e) {
             },
         });
     }
-    $(".line-number-account").on('keyup',function (event) {
-        if(event.key === "Backspace" || event.key === "Delete"){
-        $(this).prev().focus();
-        }else{
+    $(".line-number-account").on("keyup", function (event) {
+        if (event.key === "Backspace" || event.key === "Delete") {
+            $(this).prev().focus();
+        } else {
             $(this).next().focus();
         }
     });

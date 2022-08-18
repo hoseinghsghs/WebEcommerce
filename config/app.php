@@ -182,6 +182,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         Darryldecode\Cart\CartServiceProvider::class,
+        App\Providers\ViewServiceProvider::class,
 
     ],
 

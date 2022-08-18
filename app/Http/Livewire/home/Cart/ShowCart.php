@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Home\Cart;
 
+use App\Models\Category;
 use Livewire\Component;
 
 class ShowCart extends Component
@@ -109,7 +110,7 @@ class ShowCart extends Component
     
 
     public function render()
-    {
+    { 
         return view('livewire.home.cart.show-cart',['cartitems'=>\Cart::getContent()])
         ->extends('home.layout.MasterHome')
         ->section('content');
