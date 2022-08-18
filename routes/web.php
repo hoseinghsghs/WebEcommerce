@@ -90,6 +90,7 @@ Route::post('/comments/{product}', [HomeCommentController::class, 'store'])->nam
 Route::post('/reply/store', [HomeCommentController::class, 'replyStore'])->name('reply.add');
 
 // otp auth
+Route::post('/auth/check',[OtpController::class,'authenticate'])->name('authenticate');
 Route::post('/otp/verify', [OtpController::class, 'checkVerificationCode'])->name('otp.verify');
 Route::post('/otp/resend', [OtpController::class, 'resendVerificationCode'])->name('otp.resend');
 Route::post('/otp', [OtpController::class, 'sendVerificationCode'])->name('otp.auth');
