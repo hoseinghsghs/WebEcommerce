@@ -71,38 +71,30 @@
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <div class="title">با استفاده از روش‌های زیر
-                                                                        می‌توانید این صفحه را با دوستان خود به
-                                                                        اشتراک بگذارید.</div>
+                                                                        می‌توانید این صفحه را با دیگران به اشتراک
+                                                                        بگذارید.
 
-                                                                    <div class="share-options">
-                                                                        <div class="share-social-buttons text-center">
-                                                                            <a href="#"
-                                                                                class="share-social share-social-twitter">
-                                                                                <i class="mdi mdi-twitter"></i>
-                                                                            </a>
-                                                                            <a href="#"
-                                                                                class="share-social share-social-facebook">
-                                                                                <i class="mdi mdi-facebook"></i>
-                                                                            </a>
-                                                                            <a href="#"
-                                                                                class="share-social share-social-whatsapp">
-                                                                                <i class="mdi mdi-whatsapp"></i>
-                                                                            </a>
-                                                                            <a href="#"
-                                                                                class="share-social share-social-email-outline">
-                                                                                <i class="mdi mdi-email-outline"></i>
-                                                                            </a>
+                                                                        <div class="share-options">
+                                                                            <div
+                                                                                class="share-social-buttons text-center">
+                                                                                <a href="https://www.linkedin.com/shareArticle?mini=true&title={{route('home.products.show' , ['product' => $product->slug])}}"
+                                                                                    class="share-social share-social-twitter">
+                                                                                    <i class="mdi mdi-linkedin"></i>
+                                                                                </a>
+                                                                                <a href="https://telegram.me/share/url?url={{route('home.products.show' , ['product' => $product->slug])}}"
+                                                                                    class="share-social share-social-facebook">
+                                                                                    <i class="mdi mdi-telegram"></i>
+                                                                                </a>
+                                                                                <a href="https://web.whatsapp.com/send?text={{route('home.products.show' , ['product' => $product->slug])}}"
+                                                                                    class="share-social share-social-whatsapp">
+                                                                                    <i class="mdi mdi-whatsapp"></i>
+                                                                                </a>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="form-share-col">
-                                                                        <input class="ui-url-field" type="url"
-                                                                            value="{{route('home.products.show' , ['product' => $product->slug])}}"
-                                                                            readonly="">
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
                                                 </li>
                                                 <li class="Three-dimensional">
 
@@ -503,7 +495,8 @@
                                                                 در تاریخ ۱۸ فروردین ۱۳۹۹
                                                             </div>
                                                             <div class="message-light"><i
-                                                                    class="fa fa-thumbs-o-up"></i>خرید این محصول را
+                                                                    class="fa fa-thumbs-o-up"></i>خرید این
+                                                                محصول را
                                                                 توصیه می‌کنم</div>
                                                         </div>
                                                     </section>
@@ -578,7 +571,8 @@
                                                                 در تاریخ ۱۹ فروردین ۱۳۹۹
                                                             </div>
                                                             <div class="message-light"><i
-                                                                    class="fa fa-thumbs-o-up"></i>خرید این محصول را
+                                                                    class="fa fa-thumbs-o-up"></i>خرید این
+                                                                محصول را
                                                                 توصیه می‌کنم</div>
                                                         </div>
                                                     </section>
