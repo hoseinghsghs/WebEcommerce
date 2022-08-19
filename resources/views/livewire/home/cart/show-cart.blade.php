@@ -66,13 +66,13 @@
                                                             {{$item->name}}
                                                         </a>
                                                         <div class="variation">
-                                                            <div class="variant-color">
-                                                                <span class="variant-color-title">
-                                                                    {{ \App\Models\Attribute::find($item->attributes->attribute_id)->name }}
-                                                                    :
-                                                                    {{ $item->attributes->value }}</span>
-                                                                <div class="variant-shape"></div>
-                                                            </div>
+
+                                                            <span class="variant-color-title">
+                                                                {{ \App\Models\Attribute::find($item->attributes->attribute_id)->name }}
+                                                                :
+                                                                {{ $item->attributes->value }}</span>
+                                                            <div class="variant-shape"></div>
+
                                                             <div class="seller">
                                                                 <i class="mdi mdi-storefront"></i>
                                                                 فروشنده :
@@ -103,23 +103,27 @@
                                                                 value="{{$item->quantity}}" type="number" min="1"
                                                                 step="1" max="{{$item->attributes->quantity}}">
 
-
-                                                            <button class="quantity-plus w-icon-plus"
-                                                                wire:loading.attr="disabled"
-                                                                wire:click="increment('{{$item->id}}')"
-                                                                wire:touchstart="increment('{{$item->id}}')"></button>
-
-
-                                                            <button class="quantity-minus w-icon-minus"
-                                                                wire:loading.attr="disabled"
-                                                                wire:click="decrement('{{$item->id}}')"
-                                                                wire:touchstart="decrement('{{$item->id}}')"></button>
+                                                            <div class="quantity-nav">
+                                                                <div class="quantity-button quantity-up"
+                                                                    wire:loading.attr="disabled"
+                                                                    wire:click="increment('{{$item->id}}')"
+                                                                    wire:touchstart="increment('{{$item->id}}')">+</div>
+                                                                <div class="quantity-button quantity-down"
+                                                                    wire:loading.attr="disabled"
+                                                                    wire:click="decrement('{{$item->id}}')"
+                                                                    wire:touchstart="decrement('{{$item->id}}')">-</div>
+                                                            </div>
 
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td class="product-cart-Total">
-                                                    <span class="amount">6,000,000
+
+                                                <td class="product-cart-Total product-subtotal">
+                                                    <span class="loader" wire:loading.flex>
+                                                        <i class="fa fa-circle-o-notch fa-spin"></i>
+                                                    </span>
+                                                    <span class="amount" id="product-subtotal" wire:loading.remove>
+                                                        {{number_format($item->price*$item->quantity)}}
                                                         <span>تومان</span>
                                                     </span>
                                                 </td>
@@ -132,55 +136,69 @@
                                     <div class="totals d-block">
                                         <h3 class="Total-cart-total">مجموع کل سبد خرید</h3>
                                         <div class="checkout-summary">
-                                            <ul class="checkout-summary-summary">
+                                            <ul class="checkout-summary-summary" wire:loading.remove>
+
                                                 <li class="cart-subtotal">
-                                                    <span class="amount">قیمت کل</span>
-                                                    <span> 6,032,000 تومان</span>
+                                                    <span class="amount">مبلغ سفارش</span>
+                                                    <span>
+                                                        {{ number_format( \Cart::getTotal() + cartTotalSaleAmount() ) }}
+                                                        تومان</span>
                                                 </li>
+                                                @if (cartTotalSaleAmount())
+                                                <li class="cart-subtotal">
+                                                    <span class="amount text-success">مبلغ تخفیف کالا</span>
+                                                    <span class="text-success">
+                                                        {{ number_format( cartTotalSaleAmount() ) }}
+                                                        تومان</span>
+                                                </li>
+                                                @endif
+
                                                 <li class="shipping-totals">
                                                     <span class="amount">حمل و نقل</span>
-                                                    <div class="shipping-totals-item">
-                                                        <div class="shipping-totals-outline">
-                                                            <label for="#" class="outline-radio">
-                                                                <input type="radio" name="payment_method"
-                                                                    id="payment-option-online" checked="checked">
-                                                                <span class="outline-radio-check"></span>
-                                                            </label>
-                                                            <label for="#" class="shipping-totals-title-row">
-                                                                <div class="shipping-totals-title">حمل و نقل رایگان
-                                                                </div>
-                                                            </label>
-                                                        </div>
-                                                        <div class="shipping-totals-outline">
-                                                            <label for="#" class="outline-radio">
-                                                                <input type="radio" name="payment_method"
-                                                                    id="payment-option-online">
-                                                                <span class="outline-radio-check"></span>
-                                                            </label>
-                                                            <label for="#" class="shipping-totals-title-row">
-                                                                <div class="shipping-totals-title">حمل و نقل معمولی:
-                                                                    20,000 تومان</div>
-                                                            </label>
-                                                        </div>
-                                                        <span class="shipping-destination">حمل و نقل به خراسان
-                                                            شمالی</span>
-                                                    </div>
+                                                    <span>@if(cartTotalDeliveryAmount() == 0)
+                                                        <span style="color: red">
+                                                            رایگان
+                                                        </span>
+                                                        @else
+                                                        <span>
+                                                            {{ number_format( cartTotalDeliveryAmount() ) }}
+                                                            تومان
+                                                        </span>
+                                                        @endif</span>
                                                 </li>
-                                                <li class="order-total">
+                                                @if (session()->get('coupon.amount') )
+                                                <li>
+                                                    <span class="amount text-success">کد تخفیف</span>
+                                                    <span
+                                                        class="text-success">{{ number_format( session()->get('coupon.amount') ) }}
+                                                        تومان</span>
+                                                </li>
+                                                @endif
+
+
+                                                <li class=" order-total">
                                                     <span class="amount"> مجموع</span>
-                                                    <span> 6,032,000 تومان</span>
+                                                    <span>{{ number_format( cartTotalAmount() ) }} تومان </span>
                                                 </li>
+
+
                                                 <li class="discount-code">
                                                     <div class=" align-items-center">
                                                         <div class="col-md-7 pr mt-5">
                                                             <div class="coupon">
-                                                                <form action="#">
+                                                                <form class="coupon" wire:submit.prevent="checkCoupon">
                                                                     <input type="text" name="input-coupon"
+                                                                        wire:model.defer="code"
                                                                         class="input-coupon-code"
                                                                         placeholder="كد تخفیف:">
+
                                                                     <button class="btn btn-coupon"
                                                                         type="submit">اعمال</button>
+
                                                                 </form>
+                                                                @error('code') <span
+                                                                    class="text-danger">{{ $message }}</span>
+                                                                @enderror
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2 pl mt-5">
@@ -190,6 +208,13 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li>
+                                                    <span class="loader" wire:loading.flex>
+                                                        <i class="fa fa-circle-o-notch fa-spin"></i>
+                                                    </span>
                                                 </li>
                                             </ul>
                                         </div>

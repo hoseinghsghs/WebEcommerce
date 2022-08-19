@@ -694,7 +694,7 @@ $(document).ready(function (e) {
   //    quantity-selector--------------------
 
 
-  jQuery('<div class="quantity-nav"><div class="quantity-button quantity-up">+</div><div class="quantity-button quantity-down">-</div></div>').insertAfter(".quantity input");
+  jQuery("").insertAfter(".quantity input");
   jQuery(".quantity").each(function () {
     var spinner = jQuery(this),
         input = spinner.find('input[type="number"]'),
@@ -786,7 +786,7 @@ $(document).ready(function (e) {
     });
   }
 
-  $(".line-number-account").on('keyup', function (event) {
+  $(".line-number-account").on("keyup", function (event) {
     if (event.key === "Backspace" || event.key === "Delete") {
       $(this).prev().focus();
     } else {

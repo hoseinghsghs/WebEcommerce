@@ -24,8 +24,7 @@ class ShowCart extends Component
 
     public function increment($rowId)
     {
-    
-        
+        session()->forget('coupon');
         if(!\Cart::get($rowId) == null){
             $item = \Cart::get($rowId);
 
@@ -52,6 +51,7 @@ class ShowCart extends Component
 
     //کاهش
     public function decrement($rowId){
+        session()->forget('coupon');
     if(!\Cart::get($rowId) == null){
                 \Cart::update($rowId, [
                     'quantity' => -1
@@ -64,6 +64,7 @@ class ShowCart extends Component
 
     public function delete($rowId)
     {
+        session()->forget('coupon');
         if(!\Cart::get($rowId) == null){
 
             $this->dispatchBrowserEvent('say-goodbye', ['rowId' => $rowId , 'price' => \Cart::getTotal()]);
@@ -93,9 +94,6 @@ class ShowCart extends Component
         $this->validate([
             'code' => 'required|exists:coupons,code',
         ]);
-        
-  
-
         if (!auth()->check()) {
            return toastr()->livewire()->addError('برای استفاده از کد تخفیف نیاز هست ابتدا وارد وب سایت شوید');
         }

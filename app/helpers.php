@@ -68,7 +68,7 @@ if (!function_exists('cartTotalDeliveryAmount')) {
     {
         $cartTotalDeliveryAmount = 0;
         foreach (\Cart::getContent() as $item) {
-            $cartTotalDeliveryAmount += $item->associatedModel->delivery_amount;
+            $cartTotalDeliveryAmount += ($item->associatedModel->delivery_amount + (($item->quantity-1)*$item->associatedModel->delivery_amount_per_product));
         }
 
         return $cartTotalDeliveryAmount;

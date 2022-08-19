@@ -156,30 +156,33 @@
                         <div class="align-items-center">
                             <ul class="menu-ul mega-menu-level-one">
 
-                            @foreach ($categories as $category)
-                            <li id="nav-menu-item" class="menu-item nav-overlay">
-                                <a href="{{route('home.products.search',['slug'=>$category->slug])}}" class="current-link-menu">
-                                    {{$category->name}}
-                                </a>
-                                @if(count($category->children))
-                                <ul class="sub-menu is-mega-menu-small">
-                                    @foreach ($category->children as $ChildrenCategory )
-                                    <li class="menu-mega-item menu-item-type-mega-menu item-small">
-                                        <a href="{{route('home.products.index',['slug'=>$ChildrenCategory->slug])}}" class="mega-menu-link">
-                                            {{$ChildrenCategory->name}}
-                                        </a>
-                                    </li>
-                                    @endforeach
-                                </ul>
-                                @endif
-                            </li>
-                            @endforeach
-                            <li class="divider-space-card d-block">
-                                <div class="header-cart-basket">
-                                    <a href="{{route('home.cart.index')}}" class="cart-basket-box">
-                                        <span class="icon-cart">
-                                            <i class="mdi mdi-shopping"></i>
-                                        </span>
+                                @foreach ($categories as $category)
+                                <li id="nav-menu-item" class="menu-item nav-overlay">
+                                    <a href="{{route('home.products.search',['slug'=>$category->slug])}}"
+                                        class="current-link-menu">
+                                        {{$category->name}}
+                                    </a>
+                                    @if(count($category->children))
+                                    <ul class="sub-menu is-mega-menu-small">
+                                        @foreach ($category->children as $ChildrenCategory )
+                                        <li class="menu-mega-item menu-item-type-mega-menu item-small">
+                                            <a href="{{route('home.products.index',['slug'=>$ChildrenCategory->slug])}}"
+                                                class="mega-menu-link">
+                                                {{$ChildrenCategory->name}}
+                                            </a>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                    @endif
+                                </li>
+                                @endforeach
+                                @if (!request()->routeIs('home.cart.index'))
+                                <li class="divider-space-card d-block">
+                                    <div class="header-cart-basket">
+                                        <a href="{{route('home.cart.index')}}" class="cart-basket-box">
+                                            <span class="icon-cart">
+                                                <i class="mdi mdi-shopping"></i>
+                                            </span>
 
                                             <span class="count-cart"
                                                 id="count-cart">{{Cart::getContent()->count()}}</span>
@@ -251,7 +254,10 @@
 
                                     </div>
                                 </li>
+                                @endif
                             </ul>
+
+
                         </div>
                     </div>
                 </nav>
