@@ -94,7 +94,6 @@ Route::post('/reply/store', [HomeCommentController::class, 'replyStore'])->name(
 Route::post('/auth/check',[OtpController::class,'authenticate'])->name('authenticate');
 Route::post('/otp/verify', [OtpController::class, 'checkVerificationCode'])->name('otp.verify');
 Route::post('/otp/resend', [OtpController::class, 'resendVerificationCode'])->name('otp.resend');
-Route::post('/otp', [OtpController::class, 'sendVerificationCode'])->name('otp.auth');
 // end otp auth
 
 Route::get('/assets/ajax', function () {

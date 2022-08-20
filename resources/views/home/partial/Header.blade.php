@@ -104,10 +104,9 @@
                         <div class="header-left">
                             <div class="header-account text-left">
                                 <div class="d-block">
-
-                                    @auth
                                     <div class="account-box">
                                         <div class="nav-account d-block pl">
+                                            @auth
                                             <span class="icon-account">
                                                 <img src="/assets/home/images/man.png" class="avator">
                                             </span>
@@ -137,15 +136,15 @@
                                             @if (!request()->routeIs('login') && !request()->routeIs('register'))
                                             <div class="account-box" style="padding-left:8px;">
                                                 <div class="nav-account d-block pl">
-                                                    <a href="#login-popup" class="btn btn-secondary btn-sm"
+                                                    <a href="{{route('login')}}" class="btn btn-secondary btn-sm"
                                                         style="background-color:white ;border-color:#dddddd; color: gray; border-radius: 0.6rem;"><i
                                                             class="fa fa-sign-in" aria-hidden="true"></i> ثبت
                                                         نام | ورود
                                                     </a>
-                                                    @endif
-                                                    @endguest
                                                 </div>
                                             </div>
+                                            @endif
+                                            @endguest
                                         </div>
                                     </div>
                                 </div>
@@ -230,9 +229,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </li>
-
                                                                 @endforeach
-
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -345,7 +342,7 @@
                             @guest
                             <a href="{{route('login')}}">
                                 <i class="fa fa-user"></i>
-                                حساب کاربری
+                                ورود/ثبت نام
                             </a>
                             @endguest
                         </li>

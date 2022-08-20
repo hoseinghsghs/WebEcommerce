@@ -5,7 +5,6 @@ window.$ =
 // require("../assets/home/js/vendor/bootstrap.js");
 require("../assets/home/js/vendor/owl.carousel.min.js");
 
-require("../assets/home/js/vendor/jquery.countdown.js");
 require("../assets/home/js/vendor/ResizeSensor.min.js");
 require("../assets/home/js/vendor/theia-sticky-sidebar.min.js");
 require("../assets/home/js/vendor/wNumb.js");

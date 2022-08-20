@@ -25,7 +25,7 @@ class OtpController extends Controller
 
         if ($request->expectsJson()) {
             $user = User::where('cellphone', $data['username'])->orWhere('email', $data['username'])->first();
-            if ($user && isset($user->password) && $request->missing('otp_forget')) {
+            if ($user && isset($user->password) && !$request->forget_password) {
                 return response()->json(['message' => 'need password']);
             }
             $otp = Otp::create([
@@ -36,34 +36,6 @@ class OtpController extends Controller
                 $timeToExpire = (env('OTP_TIME', 2) * 60) - ($otp->updated_at->diffInSeconds(Carbon::now()));
                 return response()->json([
                     'message' => 'code sended',
-                    'id' => $otp->id,
-                    'time_to_expire' => $timeToExpire
-                ], 200);
-            }
-            $otp->delete();
-            return response()->json([
-                'message' => 'error'
-            ], 500);
-        } else {
-            return abort(404);
-        }
-    }
-
-    public function sendVerificationCode(Request $request)
-    {
-        if ($request->expectsJson()) {
-            $data = $request->validate([
-                'phone' => 'required|numeric|digits:11',
-            ]);
-
-            $user = User::where('cellphone', $data['phone'])->first();
-            $otp = Otp::create([
-                'user_id' => $user->id ?? null,
-                'cellphone' => $data['phone'],
-            ]);
-            if ($otp->sendCode()) {
-                $timeToExpire = (env('OTP_TIME', 2) * 60) - ($otp->updated_at->diffInSeconds(Carbon::now()));
-                return response()->json([
                     'id' => $otp->id,
                     'time_to_expire' => $timeToExpire
                 ], 200);

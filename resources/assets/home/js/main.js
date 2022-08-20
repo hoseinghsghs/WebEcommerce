@@ -727,7 +727,7 @@ $(document).ready(function (e) {
     });
 
     //    verify-phone-number------------------------
-    if ($("#countdown-verify-end").length) {
+    /* if ($("#countdown-verify-end").length) {
         var $countdownOptionEnd = $("#countdown-verify-end");
 
         $countdownOptionEnd.countdown({
@@ -739,7 +739,7 @@ $(document).ready(function (e) {
                 );
             },
         });
-    }
+    } */
     $(".line-number-account").on("keyup", function (event) {
         if (event.key === "Backspace" || event.key === "Delete") {
             $(this).prev().focus();
