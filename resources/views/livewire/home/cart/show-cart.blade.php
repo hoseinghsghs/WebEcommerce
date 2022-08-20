@@ -54,9 +54,12 @@
                                                                 src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$item->associatedModel->primary_image)}}">
                                                         </a>
                                                         <div class="product-remove">
-                                                            <a href="#" class="remove"
-                                                                wire:click="delete('{{$item->id}}')">
-                                                                <i class="mdi mdi-close"></i>
+                                                            <a class="remove" wire:click="delete('{{$item->id}}')">
+                                                                <i class="mdi mdi-close" wire:loading.remove
+                                                                    wire:target="delete('{{$item->id}}')"></i>
+                                                                <i class="fa fa-circle-o-notch fa-spin" wire:loading
+                                                                    wire:target="delete('{{$item->id}}')"></i>
+
                                                             </a>
                                                         </div>
                                                     </div>
@@ -203,7 +206,8 @@
                                                         </div>
                                                         <div class="col-md-2 pl mt-5">
                                                             <div class="proceed-to-checkout">
-                                                                <a href="#" class="checkout-button d-block">تسویه
+                                                                <a href="{{route('home.orders.checkout')}}"
+                                                                    class="checkout-button d-block">تسویه
                                                                     حساب</a>
                                                             </div>
                                                         </div>

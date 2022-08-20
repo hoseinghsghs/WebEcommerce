@@ -130,7 +130,7 @@ Route::get('/cart', ShowCart::class)->name('home.cart.index');
 
 Route::get('/remove-from-cart/{rowId}', [CartController::class, 'remove'])->name('home.cart.remove');
 
-Route::get('/checkout', [CartController::class, 'checkout'])->name('home.orders.checkout');
+Route::get('/checkout', [CartController::class, 'checkout'])->name('home.orders.checkout')->middleware('auth');
 
 Route::post('/payment', [PaymentController::class, 'payment'])->name('home.payment');
 

@@ -66,27 +66,20 @@ class ShowCart extends Component
     {
         session()->forget('coupon');
         if(!\Cart::get($rowId) == null){
-
             $this->dispatchBrowserEvent('say-goodbye', ['rowId' => $rowId , 'price' => \Cart::getTotal()]);
-
             \Cart::remove($rowId);
             toastr()->livewire()->addSuccess('محصول مورد نظر حذف گردید');
             }else{
             \Cart::remove($rowId);
             toastr()->livewire()->addError('محصول از سبد خرید حذف شده ');
     }
-      
-
-
-    }
+ }
 
     public function clearCart()
     {
         \Cart::clear();
         toastr()->livewire()->addSuccess('سبد خرید حذف شد');
-
     }
-
     
     //coupon
     public function checkCoupon()

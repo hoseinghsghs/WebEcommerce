@@ -8,80 +8,113 @@
             <div class="col-lg">
                 <div class="checkout woocommerce-checkout">
                     <div class="content-checkout container">
+                        @if (!session()->has('coupon'))
                         <div class="notices-wrapper">
                             <div class="col-12">
                                 <div class="form-coupon-toggle">
                                     <div class="info">
                                         کد تخفیف دارید؟
-                                        <a href="#" class="showcoupon">برای نوشتن کد اینجا کلیک کنید</a>
+                                        <a class="showcoupon">برای نوشتن کد اینجا کلیک کنید</a>
                                     </div>
                                     <div class="checkout-coupon form-coupon">
                                         <p>اگر کد تخفیف دارید، لطفا وارد کنید.</p>
-                                        <form action="#" class="form-coupon">
-                                            <div class="form-row">
-                                                <input type="text" name="coupon-code" class="checkout-discount-code" placeholder="کد تخفیف">
-                                                <div class="append pl">
-                                                    <button class="btn-append btn btn-primary" type="submit">اعمال
-                                                        تخفیف</button>
-                                                </div>
+                                        <div class="form-row">
+                                            <input type="text" name="coupon-code" class="checkout-discount-code"
+                                                placeholder="کد تخفیف" id="coupon_code">
+                                            <div class="append pl">
+                                                <button class="btn-append btn btn-primary btn-coupon"
+                                                    name="apply_coupon" type="submit">اعمال
+                                                    تخفیف</button>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        @endif
                         <div class="middle-container">
-                            <form action="#" class="form-checkout">
+
+                            <form class="form form-checkout" id="checkout" action="{{route('home.payment')}}"
+                                method="POST">
+                                @csrf
                                 <div class="col2-set" id="customer-details">
                                     <div class="col-12">
                                         <div class="billing-fields mt-4">
                                             <h4>جزئیات صورتحساب</h4>
                                             <div class="form-checkout-row">
+
+                                                @if ($addresses ->count() > 0)
                                                 <div class="validate-required">
-                                                    <label for="name">نام تحویل گیرنده <abbr class="required" title="ضروری" style="color:red;">*</abbr></span></label>
-                                                    <input type="text" id="name" class="input-name-checkout form-control">
+                                                    <label>انتخاب آدرس</label>
+                                                    <select class="form-control form-control-md" name="address_id">
+                                                        @foreach ($addresses as $address)
+                                                        <option value="{{$address->id}}">
+                                                            {{$address->title}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                @endif
+
+                                                <div class="validate-required">
+                                                    <label for="name">نام تحویل گیرنده <abbr class="required"
+                                                            title="ضروری" style="color:red;">*</abbr></span></label>
+                                                    <input type="text" id="name" name="firstname"
+                                                        class="input-name-checkout form-control">
                                                 </div>
 
                                                 <div class="validate-required">
-                                                    <label for="phone-number">شماره موبایل <abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
-                                                    <input type="text" id="phone-number" class="input-name-checkout form-control text-left">
+                                                    <label for="phone-number">نام خانوادگی<abbr class="required"
+                                                            title="ضروری" style="color:red;">*</abbr></label>
+                                                    <input type="text" id="phone-number" name="lastname"
+                                                        class="input-name-checkout form-control text-left">
                                                 </div>
-
+                                                @if ($addresses ->count() > 0)
                                                 <div class="validate-required">
-                                                    <label for="post-code">کد پستی <abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
-                                                    <input type="text" id="post-code" class="input-name-checkout form-control" placeholder="کد پستی را بدون خط تیره بنویسید">
+                                                    <select class="form-control form-control-md" name="address_id">
+                                                        @foreach ($addresses as $address)
+                                                        <option value="{{$address->id}}">
+                                                            {{$address->title}}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
-
-                                                <div class="validate-required">
-                                                    <label for="Street">خیابان <abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
-                                                    <input type="text" id="post-code" class="input-name-checkout form-control">
-                                                </div>
-
                                                 <div class="Order-another-shipping-address mt-5">
                                                     <div class="Order-address d-inline-block">
-                                                        <button class="btn btn-block text-right collapsed" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                        <a class="btn btn-block text-right collapsed"
+                                                            data-toggle="collapse" href="#collapseExample" role="button"
+                                                            aria-expanded="false" aria-controls="collapseExample">
                                                             <span>سفارش به آدرس دیگری حمل شود؟</span>
-                                                        </button>
+                                                        </a>
                                                     </div>
                                                     <div class="shipping-address">
                                                         <div id="collapseExample" class="collapse">
                                                             <div class="middle-container">
-                                                                <form action="#" class="form-checkout">
+                                                                <form class="form-checkout">
                                                                     <div class="form-checkout-row">
-                                                                        <label for="name">نام تحویل گیرنده <abbr class="required" title="ضروری" style="color:red;">*</abbr></span></label>
-                                                                        <input type="text" id="name" class="input-name-checkout form-control">
-                                                                        <label for="phone-number">شماره موبایل <abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
-                                                                        <input type="text" id="phone-number" class="input-name-checkout form-control text-left">
+                                                                        <label for="name">نام تحویل گیرنده <abbr
+                                                                                class="required" title="ضروری"
+                                                                                style="color:red;">*</abbr></span></label>
+                                                                        <input type="text" id="name"
+                                                                            class="input-name-checkout form-control">
+                                                                        <label for="phone-number">شماره موبایل <abbr
+                                                                                class="required" title="ضروری"
+                                                                                style="color:red;">*</abbr></label>
+                                                                        <input type="text" id="phone-number"
+                                                                            class="input-name-checkout form-control text-left">
                                                                         <label for="fixed-number">شماره تلفن ثابت
-                                                                            <abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
-                                                                        <input type="text" id="fixed-number" class="input-name-checkout form-control text-left">
+                                                                            <abbr class="required" title="ضروری"
+                                                                                style="color:red;">*</abbr></label>
+                                                                        <input type="text" id="fixed-number"
+                                                                            class="input-name-checkout form-control text-left">
 
                                                                         <div class="form-checkout-valid-row">
                                                                             <label for="province">استان
-                                                                                <abbr class="required" title="ضروری" style="color:red;">*</abbr>
+                                                                                <abbr class="required" title="ضروری"
+                                                                                    style="color:red;">*</abbr>
                                                                             </label>
-                                                                            <select name="" id="province" class="form-control">
-                                                                                <option value="date-desc" selected="selected">استان مورد
+                                                                            <select name="" id="province"
+                                                                                class="form-control">
+                                                                                <option value="date-desc"
+                                                                                    selected="selected">استان مورد
                                                                                     نظر خود را انتخاب کنید </option>
                                                                                 <option value="date-asc">تهران
                                                                                 </option>
@@ -92,17 +125,22 @@
                                                                                 </option>
                                                                             </select>
                                                                             <label for="bld-num">پلاک
-                                                                                <abbr class="required" title="ضروری" style="color:red;">*</abbr>
+                                                                                <abbr class="required" title="ضروری"
+                                                                                    style="color:red;">*</abbr>
                                                                             </label>
-                                                                            <input type="text" id="bld-num" class="input-name-checkout js-input-bld-num form-control">
+                                                                            <input type="text" id="bld-num"
+                                                                                class="input-name-checkout js-input-bld-num form-control">
 
                                                                         </div>
 
                                                                         <div class="form-checkout-valid-row">
                                                                             <label for="city">شهر
-                                                                                <abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
-                                                                            <select name="" id="city" class="form-control">
-                                                                                <option value="date-desc" selected="selected">شهر مورد نظر
+                                                                                <abbr class="required" title="ضروری"
+                                                                                    style="color:red;">*</abbr></label>
+                                                                            <select name="" id="city"
+                                                                                class="form-control">
+                                                                                <option value="date-desc"
+                                                                                    selected="selected">شهر مورد نظر
                                                                                     خود را انتخاب کنید</option>
                                                                                 <option value="date-asc">آشخانه
                                                                                 </option>
@@ -113,11 +151,16 @@
                                                                                 </option>
                                                                             </select>
                                                                             <label for="apt-id">واحد</label>
-                                                                            <input type="text" id="apt-id" class="input-name-checkout js-input-apt-id form-control">
+                                                                            <input type="text" id="apt-id"
+                                                                                class="input-name-checkout js-input-apt-id form-control">
                                                                         </div>
 
-                                                                        <label for="post-code">کد پستی<abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
-                                                                        <input type="text" id="post-code" class="input-name-checkout form-control" placeholder="کد پستی را بدون خط تیره بنویسید">
+                                                                        <label for="post-code">کد پستی<abbr
+                                                                                class="required" title="ضروری"
+                                                                                style="color:red;">*</abbr></label>
+                                                                        <input type="text" id="post-code"
+                                                                            class="input-name-checkout form-control"
+                                                                            placeholder="کد پستی را بدون خط تیره بنویسید">
 
                                                                     </div>
                                                                 </form>
@@ -125,11 +168,99 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                @else
+                                                <div class="Order-another-shipping-address mt-5">
+                                                    <div class="shipping-address">
+                                                        <div>
+                                                            <div class="middle-container">
+                                                                <form class="form-checkout">
+                                                                    <div class="form-checkout-row">
+                                                                        <label for="name">نام تحویل گیرنده <abbr
+                                                                                class="required" title="ضروری"
+                                                                                style="color:red;">*</abbr></span></label>
+                                                                        <input type="text" id="name"
+                                                                            class="input-name-checkout form-control">
+                                                                        <label for="phone-number">شماره موبایل <abbr
+                                                                                class="required" title="ضروری"
+                                                                                style="color:red;">*</abbr></label>
+                                                                        <input type="text" id="phone-number"
+                                                                            class="input-name-checkout form-control text-left">
+                                                                        <label for="fixed-number">شماره تلفن ثابت
+                                                                            <abbr class="required" title="ضروری"
+                                                                                style="color:red;">*</abbr></label>
+                                                                        <input type="text" id="fixed-number"
+                                                                            class="input-name-checkout form-control text-left">
+
+                                                                        <div class="form-checkout-valid-row">
+                                                                            <label for="province">استان
+                                                                                <abbr class="required" title="ضروری"
+                                                                                    style="color:red;">*</abbr>
+                                                                            </label>
+                                                                            <select name="" id="province"
+                                                                                class="form-control">
+                                                                                <option value="date-desc"
+                                                                                    selected="selected">استان مورد
+                                                                                    نظر خود را انتخاب کنید </option>
+                                                                                <option value="date-asc">تهران
+                                                                                </option>
+                                                                                <option value="rate">مشهد</option>
+                                                                                <option value="views">اصفهان
+                                                                                </option>
+                                                                                <option value="comments">شیراز
+                                                                                </option>
+                                                                            </select>
+                                                                            <label for="bld-num">پلاک
+                                                                                <abbr class="required" title="ضروری"
+                                                                                    style="color:red;">*</abbr>
+                                                                            </label>
+                                                                            <input type="text" id="bld-num"
+                                                                                class="input-name-checkout js-input-bld-num form-control">
+
+                                                                        </div>
+
+                                                                        <div class="form-checkout-valid-row">
+                                                                            <label for="city">شهر
+                                                                                <abbr class="required" title="ضروری"
+                                                                                    style="color:red;">*</abbr></label>
+                                                                            <select name="" id="city"
+                                                                                class="form-control">
+                                                                                <option value="date-desc"
+                                                                                    selected="selected">شهر مورد نظر
+                                                                                    خود را انتخاب کنید</option>
+                                                                                <option value="date-asc">آشخانه
+                                                                                </option>
+                                                                                <option value="rate">شیروان</option>
+                                                                                <option value="views">اسفراین
+                                                                                </option>
+                                                                                <option value="comments">جاجرم
+                                                                                </option>
+                                                                            </select>
+                                                                            <label for="apt-id">واحد</label>
+                                                                            <input type="text" id="apt-id"
+                                                                                class="input-name-checkout js-input-apt-id form-control">
+                                                                        </div>
+
+                                                                        <label for="post-code">کد پستی<abbr
+                                                                                class="required" title="ضروری"
+                                                                                style="color:red;">*</abbr></label>
+                                                                        <input type="text" id="post-code"
+                                                                            class="input-name-checkout form-control"
+                                                                            placeholder="کد پستی را بدون خط تیره بنویسید">
+
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @endif
 
                                                 <label for="address">توضیحات سفارش
                                                     <span class="optional">(اختیاری)</span>
                                                 </label>
-                                                <textarea rows="5" cols="30" id="address" class="textarea-name-checkout form-control" placeholder="یادداشت ها درباره سفارش شما ، برای مثال نکات مهم برای تحویل بار "></textarea>
+                                                <textarea rows="5" cols="30" id="address"
+                                                    class="textarea-name-checkout form-control"
+                                                    placeholder="یادداشت ها درباره سفارش شما ، برای مثال نکات مهم برای تحویل بار "></textarea>
 
                                             </div>
                                         </div>
@@ -196,7 +327,8 @@
                                     <ul class="checkout-payment-methods">
                                         <li class="checkout-payment-method-item d-block">
                                             <label for="#" class="outline-radio">
-                                                <input type="radio" name="payment_method" id="payment-option-online" checked>
+                                                <input type="radio" name="payment_method" id="payment-option-online"
+                                                    checked>
                                                 <span class="outline-radio-check"></span>
                                             </label>
                                             <label for="#" class="shipping-totals-title-row">
@@ -230,7 +362,8 @@
                                         </label>
                                         <label for="remember" class="remember-me mr-0"><a href="#">حریم خصوصی</a> و
                                             <a href="#">شرایط قوانین </a>استفاده از سرویس های سایت دیجی‌اسمارت را
-                                            مطالعه نموده و با کلیه موارد آن موافقم <abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
+                                            مطالعه نموده و با کلیه موارد آن موافقم <abbr class="required" title="ضروری"
+                                                style="color:red;">*</abbr></label>
                                     </div>
                                     <button class="btn-Order btn btn-primary mt-4 mb-3" type="submit">ثبت
                                         سفارش</button>
@@ -247,59 +380,58 @@
 @endsection
 @push('scripts')
 <script>
-    $('.province-select').change(function() {
+$('.province-select').change(function() {
 
-        var provinceID = $(this).val();
-        if (provinceID) {
-            $.ajax({
-                type: "GET",
-                url: "{{ url('/get-province-cities-list') }}?province_id=" + provinceID,
-                success: function(res) {
-                    if (res) {
-                        $(".city-select").empty();
+    var provinceID = $(this).val();
+    if (provinceID) {
+        $.ajax({
+            type: "GET",
+            url: "{{ url('/get-province-cities-list') }}?province_id=" + provinceID,
+            success: function(res) {
+                if (res) {
+                    $(".city-select").empty();
 
-                        $.each(res, function(key, city) {
-                            $(".city-select").append('<option value="' + city.id + '">' +
-                                city.name + '</option>');
-                        });
+                    $.each(res, function(key, city) {
+                        $(".city-select").append('<option value="' + city.id + '">' +
+                            city.name + '</option>');
+                    });
 
-                    } else {
-                        $(".city-select").empty();
-                    }
+                } else {
+                    $(".city-select").empty();
                 }
-            });
-        } else {
-            $(".city-select").empty();
-        }
-    });
+            }
+        });
+    } else {
+        $(".city-select").empty();
+    }
+});
 </script>
 <script>
-    $('#address-checkout').click(function() {
-        $('#address-form').toggle();
+$('#address-checkout').click(function() {
+    $('#address-form').toggle();
 
-    })
+})
 </script>
 
 <script>
-    $(document).ready(function(e) {
+$(document).ready(function(e) {
 
-        if ($('#zarinpal').hasClass('collapse')) {
-            $('#pay-methode').val('zarinpal');
-        }
-        if ($('#paypal-1').hasClass('collapse')) {
-            $('#pay-methode').val('pay');
-        }
-
-    })
-
-    $('#zarinpal').click(function() {
+    if ($('#zarinpal').hasClass('collapse')) {
         $('#pay-methode').val('zarinpal');
-    })
-
-    $('#paypal-1').click(function() {
+    }
+    if ($('#paypal-1').hasClass('collapse')) {
         $('#pay-methode').val('pay');
-    })
+    }
+
+})
+
+$('#zarinpal').click(function() {
+    $('#pay-methode').val('zarinpal');
+})
+
+$('#paypal-1').click(function() {
+    $('#pay-methode').val('pay');
+})
 </script>
 
 @endpush
-
