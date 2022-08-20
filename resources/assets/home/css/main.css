@@ -5246,7 +5246,7 @@ span.shipping-destination {
     margin: 15px auto;
     border-radius: 20px;
     text-align: center;
-    font-size: 12px;
+    font-size: 13px;
 }
 
 .message-light .massege-light-send .form-edit-number {
@@ -5319,7 +5319,7 @@ span.shipping-destination {
 }
 
 .message-light .receive-verify-code {
-    width: 200px;
+    /* width: 200px; */
     height: 40px;
     overflow: hidden;
     border-radius: 50px;
@@ -5360,7 +5360,7 @@ span.shipping-destination {
 .message-light .account-footer {
     width: 100%;
     text-align: center;
-    margin: 40px 0 0;
+    /* margin: 40px 0 0; */
 }
 
 .message-light .account-footer a {
@@ -11404,4 +11404,13 @@ body.light .progress-wrap::after {
 
 body.light .progress-wrap svg.progress-circle path {
     stroke: var(--black-blue);
+}
+
+/* 
+*   custom css 
+*
+*/
+
+.disable-click{
+    pointer-events:none;
 }
