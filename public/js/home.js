@@ -694,7 +694,7 @@ $(document).ready(function (e) {
   //    quantity-selector--------------------
 
 
-  jQuery('<div class="quantity-nav"><div class="quantity-button quantity-up">+</div><div class="quantity-button quantity-down">-</div></div>').insertAfter(".quantity input");
+  jQuery("").insertAfter(".quantity input");
   jQuery(".quantity").each(function () {
     var spinner = jQuery(this),
         input = spinner.find('input[type="number"]'),
@@ -21803,8 +21803,7 @@ var __webpack_exports__ = {};
   \******************************/
 window.$ = window.jQuery = window.jquery = __webpack_require__(/*! ../assets/home/js/vendor/jquery-3.2.1.min.js */ "./resources/assets/home/js/vendor/jquery-3.2.1.min.js"); // require("../assets/home/js/vendor/bootstrap.js");
 
-__webpack_require__(/*! ../assets/home/js/vendor/owl.carousel.min.js */ "./resources/assets/home/js/vendor/owl.carousel.min.js"); // require("../assets/home/js/vendor/jquery.countdown.js");
-
+__webpack_require__(/*! ../assets/home/js/vendor/owl.carousel.min.js */ "./resources/assets/home/js/vendor/owl.carousel.min.js");
 
 __webpack_require__(/*! ../assets/home/js/vendor/ResizeSensor.min.js */ "./resources/assets/home/js/vendor/ResizeSensor.min.js");
 
