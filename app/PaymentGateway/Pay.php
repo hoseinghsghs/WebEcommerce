@@ -4,7 +4,7 @@ namespace App\PaymentGateway;
 
 class Pay extends Payment
 {
-    public function send($amounts, $addressId)
+    public function send($amounts, $addressId , $description)
     {
         $api = 'test';
         $amount = $amounts['paying_amount'] . '0';
@@ -13,7 +13,7 @@ class Pay extends Payment
         $result = json_decode($result);
         if ($result->status) {
 
-            $createOrder = parent::createOrder($addressId, $amounts, $result->token, 'pay');
+            $createOrder = parent::createOrder($addressId, $amounts, $result->token, 'pay' , $description);
             if (array_key_exists('error', $createOrder)) {
                 return $createOrder;
             }

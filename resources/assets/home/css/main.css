@@ -6081,8 +6081,8 @@ span.shipping-destination {
 .middle-container .form-checkout .form-checkout-row .validate-required {
     width: 48%;
     display: inline-block;
-    padding-right: 10px;
-    padding-left: 10px;
+    padding-right: 0px;
+    padding-left: 26px;
 }
 
 .middle-container .form-checkout .form-checkout-row label {
@@ -6102,7 +6102,12 @@ span.shipping-destination {
     border: 1px solid #cfcfcf;
     padding: 0 10px;
     border-radius: 15px;
-    margin-bottom: 20px;
+    margin: 20px;
+}
+
+.revieworder {
+    background-color: #f9f9f9;
+    border-radius: 1rem;
 }
 
 .middle-container .form-checkout .form-checkout-row .textarea-name-checkout {
@@ -11411,6 +11416,6 @@ body.light .progress-wrap svg.progress-circle path {
 *
 */
 
-.disable-click{
-    pointer-events:none;
+.disable-click {
+    pointer-events: none;
 }

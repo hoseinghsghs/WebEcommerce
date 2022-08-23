@@ -93,6 +93,7 @@ if (!function_exists('cartTotalAmount')) {
 if (!function_exists('checkCoupon')) {
     function checkCoupon($code)
     {
+        
         $coupon = Coupon::where('code', $code)->where('expired_at', '>', Carbon::now())->first();
 
         if ($coupon == null) {
@@ -114,8 +115,8 @@ if (!function_exists('checkCoupon')) {
 
             session()->put('coupon', ['id' => $coupon->id, 'code' => $coupon->code, 'amount' => $amount]);
         }
-
-        return ['success' => 'کد تخفیف برای شما ثبت شد'];
+        
+        return ['success' => 'کد تخفیف برای شما ثبت شد' , 'amount'=>session()->get('coupon.amount')];
     }
 
 }

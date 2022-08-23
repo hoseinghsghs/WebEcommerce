@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class Payment
 {
-    public function createOrder($addressId, $amounts, $token, $gateway_name)
+    public function createOrder($addressId, $amounts, $token, $gateway_name , $description)
     {
         try {
             DB::beginTransaction();
@@ -18,6 +18,7 @@ class Payment
             $order = Order::create([
                 'user_id' => auth()->id(),
                 'address_id' => $addressId,
+                'description' => $description,
                 'coupon_id' => session()->has('coupon') ? session()->get('coupon.id') : null,
                 'total_amount' => $amounts['total_amount'],
                 'delivery_amount' => $amounts['delivery_amount'],

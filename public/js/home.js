@@ -488,10 +488,52 @@ $(document).ready(function (e) {
   // checkout-coupon-------------------------------
 
 
-  $(".showcoupon").on("click", function () {
-    $(".checkout-coupon").slideToggle(200);
+  $(".showcoupon").submit(function (e) {
+    e.preventDefault();
+    var code1 = $("#fixed-coupon").val();
+    var url = window.location.origin + "/checkcoupon";
+    $.post(url, {
+      _token: $('meta[name="csrf-token"]').attr("content"),
+      code: code1
+    }, function (response, status, xhr) {
+      if (xhr.status == 200) {
+        var message = response.message;
+        $(".inc-coupon").html(number_format(message) + "تومان");
+        $(".showcoupon").remove();
+        Swal.fire({
+          title: "حله",
+          text: "کد تخفیف اعمال گردید",
+          icon: "success",
+          timer: 1500,
+          ConfirmButton: "باشه"
+        });
+      }
+
+      if (xhr.status == 201) {
+        var _message = response.message;
+        Swal.fire({
+          text: _message,
+          icon: "warning",
+          timer: 1500,
+          ConfirmButton: "باشه"
+        });
+      }
+    }).fail(function (response) {
+      var message = response.errormessage;
+      console.log(message);
+      Swal.fire({
+        text: message,
+        icon: "warning",
+        timer: 1500,
+        ConfirmButton: "باشه"
+      });
+    }).always(function () {
+      a.find("i").removeClass("fa fa-circle-o-notch fa-spin");
+      a.find("i").addClass("fa fa-shopping-cart");
+    });
   }); // checkout-coupon-------------------------------
-  // SweetAlert -----------------------------------
+
+  $("#sub-coupon").on("click", function () {}); // SweetAlert -----------------------------------
   // cart-item-close
 
   $(".mini-cart-item-close").on("click", function () {}); // add-to-cart

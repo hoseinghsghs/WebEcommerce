@@ -42,21 +42,28 @@ class AddressController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
+            
+            'name' => 'required',
             'cellphone' => 'required|ir_mobile:zero',
+            'cellphone2' => 'required|ir_mobile:zero',
             'province_id' => 'required',
             'city_id' => 'required',
             'address' => 'required',
+            'lastaddress' => 'required',
             'postal_code' => 'required|ir_postal_code:without_seprate'
         ]);
         
         UserAddress::create([
             'user_id' => auth()->id(),
             'title' => $request->title,
+            'name' => $request->name,
+            'unit' => $request->unit,
             'cellphone' => $request->cellphone,
+            'cellphone2' => $request->cellphone2,
             'province_id' => $request->province_id,
             'city_id' => $request->city_id,
             'address' => $request->address,
+            'lastaddress' => $request->address,
             'postal_code' => $request->postal_code
         ]);
 
@@ -101,7 +108,9 @@ class AddressController extends Controller
     {
         
         $request->validate([
-            'title' => 'required',
+            'name' => 'required',
+            'cellphone2' => 'required|ir_mobile:zero',
+            'lastaddress' => 'required',
             'cellphone' => 'required|ir_mobile:zero',
             'province_id' => 'required',
             'city_id' => 'required',
@@ -112,6 +121,10 @@ class AddressController extends Controller
        
 
         $address->update([
+            'name' => $request->name,
+            'cellphone2' => $request->cellphone2,
+            'lastaddress' => $request->address,
+            'unit' => $request->unit,
             'title' => $request->title,
             'cellphone' => $request->cellphone,
             'province_id' => $request->province_id,

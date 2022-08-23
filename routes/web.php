@@ -141,7 +141,11 @@ Route::get('/payment-verify/{gatewayName}', [PaymentController::class, 'paymentV
 
 Route::get('/get-province-cities-list', [AddressController::class, 'getProvinceCitiesList']);
 
+//coupon
+Route::post('/checkcoupon', [PaymentController::class, 'checkCoupon'])->name('home.orders.checkcoupon')->middleware('auth');
+
+
 Route::get('/test', function(){
 
-Session::flush();
+Session::forget('coupon');
 } );

@@ -34,7 +34,7 @@ class Zarinpal extends Payment
         } else {
             if ($result["Status"] == 100) {
 
-                $createOrder = parent::createOrder($addressId, $amounts, $result["Authority"], 'zarinpal');
+                $createOrder = parent::createOrder($addressId, $amounts, $result["Authority"], 'zarinpal',$description);
                 if (array_key_exists('error', $createOrder)) {
                     return $createOrder;
                 }
