@@ -102,6 +102,7 @@ Route::get('/assets/ajax', function () {
 
 Route::prefix('profile')->name('home.')->middleware('auth')->group(function () {
   Route::get('/',[UserProfileController::class, 'index'])->name('user_profile');
+  Route::get('/editProfile',[UserProfileController::class, 'editProfile'])->name('user_profile.edit');
   Route::get('/wishlist',[WishListController::class, 'usersProfileIndex'])->name('profile.wishlist.index');
   Route::get('/add-to-wishlist/{product:id}', [WishListController::class, 'add'])->name('home.wishlist.add');
   Route::get('/addreses',  [AddressController::class, 'index'])->name('addreses.index');
@@ -109,7 +110,9 @@ Route::prefix('profile')->name('home.')->middleware('auth')->group(function () {
   Route::get('/addreses/{address}', [AddressController::class, 'edit'])->name('addreses.edit');
   Route::put('/addreses/{address}', [AddressController::class, 'update'])->name('addreses.update');
   Route::get('/addreses/delete/{address}', [AddressController::class, 'destroy'])->name('addreses.destroy');
+  Route::get('/orders', [UserProfileController::class, 'orderList'])->name('user_profile.ordersList');
   Route::get('/orders/{order}', [UserProfileController::class, 'order'])->name('user_profile.orders');
+  Route::get('/commentsList', [UserProfileController::class, 'commentsList'])->name('user_profile.commentsList');
 });
 
 

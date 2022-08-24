@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use App\Models\ProductVariation;
 use App\Models\User;
+use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\PaymentGateway\Zarinpal;
@@ -21,7 +22,6 @@ public function payment(Request $request)
     alert()->error('ابتدا باید وارد شوید');
     return redirect()->back(); 
     }
-    dd($request->all());
     if($request->address_id && $request->address_id != 'new'){
     //آدرس دارد 
     
@@ -29,9 +29,13 @@ public function payment(Request $request)
             'address_id' => 'required|integer',
             'payment_method' => 'required',
         ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        };
+        $address_id= $request->address_id;
     }else{
         $validator = Validator::make($request->all(), [
-            'address_id' => 'required',
+            'title' =>'required',
             "name" => 'required',
             "cellphone" => 'required',
             "cellphone2" => 'required',
@@ -40,40 +44,42 @@ public function payment(Request $request)
             "postal_code" => 'required',
             "address" => 'required',
             "lastaddress" => 'required',
-            "description" => 'required',
             "payment_method" => 'required',
 
         ]);
-    }
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        };
 
+        try {
+            DB::beginTransaction();
+           $user_address= UserAddress::create([
+            'user_id' => auth()->id(),
+            'title' => $request->title,
+            'name' => $request->name,
+            'unit' => $request->unit,
+            'cellphone' => $request->cellphone,
+            'cellphone2' => $request->cellphone2,
+            'province_id' => $request->province_id,
+            'city_id' => $request->city_id,
+            'address' => $request->address,
+            'lastaddress' => $request->address,
+            'postal_code' => $request->postal_code
+        ]);
+            DB::commit();
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            return ['error' => $ex->getMessage()];
+        }
+        $address_id= $user_address->id;
     
+        }
+        if($request->description){
+            $description=$request->description;
+        }else{
+            $description="بدون توضیح";
+        }
 
-
-    try {
-        DB::beginTransaction();
-
-
-        
-        DB::commit();
-    } catch (\Exception $ex) {
-        DB::rollBack();
-        return ['error' => $ex->getMessage()];
-    }
-    
-
-
-
-
-
-    User::where('id', auth()->user()->id)->update([
-        'name' => $request->firstname . ' ' . $request->lastname,
-    ]);
-    
-    
-
-    if ($validator->fails()) {
-        return redirect()->back()->withErrors($validator);
-    }
 
     $checkCart = $this->checkCart();
     if (array_key_exists('error', $checkCart)) {
@@ -89,7 +95,7 @@ public function payment(Request $request)
 
     if ($request->payment_method == 'paypal') {
         $payGateway = new Pay();
-        $payGatewayResult = $payGateway->send($amounts, $request->address_id , $request->description);
+        $payGatewayResult = $payGateway->send($amounts, $address_id , $description);
         if (array_key_exists('error', $payGatewayResult)) {
             alert()->error($payGatewayResult['error'], 'دقت کنید')->persistent('حله');
             return redirect()->back();
@@ -100,7 +106,7 @@ public function payment(Request $request)
 
     if ($request->payment_method == 'zarinpal') {
         $zarinpalGateway = new Zarinpal();
-        $zarinpalGatewayResult = $zarinpalGateway->send($amounts, $request->description, $request->address_id);
+        $zarinpalGatewayResult = $zarinpalGateway->send($amounts, $description, $address_id);
         if (array_key_exists('error', $zarinpalGatewayResult)) {
             alert()->error($zarinpalGatewayResult['error'], 'دقت کنید')->persistent('حله');
             return redirect()->back();

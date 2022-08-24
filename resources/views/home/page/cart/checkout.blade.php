@@ -17,7 +17,7 @@
                                         <div class="billing-fields mt-4">
                                             <h4>جزئیات صورتحساب</h4>
                                             <div class="form-checkout-row">
-                                                @if ($addresses ->count() > 0)
+                                                @if (!$addresses ->count() > 0)
                                                 <div class="Order-another-shipping-address mt-2 mb-2">
                                                     <div class="validate-required mb-3">
                                                         <label>انتخاب آدرس</label>
@@ -34,6 +34,18 @@
                                                             <div class="middle-container">
                                                                 <form class="form-checkout">
                                                                     <div class="row form-checkout-row">
+
+                                                                        <div class="col-lg-4 col-md-4 col-12 mb-3">
+                                                                            <label for="name">عنوان آدرس<abbr
+                                                                                    class="required" title="ضروری"
+                                                                                    style="color:red;">*</abbr></span></label>
+                                                                            <input type="text" id="name" name="title"
+                                                                                class="input-name-checkout form-control m-0">
+                                                                            @error('title')
+                                                                            <span
+                                                                                class="text-danger">{{ $message }}</span>
+                                                                            @enderror
+                                                                        </div>
 
                                                                         <div class="col-lg-4 col-md-4 col-12 mb-3">
                                                                             <label for="name">نام تحویل گیرنده <abbr
@@ -183,9 +195,7 @@
                                                     <label>انتخاب آدرس</label>
                                                     <select class="form-control form-control-md mb-0" name="address_id"
                                                         id="address-option">
-                                                        <option></option>
                                                         <option value="new">آدرس جدید</option>
-                                                        <option value="1">آدرس1د</option>
                                                         @foreach ($addresses as $address)
                                                         <option value="{{$address->id}}">
                                                             {{$address->title}}</option>
@@ -202,6 +212,19 @@
                                                             <div class="middle-container">
                                                                 <form class="form-checkout">
                                                                     <div class="row form-checkout-row">
+
+                                                                        <div class="col-lg-4 col-md-4 col-12 mb-3">
+                                                                            <label for="name">عنوان آدرس<abbr
+                                                                                    class="required" title="ضروری"
+                                                                                    style="color:red;">*</abbr></span></label>
+                                                                            <input type="text" id="name" name="title"
+                                                                                class="input-name-checkout form-control m-0">
+                                                                            @error('title')
+                                                                            <span
+                                                                                class="text-danger">{{ $message }}</span>
+                                                                            @enderror
+                                                                        </div>
+
                                                                         <div class="col-lg-4 col-md-4 col-12 mb-3">
                                                                             <label for="name">نام تحویل گیرنده <abbr
                                                                                     class="required" title="ضروری"
@@ -604,6 +627,15 @@ $(document).ready(function(e) {
     if ($('#paypal-1').hasClass('collapse')) {
         $('#pay-methode').val('pay');
     }
+
+    let categoryId = $('#address-option').val();
+    if (categoryId == "new") {
+
+        $('#sub-address').show();
+    } else {
+        $('#sub-address').hide();
+    }
+
 
 })
 
