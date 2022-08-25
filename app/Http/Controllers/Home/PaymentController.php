@@ -12,6 +12,7 @@ use App\PaymentGateway\Zarinpal;
 use App\PaymentGateway\Pay;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class PaymentController extends Controller
 {
@@ -96,6 +97,11 @@ public function payment(Request $request)
     if ($request->payment_method == 'paypal') {
         $payGateway = new Pay();
         $payGatewayResult = $payGateway->send($amounts, $address_id , $description);
+
+        
+       
+        Session::put('orderId',$payGatewayResult['orderId']);
+
         if (array_key_exists('error', $payGatewayResult)) {
             alert()->error($payGatewayResult['error'], 'دقت کنید')->persistent('حله');
             return redirect()->back();
@@ -107,6 +113,9 @@ public function payment(Request $request)
     if ($request->payment_method == 'zarinpal') {
         $zarinpalGateway = new Zarinpal();
         $zarinpalGatewayResult = $zarinpalGateway->send($amounts, $description, $address_id);
+
+        Session::put('orderId',$zarinpalGatewayResult['orderId']);
+
         if (array_key_exists('error', $zarinpalGatewayResult)) {
             alert()->error($zarinpalGatewayResult['error'], 'دقت کنید')->persistent('حله');
             return redirect()->back();
@@ -123,14 +132,16 @@ public function paymentVerify(Request $request, $gatewayName)
 {
     if ($gatewayName == 'pay') {
         $payGateway = new Pay();
+        
         $payGatewayResult = $payGateway->verify($request->token, $request->status);
 
         if (array_key_exists('error', $payGatewayResult)) {
-            alert()->error($payGatewayResult['error'], 'دقت کنید')->persistent('حله');
-            return redirect()->back();
+            alert()->error($payGatewayResult['error'])->persistent('حله');
+            return redirect()->route('home.user_profile.orders',['order' => Session::pull('orderId')]);
         } else {
             alert()->success('خرید با موفقیت انجام گرفت', 'با تشکر');
-            return redirect()->route('home.user_profile');
+            return redirect()->route('home.user_profile.orders',['order' => Session::pull('orderId')]);
+            
         }
     }
 
@@ -145,11 +156,11 @@ public function paymentVerify(Request $request, $gatewayName)
         $zarinpalGatewayResult = $zarinpalGateway->verify($request->Authority, $amounts['paying_amount']);
 
         if (array_key_exists('error', $zarinpalGatewayResult)) {
-            alert()->error($zarinpalGatewayResult['error'], 'دقت کنید')->persistent('حله');
-            return redirect()->back();
+            alert()->error($zarinpalGatewayResult['error'])->persistent('حله');
+            return redirect()->route('home.user_profile.orders',['order' => Session::pull('orderId')]);
         } else {
-            alert()->success('خرید با موفقیت انجام گرفت', 'با تشکر', 'با تشکر');
-            return redirect()->route('home.user_profile');
+            alert()->success('خرید با موفقیت انجام گرفت', 'با تشکر');
+            return redirect()->route('home.user_profile.orders',['order' => Session::pull('orderId')]);
         }
     }
 

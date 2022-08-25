@@ -1,148 +1,234 @@
 @extends('home.layout.MasterHome')
 @section('title', "سفارشات")
 @section('content')
-<main class="main order">
-    <!-- Start of Breadcrumb -->
-    <div class="page-header">
-        <div class="container">
-            <h1 class="page-title mb-0">حساب کاربری من </h1>
-        </div>
-    </div>
-    <!-- End of Page Header -->
+<div class="container-main">
+    <div class="d-block">
+        <section class="profile-home">
+            <div class="col-lg">
+                <div class="post-item-profile order-1 d-block">
+                    @include('home.page.users_profile.partial.right_side')
+                    <div class="col-lg-9 col-md-9 col-xs-12 pl">
+                        <div class="profile-content">
+                            <div class="profile-stats">
+                                <div class="table-order-view row">
+                                    @if (URL::previous() != route('home.user_profile.ordersList'))
+                                    <div class="p-5">
+                                        @if ($order->status == "آماده برای ارسال")
+                                        <p class="p-3 mb-2 bg-success text-white">
+                                            پرداخت با موفقیت انجام شد. سفارش شما با موفقیت ثبت شد و در زمان تعیین شده
+                                            برای
+                                            شما
+                                            ارسال خواهد شد. از اینکه {{env('APP_NAME')}} را برای خرید انتخاب کردید از
+                                            شما
+                                            سپاسگزاریم.</p>
+                                        @endif
+                                        @if ($order->status == "در انتظار پرداخت")
+                                        <p class="p-3 mb-2 bg-danger text-white">
+                                            سفارش دریافت نشد
+                                            پرداخت ناموفق. برای جلوگیری از لغو سیستمی سفارش،تا 24 ساعت آینده
+                                            پرداخت را انجام دهید. چنانچه طی این فرایند مبلغی از حساب شما کسر شده است،طی
+                                            72 ساعت آینده به حساب شما باز خواهد گشت.
+                                            </br>
+                                            کد سفارش برای پیگیری : {{$order->id}}
+                                        </p>
+                                        @endif
+                                    </div>
+                                    @endif
+                                    <div class="col-lg-6 col-12 mt-3 ">
+                                        <div class="box-header">
+                                            <span class="box-title">جزئیات سفارش محصول</span>
+                                        </div>
+                                        <table class="table table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">کد سفارش</th>
+                                                    <th scope="col">{{$order->id}}</th>
+                                                </tr>
 
-    <!-- Start of Breadcrumb -->
-    <nav class="breadcrumb-nav">
-        <div class="container">
-            <ul class="breadcrumb">
-                <li><a href="{{route('home')}}">صفحه اصلی </a></li>
-                <li><a href="{{route('home.user_profile')}}">حساب کاربری من </a></li>
-                <li>سفارش {{$order->id}}</li>
-            </ul>
-        </div>
-    </nav>
-    <!-- End of Breadcrumb -->
+                                                <tr>
+                                                    <th scope="col">نام محصول</th>
+                                                    <th scope="col">مجموع</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($order->orderItems as $item)
+                                                <tr>
+                                                    <td class="product-name">
+                                                        <a
+                                                            href="{{route('home.products.show' , ['product' => $item->product->slug])}}">
+                                                            ({{$item->product->name}})
+                                                            {{$item->quantity}} عدد
+                                                            * {{number_format($item->price)}} تومان
+                                                        </a>
+                                                    </td>
+                                                    <td class="product-total">
+                                                        <span class="amount">
+                                                            <span>تومان</span>
+                                                            {{number_format($item->subtotal)}}
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th scope="row">مجموع:</th>
+                                                    <td>
+                                                        <span class="amount">
 
-    <!-- Start of PageContent -->
-    <div class="page-content mb-10 pb-2">
-        <div class="container">
+                                                            {{number_format($order->total_amount)}}
+                                                            <span>تومان</span>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">حمل و نقل:</th>
+                                                    <td>{{number_format($order->delivery_amount )}}
+                                                        <span>تومان</span>
+                                                    </td>
 
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">کد تخفیف:</th>
+                                                    <td>{{number_format($order->coupon_amount )}}
+                                                        <span>تومان</span>
+                                                    </td>
 
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">روش پرداخت:</th>
+                                                    <td>{{$order->payment_type}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">قیمت نهایی:</th>
+                                                    <td>
+                                                        <span class="amount">
 
-            <div class="order-details-wrapper mb-5 mt-5">
-                <h4 class="title text-uppercase ls-25 mb-5">جزئیات سفارش </h4>
-                <table class="order-table">
-                    <thead>
-                        <tr>
-                            <th class="text-dark">محصول </th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        @foreach ($order->orderItems as $item)
-                        <tr>
-                            <td>
-                                <a
-                                    href="{{route('home.products.show' , ['product' => $item->product->slug])}}">{{$item->product->name}}</a>
-                                <p>
-                                    <strong>
-                                        {{$item->quantity}} عدد
-                                        * {{number_format($item->price)}} تومان
-                                    </strong>
-
-                                    &nbsp;
+                                                            {{number_format($order->paying_amount )}}
+                                                            <span>تومان</span>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
                                     <br>
-                                </p>
+                                    <br>
+                                    <div class="col-lg-6 col-12 mt-3 ">
+                                        <div class="box-header">
+                                            <span class="box-title">آدرس ارسال محصول</span>
+                                        </div>
+                                        <table class="table table-borderless">
+
+                                            <tfoot>
+                                                <tr>
+                                                    <th scope="row">عنوان:</th>
+                                                    <td>
+                                                        <span class="amount">
+
+                                                            {{ $order->address->title }}
+                                                        </span>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th scope="row">
+                                                        روش پرداخت:
+                                                    </th>
+                                                    <td>{{$order->payment_type}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">استان:</th>
+                                                    <td>
+                                                        <span class="amount">
+                                                            {{ province_name($order->address->province_id) }}
+
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">شهر: </th>
+                                                    <td>
+                                                        <span class="amount">
+                                                            {{ city_name($order->address->city_id) }}
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">استان:</th>
+                                                    <td>
+                                                        <span class="amount">
+                                                            {{ province_name($order->address->province_id) }}
+
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row"> شماره 1: </th>
+                                                    <td>
+                                                        <span class="amount">
+                                                            {{ $order->address->cellphone }}
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row"> شماره 2: </th>
+                                                    <td>
+                                                        <span class="amount">
+                                                            {{ $order->address->cellphone2 }}
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row"> کد پستی: </th>
+                                                    <td>
+                                                        <span class="amount">
+                                                            {{ $order->address->postal_code }}
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <div class="col-lg-12 col-12 mt-3 ">
+                                        <div class="box-header">
+                                            <span class="box-title">آدرس اول</span>
+                                        </div>
+
+                                        <tr>
+
+                                            <td>{{ $order->address->address }}
+                                            </td>
+
+                                        </tr>
+
+                                    </div>
+
+                                    <div class="col-lg-12 col-12 mt-3 mb-4">
+                                        <div class="box-header">
+                                            <span class="box-title">آدرس جایگزین</span>
+                                        </div>
+
+                                        <tr>
+
+                                            <td>
+                                                {{ $order->address->lastaddress }}
+                                            </td>
+
+                                        </tr>
+
+                                    </div>
 
 
-                            </td>
-                            <td>{{number_format($item->subtotal)}} تومان</td>
-                        </tr>
-                        @endforeach
-
-
-                    </tbody>
-
-                    <tfoot>
-                        <tr>
-                            <th>جمع: </th>
-                            <td>{{number_format($order->total_amount)}} تومان</td>
-                        </tr>
-
-                        <tr>
-                            <th>حمل و نقل :</th>
-                            <td>
-                                {{number_format($order->delivery_amount )}} تومان </td>
-                        </tr>
-
-                        <tr>
-                            <th>کد تخفیف :</th>
-                            <td>
-                                {{number_format($order->coupon_amount )}} تومان </td>
-                        </tr>
-
-                        <tr>
-                            <th>روش پرداختی:</th>
-                            <td>{{$order->payment_type}}</td>
-                        </tr>
-                        <tr class="total">
-                            <th class="border-no">مبلغ پرداختی :</th>
-                            <td class="border-no">{{number_format($order->paying_amount )}} تومان</td>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
-            <!-- End of Order Details -->
-
-
-            <!-- End of Sub Orders-->
-
-            <div class="col-sm-12 mb-12"
-                style="margin-bottom: 1rem; border: 2px solid #e1e1e1; border-radius: 1px;padding:8px">
-                <div class="ecommerce-address billing-address pr-lg-8">
-                    <h4 class="title title-underline ls-25 font-weight-bold">آدرس ارسال محصول </h4>
-                    <address class="mb-4">
-                        <table class="address-table">
-                            <tbody>
-                                <tr>
-                                    <th>نام :</th>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>عنوان آدرس :</th>
-                                    <td> {{ $order->address->title }}</td>
-                                </tr>
-                                <tr>
-                                    <th>آدرس:</th>
-                                    <td> {{ $order->address->address }}</td>
-                                </tr>
-                                <tr>
-                                    <th>استان : </th>
-                                    <td>{{ province_name($order->address->province_id) }}</td>
-                                </tr>
-                                <tr>
-                                    <th>شهر :</th>
-                                    <td>{{ city_name($order->address->city_id) }}</td>
-                                </tr>
-                                <tr>
-                                    <th>کد پستی:</th>
-                                    <td>{{ $order->address->postal_code }}</td>
-                                </tr>
-                                <tr>
-                                    <th>تلفن:</th>
-                                    <td>{{ $order->address->cellphone }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </address>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- End of Account Address -->
-
-            <a href="#" class="btn btn-dark btn-rounded btn-icon-left btn-back mt-6"><i
-                    class="w-icon-long-arrow-left"></i>برگشت به لیست</a>
-        </div>
+        </section>
     </div>
-    <!-- End of PageContent -->
-</main>
+</div>
 @endsection

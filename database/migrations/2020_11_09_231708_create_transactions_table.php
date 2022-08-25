@@ -24,6 +24,7 @@ class CreateTransactionsTable extends Migration
             $table->string('ref_id')->nullable();
             $table->string('token')->nullable();
             $table->text('description')->nullable();
+            $table->text('description_erorr')->nullable();
             $table->enum('gateway_name' , ['zarinpal' , 'pay' , 'پرداخت دستی' , 'سایر'] );
             $table->tinyInteger('status')->default(0);
 

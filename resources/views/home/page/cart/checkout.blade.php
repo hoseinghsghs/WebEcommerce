@@ -205,7 +205,103 @@
                                                     <span class="text-danger mb-2">{{ $message }}</span>
                                                     @enderror
                                                 </div>
-                                                <div class="Order-another-shipping-address mt-2 " id="sub-address"
+                                                @foreach ($addresses as $address)
+                                                <div id="dchange">
+                                                    <div class="Order-another-shipping-address mt-2"
+                                                        style="display: none" ; id="{{$address->id}}">
+                                                        <div class="col-lg-12 col-12 mt-3 ">
+                                                            <div class="box-header">
+                                                                <span class="box-title">آدرس ارسال محصول</span>
+                                                            </div>
+                                                            <table class="table table-borderless">
+
+                                                                <tfoot>
+                                                                    <tr>
+                                                                        <th scope="row">عنوان:</th>
+                                                                        <td>
+                                                                            <span class="amount">
+
+                                                                                {{ $address->title }}
+                                                                            </span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row">استان:</th>
+                                                                        <td>
+                                                                            <span class="amount">
+                                                                                {{ province_name($address->province_id) }}
+
+                                                                            </span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row">شهر: </th>
+                                                                        <td>
+                                                                            <span class="amount">
+                                                                                {{ city_name($address->city_id) }}
+                                                                            </span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row">استان:</th>
+                                                                        <td>
+                                                                            <span class="amount">
+                                                                                {{ province_name($address->province_id) }}
+
+                                                                            </span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row"> شماره 1: </th>
+                                                                        <td>
+                                                                            <span class="amount">
+                                                                                {{ $address->cellphone }}
+                                                                            </span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row"> شماره 2: </th>
+                                                                        <td>
+                                                                            <span class="amount">
+                                                                                {{ $address->cellphone2 }}
+                                                                            </span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row"> کد پستی: </th>
+                                                                        <td>
+                                                                            <span class="amount">
+                                                                                {{ $address->postal_code }}
+                                                                            </span>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tfoot>
+                                                            </table>
+                                                        </div>
+                                                        <div class="col-lg-12 col-12 mt-3 ">
+                                                            <div class="box-header">
+                                                                <span class="box-title">آدرس اول</span>
+                                                            </div>
+                                                            <tr>
+                                                                <td>{{ $address->address }}
+                                                                </td>
+                                                            </tr>
+                                                        </div>
+                                                        <div class="col-lg-12 col-12 mt-3 mb-4">
+                                                            <div class="box-header">
+                                                                <span class="box-title">آدرس
+                                                                    جایگزین</span>
+                                                            </div>
+                                                            <tr>
+                                                                <td>
+                                                                    {{ $address->lastaddress }}
+                                                                </td>
+                                                            </tr>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @endforeach
+                                                <div class=" Order-another-shipping-address mt-2 " id="sub-address"
                                                     style="display: none;">
                                                     <div class="shipping-address">
                                                         <div>
@@ -224,7 +320,6 @@
                                                                                 class="text-danger">{{ $message }}</span>
                                                                             @enderror
                                                                         </div>
-
                                                                         <div class="col-lg-4 col-md-4 col-12 mb-3">
                                                                             <label for="name">نام تحویل گیرنده <abbr
                                                                                     class="required" title="ضروری"
@@ -572,15 +667,30 @@
 @endsection
 @push('scripts')
 <script>
-$('#address-option').on('change', function() {
+var previous;
+$('#address-option').on('focus', function() {
+
+    previous = $(this).val();
+}).change(function() {
 
     let categoryId = $(this).val();
-    if (categoryId == "new") {
 
+    if (categoryId == "new") {
         $('#sub-address').show();
     } else {
         $('#sub-address').hide();
     }
+
+    $("#" + previous + "").hide();
+    $("#" + categoryId + "").show();
+
+    Swal.fire({
+        text: 'آدرس ارسال محصول تغییر کرد',
+        icon: "success",
+        timer: 1500,
+    });
+
+
 })
 </script>
 

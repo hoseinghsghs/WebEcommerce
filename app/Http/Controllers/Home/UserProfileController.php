@@ -19,7 +19,7 @@ class UserProfileController extends Controller
     public function orderList() 
     {
         $orders=Order::where('user_id', auth()->id())->get();
-        return view('home.page.users_profile.orderList' , compact('orders'));
+        return view('home.page.users_profile.order.orderList' , compact('orders'));
     }
 
     public function order(Order $order) 

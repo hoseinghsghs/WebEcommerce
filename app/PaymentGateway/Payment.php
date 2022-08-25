@@ -52,7 +52,7 @@ class Payment
             return ['error' => $ex->getMessage()];
         }
 
-        return ['success' => 'success!'];
+        return ['success' => 'success!' , 'orderId' => $order->id];
     }
 
     public function updateOrder($token, $refId)
@@ -87,5 +87,13 @@ class Payment
         }
 
         return ['success' => 'success!'];
+    }
+    public function updateOrderErorr($token,$result)
+    {
+        $transaction = Transaction::where('token', $token)->firstOrFail();
+
+        $transaction->update([
+            'description_erorr' => $result
+        ]);
     }
 }

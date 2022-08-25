@@ -76,8 +76,10 @@ class ShowCart extends Component
  }
 
     public function clearCart()
-    {
+    {   
+        
         \Cart::clear();
+        session()->forget('coupon');
         toastr()->livewire()->addSuccess('سبد خرید حذف شد');
     }
     

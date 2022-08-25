@@ -150,5 +150,6 @@ Route::post('/checkcoupon', [PaymentController::class, 'checkCoupon'])->name('ho
 
 Route::get('/test', function(){
 
-Session::forget('coupon');
+Session::flush();
+
 } );

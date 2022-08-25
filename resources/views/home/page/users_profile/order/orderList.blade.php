@@ -15,6 +15,15 @@
                         <div class="profile-content">
                             <div class="profile-stats">
                                 <div class="table-orders">
+                                    @if ($orders->isEmpty())
+                                    <tbody>
+                                        <tr>
+                                            <center>
+                                                <h4>لیست سفارشات خالی است</h4>
+                                            </center>
+                                        </tr>
+                                    </tbody>
+                                    @else
                                     <table class="table table-profile-orders">
                                         <thead class="thead-light">
                                             <tr>
@@ -25,21 +34,29 @@
                                                 <th scope="col">جزئیات</th>
                                             </tr>
                                         </thead>
+
+                                        @foreach ($orders as $order)
                                         <tbody>
                                             <tr>
-                                                <td class="order-code">DKC-57262900</td>
-                                                <td>سه شنبه 4 فروردین 99</td>
-                                                <td class="Waiting text-success">پرداخت شده</td>
+                                                <td class="order-code">{{$order->id}}</td>
+                                                <td> {{Hekmatinasser\Verta\Verta::instance($order->created_at)->format('Y/n/j')}}
+                                                </td>
+                                                <td
+                                                    class="{{$order->status == 'در انتظار پرداخت' ? 'text-primary' : 'text-success'}}">
+                                                    {{$order->status}}</td>
                                                 <td class="totla">
-                                                    <span class="amount">2,400,000
+                                                    <span class="amount">{{number_format($order->paying_amount)}}
                                                         <span>تومان</span>
                                                     </span>
                                                 </td>
-                                                <td class="detail"><a href="#"
+                                                <td class="detail"><a
+                                                        href="{{route('home.user_profile.orders',['order' => $order->id])}}"
                                                         class="btn btn-secondary d-block">نمایش</a></td>
                                             </tr>
                                         </tbody>
+                                        @endforeach
                                     </table>
+                                    @endif
                                     <div class="profile-orders">
                                         <div class="collapse">
                                             <div class="profile-orders-item">

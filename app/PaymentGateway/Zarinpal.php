@@ -35,13 +35,14 @@ class Zarinpal extends Payment
             if ($result["Status"] == 100) {
 
                 $createOrder = parent::createOrder($addressId, $amounts, $result["Authority"], 'zarinpal',$description);
+
                 if (array_key_exists('error', $createOrder)) {
                     return $createOrder;
                 }
 
-                return ['success' => 'https://sandbox.zarinpal.com/pg/StartPay/' . $result["Authority"]];
+                return ['success' => 'https://sandbox.zarinpal.com/pg/StartPay/' . $result["Authority"] , 'orderId' => $createOrder['orderId']];
             } else {
-                return ['error' => 'ERR: ' . $result["Status"]];
+                return ['error' => 'ERR: ' . $result["Status"] , ];
             }
         }
     }
@@ -77,7 +78,8 @@ class Zarinpal extends Payment
                 \Cart::clear();
                 return ['success' => 'Transation success. RefID:' . $result['RefID']];
             } else {
-                return ['error' => 'Transation failed. Status:' . $result['Status']];
+                $updateOrder = parent::updateOrderErorr($authority,$result['Status']);
+                return ['error' => 'پرداخت با خطا مواجه شد'];
             }
         }
     }
