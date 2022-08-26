@@ -19,21 +19,23 @@
                                         <tr>
                                             <td class="w-50">
                                                 <div class="title">نام و نام خانوادگی:</div>
-                                                <div class="value">حسن شجاعی</div>
+                                                <div class="value">{{auth()->user()->name}}</div>
                                             </td>
                                             <td>
                                                 <div class="title">پست الکترونیک :</div>
-                                                <div class="value">info@digismart.com</div>
+                                                <div class="value">{{auth()->user()->email}}</div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <div class="title">شماره تلفن همراه:</div>
-                                                <div class="value">*******0991</div>
+                                                <div class="value">{{auth()->user()->cellphone}}</div>
                                             </td>
                                             <td>
                                                 <div class="title">تاریخ عضویت:</div>
-                                                <div class="value">۱۳۹۹/۰۱/۱۲</div>
+                                                <div class="value">
+                                                    {{Hekmatinasser\Verta\Verta::instance(auth()->user()->created_at)->format('Y/n/j')}}
+                                                </div>
                                             </td>
                                         </tr>
                                         <tr>
@@ -52,19 +54,21 @@
                                     <ul class="mb-0">
                                         <li class="profile-item">
                                             <div class="title">نام و نام خانوادگی:</div>
-                                            <div class="value">حسن شجاعی</div>
+                                            <div class="value">{{auth()->user()->name}}</div>
                                         </li>
                                         <li class="profile-item">
                                             <div class="title">پست الکترونیک :</div>
-                                            <div class="value">info@digismart.com</div>
+                                            <div class="value">{{auth()->user()->email}}</div>
                                         </li>
                                         <li class="profile-item">
                                             <div class="title">شماره تلفن همراه:</div>
-                                            <div class="value">*******0991</div>
+                                            <div class="value">{{auth()->user()->cellphone}}1</div>
                                         </li>
                                         <li class="profile-item">
                                             <div class="title">تاریخ عضویت:</div>
-                                            <div class="value">۱۳۹۹/۰۱/۱۲</div>
+                                            <div class="value">
+                                                {{Hekmatinasser\Verta\Verta::instance(auth()->user()->created_at)->format('Y/n/j')}}
+                                            </div>
                                         </li>
                                         <li class="profile-item">
                                             <div class="title"> دریافت خبرنامه :</div>
@@ -77,7 +81,8 @@
                                     </ul>
                                 </div>
                                 <div class="profile-edit-action">
-                                    <a href="#" class="link-spoiler-edit btn btn-secondary">ویرایش اطلاعات</a>
+                                    <a href="{{route('home.user_profile.edit')}}"
+                                        class="link-spoiler-edit btn btn-secondary">ویرایش اطلاعات</a>
                                 </div>
                             </div>
                         </div>

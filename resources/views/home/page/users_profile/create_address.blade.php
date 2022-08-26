@@ -1,5 +1,5 @@
 @extends('home.layout.MasterHome')
-@section('title' , 'ویرایش آدرس')
+@section('title' , 'ایجاد آدرس')
 @section('content')
 <div class="container-main">
     <div class="d-block">
@@ -12,19 +12,17 @@
                         <div class="profile-content">
                             <div class="profile-stats">
                                 <div class="profile-address">
+
                                     <div class="middle-container">
-                                        <form class="form-checkout"
-                                            action="{{route('home.addreses.update' , ['address' => $address->id])}}"
+                                        <form class="form-checkout" action="{{route('home.addreses.store')}}"
                                             method="POST">
                                             @csrf
-                                            @method('PUT')
                                             <div class="row form-checkout-row">
 
                                                 <div class="col-lg-4 col-md-4 col-12 mb-3">
                                                     <label for="name">عنوان آدرس<abbr class="required" title="ضروری"
                                                             style="color:red;">*</abbr></span></label>
                                                     <input type="text" id="name" name="title"
-                                                        value="{{$address->title}}"
                                                         class="input-name-checkout form-control m-0">
                                                     @error('title')
                                                     <span class="text-danger">{{ $message }}</span>
@@ -33,7 +31,7 @@
                                                 <div class="col-lg-4 col-md-4 col-12 mb-3">
                                                     <label for="name">نام تحویل گیرنده <abbr class="required"
                                                             title="ضروری" style="color:red;">*</abbr></span></label>
-                                                    <input type="text" id="name" name="name" value="{{$address->name}}"
+                                                    <input type="text" id="name" name="name"
                                                         class="input-name-checkout form-control m-0">
                                                     @error('name')
                                                     <span class="text-danger">{{ $message }}</span>
@@ -43,7 +41,6 @@
                                                     <label for="phone-number">شماره موبایل <abbr class="required"
                                                             title="ضروری" style="color:red;">*</abbr></label>
                                                     <input type="text" id="phone-number" name="cellphone"
-                                                        value="{{$address->cellphone}}"
                                                         class="input-name-checkout form-control m-0 text-left">
                                                     @error('cellphone')
                                                     <span class="text-danger">{{ $message }}</span>
@@ -55,7 +52,6 @@
                                                         <abbr class="required" title="ضروری"
                                                             style="color:red;">*</abbr></label>
                                                     <input type="text" id="fixed-number" name="cellphone2"
-                                                        value="{{$address->cellphone2}}"
                                                         class="input-name-checkout form-control m-0 text-left">
                                                     @error('cellphone2')
                                                     <span class="text-danger">{{ $message }}</span>
@@ -70,9 +66,11 @@
                                                         </label>
                                                         <select id="province_id" name="province_id"
                                                             class="form-control m-0 province-select">
+                                                            <option selected="selected" disabled>استان
+                                                                مورد
+                                                                نظر خود را انتخاب کنید </option>
                                                             @foreach ($provinces as $province)
-                                                            <option value="{{ $province->id }}"
-                                                                {{ $province->id == $address->province_id ? 'selected' : '' }}>
+                                                            <option value="{{ $province->id }}">
                                                                 {{ $province->name }}
                                                             </option>
                                                             @endforeach
@@ -90,9 +88,6 @@
                                                                 style="color:red;">*</abbr></label>
                                                         <select name="city_id" id="city"
                                                             class="city-select form-control m-0">
-                                                            <option value="{{ $address->city_id }}" selected>
-                                                                {{ city_name($address->city_id) }}
-                                                            </option>
                                                         </select>
                                                         @error('city_id')
                                                         <span class="text-danger">{{ $message }}</span>
@@ -106,7 +101,6 @@
                                                             </span>
                                                         </label>
                                                         <input type="text" id="apt-id" name="unit"
-                                                            value="{{ $address->unit }}"
                                                             class="input-name-checkout js-input-apt-id form-control m-0">
                                                         @error('unit')
                                                         <span class="text-danger">{{ $message }}</span>
@@ -117,7 +111,6 @@
                                                     <label for="post-code">کد پستی<abbr class="required" title="ضروری"
                                                             style="color:red;">*</abbr></label>
                                                     <input type="text" id="post-code" name="postal_code"
-                                                        value="{{$address->postal_code}}"
                                                         class="input-name-checkout form-control m-0"
                                                         placeholder="کد پستی را بدون خط تیره بنویسید">
                                                     @error('postal_code')
@@ -130,7 +123,7 @@
                                                         <abbr class="required" title="ضروری" style="color:red;">*</abbr>
                                                     </label>
                                                     <textarea rows="5" cols="30" id="address" name="address"
-                                                        class="textarea-name-checkout form-control m-0 ">{{$address->address}}</textarea>
+                                                        class="textarea-name-checkout form-control m-0 "></textarea>
                                                     @error('address')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -142,7 +135,7 @@
                                                     </label>
                                                     <textarea rows="5" cols="30" id="address" name="lastaddress"
                                                         class="textarea-name-checkout form-control mb-0"
-                                                        placeholder="آدرس اضطراری در صورت بروز مشکل...">{{$address->lastaddress}}</textarea>
+                                                        placeholder="آدرس اضطراری در صورت بروز مشکل..."></textarea>
                                                     @error('lastaddress')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror

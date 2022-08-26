@@ -225,6 +225,17 @@
                                                                             </span>
                                                                         </td>
                                                                     </tr>
+
+                                                                    <tr>
+                                                                        <th scope="row">نام تحویل گیرنده:</th>
+                                                                        <td>
+                                                                            <span class="amount">
+
+                                                                                {{ $address->name }}
+                                                                            </span>
+                                                                        </td>
+                                                                    </tr>
+
                                                                     <tr>
                                                                         <th scope="row">استان:</th>
                                                                         <td>
@@ -242,15 +253,7 @@
                                                                             </span>
                                                                         </td>
                                                                     </tr>
-                                                                    <tr>
-                                                                        <th scope="row">استان:</th>
-                                                                        <td>
-                                                                            <span class="amount">
-                                                                                {{ province_name($address->province_id) }}
 
-                                                                            </span>
-                                                                        </td>
-                                                                    </tr>
                                                                     <tr>
                                                                         <th scope="row"> شماره 1: </th>
                                                                         <td>
@@ -287,7 +290,7 @@
                                                                 </td>
                                                             </tr>
                                                         </div>
-                                                        <div class="col-lg-12 col-12 mt-3 mb-4">
+                                                        <div class="col-lg-12 col-12 mt-3 mb-2">
                                                             <div class="box-header">
                                                                 <span class="box-title">آدرس
                                                                     جایگزین</span>
@@ -295,6 +298,15 @@
                                                             <tr>
                                                                 <td>
                                                                     {{ $address->lastaddress }}
+                                                                </td>
+                                                            </tr>
+                                                        </div>
+                                                        <div class="col-lg-12 col-12 mt-3 mb-4">
+                                                            <tr>
+                                                                <td>
+                                                                    <a href="{{ route('home.addreses.edit', ['address' => $address->id]) }}"
+                                                                        class="edit-address-link btn-Order btn btn-warning btn-sm mb-3">ویرایش
+                                                                        آدرس</a>
                                                                 </td>
                                                             </tr>
                                                         </div>

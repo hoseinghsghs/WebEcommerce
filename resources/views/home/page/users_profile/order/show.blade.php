@@ -7,10 +7,14 @@
             <div class="col-lg">
                 <div class="post-item-profile order-1 d-block">
                     @include('home.page.users_profile.partial.right_side')
+
                     <div class="col-lg-9 col-md-9 col-xs-12 pl">
+                        <a class="btn btn-primary m-3" style="color:white" onclick="printDiv()">چاپ سفارش</a>
+
                         <div class="profile-content">
                             <div class="profile-stats">
                                 <div class="table-order-view row">
+
                                     @if (URL::previous() != route('home.user_profile.ordersList'))
                                     <div class="p-5">
                                         @if ($order->status == "آماده برای ارسال")
@@ -132,6 +136,16 @@
                                                 </tr>
 
                                                 <tr>
+                                                    <th scope="row">نام تحویل گیرنده:</th>
+                                                    <td>
+                                                        <span class="amount">
+
+                                                            {{ $order->address->name }}
+                                                        </span>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
                                                     <th scope="row">
                                                         روش پرداخت:
                                                     </th>
@@ -231,4 +245,30 @@
         </section>
     </div>
 </div>
+@push('scripts')
+<script>
+function printDiv() {
+
+    var divContents = $(".profile-content").html();
+    let url = window.location.origin + "/css/home.css";
+    var a = window.open('', '', 'height=768px, width=1366px');
+    a.document.write('<html>');
+    a.document.write('<head><title></title>');
+    a.document.write('<link rel="stylesheet" href="' + url + '" type="text/css" />');
+    a.document.write('</head>');
+    a.document.write('<body > <h1>پرینت سفارش<br>');
+    a.document.write(divContents);
+    a.document.write('</body></html>');
+    a.document.close();
+    a.focus();
+    setTimeout(function() {
+        a.print();
+    }, 1000);
+
+
+    return true;
+
+}
+</script>
+@endpush
 @endsection

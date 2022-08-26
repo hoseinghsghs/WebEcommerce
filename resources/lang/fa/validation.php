@@ -179,5 +179,6 @@ return array(
         "opt_code" => "کد تایید",
         "address_id" => "آدرس",
         "cellphone2" => "تلفن ثابت",
+        "lastaddress" => "آدرس اضطراری",
     ),
 );

@@ -26,7 +26,7 @@
                                             <ul class="gallery-actions">
                                                 <li>
                                                     @if (Auth::check())
-                                                    @if ($product->checkUserWishlist(1))
+                                                    @if ($product->checkUserWishlist(auth()->user()->id))
                                                     <a href="#" data-product="{{$product->id}}"
                                                         class="btn-option add-product-wishes active">
                                                         <i class="fa fa-heart-o" style="padding:11px"></i>

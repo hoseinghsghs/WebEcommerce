@@ -17,7 +17,7 @@ class CreateUserAddressesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('unit')->nullable();
-            $table->bigInteger('cellphone2');
+            $table->string('cellphone2');
             $table->text('lastaddress'); 
             
             $table->string('title');
@@ -28,7 +28,7 @@ class CreateUserAddressesTable extends Migration
 
             $table->bigInteger('province_id');
             $table->bigInteger('city_id');
-            $table->bigInteger('cellphone');
+            $table->string('cellphone');
 
             $table->string('longitude')->nullable();
             $table->string('latitude')->nullable();

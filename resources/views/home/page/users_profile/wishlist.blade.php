@@ -9,11 +9,23 @@
                 <div class="post-item-profile order-1 d-block">
 
                     @include('home.page.users_profile.partial.right_side')
+                    <div class="col-lg-9 col-md-9 col-xs-12 pl" id="loading1"></div>
 
-                    <div class="col-lg-9 col-md-9 col-xs-12 pl">
+                    <div class="col-lg-9 col-md-9 col-xs-12 pl" id="loading">
                         <div class="profile-content">
                             <div class="profile-stats">
                                 <div class="table-favorites">
+                                    @if ($wishlist->isEmpty())
+
+                                    <div class="cart-empty text-center d-block p-5">
+
+                                        <p class="cart-empty-title">لیست علاقه مندی ها خالی است</p>
+                                        <div class="return-to-shop">
+                                            <a href="{{route('home')}}" class="backward btn btn-secondary">خانه</a>
+                                        </div>
+                                    </div>
+
+                                    @else
                                     <table class="table ns-table table-profile-favorites">
                                         <thead>
                                             <tr>
@@ -24,146 +36,95 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
+                                            @foreach ($wishlist as $item )
+                                            <tr id="{{$item->product->id}}-wish">
                                                 <th scope="row">
-                                                    <div class="favorites-product-img">
-                                                        <img src="assets/images/slider-product/Samsung-S10Plus.jpg">
-                                                        <div class="product-rate">
-                                                            <i class="fa fa-star active"></i>
-                                                            <i class="fa fa-star active"></i>
-                                                            <i class="fa fa-star active"></i>
-                                                            <i class="fa fa-star active"></i>
-                                                            <i class="fa fa-star active"></i>
-                                                        </div>
+                                                    <div class="favorites-product-img mb-4">
+                                                        <a
+                                                            href="{{route('home.products.show' , ['product' => $item->product->slug])}}">
+                                                            <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$item->product->primary_image)}}"
+                                                                alt="{{$item->product->slug}}" height="50px"
+                                                                width="50px">
+                                                        </a>
                                                     </div>
                                                 </th>
                                                 <td>
-                                                    <a href="#">سامسونگ گلکسی اس 10 پلاس – 128 گیگابایت – دو سیم
-                                                        کارت</a>
+                                                    <a
+                                                        href="{{route('home.products.show' , ['product' => $item->product->slug])}}">{{$item->product->name}}</a>
                                                 </td>
                                                 <td>
-                                                    <span class="amount">6,000,000
-                                                        <span>تومان</span>
+                                                    <span class="amount">
+                                                        @if ($item->product->quantity_check)
+
+                                                        @if ($item->product->sale_check)
+
+                                                        <ins class="new-price">{{number_format($item->product->sale_check->sale_price)}}
+                                                            تومان</ins>
+
+                                                        <del class="old-price">{{number_format($item->product->sale_check->price)}}
+                                                            تومان</del>
+                                                        @else
+                                                        <ins class="new-price">{{ number_format($item->product->price_check->price) }}
+                                                            تومان</ins>
+                                                        @endif
+                                                        @else
+                                                        <ins class="new-price">نا موجود</ins>
+
+                                                        @endif
                                                     </span>
                                                 </td>
                                                 <td class="text-left actions">
-                                                    <a href="#" class="remove-product"><i class="mdi mdi-close"></i></a>
+                                                    <button onclick="return send('{{$item->product->id}}')"
+                                                        class="remove-product btn"><i
+                                                            class="mdi mdi-close"></i></button>
                                                 </td>
                                             </tr>
                                             <tr class="spacer"></tr>
-                                            <tr>
-                                                <th scope="row">
-                                                    <div class="favorites-product-img">
-                                                        <img src="assets/images/slider-product/asus-laptop.jpg">
-                                                        <div class="product-rate">
-                                                            <i class="fa fa-star active"></i>
-                                                            <i class="fa fa-star active"></i>
-                                                            <i class="fa fa-star active"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                        </div>
-                                                    </div>
-                                                </th>
-                                                <td>
-                                                    <a href="#">لپ تاپ ایسوس زِنبوک 14</a>
-                                                </td>
-                                                <td>
-                                                    <span class="amount">6,000,000
-                                                        <span>تومان</span>
-                                                    </span>
-                                                </td>
-                                                <td class="text-left actions">
-                                                    <a href="#" class="remove-product"><i class="mdi mdi-close"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr class="spacer"></tr>
-                                            <tr>
-                                                <th scope="row">
-                                                    <div class="favorites-product-img">
-                                                        <img src="assets/images/slider-product/Avocado.jpg">
-                                                        <div class="product-rate">
-                                                            <i class="fa fa-star active"></i>
-                                                            <i class="fa fa-star active"></i>
-                                                            <i class="fa fa-star active"></i>
-                                                            <i class="fa fa-star active"></i>
-                                                            <i class="fa fa-star"></i>
-                                                        </div>
-                                                    </div>
-                                                </th>
-                                                <td>
-                                                    <a href="#">آب میوه گیری پارس خزر مدل Avocado</a>
-                                                </td>
-                                                <td>
-                                                    <span class="amount">6,000,000
-                                                        <span>تومان</span>
-                                                    </span>
-                                                </td>
-                                                <td class="text-left actions">
-                                                    <a href="#" class="remove-product"><i class="mdi mdi-close"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr class="spacer"></tr>
-                                            <tr>
-                                                <th scope="row">
-                                                    <div class="favorites-product-img">
-                                                        <img src="assets/images/slider-product/huawei.jpg">
-                                                        <div class="product-rate">
-                                                            <i class="fa fa-star active"></i>
-                                                            <i class="fa fa-star active"></i>
-                                                            <i class="fa fa-star active"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                        </div>
-                                                    </div>
-                                                </th>
-                                                <td>
-                                                    <a href="#">هواوی پی 20 پرو 128 گیگابایت – دو سیم کارت</a>
-                                                </td>
-                                                <td>
-                                                    <span class="amount">6,000,000
-                                                        <span>تومان</span>
-                                                    </span>
-                                                </td>
-                                                <td class="text-left actions">
-                                                    <a href="#" class="remove-product"><i class="mdi mdi-close"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr class="spacer"></tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
-                                    <div class="profile-recent-fav">
-                                        <a href="#" class="img-profile-favorites">
-                                            <img src="assets/images/slider-product/Samsung-S10Plus.jpg">
-                                        </a>
-                                        <div class="profile-recent-fav-col">
-                                            <a href="#">سامسونگ گلکسی اس 10 پلاس – 128 گیگابایت – دو سیم کارت</a>
-                                        </div>
-                                        <div class="profile-recent-fav-price">
-                                            <span class="amount">6,000,000
-                                                <span>تومان</span>
-                                            </span>
-                                        </div>
-                                        <div class="profile-recent-fav-remove">
-                                            <a href="#"><i class="mdi mdi-close"></i></a>
-                                        </div>
-                                    </div>
+                                    @endif
 
-                                    <div class="profile-recent-fav">
-                                        <a href="#" class="img-profile-favorites">
-                                            <img src="assets/images/slider-product/huawei.jpg">
+                                    @foreach ($wishlist as $item )
+                                    <div class="profile-recent-fav" id="{{$item->product->id}}-wish1">
+                                        <a href="{{route('home.products.show' , ['product' => $item->product->slug])}}"
+                                            class="img-profile-favorites">
+                                            <img
+                                                src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$item->product->primary_image)}}">
                                         </a>
                                         <div class="profile-recent-fav-col">
-                                            <a href="#">هواوی پی 20 پرو 128 گیگابایت – دو سیم کارت</a>
+                                            <a
+                                                href="{{route('home.products.show' , ['product' => $item->product->slug])}}">{{$item->product->name}}</a>
                                         </div>
                                         <div class="profile-recent-fav-price">
-                                            <span class="amount">6,000,000
-                                                <span>تومان</span>
+                                            <span class="amount">
+                                                @if ($item->product->quantity_check)
+
+                                                @if ($item->product->sale_check)
+
+                                                <ins class="new-price">{{number_format($item->product->sale_check->sale_price)}}
+                                                    تومان</ins>
+
+                                                <del class="old-price">{{number_format($item->product->sale_check->price)}}
+                                                    تومان</del>
+                                                @else
+                                                <ins class="new-price">{{ number_format($item->product->price_check->price) }}
+                                                    تومان</ins>
+                                                @endif
+                                                @else
+                                                <ins class="new-price">نا موجود</ins>
+
+                                                @endif
                                             </span>
                                         </div>
                                         <div class="profile-recent-fav-remove">
-                                            <a href="#"><i class="mdi mdi-close"></i></a>
+                                            <button onclick="return send('{{$item->product->id}}')"
+                                                class="remove-product btn"><i class="mdi mdi-close"></i></button>
                                         </div>
                                     </div>
+                                    @endforeach
+
+
                                 </div>
                             </div>
                         </div>
@@ -185,18 +146,18 @@ function send(product) {
         window.location.origin +
         "/profile/add-to-wishlist" +
         "/" + [product];
-    console.log(url);
-
+    $("#loading1").html('<i class="fa fa-circle-o-notch fa-spin" id="loading1"></i>');
     $.get(url,
         function(response, status) {
             if (response.errors == 'deleted') {
                 $("#" + product + "-wish").hide();
-                $.notify("ملک از لیست علاقه مندی ها حذف شد", "info", {
-                    position: "tap",
-                });
+                $("#" + product + "-wish1").hide();
             }
-        }).fail(function() {
-        console.log(status)
+        }).always(function() {
+        $("#loading1").html('');
+        $("#loading").show();
+    }).fail(function() {
+        alert('اینترنت شما قطع است')
     })
 }
 </script>

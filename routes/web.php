@@ -106,6 +106,7 @@ Route::prefix('profile')->name('home.')->middleware('auth')->group(function () {
   Route::get('/wishlist',[WishListController::class, 'usersProfileIndex'])->name('profile.wishlist.index');
   Route::get('/add-to-wishlist/{product:id}', [WishListController::class, 'add'])->name('home.wishlist.add');
   Route::get('/addreses',  [AddressController::class, 'index'])->name('addreses.index');
+  Route::get('/addreses/create',  [AddressController::class, 'create'])->name('addreses.create');
   Route::post('/addreses', [AddressController::class, 'store'])->name('addreses.store');
   Route::get('/addreses/{address}', [AddressController::class, 'edit'])->name('addreses.edit');
   Route::put('/addreses/{address}', [AddressController::class, 'update'])->name('addreses.update');

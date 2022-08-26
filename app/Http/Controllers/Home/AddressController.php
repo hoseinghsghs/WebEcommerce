@@ -30,7 +30,9 @@ class AddressController extends Controller
      */
     public function create()
     {
-        //
+        $addresses = UserAddress::where('user_id', auth()->id())->get();
+        $provinces = Province::all();
+        return view('home.page.users_profile.create_address', compact('provinces','addresses'));
     }
 
     /**
@@ -44,6 +46,7 @@ class AddressController extends Controller
         $request->validate([
             
             'name' => 'required',
+            'title' => 'required',
             'cellphone' => 'required|ir_mobile:zero',
             'cellphone2' => 'required|ir_mobile:zero',
             'province_id' => 'required',
@@ -68,7 +71,7 @@ class AddressController extends Controller
         ]);
 
         alert()->success('آدرس مورد نظر ایجاد شد', 'باتشکر');
-        return redirect()->back();
+        return redirect()->route('home.addreses.index');
         
     }
 
@@ -109,12 +112,14 @@ class AddressController extends Controller
         
         $request->validate([
             'name' => 'required',
+            'title' => 'required',
             'cellphone2' => 'required|ir_mobile:zero',
             'lastaddress' => 'required',
             'cellphone' => 'required|ir_mobile:zero',
             'province_id' => 'required',
             'city_id' => 'required',
             'address' => 'required',
+            
             'postal_code' => 'required|ir_postal_code:without_seprate'
         ]);
 

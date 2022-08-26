@@ -98,14 +98,11 @@ public function payment(Request $request)
         $payGateway = new Pay();
         $payGatewayResult = $payGateway->send($amounts, $address_id , $description);
 
-        
-       
-        Session::put('orderId',$payGatewayResult['orderId']);
-
         if (array_key_exists('error', $payGatewayResult)) {
-            alert()->error($payGatewayResult['error'], 'دقت کنید')->persistent('حله');
+            alert()->error($payGatewayResult['error'])->persistent('حله');
             return redirect()->back();
         } else {
+            Session::put('orderId',$payGatewayResult['orderId']);
             return redirect()->to($payGatewayResult['success']);
         }
     }
@@ -114,12 +111,11 @@ public function payment(Request $request)
         $zarinpalGateway = new Zarinpal();
         $zarinpalGatewayResult = $zarinpalGateway->send($amounts, $description, $address_id);
 
-        Session::put('orderId',$zarinpalGatewayResult['orderId']);
-
         if (array_key_exists('error', $zarinpalGatewayResult)) {
-            alert()->error($zarinpalGatewayResult['error'], 'دقت کنید')->persistent('حله');
+            alert()->error($zarinpalGatewayResult['error'])->persistent('حله');
             return redirect()->back();
         } else {
+            Session::put('orderId',$zarinpalGatewayResult['orderId']);
             return redirect()->to($zarinpalGatewayResult['success']);
         }
     }
@@ -154,7 +150,6 @@ public function paymentVerify(Request $request, $gatewayName)
 
         $zarinpalGateway = new Zarinpal();
         $zarinpalGatewayResult = $zarinpalGateway->verify($request->Authority, $amounts['paying_amount']);
-
         if (array_key_exists('error', $zarinpalGatewayResult)) {
             alert()->error($zarinpalGatewayResult['error'])->persistent('حله');
             return redirect()->route('home.user_profile.orders',['order' => Session::pull('orderId')]);

@@ -9,20 +9,24 @@
                 <div class="post-item-profile order-1 d-block">
 
                     @include('home.page.users_profile.partial.right_side')
+                    <a class="btn btn-warning btn-sm mr-5 mb-3 " href="{{route('home.addreses.create')}}">آدرس جدید</a>
 
+                    @foreach ($addresses as $address)
                     <div class="col-lg-9 col-md-9 col-xs-12 pl">
                         <div class="profile-content">
                             <div class="profile-stats">
                                 <div class="profile-address">
                                     <div class="box-header">
-                                        <span class="box-title">نشانی ما</span>
+                                        <span class="box-title">آدرس ها</span>
                                     </div>
                                     <div class="profile-address-item">
                                         <div class="profile-address-item-top">
-                                            <div class="profile-address-item-title">خراسان شمالی ، بجنورد</div>
+                                            <div class="profile-address-item-title">
+                                                {{$address->address}}
+                                            </div>
                                             <div class="ui-more">
-                                                <button class="btn-remove-address btn btn-danger"
-                                                    type="submit">حذف</button>
+                                                <a href="{{ route('home.addreses.destroy', ['address' => $address->id]) }}"
+                                                    class="btn-remove-address btn btn-danger" type="submit">حذف</a>
                                             </div>
                                         </div>
 
@@ -31,29 +35,32 @@
                                                 <li>
                                                     <div class="profile-address-info-item location">
                                                         <i class="mdi mdi-map-outline"></i>
-                                                        خراسان شمالی، بجنورد
+                                                        {{ province_name($address->province_id) }} ،
+                                                        {{ city_name($address->city_id) }}
                                                     </div>
                                                 </li>
                                                 <li>
                                                     <div class="profile-address-info-item location">
                                                         <i class="mdi mdi-email-outline"></i>
-                                                        945789651235
+                                                        {{ $address->postal_code }}
+
                                                     </div>
                                                 </li>
                                                 <li>
                                                     <div class="profile-address-info-item location">
                                                         <i class="mdi mdi-phone"></i>
-                                                        0991*******
+                                                        {{ $address->cellphone }} , {{ $address->cellphone2 }}
                                                     </div>
                                                 </li>
                                                 <li>
                                                     <div class="profile-address-info-item location">
                                                         <i class="mdi mdi-account"></i>
-                                                        خراسان شمالی، بجنورد
+                                                        {{ $address->name }}
                                                     </div>
                                                 </li>
                                                 <li class="location-link">
-                                                    <a href="#" class="edit-address-link">ویرایش آدرس</a>
+                                                    <a href="{{ route('home.addreses.edit', ['address' => $address->id]) }}"
+                                                        class="edit-address-link">ویرایش آدرس</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -62,6 +69,7 @@
                             </div>
                         </div>
                     </div>
+                    @endforeach
                 </div>
             </div>
         </section>
