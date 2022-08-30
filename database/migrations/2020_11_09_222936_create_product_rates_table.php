@@ -19,7 +19,10 @@ class CreateProductRatesTable extends Migration
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
 
-            $table->tinyInteger('rate');
+            $table->tinyInteger('rate')->nullable();
+            $table->tinyInteger('cost');
+            $table->tinyInteger('quality');
+            $table->tinyInteger('satisfaction');
 
             $table->timestamps();
         });

@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\TransactionController;
@@ -25,6 +26,7 @@ use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Home\PaymentController;
 use App\Http\Controllers\Home\PostController as HomePostController;
 use App\Http\Controllers\Home\ProductController as HomeProductController;
+use App\Http\Controllers\Home\QuestionController as HomeQuestionController;
 use App\Http\Controllers\Home\UserProfileController;
 use App\Http\Controllers\Home\WishListController;
 use Illuminate\Support\Facades\Route;
@@ -85,10 +87,15 @@ Route::get('/products/{product:slug}', [HomeProductController::class, 'show'])->
 
 Route::get('/search/{slug?}', ProductsList::class)->name('home.products.search');
 Route::get('/main/{slug}', ProductsList::class)->name('home.products.index');
+
+//comments
+Route::get('home/question/{product}', [HomeCommentController::class, 'create'])->name('home.comments.index');
 Route::post('/comments/{product}', [HomeCommentController::class, 'store'])->name('home.comments.store');
-
-
 Route::post('/reply/store', [HomeCommentController::class, 'replyStore'])->name('reply.add');
+
+//questions
+Route::post('/question/{product}', [HomeQuestionController::class, 'store'])->name('home.question.store');
+Route::post('/question/reply/store', [HomeQuestionController::class, 'replyStore'])->name('question.reply.add');
 
 // otp auth
 Route::post('/auth/check',[OtpController::class,'authenticate'])->name('authenticate');

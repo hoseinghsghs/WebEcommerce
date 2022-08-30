@@ -86,7 +86,6 @@ class Product extends Model
 
     public function rates()
     {
-
         return $this->hasMany(ProductRate::class);
     }
     
@@ -98,6 +97,16 @@ class Product extends Model
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable')->whereNull('parent_id');
+    }
+
+    public function approvedQuestions()
+    {
+        return $this->hasMany(Question::class)->where('approved' , 1)->where('parent_id' , 0);
+    }
+
+    public function question()
+    {
+        return $this->hasMany(Question::class)->whereNull('parent_id');
     }
 
     public function checkUserWishlist($userId)

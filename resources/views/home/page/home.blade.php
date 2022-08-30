@@ -7,6 +7,7 @@
 
 <!-- slidre-product------------------------>
 <!-- فروش ویژه -->
+@if ($Products_special->count())
 <section class="section-slider amazing-section pt-0">
     <div class="container-amazing col-12">
         <div class="col-lg-3 display-md-none pull-right">
@@ -18,7 +19,8 @@
 
             </div>
         </div>
-        @if ($Products_special)
+
+
         <div class="col-lg-9 col-md-12 pull-left pr-1">
             <div class="slider-widget-products mb-0">
                 <div class="widget widget-product card" style="padding:32px ;">
@@ -48,9 +50,10 @@
                 </div>
             </div>
         </div>
-        @endif
+
     </div>
 </section>
+@endif
 <!--  پایان محصولات ویژه -->
 
 <!-- پیشنهاد ما -->
