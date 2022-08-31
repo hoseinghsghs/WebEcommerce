@@ -7,8 +7,8 @@ require("../assets/home/js/vendor/owl.carousel.min.js");
 
 require("../assets/home/js/vendor/ResizeSensor.min.js");
 require("../assets/home/js/vendor/theia-sticky-sidebar.min.js");
-require("../assets/home/js/vendor/wNumb.js");
-require("../assets/home/js/vendor/nouislider.min.js");
+window.wNumb = require("../assets/home/js/vendor/wNumb.js");
+window.noUiSlider = require("../assets/home/js/vendor/nouislider.min.js");
 
 require("../assets/home/js/vendor/jquery.nice-select.min.js");
 require("../assets/home/js/vendor/jquery.jqZoom.js");

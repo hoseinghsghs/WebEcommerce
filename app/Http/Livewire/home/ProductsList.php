@@ -11,7 +11,9 @@ use Livewire\WithPagination;
 class ProductsList extends Component
 {
     use WithPagination;
+    protected $paginationTheme = 'bootstrap';
 
+    protected $listeners = ['priceRangeUpdated'];
     public $category;
     public $routeName = '';
     public $collapsible = [
@@ -64,6 +66,10 @@ class ProductsList extends Component
     {
         $this->resetPage();
     }
+    public function priceRangeUpdated($values){
+        $this->filterd['price']['low']=$values[0];
+        $this->filterd['price']['high']=$values[1];
+    }
 
     public function collapse($type, $id = null)
     {
@@ -100,6 +106,9 @@ class ProductsList extends Component
         }
         $this->filterd = $filterd;
         $this->gotoPage(1);
+    }
+    public function showres(){
+        dd($this->filterd);
     }
 
     public function render()

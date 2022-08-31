@@ -10,11 +10,11 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory, Sluggable;
-    
-    protected $guarded=[];
-    protected $table="products";
-    protected $appends = ['quantity_check', 'sale_check', 'price_check' , 'pro_check'];
-    public function sluggable():array
+
+    protected $guarded = [];
+    protected $table = "products";
+    protected $appends = ['quantity_check', 'sale_check', 'price_check', 'pro_check'];
+    public function sluggable(): array
     {
         return [
             'slug' => [
@@ -28,11 +28,29 @@ class Product extends Model
         return $query->where('is_active', true);
     }
 
-  public function getProCheckAttribute()
+    /**
+     * Get the percentage of discount price.
+     *
+     */
+    protected function scopeDiscountPercent()
+    {
+        $prices = $this->variations()->where([['quantity', '>', 0], ['sale_price', '<>', null], ['date_on_sale_from', '<', Carbon::now()], ['date_on_sale_to', '>', Carbon::now()]])->get(['sale_price', 'price'])->toArray();
+        if ($prices) {
+            foreach ($prices as $price) {
+                $percents[] = intval(100 - (($price['sale_price'] * 100) / $price['price']));
+            }
+            $percents = array_unique($percents);
+            sort($percents);
+            return $percents;
+        }
+        return null;
+    }
+
+    public function getProCheckAttribute()
     {
         return $this->category()->where('name', 'موبایل')->first() ?? false;
     }
-    
+
     public function getPriceCheckAttribute()
     {
         return $this->variations()->where('quantity', '>', 0)->orderBy('price')->first() ?? false;
@@ -48,7 +66,7 @@ class Product extends Model
     {
         return $this->variations()->where('quantity', '>', 0)->first() ?? 0;
     }
-    
+
     public function tags()
     {
         return $this->belongsToMany(Tag::class, 'product_tag');
@@ -89,10 +107,10 @@ class Product extends Model
 
         return $this->hasMany(ProductRate::class);
     }
-    
+
     public function approvedComments()
     {
-        return $this->morphMany(Comment::class, 'commentable')->where('approved' , 1)->where('parent_id' , 0);
+        return $this->morphMany(Comment::class, 'commentable')->where('approved', 1)->where('parent_id', 0);
     }
 
     public function comments()
@@ -102,7 +120,7 @@ class Product extends Model
 
     public function checkUserWishlist($userId)
     {
-        return $this->hasMany(WishList::class)->where('user_id' , $userId)->exists();
+        return $this->hasMany(WishList::class)->where('user_id', $userId)->exists();
     }
 
     public function scopeFilter($query, $filters)
@@ -121,7 +139,7 @@ class Product extends Model
 
         if ($filters['price']['low'] && $filters['price']['high']) {
             $query->whereHas('variations', function ($q) use ($filters) {
-                $q->whereBetween('price', [str_replace(',', '',$filters['price']['low']), str_replace(',', '',$filters['price']['high'])]);
+                $q->whereBetween('price', [str_replace(',', '', $filters['price']['low']), str_replace(',', '', $filters['price']['high'])]);
             });
         }
 
