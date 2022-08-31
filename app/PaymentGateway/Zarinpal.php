@@ -30,18 +30,20 @@ class Zarinpal extends Payment
         $result = json_decode($result, true);
         curl_close($ch);
         if ($err) {
-            return ['error' => "cURL Error #:" . $err];
+            return ['error' => "خطای اتصال به درگاه بانکی"];
+            // return ['error' => "cURL Error #:" . $err];
         } else {
             if ($result["Status"] == 100) {
 
-                $createOrder = parent::createOrder($addressId, $amounts, $result["Authority"], 'zarinpal');
+                $createOrder = parent::createOrder($addressId, $amounts, $result["Authority"], 'zarinpal',$description);
                 if (array_key_exists('error', $createOrder)) {
                     return $createOrder;
                 }
 
-                return ['success' => 'https://sandbox.zarinpal.com/pg/StartPay/' . $result["Authority"]];
+                return ['success' => 'https://sandbox.zarinpal.com/pg/StartPay/' . $result["Authority"] , 'orderId' => $createOrder['orderId']];
             } else {
-                return ['error' => 'ERR: ' . $result["Status"]];
+
+                return ['error' => 'ERR: ' . $result["Status"] , ];
             }
         }
     }
@@ -67,7 +69,8 @@ class Zarinpal extends Payment
         curl_close($ch);
         $result = json_decode($result, true);
         if ($err) {
-            return ['error' => "cURL Error #:" . $err];
+            $updateOrder = parent::updateOrderErorr($authority,$err);
+            return ['error' => "درگاه بانکی قطع است"];
         } else {
             if ($result['Status'] == 100) {
                 $updateOrder = parent::updateOrder($authority, $result['RefID']);
@@ -77,7 +80,8 @@ class Zarinpal extends Payment
                 \Cart::clear();
                 return ['success' => 'Transation success. RefID:' . $result['RefID']];
             } else {
-                return ['error' => 'Transation failed. Status:' . $result['Status']];
+                $updateOrder = parent::updateOrderErorr($authority,$result['Status']);
+                return ['error' => 'پرداخت با خطا مواجه شد'];
             }
         }
     }

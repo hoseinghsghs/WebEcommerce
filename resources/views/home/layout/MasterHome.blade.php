@@ -111,8 +111,10 @@
     </script>
 
     @include('sweetalert::alert')
+
     @livewireScripts()
 
+    @flasher_livewire_render
 
 </body>
 

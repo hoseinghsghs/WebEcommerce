@@ -1,10 +1,12 @@
 <?php
 
 namespace App\PaymentGateway;
+use Illuminate\Support\Facades\Session;
 
 class Pay extends Payment
 {
-    public function send($amounts, $addressId)
+    public $orderID;
+    public function send($amounts, $addressId , $description)
     {
         $api = 'test';
         $amount = $amounts['paying_amount'] . '0';
@@ -13,12 +15,13 @@ class Pay extends Payment
         $result = json_decode($result);
         if ($result->status) {
 
-            $createOrder = parent::createOrder($addressId, $amounts, $result->token, 'pay');
+            $createOrder = parent::createOrder($addressId, $amounts, $result->token, 'pay' , $description);
+            
             if (array_key_exists('error', $createOrder)) {
                 return $createOrder;
             }
             $go = "https://pay.ir/pg/$result->token";
-            return ['success' => $go];
+            return ['success' => $go , 'orderId' => $createOrder['orderId'] ];
         } else {
             return ['error' => $result->errorMessage];
         }
@@ -32,17 +35,21 @@ class Pay extends Payment
         if (isset($result->status)) {
             if ($result->status == 1) {
                 $updateOrder = parent::updateOrder($token, $result->transId);
+                
                 if (array_key_exists('error', $updateOrder)) {
                     return $updateOrder;
                 }
                 \Cart::clear();
-                return ['success' => ' پرداخت با موفقیت انجام شد.شماره تراکنش' . $result->transId];
+                return ['success' => ' پرداخت با موفقیت انجام شد.شماره تراکنش' . $result->transId ];
             } else {
-                return ['error' => 'پرداخت با خطا مواجه شد.شماره وضعیت' . $result->status];
+                $updateOrder = parent::updateOrderErorr($token,$result['Status']);
+
+                return ['error' => 'پرداخت با خطا مواجه شد'];
             }
         } else {
             if ($status == 0) {
-                return ['error' => 'پرداخت با خطا مواجه شد.شماره وضعیت' . $status];
+                $updateOrder = parent::updateOrderErorr($token,$result['Status']);
+                return ['error' => 'پرداخت با خطا مواجه شد' ];
             }
         }
     }

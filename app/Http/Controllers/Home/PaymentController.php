@@ -5,13 +5,14 @@ namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use App\Models\ProductVariation;
 use App\Models\User;
+use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\PaymentGateway\Zarinpal;
 use App\PaymentGateway\Pay;
 use Illuminate\Support\Facades\Auth;
-
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class PaymentController extends Controller
 {
@@ -22,24 +23,64 @@ public function payment(Request $request)
     alert()->error('ابتدا باید وارد شوید');
     return redirect()->back(); 
     }
+    if($request->address_id && $request->address_id != 'new'){
+    //آدرس دارد 
     
     $validator = Validator::make($request->all(), [
-        'address_id' => 'required',
-        'payment_method' => 'required',
-        'firstname' => 'required',
-        'lastname' => 'required',
-        'payment_method' => 'required',
-    ]);
-    User::where('id', auth()->user()->id)->update([
-        'name' => $request->firstname . ' ' . $request->lastname,
-    ]);
-    
-    
+            'address_id' => 'required|integer',
+            'payment_method' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        };
+        $address_id= $request->address_id;
+    }else{
+        $validator = Validator::make($request->all(), [
+            'title' =>'required',
+            "name" => 'required',
+            "cellphone" => 'required',
+            "cellphone2" => 'required',
+            "province_id" => "required",
+            "unit" => 'required',
+            "postal_code" => 'required',
+            "address" => 'required',
+            "lastaddress" => 'required',
+            "payment_method" => 'required',
 
-    if ($validator->fails()) {
-        alert()->error('انتخاب آدرس تحویل سفارش الزامی می باشد', 'آدرد جسدید ایجاد کنید')->persistent('حله');
-        return redirect()->back();
-    }
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        };
+
+        try {
+            DB::beginTransaction();
+           $user_address= UserAddress::create([
+            'user_id' => auth()->id(),
+            'title' => $request->title,
+            'name' => $request->name,
+            'unit' => $request->unit,
+            'cellphone' => $request->cellphone,
+            'cellphone2' => $request->cellphone2,
+            'province_id' => $request->province_id,
+            'city_id' => $request->city_id,
+            'address' => $request->address,
+            'lastaddress' => $request->address,
+            'postal_code' => $request->postal_code
+        ]);
+            DB::commit();
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            return ['error' => $ex->getMessage()];
+        }
+        $address_id= $user_address->id;
+    
+        }
+        if($request->description){
+            $description=$request->description;
+        }else{
+            $description="بدون توضیح";
+        }
+
 
     $checkCart = $this->checkCart();
     if (array_key_exists('error', $checkCart)) {
@@ -53,24 +94,28 @@ public function payment(Request $request)
         return redirect()->route('home');
     }
 
-    if ($request->payment_method == 'pay') {
+    if ($request->payment_method == 'paypal') {
         $payGateway = new Pay();
-        $payGatewayResult = $payGateway->send($amounts, $request->address_id);
+        $payGatewayResult = $payGateway->send($amounts, $address_id , $description);
+
         if (array_key_exists('error', $payGatewayResult)) {
-            alert()->error($payGatewayResult['error'], 'دقت کنید')->persistent('حله');
+            alert()->error($payGatewayResult['error'])->persistent('حله');
             return redirect()->back();
         } else {
+            Session::put('orderId',$payGatewayResult['orderId']);
             return redirect()->to($payGatewayResult['success']);
         }
     }
 
     if ($request->payment_method == 'zarinpal') {
         $zarinpalGateway = new Zarinpal();
-        $zarinpalGatewayResult = $zarinpalGateway->send($amounts, 'خرید تستی', $request->address_id);
+        $zarinpalGatewayResult = $zarinpalGateway->send($amounts, $description, $address_id);
+
         if (array_key_exists('error', $zarinpalGatewayResult)) {
-            alert()->error($zarinpalGatewayResult['error'], 'دقت کنید')->persistent('حله');
+            alert()->error($zarinpalGatewayResult['error'])->persistent('حله');
             return redirect()->back();
         } else {
+            Session::put('orderId',$zarinpalGatewayResult['orderId']);
             return redirect()->to($zarinpalGatewayResult['success']);
         }
     }
@@ -83,14 +128,16 @@ public function paymentVerify(Request $request, $gatewayName)
 {
     if ($gatewayName == 'pay') {
         $payGateway = new Pay();
+        
         $payGatewayResult = $payGateway->verify($request->token, $request->status);
 
         if (array_key_exists('error', $payGatewayResult)) {
-            alert()->error($payGatewayResult['error'], 'دقت کنید')->persistent('حله');
-            return redirect()->back();
+            alert()->error($payGatewayResult['error'])->persistent('حله');
+            return redirect()->route('home.user_profile.orders',['order' => Session::pull('orderId')]);
         } else {
             alert()->success('خرید با موفقیت انجام گرفت', 'با تشکر');
-            return redirect()->route('home.user_profile');
+            return redirect()->route('home.user_profile.orders',['order' => Session::pull('orderId')]);
+            
         }
     }
 
@@ -103,13 +150,12 @@ public function paymentVerify(Request $request, $gatewayName)
 
         $zarinpalGateway = new Zarinpal();
         $zarinpalGatewayResult = $zarinpalGateway->verify($request->Authority, $amounts['paying_amount']);
-
         if (array_key_exists('error', $zarinpalGatewayResult)) {
-            alert()->error($zarinpalGatewayResult['error'], 'دقت کنید')->persistent('حله');
-            return redirect()->back();
+            alert()->error($zarinpalGatewayResult['error'])->persistent('حله');
+            return redirect()->route('home.user_profile.orders',['order' => Session::pull('orderId')]);
         } else {
-            alert()->success('خرید با موفقیت انجام گرفت', 'با تشکر', 'با تشکر');
-            return redirect()->route('home.user_profile');
+            alert()->success('خرید با موفقیت انجام گرفت', 'با تشکر');
+            return redirect()->route('home.user_profile.orders',['order' => Session::pull('orderId')]);
         }
     }
 
@@ -164,4 +210,28 @@ public function getAmounts()
         'paying_amount' => cartTotalAmount()
     ];
 }
+
+public function checkCoupon(Request $request)
+{
+    
+    
+    if (!auth()->check()) {
+       return response('error' , 400);
+    };
+
+    if($request->code == null){
+        return response(['message'=>'فیلد کد تخفیف خالی است' ] , 201);
+    };
+    $result = checkCoupon($request->code);
+    
+    if (array_key_exists('error', $result)) {
+        
+        return response()->json(['message'=>$result['error']] , 201);
+        
+    } else {
+        return response()->json(['message'=>$result['amount'] ] , 200);
+      
+    }
+}
+
 }

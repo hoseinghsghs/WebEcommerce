@@ -26,7 +26,7 @@
                                             <ul class="gallery-actions">
                                                 <li>
                                                     @if (Auth::check())
-                                                    @if ($product->checkUserWishlist(1))
+                                                    @if ($product->checkUserWishlist(auth()->user()->id))
                                                     <a href="#" data-product="{{$product->id}}"
                                                         class="btn-option add-product-wishes active">
                                                         <i class="fa fa-heart-o" style="padding:11px"></i>
@@ -481,8 +481,12 @@
                                                 نظر
                                                 شما به عنوان مالک محصول ثبت خواهد شد.
                                             </p>
-                                            <a href="#" class="btn-add-comment btn btn-secondary">افزودن نظر
-                                                جدید</a>
+
+                                            <button type="button" class="btn-add-comment btn btn-secondary"
+                                                data-toggle="modal" data-target="#comment-modal">
+                                                ارسال نظر
+                                            </button>
+
                                         </div>
                                     </div>
                                     <div class="product-comment-list">
@@ -795,11 +799,245 @@
     </div>
 </div>
 
+<!-- modal -->
+<div class="modal fade bd-example-modal-lg" id="comment-modal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{route('home.comments.store' , ['product' => $product->id])}}" method="POST"
+                    id="addCommentForm">
+                    @csrf
+
+                    <section class="product-comment">
+                        <div class="comments-product">
+                            <div class="comments-product-row">
+                                <div class="col-lg-12 col-md-12 col-xs-12 pull-left">
+                                    <div class="comments-product-col-info">
+                                        <div class="comments-product-attributes px-3">
+
+                                            <div class="row">
+                                                <div class="col-sm-12 col-12 mb-3">
+                                                    <div class="comments-product-attributes-title">ارزش خرید نسبت به
+                                                        قیمت</div>
+
+                                                    <input type="range" class="cost form-control-range" name="cost"
+                                                        id="formControlRange" min="1" max="5" step="1"
+                                                        onInput="setlable('cost')">
+                                                </div>
+                                                <center>
+                                                    <span id="rangeva1" class="bg-primary text-white p-1"
+                                                        style="border-radius: 1rem;">
+                                                        خوب
+                                                    </span>
+                                                </center>
+
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-12 col-12 mb-3">
+                                                    <div class="comments-product-attributes-title">کیفیت</div>
+
+                                                    <input type="range" class="quality form-control-range"
+                                                        name="quality" id="formControlRange" min="1" max="5" step="1"
+                                                        onInput="setlable('quality')">
+                                                </div>
+                                                <center>
+                                                    <span id="rangeva2" class="bg-primary text-white p-1"
+                                                        style="border-radius: 1rem;">
+                                                        خوب
+                                                    </span>
+                                                </center>
+
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-12 col-12 mb-3">
+                                                    <div class="comments-product-attributes-title">میزان رضایت کلی از
+                                                        محصول</div>
+
+                                                    <input type="range" class="satisfaction form-control-range"
+                                                        name="satisfaction" id="formControlRange" min="1" max="5"
+                                                        step="1" onInput="setlable('satisfaction')">
+
+                                                </div>
+
+                                                <center>
+                                                    <span id="rangeva3" class="bg-primary text-white p-1"
+                                                        style="border-radius: 1rem;">
+                                                        خوب
+                                                    </span>
+                                                </center>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="comments-add">
+                                    <div class="comments-add-row d-inline-block">
+                                        <div class="col-lg-12 col-md-12 col-xs-12 pull-right">
+                                            <div class="comments-add-col-form">
+                                                <div class="form-comment">
+                                                    <div class="col-md-12 col-sm-12">
+                                                        <div class="form-ui">
+                                                            <form class="px-5">
+                                                                <div class="row">
+                                                                    <div class="col-12">
+                                                                        <div class="form-row-title mb-2">عنوان نظر شما
+                                                                            (اجباری)</div>
+                                                                        <div class="form-row">
+                                                                            <input class="input-ui pr-2" type="text"
+                                                                                name="title"
+                                                                                placeholder="عنوان نظر خود را بنویسید">
+                                                                            @error('title')
+                                                                            <span
+                                                                                class="text-danger">{{ $message }}</span>
+                                                                            @enderror
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div
+                                                                        class="col-12 form-comment-title--positive mt-4">
+                                                                        <div class="form-row-title mb-2 pr-3">
+                                                                            نقاط قوت
+                                                                        </div>
+                                                                        <div id="advantages" class="form-row">
+                                                                            <div class="ui-input--add-point">
+                                                                                <input name="strengthss[]"
+                                                                                    class="input-ui pr-2 ui-input-field"
+                                                                                    type="text" id="advantage-input"
+                                                                                    autocomplete="off" value="">
+                                                                                <button
+                                                                                    class="ui-input-point js-icon-form-add"
+                                                                                    type="button"></button>
+                                                                            </div>
+                                                                            <div
+                                                                                class="form-comment-dynamic-labels js-advantages-list">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div
+                                                                        class="col-12 form-comment-title--negative mt-2">
+                                                                        <div class="form-row-title mb-2 pr-3">
+                                                                            نقاط ضعف
+                                                                        </div>
+                                                                        <div id="disadvantages" class="form-row">
+                                                                            <div class="ui-input--add-point">
+                                                                                <input name="weak-points[]"
+                                                                                    class="input-ui pr-2 ui-input-field"
+                                                                                    type="text" id="disadvantage-input"
+                                                                                    autocomplete="off" value="">
+                                                                                <button
+                                                                                    class="ui-input-point js-icon-form-add"
+                                                                                    type="button"></button>
+                                                                            </div>
+                                                                            <div
+                                                                                class="form-comment-dynamic-labels js-disadvantages-list">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12 mt-3">
+                                                                        <div class="form-row-title mb-2">متن نظر شما
+                                                                            (اجباری)</div>
+                                                                        <div class="form-row">
+                                                                            <textarea class="input-ui pr-2 pt-2"
+                                                                                name="text" rows="5"
+                                                                                placeholder="متن خود را بنویسید"
+                                                                                style="height:120px;"></textarea>
+                                                                            @error('text')
+                                                                            <span
+                                                                                class="text-danger">{{ $message }}</span>
+                                                                            @enderror
+                                                                        </div>
+                                                                    </div>
+                                                                    <br>
+                                                                    <br>
+                                                                    <br>
+                                                                    <div class="col-12 mt-5 px-0">
+                                                                        <button class="btn comment-submit-button">
+                                                                            ثبت نظر
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end modal -->
+
 
 
 @push('scripts')
-
+@if(Session::get('errors'))
 <script>
+$(function() {
+    $('#comment-modal').modal('show');
+});
+</script>
+@endif
+<script>
+function setlable(e) {
+
+
+    if (e == "cost") {
+        var lable = $(".cost").val();
+    }
+    if (e == "quality") {
+        var lable = $(".quality").val();
+    }
+    if (e == "satisfaction") {
+        var lable = $(".satisfaction").val();
+    }
+
+
+
+    if (lable == 1) {
+        lable = "بد";
+    }
+    if (lable == 2) {
+        lable = "متوسط";
+    }
+    if (lable == 3) {
+        lable = "خوب";
+    }
+    if (lable == 4) {
+        lable = "خیلی خوب";
+    }
+    if (lable == 5) {
+        lable = "عالی";
+    }
+
+    if (e == "cost") {
+        $("#rangeva1").html(lable);
+    }
+    if (e == "quality") {
+        $("#rangeva2").html(lable);
+    }
+    if (e == "satisfaction") {
+        $("#rangeva3").html(lable);
+    }
+
+}
+
 $(document).ready(function(e) {
 
     let variation = JSON.parse($('#var-select').val());

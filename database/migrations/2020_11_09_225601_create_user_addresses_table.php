@@ -15,16 +15,20 @@ class CreateUserAddressesTable extends Migration
     {
         Schema::create('user_addresses', function (Blueprint $table) {
             $table->id();
-
+            $table->string('name');
+            $table->string('unit')->nullable();
+            $table->string('cellphone2');
+            $table->text('lastaddress'); 
+            
             $table->string('title');
-            $table->string('address');
+            $table->text('address');
             $table->string('postal_code');
 
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
 
             $table->bigInteger('province_id');
             $table->bigInteger('city_id');
-            $table->bigInteger('cellphone');
+            $table->string('cellphone');
 
             $table->string('longitude')->nullable();
             $table->string('latitude')->nullable();

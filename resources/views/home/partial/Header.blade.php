@@ -175,9 +175,13 @@
                                     @endif
                                 </li>
                                 @endforeach
+
                                 @if (!request()->routeIs('home.cart.index'))
+
                                 <li class="divider-space-card d-block">
+
                                     <div class="header-cart-basket">
+
                                         <a href="{{route('home.cart.index')}}" class="cart-basket-box">
                                             <span class="icon-cart">
                                                 <i class="mdi mdi-shopping"></i>
@@ -185,6 +189,8 @@
 
                                             <span class="count-cart"
                                                 id="count-cart">{{Cart::getContent()->count()}}</span>
+
+
                                         </a>
 
                                         <div class="widget-shopping-cart" id="widget-shopping-cart"
@@ -252,9 +258,14 @@
                                     </div>
                                 </li>
                                 @endif
+                                <a href="{{route('home.compare.index')}}" class="cart-basket-box">
+                                    <span>
+                                        <i class="fa fa-random ml-3 "
+                                            style="float: left; font-size: 1.7rem; color:#676767 ; margin: 1.2rem;">
+                                            <span style="font-size: 1rem;"></span>
+                                        </i>
+                                    </span></a>
                             </ul>
-
-
                         </div>
                     </div>
                 </nav>

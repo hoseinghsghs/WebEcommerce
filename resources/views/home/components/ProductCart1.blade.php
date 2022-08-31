@@ -5,7 +5,7 @@
             <ul>
                 <!-- علاقه مندی -->
                 @if (Auth::check())
-                @if ($Product_special->checkUserWishlist(1))
+                @if ($Product_special->checkUserWishlist(auth()->user()->id))
                 <li class="action-item like">
                     <button data-product="{{$Product_special->id}}" class="btn btn-link add-product-wishes active"
                         type="submit">

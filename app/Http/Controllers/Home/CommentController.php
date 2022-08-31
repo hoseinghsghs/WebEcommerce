@@ -12,18 +12,30 @@ use Illuminate\Support\Facades\Validator;
 
 class CommentController extends Controller
 {
-    public function store(Product $product , Request $request)
-    {
+    public function create(Request $request){
         
+        return view('home.page.comment.comments');
+        
+    }
+
+    public function store(Product $product , Request $request)
+
+{
         $validator = Validator::make($request->all(), [
             'text' => 'required|min:5|max:7000',
+            'comment.*.advantages.*' => 'min:5|max:7000',
+            'comment.*.disadvantages.*' => 'min:5|max:7000',
+           
+            // 'cost'=>'required|digits_between:0,5',
+            // 'quality'=>'required|digits_between:0,5',
+            // 'strengthss'=>'required|digits_between:0,5',
             // 'rate' => 'required|digits_between:0,5', 
         ]);
-
-        if ($validator->fails()) {
-            return redirect()->to(url()->previous() . '#respon')->withErrors($validator);
-        }
         
+        if ($validator->fails()) {
+            return redirect()->to(url()->previous())->withErrors($validator);
+        }
+
         if (auth()->check()) {
             try {
                 DB::beginTransaction();
@@ -32,24 +44,33 @@ class CommentController extends Controller
 
                     'user_id' => auth()->id(),
                     'text' => $request->text,
+                    
+                    'advantages' =>json_encode($request->comment['advantages']),
+                    'disadvantages' =>json_encode($request->comment['disadvantages']) ,
+
                     'commentable_id' => $product->id,
                     'commentable_type' => Product::class,
                  
                 ]);
                
 
-                // if ($product->rates()->where('user_id', auth()->id())->exists()) {
-                //     $productRate = $product->rates()->where('user_id', auth()->id())->first();
-                //     $productRate->update([
-                //         'rate' => $request->rate
-                //     ]);
-                // } else {
-                //     ProductRate::create([
-                //         'user_id' => auth()->id(),
-                //         'product_id' => $product->id,
-                //         'rate' => $request->rate
-                //     ]);
-                // }
+                if ($product->rates()->where('user_id', auth()->id())->exists()) {
+                    $productRate = $product->rates()->where('user_id', auth()->id())->first();
+                    $productRate->update([
+                        'cost'=>$request->cost,
+                        'quality'=>$request->quality,
+                        'satisfaction'=>$request->satisfaction,
+                    ]);
+                } else {
+                    ProductRate::create([
+                        'user_id' => auth()->id(),
+                        'product_id' => $product->id,
+                        'cost'=>$request->cost,
+                        'quality'=>$request->quality,
+                        'satisfaction'=>$request->satisfaction,
+                        
+                    ]);
+                }
 
                 DB::commit();
             } catch (\Exception $ex) {

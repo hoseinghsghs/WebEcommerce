@@ -56,6 +56,7 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request ,ToastrFactory $flasher)
     {
+        
         try {
             DB::beginTransaction();
 
@@ -87,7 +88,7 @@ class ProductController extends Controller
         }
 
         $productAttributeController = new ProductAttributeController();
-        $productAttributeController->store($request->attribute_ids, $product);
+        $productAttributeController->store($request->attribute_ids,$request-> $product);
 
         $category = Category::find($request->category_id);
         $productVariationController = new ProductVariationController();

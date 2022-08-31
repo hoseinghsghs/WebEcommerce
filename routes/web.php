@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\TransactionController;
@@ -25,6 +26,7 @@ use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Home\PaymentController;
 use App\Http\Controllers\Home\PostController as HomePostController;
 use App\Http\Controllers\Home\ProductController as HomeProductController;
+use App\Http\Controllers\Home\QuestionController as HomeQuestionController;
 use App\Http\Controllers\Home\UserProfileController;
 use App\Http\Controllers\Home\WishListController;
 use Illuminate\Support\Facades\Route;
@@ -85,10 +87,15 @@ Route::get('/products/{product:slug}', [HomeProductController::class, 'show'])->
 
 Route::get('/search/{slug?}', ProductsList::class)->name('home.products.search');
 Route::get('/main/{slug}', ProductsList::class)->name('home.products.index');
+
+//comments
+Route::get('home/question/{product}', [HomeCommentController::class, 'create'])->name('home.comments.index');
 Route::post('/comments/{product}', [HomeCommentController::class, 'store'])->name('home.comments.store');
-
-
 Route::post('/reply/store', [HomeCommentController::class, 'replyStore'])->name('reply.add');
+
+//questions
+Route::post('/question/{product}', [HomeQuestionController::class, 'store'])->name('home.question.store');
+Route::post('/question/reply/store', [HomeQuestionController::class, 'replyStore'])->name('question.reply.add');
 
 // otp auth
 Route::post('/auth/check',[OtpController::class,'authenticate'])->name('authenticate');
@@ -102,14 +109,18 @@ Route::get('/assets/ajax', function () {
 
 Route::prefix('profile')->name('home.')->middleware('auth')->group(function () {
   Route::get('/',[UserProfileController::class, 'index'])->name('user_profile');
+  Route::get('/editProfile',[UserProfileController::class, 'editProfile'])->name('user_profile.edit');
   Route::get('/wishlist',[WishListController::class, 'usersProfileIndex'])->name('profile.wishlist.index');
   Route::get('/add-to-wishlist/{product:id}', [WishListController::class, 'add'])->name('home.wishlist.add');
   Route::get('/addreses',  [AddressController::class, 'index'])->name('addreses.index');
+  Route::get('/addreses/create',  [AddressController::class, 'create'])->name('addreses.create');
   Route::post('/addreses', [AddressController::class, 'store'])->name('addreses.store');
   Route::get('/addreses/{address}', [AddressController::class, 'edit'])->name('addreses.edit');
   Route::put('/addreses/{address}', [AddressController::class, 'update'])->name('addreses.update');
   Route::get('/addreses/delete/{address}', [AddressController::class, 'destroy'])->name('addreses.destroy');
+  Route::get('/orders', [UserProfileController::class, 'orderList'])->name('user_profile.ordersList');
   Route::get('/orders/{order}', [UserProfileController::class, 'order'])->name('user_profile.orders');
+  Route::get('/commentsList', [UserProfileController::class, 'commentsList'])->name('user_profile.commentsList');
 });
 
 
@@ -129,7 +140,7 @@ Route::get('/cart', ShowCart::class)->name('home.cart.index');
 
 Route::get('/remove-from-cart/{rowId}', [CartController::class, 'remove'])->name('home.cart.remove');
 
-Route::get('/checkout', [CartController::class, 'checkout'])->name('home.orders.checkout');
+Route::get('/checkout', [CartController::class, 'checkout'])->name('home.orders.checkout')->middleware('auth');
 
 Route::post('/payment', [PaymentController::class, 'payment'])->name('home.payment');
 
@@ -141,7 +152,12 @@ Route::get('/payment-verify/{gatewayName}', [PaymentController::class, 'paymentV
 
 Route::get('/get-province-cities-list', [AddressController::class, 'getProvinceCitiesList']);
 
+//coupon
+Route::post('/checkcoupon', [PaymentController::class, 'checkCoupon'])->name('home.orders.checkcoupon')->middleware('auth');
+
+
 Route::get('/test', function(){
 
 Session::flush();
+
 } );

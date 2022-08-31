@@ -30,6 +30,7 @@ class CreateOrdersTable extends Migration
             $table->enum('payment_type' , ['pos' , 'cash' , 'shabaNumber' , 'cardToCard' , 'online']);
             $table->tinyInteger('payment_status')->default(0);
             $table->text('description')->nullable();
+            $table->text('description_error')->nullable();
 
             $table->timestamps();
         });

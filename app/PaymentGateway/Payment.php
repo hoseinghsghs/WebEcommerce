@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class Payment
 {
-    public function createOrder($addressId, $amounts, $token, $gateway_name)
+    public function createOrder($addressId, $amounts, $token, $gateway_name , $description)
     {
         try {
             DB::beginTransaction();
@@ -18,6 +18,7 @@ class Payment
             $order = Order::create([
                 'user_id' => auth()->id(),
                 'address_id' => $addressId,
+                'description' => $description,
                 'coupon_id' => session()->has('coupon') ? session()->get('coupon.id') : null,
                 'total_amount' => $amounts['total_amount'],
                 'delivery_amount' => $amounts['delivery_amount'],
@@ -51,7 +52,7 @@ class Payment
             return ['error' => $ex->getMessage()];
         }
 
-        return ['success' => 'success!'];
+        return ['success' => 'success!' , 'orderId' => $order->id];
     }
 
     public function updateOrder($token, $refId)
@@ -86,5 +87,13 @@ class Payment
         }
 
         return ['success' => 'success!'];
+    }
+    public function updateOrderErorr($token,$result)
+    {
+        $transaction = Transaction::where('token', $token)->firstOrFail();
+
+        $transaction->update([
+            'description_erorr' => $result
+        ]);
     }
 }

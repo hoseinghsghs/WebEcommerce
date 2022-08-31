@@ -23,6 +23,7 @@ class StoreProductRequest extends FormRequest
      */
     public function rules()
     {
+        
         return [
             'name' => 'required',
             'brand_id' => 'required',

@@ -30,7 +30,9 @@ class AddressController extends Controller
      */
     public function create()
     {
-        //
+        $addresses = UserAddress::where('user_id', auth()->id())->get();
+        $provinces = Province::all();
+        return view('home.page.users_profile.create_address', compact('provinces','addresses'));
     }
 
     /**
@@ -42,26 +44,34 @@ class AddressController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            
+            'name' => 'required',
             'title' => 'required',
             'cellphone' => 'required|ir_mobile:zero',
+            'cellphone2' => 'required|ir_mobile:zero',
             'province_id' => 'required',
             'city_id' => 'required',
             'address' => 'required',
+            'lastaddress' => 'required',
             'postal_code' => 'required|ir_postal_code:without_seprate'
         ]);
         
         UserAddress::create([
             'user_id' => auth()->id(),
             'title' => $request->title,
+            'name' => $request->name,
+            'unit' => $request->unit,
             'cellphone' => $request->cellphone,
+            'cellphone2' => $request->cellphone2,
             'province_id' => $request->province_id,
             'city_id' => $request->city_id,
             'address' => $request->address,
+            'lastaddress' => $request->address,
             'postal_code' => $request->postal_code
         ]);
 
         alert()->success('آدرس مورد نظر ایجاد شد', 'باتشکر');
-        return redirect()->back();
+        return redirect()->route('home.addreses.index');
         
     }
 
@@ -101,17 +111,25 @@ class AddressController extends Controller
     {
         
         $request->validate([
+            'name' => 'required',
             'title' => 'required',
+            'cellphone2' => 'required|ir_mobile:zero',
+            'lastaddress' => 'required',
             'cellphone' => 'required|ir_mobile:zero',
             'province_id' => 'required',
             'city_id' => 'required',
             'address' => 'required',
+            
             'postal_code' => 'required|ir_postal_code:without_seprate'
         ]);
 
        
 
         $address->update([
+            'name' => $request->name,
+            'cellphone2' => $request->cellphone2,
+            'lastaddress' => $request->address,
+            'unit' => $request->unit,
             'title' => $request->title,
             'cellphone' => $request->cellphone,
             'province_id' => $request->province_id,

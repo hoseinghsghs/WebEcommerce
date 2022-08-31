@@ -23,9 +23,8 @@
                                         <img src="/assets/home/images/shopping-cart.png">
                                     </div>
                                     <p class="cart-empty-title">سبد خرید شما در حال حاضر خالی است.</p>
-                                    <a href="#" class="btn account-btn btn-primary">ورود به حساب کاربری</a>
                                     <div class="return-to-shop">
-                                        <a href="#" class="backward btn btn-secondary">بازگشت به صفحه اصلی</a>
+                                        <a href="{{route('home')}}" class="backward btn btn-secondary">ادامه خرید</a>
                                     </div>
                                 </div>
                                 @else
@@ -54,9 +53,12 @@
                                                                 src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$item->associatedModel->primary_image)}}">
                                                         </a>
                                                         <div class="product-remove">
-                                                            <a href="#" class="remove"
-                                                                wire:click="delete('{{$item->id}}')">
-                                                                <i class="mdi mdi-close"></i>
+                                                            <a class="remove" wire:click="delete('{{$item->id}}')">
+                                                                <i class="mdi mdi-close" wire:loading.remove
+                                                                    wire:target="delete('{{$item->id}}')"></i>
+                                                                <i class="fa fa-circle-o-notch fa-spin" wire:loading
+                                                                    wire:target="delete('{{$item->id}}')"></i>
+
                                                             </a>
                                                         </div>
                                                     </div>
@@ -184,26 +186,18 @@
 
                                                 <li class="discount-code">
                                                     <div class=" align-items-center">
-                                                        <div class="col-md-7 pr mt-5">
-                                                            <div class="coupon">
-                                                                <form class="coupon" wire:submit.prevent="checkCoupon">
-                                                                    <input type="text" name="input-coupon"
-                                                                        wire:model.defer="code"
-                                                                        class="input-coupon-code"
-                                                                        placeholder="كد تخفیف:">
 
-                                                                    <button class="btn btn-coupon"
-                                                                        type="submit">اعمال</button>
-
-                                                                </form>
-                                                                @error('code') <span
-                                                                    class="text-danger">{{ $message }}</span>
-                                                                @enderror
-                                                            </div>
-                                                        </div>
                                                         <div class="col-md-2 pl mt-5">
                                                             <div class="proceed-to-checkout">
-                                                                <a href="#" class="checkout-button d-block">تسویه
+                                                                <a wire:click="clearCart()"
+                                                                    class="checkout-button d-block">پاک کردن سبد</a>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-2 pl mt-5">
+                                                            <div class="proceed-to-checkout">
+                                                                <a href="{{route('home.orders.checkout')}}"
+                                                                    class="checkout-button d-block">تسویه
                                                                     حساب</a>
                                                             </div>
                                                         </div>
