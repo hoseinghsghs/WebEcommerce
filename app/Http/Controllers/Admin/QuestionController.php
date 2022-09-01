@@ -3,18 +3,22 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Question;
+use Flasher\Toastr\Prime\ToastrFactory;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $questions = Question::latest()->paginate(10);
+
+        return view('admin.page.questions.index', compact('questions'));
     }
 
     /**
@@ -33,10 +37,23 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, ToastrFactory $flasher)
     {
-        //
-    }
+        $request->validate([
+            'text' => 'required',
+        ]);
+    
+        Question::create([
+            'parent_id' => $request->question_id,
+            'user_id' => auth()->id(),
+            'text' => $request->text,
+            'product_id' => $request->product_id,
+
+
+        ]);
+        
+        $flasher->addSuccess('تغییرات با موفقیت ذخیره شد');
+        return redirect()->route('admin.questions.index');    }
 
     /**
      * Display the specified resource.
@@ -55,9 +72,9 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Question $question)
     {
-        //
+        return view('admin.page.questions.edit' , compact('question'));
     }
 
     /**
@@ -67,9 +84,24 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Question $question ,ToastrFactory $flasher)
     {
-        //
+        $request->validate([
+            'text' => 'required|min:5',
+        ]);
+        try {
+                $question->update([
+                    "text" => $request->text
+                ]); 
+
+                $flasher->addSuccess('تغییرات با موفقیت ذخیره شد');
+                return redirect()->route('admin.questions.index');
+        } 
+        
+        catch (\Throwable $th) {
+            $flasher->addError('مشکل در تغییر');
+            return redirect()->route('admin.questions.index');
+        }
     }
 
     /**
@@ -78,8 +110,11 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Question $question,ToastrFactory $flasher)
     {
-        //
+        $question->delete();
+        $flasher->addSuccess('کامنت مورد نظر حذف شد');
+        return back();
+
     }
 }

@@ -54,18 +54,12 @@
                                 <div class="form-group">
                                     <div class="form-line">
                                         <label class="form-label">توضیحات</label>
-                                        <textarea name="body" rows="4" class="form-control" minlength="5"
-                                            required>{{ old('body') }}</textarea>
+                                        <textarea name="body" rows="4" class="form-control" id="summernote"
+                                            minlength="5" required>{{ old('body') }}</textarea>
                                     </div>
                                 </div>
 
-                                <div class="card">
-                                    <div class="body">
-                                        <div class="summernote">
 
-                                        </div>
-                                    </div>
-                                </div>
 
                                 <div class="form-group ">
                                     <label class="form-label">آپلود عکس</label>
@@ -96,12 +90,3 @@
     </div>
 </section>
 @endsection
-
-@push('styles')
-<link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
-<link rel="stylesheet" href="/assets/summernote/dist/summernote.css" />
-@endpush
-
-@push('scripts')
-<script src="/assets/summernote/dist/summernote.js"></script>
-@endpush

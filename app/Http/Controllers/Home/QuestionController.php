@@ -29,7 +29,7 @@ class QuestionController extends Controller
             try {
                 DB::beginTransaction();
 
-                Comment::create([
+                Question::create([
 
                     'user_id' => auth()->id(),
                     'text' => $request->text,
@@ -40,7 +40,7 @@ class QuestionController extends Controller
                 DB::commit();
             } catch (\Exception $ex) {
                 DB::rollBack();
-                alert()->error('مشکل در ایجاد پست', $ex->getMessage())->persistent('حله');
+                alert()->error('مشکل در ایجاد پرسش و پاسخ', $ex->getMessage())->persistent('حله');
                 return redirect()->back();
             }
 

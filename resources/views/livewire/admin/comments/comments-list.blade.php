@@ -45,7 +45,6 @@
                                     <th>نوشته توسط</th>
                                     <th>تاریخ</th>
                                     <th>نام محصول</th>
-                                    <th>امتیاز</th>
                                     <th>تعداد پاسخ ها</th>
                                     <th>وضعیت</th>
                                     <th>
@@ -73,17 +72,7 @@
                                         </a>
 
                                     </td>
-                                    <td>
-                                        @if (isset($comment->user->rate))
-                                        <div data-rating-stars="5" data-rating-readonly="true"
-                                            data-rating-value="{{ceil($comment->user->rate->first()->rate)}}">
-                                        </div>
-                                        @else
-                                        <div data-rating-stars="5" data-rating-readonly="true" data-rating-value="0">
-                                        </div>
-                                        @endif
 
-                                    </td>
                                     <td>
                                         <span class="badge badge-success p-2">{{$comment->appro(1)->count()}}</span>
                                         @if ($comment->appro(0)->count() > 0)

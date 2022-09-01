@@ -25,6 +25,8 @@ require("../assets/admin/plugins/select2/select2.min.js");
 require("../assets/admin/plugins/nestable/nestable-rtl");
 
 require("../assets/admin/bundles/mainscripts.bundle");
+require("../assets/admin/plugins/smnote/summernote-lite.min.js");
+
 require("../assets/admin/js/pages/ui/sweetalert.js");
 require("../assets/admin/js/pages/forms/form-validation.js");
 // require("../assets/admin/js/pages/index.js");

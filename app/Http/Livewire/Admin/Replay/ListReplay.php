@@ -3,12 +3,13 @@
 namespace App\Http\Livewire\Admin\Replay;
 
 use App\Models\Comment;
+use App\Models\Question;
 use Livewire\Component;
 
 class ListReplay extends Component
 {
 
-public $comment;
+public $question;
 public $title;
 public $color;
 public $text_log;
@@ -20,13 +21,13 @@ protected $listeners = [
 
 
        
-public function ChengeActive(Comment $comment){
-    if($comment->approved == 1){
+public function ChengeActive(Question $question){
+    if($question->approved == 1){
         
-        $comment->update([
+        $question->update([
             "approved"=> 0
            ]);
-           toastr()->livewire()->addError('عدم انتشار'. $comment->id);
+           toastr()->livewire()->addError('عدم انتشار'. $question->id);
            $this->title="عدم انتشار";
            $this->color="danger";
            $this->text_log="عدم انتشار";
@@ -34,10 +35,10 @@ public function ChengeActive(Comment $comment){
 
     }else{
         
-        $comment->update([
+        $question->update([
             "approved"=> 1
            ]);
-           toastr()->livewire()->addSuccess('انتشار' . $comment->id);
+           toastr()->livewire()->addSuccess('انتشار' . $question->id);
            $this->title="انتشار";
            $this->color="success";
            $this->text_log="انتشار";
@@ -50,9 +51,9 @@ public function ChengeActive(Comment $comment){
     {
         return view('livewire.admin.replay.list-replay');
     }
-    public function delcomment(Comment $comment){
+    public function delquestion(Question $question){
 
-        $this->comment=$comment;
+        $this->question=$question;
           sweetAlert()
           ->livewire()
           ->showDenyButton(true,'انصراف')->confirmButtonText("تایید")
@@ -64,7 +65,7 @@ public function ChengeActive(Comment $comment){
        
        public function sweetAlertConfirmed(array $data)
        { 
-          $this->comment->delete();
+          $this->question->delete();
           toastr()->livewire()->addSuccess('نظر با موفقیت حذف شد');
        }
 }

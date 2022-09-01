@@ -41,6 +41,10 @@
                 @endforeach
                 <div class="card">
                     <div class="body">
+                        <div class="header p-0">
+                            <h2><strong>مشخصات</strong></h2>
+                        </div>
+                        <hr>
                         <form id="form_advanced_validation" class="needs-validation"
                             action={{route('admin.comments.update',$comment->id)}} method="POST"
                             enctype="multipart/form-data">
@@ -76,7 +80,7 @@
                                 <div class="col-md-12">
                                     <label for="text">دیدگاه</label>
                                     <div class="form-group">
-                                        <textarea name="text" id="text" minlength="5" required
+                                        <textarea name="text" id="summernote2" minlength="3" required
                                             class="form-control">{{old('text') ?? $comment->text}}</textarea>
                                     </div>
                                 </div>
@@ -86,6 +90,131 @@
                             </div>
                         </form>
 
+                        <div class="row clearfix">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="card">
+                                    <div class="body">
+
+                                        <div class="header p-0">
+                                            <h2><strong>نظر خریدار</strong></h2>
+                                        </div>
+                                        <hr>
+
+                                        @if (isset($comment->user->rate->cost))
+                                        <span class="cell-title">ارزش خرید
+                                            :</span>
+                                        <div class="progress m-b-5 my-2 mb-4">
+                                            <div class="progress-bar progress-bar-success progress-bar-striped"
+                                                role="progressbar" aria-valuenow="40" aria-valuemin="0"
+                                                aria-valuemax="100"
+                                                style="width: {{(ceil($comment->user->rate->first()->cost)*100)/5}}%;">
+                                                <span
+                                                    class="sr-only">{{(ceil($comment->user->rate->first()->cost)*100)/5}}%;
+                                                </span>
+                                            </div>
+                                        </div>
+                                        @else
+                                        <span class="cell-title">ارزش خرید
+                                            :</span>
+                                        <div class="rating-value" style="width: 0%;">
+                                        </div>
+                                        @endif
+
+                                        @if (isset($comment->user->rate->quality))
+                                        <span class="cell-title">کیفیت
+                                            :</span>
+                                        <div class="progress m-b-5 my-2 mb-4">
+                                            <div class="progress-bar progress-bar-info progress-bar-striped"
+                                                role="progressbar" aria-valuenow="40" aria-valuemin="0"
+                                                aria-valuemax="100"
+                                                style="width: {{(ceil($comment->user->rate->first()->quality)*100)/5}}%;">
+                                                <span
+                                                    class="sr-only">{{(ceil($comment->user->rate->first()->quality)*100)/5}}%;
+
+                                                    (میزان رضایت)</span>
+                                            </div>
+                                        </div>
+                                        @else
+                                        <span class="cell-title">کیفیت
+                                            :</span>
+                                        <div class="rating-value" style="width: 0%;">
+                                        </div>
+                                        @endif
+
+                                        @if (isset($comment->user->rate->satisfaction))
+                                        <span class="cell-title">میزان رضایت کلی از محصول
+                                            :</span>
+                                        <div class="progress m-b-5 my-2 mb-4">
+                                            <div class="progress-bar progress-bar-warning progress-bar-striped"
+                                                role="progressbar" aria-valuenow="40" aria-valuemin="0"
+                                                aria-valuemax="100"
+                                                style="width: {{(ceil($comment->user->rate->first()->satisfaction)*100)/5}}%;">
+                                                <span
+                                                    class="sr-only">{{(ceil($comment->user->rate->first()->satisfaction)*100)/5}}%;
+
+                                                    (میزان رضایت)</span>
+                                            </div>
+                                        </div>
+                                        @else
+                                        <span class="cell-title">میزان رضایت کلی از محصول
+                                            :</span>
+                                        <div class="rating-value" style="width: 0%;">
+                                        </div>
+                                        @endif
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="card">
+                                    <span class="text-success">نقاط قوت :</span>
+                                    <div class="body">
+                                        <ul class="list-group">
+                                            @php
+                                            $comment['advantages'] =
+                                            json_decode($comment->advantages);
+                                            @endphp
+                                            @foreach ($comment->advantages as $item )
+                                            <li class="list-group-item">
+                                                {{ $item }}
+                                            </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row clearfix">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="card">
+                                    <span class="text-danger">نقاط ضعف :</span>
+                                    <div class="body">
+                                        <ul class="list-group">
+                                            @php
+                                            $comment['disadvantages'] =
+                                            json_decode($comment->disadvantages);
+                                            @endphp
+                                            @foreach ($comment->disadvantages as $item )
+                                            <li class="list-group-item ">
+                                                {{ $item }}
+                                            </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="header p-0">
+                            <h2><strong>پاسخ ها</strong></h2>
+                        </div>
+                        <hr>
                         <form
                             action="{{route('admin.comments.store' , ['comment_id' => $comment->id , 'product_id' => $comment->commentable_id])}}"
                             id="form_advanced_validation" class="needs-validation" method="POST">
@@ -94,7 +223,7 @@
                                 <div class="col-md-12">
                                     <label for="text">دیدگاه</label>
                                     <div class="form-group">
-                                        <textarea name="text" id="text" minlength="5" required
+                                        <textarea name="text" id="summernote" minlength="5" required
                                             placeholder="پاسخ ادمین...." class="form-control"></textarea>
                                     </div>
                                 </div>
@@ -103,8 +232,6 @@
                                     پاسخ به این سوال </button>
                             </div>
                         </form>
-
-                        <h5>پاسخ ها</h5>
                         <hr>
                         @foreach ($comment->replies as $comment)
 
@@ -136,4 +263,5 @@
 
 </section>
 @endsection
+@flasher_render
 @flasher_render

@@ -4,7 +4,7 @@
 <div class="container-main">
     <div class="d-block">
         <div class="page-content page-row">
-            <div class="main-row">
+            <div class="main-row p-0">
                 <div id="breadcrumb">
                     <i class="mdi mdi-home"></i>
                     <nav aria-label="breadcrumb">
@@ -428,45 +428,32 @@
                                         <div class="comments-summary-box">
                                             <ul class="comments-item-rating">
                                                 <li>
-                                                    <span class="cell-title">کیفیت ساخت:</span>
-                                                    <span class="cell-value">خوب</span>
+                                                    <span class="cell-title">ارزش خرید نسبت به قیمت
+                                                        :</span>
+                                                    <span class="cell-value"></span>
                                                     <div class="rating-general">
-                                                        <div class="rating-value"></div>
+                                                        <div class="rating-value"
+                                                            style="width: {{(ceil($product->rates->avg('cost'))*100)/5}}%;">
+                                                        </div>
                                                     </div>
                                                 </li>
                                                 <li>
-                                                    <span class="cell-title">ارزش خرید به نسبت قیمت:</span>
-                                                    <span class="cell-value">خوب</span>
+                                                    <span class="cell-title">کیفیت:</span>
+                                                    <span class="cell-value"></span>
                                                     <div class="rating-general">
-                                                        <div class="rating-value"></div>
+                                                        <div class="rating-value"
+                                                            style="width: {{(ceil($product->rates->avg('quality'))*100)/5}}%;">
+                                                        </div>
                                                     </div>
                                                 </li>
                                                 <li>
-                                                    <span class="cell-title">نوآوری:</span>
-                                                    <span class="cell-value">خوب</span>
+                                                    <span class="cell-title">میزان رضایت کلی از محصول
+                                                        :</span>
+                                                    <span class="cell-value"></span>
                                                     <div class="rating-general">
-                                                        <div class="rating-value" style="width: 70%;"></div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <span class="cell-title">امکانات و قابلیت ها:</span>
-                                                    <span class="cell-value">متوسط</span>
-                                                    <div class="rating-general">
-                                                        <div class="rating-value" style="width: 65%;"></div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <span class="cell-title">سهولت استفاده:</span>
-                                                    <span class="cell-value">خوب</span>
-                                                    <div class="rating-general">
-                                                        <div class="rating-value" style="width: 75%;"></div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <span class="cell-title">طراحی و ظاهر:</span>
-                                                    <span class="cell-value">خوب</span>
-                                                    <div class="rating-general">
-                                                        <div class="rating-value"></div>
+                                                        <div class="rating-value"
+                                                            style="width: {{(ceil($product->rates->avg('satisfaction'))*100)/5}}%;">
+                                                        </div>
                                                     </div>
                                                 </li>
                                             </ul>
@@ -482,26 +469,44 @@
                                                 شما به عنوان مالک محصول ثبت خواهد شد.
                                             </p>
 
+                                            @if (auth()->user())
+                                            @foreach ( auth()->user()->orders as $order)
+                                            @php
+                                            $cheak_item=App\Models\OrderItem::where('order_id' ,
+                                            $order->id)->where('product_id'
+                                            , $product->id)->first();
+                                            @endphp
+                                            @endforeach
+                                            @if ($cheak_item)
                                             <button type="button" class="btn-add-comment btn btn-secondary"
                                                 data-toggle="modal" data-target="#comment-modal">
                                                 ارسال نظر
                                             </button>
+                                            @endif
+                                            @endif
+
+
 
                                         </div>
                                     </div>
                                     <div class="product-comment-list">
                                         <ul class="comment-list">
+                                            @foreach ($product->approvedComments as $comment )
                                             <li>
                                                 <div class="col-lg-3 pr">
                                                     <section>
-                                                        <div class="comments-user-shopping">حسن شجاعی
+                                                        <div class="comments-user-shopping">
+
+                                                            {{$comment->user->name == " " ? "بدون نام" : $comment->user->phone }}
                                                             <div class="cell-date">
-                                                                در تاریخ ۱۸ فروردین ۱۳۹۹
+                                                                {{Hekmatinasser\Verta\Verta::instance($comment->created_at)->format('Y/n/j')}}
                                                             </div>
-                                                            <div class="message-light"><i
-                                                                    class="fa fa-thumbs-o-up"></i>خرید این
-                                                                محصول را
-                                                                توصیه می‌کنم</div>
+
+                                                            <span data-rating-stars="5" data-rating-readonly="true"
+                                                                data-rating-value="{{ceil($comment->commentable->rates->avg('satisfaction'))}}">
+                                                            </span>
+
+
                                                         </div>
                                                     </section>
                                                 </div>
@@ -509,141 +514,49 @@
                                                     <div class="article">
                                                         <ul class="comment-text">
                                                             <div class="header">
-                                                                <div>بهتر از آیفون</div>
-                                                                <div class="product-rate pl">
-                                                                    <i class="fa fa-star active"></i>
-                                                                    <i class="fa fa-star active"></i>
-                                                                    <i class="fa fa-star active"></i>
-                                                                    <i class="fa fa-star active"></i>
-                                                                    <i class="fa fa-star active"></i>
-                                                                </div>
-                                                                <p>در کل سامسونگ کاربردی تر از آیفون هست ولی از نظر
-                                                                    کیفیت تصویر و سرعت آیفون بهتره و کلاس!</p>
+                                                                <div>{{$comment->title}}</div>
+
+                                                                <p>{{$comment->text}}</p>
                                                             </div>
                                                             <div class="comments-evaluation">
                                                                 <div class="comments-evaluation-positive">
                                                                     <span>نقاط قوت</span>
                                                                     <ul>
+                                                                        @php
+                                                                        $comment['advantages'] =
+                                                                        json_decode($comment->advantages);
+                                                                        @endphp
+                                                                        @foreach ($comment->advantages as $item )
                                                                         <li>
-                                                                            سبک
+                                                                            {{ $item }}
                                                                         </li>
-                                                                        <li>
-                                                                            سرعت پردازش بالا
-                                                                        </li>
-                                                                        <li>
-                                                                            خوش دست
-                                                                        </li>
-                                                                        <li>
-                                                                            صفحه نمایش عالی
-                                                                        </li>
+                                                                        @endforeach
+
+
                                                                     </ul>
                                                                 </div>
                                                                 <div class="comments-evaluation-negative">
-                                                                    <span>نقاط قوت</span>
+                                                                    <span>نقاط ضعف</span>
                                                                     <ul>
+                                                                        @php
+                                                                        $comment['disadvantages'] =
+                                                                        json_decode($comment->disadvantages);
+                                                                        @endphp
+                                                                        @foreach ($comment->disadvantages as $item )
                                                                         <li>
-                                                                            قیمت زیاد
+                                                                            {{ $item }}
                                                                         </li>
-                                                                        <li>
-                                                                            باطری ضعیف
-                                                                        </li>
+                                                                        @endforeach
+
                                                                     </ul>
                                                                 </div>
-                                                                <div class="footer">
-                                                                    <div class="comments-likes">آیا این نظر برایتان
-                                                                        مفید بود؟
-                                                                        <button class="btn-like js-comment-like"
-                                                                            type="submit">بله
-                                                                            <span class="count">8</span>
-                                                                        </button>
-                                                                        <button class="btn-like js-comment-dislike"
-                                                                            type="submit">خیر
-                                                                            <span class="count">4</span>
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
+
                                                             </div>
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li>
-                                                <div class="col-lg-3 pr">
-                                                    <section>
-                                                        <div class="comments-user-shopping">جلال بهرامی راد
-                                                            <div class="cell-date">
-                                                                در تاریخ ۱۹ فروردین ۱۳۹۹
-                                                            </div>
-                                                            <div class="message-light"><i
-                                                                    class="fa fa-thumbs-o-up"></i>خرید این
-                                                                محصول را
-                                                                توصیه می‌کنم</div>
-                                                        </div>
-                                                    </section>
-                                                </div>
-                                                <div class="col-lg-9 pl">
-                                                    <div class="article">
-                                                        <ul class="comment-text">
-                                                            <div class="header">
-                                                                <div>عالی و صدرصد بهتر از اپل</div>
-                                                                <div class="product-rate pl">
-                                                                    <i class="fa fa-star active"></i>
-                                                                    <i class="fa fa-star active"></i>
-                                                                    <i class="fa fa-star active"></i>
-                                                                    <i class="fa fa-star active"></i>
-                                                                    <i class="fa fa-star active"></i>
-                                                                </div>
-                                                                <p>عالییه بنظرمن اونایی که میرن پول گوشی های ایفون
-                                                                    با اون قیمت رو میدن با استفاده از این گوشی باید
-                                                                    نظرشونو عوض کنن</p>
-                                                            </div>
-                                                            <div class="comments-evaluation">
-                                                                <div class="comments-evaluation-positive">
-                                                                    <span>نقاط قوت</span>
-                                                                    <ul>
-                                                                        <li>
-                                                                            سبک
-                                                                        </li>
-                                                                        <li>
-                                                                            سرعت پردازش بالا
-                                                                        </li>
-                                                                        <li>
-                                                                            خوش دست
-                                                                        </li>
-                                                                        <li>
-                                                                            صفحه نمایش عالی
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="comments-evaluation-negative">
-                                                                    <span>نقاط قوت</span>
-                                                                    <ul>
-                                                                        <li>
-                                                                            قیمت زیاد
-                                                                        </li>
-                                                                        <li>
-                                                                            باطری ضعیف
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="footer">
-                                                                    <div class="comments-likes">آیا این نظر برایتان
-                                                                        مفید بود؟
-                                                                        <button class="btn-like js-comment-like"
-                                                                            type="submit">بله
-                                                                            <span class="count">8</span>
-                                                                        </button>
-                                                                        <button class="btn-like js-comment-dislike"
-                                                                            type="submit">خیر
-                                                                            <span class="count">4</span>
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>
@@ -664,7 +577,7 @@
                                 @endforeach
                                 @endif
 
-                                <form action="{{route('home.comments.store' , ['product' => $product->id])}}"
+                                <form action="{{route('home.questions.store' , ['product' => $product->id])}}"
                                     method="POST" class="review-form">
                                     @csrf
                                     <div class="form-faq-row mt-4">
@@ -713,7 +626,7 @@
                                     </div>
                                 </form>
                                 <div id="product-questions-list">
-                                    @foreach ($product->approvedComments as $comment )
+                                    @foreach ($product->approvedQuestions as $question )
                                     <div class="questions-list mb-2">
                                         <ul class="faq-list">
                                             <li class="is-question">
@@ -722,14 +635,15 @@
                                                         <span class="icon-faq">?</span>
                                                         <p class="h5">
                                                             پرسش :
-                                                            <span>{{$comment->user->name == null ? "بدون نام" : $comment->user->name }}</span>
+                                                            <span>{{$question->user->name == null ? "بدون نام" : $question->user->name }}</span>
                                                         </p>
+                                                        <p>{{$question->text}}</p>
                                                     </div>
-                                                    <p>{{$comment->text}}</p>
+
                                                     <div class="faq-date">
-                                                        <em>{{Hekmatinasser\Verta\Verta::instance($comment->created_at)->format('Y/n/j')}}</em>
+                                                        <em>{{Hekmatinasser\Verta\Verta::instance($question->created_at)->format('Y/n/j')}}</em>
                                                     </div>
-                                                    <a onclick="reply('{{$comment->id}}')" class="btn btn-link" style="
+                                                    <a onclick="reply('{{$question->id}}')" class="btn btn-link" style="
                                                         color: #24c0df;
                                                         padding: 0;
                                                         line-height: 2;
@@ -747,8 +661,8 @@
                                         </ul>
                                     </div>
                                     <form style="margin-right: 4rem;margin-left: 4px;display: none;"
-                                        id="reply-form-{{$comment->id}}"
-                                        action="{{route('reply.add' , ['product' => $product->id , 'comment' => $comment->id])}}"
+                                        id="reply-form-{{$question->id}}"
+                                        action="{{route('questions.reply.add' , ['product' => $product->id , 'question' => $question->id])}}"
                                         method="POST" class="review-form ">
                                         @csrf
 
@@ -765,10 +679,35 @@
 
 
                                     </form>
-                                    @foreach ($comment->replies as $reply)
+                                    @foreach ($question->replies as $reply)
                                     @if ($reply->approved == 1)
                                     <div class="questions-list answer-questions">
                                         <ul class="faq-list">
+                                            <li class="is-question">
+                                                <div class="section">
+                                                    <div class="faq-header">
+                                                        <span class="icon-faq"><i class="mdi mdi-storefront"></i></span>
+                                                        <p class="h5">
+                                                            پاسخ فروشنده :
+                                                            <span>{{$reply->user->name == null ? "بدون نام" : $reply->user->name }}</span>
+                                                        </p>
+                                                    </div>
+                                                    <div style="word-wrap: break-word;">
+                                                        <p>{{$reply->text}}</p>
+                                                    </div>
+
+                                                    <div class="faq-date">
+                                                        <em>{{Hekmatinasser\Verta\Verta::instance($reply->created_at)->format('Y/n/j')}}</em>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+                                    <div class="questions-list answer-questions" style="width: 89% !important;">
+                                        <ul class="faq-list">
+                                            @foreach ($reply->replies as $reply)
+                                            @if ($reply->approved == 1)
                                             <li class="is-question">
                                                 <div class="section">
                                                     <div class="faq-header">
@@ -784,6 +723,8 @@
                                                     </div>
                                                 </div>
                                             </li>
+                                            @endif
+                                            @endforeach
                                         </ul>
                                     </div>
                                     @endif

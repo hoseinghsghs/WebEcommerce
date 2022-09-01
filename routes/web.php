@@ -33,6 +33,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Admin\Tags\TagControll;
 use App\Http\Livewire\Home\Cart\ShowCart;
 use App\Http\Livewire\Home\ProductsList;
+use App\Models\Question;
 use Illuminate\Support\Facades\Session;
 
 //admin routes
@@ -46,6 +47,7 @@ Route::prefix('Admin-panel/managment')->name('admin.')->middleware(['auth','has_
     Route::resource('services',         ServiceController::class)->except(['show'])->middleware('permission:services');
     Route::resource('posts',            PostController::class)->except('show')->middleware('permission:posts');
     Route::resource('comments',         CommentController::class)->middleware('permission:comments');
+    Route::resource('questions',         QuestionController::class)->middleware('permission:questions');
     Route::resource('coupons',          CouponController::class)->middleware('permission:coupons');
     Route::resource('products',         ProductController::class)->middleware('permission:products');
     Route::resource('orders',           OrderController::class)->middleware('permission:orders');
@@ -94,8 +96,8 @@ Route::post('/comments/{product}', [HomeCommentController::class, 'store'])->nam
 Route::post('/reply/store', [HomeCommentController::class, 'replyStore'])->name('reply.add');
 
 //questions
-Route::post('/question/{product}', [HomeQuestionController::class, 'store'])->name('home.question.store');
-Route::post('/question/reply/store', [HomeQuestionController::class, 'replyStore'])->name('question.reply.add');
+Route::post('/question/{product}', [HomeQuestionController::class, 'store'])->name('home.questions.store');
+Route::post('/question/reply/store', [HomeQuestionController::class, 'replyStore'])->name('questions.reply.add');
 
 // otp auth
 Route::post('/auth/check',[OtpController::class,'authenticate'])->name('authenticate');
