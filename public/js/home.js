@@ -708,31 +708,31 @@ $(document).ready(function (e) {
     $(".custom-select-ui select").niceSelect();
   } // nice-select-----------------------------------
   //    price-range--------------------------------
-
-
-  var nonLinearStepSlider = document.getElementById("slider-non-linear-step");
-
-  if ($("#slider-non-linear-step").length) {
-    noUiSlider.create(nonLinearStepSlider, {
-      start: [0, 5000000],
-      connect: true,
-      direction: "rtl",
-      format: wNumb({
-        decimals: 0,
-        thousand: ","
-      }),
-      range: {
-        min: [0],
-        "10%": [500, 500],
-        "50%": [40000, 1000],
-        max: [10000000]
-      }
-    });
-    var nonLinearStepSliderValueElement = document.getElementById("slider-non-linear-step-value");
-    nonLinearStepSlider.noUiSlider.on("update", function (values) {
-      nonLinearStepSliderValueElement.innerHTML = values.join(" - ");
-    });
-  } //    price-range--------------------------
+  // var nonLinearStepSlider = document.getElementById("slider-non-linear-step");
+  // if ($("#slider-non-linear-step").length) {
+  //     noUiSlider.create(nonLinearStepSlider, {
+  //         start: [0, 5000000],
+  //         connect: true,
+  //         direction: "rtl",
+  //         format: wNumb({
+  //             decimals: 0,
+  //             thousand: ",",
+  //         }),
+  //         range: {
+  //             min: [0],
+  //             "10%": [500, 500],
+  //             "50%": [40000, 1000],
+  //             max: [10000000],
+  //         },
+  //     });
+  //     var nonLinearStepSliderValueElement = document.getElementById(
+  //         "slider-non-linear-step-value"
+  //     );
+  //     nonLinearStepSlider.noUiSlider.on("update", function (values) {
+  //         nonLinearStepSliderValueElement.innerHTML = values.join(" - ");
+  //     });
+  // }
+  //    price-range--------------------------
   //    quantity-selector--------------------
 
 
@@ -22953,9 +22953,8 @@ __webpack_require__(/*! ../assets/home/js/vendor/ResizeSensor.min.js */ "./resou
 
 __webpack_require__(/*! ../assets/home/js/vendor/theia-sticky-sidebar.min.js */ "./resources/assets/home/js/vendor/theia-sticky-sidebar.min.js");
 
-__webpack_require__(/*! ../assets/home/js/vendor/wNumb.js */ "./resources/assets/home/js/vendor/wNumb.js");
-
-__webpack_require__(/*! ../assets/home/js/vendor/nouislider.min.js */ "./resources/assets/home/js/vendor/nouislider.min.js");
+window.wNumb = __webpack_require__(/*! ../assets/home/js/vendor/wNumb.js */ "./resources/assets/home/js/vendor/wNumb.js");
+window.noUiSlider = __webpack_require__(/*! ../assets/home/js/vendor/nouislider.min.js */ "./resources/assets/home/js/vendor/nouislider.min.js");
 
 __webpack_require__(/*! ../assets/home/js/vendor/jquery.nice-select.min.js */ "./resources/assets/home/js/vendor/jquery.nice-select.min.js");
 

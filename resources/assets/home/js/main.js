@@ -668,32 +668,32 @@ $(document).ready(function (e) {
     }
     // nice-select-----------------------------------
     //    price-range--------------------------------
-    var nonLinearStepSlider = document.getElementById("slider-non-linear-step");
+    // var nonLinearStepSlider = document.getElementById("slider-non-linear-step");
 
-    if ($("#slider-non-linear-step").length) {
-        noUiSlider.create(nonLinearStepSlider, {
-            start: [0, 5000000],
-            connect: true,
-            direction: "rtl",
-            format: wNumb({
-                decimals: 0,
-                thousand: ",",
-            }),
-            range: {
-                min: [0],
-                "10%": [500, 500],
-                "50%": [40000, 1000],
-                max: [10000000],
-            },
-        });
-        var nonLinearStepSliderValueElement = document.getElementById(
-            "slider-non-linear-step-value"
-        );
+    // if ($("#slider-non-linear-step").length) {
+    //     noUiSlider.create(nonLinearStepSlider, {
+    //         start: [0, 5000000],
+    //         connect: true,
+    //         direction: "rtl",
+    //         format: wNumb({
+    //             decimals: 0,
+    //             thousand: ",",
+    //         }),
+    //         range: {
+    //             min: [0],
+    //             "10%": [500, 500],
+    //             "50%": [40000, 1000],
+    //             max: [10000000],
+    //         },
+    //     });
+    //     var nonLinearStepSliderValueElement = document.getElementById(
+    //         "slider-non-linear-step-value"
+    //     );
 
-        nonLinearStepSlider.noUiSlider.on("update", function (values) {
-            nonLinearStepSliderValueElement.innerHTML = values.join(" - ");
-        });
-    }
+    //     nonLinearStepSlider.noUiSlider.on("update", function (values) {
+    //         nonLinearStepSliderValueElement.innerHTML = values.join(" - ");
+    //     });
+    // }
     //    price-range--------------------------
 
     //    quantity-selector--------------------
