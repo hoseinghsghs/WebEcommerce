@@ -26,7 +26,7 @@ class ViewServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer('home.partial.Header', function($view) {
-            $categories = Category::all();
+            $categories = Category::where('parent_id', 0)->where('is_active', 1)->get();
             $view->with([
                 'categories' => $categories,
             ]);

@@ -25,7 +25,7 @@ class Product extends Model
 
     public function scopeActive($query)
     {
-        return $query->where('is_active', true);
+        return $query->where('products.is_active', true);
     }
 
     /**
@@ -146,7 +146,7 @@ class Product extends Model
             $query->where('category_id', $filters['category']);
         }
 
-        if ($filters['price']['low'] && $filters['price']['high']) {
+        if ($filters['price']['low'] < $filters['price']['high']) {
             $query->whereHas('variations', function ($q) use ($filters) {
                 $q->whereBetween('price', [str_replace(',', '', $filters['price']['low']), str_replace(',', '', $filters['price']['high'])]);
             });

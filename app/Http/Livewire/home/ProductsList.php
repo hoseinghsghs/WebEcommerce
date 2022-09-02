@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Home;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductVariation;
 use Illuminate\Support\Facades\Route;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -16,17 +17,14 @@ class ProductsList extends Component
     protected $listeners = ['priceRangeUpdated'];
     public $category;
     public $routeName = '';
-    public $collapsible = [
-        'categories' => true,
-        'price' => true,
-        'variation' => [],
-        'attribute' => [],
-    ];
+    public $initialFilter;
+    public bool $show_sidebar=false;
+
     public $filterd = [
         'variation' => [],
         'attribute' => [],
         'orderBy' => 'default',
-        'price' => ['high' => null, 'low' => null],
+        'price' => ['high' => 5000000, 'low' => 0],
         'displayCount' => 12,
         'search' => '',
     ];
@@ -43,20 +41,22 @@ class ProductsList extends Component
         request()->whenFilled('q', function () {
             $this->filterd['search'] = request()->query('q');
         });
+        // get maximum of price
+        $max_price = ProductVariation::max('price');
+        if ($max_price) {
+            $price_rank = 10 ** floor(log10($max_price));
+            $round_max = ceil($max_price / $price_rank) * $price_rank;
+            $this->filterd['price']['high'] = $round_max;
+        }
+
+        $this->initialFilter = $this->filterd;
     }
 
     public function resetFilters()
     {
-        $this->reset('filterd');
-    }
-
-    public function updatingFilterdPriceHigh($field, $value)
-    {
-        $this->resetPage();
-    }
-    public function updatingFilterdPriceLow($field, $value)
-    {
-        $this->resetPage();
+        // $this->reset('filterd');
+        $this->filterd=$this->initialFilter;
+        $this->emit('filterReset');
     }
     public function updatingFilterdDisplayCount($field, $value)
     {
@@ -66,27 +66,15 @@ class ProductsList extends Component
     {
         $this->resetPage();
     }
-    public function priceRangeUpdated($values){
-        $this->filterd['price']['low']=$values[0];
-        $this->filterd['price']['high']=$values[1];
-    }
-
-    public function collapse($type, $id = null)
+    public function priceRangeUpdated($values)
     {
-        if ($type == 'variation' || $type == 'attribute') {
-            if (in_array($id, $this->collapsible[$type])) {
-                $this->collapsible[$type] = array_diff($this->collapsible[$type], [$id]);
-            } else {
-                $this->collapsible[$type][] = $id;
-            }
-        } else {
-            $this->collapsible[$type] = !$this->collapsible[$type];
-        }
+        $this->filterd['price']['low'] = $values[0];
+        $this->filterd['price']['high'] = $values[1];
+        $this->resetPage();
     }
 
     public function addFilter($type, $attribute_id, $value)
     {
-
         $filterd = $this->filterd;
 
         if (array_key_exists($attribute_id, $filterd[$type])) {
@@ -107,24 +95,21 @@ class ProductsList extends Component
         $this->filterd = $filterd;
         $this->gotoPage(1);
     }
-    public function showres(){
-        dd($this->filterd);
-    }
 
     public function render()
     {
         if ($this->routeName == 'home.products.index') {
             $attributes = $this->category->attributes()->where('is_filter', 1)->has('categoryValues')->with('categoryValues')->get();
             $variation = $this->category->attributes()->where('is_variation', 1)->with('variationValues')->first();
-            $products = $this->category->products()->filter($this->filterd)->paginate($this->filterd['displayCount']);
+            $products = $this->category->products()->active()->filter($this->filterd)->paginate($this->filterd['displayCount']);
             return view('livewire.home.products-list', compact('attributes', 'variation', 'products'))->extends('home.layout.MasterHome');
         } elseif ($this->routeName == 'home.products.search' && isset($this->category)) {
 
             $attributes = $this->category->attributes()->where('is_filter', 1)->has('categoryValues')->with('categoryValues')->get();
-            $products = $this->category->productsFromParent()->filter($this->filterd)->paginate($this->filterd['displayCount']);
+            $products = $this->category->productsFromParent()->active()->filter($this->filterd)->paginate($this->filterd['displayCount']);
             return view('livewire.home.products-list', compact('attributes', 'products'))->extends('home.layout.MasterHome');
         } else {
-            $products = Product::filter($this->filterd)->paginate($this->filterd['displayCount']);
+            $products = Product::active()->filter($this->filterd)->paginate($this->filterd['displayCount']);
             $categories = Category::where('parent_id', 0)->get();
             return view('livewire.home.products-list', compact('categories', 'products'))->extends('home.layout.MasterHome');
         }
