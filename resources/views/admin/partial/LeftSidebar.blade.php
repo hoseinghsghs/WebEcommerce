@@ -161,7 +161,7 @@
 
             @can('questions')
             <li @class(['active'=>request()->routeIs('admin.questions.*')])> <a href={{route('admin.questions.index')}}>
-                    <i class="zmdi zmdi-hc-fw"></i><span>پرسش و پاسخ</span></a>
+                    <i class="zmdi zmdi-help-outline"></i><span>پرسش و پاسخ</span></a>
             </li>
             @endcan
 

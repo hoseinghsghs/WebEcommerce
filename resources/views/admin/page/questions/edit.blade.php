@@ -79,7 +79,7 @@
                                     <label for="text">دیدگاه</label>
                                     <div class="form-group">
                                         <textarea name="text" id="summernote2" minlength="3" required
-                                            class="form-control">{{old('text') ?? $question->text}}</textarea>
+                                            class="form-control"><?= old('text') ?? $question->text ?></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -103,7 +103,7 @@
                                             placeholder="پاسخ ادمین...." class="form-control"></textarea>
                                     </div>
                                 </div>
-                                <button type="submit onclick=" loadbtn(event)"
+                                <button type="submit onclick=" loadbtn(event)
                                     class="btn btn-raised btn-success waves-effect">
                                     پاسخ به این سوال </button>
                             </div>

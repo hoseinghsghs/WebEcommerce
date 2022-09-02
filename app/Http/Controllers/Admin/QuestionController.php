@@ -42,14 +42,14 @@ class QuestionController extends Controller
         $request->validate([
             'text' => 'required',
         ]);
+        $approved = (auth()->user()->hasRole('super-admin')) ? 1 : 0 ;
     
         Question::create([
             'parent_id' => $request->question_id,
             'user_id' => auth()->id(),
             'text' => $request->text,
             'product_id' => $request->product_id,
-
-
+            'approved' => $approved
         ]);
         
         $flasher->addSuccess('تغییرات با موفقیت ذخیره شد');

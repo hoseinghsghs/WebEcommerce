@@ -22,7 +22,7 @@ class QuestionController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->to(url()->previous() . '#respon')->withErrors($validator);
+            return redirect()->to(url()->previous() . '#respon')->withErrors($validator)->with('status-question', 'Some message');
         }
         
         if (auth()->check()) {

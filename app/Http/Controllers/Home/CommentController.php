@@ -33,7 +33,7 @@ class CommentController extends Controller
         ]);
         
         if ($validator->fails()) {
-            return redirect()->to(url()->previous())->withErrors($validator);
+            return redirect()->to(url()->previous())->withErrors($validator)->with('status' , 1);
         }
 
         if (auth()->check()) {

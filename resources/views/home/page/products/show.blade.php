@@ -7,8 +7,8 @@
             <div class="main-row p-0">
                 <div id="breadcrumb">
                     <i class="mdi mdi-home"></i>
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
+                    <nav aria-label="breadcrumb" class="p-1">
+                        <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('home')}}">خانه</a></li>
                             <li class="breadcrumb-item"><a href="#">{{$product->category->parent->name}}</a></li>
                             <li class="breadcrumb-item"><a href="#"> {{$product->category->name}}</a></li>
@@ -29,20 +29,20 @@
                                                     @if ($product->checkUserWishlist(auth()->user()->id))
                                                     <a href="#" data-product="{{$product->id}}"
                                                         class="btn-option add-product-wishes active">
-                                                        <i class="fa fa-heart-o" style="padding:11px"></i>
+                                                        <i class="fa fa-heart-o"></i>
                                                         <span>محبوب</span>
                                                     </a>
                                                     @else
                                                     <a href="#" data-product="{{$product->id}}"
                                                         class="btn-option add-product-wishes ">
-                                                        <i class="fa fa-heart-o" style="padding:11px"></i>
+                                                        <i class="fa fa-heart-o"></i>
                                                         <span>محبوب</span>
                                                     </a>
                                                     @endif
                                                     @else
                                                     <a href="#" data-product="{{$product->id}}"
                                                         class="btn-option add-product-wishes ">
-                                                        <i class="fa fa-heart-o" style="padding:11px"></i>
+                                                        <i class="fa fa-heart-o"></i>
                                                         <span>محبوب</span>
                                                     </a>
                                                     @endif
@@ -51,7 +51,7 @@
                                                 <li class="option-social">
                                                     <a href="#" class="btn-option btn-option-social" data-toggle="modal"
                                                         data-target="#option-social">
-                                                        <i class="mdi mdi-share"></i>
+                                                        <i class="fa fa-share-alt"></i>
                                                         <span>اشتراک</span>
                                                     </a>
                                                     <!-- Modal-option-social -->
@@ -104,14 +104,14 @@
                                                     session()->get('compareProducts')) )
                                                     <a href="product-comparison.html" data-product="{{$product->id}}"
                                                         class="btn-option btn-compare" style="color: #651fff;">
-                                                        <i class="fa fa-random" style="padding:11px"></i>
+                                                        <i class="fa fa-random"></i>
                                                         <span>مقایسه</span>
                                                     </a>
 
                                                     @else
                                                     <a href="product-comparison.html" data-product="{{$product->id}}"
                                                         class="btn-option btn-compare">
-                                                        <i class="fa fa-random" style="padding:11px"></i>
+                                                        <i class="fa fa-random"></i>
                                                         <span>مقایسه</span>
                                                     </a>
                                                     @endif
@@ -119,7 +119,7 @@
                                                     @else
                                                     <a href="product-comparison.html" data-product="{{$product->id}}"
                                                         class="btn-option btn-compare">
-                                                        <i class="fa fa-random" style="padding:11px"></i>
+                                                        <i class="fa fa-random"></i>
                                                         <span>مقایسه</span>
                                                     </a>
                                                     @endif
@@ -160,24 +160,17 @@
                                 <h1 class="product-title">
                                     {{$product->name}}
                                 </h1>
-                                <!-- <div class="product-guaranteed text-success">
-                                    12
-                                    <span>فروش موفق</span>
-                                </div> -->
+                                <div class="product-guaranteed" style="color: #651fff !important;">
+                                    میزان رضایت:
+                                    <span><span data-rating-stars="5" data-rating-readonly="true"
+                                            data-rating-value="{{ceil($product->rates->avg('satisfaction'))}}">
+                                        </span></span>
+                                </div>
                             </div>
                             <div class="product-attributes">
                                 <div class="product-config">
-
-                                    <span>امتیاز :</span>
-
-                                    <span data-rating-stars="5" data-rating-readonly="true"
-                                        data-rating-value="{{ceil($product->rates->avg('rate'))}}">
-                                    </span>
                                     <span class="product-title-en">کد محصول: </span><span
                                         class="sku product-title-en"></span>
-
-
-
                                 </div>
                             </div>
                             <div class="product-config-wrapper">
@@ -637,7 +630,7 @@
                                                             پرسش :
                                                             <span>{{$question->user->name == null ? "بدون نام" : $question->user->name }}</span>
                                                         </p>
-                                                        <p>{{$question->text}}</p>
+                                                        <p>{!!$question->text!!}</p>
                                                     </div>
 
                                                     <div class="faq-date">
@@ -686,14 +679,14 @@
                                             <li class="is-question">
                                                 <div class="section">
                                                     <div class="faq-header">
-                                                        <span class="icon-faq"><i class="mdi mdi-storefront"></i></span>
+                                                        <span class="icon-faq"><i class="fa fa-reply"></i></span>
                                                         <p class="h5">
-                                                            پاسخ فروشنده :
+                                                            پاسخ :
                                                             <span>{{$reply->user->name == null ? "بدون نام" : $reply->user->name }}</span>
                                                         </p>
                                                     </div>
                                                     <div style="word-wrap: break-word;">
-                                                        <p>{{$reply->text}}</p>
+                                                        <span>{!!$reply->text!!}</span>
                                                     </div>
 
                                                     <div class="faq-date">
@@ -704,29 +697,32 @@
                                         </ul>
 
                                     </div>
+
+                                    @foreach ($reply->replies as $reply)
+                                    @if ($reply->approved == 1)
                                     <div class="questions-list answer-questions" style="width: 89% !important;">
                                         <ul class="faq-list">
-                                            @foreach ($reply->replies as $reply)
-                                            @if ($reply->approved == 1)
                                             <li class="is-question">
                                                 <div class="section">
                                                     <div class="faq-header">
-                                                        <span class="icon-faq"><i class="mdi mdi-storefront"></i></span>
+                                                        <span class="icon-faq" style="size:3rem ;"><i
+                                                                class="fa fa-reply-all"></i></span>
                                                         <p class="h5">
-                                                            پاسخ فروشنده :
+                                                            پاسخ :
                                                             <span>{{$reply->user->name == null ? "بدون نام" : $reply->user->name }}</span>
                                                         </p>
                                                     </div>
-                                                    <p>{{$reply->text}}</p>
+                                                    <p>{!!$reply->text!!}</p>
                                                     <div class="faq-date">
                                                         <em>{{Hekmatinasser\Verta\Verta::instance($reply->created_at)->format('Y/n/j')}}</em>
                                                     </div>
                                                 </div>
                                             </li>
-                                            @endif
-                                            @endforeach
                                         </ul>
                                     </div>
+                                    @endif
+                                    @endforeach
+
                                     @endif
                                     @endforeach
                                     @endforeach
@@ -928,7 +924,7 @@
 
 
 @push('scripts')
-@if(Session::get('errors'))
+@if(Session::get('status'))
 <script>
 $(function() {
     $('#comment-modal').modal('show');

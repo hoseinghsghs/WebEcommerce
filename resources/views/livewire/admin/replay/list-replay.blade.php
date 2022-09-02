@@ -8,7 +8,7 @@
                         {{$question->user->name}}
                     </div>
                     <div style="border: 1px solid gray; border-radius: 10px; padding:15px ">
-                        {{$question->text}}
+                        {!! $question->text !!}
                     </div>
                     </span>
                 </div>
