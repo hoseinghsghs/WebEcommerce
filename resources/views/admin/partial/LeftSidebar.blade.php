@@ -1,7 +1,9 @@
 <aside id="leftsidebar" class="sidebar">
     <div class="navbar-brand">
         <button class="btn-menu ls-toggle-btn" type="button"><i class="zmdi zmdi-menu"></i></button>
-        <a href="{{route('home')}}"><img src="{{$setting->logo ? asset('storage/logo/'.$setting->logo):'/images/logo.png'}}" style="margin-right:20px;max-height: 3rem;" alt="meta-webs"><span class="m-l-10"></span></a>
+        <a href="{{route('home')}}"><img
+                src="{{$setting->logo ? asset('storage/logo/'.$setting->logo):'/images/logo.png'}}"
+                style="margin-right:20px;max-height: 3rem;" alt="meta-webs"><span class="m-l-10"></span></a>
     </div>
     <div class="menu">
         <ul class="list pb-4" id="myList">
@@ -157,15 +159,25 @@
             </li>
             @endcan
 
+            @can('questions')
+            <li @class(['active'=>request()->routeIs('admin.questions.*')])> <a href={{route('admin.questions.index')}}>
+                    <i class="zmdi zmdi-help-outline"></i><span>پرسش و پاسخ</span></a>
+            </li>
+            @endcan
+
             <!-- تنظیمات -->
-            <li @class(['active open'=>request()->routeIs('admin.settings.*','admin.profile.*')])> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-settings zmdi-hc-spin"></i><span>تنظیمات</span></a>
+            <li @class(['active open'=>request()->routeIs('admin.settings.*','admin.profile.*')])> <a
+                    href="javascript:void(0);" class="menu-toggle"><i
+                        class="zmdi zmdi-settings zmdi-hc-spin"></i><span>تنظیمات</span></a>
                 <ul class="ml-menu">
                     @can('settings')
-                    <li @class(['active'=>request()->routeIs('admin.settings.show')])><a href="{{route('admin.settings.show')}}">سایت</a></li>
+                    <li @class(['active'=>request()->routeIs('admin.settings.show')])><a
+                            href="{{route('admin.settings.show')}}">سایت</a></li>
                     @endcan
                     <li @class(['active'=>request()->routeIs('admin.profile.edit')])><a
                             href="{{route('admin.profile.edit')}}">ویرایش پروفایل کاربری </a></li>
-                    <li @class(['active'=>request()->routeIs('admin.profile.change-pass')])><a href="{{route('admin.profile.change-pass')}}">تغییر کلمه عبور </a></li>
+                    <li @class(['active'=>request()->routeIs('admin.profile.change-pass')])><a
+                            href="{{route('admin.profile.change-pass')}}">تغییر کلمه عبور </a></li>
                 </ul>
             </li>
         </ul>

@@ -29,7 +29,9 @@ class UserProfileController extends Controller
 
      public function commentsList() 
     {
-        return view('home.page.users_profile.comments');
+        $comments= Comment::where('user_id', auth()->id())->get();
+
+        return view('home.page.users_profile.comments' , compact('comments'));
     } 
     
     public function editProfile() 

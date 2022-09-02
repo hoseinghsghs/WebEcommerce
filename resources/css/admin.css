@@ -9,7 +9,10 @@
 @import "../assets/admin/plugins/jquery-steps/jquery.steps.css";
 @import "../assets/admin/plugins/light-gallery/css/lightgallery.css";
 @import "../assets/admin/plugins/select2/select2.css";
+
 @import "~lightbox2/dist/css/lightbox.css";
+@import "../assets/admin/plugins/smnote/summernote-lite.min.css";
+
 @import "../assets/admin/css/style.min.css";
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 
@@ -28,7 +31,9 @@
     min-height: calc(2.25rem + 2px);
 }
 
-.select2-container--default[dir="rtl"] .select2-selection--single .select2-selection__arrow {
+.select2-container--default[dir="rtl"]
+    .select2-selection--single
+    .select2-selection__arrow {
     top: 5px;
 }
 
@@ -41,7 +46,11 @@
     white-space: nowrap;
 }
 
-.bootstrap-select.btn-group.show-tick .dropdown-menu li.selected a span.check-mark {
+.bootstrap-select.btn-group.show-tick
+    .dropdown-menu
+    li.selected
+    a
+    span.check-mark {
     position: absolute;
     display: inline-block;
     left: 15px;
@@ -82,13 +91,13 @@
     transition: 0.3s;
 }
 
-.switchToggle input:checked+label,
-.switchToggle input:checked+input+label {
+.switchToggle input:checked + label,
+.switchToggle input:checked + input + label {
     background: #d1d1d1;
 }
 
-.switchToggle input+label:before,
-.switchToggle input+input+label:before {
+.switchToggle input + label:before,
+.switchToggle input + input + label:before {
     content: "فعال";
     position: absolute;
     top: 5px;
@@ -101,8 +110,8 @@
     color: #fff;
 }
 
-.switchToggle input:checked+label:before,
-.switchToggle input:checked+input+label:before {
+.switchToggle input:checked + label:before,
+.switchToggle input:checked + input + label:before {
     content: "غیرفعال";
     position: absolute;
     top: 5px;
@@ -115,8 +124,8 @@
     color: #7f7777;
 }
 
-.switchToggle input:checked+label:after,
-.switchToggle input:checked+input+label:after {
+.switchToggle input:checked + label:after,
+.switchToggle input:checked + input + label:after {
     left: calc(100% - 2px);
     transform: translateX(-100%);
 }
@@ -150,13 +159,11 @@ a[aria-expanded="true"] span {
     /* 	for browsers supporting webkit (such as chrome, firefox, safari etc.). */
     -webkit-transform: rotate(270deg);
     display: inline-block;
-
 }
 
 .bg-ghostwhite {
     background-color: #f9f9fd;
 }
-
 
 /*
 *  input with addon

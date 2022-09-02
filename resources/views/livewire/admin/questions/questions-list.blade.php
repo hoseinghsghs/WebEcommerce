@@ -45,7 +45,6 @@
                                     <th>نوشته توسط</th>
                                     <th>تاریخ</th>
                                     <th>نام محصول</th>
-                                    <th>امتیاز</th>
                                     <th>تعداد پاسخ ها</th>
                                     <th>وضعیت</th>
                                     <th>
@@ -69,19 +68,8 @@
                                     <td>
                                         <a
                                             href="{{route('admin.products.show',['product' => $question->product->id])}}">
-                                            {{$question->product->id}}
+                                            {{$question->product->name}}
                                         </a>
-
-                                    </td>
-                                    <td>
-                                        @if (isset($question->user->rate))
-                                        <div data-rating-stars="5" data-rating-readonly="true"
-                                            data-rating-value="{{ceil($question->user->rate->first()->rate)}}">
-                                        </div>
-                                        @else
-                                        <div data-rating-stars="5" data-rating-readonly="true" data-rating-value="0">
-                                        </div>
-                                        @endif
 
                                     </td>
                                     <td>
