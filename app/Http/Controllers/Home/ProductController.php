@@ -25,19 +25,19 @@ class ProductController extends Controller
         SEOTools::twitter()->setSite('@LuizVinicius73');
         SEOTools::jsonLd()->addImage('https://codecasts.com.br/img/logo.jpg');
         //END SEO
-        
+
         $categories=Category::all();
         $brands=Brand::all();
         $services=Service::orderBy('service_order')->get();
-        $category_simulation=Category::active()->where('name',$product->category->name)->get()->first();
-        $product_simulation=$category_simulation->products->take(3)->sortBy('desc');
+        // $category_simulation=Category::active()->where('name',$product->category->name)->get()->first();
+        // $product_simulation=$category_simulation->products->take(3)->sortBy('desc');
         $products_latest=Product::active()->latest()->take(3)->get();
         $wishlist = WishList::where('user_id', auth()->id())->get();
         $banner_product=Banner::active()->where('type','محصول')->get()->first();
 
-       
-  
 
-        return view('home.page.products.show' , compact('product','categories','services','product_simulation' ,'products_latest' ,'wishlist' , 'banner_product'));
+
+
+        return view('home.page.products.show' , compact('product','categories','services','products_latest' ,'wishlist' , 'banner_product'));
     }
 }

@@ -240,7 +240,7 @@
         </div>
     </div>
     <!-- mobile product filter sidebar -->
-    <nav @class(["sidebar bg-light p-2","open"=>$show_sidebar])>
+    <div @class(["sidebar bg-light p-2","open"=>$show_sidebar])>
         <div class="shop-archive-sidebar">
             <div class="text-left"><span class="text-dark ml-2" wire:click="$set('show_sidebar',false)">X</span></div>
             <div class="sidebar-archive mb-3">
@@ -401,7 +401,7 @@
                 @endif
             </div>
         </div>
-    </nav>
+    </div>
     <div wire:click="$set('show_sidebar',false)" @class(["filter-sidebar-overlay","d-none"=>!$show_sidebar])></div>
     <!-- end mobile product filter sidebar -->
 </div>

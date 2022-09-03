@@ -286,11 +286,10 @@
                     <ul class="nav-categories ul-base mt-4">
                         @foreach ($categories as $category)
                         <li>
-                            <a href="{{route('home.products.search',['slug'=>$category->slug])}}" class="collapsed"
-                                type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false"
-                                aria-controls="collapseOne"><i class="mdi mdi-chevron-down"></i>{{$category->name}}</a>
-                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
-                                data-parent="#accordionExample">
+                            <a href="#" class="collapsed"
+                                type="button" data-toggle="collapse" data-target="#collapse-{{$category->id}}" aria-expanded="false"
+                                aria-controls="collapse-{{$category->id}}"><i class="mdi mdi-chevron-down"></i>{{$category->name}}</a>
+                            <div id="collapse-{{$category->id}}" class="collapse" aria-labelledby="headingOne">
                                 @if(count($category->children))
                                 <ul>
                                     @foreach ($category->children as $ChildrenCategory )
