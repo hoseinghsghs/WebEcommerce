@@ -13,6 +13,15 @@
                         <div class="profile-content">
                             <div class="profile-stats">
                                 <div class="profile-comment">
+                                    @if ($comments->count())
+                                    <div class="cart-empty text-center d-block p-5">
+                                        <p class="cart-empty-title">لیست نظرات خالی است</p>
+                                        <div class="return-to-shop">
+                                            <a href="{{route('home')}}" class="backward btn btn-warning">بازگشت به
+                                                خانه</a>
+                                        </div>
+                                    </div>
+                                    @else
                                     <table class="table table-borderless table-profile-comment">
                                         <thead>
                                             <tr>
@@ -87,6 +96,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
         </section>

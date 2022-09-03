@@ -9,8 +9,24 @@
                 <div class="post-item-profile order-1 d-block">
 
                     @include('home.page.users_profile.partial.right_side')
-                    <a class="btn btn-warning btn-sm mr-5 mb-3 " href="{{route('home.addreses.create')}}">آدرس جدید</a>
-
+                    @if (!$addresses->count())
+                    <div class="col-lg-9 col-md-9 col-xs-12 pl">
+                        <div class="profile-content">
+                            <div class="profile-stats">
+                                <div class="profile-address">
+                                    <center class="my-5">
+                                        <div class="m-3 "> لیست آدرس شما خالی است.
+                                        </div>
+                                        <a class="btn btn-warning btn-sm  m-3 "
+                                            href="{{route('home.addreses.create')}}">آدرس
+                                            جدید</a>
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @else
+                    <a class="btn btn-warning btn-sm mr-5 my-3 " href="{{route('home.addreses.create')}}">آدرس جدید</a>
                     @foreach ($addresses as $address)
                     <div class="col-lg-9 col-md-9 col-xs-12 pl">
                         <div class="profile-content">
@@ -75,6 +91,7 @@
         </section>
     </div>
 </div>
+@endif
 
 
 @push('scripts')
