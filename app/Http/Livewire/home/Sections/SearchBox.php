@@ -26,13 +26,16 @@ class SearchBox extends Component
             });
             // dd(request()->route('slug'));
             if (request()->route('slug')) {
-                $category=Category::where('slug', request()->route('slug'))->firstOrFail();
+                $category = Category::where('slug', request()->route('slug'))->firstOrFail();
                 $this->categoryId = $category->id;
                 $this->category = $category;
             }
         }
     }
-
+    public function showres()
+    {
+        dd($this->categoryId);
+    }
     public function updatedCategoryId($id)
     {
         if ($id) {

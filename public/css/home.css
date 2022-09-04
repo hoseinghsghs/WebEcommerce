@@ -28984,7 +28984,7 @@ header.header-main {
 .header-search .header-search-box .form-search .header-search-input {
     width: 100%;
     background: transparent;
-    font-size: 12px;
+    font-size: 14px;
     height: 50px;
     line-height: 50px;
     padding: 0 15px 0 160px;
@@ -29035,18 +29035,21 @@ header.header-main {
     border: none;
     display: block;
     outline: none;
-    background: #651fff;
+    background: #14b2d4;
     z-index: 999;
     border-radius: 20px 0 0 20px;
     float: left;
 }
 
 .header-search .header-search-box .form-search .action-btns .btn-search i {
-    color: #4a4a4a !important;
-    font-size: 20px;
+    color: #fff !important;
+    font-size: 25px;
     margin: auto;
     display: block;
     z-index: 1;
+}
+.header-search .header-search-box .form-search .action-btns .btn-search i.mdi-loading {
+    display: none;
 }
 
 .header-search .header-search-box .form-search .action-btns .btn-search img {
@@ -29139,7 +29142,7 @@ header.header-main {
     width: 100%;
     right: 0;
     top: 50px;
-    display: none;
+    /* display: none; */
     background-color: #fff;
     padding: 1rem 0;
     border-radius: 0 0 20px 20px;
@@ -32704,13 +32707,12 @@ aside.main-row-bg .card-product-horizontal .card-product-horizontal-content {
     position: relative;
     background: transparent;
     float: right;
-    line-height: 3px;
 }
 
 .main-row #breadcrumb i {
     position: absolute;
     right: 12px;
-    top: 13px;
+    top: 2px;
     font-size: 25px;
     color: #ababab;
     border-radius: 20px;
@@ -32726,6 +32728,9 @@ aside.main-row-bg .card-product-horizontal .card-product-horizontal-content {
 
 .main-row #breadcrumb li.breadcrumb-item {
     color: #aaa;
+}
+.main-row .breadcrumb {
+    padding: 0px 1rem;
 }
 .widget-product-categories {
     width: 100%;
@@ -40186,6 +40191,10 @@ button.products-filter-btn {
     background-color: rgba(125, 125, 125, 0.5);
     z-index: 1001;
 }
+/* search box */
+.search-filter .custom-select:focus{
+    box-shadow: unset;
+}
 
 .compare-item {
     margin-top: -31px;
@@ -40372,7 +40381,7 @@ button.products-filter-btn {
     }
 
     .account-box {
-        margin-top: -110px;
+        margin-top: -50px;
         background-color: transparent;
         z-index: 999;
     }
@@ -40386,7 +40395,7 @@ button.products-filter-btn {
     }
 
     .nav-btn {
-        top: 160px;
+        top: 100px;
     }
 
     .btn-h4 {
@@ -40747,7 +40756,7 @@ button.products-filter-btn {
     }
 
     .account-box {
-        margin-top: -110px;
+        margin-top: -50px;
         background-color: transparent;
         z-index: 999;
     }
@@ -40954,11 +40963,11 @@ button.products-filter-btn {
     }
 
     .account-box {
-        margin-top: -100px;
+        margin-top: -45px;
     }
 
     .nav-btn {
-        top: 150px;
+        top: 100px;
     }
 
     .header-main-nav .divider-space-card .header-cart-basket .cart-basket-box {

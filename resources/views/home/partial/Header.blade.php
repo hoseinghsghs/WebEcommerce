@@ -14,88 +14,9 @@
                                     @endisset
                                 </div>
                             </div>
-                            <div class="col-lg-8 pr">
+                            <div class="col-lg-8 pr d-none d-lg-block">
                                 <div class="header-search row text-right">
-                                    <div class="header-search-box">
-                                        <form action="#" class="form-search">
-                                            <input type="search" class="header-search-input" name="search-input"
-                                                placeholder="نام کالا، برند و یا دسته مورد نظر خود را جستجو کنید…">
-                                            <div class="action-btns">
-                                                <button class="btn btn-search" type="submit">
-                                                    <img src="/assets/home/images/search.png" alt="search">
-                                                </button>
-                                                <div class="search-filter">
-                                                    <div class="form-ui">
-                                                        <div class="custom-select-ui">
-                                                            <select class="right">
-                                                                <option>همه دسته ها</option>
-                                                                <option>کالای دیجیتال</option>
-                                                                <option>آرایشی بهداشتی</option>
-                                                                <option>ابزاری اداری</option>
-                                                                <option>مد پوشاک</option>
-                                                                <option>خانه آشپز خانه</option>
-                                                                <option>لوازم تحریر و هنر</option>
-                                                                <option>کودک و نوزاد</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                        <div class="search-result">
-                                            <ul class="search-result-list mb-0">
-                                                <li>
-                                                    <a href="#"><i class="mdi mdi-clock-outline"></i>
-                                                        کالای دیجیتال
-                                                        <button class="btn btn-light btn-continue-search" type="submit">
-                                                            <i class="fa fa-angle-left"></i>
-                                                        </button>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="mdi mdi-clock-outline"></i>
-                                                        آرایشی و بهداشتی
-                                                        <button class="btn btn-light btn-continue-search" type="submit">
-                                                            <i class="fa fa-angle-left"></i>
-                                                        </button>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="mdi mdi-clock-outline"></i>
-                                                        گوشی موبایل
-                                                        <button class="btn btn-light btn-continue-search" type="submit">
-                                                            <i class="fa fa-angle-left"></i>
-                                                        </button>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="mdi mdi-clock-outline"></i>
-                                                        تبلت
-                                                        <button class="btn btn-light btn-continue-search" type="submit">
-                                                            <i class="fa fa-angle-left"></i>
-                                                        </button>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="mdi mdi-clock-outline"></i>
-                                                        لپ تاپ
-                                                        <button class="btn btn-light btn-continue-search" type="submit">
-                                                            <i class="fa fa-angle-left"></i>
-                                                        </button>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="mdi mdi-clock-outline"></i>
-                                                        دوربین
-                                                        <button class="btn btn-light btn-continue-search" type="submit">
-                                                            <i class="fa fa-angle-left"></i>
-                                                        </button>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                            <div class="localSearchSimple"></div>
-                                        </div>
-                                    </div>
+                                    @livewire('home.sections.search-box')
                                 </div>
                             </div>
                         </div>
@@ -296,20 +217,26 @@
                     <ul class="nav-categories ul-base mt-4">
                         @foreach ($categories as $category)
                         <li>
-                            <a href="#" class="collapsed" type="button" data-toggle="collapse"
+                            <<<<<<< HEAD <a href="#" class="collapsed" type="button" data-toggle="collapse"
                                 data-target="#collapse-{{$category->id}}" aria-expanded="false"
                                 aria-controls="collapse-{{$category->id}}"><i
                                     class="mdi mdi-chevron-down"></i>{{$category->name}}</a>
-                            <div id="collapse-{{$category->id}}" class="collapse" aria-labelledby="headingOne">
-                                @if(count($category->children))
-                                <ul>
-                                    @foreach ($category->children as $ChildrenCategory )
-                                    <li><a href="{{route('home.products.index',['slug'=>$ChildrenCategory->slug])}}"
-                                            class="category-level-3">{{$ChildrenCategory->name}}</a></li>
-                                    @endforeach
-                                </ul>
-                                @endif
-                            </div>
+                                =======
+                                <a href="#" class="collapsed" type="button" data-toggle="collapse"
+                                    data-target="#collapse-{{$category->id}}" aria-expanded="false"
+                                    aria-controls="collapse-{{$category->id}}"><i
+                                        class="mdi mdi-chevron-down"></i>{{$category->name}}</a>
+                                >>>>>>> c6bbbb5d602f460deee4ac433b81bc5cc072659d
+                                <div id="collapse-{{$category->id}}" class="collapse" aria-labelledby="headingOne">
+                                    @if(count($category->children))
+                                    <ul>
+                                        @foreach ($category->children as $ChildrenCategory )
+                                        <li><a href="{{route('home.products.index',['slug'=>$ChildrenCategory->slug])}}"
+                                                class="category-level-3">{{$ChildrenCategory->name}}</a></li>
+                                        @endforeach
+                                    </ul>
+                                    @endif
+                                </div>
                         </li>
                         @endforeach
                     </ul>
