@@ -21,7 +21,8 @@
 
                                         <p class="cart-empty-title">لیست علاقه مندی ها خالی است</p>
                                         <div class="return-to-shop">
-                                            <a href="{{route('home')}}" class="backward btn btn-secondary">خانه</a>
+                                            <a href="{{route('home')}}" class="backward btn btn-warning">بازگشت به
+                                                خانه</a>
                                         </div>
                                     </div>
 
