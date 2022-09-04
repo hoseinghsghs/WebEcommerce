@@ -1,14 +1,5 @@
 $(document).ready(function (e) {
     //    hover-menu-overlay--------------------------
-    $("li.nav-overlay").hover(
-        function () {
-            $(".mega-menu").removeClass("active");
-            $(".nav-categories-overlay").addClass("active");
-        },
-        function () {
-            $(".nav-categories-overlay").removeClass("active");
-        }
-    );
 
     //    resposive-megamenu-mobile------------------
     $(".dropdown-toggle").on("click", function (e) {
@@ -571,7 +562,6 @@ $(document).ready(function (e) {
 
         var s = $(this);
         let id = this.dataset.product;
-        console.log(id);
         let url = window.location.origin + "/add-to-compare" + "/" + [id];
         console.log(url);
         n.preventDefault();
@@ -579,12 +569,26 @@ $(document).ready(function (e) {
         s.find("i").addClass("fa fa-circle-o-notch fa-spin");
         $.get(url, function (response, status) {
             if (response.errors == "deleted") {
-                s.css("color", "rgb(31, 30, 30)"),
-                    Toast.fire({
-                        icon: "success",
-                        title: "محصول از لیست مقایسه حذف شد",
-                    });
+                s.css("color", "rgb(31, 30, 30)");
+                if ($(".compare-text").html == 0) {
+                    $(".compare-text").value(1);
+                } else {
+                    $(".compare-text").html(
+                        parseInt($(".compare-text").html(), 10) - 1
+                    );
+                }
+                Toast.fire({
+                    icon: "success",
+                    title: "محصول از لیست مقایسه حذف شد",
+                });
             } else if (response.errors == "saved") {
+                if ($(".compare-text").html == 0) {
+                    $(".compare-text").value(1);
+                } else {
+                    $(".compare-text").html(
+                        parseInt($(".compare-text").html(), 10) + 1
+                    );
+                }
                 s.css("color", "#651fff"),
                     Toast.fire({
                         icon: "success",
@@ -874,4 +878,95 @@ $(document).ready(function (e) {
         $(".lg-outer").css("background-color", colours[index]);
     });
     // product-img-----------------------------
+});
+
+// custom
+
+function delete_product_cart(id) {
+    let url = window.location.origin + "/remove-from-cart" + "/" + id;
+    Swal.fire({
+        text: "آیا مطمئن هستید حذف شود؟",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "بله",
+        cancelButtonText: "خیر",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.get(url, function (response, status, xyz) {
+                console.log(status);
+                if (status == "success") {
+                    let price = number_format(response);
+                    $(".price-total").html(price + " " + "تومان");
+                    $("#" + id).remove();
+                    $("#shopping-bag-item").html(
+                        parseInt($("#shopping-bag-item").html(), 10) - 1
+                    );
+                    $("#count-cart").html(
+                        parseInt($("#count-cart").html(), 10) - 1
+                    );
+
+                    Livewire.emit("delete", id);
+                }
+            }).fail(function () {
+                Swal.fire({
+                    title: "مشکل",
+                    text: " اینترنت شما قطع است",
+                    icon: "error",
+                    timer: 1500,
+                    ConfirmButton: "باشه",
+                });
+            });
+        } else {
+        }
+    });
+}
+window.addEventListener("say-goodbye", (event) => {
+    $("#shopping-bag-item").html(
+        parseInt($("#shopping-bag-item").html(), 10) - 1
+    );
+    $("#count-cart").html(parseInt($("#count-cart").html(), 10) - 1);
+
+    $("#" + event.detail.rowId).remove();
+
+    $(".mini-card-total").remove();
+});
+
+$(document).ready(function () {
+    $(".carousel").carousel({
+        interval: false,
+        pause: true,
+        touch: true,
+    });
+
+    $(".carousel .carousel-inner").swipe({
+        swipeLeft: function (
+            event,
+            direction,
+            distance,
+            duration,
+            fingerCount
+        ) {
+            this.parent().carousel("next");
+        },
+        swipeRight: function () {
+            this.parent().carousel("prev");
+        },
+        threshold: 0,
+        tap: function (event, target) {
+            window.location = $(this)
+                .find(".carousel-item.active a")
+                .attr("href");
+        },
+        excludedElements: "label, button, input, select, textarea, .noSwipe",
+    });
+
+    $(".carousel .carousel-control-prev").on("click", function () {
+        $(".carousel").carousel("prev");
+    });
+
+    $(".carousel .carousel-control-next").on("click", function () {
+        $(".carousel").carousel("next");
+    });
 });

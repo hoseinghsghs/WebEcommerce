@@ -125,8 +125,7 @@
                                                         <a href="{{route('logout')}}" class="account-link"
                                                             onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">خروج</a>
                                                     </li>
-                                                    <form id="frm-logout" action="{{ route('logout') }}" method="POST"
-                                                        style="display: none;">
+                                                    <form id="frm-logout" action="{{ route('logout') }}" method="POST">
                                                         {{ csrf_field() }}
                                                     </form>
                                                 </ul>
@@ -134,11 +133,11 @@
                                             @endauth
                                             @guest
                                             @if (!request()->routeIs('login') && !request()->routeIs('register'))
-                                            <div class="account-box" style="padding-left:8px;">
+                                            <div class="account-box">
                                                 <div class="nav-account d-block pl">
-                                                    <a href="{{route('login')}}" class="btn btn-secondary btn-sm"
-                                                        style="background-color:white ;border-color:#dddddd; color: gray; border-radius: 0.6rem;"><i
-                                                            class="fa fa-sign-in" aria-hidden="true"></i> ثبت
+                                                    <a href="{{route('login')}}" class="btn btn-secondary btn-sm "
+                                                        id="login-style"><i class="fa fa-sign-in"
+                                                            aria-hidden="true"></i> ثبت
                                                         نام | ورود
                                                     </a>
                                                 </div>
@@ -254,17 +253,28 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                 </li>
                                 @endif
+                                @if (!request()->routeIs('home.cart.index'))
                                 <a href="{{route('home.compare.index')}}" class="cart-basket-box">
                                     <span>
-                                        <i class="fa fa-random ml-3 "
-                                            style="float: left; font-size: 1.7rem; color:#676767 ; margin: 1.2rem;">
-                                            <span style="font-size: 1rem;"></span>
+                                        <i class="fa fa-random ml-3" id="compare-style">
+                                            <div class="compare-item">
+                                                <span class="compare-text">
+                                                    @if (session()->get('compareProducts'))
+                                                    {{count(session()->get('compareProducts'))}}
+                                                    @else
+                                                    0
+                                                    @endif
+                                                </span>
+                                            </div>
                                         </i>
-                                    </span></a>
+                                    </span>
+                                </a>
+                                @endif
+
+
                             </ul>
                         </div>
                     </div>
@@ -286,9 +296,10 @@
                     <ul class="nav-categories ul-base mt-4">
                         @foreach ($categories as $category)
                         <li>
-                            <a href="#" class="collapsed"
-                                type="button" data-toggle="collapse" data-target="#collapse-{{$category->id}}" aria-expanded="false"
-                                aria-controls="collapse-{{$category->id}}"><i class="mdi mdi-chevron-down"></i>{{$category->name}}</a>
+                            <a href="#" class="collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapse-{{$category->id}}" aria-expanded="false"
+                                aria-controls="collapse-{{$category->id}}"><i
+                                    class="mdi mdi-chevron-down"></i>{{$category->name}}</a>
                             <div id="collapse-{{$category->id}}" class="collapse" aria-labelledby="headingOne">
                                 @if(count($category->children))
                                 <ul>

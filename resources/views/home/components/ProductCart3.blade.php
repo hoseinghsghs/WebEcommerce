@@ -5,12 +5,10 @@
                 @if ($product->quantity_check && $product->sale_check)
                 <div class="promotion-badge">فروش ویژه</div>
                 @endif
-                <div class="product-rate">
-                    <i class="fa fa-star active"></i>
-                    <i class="fa fa-star active"></i>
-                    <i class="fa fa-star active"></i>
-                    <i class="fa fa-star active"></i>
-                    <i class="fa fa-star"></i>
+                <span class="cell-value"></span>
+                <div class="rating-general">
+                    <div class="rating-value" style="width: {{(ceil($product->rates->avg('satisfaction'))*100)/5}}%;">
+                    </div>
                 </div>
                 @php
                 $percents=$product->discountPercent();
@@ -31,21 +29,24 @@
                             @if (Auth::check())
                             @if ($product->checkUserWishlist(1))
                             <li class="action-item like">
-                                <button data-product="{{$product->id}}" class="btn btn-link add-product-wishes active" type="submit">
+                                <button data-product="{{$product->id}}" class="btn btn-link add-product-wishes active"
+                                    type="submit">
                                     <i class="fa fa-heart-o"></i>
                                 </button>
                             </li>
 
                             @else
                             <li class="action-item like">
-                                <button data-product="{{$product->id}}" class="btn btn-link add-product-wishes" type="submit">
+                                <button data-product="{{$product->id}}" class="btn btn-link add-product-wishes"
+                                    type="submit">
                                     <i class="fa fa-heart-o"></i>
                                 </button>
                             </li>
                             @endif
                             @else
                             <li class="action-item like">
-                                <button data-product="{{$product->id}}" class="btn btn-link add-product-wishes" type="submit">
+                                <button data-product="{{$product->id}}" class="btn btn-link add-product-wishes"
+                                    type="submit">
                                     <i class="fa fa-heart-o"></i>
                                 </button>
                             </li>
@@ -55,13 +56,15 @@
                             @if (session()->has('compareProducts'))
                             @if (in_array($product->id, session()->get('compareProducts')) )
                             <li class="action-item compare">
-                                <button data-product="{{$product->id}}" id="compare" class="btn btn-link btn-compare" style="color: #651fff;" type="submit">
+                                <button data-product="{{$product->id}}" id="compare" class="btn btn-link btn-compare"
+                                    style="color: #651fff;" type="submit">
                                     <i class="fa fa-random"></i>
                                 </button>
                             </li>
                             @else
                             <li class="action-item compare">
-                                <button data-product="{{$product->id}}" id="compare" class="btn btn-link btn-compare" type="submit">
+                                <button data-product="{{$product->id}}" id="compare" class="btn btn-link btn-compare"
+                                    type="submit">
                                     <i class="fa fa-random"></i>
                                 </button>
                             </li>
@@ -86,7 +89,10 @@
                                 <input type="hidden" id="variation_value" name="productvar">
 
                                 <li class="action-item add-to-cart">
-                                    <button class="btn btn-link btn-add-to-cart" data-ishome="1" data-product="{{$product->id}}" data-varition="{{ json_encode($variation->only(['id' , 'sku' , 'quantity','is_sale' , 'sale_price' , 'price'])) }}" type="submit">
+                                    <button class="btn btn-link btn-add-to-cart" data-ishome="1"
+                                        data-product="{{$product->id}}"
+                                        data-varition="{{ json_encode($variation->only(['id' , 'sku' , 'quantity','is_sale' , 'sale_price' , 'price'])) }}"
+                                        type="submit">
                                         <i class="fa fa-shopping-cart"></i>
                                     </button>
 
@@ -96,7 +102,8 @@
                             @endif
                         </ul>
                     </div>
-                    <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}" alt="{{$product->slug}}">
+                    <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}"
+                        alt="{{$product->slug}}">
                 </div>
             </a>
         </div>
