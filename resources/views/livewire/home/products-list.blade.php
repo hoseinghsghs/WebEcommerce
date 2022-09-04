@@ -6,7 +6,7 @@
                 <div id="breadcrumb">
                     <i class="mdi mdi-home"></i>
                     <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
+                        <ol class="breadcrumb mb-0">
                             <li class="breadcrumb-item"><a href="{{route('home')}}">خانه</a></li>
                             <li class="breadcrumb-item">فروشگاه</li>
                             <li class="breadcrumb-item active" aria-current="page">{{$category ? $category->name : 'جستجوی: "'.$filterd['search'].'"'}}</li>
@@ -73,7 +73,7 @@
                                                             <input type="checkbox" id="check-{{$loop->index}}">
                                                             <span class="ui-checkbox-check"></span>
                                                         </label>
-                                                        <label for="check-{{$loop->index}}" class="remember-me" style="cursor: pointer;">{{$child->name}}</label>
+                                                        <label for="check-{{$loop->index}}" class="remember-me" style="cursor: pointer;">{{$category->name}}</label>
                                                     </div>
                                                 </a>
                                                 @endforeach
