@@ -29048,7 +29048,12 @@ header.header-main {
     display: block;
     z-index: 1;
 }
-.header-search .header-search-box .form-search .action-btns .btn-search i.mdi-loading {
+.header-search
+    .header-search-box
+    .form-search
+    .action-btns
+    .btn-search
+    i.mdi-loading {
     display: none;
 }
 
@@ -40191,10 +40196,6 @@ button.products-filter-btn {
     background-color: rgba(125, 125, 125, 0.5);
     z-index: 1001;
 }
-/* search box */
-.search-filter .custom-select:focus{
-    box-shadow: unset;
-}
 
 .compare-item {
     margin-top: -31px;
@@ -40238,6 +40239,10 @@ button.products-filter-btn {
     left: 25px;
     font-size: 13px;
     margin-bottom: 15px;
+}
+/* search box */
+.search-filter .custom-select:focus {
+    box-shadow: unset;
 }
 
 @media (max-width: 992px) {
