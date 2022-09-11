@@ -825,7 +825,7 @@ $(document).ready(function (e) {
 
   /* if ($("#countdown-verify-end").length) {
       var $countdownOptionEnd = $("#countdown-verify-end");
-       $countdownOptionEnd.countdown({
+        $countdownOptionEnd.countdown({
           date: new Date().getTime() + 180 * 1000, // 1 minute later
           text: '<span class="day">%s</span><span class="hour">%s</span><span>: %s</span><span>%s</span>',
           end: function () {
@@ -8760,11 +8760,11 @@ if (typeof Object.create !== 'function') {
                    if(!self.bgyp){self.bgyp = self.largeHeight/self.newvalue ;}
                    if (!self.bgloop){
                    self.bgloop = setInterval(function(){
-                    self.bgxp += (self.largeWidth/self.newvalue  - self.bgxp) / self.options.easingAmount;
+                     self.bgxp += (self.largeWidth/self.newvalue  - self.bgxp) / self.options.easingAmount;
                    self.bgyp += (self.largeHeight/self.newvalue  - self.bgyp) / self.options.easingAmount;
-                    self.zoomWindow.css('background-size', self.bgxp + 'px ' + self.bgyp + 'px' );
-                     }, 16);
-                    }
+                     self.zoomWindow.css('background-size', self.bgxp + 'px ' + self.bgyp + 'px' );
+                       }, 16);
+                     }
                    */
 
 
