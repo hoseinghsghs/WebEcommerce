@@ -203,11 +203,6 @@
                                             <a href="#"
                                                 class="product-link product-tag-title">{{$product->brand->slug}}</a>
                                         </li>
-                                        <li>
-                                            <span>
-                                                ({{$product->approvedComments()->count()}}) نظر
-                                            </span>
-                                        </li>
                                     </ul>
                                 </div>
                                 @php
@@ -281,12 +276,13 @@
 
                                                     @if ($product->sale_check)
 
-                                                    <span
-                                                        class="amount">{{number_format($product->sale_check->sale_price)}}
-                                                        تومان</span>
+                                                    <div class="amount">
+                                                        {{number_format($product->sale_check->sale_price)}}
+                                                        تومان </div>
 
-                                                    <del>{{number_format($product->sale_check->price)}}
-                                                        تومان</del>
+                                                    </br>
+                                                    <del> {{number_format($product->sale_check->price)}}
+                                                        تومان </del>
                                                     @else
                                                     <span
                                                         class="amount">{{ number_format($product->price_check->price) }}
@@ -636,15 +632,8 @@
                                                     <div class="faq-date">
                                                         <em>{{Hekmatinasser\Verta\Verta::instance($question->created_at)->format('Y/n/j')}}</em>
                                                     </div>
-                                                    <a onclick="reply('{{$question->id}}')" class="btn btn-link" style="
-                                                        color: #24c0df;
-                                                        padding: 0;
-                                                        line-height: 2;
-                                                        position: absolute;
-                                                        bottom: 0;
-                                                        left: 25px;
-                                                        font-size: 13px;
-                                                        margin-bottom: 15px;">
+                                                    <a onclick="reply('{{$question->id}}')" class="btn btn-link"
+                                                        id="btn-question-show">
                                                         پاسخ
                                                         <i class="fa fa-reply"></i>
                                                     </a>
@@ -983,8 +972,8 @@ $(document).ready(function(e) {
     $('.sku').html(variation.sku)
 
     if (variation.is_sale) {
-        let spanSale = $('<span />', {
-            class: 'amount',
+        let spanSale = $('<div />', {
+            class: 'amount text-danger',
             text: number_format(variation.sale_price) + ' تومان'
         });
         let spanPrice = $('<del />', {

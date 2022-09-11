@@ -21,7 +21,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-sm-12">
-                    <form id="form_validation" novalidate="novalidate" class="card auth_form" action="{{route('login')}}" method="POST">
+                    <form id="form_validation" novalidate="novalidate" class="card auth_form"
+                        action="{{route('login')}}" method="POST">
                         @csrf
                         <div class="header">
                             @isset($setting->logo)
@@ -32,7 +33,9 @@
                         <div class="body text-right">
                             <label>نام کاربری:</label>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" placeholder="ایمیل یا شماره همراه" value="{{old('username')}}" required />
+                                <input type="text" class="form-control @error('username') is-invalid @enderror"
+                                    name="username" placeholder="ایمیل یا شماره همراه" value="{{old('username')}}"
+                                    required />
                                 <div class="input-group-append">
                                     <span class="input-group-text"><i class="zmdi zmdi-account-circle"></i></span>
                                 </div>
@@ -44,9 +47,11 @@
                             </div>
                             <label>رمز عبور:</label>
                             <div class="input-group mb-3">
-                                <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="" required>
+                                <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                    name="password" placeholder="" required>
                                 <div class="input-group-append">
-                                    <span class="input-group-text"><a href="forgot-password.html" class="forgot" title="فراموشی رمز عبور"><i class="zmdi zmdi-lock"></i></a></span>
+                                    <span class="input-group-text"><a href="forgot-password.html" class="forgot"
+                                            title="فراموشی رمز عبور"><i class="zmdi zmdi-lock"></i></a></span>
                                 </div>
                                 @error('password')
                                 <div class="invalid-feedback text-right">
@@ -58,12 +63,16 @@
                                 <input id="remember_me" type="checkbox" name="remember">
                                 <label for="remember_me">مرا به خاطر بسپار</label>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-block waves-effect waves-light">ورود</button>
+                            <button type="submit"
+                                class="btn btn-primary btn-block waves-effect waves-light">ورود</button>
                             <div class="signin_with mt-3">
                                 <p class="mb-0">یا ثبت نام با استفاده از</p>
-                                <button class="btn btn-primary btn-icon btn-icon-mini btn-round facebook"><i class="zmdi zmdi-facebook"></i></button>
-                                <button class="btn btn-primary btn-icon btn-icon-mini btn-round twitter"><i class="zmdi zmdi-twitter"></i></button>
-                                <button class="btn btn-primary btn-icon btn-icon-mini btn-round google"><i class="zmdi zmdi-google-plus"></i></button>
+                                <button class="btn btn-primary btn-icon btn-icon-mini btn-round facebook"><i
+                                        class="zmdi zmdi-facebook"></i></button>
+                                <button class="btn btn-primary btn-icon btn-icon-mini btn-round twitter"><i
+                                        class="zmdi zmdi-twitter"></i></button>
+                                <button class="btn btn-primary btn-icon btn-icon-mini btn-round google"><i
+                                        class="zmdi zmdi-google-plus"></i></button>
                             </div>
                         </div>
                     </form>

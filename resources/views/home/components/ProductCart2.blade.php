@@ -16,15 +16,11 @@
         <div class="price mt-0">
             @if ($Product_special->quantity_check)
             @if ($Product_special->sale_check)
-
-            <del><span>{{number_format($Product_special->sale_check->price)}}<span>تومان</span></span></del>
-
-            <ins><span>{{number_format($Product_special->sale_check->sale_price)}}<span>تومان</span></span>
+            <ins><span>{{number_format($Product_special->sale_check->sale_price)}}<span> تومان </span></span>
             </ins>
-
+            <del><span>{{number_format($Product_special->sale_check->price)}}<span> تومان </span></span></del>
             @else
-
-            <ins><span>{{ number_format($Product_special->price_check->price) }}<span>تومان</span></span></ins>
+            <ins><span>{{ number_format($Product_special->price_check->price) }}<span> تومان </span></span></ins>
             @endif
             @else
             <ins><span>ناموجود</span></ins>

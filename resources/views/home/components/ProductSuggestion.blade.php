@@ -11,21 +11,22 @@
         <div class="price">
             @if ($Products_our_suggestion_unit->quantity_check)
             @if ($Products_our_suggestion_unit->sale_check)
+            <span class="amount">{{number_format($Products_our_suggestion_unit->sale_check->sale_price)}}<span> تومان
+                </span></span>
 
-            <del><span
-                    class="amount">{{number_format($Products_our_suggestion_unit->sale_check->price)}}<span>تومان</span></span></del>
+            <del><span class="amount">{{number_format($Products_our_suggestion_unit->sale_check->price)}}<span> تومان
+                    </span></span></del>
 
-            <ins><span
-                    class="amount">{{number_format($Products_our_suggestion_unit->sale_check->sale_price)}}<span>تومان</span></span>
-            </ins>
+
+
 
             @else
 
-            <ins><span
-                    class="amount">{{ number_format($Products_our_suggestion_unit->price_check->price) }}<span>تومان</span></span></ins>
+            <span class="amount">{{ number_format($Products_our_suggestion_unit->price_check->price) }}<span> تومان
+                </span></span>
             @endif
             @else
-            <ins><span class="amount">ناموجود</span></ins>
+            <span class="amount">ناموجود</span>
 
             @endif
 
