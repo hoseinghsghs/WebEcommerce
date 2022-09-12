@@ -103,6 +103,9 @@ Route::post('/question/reply/store', [HomeQuestionController::class, 'replyStore
 Route::post('/auth/check',[OtpController::class,'authenticate'])->name('authenticate');
 Route::post('/otp/verify', [OtpController::class, 'checkVerificationCode'])->name('otp.verify');
 Route::post('/otp/resend', [OtpController::class, 'resendVerificationCode'])->name('otp.resend');
+
+Route::post('/otp/alterPhone',[OtpController::class, 'alterPhone'])->middleware('auth')->name('phone.update');
+Route::post('/otp/verfiyPhone',[OtpController::class, 'verfiyPhone'])->middleware('auth')->name('phone.verify');
 // end otp auth
 
 Route::get('/assets/ajax', function () {

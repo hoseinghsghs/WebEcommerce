@@ -105,4 +105,62 @@ class OtpController extends Controller
             return abort(404);
         }
     }
+
+    // add or change phone in user profile
+    public function alterPhone(Request $request)
+    {
+        if ($request->expectsJson()) {
+            $data = $request->validate([
+                'phone' => 'required|unique:users,cellphone|ir_mobile',
+            ]);
+
+            $otp = Otp::create([
+                'user_id' =>  null,
+                'cellphone' => $data['phone'],
+            ]);
+            if ($otp->sendCode($data['phone'])) {
+                $timeToExpire = (env('OTP_TIME', 2) * 60) - ($otp->updated_at->diffInSeconds(Carbon::now()));
+                return response()->json([
+                    'id' => $otp->id,
+                    'time_to_expire' => $timeToExpire
+                ], 200);
+            }
+            $otp->delete();
+            return response()->json([
+                'message' => 'خطا در ارسال کد تایید'
+            ], 500);
+        } else {
+            return abort(404);
+        }
+    }
+
+    public function verfiyPhone(Request $request)
+    {
+        if ($request->expectsJson()) {
+            $data = $request->validate([
+                'id' => 'required|uuid',
+                'otp_code' => 'required|numeric|digits:5',
+            ]);
+
+            $otp = Otp::where('id', $data['id'])->first();
+
+            if (!$otp || empty($otp->id))
+                return response()->json(['message' => 'Id not found'], 422);
+            if (!$otp->isValid())
+                return response()->json(['errors' => ['otp_code' => ['کد تایید منقضی شده است']]], 422);
+            if ($otp->code !== $data['otp_code'])
+                return response()->json(['errors' => ['otp_code' => ['کد تایید نامعتبر است']]], 422);
+
+            auth()->user()->update(['cellphone' => $otp->cellphone]);
+
+            $otp->delete();
+            $request->session()->flash('message', ['type'=>'success','text'=>'شماره همراه با موفقیت ثبت شد']);
+            return response()->json([
+                'message' => 'success'
+            ], 200);
+        } else {
+            return abort(404);
+        }
+    }
+    //end change phone number in profile
 }
