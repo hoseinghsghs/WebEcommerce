@@ -470,8 +470,10 @@ $(document).ready(function (e) {
                               <a onclick="return delete_product_cart('` +
                             rowid +
                             `')"
-                                  class="mini-cart-item-close">
-                                  <i class="mdi mdi-close"></i>
+                                  class="mr-3" style="position: absolute;left: 3px;">
+                                  <i class="mdi mdi-close" id="del-pro-cart-` +
+                            rowid +
+                            `"></i>
                               </a>
                               <a href="  ` +
                             href_product +
@@ -878,38 +880,30 @@ $(document).ready(function (e) {
         $(".lg-outer").css("background-color", colours[index]);
     });
     // product-img-----------------------------
-});
 
-// custom
+    // custom
 
-function delete_product_cart(id) {
-    let url = window.location.origin + "/remove-from-cart" + "/" + id;
-    Swal.fire({
-        text: "آیا مطمئن هستید حذف شود؟",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "بله",
-        cancelButtonText: "خیر",
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.get(url, function (response, status, xyz) {
-                console.log(status);
-                if (status == "success") {
-                    let price = number_format(response);
-                    $(".price-total").html(price + " " + "تومان");
-                    $("#" + id).remove();
-                    $("#shopping-bag-item").html(
-                        parseInt($("#shopping-bag-item").html(), 10) - 1
-                    );
-                    $("#count-cart").html(
-                        parseInt($("#count-cart").html(), 10) - 1
-                    );
+    window.delete_product_cart = function (id) {
+        a = $(this);
+        let url = window.location.origin + "/remove-from-cart" + "/" + id;
+        $("#" + "del-pro-cart-" + id).addClass("fa fa-circle-o-notch fa-spin");
+        $("#" + "del-pro-cart-" + id).removeClass("mdi mdi-close");
+        $.get(url, function (response, status, xyz) {
+            if (status == "success") {
+                let price = number_format(response);
+                $(".price-total").html(price + " " + "تومان");
+                $("#" + id).remove();
+                $("#shopping-bag-item").html(
+                    parseInt($("#shopping-bag-item").html(), 10) - 1
+                );
+                $("#count-cart").html(
+                    parseInt($("#count-cart").html(), 10) - 1
+                );
 
-                    Livewire.emit("delete", id);
-                }
-            }).fail(function () {
+                Livewire.emit("delete", id);
+            }
+        })
+            .fail(function () {
                 Swal.fire({
                     title: "مشکل",
                     text: " اینترنت شما قطع است",
@@ -917,23 +911,55 @@ function delete_product_cart(id) {
                     timer: 1500,
                     ConfirmButton: "باشه",
                 });
+            })
+            .always(function () {
+                $("#" + "del-pro-cart-" + id).removeClass(
+                    "fa fa-circle-o-notch fa-spin"
+                );
+                $("#" + "del-pro-cart-" + id).addClass("mdi mdi-close");
             });
-        } else {
+    };
+
+    window.number_format = function (
+        number,
+        decimals,
+        dec_point,
+        thousands_sep
+    ) {
+        // Strip all characters but numerical ones.
+        number = (number + "").replace(/[^0-9+\-Ee.]/g, "");
+        var n = !isFinite(+number) ? 0 : +number,
+            prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+            sep = typeof thousands_sep === "undefined" ? "," : thousands_sep,
+            dec = typeof dec_point === "undefined" ? "." : dec_point,
+            s = "",
+            toFixedFix = function (n, prec) {
+                var k = Math.pow(10, prec);
+                return "" + Math.round(n * k) / k;
+            };
+        // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+        s = (prec ? toFixedFix(n, prec) : "" + Math.round(n)).split(".");
+        if (s[0].length > 3) {
+            s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
         }
+        if ((s[1] || "").length < prec) {
+            s[1] = s[1] || "";
+            s[1] += new Array(prec - s[1].length + 1).join("0");
+        }
+        return s.join(dec);
+    };
+
+    window.addEventListener("say-goodbye", (event) => {
+        $("#shopping-bag-item").html(
+            parseInt($("#shopping-bag-item").html(), 10) - 1
+        );
+        $("#count-cart").html(parseInt($("#count-cart").html(), 10) - 1);
+
+        $("#" + event.detail.rowId).remove();
+
+        $(".mini-card-total").remove();
     });
-}
-window.addEventListener("say-goodbye", (event) => {
-    $("#shopping-bag-item").html(
-        parseInt($("#shopping-bag-item").html(), 10) - 1
-    );
-    $("#count-cart").html(parseInt($("#count-cart").html(), 10) - 1);
 
-    $("#" + event.detail.rowId).remove();
-
-    $(".mini-card-total").remove();
-});
-
-$(document).ready(function () {
     $(".carousel").carousel({
         interval: false,
         pause: true,

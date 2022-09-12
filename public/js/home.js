@@ -578,7 +578,7 @@ $(document).ready(function (e) {
           $("#count-cart").html(parseInt($("#count-cart").html(), 10) + 1);
         }
 
-        $("#product-list-widget").append("<li class=\"mini-cart-item\" id=\"" + rowid + "\">\n                          <div class=\"mini-cart-item-content\">\n                              <a onclick=\"return delete_product_cart('" + rowid + "')\"\n                                  class=\"mini-cart-item-close\">\n                                  <i class=\"mdi mdi-close\"></i>\n                              </a>\n                              <a href=\"  " + href_product + " \"\n                                  class=\"mini-cart-item-image d-block\">\n                                  <img\n                                      src=\"" + image_url + "\">\n                              </a>\n                              <span class=\"product-name-card\">" + pro.name + "-\n                                  " + response.cart[rowid].attributes.value + "</span>\n                            <div class=\"variation\">\n                            <span class=\"variation-n\">\u0641\u0631\u0648\u0634\u0646\u062F\u0647 :\n                            </span>\n                            <p class=\"mb-0\">" + app_name + "</p>\n                            </div>\n                              <div class=\"quantity\">\n                                  <span class=\"quantity-Price-amount\">\n                                      " + response.cart[rowid].quantity + " *\n                                      " + number_format(response.cart[rowid].price) + "\n                            " + number_format(response.cart[rowid].quantity * response.cart[rowid].price) + "\n                                      <span>\u062A\u0648\u0645\u0627\u0646</span>\n                                  </span>\n                              </div>\n                          </div>\n                      </li>");
+        $("#product-list-widget").append("<li class=\"mini-cart-item\" id=\"" + rowid + "\">\n                          <div class=\"mini-cart-item-content\">\n                              <a onclick=\"return delete_product_cart('" + rowid + "')\"\n                                  class=\"mr-3\" style=\"position: absolute;left: 3px;\">\n                                  <i class=\"mdi mdi-close\" id=\"del-pro-cart-" + rowid + "\"></i>\n                              </a>\n                              <a href=\"  " + href_product + " \"\n                                  class=\"mini-cart-item-image d-block\">\n                                  <img\n                                      src=\"" + image_url + "\">\n                              </a>\n                              <span class=\"product-name-card\">" + pro.name + "-\n                                  " + response.cart[rowid].attributes.value + "</span>\n                            <div class=\"variation\">\n                            <span class=\"variation-n\">\u0641\u0631\u0648\u0634\u0646\u062F\u0647 :\n                            </span>\n                            <p class=\"mb-0\">" + app_name + "</p>\n                            </div>\n                              <div class=\"quantity\">\n                                  <span class=\"quantity-Price-amount\">\n                                      " + response.cart[rowid].quantity + " *\n                                      " + number_format(response.cart[rowid].price) + "\n                            " + number_format(response.cart[rowid].quantity * response.cart[rowid].price) + "\n                                      <span>\u062A\u0648\u0645\u0627\u0646</span>\n                                  </span>\n                              </div>\n                          </div>\n                      </li>");
         $(".price-total").html(number_format(response.all_cart) + "تومان");
         Swal.fire({
           title: "حله",
@@ -825,7 +825,7 @@ $(document).ready(function (e) {
 
   /* if ($("#countdown-verify-end").length) {
       var $countdownOptionEnd = $("#countdown-verify-end");
-       $countdownOptionEnd.countdown({
+        $countdownOptionEnd.countdown({
           date: new Date().getTime() + 180 * 1000, // 1 minute later
           text: '<span class="day">%s</span><span class="hour">%s</span><span>: %s</span><span>%s</span>',
           end: function () {
@@ -913,51 +913,71 @@ $(document).ready(function (e) {
   $customEvents.on("onBeforeSlide.lg", function (event, prevIndex, index) {
     $(".lg-outer").css("background-color", colours[index]);
   }); // product-img-----------------------------
-}); // custom
+  // custom
 
-function delete_product_cart(id) {
-  var url = window.location.origin + "/remove-from-cart" + "/" + id;
-  Swal.fire({
-    text: "آیا مطمئن هستید حذف شود؟",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "بله",
-    cancelButtonText: "خیر"
-  }).then(function (result) {
-    if (result.isConfirmed) {
-      $.get(url, function (response, status, xyz) {
-        console.log(status);
-
-        if (status == "success") {
-          var price = number_format(response);
-          $(".price-total").html(price + " " + "تومان");
-          $("#" + id).remove();
-          $("#shopping-bag-item").html(parseInt($("#shopping-bag-item").html(), 10) - 1);
-          $("#count-cart").html(parseInt($("#count-cart").html(), 10) - 1);
-          Livewire.emit("delete", id);
-        }
-      }).fail(function () {
-        Swal.fire({
-          title: "مشکل",
-          text: " اینترنت شما قطع است",
-          icon: "error",
-          timer: 1500,
-          ConfirmButton: "باشه"
-        });
+  window.delete_product_cart = function (id) {
+    a = $(this);
+    var url = window.location.origin + "/remove-from-cart" + "/" + id;
+    $("#" + "del-pro-cart-" + id).addClass("fa fa-circle-o-notch fa-spin");
+    $("#" + "del-pro-cart-" + id).removeClass("mdi mdi-close");
+    $.get(url, function (response, status, xyz) {
+      if (status == "success") {
+        var price = number_format(response);
+        $(".price-total").html(price + " " + "تومان");
+        $("#" + id).remove();
+        $("#shopping-bag-item").html(parseInt($("#shopping-bag-item").html(), 10) - 1);
+        $("#count-cart").html(parseInt($("#count-cart").html(), 10) - 1);
+        Livewire.emit("delete", id);
+      }
+    }).fail(function () {
+      Swal.fire({
+        title: "مشکل",
+        text: " اینترنت شما قطع است",
+        icon: "error",
+        timer: 1500,
+        ConfirmButton: "باشه"
       });
-    } else {}
-  });
-}
+    }).always(function () {
+      $("#" + "del-pro-cart-" + id).removeClass("fa fa-circle-o-notch fa-spin");
+      $("#" + "del-pro-cart-" + id).addClass("mdi mdi-close");
+    });
+  };
 
-window.addEventListener("say-goodbye", function (event) {
-  $("#shopping-bag-item").html(parseInt($("#shopping-bag-item").html(), 10) - 1);
-  $("#count-cart").html(parseInt($("#count-cart").html(), 10) - 1);
-  $("#" + event.detail.rowId).remove();
-  $(".mini-card-total").remove();
-});
-$(document).ready(function () {
+  window.number_format = function (number, decimals, dec_point, thousands_sep) {
+    // Strip all characters but numerical ones.
+    number = (number + "").replace(/[^0-9+\-Ee.]/g, "");
+
+    var n = !isFinite(+number) ? 0 : +number,
+        prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+        sep = typeof thousands_sep === "undefined" ? "," : thousands_sep,
+        dec = typeof dec_point === "undefined" ? "." : dec_point,
+        s = "",
+        toFixedFix = function toFixedFix(n, prec) {
+      var k = Math.pow(10, prec);
+      return "" + Math.round(n * k) / k;
+    }; // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+
+
+    s = (prec ? toFixedFix(n, prec) : "" + Math.round(n)).split(".");
+
+    if (s[0].length > 3) {
+      s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+    }
+
+    if ((s[1] || "").length < prec) {
+      s[1] = s[1] || "";
+      s[1] += new Array(prec - s[1].length + 1).join("0");
+    }
+
+    return s.join(dec);
+  };
+
+  window.addEventListener("say-goodbye", function (event) {
+    $("#shopping-bag-item").html(parseInt($("#shopping-bag-item").html(), 10) - 1);
+    $("#count-cart").html(parseInt($("#count-cart").html(), 10) - 1);
+    $("#" + event.detail.rowId).remove();
+    $(".mini-card-total").remove();
+  });
   $(".carousel").carousel({
     interval: false,
     pause: true,

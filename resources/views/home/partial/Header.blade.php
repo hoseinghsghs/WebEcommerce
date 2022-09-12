@@ -124,10 +124,7 @@
                                                                 @foreach (\Cart::getContent() as $item)
                                                                 <li class="mini-cart-item" id="{{$item->id}}">
                                                                     <div class="mini-cart-item-content">
-                                                                        <a onclick="return delete_product_cart('{{$item->id}}')"
-                                                                            class="mini-cart-item-close">
-                                                                            <i class="mdi mdi-close"></i>
-                                                                        </a>
+
                                                                         <a href="{{route('home.products.show',['product'=>$item->associatedModel->slug])}}"
                                                                             class="mini-cart-item-image d-block">
                                                                             <img
@@ -135,6 +132,14 @@
                                                                         </a>
                                                                         <span class="product-name-card">{{$item->name}}
                                                                             {{$item->attributes->value}}</span>
+
+                                                                        <a onclick="return delete_product_cart('{{$item->id}}')"
+                                                                            class="mr-3"
+                                                                            style="position: absolute;left: 3px;">
+                                                                            <i class="mdi mdi-close"
+                                                                                id="del-pro-cart-{{$item->id}}"></i>
+                                                                        </a>
+
                                                                         <div class="variation">
                                                                             <span class="variation-n">فروشنده :
                                                                             </span>
@@ -217,26 +222,20 @@
                     <ul class="nav-categories ul-base mt-4">
                         @foreach ($categories as $category)
                         <li>
-                            <<<<<<< HEAD <a href="#" class="collapsed" type="button" data-toggle="collapse"
+                            <a href="#" class="collapsed" type="button" data-toggle="collapse"
                                 data-target="#collapse-{{$category->id}}" aria-expanded="false"
                                 aria-controls="collapse-{{$category->id}}"><i
                                     class="mdi mdi-chevron-down"></i>{{$category->name}}</a>
-                                =======
-                                <a href="#" class="collapsed" type="button" data-toggle="collapse"
-                                    data-target="#collapse-{{$category->id}}" aria-expanded="false"
-                                    aria-controls="collapse-{{$category->id}}"><i
-                                        class="mdi mdi-chevron-down"></i>{{$category->name}}</a>
-                                >>>>>>> c6bbbb5d602f460deee4ac433b81bc5cc072659d
-                                <div id="collapse-{{$category->id}}" class="collapse" aria-labelledby="headingOne">
-                                    @if(count($category->children))
-                                    <ul>
-                                        @foreach ($category->children as $ChildrenCategory )
-                                        <li><a href="{{route('home.products.index',['slug'=>$ChildrenCategory->slug])}}"
-                                                class="category-level-3">{{$ChildrenCategory->name}}</a></li>
-                                        @endforeach
-                                    </ul>
-                                    @endif
-                                </div>
+                            <div id="collapse-{{$category->id}}" class="collapse" aria-labelledby="headingOne">
+                                @if(count($category->children))
+                                <ul>
+                                    @foreach ($category->children as $ChildrenCategory )
+                                    <li><a href="{{route('home.products.index',['slug'=>$ChildrenCategory->slug])}}"
+                                            class="category-level-3">{{$ChildrenCategory->name}}</a></li>
+                                    @endforeach
+                                </ul>
+                                @endif
+                            </div>
                         </li>
                         @endforeach
                     </ul>
