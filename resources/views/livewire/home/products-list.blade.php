@@ -161,7 +161,7 @@
                                                 @foreach ($variation->variationValues as $value)
                                                 <div class="form-auth-row" wire:key="var-{{$loop->index}}">
                                                     <label for="#" class="ui-checkbox">
-                                                        <input id="var-{{$loop->index}}" @checked(array_key_exists($variation->id,$filterd['variation']) && in_array($value->value,$filterd['variation'][$variation->id])) wire:click="addFilter('attribute','{{$attribute->id}}','{{$value->value}}')" type="checkbox" value="1">
+                                                        <input id="var-{{$loop->index}}" @checked(array_key_exists($variation->id,$filterd['variation']) && in_array($value->value,$filterd['variation'][$variation->id])) wire:click="addFilter('variation','{{$variation->id}}','{{$value->value}}')" type="checkbox" value="1">
                                                         <span class="ui-checkbox-check"></span>
                                                     </label>
                                                     <label for="var-{{$loop->index}}" class="remember-me">{{$value->value}}</label>
@@ -387,7 +387,7 @@
                                     @foreach ($variation->variationValues as $value)
                                     <div class="form-auth-row" wire:key="var-side-{{$loop->index}}">
                                         <label for="#" class="ui-checkbox">
-                                            <input id="var-side-{{$loop->index}}" @checked(array_key_exists($variation->id,$filterd['variation']) && in_array($value->value,$filterd['variation'][$variation->id])) wire:click="filter('attribute','{{$attribute->id}}','{{$value->value}}')" type="checkbox" value="1">
+                                            <input id="var-side-{{$loop->index}}" @checked(array_key_exists($variation->id,$filterd['variation']) && in_array($value->value,$filterd['variation'][$variation->id])) wire:click="addFilter('variation','{{$variation->id}}','{{$value->value}}')" type="checkbox" value="1">
                                             <span class="ui-checkbox-check"></span>
                                         </label>
                                         <label for="var-side-{{$loop->index}}" class="remember-me">{{$value->value}}</label>
