@@ -1,5 +1,5 @@
 @if ($paginator->hasPages())
-<div class="card">
+<div class="">
     <div class="body">
         <div class="row clearfix">
             <div class="col-md-6">

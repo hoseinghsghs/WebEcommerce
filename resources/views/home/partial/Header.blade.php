@@ -95,6 +95,11 @@
                                     @endif
                                 </li>
                                 @endforeach
+                                <li id="nav-menu-item" class="menu-item nav-overlay">
+                                    <a href="{{route('home.posts.index')}}" class="current-link-menu">
+                                        بلاگ
+                                    </a>
+                                </li>
 
                                 @if (!request()->routeIs('home.cart.index'))
 
@@ -238,6 +243,11 @@
                             </div>
                         </li>
                         @endforeach
+                        <li> <a href="{{route('home.posts.index')}}">
+                                بلاگ
+                            </a>
+                        </li>
+
                     </ul>
                     <!-- پایان لیست دسته بندی ها در حالت موبایل در دو سطح  -->
 

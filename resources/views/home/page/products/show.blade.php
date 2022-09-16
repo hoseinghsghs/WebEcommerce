@@ -473,9 +473,6 @@
                                             </button>
                                             @endif
                                             @endif
-
-
-
                                         </div>
                                     </div>
                                     <div class="product-comment-list">
@@ -486,7 +483,7 @@
                                                     <section>
                                                         <div class="comments-user-shopping">
 
-                                                            {{$comment->user->name == " " ? "بدون نام" : $comment->user->phone }}
+                                                            {{$comment->user->name == " " ? "بدون نام" : $comment->user->name }}
                                                             <div class="cell-date">
                                                                 {{Hekmatinasser\Verta\Verta::instance($comment->created_at)->format('Y/n/j')}}
                                                             </div>

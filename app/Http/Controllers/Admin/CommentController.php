@@ -16,8 +16,8 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $comments = Comment::latest()->paginate(10);
 
+        $comments = Comment::latest()->paginate(10);
         return view('admin.page.comments.index', compact('comments'));
     }
 
@@ -44,12 +44,14 @@ class CommentController extends Controller
             'text' => 'required',
         ]);
     
+        $approved = (auth()->user()->hasRole('super-admin')) ? 1 : 0 ;
         Comment::create([
             'parent_id' => $request->comment_id,
             'user_id' => auth()->id(),
             'text' => $request->text,
             'commentable_type' => 'App\Models\Product',
             'commentable_id' => $request->product_id,
+            'approved' => $approved
 
 
         ]);

@@ -3,76 +3,52 @@
 @section('content')
 
 <!-- Start of Main -->
-<main class="main">
-    <!-- Start of Page Header -->
-    <div class="page-header">
-        <div class="container">
-            <h1 class="page-title mb-0">پست ها</h1>
-        </div>
+<main class="main-row mb-2 mt-2 p-0">
+    <div id="breadcrumb">
+        <i class="mdi mdi-home"></i>
+        <nav aria-label="breadcrumb" class="p-1">
+            <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item"><a href="{{route('home')}}">خانه</a></li>
+                <li class="breadcrumb-item"><a href="{{route('home.posts.index')}}">بلاگ</a>
+                </li>
+            </ol>
+        </nav>
     </div>
-    <!-- End of Page Header -->
+    <div class="container-main">
+        <div class="d-block">
+            <section class="content-widget">
+                @foreach ($posts as $post)
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4 items-2 pr">
+                    <article class="blog-item">
+                        <figure class="figure">
+                            <div class="post-thumbnail">
 
-    <!-- Start of Breadcrumb -->
-    <nav class="breadcrumb-nav mb-6">
-        <div class="container">
-            <ul class="breadcrumb">
-                <li><a href="{{route('home')}}">صفحه اصلی </a></li>
-                <li><a href="{{route('home.posts.index')}}">وبلاگ </a></li>
-            </ul>
-        </div>
-    </nav>
-    <!-- End of Breadcrumb -->
+                                <img src="{{url('storage/'.$post->image->url)}}" alt="{{$post->title}}">
+                            </div>
 
-    <!-- Start of Page Content -->
-    <div class="page-content">
-        <div class="container">
-
-            <div class="row grid cols-lg-3 cols-md-2 mb-2" data-grid-options="{
-                        'layoutMode': 'fitRows'
-                    }">
-                @foreach($posts as $post)
-                <div class="grid-item fashion">
-                    <article class="post post-mask overlay-zoom br-sm">
-                        <figure class="post-media">
-                            <a href="{{route('home.posts.show' , ['post' => $post->id] )}}">
-                                <img src="{{url('storage/'.$post->image->url)}}" width="600" height="420" alt="blog">
-                            </a>
+                            <div class="post-title">
+                                <a href="{{route('home.posts.show' , ['post' => $post->slug] )}}" class="d-block">
+                                    <h4>{{$post->title}}</h4>
+                                </a>
+                                <span class="post-date">
+                                    <i class="fa fa-calendar"></i>
+                                    {{Hekmatinasser\Verta\Verta::instance($post->created_at)->format('Y/n/j')}}
+                                </span>
+                            </div>
                         </figure>
-                        <div class="post-details">
-                            <div class="post-details-visible">
-                                <div class="post-cats">
-                                </div>
-                                <h4 class="post-title text-white"><a
-                                        href="{{route('home.posts.show' , ['post' => $post->id] )}}">{{$post->title}}</a>
-                                </h4>
-                            </div>
-                            <div class="post-meta">
-                                توسط <a href="{{route('home.posts.show' , ['post' => $post->id] )}}"
-                                    class="post-author">{{$post->user->name}}</a>
-                                - <a href="{{route('home.posts.show' , ['post' => $post->id] )}}"
-                                    class="post-date">{{Hekmatinasser\Verta\Verta::instance($post->created_at)->format('Y/n/j')}}</a>
-                                <!-- <a href="{{route('home.posts.show' , ['post' => $post->id] )}}" class="post-comment">0
-                                    نظرات </a> -->
-                            </div>
-                        </div>
                     </article>
                 </div>
-
                 @endforeach
 
+            </section>
+            <div class="pagination-product pr-3 pl-3 pr">
+                <nav aria-label="Page navigation example">
+                    {{ $posts->links() }}
 
+                </nav>
             </div>
-            <center>
-
-                <ul class="justify-content-center mb-10 pb-2 pt-2 mt-8">
-                    {{$posts->links()}}
-                </ul>
-
-            </center>
-
-
         </div>
-        <!-- End of Page Content -->
+    </div>
 </main>
 <!-- End of Main -->
 

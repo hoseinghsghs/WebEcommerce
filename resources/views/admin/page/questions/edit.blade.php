@@ -125,7 +125,7 @@
                         @endif
 
                         @livewire('admin.replay.list-replay', key($question->id) , ['question' =>
-                        $question , 'color' => $color , 'title' => $title])
+                        $question , 'color' => $color , 'title' => $title , 'isquestion' => 1])
 
                         @endforeach
 

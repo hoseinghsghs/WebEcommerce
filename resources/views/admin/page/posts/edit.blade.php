@@ -54,11 +54,32 @@
                                     </div>
                                 </div>
 
+                                <div class="form-group form-float">
+                                    <label for="categoryposition_id">دسته بندی</label>
+                                    <select id="categorySelect" name="category" data-placeholder="انتخاب محل"
+                                        class="form-control ms select2">
+                                        <option {{$post->category == 'بدون دسته بندی' ? 'selected' : ''}}>بدون دسته بندی
+                                        </option>
+                                        <option {{$post->category == 'سئو' ? 'selected' : ''}}>سئو
+                                        </option>
+                                        <option {{$post->category == 'دیجیتال مارکتینگ' ? 'selected' : ''}}>دیجیتال
+                                            مارکتینگ
+                                        </option>
+                                        <option {{$post->category == 'تکنولوژی' ? 'selected' : ''}}>تکنولوژی
+                                        </option>
+                                        <option {{$post->category == 'محبوب ها' ? 'selected' : ''}}>محبوب ها
+                                        </option>
+                                    </select>
+                                    @error('category')
+                                    <span class="text-danger m-0">{{$message}}</span>
+                                    @enderror
+                                </div>
+
                                 <div class="form-group">
                                     <div class="form-line">
                                         <label class="form-label">متن خبر</label>
-                                        <textarea name="body" rows="4" class="form-control" minlength="5"
-                                            required>{{old('body')??$post->body}}</textarea>
+                                        <textarea id="summernote" name="body" rows="4" class="form-control"
+                                            minlength="5" required>{{old('body')??$post->body}}</textarea>
                                     </div>
                                 </div>
 
@@ -94,3 +115,10 @@
     </div>
 </section>
 @endsection
+@push('scripts')
+<script>
+$(document).ready(function() {
+    $('#summernote').summernote();
+});
+</script>
+@endpush
