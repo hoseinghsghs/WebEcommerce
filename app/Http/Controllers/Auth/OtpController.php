@@ -19,7 +19,12 @@ class OtpController extends Controller
             ]);
         } else {
             $data = $request->validate([
-                'username' => 'required|email|exists:users,email'
+                'username' => ['required','email','exists:users,email',function ($attribute, $value, $fail) {
+                    $user=User::where('email',$value)->first();
+                    if (empty($user->email_verified_at)) {
+                        $fail('ایمیل تایید نشده است');
+                    }
+                }]
             ]);
         }
 
