@@ -13,20 +13,37 @@
                             <div class="profile-stats">
                                 <div class="profile-address">
                                     <div class="middle-container">
-                                        <form action="#" class="form-checkout">
+                                        @if ($errors->updateProfileInformation->any())
+                                        <div class="alert alert-danger mt-3">
+                                            <ul>
+                                                @foreach ($errors->updateProfileInformation->all() as $error)
+                                                <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                        @endif
+                                        <form action="{{route('user-profile-information.update')}}" method="POST" class="form-checkout">
+                                            @csrf
+                                            @method('PUT')
                                             <div class="form-checkout-row">
                                                 <label for="fullname">نام و نام خانوادگی</label>
-                                                <input type="text" id="fullname" class="input-namefirst-checkout form-control" value="{{old('name')??$user->name}}">
+                                                <input type="text" id="fullname" name="name" class="input-namefirst-checkout form-control @error('name','updateProfileInformation') is-invalid @enderror" value="{{old('name')??$user->name}}">
 
-                                                <label for="cellphone">شماره موبایل<abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
+                                                <label>شماره موبایل<abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
                                                 <div class="input-group mb-3">
-                                                    <input class="form-control" aria-label="شماره تماس" aria-describedby="button-addon2" value="{{$user->cellphone}}" disabled readonly>
-                                                    <button class="btn btn-outline-info" type="button" id="button-addon2" data-toggle="modal" data-target="#sendOtpModal"><small>ویرایش</small></button>
+                                                    <input class="form-control" aria-label="شماره تماس" value="{{$user->cellphone}}" disabled readonly>
+                                                    <button class="btn btn-outline-info" type="button" id="cellphone" data-toggle="modal" data-target="#sendOtpModal"><small>ویرایش</small></button>
                                                 </div>
-                                                <!-- <input type="text"  class="input-namelast-checkout form-control" value="{{$user->cellphone}}"> -->
-
-                                                <label for="email">ایمیل</label>
-                                                <input type="email" id="email" class="input-email-checkout form-control" value="{{$user->email}}">
+                                                @if($user->email && empty($user->email_verified_at))
+                                                <label>ایمیل<span class="badge badge-warning p-1 mr-1">تایید نشده</span></label>
+                                                <div class="input-group mb-3">
+                                                    <input type="email" name="email" class="input-email-checkout form-control @error('email','updateProfileInformation') is-invalid @enderror"" value=" {{$user->email}}">
+                                                    <button class="btn btn-outline-info" type="button" onclick="verifyEmail(event)"><small>تایید ایمیل</small></button>
+                                                </div>
+                                                @else
+                                                <label for="email">ایمیل<span class="badge badge-success p-1 mr-1">تایید شده</span></label>
+                                                <input type="email" name="email" id="email" class="input-email-checkout form-control @error('email','updateProfileInformation') is-invalid @enderror"" value=" {{$user->email}}">
+                                                @endif
                                                 <div class="AR-CR">
                                                     <button class="btn-registrar">ذخیره</button>
                                                 </div>
@@ -55,14 +72,14 @@
                                             @method('PUT')
                                             <div class="form-checkout-row">
                                                 @isset($user->password)
-                                                <label for="password">رمز عبور قبلی <abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
-                                                <input type="password" name="current_password" id="password" class="@error('current_password','updatePassword') is-invalid @enderror input-password-checkout form-control ">
+                                                <label for="current_password">رمز عبور قبلی <abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
+                                                <input type="password" name="current_password" id="current_password" class="@error('current_password','updatePassword') is-invalid @enderror input-password-checkout form-control ">
                                                 @endisset
                                                 <label for="password">رمز عبور جدید <abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
                                                 <input type="password" name="password" id="password" class="input-password-checkout form-control @error('password','updatePassword') is-invalid @enderror">
 
-                                                <label for="password">تکرار رمز عبور جدید <abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
-                                                <input type="password" name="password_confirmation" id="password" class="input-password-checkout form-control @error('password_confirmation','updatePassword') is-invalid @enderror">
+                                                <label for="password_confirmation">تکرار رمز عبور جدید <abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
+                                                <input type="password" name="password_confirmation" id="password_confirmation" class="input-password-checkout form-control @error('password_confirmation','updatePassword') is-invalid @enderror">
 
                                                 <div class="AR-CR">
                                                     <button type="submit" class="btn-registrar">تغییر</button>
@@ -152,31 +169,6 @@
 @push('scripts')
 <script src="{{asset('assets/home/js/vendor/jquery.countdown.js')}}"></script>
 <script>
-    @if(session('status'))
-
-    @if(session('status') == "profile-information-updated")
-    Swal.fire({
-        text: "حساب کاربری با موفقیت ویرایش شد",
-        icon: 'success',
-        showConfirmButton: false,
-        toast: true,
-        position: 'top-right',
-        timer: 5000,
-        timerProgressBar: true,
-    })
-    @else
-    Swal.fire({
-        text: "{{ session('status') }}",
-        icon: 'success',
-        showConfirmButton: false,
-        toast: true,
-        position: 'top-right',
-        timer: 5000,
-        timerProgressBar: true,
-    })
-    @endif
-    @endif
-
     let opt_id;
     // get phone number
     $('#get-phone-form').submit(function(event) {
@@ -331,5 +323,29 @@
             $('#resendOtp').removeClass("disable-click").find('span').remove();
         });
     };
+    // verify email
+    function verifyEmail(event) {
+        $(event.target).attr('disabled', true).append('<span class="mr-1"><i class="fa fa-spinner fa-spin"></i></span>');
+        $.post("{{ route('verification.send') }}", {
+            '_token': "{{csrf_token()}}"
+        }, function(response, status) {
+            Swal.fire({
+                title: 'لینک تایید ارسال شد',
+                text:'ایمیل خود را باز کنید و روی لینک تایید ایمیل کلیک کنید.',
+                icon: 'success',
+                confirmButtonText: 'تایید',
+            })
+        }).fail(function(response) {
+            Swal.fire({
+                text: "خطا در ارسال لینک",
+                icon: 'error',
+                confirmButtonText: 'تایید',
+                timer: 5000,
+                timerProgressBar: true,
+            })
+        }).always(function(){
+        $(event.target).attr('disabled', false).find('span').remove();
+        })
+    }
 </script>
 @endpush

@@ -22,11 +22,58 @@
     @include('sweetalert::alert')
     @livewireScripts()
     @flasher_livewire_render
-</body>
+    @stack('scripts')
 
-@stack('scripts')
-</script>
-<script type="text/javascript" src="{{asset('assets/home/js/vendor/bootstrap.bundle.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/home/js/vendor/jquery.touchSwipe.min.js')}}"></script>
+    <script>
+        @if(session('status'))
+        @if(session('status') == "profile-information-updated")
+        Swal.fire({
+            text: "حساب کاربری با موفقیت ویرایش شد",
+            icon: 'success',
+            showConfirmButton: false,
+            toast: true,
+            position: 'top-right',
+            timer: 5000,
+            timerProgressBar: true,
+        })
+        @elseif(session('status') == 'verification-link-sent')
+        Swal.fire({
+            title: 'لینک تایید ارسال شد',
+            text: 'ایمیل خود را باز کنید و روی لینک تایید ایمیل کلیک کنید.',
+            icon: 'success',
+            confirmButtonText: 'تایید',
+        })
+        @else
+        Swal.fire({
+            text: "{{ session('status') }}",
+            icon: 'success',
+            showConfirmButton: false,
+            toast: true,
+            position: 'top-right',
+            timer: 5000,
+            timerProgressBar: true,
+        })
+        @endif
+        @endif
+    </script>
+
+    @if (request()->session()->has('message'))
+    <script>
+        // show message if exist
+        Swal.fire({
+            text: "{{session('message.text')}}",
+            icon: "{{session('message.type')}}",
+            showConfirmButton: false,
+            toast: true,
+            position: 'top-right',
+            timer: 5000,
+            timerProgressBar: true,
+        });
+    </script>
+    @endif
+    <script type="text/javascript" src="{{asset('assets/home/js/vendor/bootstrap.bundle.min.js')}}">
+    </script>
+    <script type="text/javascript" src="{{asset('assets/home/js/vendor/jquery.touchSwipe.min.js')}}"></script>
+</body>
 
 </html>
