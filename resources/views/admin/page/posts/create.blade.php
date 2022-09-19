@@ -50,16 +50,28 @@
                                             minlength="3" value="{{ old('title') }}" required>
                                     </div>
                                 </div>
-
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <label class="form-label">توضیحات</label>
-                                        <textarea name="body" rows="4" class="form-control" id="summernote"
-                                            minlength="5" required>{{ old('body') }}</textarea>
-                                    </div>
+                                <div class="form-group form-float">
+                                    <label for="categoryposition_id">دسته بندی</label>
+                                    <select id="categorySelect" name="category" data-placeholder="انتخاب محل"
+                                        class="form-control ms select2">
+                                        <option>بدون دسته بندی</option>
+                                        <option>سئو</option>
+                                        <option>دیجیتال مارکتینگ</option>
+                                        <option>تکنولوژی</option>
+                                        <option>محبوب ها</option>
+                                    </select>
+                                    @error('category')
+                                    <span class="text-danger m-0">{{$message}}</span>
+                                    @enderror
                                 </div>
 
 
+
+                                <div class="body">
+                                    <textarea id="summernote" name="body" rows="8" style="z-index:1000 ;" required>
+                                    {{ old('body') }}
+                                    </textarea>
+                                </div>
 
                                 <div class="form-group ">
                                     <label class="form-label">آپلود عکس</label>
@@ -90,3 +102,10 @@
     </div>
 </section>
 @endsection
+@push('scripts')
+<script>
+$(document).ready(function() {
+    $('#summernote').summernote();
+});
+</script>
+@endpush

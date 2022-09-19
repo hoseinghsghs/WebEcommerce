@@ -99,7 +99,6 @@
                                             <h2><strong>نظر خریدار</strong></h2>
                                         </div>
                                         <hr>
-
                                         @if (isset($comment->user->rate->cost))
                                         <span class="cell-title">ارزش خرید
                                             :</span>
@@ -112,11 +111,6 @@
                                                     class="sr-only">{{(ceil($comment->user->rate->first()->cost)*100)/5}}%;
                                                 </span>
                                             </div>
-                                        </div>
-                                        @else
-                                        <span class="cell-title">ارزش خرید
-                                            :</span>
-                                        <div class="rating-value" style="width: 0%;">
                                         </div>
                                         @endif
 
@@ -133,11 +127,6 @@
 
                                                     (میزان رضایت)</span>
                                             </div>
-                                        </div>
-                                        @else
-                                        <span class="cell-title">کیفیت
-                                            :</span>
-                                        <div class="rating-value" style="width: 0%;">
                                         </div>
                                         @endif
 
@@ -156,10 +145,7 @@
                                             </div>
                                         </div>
                                         @else
-                                        <span class="cell-title">میزان رضایت کلی از محصول
-                                            :</span>
-                                        <div class="rating-value" style="width: 0%;">
-                                        </div>
+                                        بدون نظر سنجی
                                         @endif
 
 
@@ -167,6 +153,8 @@
                                 </div>
                             </div>
                         </div>
+
+                        @if ($comment['advantages'])
                         <div class="row clearfix">
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="card">
@@ -187,7 +175,9 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
 
+                        @if ($comment['disadvantages'])
                         <div class="row clearfix">
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="card">
@@ -208,6 +198,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
 
 
 
@@ -248,8 +239,8 @@
                         @endphp
                         @endif
 
-                        @livewire('admin.replay.list-replay', key($comment->id) , ['comment' =>
-                        $comment , 'color' => $color , 'title' => $title])
+                        @livewire('admin.replay.list-replay', key($comment->id) , ['question' =>
+                        $comment , 'color' => $color , 'title' => $title , 'isquestion' => 0])
 
                         @endforeach
 

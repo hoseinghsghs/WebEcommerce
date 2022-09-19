@@ -11,7 +11,7 @@ class Post extends Model
 {
     use HasFactory, Sluggable;
 
-    protected $fillable = ['user_id', 'title', 'slug', 'body', 'status'];
+    protected $fillable = ['user_id', 'title', 'slug', 'body', 'status' , 'category'];
 
     public function sluggable(): array
     {
@@ -38,4 +38,9 @@ class Post extends Model
     {
         return $this->morphMany(Comment::class, 'commentable')->whereNull('parent_id');
     }
+    public function approvedComments()
+    {
+        return $this->morphMany(comment::class, 'commentable')->where('approved', 1)->where('parent_id', 0);
+    }
+    
 }

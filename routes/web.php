@@ -96,6 +96,7 @@ Route::get('/main/{slug}', ProductsList::class)->name('home.products.index');
 Route::get('home/question/{product}', [HomeCommentController::class, 'create'])->name('home.comments.index');
 Route::post('/comments/{product}', [HomeCommentController::class, 'store'])->name('home.comments.store');
 Route::post('/reply/store', [HomeCommentController::class, 'replyStore'])->name('reply.add');
+Route::post('/postcomments/{post}', [HomeCommentController::class, 'poststore'])->name('home.comments.poststore');
 
 //questions
 Route::post('/question/{product}', [HomeQuestionController::class, 'store'])->name('home.questions.store');
@@ -152,8 +153,10 @@ Route::get('/checkout', [CartController::class, 'checkout'])->name('home.orders.
 
 Route::post('/payment', [PaymentController::class, 'payment'])->name('home.payment');
 
-Route::get('/post/{post}', [HomePostController::class, 'show'])->name('home.posts.show');
+Route::get('/post/{post:slug}', [HomePostController::class, 'show'])->name('home.posts.show');
 Route::get('/post', [HomePostController::class, 'index'])->name('home.posts.index');
+
+Route::get('/post/list/{post:category}', [HomePostController::class, 'list'])->name('home.posts.list');
 
 Route::get('/payment-verify/{gatewayName}', [PaymentController::class, 'paymentVerify'])->name('home.payment_verify');
 
@@ -166,5 +169,4 @@ Route::post('/checkcoupon', [PaymentController::class, 'checkCoupon'])->name('ho
 
 Route::get('/test', function () {
 
-    Session::flush();
-});
+} );

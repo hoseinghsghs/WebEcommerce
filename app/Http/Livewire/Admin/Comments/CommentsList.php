@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Livewire\Admin\Comments;
 use App\Models\Comment;
+use App\Models\Post;
 use App\Models\Product;
 use App\Models\User;
 use Livewire\Component;
@@ -41,13 +42,15 @@ public function mount(Comment $comment)
       
         public function render()
         {
+            
             $user_name=User::where('name','like','%'.$this->name.'%')->pluck('id')->toArray();
             $product_name=Product::where('name','like','%'.$this->product_name.'%')->pluck('id')->toArray();
+            $post_name=Post::where('title','like','%'.$this->product_name.'%')->pluck('id')->toArray();
+            $data = array_merge( $post_name, $product_name);
             $comments = Comment::whereIn('user_id',$user_name)
-            ->whereIn('commentable_id',$product_name)
+            ->whereIn('commentable_id', $data)
             ->where('parent_id',0)
             ->paginate(10);
-
 
             return view('livewire.admin.comments.comments-list',['comments' => $comments]);
         }
@@ -63,7 +66,7 @@ public function mount(Comment $comment)
     }
 
    public function ChengeActive_comment (Comment $comment){
-       
+      
 
     if($comment->approved){
         $comment->update([

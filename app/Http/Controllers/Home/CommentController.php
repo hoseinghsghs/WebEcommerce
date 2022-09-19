@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
+use App\Models\Post;
 use App\Models\Product;
 use App\Models\ProductRate;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class CommentController extends Controller
 
     public function store(Product $product , Request $request)
 
-{
+    {
         $validator = Validator::make($request->all(), [
             'text' => 'required|min:5|max:7000',
             'comment.*.advantages.*' => 'min:5|max:7000',
@@ -104,4 +105,47 @@ class CommentController extends Controller
         return back();
     }
    
+
+
+    //posts comment
+    
+    public function poststore(Post $post , Request $request)
+    {
+        
+        $validator = Validator::make($request->all(), [
+            'text' => 'required|min:5|max:7000',
+        ]);
+        
+        if ($validator->fails()) {
+            return redirect()->to(url()->previous() . '#scform')->withErrors($validator)->with('status' , 1);
+        }
+
+        if (auth()->check()) {
+            try {
+                DB::beginTransaction();
+
+                Comment::create([
+
+                    'user_id' => auth()->id(),
+                    'text' => $request->text,
+                    'commentable_id' => $post->id,
+                    'commentable_type' => Post::class,
+                 
+                ]);
+
+                DB::commit();
+            } catch (\Exception $ex) {
+                DB::rollBack();
+                alert()->error('مشکل در ایجاد پست', $ex->getMessage())->persistent('حله');
+                return redirect()->back();
+            }
+
+            alert()->success('نظر شما با موفقیت برای این پست ثبت شد', 'باتشکر');
+            return redirect()->back();
+        } else {
+            alert()->warning('برای ثبت نظر ابتدا وارد سایت شوید')->persistent('حله');
+            return redirect()->back();
+        }
+    }
+
 }

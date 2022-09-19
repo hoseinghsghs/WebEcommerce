@@ -42,22 +42,22 @@ class PostController extends Controller
      */
     public function store(Request $request, ToastrFactory $flasher)
     {
+       
         $request->whenHas('status', function ($input) use ($request) {
             $request['status'] = false;
         }, function () use ($request) {
             $request['status'] = true;
         });
-
+        
         $data = $request->validate([
             'title'     => 'required|string|unique:posts',
             'image'     => 'required|image|mimes:jpeg,jpg,png',
+            'category'  => 'required|string',
             'body'      => 'required|string',
+            
         ]);
-
         $user=auth()->id();
-        $slug  = str_slug($request->title);
         $data['user_id'] = $user;
-        $data['slug'] = $slug;
         $data['status'] = $request['status'];
         $post = Post::create($data);
 
@@ -104,12 +104,13 @@ class PostController extends Controller
         $data = $request->validate([
             'title'     => ['required', 'string', Rule::unique('posts')->ignore($post->id)],
             'image'     => 'nullable|image|mimes:jpeg,jpg,png',
-            'body'      => 'required|string'
+            'body'      => 'required|string',
+            'category'  => 'required|string',
+
         ]);
-        $slug  = str_slug($request->title);
         $data['user_id'] = auth()->id();
-        $data['slug'] = $slug;
         $data['status'] = $request['status'];
+      
         $post->update($data);
         // resize and save image
 

@@ -61,7 +61,7 @@
 
                                 <tr wire:key="name_{{ $question->id }}">
                                     <td scope=" row">{{$question->id}}</td>
-                                    <td>{{$question->user->name == null ? "بدون نام" : $question->user->name }}
+                                    <td>{{$question->user->name == null ? "بدون نام" : $question->user->cellphone }}
                                     </td>
                                     <td>{{Hekmatinasser\Verta\Verta::instance($question->created_at)->format('Y/n/j')}}
                                     </td>

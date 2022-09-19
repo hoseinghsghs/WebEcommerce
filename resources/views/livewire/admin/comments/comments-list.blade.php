@@ -44,7 +44,7 @@
                                     <th>#</th>
                                     <th>نوشته توسط</th>
                                     <th>تاریخ</th>
-                                    <th>نام محصول</th>
+                                    <th>عنوان/ نام محصول</th>
                                     <th>تعداد پاسخ ها</th>
                                     <th>وضعیت</th>
                                     <th>
@@ -56,19 +56,19 @@
                             </thead>
 
                             <tbody>
-                                @foreach ($comments as $comment)
 
+                                @foreach ($comments as $comment)
 
                                 <tr wire:key="name_{{ $comment->id }}">
                                     <td scope=" row">{{$comment->id}}</td>
-                                    <td>{{$comment->user->name == null ? "بدون نام" : $comment->user->name }}
+                                    <td>{{$comment->user->name == null ? "بدون نام" : $comment->user->cellphone }}
                                     </td>
                                     <td>{{Hekmatinasser\Verta\Verta::instance($comment->created_at)->format('Y/n/j')}}
                                     </td>
                                     <td>
                                         <a
                                             href="{{route('admin.products.show',['product' => $comment->commentable_id])}}">
-                                            {{$comment->commentable->name}}
+                                            {{$comment->commentable->name ? $comment->commentable->name : $comment->commentable->title }}
                                         </a>
 
                                     </td>
