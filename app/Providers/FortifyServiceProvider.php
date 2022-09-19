@@ -35,6 +35,7 @@ class FortifyServiceProvider extends ServiceProvider
     public function register()
     {
 
+        Fortify::ignoreRoutes();  //to ignore the fortify routes and use routes/fortify.php
         $this->app->instance(LogoutResponse::class, new class implements LogoutResponse {
             public function toResponse($request)
             {

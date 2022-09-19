@@ -36,12 +36,14 @@ use App\Http\Livewire\Home\ProductsList;
 use App\Models\Question;
 use Illuminate\Support\Facades\Session;
 
+//fortify routes
+require_once __DIR__.'/fortify.php';
 //admin routes
-Route::prefix('Admin-panel/managment')->name('admin.')->middleware(['auth','has_role','has_free_plan'])->group(function () {
+Route::prefix('Admin-panel/managment')->name('admin.')->middleware(['auth', 'has_role', 'has_free_plan'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('home');
     Route::resource('brands',         BrandController::class)->middleware('permission:brands');
     Route::resource('attributes',     AttributeController::class)->except(['show', 'destroy'])->middleware('permission:attributes');
-    Route::post('/categories/order',[CategoryController::class,'saveOrder'])->name('category.order');
+    Route::post('/categories/order', [CategoryController::class, 'saveOrder'])->name('category.order');
     Route::resource('categories',       CategoryController::class)->middleware('permission:categories');
     Route::resource('banners',          BannerController::class)->except(['show', 'destroy'])->middleware('permission:banners');
     Route::resource('services',         ServiceController::class)->except(['show'])->middleware('permission:services');
@@ -56,9 +58,9 @@ Route::prefix('Admin-panel/managment')->name('admin.')->middleware(['auth','has_
     Route::resource('roles',   RoleController::class)->except('show')->middleware('permission:roles');
     Route::view('permissions', 'admin.page.permissions.index')->name('permissions')->middleware('permission:permissions');
 
-    Route::get('/profile', [ProfileController::class,'edit'])->name('profile.edit');
-    Route::put('/profile', [ProfileController::class,'update'])->name('profile.update');
-    Route::view('/user/password','admin.page.auth.change-password')->name('profile.change-pass');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::view('/user/password', 'admin.page.auth.change-password')->name('profile.change-pass');
 
     Route::view('/settings', 'admin.page.settings.setting')->name('settings.show')->middleware('permission:settings');
     Route::get('tags/create',                         [TagControll::class, "createTag"])->name('tags.create')->middleware('permission:tags');
@@ -79,7 +81,7 @@ Route::prefix('Admin-panel/managment')->name('admin.')->middleware(['auth','has_
 //end
 
 //admin auth
-Route::view('admin/login','admin.page.auth.login')->middleware('guest')->name('admin.login');
+Route::view('admin/login', 'admin.page.auth.login')->middleware('guest')->name('admin.login');
 
 // home routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -100,12 +102,12 @@ Route::post('/question/{product}', [HomeQuestionController::class, 'store'])->na
 Route::post('/question/reply/store', [HomeQuestionController::class, 'replyStore'])->name('questions.reply.add');
 
 // otp auth
-Route::post('/auth/check',[OtpController::class,'authenticate'])->name('authenticate');
+Route::post('/auth/check', [OtpController::class, 'authenticate'])->name('authenticate');
 Route::post('/otp/verify', [OtpController::class, 'checkVerificationCode'])->name('otp.verify');
 Route::post('/otp/resend', [OtpController::class, 'resendVerificationCode'])->name('otp.resend');
-
-Route::post('/otp/alterPhone',[OtpController::class, 'alterPhone'])->middleware('auth')->name('phone.update');
-Route::post('/otp/verfiyPhone',[OtpController::class, 'verfiyPhone'])->middleware('auth')->name('phone.verify');
+Route::post('/otp/reset-password', [OtpController::class, 'resetPassword'])->name('otp.resetPassword');
+Route::post('/otp/alter-phone', [OtpController::class, 'alterPhone'])->middleware('auth')->name('phone.update');
+Route::post('/otp/verfiy-phone', [OtpController::class, 'verfiyPhone'])->middleware('auth')->name('phone.verify');
 // end otp auth
 
 Route::get('/assets/ajax', function () {
@@ -113,19 +115,20 @@ Route::get('/assets/ajax', function () {
 });
 
 Route::prefix('profile')->name('home.')->middleware('auth')->group(function () {
-  Route::get('/',[UserProfileController::class, 'index'])->name('user_profile');
-  Route::get('/editProfile',[UserProfileController::class, 'editProfile'])->name('user_profile.edit');
-  Route::get('/wishlist',[WishListController::class, 'usersProfileIndex'])->name('profile.wishlist.index');
-  Route::get('/add-to-wishlist/{product:id}', [WishListController::class, 'add'])->name('home.wishlist.add');
-  Route::get('/addreses',  [AddressController::class, 'index'])->name('addreses.index');
-  Route::get('/addreses/create',  [AddressController::class, 'create'])->name('addreses.create');
-  Route::post('/addreses', [AddressController::class, 'store'])->name('addreses.store');
-  Route::get('/addreses/{address}', [AddressController::class, 'edit'])->name('addreses.edit');
-  Route::put('/addreses/{address}', [AddressController::class, 'update'])->name('addreses.update');
-  Route::get('/addreses/delete/{address}', [AddressController::class, 'destroy'])->name('addreses.destroy');
-  Route::get('/orders', [UserProfileController::class, 'orderList'])->name('user_profile.ordersList');
-  Route::get('/orders/{order}', [UserProfileController::class, 'order'])->name('user_profile.orders');
-  Route::get('/commentsList', [UserProfileController::class, 'commentsList'])->name('user_profile.commentsList');
+    Route::get('/', [UserProfileController::class, 'index'])->name('user_profile');
+    Route::get('/editProfile', [UserProfileController::class, 'editProfile'])->name('user_profile.edit');
+    Route::post('/forgot-password', [UserProfileController::class, 'forgetPassword'])->name('password.email');
+    Route::get('/wishlist', [WishListController::class, 'usersProfileIndex'])->name('profile.wishlist.index');
+    Route::get('/add-to-wishlist/{product:id}', [WishListController::class, 'add'])->name('home.wishlist.add');
+    Route::get('/addreses',  [AddressController::class, 'index'])->name('addreses.index');
+    Route::get('/addreses/create',  [AddressController::class, 'create'])->name('addreses.create');
+    Route::post('/addreses', [AddressController::class, 'store'])->name('addreses.store');
+    Route::get('/addreses/{address}', [AddressController::class, 'edit'])->name('addreses.edit');
+    Route::put('/addreses/{address}', [AddressController::class, 'update'])->name('addreses.update');
+    Route::get('/addreses/delete/{address}', [AddressController::class, 'destroy'])->name('addreses.destroy');
+    Route::get('/orders', [UserProfileController::class, 'orderList'])->name('user_profile.ordersList');
+    Route::get('/orders/{order}', [UserProfileController::class, 'order'])->name('user_profile.orders');
+    Route::get('/commentsList', [UserProfileController::class, 'commentsList'])->name('user_profile.commentsList');
 });
 
 
@@ -161,8 +164,7 @@ Route::get('/get-province-cities-list', [AddressController::class, 'getProvinceC
 Route::post('/checkcoupon', [PaymentController::class, 'checkCoupon'])->name('home.orders.checkcoupon')->middleware('auth');
 
 
-Route::get('/test', function(){
+Route::get('/test', function () {
 
-Session::flush();
-
-} );
+    Session::flush();
+});

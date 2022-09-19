@@ -8,6 +8,9 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Password;
 
 class OtpController extends Controller
 {
@@ -19,8 +22,8 @@ class OtpController extends Controller
             ]);
         } else {
             $data = $request->validate([
-                'username' => ['required','email','exists:users,email',function ($attribute, $value, $fail) {
-                    $user=User::where('email',$value)->first();
+                'username' => ['required', 'email', 'exists:users,email', function ($attribute, $value, $fail) {
+                    $user = User::where('email', $value)->first();
                     if (empty($user->email_verified_at)) {
                         $fail('ایمیل تایید نشده است');
                     }
@@ -81,7 +84,7 @@ class OtpController extends Controller
         if ($request->expectsJson()) {
             $data = $request->validate([
                 'id' => 'required|uuid',
-                'opt_code' => 'required|numeric|digits:5',
+                'otp_code' => 'required|numeric|digits:5',
                 'remember' => 'nullable|boolean',
             ]);
 
@@ -90,10 +93,16 @@ class OtpController extends Controller
             if (!$otp || empty($otp->id))
                 return response()->json(['message' => 'Id not found'], 422);
             if (!$otp->isValid())
-                return response()->json(['errors' => ['opt_code' => ['کد تایید منقضی شده است']]], 422);
-            if ($otp->code !== $data['opt_code'])
-                return response()->json(['errors' => ['opt_code' => ['کد تایید نامعتبر است']]], 422);
-
+                return response()->json(['errors' => ['otp_code' => ['کد تایید منقضی شده است']]], 422);
+            if ($otp->code !== $data['otp_code'])
+                return response()->json(['errors' => ['otp_code' => ['کد تایید نامعتبر است']]], 422);
+            // check verification code and then show form for change password
+            if ($request->forget_password) {
+                session()->flash($otp->cellphone, 'checked');
+                $otp->delete();
+                return response()->json(['message' => 'check successfull']);
+            }
+            //find or create user if not exists
             if ($otp->user_id) {
                 $user = User::findOrFail($otp->user_id);
             } else {
@@ -101,6 +110,7 @@ class OtpController extends Controller
                     'cellphone' => $otp->cellphone,
                 ]);
             }
+            // login user
             Auth::login($user, $request->has('remember') ? $data['remember'] : null);
             $otp->delete();
             return response()->json([
@@ -108,6 +118,29 @@ class OtpController extends Controller
             ], 200);
         } else {
             return abort(404);
+        }
+    }
+    // reset password
+    public function resetPassword(Request $request)
+    {
+        if ($request->session()->has($request->cellphone) && session($request->cellphone) == 'checked') {
+            $validator = Validator::make($request->all(), [
+                'password' => ['required', 'confirmed', Password::min(8)],
+                'cellphone' => 'required|ir_mobile|exists:users,cellphone'
+            ]);
+            if ($validator->fails()) {
+                $request->session()->keep([$request->cellphone]);
+                return response()->json(['errors' => $validator->getMessageBag()->toArray()], 400);
+            }
+            $user = User::where('cellphone', $request->cellphone)->first();
+            $user->update(['password' => Hash::make($request->password)]);
+            if(!auth()->check()){
+                Auth::login($user);
+            }
+            alert()->success('رمزعبور با موفقیت تغییر یافت.')->timerProgressBar()->toToast();
+            return response()->json(['message' => 'رمزعبور با موفقیت تغییر یافت.']);
+        } else {
+            return response()->json(['message' => 'شما دسترسی ندارید','sdf'=>$request->session()->all()], 422);
         }
     }
 
@@ -159,7 +192,7 @@ class OtpController extends Controller
             auth()->user()->update(['cellphone' => $otp->cellphone]);
 
             $otp->delete();
-            $request->session()->flash('message', ['type'=>'success','text'=>'شماره همراه با موفقیت ثبت شد']);
+            alert('', 'شماره همراه با موفقیت ثبت شد', 'success')->showConfirmButton('تایید');
             return response()->json([
                 'message' => 'success'
             ], 200);

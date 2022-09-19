@@ -1,75 +1,60 @@
 @extends('home.layout.MasterHome')
 @section('title','بازیابی رمز عبور')
 @section('content')
-<main class="main login-page">
-    <!-- Start of Page Header -->
-    <div class="page-header">
-        <div class="container">
-            <h1 class="page-title mb-0">بازیابی رمز عبور </h1>
-        </div>
-    </div>
-    <!-- End of Page Header -->
-
-    <!-- Start of Breadcrumb -->
-    <nav class="breadcrumb-nav">
-        <div class="container">
-            <ul class="breadcrumb">
-                <li><a href="{{route('home')}}">صفحه اصلی </a></li>
-                <li>فراموشی رمز</li>
-            </ul>
-        </div>
-    </nav>
-    <!-- End of Breadcrumb -->
-    <div class="page-content">
-        <div class="container">
-            <div class="login-popup">
-                <div class="tab tab-nav-boxed tab-nav-center tab-nav-underline">
-                    <ul class="nav nav-tabs text-uppercase" role="tablist">
-                        <li class="nav-item">
-                            <a href="#reset-password" class="nav-link active">تغییر رمز</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="reset-password">
-                            <form action="{{route('password.update')}}" method="POST">
-                                @csrf
-                                <div class="form-group">
-                                    <label>ایمیل *</label>
-                                    <input type="text" class="form-control" name="email" value="{{old('email')}}" required>
-                                    @error('email')
-                                    <span class="text-red">{{$message}}</span>
-                                    @enderror
+<div class="container">
+    <div class="row">
+        <div class="col-lg">
+            <section class="page-account-box">
+                <div class="col-lg-6 col-md-10 col-xs-12 mx-auto">
+                    <div class="ds-userlogin">
+                        <a href="{{route('home')}}" class="account-box-logo" style="background: url({{asset('storage/logo/'.$setting->logo)}}) no-repeat;background-size: contain;">{{$setting->title}}</a>
+                        <div class="account-box">
+                            <div class="Login-to-account mt-4">
+                                <div class="account-box-content">
+                                    <form id="reset-password" class="form-account text-center" action="{{route('password.update')}}" method="POST">
+                                        @csrf
+                                        <h4>تغییر رمزعبور</h4>
+                                        <div class="form-account-title text-right">
+                                            <label for="email">ایمیل<abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
+                                            <input type="email" id="email" class="number-email-input form-control @error('email') is-invalid @enderror" value="{{old('email')}}" name="email">
+                                            @error('email')
+                                            <div class="invalid-feedback pr-2">{{$message}}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-account-title text-right">
+                                            <label for="password">رمز عبور<abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
+                                            <input type="password" id="password" class="number-email-input form-control @error('password') is-invalid @enderror" name="password">
+                                            @error('password')
+                                            <div class="invalid-feedback pr-2">{{$message}}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-account-title text-right">
+                                            <label for="password_confirmation">تکرار رمز عبور <abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
+                                            <input type="password" class="number-email-input form-control @error('password_confirmation') is-invalid @enderror" id="password_confirmation" name="password_confirmation">
+                                            @error('password_confirmation')
+                                            <div class="invalid-feedback pr-2">{{$message}}</div>
+                                            @enderror
+                                            <input type="hidden" name="token" value="{{request()->route('token')}}">
+                                        </div>
+                                        <div class="form-row-account">
+                                            <button class="btn btn-primary btn-reset">تایید</button>
+                                        </div>
+                                    </form>
                                 </div>
-                                <div class="form-group">
-                                    <label>رمز عبور *</label>
-                                    <input type="password" class="form-control" name="password" required>
-                                    @error('password')
-                                    <span class="text-red">{{$message}}</span>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label>تکرار رمز عبور *</label>
-                                    <input type="password" class="form-control" name="password_confirmation" required>
-                                    @error('password_confirmation')
-                                    <span class="text-red">{{$message}}</span>
-                                    @enderror
-                                </div>
-                                <input type="hidden" name="token" value="{{request()->route('token')}}">
-                                <button type="submit" class="btn btn-primary">تغییر </button>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
     </div>
-</main>
+</div>
 @endsection
 @push('scripts')
 <script>
     $(document).ready(function() {
         $('#reset-password').submit(function(event) {
-            $('#reset-password .btn-primary').attr('disabled', true).append('<span class="ml-1"><i class="w-icon-store-seo fa-spin"></i></span>');
+            $('#reset-password .btn-reset').attr('disabled', true).append('<span class="mr-1"><i class="fa fa-spinner fa-spin"></i></span>');
         });
     });
 </script>

@@ -176,7 +176,7 @@ return array(
         "city_id" => "شهر",
         "postal_code" => "کد پستی",
         "display_name" => "نام نمایشی",
-        "opt_code" => "کد تایید",
+        "otp_code" => "کد تایید",
         "address_id" => "آدرس",
         "cellphone2" => "تلفن ثابت",
         "lastaddress" => "آدرس اضطراری",
