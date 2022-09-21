@@ -50,7 +50,7 @@ class OtpController extends Controller
             }
             $otp->delete();
             return response()->json([
-                'message' => 'خطا در ارسال کد تایید'
+                'error' => 'خطا در ارسال کد تایید'
             ], 500);
         } else {
             return abort(404);
@@ -72,7 +72,7 @@ class OtpController extends Controller
             }
 
             return response()->json([
-                'message' => 'خطا در ارسال کد تایید'
+                'erorr' => 'خطا در ارسال کد تایید'
             ], 500);
         } else {
             return abort(404);
@@ -91,7 +91,7 @@ class OtpController extends Controller
             $otp = Otp::where('id', $data['id'])->first();
 
             if (!$otp || empty($otp->id))
-                return response()->json(['message' => 'Id not found'], 422);
+                return response()->json(['error' => 'Id not found'], 422);
             if (!$otp->isValid())
                 return response()->json(['errors' => ['otp_code' => ['کد تایید منقضی شده است']]], 422);
             if ($otp->code !== $data['otp_code'])
@@ -140,7 +140,7 @@ class OtpController extends Controller
             alert()->success('رمزعبور با موفقیت تغییر یافت.')->timerProgressBar()->toToast();
             return response()->json(['message' => 'رمزعبور با موفقیت تغییر یافت.']);
         } else {
-            return response()->json(['message' => 'شما دسترسی ندارید','sdf'=>$request->session()->all()], 422);
+            return response()->json(['error' => 'شما دسترسی ندارید'], 422);
         }
     }
 
@@ -165,7 +165,7 @@ class OtpController extends Controller
             }
             $otp->delete();
             return response()->json([
-                'message' => 'خطا در ارسال کد تایید'
+                'error' => 'خطا در ارسال کد تایید'
             ], 500);
         } else {
             return abort(404);
@@ -183,7 +183,7 @@ class OtpController extends Controller
             $otp = Otp::where('id', $data['id'])->first();
 
             if (!$otp || empty($otp->id))
-                return response()->json(['message' => 'Id not found'], 422);
+                return response()->json(['error' => 'Id not found'], 422);
             if (!$otp->isValid())
                 return response()->json(['errors' => ['otp_code' => ['کد تایید منقضی شده است']]], 422);
             if ($otp->code !== $data['otp_code'])

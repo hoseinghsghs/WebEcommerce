@@ -242,9 +242,9 @@
                 })
             }
         }, 'json').fail(function(response) {
-            if (response.message) {
+            if (response.responseJSON.error) {
                 Swal.fire({
-                    text: response.message,
+                    text: response.responseJSON.error,
                     icon: 'error',
                     confirmButtonText: 'تایید',
                     timer: 6000,
@@ -297,9 +297,9 @@
                     timerProgressBar: true,
                 });
             }
-            if (response.message) {
+            if (response.error) {
                 Swal.fire({
-                    text: response.message,
+                    text: response.error,
                     icon: 'error',
                     showConfirmButton: false,
                     toast: true,
@@ -348,9 +348,18 @@
                     timerProgressBar: true,
                 })
             }, 'json').fail(function(response) {
-            if (response.message) {
+            if (response.responseJSON.id) {
                 Swal.fire({
-                    text: response.message,
+                    text: response.responseJSON.id,
+                    icon: 'error',
+                    confirmButtonText: 'تایید',
+                    timer: 5000,
+                    timerProgressBar: true,
+                })
+            }
+            if (response.responseJSON.error) {
+                Swal.fire({
+                    text: response.responseJSON.error,
                     icon: 'error',
                     confirmButtonText: 'تایید',
                     timer: 5000,
@@ -441,9 +450,9 @@
                 })
             }
         }, 'json').fail(function(response) {
-            if (response.message) {
+            if (response.responseJSON.error) {
                 Swal.fire({
-                    text: response.message,
+                    text: response.responseJSON.error,
                     icon: 'error',
                     confirmButtonText: 'تایید',
                     timer: 5000,
@@ -460,8 +469,8 @@
         });
     }
     // forget password
-    function setUsername(){
-        $('#forget-password-form input').val($('#username').val(),);
+    function setUsername() {
+        $('#forget-password-form input').val($('#username').val());
     }
     var input
     $('#forget-password-form').submit(function(event) {
@@ -534,16 +543,16 @@
 
                 }, 'json').fail(function(response) {
 
-                if (response.responseJSON.errors.username) {
-                    $('#verify-otp-code-reset input').addClass("is-invalid");
-                    $('#verify-otp-code-reset .invalid-feedback').html(response.responseJSON.errors.username[0]);
+                if (response.responseJSON.errors && response.responseJSON.errors.username) {
+                    $('#forget-password-form input').addClass("is-invalid");
+                    $('#forget-password-form .invalid-feedback').html(response.responseJSON.errors.username[0]);
                 } else {
-                    $('#verify-otp-code-reset input').removeClass('is-invalid');
-                    $('#verify-otp-code-reset .invalid-feedback').html('');
+                    $('#forget-password-form input').removeClass('is-invalid');
+                    $('#forget-password-form .invalid-feedback').html('');
                 }
-                if (response.message) {
+                if (response.responseJSON.error) {
                     Swal.fire({
-                        text: response.message,
+                        text: response.responseJSON.error,
                         icon: 'error',
                         confirmButtonText: 'تایید',
                         timer: 6000,
@@ -551,7 +560,7 @@
                     })
                 }
             }).always(function() {
-                $('#get-phone-form button[type="submit"]').attr('disabled', false).find('span').remove();
+                $('#forget-password-form button[type="submit"]').attr('disabled', false).find('span').remove();
             });
         }
         $('#verify-otp-code-reset').submit(function(event) {
@@ -574,7 +583,7 @@
                     form.hide();
                     $('#reset-password').show('slow');
                 }, 'json').fail(function(response) {
-                if (response.responseJSON.errors.otp_code) {
+                if (response.responseJSON.errors && response.responseJSON.errors.otp_code) {
                     Swal.fire({
                         text: response.responseJSON.errors.otp_code[0],
                         icon: 'error',
@@ -585,9 +594,9 @@
                         timerProgressBar: true,
                     });
                 }
-                if (response.message) {
+                if (response.responseJSON.error) {
                     Swal.fire({
-                        text: response.message,
+                        text: response.responseJSON.error,
                         icon: 'error',
                         showConfirmButton: false,
                         toast: true,
@@ -618,23 +627,23 @@
                 function(response, status) {
                     window.location.replace("{{route('home')}}");
                 }, 'json').fail(function(response) {
-                if (response.responseJSON.errors.password) {
+                if (response.responseJSON.errors && response.responseJSON.errors.password) {
                     $('#reset-password input[name=password]').addClass("is-invalid");
                     $('#reset-password .invalid-feedback.password-error').html(response.responseJSON.errors.password[0]);
                 } else {
                     $('#reset-password input[name=password]').removeClass('is-invalid');
                     $('#reset-password .invalid-feedback.password-error').html('');
                 }
-                if (response.responseJSON.errors.password_confirmation) {
+                if (response.responseJSON.errors && response.responseJSON.errors.password_confirmation) {
                     $('#reset-password input[name=password_confirmation]').addClass("is-invalid");
                     $('#reset-password .invalid-feedback.password_confirmation-error').html(response.responseJSON.errors.password_confirmation[0]);
                 } else {
                     $('#reset-password input[name=password_confirmation]').removeClass('is-invalid');
                     $('#reset-password .invalid-feedback.password_confirmation-error').html('');
                 }
-                if (response.message) {
+                if (response.responseJSON.error) {
                     Swal.fire({
-                        text: response.message,
+                        text: response.responseJSON.error,
                         icon: 'error',
                         showConfirmButton: false,
                         toast: true,

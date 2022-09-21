@@ -7,7 +7,7 @@
                 </div>
             </header>
             <footer class="profile-box-content-footer">
-                <span class="profile-box-nameuser">حسن شجاعی</span>
+                <span class="profile-box-nameuser">{{Auth::user()->name ?? auth()->user()->cellphone}}</span>
 
                 <ul class="profile-account-navs mt-4">
                     <li class="profile-account-nav-item navigation-link-dashboard">
