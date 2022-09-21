@@ -21,156 +21,90 @@
          <div class="container-fluid">
              <div class="col-12">
                  <div class="footer-middlebar">
+                     @if (!empty(json_decode($setting->links,true)))
                      <div class="col-lg-8 d-block pr">
                          <div class="footer-links">
+                             @foreach (json_decode($setting->links,true) as $pLink )
                              <div class="col-lg-3 col-md-3 col-xs-12 pr">
                                  <div class="row">
                                      <section class="footer-links-col">
                                          <div class="headline-links">
                                              <a href="#">
-                                                 با دیجی اسمارت
+                                                 {{$pLink['name']}}
                                              </a>
                                          </div>
+                                         @isset ($pLink['children'])
                                          <ul class="footer-menu-ul">
+                                             @foreach ($pLink['children'] as $link)
                                              <li class="menu-item-type-custom">
-                                                 <a href="#">
-                                                     اتاق خبر دیجی اسمارت
+                                                 <a href="{{$link['url']}}">
+                                                     {{$link['title']}}
                                                  </a>
                                              </li>
-                                             <li class="menu-item-type-custom">
-                                                 <a href="#">
-                                                     فروش در دیجی اسمارت
-                                                 </a>
-                                             </li>
-                                             <li class="menu-item-type-custom">
-                                                 <a href="#">
-                                                     همکاری با سازمان‌ها
-                                                 </a>
-                                             </li>
-                                             <li class="menu-item-type-custom">
-                                                 <a href="#">
-                                                     فرصت‌های شغلی
-                                                 </a>
-                                             </li>
+                                             @endforeach
                                          </ul>
+                                         @endisset
                                      </section>
                                  </div>
                              </div>
-                             <div class="col-lg-3 col-md-3 col-xs-12 pr">
-                                 <div class="row">
-                                     <section class="footer-links-col">
-                                         <div class="headline-links">
-                                             <a href="#">
-                                                 خدمات مشتریان
-                                             </a>
-                                         </div>
-                                         <ul class="footer-menu-ul">
-                                             <li class="menu-item-type-custom">
-                                                 <a href="#">
-                                                     پاسخ به پرسش‌های متداول
-                                                 </a>
-                                             </li>
-                                             <li class="menu-item-type-custom">
-                                                 <a href="#">
-                                                     رویه‌های بازگرداندن کالا
-                                                 </a>
-                                             </li>
-                                             <li class="menu-item-type-custom">
-                                                 <a href="#">
-                                                     شرایط استفاده
-                                                 </a>
-                                             </li>
-                                             <li class="menu-item-type-custom">
-                                                 <a href="#">
-                                                     حریم خصوصی
-                                                 </a>
-                                             </li>
-                                         </ul>
-                                     </section>
-                                 </div>
-                             </div>
-                             <div class="col-lg-3 col-md-3 col-xs-12 pr">
-                                 <div class="row">
-                                     <section class="footer-links-col">
-                                         <div class="headline-links">
-                                             <a href="#">
-                                                 راهنمای خرید از دیجی اسمارت
-                                             </a>
-                                         </div>
-                                         <ul class="footer-menu-ul">
-                                             <li class="menu-item-type-custom">
-                                                 <a href="#">
-                                                     نحوه ثبت سفارش
-                                                 </a>
-                                             </li>
-                                             <li class="menu-item-type-custom">
-                                                 <a href="#">
-                                                     رویه ارسال سفارش
-                                                 </a>
-                                             </li>
-                                             <li class="menu-item-type-custom">
-                                                 <a href="#">
-                                                     شیوه‌های پرداخت
-                                                 </a>
-                                             </li>
-                                         </ul>
-                                     </section>
-                                 </div>
-                             </div>
+                             @endforeach
                          </div>
                      </div>
+                     @endif
+                     @if($setting->instagram || $setting->whatsapp || $setting->telegram)
                      <div class="col-lg-4 d-block pl">
                          <div class="shortcode-widget-area">
                              <form action="#" class="form-newsletter">
                                  <fieldset>
-                                     <span class="form-newsletter-title"> با عضویت در خبرنامه از آخرین اخبار و
+                                     <span class="form-newsletter-title"> با عضویت در کانال‌های ما، از آخرین اخبار و
                                          محصولات سایت مطلع شوید...</span>
-                                     <div class="input-group-newsletter">
-                                         <input type="email" class="input-field form-control"
-                                             placeholder="آدرس ایمیل خود را وارد کنید">
-                                         <button class="btn btn-info btn-secondary" type="submit">ارسال</button>
-                                     </div>
+                                     <div class="social-container">
+                                         <ul class="social-icons">
+                                             @isset($setting->instagram)
+                                             <li><a href="{{$setting->instagram}}"><i class="fa fa-instagram"></i></a></li>
+                                             @endisset
+                                             @isset($setting->whatsapp)
+                                             <li><a href="{{$setting->whatsapp}}"><i class="fa fa-whatsapp"></i></a></li>
+                                             @endisset
+                                             @isset($setting->telegram)
+                                             <li><a href="{{$setting->telegram}}"><i class="fa fa-telegram"></i></a></li>
+                                             @endisset
+                                         </ul>
                                  </fieldset>
                              </form>
                          </div>
                      </div>
+                     @endif
                      <div class="footer-more-info">
                          <div class="col-lg-10 pr">
                              <div class="footer-content d-block">
                                  <div class="text pr-1">
-                                     <h2 class="title">فروشگاه اینترنتی دیجی اسمارت</h2>
-                                     <p class="desc"> دیجی اسمارت به عنوان یکی از قدیمی‌ترین فروشگاه های اینترنتی با
-                                         بیش از یک دهه تجربه، با پایبندی به سه اصل کلیدی، پرداخت در محل، 7 روز ضمانت
-                                         بازگشت کالا و تضمین اصل‌بودن کالا، موفق شده تا همگام با فروشگاه‌های معتبر
-                                         جهان، به بزرگ‌ترین فروشگاه اینترنتی ایران تبدیل شود. به محض ورود به دیجی
-                                         اسمارت با یک سایت پر از کالا رو به رو می‌شوید! هر آنچه که نیاز دارید و به
-                                         ذهن شما خطور می‌کند در اینجا پیدا خواهید کرد.</p>
+                                     @isset($setting->site_name)
+                                     <h2 class="title">فروشگاه اینترنتی {{$setting->site_name}}</h2>
+                                     @endisset
+                                     @isset($setting->description)
+                                     <p class="desc">{{$setting->description}}</p>
+                                     @endisset
                                  </div>
                              </div>
                          </div>
                          <div class="col-lg-2 pl">
                              <div class="footer-safety-partner">
                                  <div class="widget widget-product card mb-0">
-                                     <div
-                                         class="product-carousel-symbol owl-carousel owl-theme owl-rtl owl-loaded owl-drag">
+                                     <div class="product-carousel-symbol owl-carousel owl-theme owl-rtl owl-loaded owl-drag">
                                          <div class="owl-stage-outer">
-                                             <div class="owl-stage"
-                                                 style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 2234px;">
-                                                 <div class="owl-item active"
-                                                     style="width: 300.75px; margin-left: 10px;">
+                                             <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 2234px;">
+                                                 <div class="owl-item active" style="width: 300.75px; margin-left: 10px;">
                                                      <div class="item">
                                                          <a href="#" class="d-block hover-img-link">
-                                                             <img src="/assets/home/images/footer/license/L-1.png"
-                                                                 class="img-fluid img-brand" alt="">
+                                                             <img src="/assets/home/images/footer/license/L-1.png" class="img-fluid img-brand" alt="">
                                                          </a>
                                                      </div>
                                                  </div>
-                                                 <div class="owl-item active"
-                                                     style="width: 300.75px; margin-left: 10px;">
+                                                 <div class="owl-item active" style="width: 300.75px; margin-left: 10px;">
                                                      <div class="item">
                                                          <a href="#" class="d-block hover-img-link mt-0">
-                                                             <img src="/assets/home/images/footer/license/L-2.png"
-                                                                 class="img-fluid img-brand" alt="">
+                                                             <img src="/assets/home/images/footer/license/L-2.png" class="img-fluid img-brand" alt="">
                                                          </a>
                                                      </div>
                                                  </div>
@@ -182,7 +116,7 @@
                          </div>
                          <div class="footer-copyright">
                              <div class="footer-copyright-text">
-                                 <p>تمامی مطالب، عکس ها و... متعلق به سایت فروشگاهی دیجی اسمارت می باشد.</p>
+                                 <p>تمامی حقوق متعلق به سایت فروشگاهی {{$setting->site_name}} می باشد.</p>
                              </div>
                          </div>
                      </div>
