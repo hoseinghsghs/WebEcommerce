@@ -10,6 +10,7 @@
     "require": {
         "php": "^8.0.2",
         "artesaos/seotools": "^0.22.0",
+        "beyondcode/laravel-websockets": "^2.0.0",
         "cviebrock/eloquent-sluggable": "^9.0",
         "darryldecode/cart": "^4.2",
         "guzzlehttp/guzzle": "^7.2",

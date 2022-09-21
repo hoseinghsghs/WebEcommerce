@@ -59,7 +59,7 @@ class CouponController extends Controller
             'expired_at' => $request->expired_at
         ]);
 
-        alert()->success('کوپن مورد نظر ایجاد شد', 'باتشکر');
+        alert()->success('کد تخفیف مورد نظر ایجاد شد', 'باتشکر');
         return redirect()->route('admin.coupons.index');
     }
 
@@ -119,7 +119,7 @@ class CouponController extends Controller
       
        
 
-        alert()->success('کوپن مورد نظر ویرایش شد', 'باتشکر');
+        alert()->success('کد تخفیف مورد نظر ویرایش شد', 'باتشکر');
         return redirect()->route('admin.coupons.index');
     }
 

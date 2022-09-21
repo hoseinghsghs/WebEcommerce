@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Events\NotificationMessage;
 use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use App\Models\Brand;
@@ -18,6 +19,7 @@ class HomeController extends Controller
 {
     public function index()
     {
+        
 
         // SEO
         SEOTools::setTitle('خانه');

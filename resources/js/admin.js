@@ -6,6 +6,7 @@ window.$ = window.jQuery = window.jquery = require("jquery");
 require("node-waves");
 require("bootstrap-fileinput");
 require("lightbox2");
+require("./bootstrap.js");
 require("../assets/admin/plugins/bootstrap/js/bootstrap.min.js");
 require("../assets/admin/bundles/libscripts.bundle");
 require("../assets/admin/bundles/vendorscripts.bundle");

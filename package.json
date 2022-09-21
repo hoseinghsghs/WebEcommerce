@@ -17,7 +17,7 @@
         "persian-date": "^1.1.0",
         "postcss": "^8.1.14",
         "resolve-url-loader": "^5.0.0",
-        "sass": "^1.51.0",
+        "sass": "^1.54.9",
         "sass-loader": "^12.1.0",
         "webpack-cli": "^4.9.2"
     },
@@ -32,12 +32,13 @@
         "d3": "^7.2.1",
         "dropify": "^0.2.2",
         "jquery": "^3.3.1",
+        "laravel-echo": "^1.14.0",
         "lightbox2": "^2.11.3",
         "moment": "^2.29.3",
-        "node-sass": "^6.0.1",
         "node-waves": "^0.7.6",
         "persian-datepicker": "^1.2.0",
         "popper.js": "^1.16.1",
+        "pusher-js": "^7.4.0",
         "webpack": "^5.70.0"
     }
 }
