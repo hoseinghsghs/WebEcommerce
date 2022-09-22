@@ -24,7 +24,7 @@ class CartController extends Controller
         $product = Product::findOrFail($request->product);
         $productVariation = ProductVariation::findOrFail(json_decode($request->variation)->id);
         
-        // broadcast(new NotificationMessage($product));
+        broadcast(new NotificationMessage($product));
 
         if ($request->qtybutton > $productVariation->quantity) {
             
