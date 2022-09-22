@@ -138,6 +138,12 @@ class Product extends Model
             $query->where('products.name', 'like', '%' . $filters['search'] . '%');
         }
 
+        if (isset($filters['tag'])) {
+            $query->whereHas('tags',function($q)use($filters){
+                $q->where('name', $filters['tag']);
+            });
+        }
+
         if (isset($filters['brand'])) {
             $query->where('brand_id', $filters['brand']);
         }
