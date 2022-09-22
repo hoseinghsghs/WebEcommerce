@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Events\NotificationMessage;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductVariation;
@@ -14,7 +15,7 @@ use SebastianBergmann\Environment\Console;
 class CartController extends Controller
 {
     public function add(Request $request)   
-    {        
+    {       
         $request->validate([
             'product' => 'required',
             'qtybutton' => 'required'
@@ -22,6 +23,8 @@ class CartController extends Controller
 
         $product = Product::findOrFail($request->product);
         $productVariation = ProductVariation::findOrFail(json_decode($request->variation)->id);
+        
+        // broadcast(new NotificationMessage($product));
 
         if ($request->qtybutton > $productVariation->quantity) {
             

@@ -25,46 +25,46 @@
     @stack('scripts')
 
     <script>
-        @if(session('status'))
-        @if(session('status') == "profile-information-updated")
-        Swal.fire({
-            text: "حساب کاربری با موفقیت ویرایش شد",
-            icon: 'success',
-            showConfirmButton: false,
-            toast: true,
-            position: 'top-right',
-            timer: 5000,
-            timerProgressBar: true,
-        })
-        @elseif(session('status') == 'verification-link-sent')
-        Swal.fire({
-            title: 'لینک تایید ارسال شد',
-            text: 'ایمیل خود را باز کنید و روی لینک تایید ایمیل کلیک کنید.',
-            icon: 'success',
-            confirmButtonText: 'تایید',
-        })
-        @elseif(session('status') == 'passwords.reset')
-        Swal.fire({
-            text: 'رمز عبور با موفقیت ذخیره شد.',
-            icon: 'success',
-            showConfirmButton: false,
-            toast: true,
-            position: 'top-right',
-            timer: 5000,
-            timerProgressBar: true,
-        })
-        @else
-        Swal.fire({
-            text: "{{ session('status') }}",
-            icon: 'success',
-            showConfirmButton: false,
-            toast: true,
-            position: 'top-right',
-            timer: 5000,
-            timerProgressBar: true,
-        })
-        @endif
-        @endif
+    @if(session('status'))
+    @if(session('status') == "profile-information-updated")
+    Swal.fire({
+        text: "حساب کاربری با موفقیت ویرایش شد",
+        icon: 'success',
+        showConfirmButton: false,
+        toast: true,
+        position: 'top-right',
+        timer: 5000,
+        timerProgressBar: true,
+    })
+    @elseif(session('status') == 'verification-link-sent')
+    Swal.fire({
+        title: 'لینک تایید ارسال شد',
+        text: 'ایمیل خود را باز کنید و روی لینک تایید ایمیل کلیک کنید.',
+        icon: 'success',
+        confirmButtonText: 'تایید',
+    })
+    @elseif(session('status') == 'passwords.reset')
+    Swal.fire({
+        text: 'رمز عبور با موفقیت ذخیره شد.',
+        icon: 'success',
+        showConfirmButton: false,
+        toast: true,
+        position: 'top-right',
+        timer: 5000,
+        timerProgressBar: true,
+    })
+    @else
+    Swal.fire({
+        text: "{{ session('status') }}",
+        icon: 'success',
+        showConfirmButton: false,
+        toast: true,
+        position: 'top-right',
+        timer: 5000,
+        timerProgressBar: true,
+    })
+    @endif
+    @endif
     </script>
     <script type="text/javascript" src="{{asset('assets/home/js/vendor/bootstrap.bundle.min.js')}}">
     </script>

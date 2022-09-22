@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\NotificationMessage;
 use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;

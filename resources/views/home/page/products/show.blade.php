@@ -1,6 +1,7 @@
 @extends('home.layout.MasterHome')
 @section('title', "خانه -". $product->slug)
 @section('content')
+
 <div class="container-main">
     <div class="d-block">
         <div class="page-content page-row">
@@ -239,11 +240,12 @@
                                                             style="display: inline; width: 75%;"
                                                             class="select-var form-control form-control-sm"
                                                             id="varition">
-                                                            @foreach ($product->variations()->where('quantity', '>'
-                                                            ,
-                                                            0)->get()
-                                                            as
-                                                            $variation )
+                                                            @php
+                                                            $var=$product->variations()->where('quantity', '>' ,
+                                                            0)->get();
+                                                            @endphp
+
+                                                            @foreach($var as $variation )
                                                             <option
                                                                 value="{{ json_encode($variation->only(['id' , 'sku' , 'quantity','is_sale' , 'sale_price' , 'price'])) }}"
                                                                 {{ $variationProductSelected->id == $variation->id ? 'selected' : '' }}>
@@ -323,6 +325,7 @@
                 </div>
             </div>
         </div>
+
         <div class="tabs" id="respon">
             <div class="tab-box">
                 <ul class="tab nav nav-tabs" id="myTab" role="tablist">
@@ -612,6 +615,7 @@
                                     </div>
                                 </form>
                                 <div id="product-questions-list">
+
                                     @foreach ($product->approvedQuestions as $question )
                                     <div class="questions-list mb-2">
                                         <ul class="faq-list">
