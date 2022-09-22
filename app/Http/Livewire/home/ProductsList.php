@@ -27,6 +27,7 @@ class ProductsList extends Component
         'price' => ['high' => 5000000, 'low' => 0],
         'displayCount' => 12,
         'search' => '',
+        'tag'=>null,
     ];
 
     public function mount($slug = null)
@@ -40,6 +41,9 @@ class ProductsList extends Component
 
         request()->whenFilled('q', function () {
             $this->filterd['search'] = request()->query('q');
+        });
+        request()->whenFilled('tag', function () {
+            $this->filterd['tag'] = request()->query('tag');
         });
         // get maximum of price
         $max_price = ProductVariation::max('price');

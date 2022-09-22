@@ -8,9 +8,25 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0">
                             <li class="breadcrumb-item"><a href="{{route('home')}}">خانه</a></li>
-                            <li class="breadcrumb-item">فروشگاه</li>
+                            <li class="breadcrumb-item"><a href="{{route('home.products.search')}}">فروشگاه</a></li>
+                            @if ($category)
+                            <li @class(["breadcrumb-item","acive"=>!$filterd['search'] && !$filterd['tag']])>
+                                @if ($filterd['search'] || $filterd['tag'])
+                                <a href="{{route('home.products.search',$category->slug)}}">{{$category->name}}</a>
+                                @else
+                                {{$category->name}}
+                                @endif
+                            </li>
+                            @endif
+                            @if ($filterd['search'])
                             <li class="breadcrumb-item active" aria-current="page">
-                                {{$category ? $category->name : 'جستجوی: "'.$filterd['search'].'"'}}</li>
+                                {{'جستجوی: "'.$filterd['search'].'"'}}
+                            </li>
+                            @elseif ($filterd['tag'])
+                            <li class="breadcrumb-item active" aria-current="page">
+                                {{$filterd['tag']}}
+                            </li>
+                            @endif
                         </ol>
                     </nav>
                 </div>
@@ -22,9 +38,7 @@
                             <section class="widget-product-categories">
                                 <header class="cat-header">
                                     <h2 class="mb-0">
-                                        <button class="btn btn-block text-right" data-toggle="collapse"
-                                            href="#headingOne" role="button" aria-expanded="false"
-                                            aria-controls="headingOne">
+                                        <button class="btn btn-block text-right" data-toggle="collapse" href="#headingOne" role="button" aria-expanded="false" aria-controls="headingOne">
                                             @if($routeName == 'home.products.index')
                                             {{$category->parent->name}}
                                             @elseif ($routeName == 'home.products.search' && isset($category))
@@ -46,15 +60,12 @@
                                                     <div class="form-auth-row">
                                                         @if($child->name == $category->name)
                                                         <label for="#" class="ui-checkbox">
-                                                            <input checked type="checkbox" disabled
-                                                                id="check-{{$loop->index}}">
+                                                            <input checked type="checkbox" disabled id="check-{{$loop->index}}">
                                                             <span class="ui-checkbox-check"></span>
                                                         </label>
-                                                        <label for="check-{{$loop->index}}"
-                                                            class="remember-me">{{$child->name}}</label>
+                                                        <label for="check-{{$loop->index}}" class="remember-me">{{$child->name}}</label>
                                                         @else
-                                                        <label class="remember-me"
-                                                            style="cursor: pointer;">{{$child->name}}</label>
+                                                        <label class="remember-me" style="cursor: pointer;">{{$child->name}}</label>
                                                         @endif
                                                     </div>
                                                 </a>
@@ -67,8 +78,7 @@
                                                             <input type="checkbox" id="check-{{$loop->index}}">
                                                             <span class="ui-checkbox-check"></span>
                                                         </label>
-                                                        <label for="check-{{$loop->index}}" class="remember-me"
-                                                            style="cursor: pointer;">{{$child->name}}</label>
+                                                        <label for="check-{{$loop->index}}" class="remember-me" style="cursor: pointer;">{{$child->name}}</label>
                                                     </div>
                                                 </a>
                                                 @endforeach
@@ -80,8 +90,7 @@
                                                             <input type="checkbox" id="check-{{$loop->index}}">
                                                             <span class="ui-checkbox-check"></span>
                                                         </label>
-                                                        <label for="check-{{$loop->index}}" class="remember-me"
-                                                            style="cursor: pointer;">{{$category->name}}</label>
+                                                        <label for="check-{{$loop->index}}" class="remember-me" style="cursor: pointer;">{{$category->name}}</label>
                                                     </div>
                                                 </a>
                                                 @endforeach
@@ -94,9 +103,7 @@
                             <section class="widget-product-categories">
                                 <header class="cat-header">
                                     <h2 class="mb-0">
-                                        <button class="btn btn-block text-right" data-toggle="collapse"
-                                            href="#headingThree" role="button" aria-expanded="false"
-                                            aria-controls="headingThree">
+                                        <button class="btn btn-block text-right" data-toggle="collapse" href="#headingThree" role="button" aria-expanded="false" aria-controls="headingThree">
                                             محدوده قیمت
                                             <i class="mdi mdi-chevron-down"></i>
                                         </button>
@@ -127,9 +134,7 @@
                             <section class="widget-product-categories" wire:key="attr-{{$attribute->id}}">
                                 <header class="cat-header">
                                     <h2 class="mb-0">
-                                        <button class="btn btn-block text-right" data-toggle="collapse"
-                                            href="#attribute-{{$attribute->id}}" role="button" aria-expanded="false"
-                                            aria-controls="attribute-{{$attribute->id}}">
+                                        <button class="btn btn-block text-right" data-toggle="collapse" href="#attribute-{{$attribute->id}}" role="button" aria-expanded="false" aria-controls="attribute-{{$attribute->id}}">
                                             {{$attribute->name}}
                                             <i class="mdi mdi-chevron-down"></i>
                                         </button>
@@ -140,19 +145,16 @@
                                         <div class="collapse show" id="attribute-{{$attribute->id}}">
                                             <div class="card-main mb-0">
                                                 @foreach ($attribute->categoryValues as $value)
-                                                <div class="form-auth-row"
-                                                    wire:key="attr-{{$attribute->id}}-{{$loop->index}}">
+                                                <div class="form-auth-row" wire:key="attr-{{$attribute->id}}-{{$loop->index}}">
                                                     <label for="#" class="ui-checkbox">
-                                                        <input id="attr-{{$attribute->id}}-{{$loop->index}}"
-                                                            @checked(array_key_exists($attribute->id,$filterd['attribute'])
+                                                        <input id="attr-{{$attribute->id}}-{{$loop->index}}" @checked(array_key_exists($attribute->id,$filterd['attribute'])
                                                         &&
                                                         in_array($value->value,$filterd['attribute'][$attribute->id]))
                                                         wire:click="addFilter('attribute','{{$attribute->id}}','{{$value->value}}')"
                                                         type="checkbox" value="1">
                                                         <span class="ui-checkbox-check"></span>
                                                     </label>
-                                                    <label for="attr-{{$attribute->id}}-{{$loop->index}}"
-                                                        class="remember-me">{{$value->value}}</label>
+                                                    <label for="attr-{{$attribute->id}}-{{$loop->index}}" class="remember-me">{{$value->value}}</label>
                                                 </div>
                                                 @endforeach
                                             </div>
@@ -168,9 +170,7 @@
                             <section class="widget-product-categories">
                                 <header class="cat-header">
                                     <h2 class="mb-0">
-                                        <button class="btn btn-block text-right" data-toggle="collapse"
-                                            href="#variation-{{$variation->id}}" role="button" aria-expanded="false"
-                                            aria-controls="variation-{{$variation->id}}">
+                                        <button class="btn btn-block text-right" data-toggle="collapse" href="#variation-{{$variation->id}}" role="button" aria-expanded="false" aria-controls="variation-{{$variation->id}}">
                                             {{$variation->name}}
                                             <i class="mdi mdi-chevron-down"></i>
                                         </button>
@@ -183,8 +183,7 @@
                                                 @foreach ($variation->variationValues as $value)
                                                 <div class="form-auth-row" wire:key="var-{{$loop->index}}">
                                                     <label for="#" class="ui-checkbox">
-                                                        <input id="var-{{$loop->index}}"
-                                                            @checked(array_key_exists($variation->id,$filterd['variation'])
+                                                        <input id="var-{{$loop->index}}" @checked(array_key_exists($variation->id,$filterd['variation'])
                                                         &&
                                                         in_array($value->value,$filterd['variation'][$variation->id]))
                                                         wire:click="addFilter('variation','{{$variation->id}}','{{$value->value}}')"
@@ -192,8 +191,7 @@
                                                         type="checkbox" value="1">
                                                         <span class="ui-checkbox-check"></span>
                                                     </label>
-                                                    <label for="var-{{$loop->index}}"
-                                                        class="remember-me">{{$value->value}}</label>
+                                                    <label for="var-{{$loop->index}}" class="remember-me">{{$value->value}}</label>
                                                 </div>
                                                 @endforeach
                                             </div>
@@ -249,8 +247,7 @@
                         </div>
                         <div class="product-items">
                             <div class="tab-content" id="myTabContent">
-                                <div class="tab-pane fade show active" id="Most-visited" role="tabpanel"
-                                    aria-labelledby="Most-visited-tab">
+                                <div class="tab-pane fade show active" id="Most-visited" role="tabpanel" aria-labelledby="Most-visited-tab">
                                     <div class="row">
                                         @each('home.components.ProductCart3',$products,'product','home.partial.empty-products-list')
                                     </div>
@@ -277,8 +274,7 @@
                 <section class="widget-product-categories">
                     <header class="cat-header">
                         <h2 class="mb-0">
-                            <button class="btn btn-block text-right" data-toggle="collapse" href="#headingOne"
-                                role="button" aria-expanded="false" aria-controls="headingOne">
+                            <button class="btn btn-block text-right" data-toggle="collapse" href="#headingOne" role="button" aria-expanded="false" aria-controls="headingOne">
                                 @if($routeName == 'home.products.index')
                                 {{$category->parent->name}}
                                 @elseif ($routeName == 'home.products.search' && isset($category))
@@ -303,8 +299,7 @@
                                                 <input checked type="checkbox" disabled id="check-{{$loop->index}}">
                                                 <span class="ui-checkbox-check"></span>
                                             </label>
-                                            <label for="check-{{$loop->index}}"
-                                                class="remember-me">{{$child->name}}</label>
+                                            <label for="check-{{$loop->index}}" class="remember-me">{{$child->name}}</label>
                                             @else
                                             <label class="remember-me" style="cursor: pointer;">{{$child->name}}</label>
                                             @endif
@@ -319,8 +314,7 @@
                                                 <input type="checkbox" id="check-{{$loop->index}}">
                                                 <span class="ui-checkbox-check"></span>
                                             </label>
-                                            <label for="check-{{$loop->index}}" class="remember-me"
-                                                style="cursor: pointer;">{{$child->name}}</label>
+                                            <label for="check-{{$loop->index}}" class="remember-me" style="cursor: pointer;">{{$child->name}}</label>
                                         </div>
                                     </a>
                                     @endforeach
@@ -332,8 +326,7 @@
                                                 <input type="checkbox" id="check-{{$loop->index}}">
                                                 <span class="ui-checkbox-check"></span>
                                             </label>
-                                            <label for="check-{{$loop->index}}" class="remember-me"
-                                                style="cursor: pointer;">{{$child->name}}</label>
+                                            <label for="check-{{$loop->index}}" class="remember-me" style="cursor: pointer;">{{$child->name}}</label>
                                         </div>
                                     </a>
                                     @endforeach
@@ -346,8 +339,7 @@
                 <section class="widget-product-categories">
                     <header class="cat-header">
                         <h2 class="mb-0">
-                            <button class="btn btn-block text-right" data-toggle="collapse" href="#headingThree"
-                                role="button" aria-expanded="false" aria-controls="headingThree">
+                            <button class="btn btn-block text-right" data-toggle="collapse" href="#headingThree" role="button" aria-expanded="false" aria-controls="headingThree">
                                 محدوده قیمت
                                 <i class="mdi mdi-chevron-down"></i>
                             </button>
@@ -378,9 +370,7 @@
                 <section class="widget-product-categories" wire:key="attr-side-{{$attribute->id}}">
                     <header class="cat-header">
                         <h2 class="mb-0">
-                            <button class="btn btn-block text-right" data-toggle="collapse"
-                                href="#attribute-side-{{$attribute->id}}" role="button" aria-expanded="false"
-                                aria-controls="attribute-side-{{$attribute->id}}">
+                            <button class="btn btn-block text-right" data-toggle="collapse" href="#attribute-side-{{$attribute->id}}" role="button" aria-expanded="false" aria-controls="attribute-side-{{$attribute->id}}">
                                 {{$attribute->name}}
                                 <i class="mdi mdi-chevron-down"></i>
                             </button>
@@ -393,15 +383,13 @@
                                     @foreach ($attribute->categoryValues as $value)
                                     <div class="form-auth-row" wire:key="attr-side-{{$attribute->id}}-{{$loop->index}}">
                                         <label for="#" class="ui-checkbox">
-                                            <input id="attr-side-{{$attribute->id}}-{{$loop->index}}"
-                                                @checked(array_key_exists($attribute->id,$filterd['attribute']) &&
+                                            <input id="attr-side-{{$attribute->id}}-{{$loop->index}}" @checked(array_key_exists($attribute->id,$filterd['attribute']) &&
                                             in_array($value->value,$filterd['attribute'][$attribute->id]))
                                             wire:click="addFilter('attribute','{{$attribute->id}}','{{$value->value}}')"
                                             type="checkbox" value="1">
                                             <span class="ui-checkbox-check"></span>
                                         </label>
-                                        <label for="attr-side-{{$attribute->id}}-{{$loop->index}}"
-                                            class="remember-me">{{$value->value}}</label>
+                                        <label for="attr-side-{{$attribute->id}}-{{$loop->index}}" class="remember-me">{{$value->value}}</label>
                                     </div>
                                     @endforeach
                                 </div>
@@ -417,9 +405,7 @@
                 <section class="widget-product-categories">
                     <header class="cat-header">
                         <h2 class="mb-0">
-                            <button class="btn btn-block text-right" data-toggle="collapse"
-                                href="#variation-side-{{$variation->id}}" role="button" aria-expanded="false"
-                                aria-controls="variation-side-{{$variation->id}}">
+                            <button class="btn btn-block text-right" data-toggle="collapse" href="#variation-side-{{$variation->id}}" role="button" aria-expanded="false" aria-controls="variation-side-{{$variation->id}}">
                                 {{$variation->name}}
                                 <i class="mdi mdi-chevron-down"></i>
                             </button>
@@ -432,15 +418,13 @@
                                     @foreach ($variation->variationValues as $value)
                                     <div class="form-auth-row" wire:key="var-side-{{$loop->index}}">
                                         <label for="#" class="ui-checkbox">
-                                            <input id="var-side-{{$loop->index}}"
-                                                @checked(array_key_exists($variation->id,$filterd['variation']) &&
+                                            <input id="var-side-{{$loop->index}}" @checked(array_key_exists($variation->id,$filterd['variation']) &&
                                             in_array($value->value,$filterd['variation'][$variation->id]))
                                             wire:click="addFilter('variation','{{$variation->id}}','{{$value->value}}')"
                                             type="checkbox" value="1">
                                             <span class="ui-checkbox-check"></span>
                                         </label>
-                                        <label for="var-side-{{$loop->index}}"
-                                            class="remember-me">{{$value->value}}</label>
+                                        <label for="var-side-{{$loop->index}}" class="remember-me">{{$value->value}}</label>
                                     </div>
                                     @endforeach
                                 </div>
@@ -458,59 +442,59 @@
 
 @push('scripts')
 <script>
-// price range slider
-var nonLinearStepSlider = document.getElementById("slider-non-linear-step");
-var nonLinearStepSlider2 = document.getElementById("slider-non-linear-step2");
+    // price range slider
+    var nonLinearStepSlider = document.getElementById("slider-non-linear-step");
+    var nonLinearStepSlider2 = document.getElementById("slider-non-linear-step2");
 
-Livewire.on('filterReset', () => {
-    nonLinearStepSlider.noUiSlider.reset();
-    nonLinearStepSlider2.noUiSlider.reset()
-})
-if ($("#slider-non-linear-step").length) {
-    noUiSlider.create(nonLinearStepSlider, {
-        start: [0, parseInt("{{$filterd['price']['high']}}")],
-        connect: true,
-        step: 1000,
-        direction: "rtl",
-        format: wNumb({
-            decimals: 0,
-        }),
-        range: {
-            min: [0],
-            max: [parseInt("{{$filterd['price']['high']}}")],
-        },
-    });
+    Livewire.on('filterReset', () => {
+        nonLinearStepSlider.noUiSlider.reset();
+        nonLinearStepSlider2.noUiSlider.reset()
+    })
+    if ($("#slider-non-linear-step").length) {
+        noUiSlider.create(nonLinearStepSlider, {
+            start: [0, parseInt("{{$filterd['price']['high']}}")],
+            connect: true,
+            step: 1000,
+            direction: "rtl",
+            format: wNumb({
+                decimals: 0,
+            }),
+            range: {
+                min: [0],
+                max: [parseInt("{{$filterd['price']['high']}}")],
+            },
+        });
 
-    nonLinearStepSlider.noUiSlider.on("change", function(values) {
-        values.forEach((element, index) => {
-            values[index] = parseInt(element);
+        nonLinearStepSlider.noUiSlider.on("change", function(values) {
+            values.forEach((element, index) => {
+                values[index] = parseInt(element);
+            });
+            Livewire.emit('priceRangeUpdated', values);
+            nonLinearStepSlider2.noUiSlider.set(values);
         });
-        Livewire.emit('priceRangeUpdated', values);
-        nonLinearStepSlider2.noUiSlider.set(values);
-    });
-}
-// sidebar price range slider
-if ($("#slider-non-linear-step2").length) {
-    noUiSlider.create(nonLinearStepSlider2, {
-        start: [0, parseInt("{{$filterd['price']['high']}}")],
-        connect: true,
-        step: 1000,
-        direction: "rtl",
-        format: wNumb({
-            decimals: 0,
-        }),
-        range: {
-            min: [0],
-            max: [parseInt("{{$filterd['price']['high']}}")],
-        },
-    });
-    nonLinearStepSlider2.noUiSlider.on("change", function(values) {
-        values.forEach((element, index) => {
-            values[index] = parseInt(element);
+    }
+    // sidebar price range slider
+    if ($("#slider-non-linear-step2").length) {
+        noUiSlider.create(nonLinearStepSlider2, {
+            start: [0, parseInt("{{$filterd['price']['high']}}")],
+            connect: true,
+            step: 1000,
+            direction: "rtl",
+            format: wNumb({
+                decimals: 0,
+            }),
+            range: {
+                min: [0],
+                max: [parseInt("{{$filterd['price']['high']}}")],
+            },
         });
-        Livewire.emit('priceRangeUpdated', values)
-        nonLinearStepSlider.noUiSlider.set(values);
-    });
-}
+        nonLinearStepSlider2.noUiSlider.on("change", function(values) {
+            values.forEach((element, index) => {
+                values[index] = parseInt(element);
+            });
+            Livewire.emit('priceRangeUpdated', values)
+            nonLinearStepSlider.noUiSlider.set(values);
+        });
+    }
 </script>
 @endpush

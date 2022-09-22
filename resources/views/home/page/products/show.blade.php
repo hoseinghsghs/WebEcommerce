@@ -193,7 +193,7 @@
                                             </span>
                                             @foreach ($product->tags as $tag )
 
-                                            <a href="#" class="product-link product-tag-title">{{$tag->name}} ،</a>
+                                            <a href="{{route('home.products.search',['tag'=>$tag->name])}}" class="product-link product-tag-title">{{$tag->name}} ،</a>
                                             @endforeach
 
                                         </li>
