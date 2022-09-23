@@ -4,6 +4,9 @@ namespace App\Http\Livewire\Home\Sections;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Setting;
+use Artesaos\SEOTools\Facades\OpenGraph;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Livewire\Component;
 use Illuminate\Support\Facades\Route;
 

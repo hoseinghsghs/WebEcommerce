@@ -23,7 +23,7 @@ class Kernel extends ConsoleKernel
         })->weekly();
 
         //SEO SITEMAP
-        $schedule->command('sitemap:generate')->weekly();
+        $schedule->command('sitemap:generate');
 
     }
 

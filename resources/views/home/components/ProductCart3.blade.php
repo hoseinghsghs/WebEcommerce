@@ -6,7 +6,7 @@
                 <div class="promotion-badge">فروش ویژه</div>
                 @endif
 
-                <span><span data-rating-stars="5" data-rating-readonly="true"
+                <span class="p-2"><span data-rating-stars="5" data-rating-readonly="true"
                         data-rating-value="{{ceil($product->rates->avg('satisfaction'))}}">
                     </span></span>
 
@@ -104,7 +104,7 @@
                         </ul>
                     </div>
                     <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}"
-                        alt="{{$product->slug}}">
+                        alt="{{$product->slug}}" height="77%" width="77%" class="pr-2">
                 </div>
             </a>
         </div>

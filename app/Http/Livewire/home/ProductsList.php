@@ -5,6 +5,9 @@ namespace App\Http\Livewire\Home;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductVariation;
+use App\Models\Setting;
+use Artesaos\SEOTools\Facades\OpenGraph;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Facades\Route;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -30,6 +33,19 @@ class ProductsList extends Component
         'tag'=>null,
     ];
 
+    public function seoparameter()
+    {
+        $settings = Setting::findOrNew(1);
+        SEOTools::setDescription($settings->description);
+        SEOTools::opengraph()->setUrl(env('APP_URL'));
+        OpenGraph::addImage(asset('storage/logo/' . $settings->logo));
+        OpenGraph::addProperty('site_name', env('APP_NAME'));
+        OpenGraph::addProperty('locale', 'fa');
+        SEOTools::opengraph()->addProperty('type', 'articles');
+        SEOTools::twitter()->setSite('@metawebs_ir');
+        SEOTools::jsonLd()->addImage(asset('storage/logo/' . $settings->logo));
+    }
+    
     public function mount($slug = null)
     {
         $this->routeName = Route::currentRouteName();
@@ -103,16 +119,20 @@ class ProductsList extends Component
     public function render()
     {
         if ($this->routeName == 'home.products.index') {
+            SEOTools::setCanonical(env('APP_URL').'/main');
+            $this->seoparameter();
             $attributes = $this->category->attributes()->where('is_filter', 1)->has('categoryValues')->with('categoryValues')->get();
             $variation = $this->category->attributes()->where('is_variation', 1)->with('variationValues')->first();
             $products = $this->category->products()->active()->filter($this->filterd)->paginate($this->filterd['displayCount']);
             return view('livewire.home.products-list', compact('attributes', 'variation', 'products'))->extends('home.layout.MasterHome');
         } elseif ($this->routeName == 'home.products.search' && isset($this->category)) {
-
+            SEOTools::setCanonical(env('APP_URL').'/search');
+            $this->seoparameter();
             $attributes = $this->category->attributes()->where('is_filter', 1)->has('categoryValues')->with('categoryValues')->get();
             $products = $this->category->productsFromParent()->active()->filter($this->filterd)->paginate($this->filterd['displayCount']);
             return view('livewire.home.products-list', compact('attributes', 'products'))->extends('home.layout.MasterHome');
         } else {
+            $this->seoparameter();
             $products = Product::active()->filter($this->filterd)->paginate($this->filterd['displayCount']);
             $categories = Category::where('parent_id', 0)->get();
             return view('livewire.home.products-list', compact('categories', 'products'))->extends('home.layout.MasterHome');

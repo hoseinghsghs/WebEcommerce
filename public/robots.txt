@@ -1,5 +1,8 @@
 User-agent: *
 Disallow: /Admin-panel/
+Disallow: /admin/
+Disallow: /profile/
+
 
 
 

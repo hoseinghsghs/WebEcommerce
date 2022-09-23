@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Product;
+use App\Models\Tag;
 use Illuminate\Console\Command;
 use Spatie\Sitemap\SitemapGenerator;
 use Spatie\Sitemap\Tags\Url;
@@ -31,27 +32,46 @@ class GenerateSitemap extends Command
      */
     public function handle()
     {
+
         $sitemap = SitemapGenerator::create(config('app.url'))->getSitemap() ;
-        Product::all()->each(function (Product $product) use ($sitemap) {
+
+        $sitemap->add(Url::create('/')->setPriority(1.0));
+        $sitemap->add(Url::create('/faq')->setPriority(0.8));
+        $sitemap->add(Url::create('/privacy')->setPriority(0.8));
+        $sitemap->add(Url::create('/rules')->setPriority(0.8));
+
+        Product::active()->get()->each(function (Product $product) use ($sitemap) {
             $sitemap->add(Url::create("/products/{$product->slug}")
             ->setPriority(0.9)
             );
         });
-        Category::where('parent_id' , 0)->get()->each(function (Category $category) use ($sitemap) {
+        Category::where('parent_id' , 0)->where('is_active', 1)->get()->each(function (Category $category) use ($sitemap) {
             $sitemap->add(Url::create("/search/{$category->slug}")
-            ->setPriority(0.9)
+            ->setPriority(0.7)
             );
         });
-        Category::where('parent_id' , '!=' , 0)->get()->each(function (Category $category) use ($sitemap) {
-            $sitemap->add(Url::create("/main/{$category->slug}")
-            ->setPriority(0.9)
-            );
-        });
-        Post::all()->each(function (Post $post) use ($sitemap) {
-            $sitemap->add(Url::create("/posts/{$post->id}")
+        Tag::all()->each(function (Tag $tag) use ($sitemap) {
+            $sitemap->add(Url::create("/search/?tag={$tag->name}")
             ->setPriority(0.8)
             );
         });
+        Category::where('parent_id' , '!=' , 0)->where('is_active', 1)->get()->each(function (Category $category) use ($sitemap) {
+            $sitemap->add(Url::create("/main/{$category->slug}")
+            ->setPriority(0.7)
+            );
+        });
+        Post::where('status' , 1)->select('category')->distinct()->get()->each(function (Post $post) use ($sitemap) {
+            $sitemap->add(Url::create("/post/list/{$post->category}")
+            ->setPriority(0.7)
+            );
+        });
+
+        Post::where('status' , 1)->get()->each(function (Post $post) use ($sitemap) {
+            $sitemap->add(Url::create("/post/{$post->slug}")
+            ->setPriority(0.7)
+            );
+        });
+        
         $sitemap->writeToFile(public_path('sitemap.xml'));
       
     }

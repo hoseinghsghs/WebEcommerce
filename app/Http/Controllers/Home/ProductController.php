@@ -8,7 +8,9 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Service;
+use App\Models\Setting;
 use App\Models\WishList;
+use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 
@@ -16,16 +18,16 @@ class ProductController extends Controller
 {
     public function show(Product $product)
     {
-
-        // SEO
-        SEOTools::setTitle('صفحه محصول');
-        SEOTools::setDescription(' فروشگاه اینترنتی لوازم آرایشی در تهران ');
-        SEOTools::opengraph()->setUrl('http://current.url.com');
-        SEOTools::setCanonical('https://codecasts.com.br/lesson');
+        $settings = Setting::findOrNew(1);
+        SEOTools::setDescription($settings->description);
+        SEOTools::opengraph()->setUrl(env('APP_URL'));
+        SEOTools::setCanonical(env('APP_URL').'/products');
+        OpenGraph::addImage(asset('storage/logo/' . $settings->logo));
+        OpenGraph::addProperty('site_name', env('APP_NAME'));
+        OpenGraph::addProperty('locale', 'fa');
         SEOTools::opengraph()->addProperty('type', 'articles');
-        SEOTools::twitter()->setSite('@LuizVinicius73');
-        SEOTools::jsonLd()->addImage('https://codecasts.com.br/img/logo.jpg');
-        //END SEO
+        SEOTools::twitter()->setSite('@metawebs_ir');
+        SEOTools::jsonLd()->addImage(asset('storage/logo/' . $settings->logo));
 
         $categories=Category::all();
         $brands=Brand::all();
