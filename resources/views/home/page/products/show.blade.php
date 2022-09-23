@@ -253,7 +253,7 @@
 
                                                             @foreach($var as $variation )
                                                             <option
-                                                                value="{{ json_encode($variation->only(['id' , 'sku' , 'quantity','is_sale' , 'sale_price' , 'price'])) }}"
+                                                                value="{{ json_encode($variation->only(['id' , 'sku' ,'guarantee' ,'time_guarantee' , 'quantity','is_sale' , 'sale_price' , 'price'])) }}"
                                                                 {{ $variationProductSelected->id == $variation->id ? 'selected' : '' }}>
                                                                 {{$variation->value}}
                                                             </option>
@@ -274,11 +274,11 @@
                                                 <span class="title"> فروشنده:</span>
                                                 <a class="product-name">{{env('APP_NAME')}}</a>
                                             </div>
-                                            <div class="product-seller-row guarantee">
+                                            <div class="product-seller-row guarantee1">
                                                 <span class="title"> گارانتی:</span>
                                                 <a class="product-name" id="guarantee"></a>
                                             </div>
-                                            <div class="product-seller-row guarantee">
+                                            <div class="product-seller-row guarantee2">
                                                 <span class="title"> مدت گارانتی:</span>
                                                 <a class="product-name" id="time_guarantee"></a>
                                             </div>
@@ -979,110 +979,119 @@ function setlable(e) {
 
 $(document).ready(function(e) {
 
-            let variation = JSON.parse($('#var-select').val());
-            let variationPriceDiv = $('.variation-price');
-            variationPriceDiv.empty();
-            $('.sku').html(variation.sku)
+    let variation = JSON.parse($('#var-select').val());
+    let variationPriceDiv = $('.variation-price');
+    variationPriceDiv.empty();
+    $('.sku').html(variation.sku)
 
-            if (variation.is_sale) {
-                let spanSale = $('<div />', {
-                    class: 'amount text-danger',
-                    text: number_format(variation.sale_price) + ' تومان'
-                });
-                let spanPrice = $('<del />', {
-                    class: 'amount',
-                    text: number_format(variation.price) + ' تومان'
-                });
-
-                variationPriceDiv.append(spanSale);
-                variationPriceDiv.append(spanPrice);
-            } else {
-                let spanPrice = $('<span />', {
-                    class: 'amount',
-                    text: number_format(variation.price) + ' تومان'
-                });
-                variationPriceDiv.append(spanPrice);
-            }
-
-            <<
-            <<
-            << < HEAD
-        }
-
-        $(document).ready(function(e) {
-
-            let variation = JSON.parse($('#var-select').val());
-            let variationPriceDiv = $('.variation-price');
-            variationPriceDiv.empty();
-            $('.sku').html(variation.sku);
-            $('#time_guarantee').html(variation.time_guarantee);
-            $('#guarantee').html(variation.guarantee);
-
-            if (variation.is_sale) {
-                let spanSale = $('<div />', {
-                    class: 'amount text-danger',
-                    text: number_format(variation.sale_price) + ' تومان'
-                });
-                let spanPrice = $('<del />', {
-                    class: 'amount',
-                    text: number_format(variation.price) + ' تومان'
-                });
-
-                variationPriceDiv.append(spanSale);
-                variationPriceDiv.append(spanPrice);
-            } else {
-                let spanPrice = $('<span />', {
-                    class: 'amount',
-                    text: number_format(variation.price) + ' تومان'
-                });
-                variationPriceDiv.append(spanPrice);
-            }
-
-            $('.numberstyle').attr('max', variation.quantity);
-            $('.numberstyle').val(1);
-
+    if (variation.is_sale) {
+        let spanSale = $('<div />', {
+            class: 'amount text-danger',
+            text: number_format(variation.sale_price) + ' تومان'
+        });
+        let spanPrice = $('<del />', {
+            class: 'amount',
+            text: number_format(variation.price) + ' تومان'
         });
 
-        $('#var-select').on('change', function() {
+        variationPriceDiv.append(spanSale);
+        variationPriceDiv.append(spanPrice);
+    } else {
+        let spanPrice = $('<span />', {
+            class: 'amount',
+            text: number_format(variation.price) + ' تومان'
+        });
+        variationPriceDiv.append(spanPrice);
+    }
+})
 
-            let variation = JSON.parse(this.value);
-            let variationPriceDiv = $('.variation-price');
-            variationPriceDiv.empty();
+$(document).ready(function(e) {
 
-            $('.sku').html(variation.sku);
-            $('#time_guarantee').html(variation.time_guarantee);
-            $('#guarantee').html(variation.guarantee);
+    let variation = JSON.parse($('#var-select').val());
+    let variationPriceDiv = $('.variation-price');
+    variationPriceDiv.empty();
+    console.log(variation);
 
-            if (variation.is_sale) {
-                let spanSale = $('<span />', {
-                    class: 'amount',
-                    text: number_format(variation.sale_price) + ' تومان'
-                });
-                let spanPrice = $('<del />', {
-                    class: 'amount',
-                    text: number_format(variation.price) + ' تومان'
-                });
+    $('.sku').html(variation.sku);
 
-                variationPriceDiv.append(spanSale);
-                variationPriceDiv.append(spanPrice);
-            } else {
-                let spanPrice = $('<span />', {
-                    class: 'amount',
-                    text: number_format(variation.price) + ' تومان'
-                });
-                variationPriceDiv.append(spanPrice);
-            }
-            $('.numberstyle').attr('max', variation.quantity);
-            $('.numberstyle').val(1);
+    if (variation.time_guarantee === null) {
+        $('.guarantee1').remove();
+    } else {
+        $('#time_guarantee').html(variation.time_guarantee);
+    }
 
+    if (variation.guarantee === null) {
+        $('.guarantee2').remove();
+    } else {
+        $('#guarantee').html(variation.guarantee);
+
+    }
+
+    if (variation.is_sale) {
+        let spanSale = $('<div />', {
+            class: 'amount text-danger',
+            text: number_format(variation.sale_price) + ' تومان'
+        });
+        let spanPrice = $('<del />', {
+            class: 'amount',
+            text: number_format(variation.price) + ' تومان'
         });
 
-        function reply(id) {
+        variationPriceDiv.append(spanSale);
+        variationPriceDiv.append(spanPrice);
+    } else {
+        let spanPrice = $('<span />', {
+            class: 'amount',
+            text: number_format(variation.price) + ' تومان'
+        });
+        variationPriceDiv.append(spanPrice);
+    }
 
-            let sid = 'reply-form-' + id;
-            console.log(sid);
-            $('#' + sid).toggle();
-        }
+    $('.numberstyle').attr('max', variation.quantity);
+    $('.numberstyle').val(1);
+
+});
+
+$('#var-select').on('change', function() {
+
+    let variation = JSON.parse(this.value);
+    let variationPriceDiv = $('.variation-price');
+    variationPriceDiv.empty();
+
+    $('.sku').html(variation.sku);
+    $('#time_guarantee').html(variation.time_guarantee);
+    $('#guarantee').html(variation.guarantee);
+
+    if (variation.is_sale) {
+        let spanSale = $('<span />', {
+            class: 'amount',
+            text: number_format(variation.sale_price) + ' تومان'
+        });
+        let spanPrice = $('<del />', {
+            class: 'amount',
+            text: number_format(variation.price) + ' تومان'
+        });
+
+        variationPriceDiv.append(spanSale);
+        variationPriceDiv.append(spanPrice);
+    } else {
+        let spanPrice = $('<span />', {
+            class: 'amount',
+            text: number_format(variation.price) + ' تومان'
+        });
+        variationPriceDiv.append(spanPrice);
+    }
+    $('.numberstyle').attr('max', variation.quantity);
+    $('.numberstyle').val(1);
+
+});
+
+function reply(id) {
+
+    let sid = 'reply-form-' + id;
+    console.log(sid);
+    $('#' + sid).toggle();
+}
 </script>
 <script>
 (function($) {
