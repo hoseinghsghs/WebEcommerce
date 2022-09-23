@@ -1005,7 +1005,8 @@ $(document).ready(function(e) {
             }
 
             <<
-            << << < HEAD
+            <<
+            << < HEAD
         }
 
         $(document).ready(function(e) {
@@ -1070,51 +1071,11 @@ $(document).ready(function(e) {
                     text: number_format(variation.price) + ' تومان'
                 });
                 variationPriceDiv.append(spanPrice);
-            } ===
-            === =
+            }
             $('.numberstyle').attr('max', variation.quantity);
             $('.numberstyle').val(1);
 
         });
-
-        $('#var-select').on('change', function() {
-            >>>
-            >>> > 56 a05a8a82fcbfd9934de045296d29b76f3e7f40
-
-            let variation = JSON.parse(this.value);
-            let variationPriceDiv = $('.variation-price');
-            variationPriceDiv.empty();
-
-            $('.sku').html(variation.sku)
-
-            if (variation.is_sale) {
-                let spanSale = $('<span />', {
-                    class: 'amount',
-                    text: number_format(variation.sale_price) + ' تومان'
-                });
-                let spanPrice = $('<del />', {
-                    class: 'amount',
-                    text: number_format(variation.price) + ' تومان'
-                });
-
-                variationPriceDiv.append(spanSale);
-                variationPriceDiv.append(spanPrice);
-            } else {
-                let spanPrice = $('<span />', {
-                    class: 'amount',
-                    text: number_format(variation.price) + ' تومان'
-                });
-                variationPriceDiv.append(spanPrice);
-            }
-
-
-
-            $('.numberstyle').attr('max', variation.quantity);
-            $('.numberstyle').val(1);
-
-
-
-        })
 
         function reply(id) {
 
