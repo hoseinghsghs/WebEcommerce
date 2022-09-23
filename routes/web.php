@@ -23,6 +23,7 @@ use App\Http\Controllers\Home\AddressController;
 use App\Http\Controllers\Home\CartController;
 use App\Http\Controllers\Home\CommentController as HomeCommentController;
 use App\Http\Controllers\Home\CompareController;
+use App\Http\Controllers\Home\FaqController;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Home\PaymentController;
 use App\Http\Controllers\Home\PostController as HomePostController;
@@ -167,6 +168,10 @@ Route::get('/get-province-cities-list', [AddressController::class, 'getProvinceC
 //coupon
 Route::post('/checkcoupon', [PaymentController::class, 'checkCoupon'])->name('home.orders.checkcoupon')->middleware('auth');
 
+//faq
+Route::get('/faq' , [FaqController::class , 'index'] )->name('faq');
+Route::get('/privacy' , [FaqController::class , 'privacy'] )->name('privacy');
+Route::get('/rules' , [FaqController::class , 'rules'] )->name('ruls');
 
 Route::get('/test', function () {
 

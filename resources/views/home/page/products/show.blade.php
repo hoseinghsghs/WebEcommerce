@@ -193,7 +193,8 @@
                                             </span>
                                             @foreach ($product->tags as $tag )
 
-                                            <a href="{{route('home.products.search',['tag'=>$tag->name])}}" class="product-link product-tag-title">{{$tag->name}} ،</a>
+                                            <a href="{{route('home.products.search',['tag'=>$tag->name])}}"
+                                                class="product-link product-tag-title">{{$tag->name}} ،</a>
                                             @endforeach
 
                                         </li>
@@ -247,7 +248,7 @@
 
                                                             @foreach($var as $variation )
                                                             <option
-                                                                value="{{ json_encode($variation->only(['id' , 'sku' , 'quantity','is_sale' , 'sale_price' , 'price'])) }}"
+                                                                value="{{ json_encode($variation->only(['id' , 'sku' , 'guarantee' , 'time_guarantee', 'quantity','is_sale' , 'sale_price' , 'price'])) }}"
                                                                 {{ $variationProductSelected->id == $variation->id ? 'selected' : '' }}>
                                                                 {{$variation->value}}</option>
                                                             @endforeach
@@ -265,15 +266,19 @@
                                         <div class="seller-info-changable">
                                             <div class="product-seller-row vendor">
                                                 <span class="title"> فروشنده:</span>
-                                                <a href="#" class="product-name">{{env('APP_NAME')}}</a>
+                                                <a class="product-name">{{env('APP_NAME')}}</a>
                                             </div>
                                             <div class="product-seller-row guarantee">
                                                 <span class="title"> گارانتی:</span>
-                                                <a href="#" class="product-name">۱۸ ماهه دیجی اسمارت</a>
+                                                <a class="product-name" id="guarantee"></a>
+                                            </div>
+                                            <div class="product-seller-row guarantee">
+                                                <span class="title"> مدت گارانتی:</span>
+                                                <a class="product-name" id="time_guarantee"></a>
                                             </div>
                                             <div class="product-seller-row price">
                                                 <span class="title"> قیمت:</span>
-                                                <a href="#" class="product-name variation-price">
+                                                <a class="product-name variation-price">
                                                     @if ($product->quantity_check)
 
                                                     @if ($product->sale_check)
@@ -970,7 +975,9 @@ $(document).ready(function(e) {
     let variation = JSON.parse($('#var-select').val());
     let variationPriceDiv = $('.variation-price');
     variationPriceDiv.empty();
-    $('.sku').html(variation.sku)
+    $('.sku').html(variation.sku);
+    $('#time_guarantee').html(variation.time_guarantee);
+    $('#guarantee').html(variation.guarantee);
 
     if (variation.is_sale) {
         let spanSale = $('<div />', {
@@ -1003,7 +1010,9 @@ $('#var-select').on('change', function() {
     let variationPriceDiv = $('.variation-price');
     variationPriceDiv.empty();
 
-    $('.sku').html(variation.sku)
+    $('.sku').html(variation.sku);
+    $('#time_guarantee').html(variation.time_guarantee);
+    $('#guarantee').html(variation.guarantee);
 
     if (variation.is_sale) {
         let spanSale = $('<span />', {

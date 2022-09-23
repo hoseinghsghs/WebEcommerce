@@ -88,7 +88,7 @@ class ProductController extends Controller
         }
 
         $productAttributeController = new ProductAttributeController();
-        $productAttributeController->store($request->attribute_ids,$request-> $product);
+        $productAttributeController->store($request->attribute_ids,$product);
 
         $category = Category::find($request->category_id);
         $productVariationController = new ProductVariationController();

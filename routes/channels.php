@@ -18,5 +18,4 @@ Broadcast::channel('AdminNotification', function ($user) {
         'name' => $user->name,
     ];
 },
-['guards' => ['web', 'super-admin']]
 );

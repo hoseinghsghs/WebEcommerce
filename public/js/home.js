@@ -52495,7 +52495,7 @@ var __webpack_exports__ = {};
 /*!******************************!*\
   !*** ./resources/js/home.js ***!
   \******************************/
-window.$ = window.jQuery = window.jquery = __webpack_require__(/*! ../assets/home/js/vendor/jquery-3.2.1.min.js */ "./resources/assets/home/js/vendor/jquery-3.2.1.min.js"); // require("../assets/home/js/vendor/bootstrap.js");
+window.$ = window.jQuery = window.jquery = __webpack_require__(/*! ../assets/home/js/vendor/jquery-3.2.1.min.js */ "./resources/assets/home/js/vendor/jquery-3.2.1.min.js");
 
 __webpack_require__(/*! ./bootstrap.js */ "./resources/js/bootstrap.js");
 

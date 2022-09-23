@@ -25,6 +25,8 @@ class CreateProductVariationsTable extends Migration
             $table->unsignedInteger('price')->default(0);
             $table->unsignedInteger('quantity')->default(0);
             $table->string('sku')->nullable();
+            $table->string('guarantee')->nullable();
+            $table->string('time_guarantee')->nullable();
 
             $table->unsignedInteger('sale_price')->nullable();
             $table->timestamp('date_on_sale_from')->nullable();

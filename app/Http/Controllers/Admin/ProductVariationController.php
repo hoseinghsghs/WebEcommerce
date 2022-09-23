@@ -19,7 +19,9 @@ class ProductVariationController extends Controller
                 'value' => $variations['value'][$i],
                 'price' => $variations['price'][$i],
                 'quantity' => $variations['quantity'][$i],
-                'sku' => $variations['sku'][$i]
+                'sku' => $variations['sku'][$i],
+                'guarantee' => $variations['guarantee'][$i],
+                'time_guarantee' => $variations['time_guarantee'][$i],
             ]);
         }
     }
@@ -35,6 +37,8 @@ class ProductVariationController extends Controller
                 'price' => $value['price'],
                 'quantity' => $value['quantity'],
                 'sku' => $value['sku'],
+                'guarantee' => $value['guarantee'],
+                'time_guarantee' => $value['time_guarantee'],
                 'sale_price' => $value['sale_price'],
                 'date_on_sale_from' => $value['date_on_sale_from'],
                 'date_on_sale_to' => $value['date_on_sale_to'],
@@ -54,7 +58,10 @@ class ProductVariationController extends Controller
                 'value' => $variations['value'][$i],
                 'price' => $variations['price'][$i],
                 'quantity' => $variations['quantity'][$i],
-                'sku' => $variations['sku'][$i]
+                'sku' => $variations['sku'][$i],
+                'guarantee' => $variations['guarantee'][$i],
+                'time_guarantee' => $variations['time_guarantee'][$i],
+
             ]);
         }
     }

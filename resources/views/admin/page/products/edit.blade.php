@@ -221,6 +221,20 @@
                                                         value="{{ $variation->sku }}" required>
                                                 </div>
 
+                                                <div class="form-group col-md-6">
+                                                    <label> کارانتی </label>
+                                                    <input type="text" class="form-control"
+                                                        name="variation_values[{{ $variation->id }}][guarantee]"
+                                                        value="{{ $variation->guarantee }}" required>
+                                                </div>
+
+                                                <div class="form-group col-md-6">
+                                                    <label> مدت گارانتی </label>
+                                                    <input type="text" class="form-control"
+                                                        name="variation_values[{{ $variation->id }}][time_guarantee]"
+                                                        value="{{ $variation->time_guarantee}}" required>
+                                                </div>
+
                                                 {{-- Sale Section --}}
                                                 <div class="col-md-12">
                                                     <p> حراج : </p>

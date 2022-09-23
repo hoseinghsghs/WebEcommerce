@@ -7,7 +7,7 @@
                      @foreach ($services as $service)
                      <div class="item">
                          <span class="icon-shopping">
-                             <i class="fa fa-font-awesome"></i>
+                             <i class="{{$service->icon}}"></i>
                          </span>
                          <span class="title-shopping">{{$service->title}}</span>
                          <span class="desc-shopping">{{$service->description}}</span>
@@ -61,13 +61,16 @@
                                      <div class="social-container">
                                          <ul class="social-icons">
                                              @isset($setting->instagram)
-                                             <li><a href="{{$setting->instagram}}"><i class="fa fa-instagram"></i></a></li>
+                                             <li><a href="{{$setting->instagram}}"><i class="fa fa-instagram"></i></a>
+                                             </li>
                                              @endisset
                                              @isset($setting->whatsapp)
-                                             <li><a href="{{$setting->whatsapp}}"><i class="fa fa-whatsapp"></i></a></li>
+                                             <li><a href="{{$setting->whatsapp}}"><i class="fa fa-whatsapp"></i></a>
+                                             </li>
                                              @endisset
                                              @isset($setting->telegram)
-                                             <li><a href="{{$setting->telegram}}"><i class="fa fa-telegram"></i></a></li>
+                                             <li><a href="{{$setting->telegram}}"><i class="fa fa-telegram"></i></a>
+                                             </li>
                                              @endisset
                                          </ul>
                                  </fieldset>
@@ -91,20 +94,26 @@
                          <div class="col-lg-2 pl">
                              <div class="footer-safety-partner">
                                  <div class="widget widget-product card mb-0">
-                                     <div class="product-carousel-symbol owl-carousel owl-theme owl-rtl owl-loaded owl-drag">
+                                     <div
+                                         class="product-carousel-symbol owl-carousel owl-theme owl-rtl owl-loaded owl-drag">
                                          <div class="owl-stage-outer">
-                                             <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 2234px;">
-                                                 <div class="owl-item active" style="width: 300.75px; margin-left: 10px;">
+                                             <div class="owl-stage"
+                                                 style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 2234px;">
+                                                 <div class="owl-item active"
+                                                     style="width: 300.75px; margin-left: 10px;">
                                                      <div class="item">
                                                          <a href="#" class="d-block hover-img-link">
-                                                             <img src="/assets/home/images/footer/license/L-1.png" class="img-fluid img-brand" alt="">
+                                                             <img src="/assets/home/images/footer/license/L-1.png"
+                                                                 class="img-fluid img-brand" alt="">
                                                          </a>
                                                      </div>
                                                  </div>
-                                                 <div class="owl-item active" style="width: 300.75px; margin-left: 10px;">
+                                                 <div class="owl-item active"
+                                                     style="width: 300.75px; margin-left: 10px;">
                                                      <div class="item">
                                                          <a href="#" class="d-block hover-img-link mt-0">
-                                                             <img src="/assets/home/images/footer/license/L-2.png" class="img-fluid img-brand" alt="">
+                                                             <img src="/assets/home/images/footer/license/L-2.png"
+                                                                 class="img-fluid img-brand" alt="">
                                                          </a>
                                                      </div>
                                                  </div>

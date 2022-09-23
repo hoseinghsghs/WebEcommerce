@@ -66,7 +66,7 @@
                                     <div class="form-line">
                                         <label class="form-label">آیکن </label>
                                         <small>برای گرفتن نام آیکن ها روی این لینک کلیک کنید: <a
-                                                href="https://fontawesome.com/v4/icon/address-book" target="_blank">
+                                                href="https://fontawesome.com/v4/icons/" target="_blank">
                                                 Icon</a></small>
                                         <div class="form-group">
                                             <input type="text" name="icon" class="form-control" required

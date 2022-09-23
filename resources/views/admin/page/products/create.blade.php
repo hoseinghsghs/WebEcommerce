@@ -213,6 +213,20 @@
                                                                 required type="text">
                                                         </div>
                                                     </div>
+                                                    <div class="col-md-6">
+                                                        <label>گارانتی</label>
+                                                        <div class="form-group">
+                                                            <input class="form-control"
+                                                                name="variation_values[guarantee][]" type="text">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label>مدت گارانتی</label>
+                                                        <div class="form-group">
+                                                            <input class="form-control"
+                                                                name="variation_values[time_guarantee][]" type="text">
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

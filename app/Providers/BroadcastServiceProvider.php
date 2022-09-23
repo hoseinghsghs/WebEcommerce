@@ -16,6 +16,8 @@ class BroadcastServiceProvider extends ServiceProvider
     {
         Broadcast::routes();
 
+        Broadcast::routes(['middleware' => ['web' , 'role:super-admin']]);
         require base_path('routes/channels.php');
+
     }
 }

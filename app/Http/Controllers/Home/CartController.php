@@ -24,7 +24,6 @@ class CartController extends Controller
         $product = Product::findOrFail($request->product);
         $productVariation = ProductVariation::findOrFail(json_decode($request->variation)->id);
         
-        broadcast(new NotificationMessage($product));
 
         if ($request->qtybutton > $productVariation->quantity) {
             
@@ -43,11 +42,25 @@ class CartController extends Controller
                 'associatedModel' => $product,
                 
             ));
+
+            try {
+                broadcast(new NotificationMessage($product));
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
+            
            return response()->json(['product'=>$product,'app_name' => env('APP_NAME'),'rowId'=>$rowId , 'cart' => Cart::getContent($rowId) , 'rowId' =>$rowId , 'all_cart' => Cart::getTotal()],200);    
         } 
         else {
+            try {
+                broadcast(new NotificationMessage($product));
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
            return response( 'success', 201 );
         }
+        
+
     }
     
     public function index()
