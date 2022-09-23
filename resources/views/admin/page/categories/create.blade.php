@@ -90,7 +90,7 @@
                                     </div>
 
                                     <div class="col-md-3">
-                                        <label for="attributesId">ویژگی</label>
+                                        <label for="attributesId">ویژگی‌ها</label>
                                         <div class="form-group">
                                             <select id="attributesId" name="attribute_ids[]"
                                                 class="form-control show-tick ms select2"
@@ -117,6 +117,22 @@
                                                 )
                                                 <option value="{{$selected_attribute->id}}"
                                                     {{in_array($selected_attribute->id, old('attribute_is_filter_ids'))? "selected":null}}>
+                                                    {{$selected_attribute->name}}</option>
+                                                @endforeach
+                                                @endif
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="attributeIsMain">انتخاب ویژگی های اصلی دسته</label>
+                                        <div class="form-group">
+                                            <select id="attributeIsMain" name="attribute_is_main_ids[]"
+                                                class="form-control show-tick ms select2" multiple
+                                                data-close-on-select="false" data-placeholder="انتخاب ویژگی">
+                                                @if (old('attribute_ids') && old('attribute_is_main_ids'))
+                                                @foreach ($attributes->only(old('attribute_ids')) as $selected_attribute)
+                                                <option value="{{$selected_attribute->id}}"
+                                                    {{in_array($selected_attribute->id, old('attribute_is_main_ids'))? "selected":null}}>
                                                     {{$selected_attribute->name}}</option>
                                                 @endforeach
                                                 @endif
@@ -192,6 +208,7 @@ $('#attributesId').on('change', function() {
         options += `<option value="${element.id}">${element.text}</option>`
     });
     $('#attributeIsFilter').html(options).trigger('change');
+    $('#attributeIsMain').html(options).trigger('change');
     $('#attributeVariation').html(options).trigger('change');
 })
 </script>

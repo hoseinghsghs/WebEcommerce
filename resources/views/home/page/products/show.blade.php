@@ -11,8 +11,12 @@
                     <nav aria-label="breadcrumb" class="p-1">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('home')}}">خانه</a></li>
-                            <li class="breadcrumb-item"><a href="#">{{$product->category->parent->name}}</a></li>
-                            <li class="breadcrumb-item"><a href="#"> {{$product->category->name}}</a></li>
+                            <li class="breadcrumb-item"><a
+                                    href="{{route('home.products.search',$product->category->parent->slug)}}">{{$product->category->parent->name}}</a>
+                            </li>
+                            <li class="breadcrumb-item"><a
+                                    href="{{route('home.products.index',$product->category->slug)}}">
+                                    {{$product->category->name}}</a></li>
                             <li class="breadcrumb-item active" aria-current="page">{{$product->name}}</li>
                         </ol>
                     </nav>
@@ -181,11 +185,11 @@
                                             <span>
                                                 <i class="fa fa-archive"></i> دسته:
                                             </span>
-                                            <a href="#"
-                                                class="product-link product-cat-title">{{$product->category->name}}</a>
-                                            ,
-                                            <a href="#"
+                                            <a href="{{route('home.products.search',$product->category->parent->slug)}}"
                                                 class="product-link product-cat-title">{{$product->category->parent->name}}</a>
+                                            ,
+                                            <a href="{{route('home.products.index',$product->category->slug)}}"
+                                                class="product-link product-cat-title">{{$product->category->name}}</a>
                                         </li>
                                         <li>
                                             <span>
@@ -220,15 +224,16 @@
 
                                     </div>
                                     <div class="product-params pt-3">
+                                        @if ($main_attributes->count()>0)
                                         <ul data-title="ویژگی‌های محصول">
-                                            @foreach ($product->attributes()->with('attribute')->get() as $attribute )
+                                            @foreach ($main_attributes as $attribute )
                                             <li>
                                                 <span>{{$attribute->attribute->name}}:</span>
                                                 <span>{{$attribute->value}}</span>
                                             </li>
                                             @endforeach
                                         </ul>
-
+                                        @endif
                                         <ul
                                             data-title="{{App\Models\Attribute::find($product->variations->first()->attribute_id)->name}}:">
 
@@ -248,9 +253,10 @@
 
                                                             @foreach($var as $variation )
                                                             <option
-                                                                value="{{ json_encode($variation->only(['id' , 'sku' , 'guarantee' , 'time_guarantee', 'quantity','is_sale' , 'sale_price' , 'price'])) }}"
+                                                                value="{{ json_encode($variation->only(['id' , 'sku' , 'quantity','is_sale' , 'sale_price' , 'price'])) }}"
                                                                 {{ $variationProductSelected->id == $variation->id ? 'selected' : '' }}>
-                                                                {{$variation->value}}</option>
+                                                                {{$variation->value}}
+                                                            </option>
                                                             @endforeach
                                                         </select>
 
@@ -285,7 +291,8 @@
 
                                                     <div class="amount">
                                                         {{number_format($product->sale_check->sale_price)}}
-                                                        تومان </div>
+                                                        تومان
+                                                    </div>
 
                                                     </br>
                                                     <del> {{number_format($product->sale_check->price)}}
@@ -972,83 +979,149 @@ function setlable(e) {
 
 $(document).ready(function(e) {
 
-    let variation = JSON.parse($('#var-select').val());
-    let variationPriceDiv = $('.variation-price');
-    variationPriceDiv.empty();
-    $('.sku').html(variation.sku);
-    $('#time_guarantee').html(variation.time_guarantee);
-    $('#guarantee').html(variation.guarantee);
+            let variation = JSON.parse($('#var-select').val());
+            let variationPriceDiv = $('.variation-price');
+            variationPriceDiv.empty();
+            $('.sku').html(variation.sku)
 
-    if (variation.is_sale) {
-        let spanSale = $('<div />', {
-            class: 'amount text-danger',
-            text: number_format(variation.sale_price) + ' تومان'
+            if (variation.is_sale) {
+                let spanSale = $('<div />', {
+                    class: 'amount text-danger',
+                    text: number_format(variation.sale_price) + ' تومان'
+                });
+                let spanPrice = $('<del />', {
+                    class: 'amount',
+                    text: number_format(variation.price) + ' تومان'
+                });
+
+                variationPriceDiv.append(spanSale);
+                variationPriceDiv.append(spanPrice);
+            } else {
+                let spanPrice = $('<span />', {
+                    class: 'amount',
+                    text: number_format(variation.price) + ' تومان'
+                });
+                variationPriceDiv.append(spanPrice);
+            }
+
+            <<
+            << << < HEAD
+        }
+
+        $(document).ready(function(e) {
+
+            let variation = JSON.parse($('#var-select').val());
+            let variationPriceDiv = $('.variation-price');
+            variationPriceDiv.empty();
+            $('.sku').html(variation.sku);
+            $('#time_guarantee').html(variation.time_guarantee);
+            $('#guarantee').html(variation.guarantee);
+
+            if (variation.is_sale) {
+                let spanSale = $('<div />', {
+                    class: 'amount text-danger',
+                    text: number_format(variation.sale_price) + ' تومان'
+                });
+                let spanPrice = $('<del />', {
+                    class: 'amount',
+                    text: number_format(variation.price) + ' تومان'
+                });
+
+                variationPriceDiv.append(spanSale);
+                variationPriceDiv.append(spanPrice);
+            } else {
+                let spanPrice = $('<span />', {
+                    class: 'amount',
+                    text: number_format(variation.price) + ' تومان'
+                });
+                variationPriceDiv.append(spanPrice);
+            }
+
+            $('.numberstyle').attr('max', variation.quantity);
+            $('.numberstyle').val(1);
+
         });
-        let spanPrice = $('<del />', {
-            class: 'amount',
-            text: number_format(variation.price) + ' تومان'
+
+        $('#var-select').on('change', function() {
+
+            let variation = JSON.parse(this.value);
+            let variationPriceDiv = $('.variation-price');
+            variationPriceDiv.empty();
+
+            $('.sku').html(variation.sku);
+            $('#time_guarantee').html(variation.time_guarantee);
+            $('#guarantee').html(variation.guarantee);
+
+            if (variation.is_sale) {
+                let spanSale = $('<span />', {
+                    class: 'amount',
+                    text: number_format(variation.sale_price) + ' تومان'
+                });
+                let spanPrice = $('<del />', {
+                    class: 'amount',
+                    text: number_format(variation.price) + ' تومان'
+                });
+
+                variationPriceDiv.append(spanSale);
+                variationPriceDiv.append(spanPrice);
+            } else {
+                let spanPrice = $('<span />', {
+                    class: 'amount',
+                    text: number_format(variation.price) + ' تومان'
+                });
+                variationPriceDiv.append(spanPrice);
+            } ===
+            === =
+            $('.numberstyle').attr('max', variation.quantity);
+            $('.numberstyle').val(1);
+
         });
 
-        variationPriceDiv.append(spanSale);
-        variationPriceDiv.append(spanPrice);
-    } else {
-        let spanPrice = $('<span />', {
-            class: 'amount',
-            text: number_format(variation.price) + ' تومان'
-        });
-        variationPriceDiv.append(spanPrice);
-    }
+        $('#var-select').on('change', function() {
+            >>>
+            >>> > 56 a05a8a82fcbfd9934de045296d29b76f3e7f40
 
-    $('.numberstyle').attr('max', variation.quantity);
-    $('.numberstyle').val(1);
+            let variation = JSON.parse(this.value);
+            let variationPriceDiv = $('.variation-price');
+            variationPriceDiv.empty();
 
-});
+            $('.sku').html(variation.sku)
 
-$('#var-select').on('change', function() {
+            if (variation.is_sale) {
+                let spanSale = $('<span />', {
+                    class: 'amount',
+                    text: number_format(variation.sale_price) + ' تومان'
+                });
+                let spanPrice = $('<del />', {
+                    class: 'amount',
+                    text: number_format(variation.price) + ' تومان'
+                });
 
-    let variation = JSON.parse(this.value);
-    let variationPriceDiv = $('.variation-price');
-    variationPriceDiv.empty();
-
-    $('.sku').html(variation.sku);
-    $('#time_guarantee').html(variation.time_guarantee);
-    $('#guarantee').html(variation.guarantee);
-
-    if (variation.is_sale) {
-        let spanSale = $('<span />', {
-            class: 'amount',
-            text: number_format(variation.sale_price) + ' تومان'
-        });
-        let spanPrice = $('<del />', {
-            class: 'amount',
-            text: number_format(variation.price) + ' تومان'
-        });
-
-        variationPriceDiv.append(spanSale);
-        variationPriceDiv.append(spanPrice);
-    } else {
-        let spanPrice = $('<span />', {
-            class: 'amount',
-            text: number_format(variation.price) + ' تومان'
-        });
-        variationPriceDiv.append(spanPrice);
-    }
+                variationPriceDiv.append(spanSale);
+                variationPriceDiv.append(spanPrice);
+            } else {
+                let spanPrice = $('<span />', {
+                    class: 'amount',
+                    text: number_format(variation.price) + ' تومان'
+                });
+                variationPriceDiv.append(spanPrice);
+            }
 
 
 
-    $('.numberstyle').attr('max', variation.quantity);
-    $('.numberstyle').val(1);
+            $('.numberstyle').attr('max', variation.quantity);
+            $('.numberstyle').val(1);
 
 
 
-})
+        })
 
-function reply(id) {
+        function reply(id) {
 
-    let sid = 'reply-form-' + id;
-    console.log(sid);
-    $('#' + sid).toggle();
-}
+            let sid = 'reply-form-' + id;
+            console.log(sid);
+            $('#' + sid).toggle();
+        }
 </script>
 <script>
 (function($) {
