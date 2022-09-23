@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Models\Setting;
+use GuzzleHttp\Middleware;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
