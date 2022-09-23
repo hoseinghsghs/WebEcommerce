@@ -142,6 +142,8 @@ return array(
         "primary_image" => "تصویر اصلی",
         "category_id" => "دسته بندی",
         "attribute_ids" => "ویژگی ها",
+        "attribute_is_main_ids" => "ویژگی‌های اصلی",
+        "variation_id" => "ویژگی‌متغیر",
         "variation_values" => "ویژگی متغییر",
         "variation_values.*" => "ویژگی متغییر",
         "attribute_values.*" => "ویژگی ها",

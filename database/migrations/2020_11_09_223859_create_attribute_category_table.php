@@ -21,6 +21,7 @@ class CreateAttributeCategoryTable extends Migration
 
             $table->boolean('is_filter')->default(0);
             $table->boolean('is_variation')->default(0);
+            $table->boolean('is_main')->default(0);
 
             $table->primary(['attribute_id' , 'category_id']);
 

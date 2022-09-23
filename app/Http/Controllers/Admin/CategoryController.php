@@ -22,8 +22,6 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::latest()->paginate(10);
-        // $settings = Setting::findOrNew(1);
-        // $categories_order = json_decode($settings->data, 'true');
         return view('admin.page.categories.index', compact('categories'));
     }
 
@@ -71,10 +69,15 @@ class CategoryController extends Controller
             'attribute_ids.*' => 'exists:attributes,id',
             'attribute_is_filter_ids' => 'required',
             'attribute_is_filter_ids.*' => 'exists:attributes,id',
-            'variation_id' => 'required|exists:attributes,id',
+            'attribute_is_main_ids' => 'nullable|array',
+            'attribute_is_main_ids.*' => 'exists:attributes,id',
+            'variation_id' => ['required','exists:attributes,id',Rule::notIn($request->attribute_is_main_ids)],
         ]);
 
-        $filtered = Arr::except($data, ['attribute_ids', 'variation_id', 'attribute_is_filter_ids']);
+        $filtered = Arr::except($data, ['attribute_ids', 'variation_id','attribute_is_main_ids', 'attribute_is_filter_ids']);
+        if($request->missing('attribute_is_main_ids')){
+            $data['attribute_is_main_ids']=[];
+        }
 
         try {
             DB::beginTransaction();
@@ -84,7 +87,8 @@ class CategoryController extends Controller
             foreach ($data['attribute_ids'] as  $attribute_id) {
                 $array[$attribute_id] = [
                     'is_filter' => in_array($attribute_id, $data['attribute_is_filter_ids']) ? 1 : 0,
-                    'is_variation' => $attribute_id == $data['variation_id'] ? 1 : 0
+                    'is_variation' => $attribute_id == $data['variation_id'] ? 1 : 0,
+                    'is_main'=>in_array($attribute_id,$data['attribute_is_main_ids'])
                 ];
             }
             $category->attributes()->attach($array);
@@ -158,10 +162,14 @@ class CategoryController extends Controller
             'attribute_ids.*' => 'exists:attributes,id',
             'attribute_is_filter_ids' => 'required',
             'attribute_is_filter_ids.*' => 'exists:attributes,id',
-            'variation_id' => 'required|exists:attributes,id',
-        ]);
+            'attribute_is_main_ids' => 'nullable|array',
+            'attribute_is_main_ids.*' => 'exists:attributes,id',
+            'variation_id' => ['required','exists:attributes,id',Rule::notIn($request->attribute_is_main_ids)],        ]);
 
-        $filtered = Arr::except($data, ['attribute_ids', 'variation_id', 'attribute_is_filter_ids']);
+        $filtered = Arr::except($data, ['attribute_ids', 'variation_id','attribute_is_main_ids', 'attribute_is_filter_ids']);
+        if($request->missing('attribute_is_main_ids')){
+            $data['attribute_is_main_ids']=[];
+        }
 
         try {
             DB::beginTransaction();
@@ -171,7 +179,8 @@ class CategoryController extends Controller
             foreach ($data['attribute_ids'] as  $attribute_id) {
                 $array[$attribute_id] = [
                     'is_filter' => in_array($attribute_id, $data['attribute_is_filter_ids']) ? 1 : 0,
-                    'is_variation' => $attribute_id == $data['variation_id'] ? 1 : 0
+                    'is_variation' => $attribute_id == $data['variation_id'] ? 1 : 0,
+                    'is_main'=>in_array($attribute_id,$data['attribute_is_main_ids'])
                 ];
             }
             $category->attributes()->sync($array);

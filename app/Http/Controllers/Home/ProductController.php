@@ -16,7 +16,7 @@ class ProductController extends Controller
 {
     public function show(Product $product)
     {
-        
+
         // SEO
         SEOTools::setTitle('صفحه محصول');
         SEOTools::setDescription(' فروشگاه اینترنتی لوازم آرایشی در تهران ');
@@ -30,13 +30,14 @@ class ProductController extends Controller
         $categories=Category::all();
         $brands=Brand::all();
         $services=Service::orderBy('service_order')->get();
-        
+
         // $category_simulation=Category::active()->where('name',$product->category->name)->get()->first();
         // $product_simulation=$category_simulation->products->take(3)->sortBy('desc');
         $products_latest=Product::active()->latest()->take(3)->get();
         $wishlist = WishList::where('user_id', auth()->id())->get();
         $banner_product=Banner::active()->where('type','محصول')->get()->first();
+        $main_attributes=$product->attributes()->whereIn('attribute_id',$product->category->attributes()->where('is_main',true)->pluck('id')->toArray())->with('attribute')->get();
 
-        return view('home.page.products.show' , compact('product','categories','services','products_latest' ,'wishlist' , 'banner_product'));
+        return view('home.page.products.show' , compact('product','categories','services','products_latest' ,'wishlist' , 'banner_product','main_attributes'));
     }
 }
