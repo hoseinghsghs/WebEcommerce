@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Events\NotificationMessage;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
+use App\Models\Event;
 use App\Models\Post;
 use App\Models\Product;
 use App\Models\ProductRate;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -53,6 +57,21 @@ class CommentController extends Controller
                     'commentable_type' => Product::class,
                  
                 ]);
+
+
+                $event= Event::create([
+                    'title' => 'کامنت جدید ثبت شد',
+                    'body' => 'نام کاربر' . " " . Auth::user()->name . "" . Auth::user()->cellphone . " ". 'محصول' ." ".$product->name ,
+                    'user_id' => auth()->id(),
+                    'eventable_id' =>auth()->id(),
+                    'eventable_type' => User::class,
+                ]);
+                
+                try {
+                    broadcast(new NotificationMessage($event))->toOthers();
+                } catch (\Throwable $th) {
+                    //throw $th;
+                }
                
 
                 if ($product->rates()->where('user_id', auth()->id())->exists()) {

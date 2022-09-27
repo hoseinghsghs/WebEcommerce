@@ -129,16 +129,28 @@ public function paymentVerify(Request $request, $gatewayName)
     if ($gatewayName == 'pay') {
         $payGateway = new Pay();
         
+        
         $payGatewayResult = $payGateway->verify($request->token, $request->status);
+        if ($payGatewayResult == null) {
+            alert()->error('پرداخت با مشکل مواجه شد');
 
-        if (array_key_exists('error', $payGatewayResult)) {
-            alert()->error($payGatewayResult['error'])->persistent('حله');
-            return redirect()->route('home.user_profile.orders',['order' => Session::pull('orderId')]);
+            return redirect()->back();
         } else {
-            alert()->success('خرید با موفقیت انجام گرفت', 'با تشکر');
-            return redirect()->route('home.user_profile.orders',['order' => Session::pull('orderId')]);
-            
+            if (array_key_exists('error', $payGatewayResult)) {
+                alert()->error($payGatewayResult['error'])->persistent('حله');
+                return redirect()->route('home.user_profile.orders',['order' => Session::pull('orderId')]);
+            } else {
+                alert()->success('خرید با موفقیت انجام گرفت', 'با تشکر');
+                try {
+                    return redirect()->route('home.user_profile.orders',['order' => Session::pull('orderId')]);
+                } catch (\Throwable $th) {
+                    return redirect()->route('home.user_profile.ordersList');
+                }
+                
+            }   
         }
+        
+          
     }
 
     if ($gatewayName == 'zarinpal') {

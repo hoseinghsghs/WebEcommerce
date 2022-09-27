@@ -75,4 +75,8 @@ class Order extends Model
     {
         return $this->belongsTo(UserAddress::class);
     }
+    public function events()
+    {
+        return $this->morphMany(Event::class, 'eventable');
+    }
 }

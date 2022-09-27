@@ -70,6 +70,7 @@
     </script>
     <script>
     $(document).ready(function() {
+
         $('#summernote').summernote({
             height: 200,
             toolbar: [
@@ -107,6 +108,19 @@
             ]
         })
     });
+    window.addEventListener('say-sound', event => {
+        var audio = new Audio(window.location.origin + '/assets/admin/sound/beep.mp3');
+        audio.play();
+
+        $('.notify').css({
+            "display": "block"
+        });
+
+        $.notify({
+            message: "رویداد جدید ثبت شد."
+        });
+
+    })
     </script>
 
 

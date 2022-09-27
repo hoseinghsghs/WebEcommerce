@@ -55,4 +55,13 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Order::class);
     }
+    public function events()
+    {
+        return $this->morphMany(Event::class, 'eventable');
+    }
+
+    public function events1()
+    {
+        return $this->belongsToMany(EventUser::class);
+    }
 }

@@ -13,6 +13,7 @@ class Pay extends Payment
         $redirect = route('home.payment_verify' , ['gatewayName' => 'pay']);
         $result = $this->sendRequest($api, $amount, $redirect);
         $result = json_decode($result);
+        if($result){
         if ($result->status) {
 
             $createOrder = parent::createOrder($addressId, $amounts, $result->token, 'pay' , $description);
@@ -25,6 +26,10 @@ class Pay extends Payment
         } else {
             return ['error' => $result->errorMessage];
         }
+        }else{
+            return ['error' => 'مشکل ارتباط با درگاه پرداخت'];
+        }
+        
     }
 
     public function verify($token , $status)
@@ -32,6 +37,7 @@ class Pay extends Payment
         $api = 'test';
         $token = $token;
         $result = json_decode($this->verifyRequest($api, $token));
+        if($result){
         if (isset($result->status)) {
             if ($result->status == 1) {
                 $updateOrder = parent::updateOrder($token, $result->transId);
@@ -48,10 +54,15 @@ class Pay extends Payment
             }
         } else {
             if ($status == 0) {
+                
+
                 $updateOrder = parent::updateOrderErorr($token,$result['Status']);
                 return ['error' => 'پرداخت با خطا مواجه شد' ];
             }
         }
+        return ['error' => 'درگاه پرداخت مشکل دارد' ];
+      }
+      
     }
 
     public function sendRequest($api, $amount, $redirect, $mobile = null, $factorNumber = null, $description = null)

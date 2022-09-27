@@ -2,6 +2,8 @@
 
 namespace App\PaymentGateway;
 
+use App\Events\NotificationMessage;
+use App\Models\Event;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Transaction;
@@ -46,10 +48,24 @@ class Payment
                 'gateway_name' => $gateway_name
             ]);
 
+           $event= Event::create([
+                'title' => 'سفارش جدید ثبت شد',
+                'body' => 'شماره سفارش' . " " . $order->id ." ". 'آیدی کاربر' ." ".auth()->id() ,
+                'user_id' => auth()->id(),
+                'eventable_id' => $order->id,
+                'eventable_type' => Order::class,
+            ]);
+
             DB::commit();
         } catch (\Exception $ex) {
             DB::rollBack();
             return ['error' => $ex->getMessage()];
+        }
+
+        try {
+            broadcast(new NotificationMessage($event))->toOthers();
+        } catch (\Throwable $th) {
+            //throw $th;
         }
 
         return ['success' => 'success!' , 'orderId' => $order->id];

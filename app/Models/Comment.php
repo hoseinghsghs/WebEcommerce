@@ -37,5 +37,10 @@ class Comment extends Model
     {
          return $this->belongsTo(Comment::class,'parent_id');
     }
+
+    public function events()
+    {
+        return $this->morphMany(Event::class, 'eventable');
+    }
     
 }

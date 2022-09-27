@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use App\Events\NotificationMessage;
 use App\Http\Controllers\Controller;
+use App\Models\Event;
 use App\Models\Product;
 use App\Models\ProductVariation;
 use App\Models\Province;
@@ -42,21 +43,11 @@ class CartController extends Controller
                 'associatedModel' => $product,
                 
             ));
-
-            try {
-                broadcast(new NotificationMessage($product));
-            } catch (\Throwable $th) {
-                //throw $th;
-            }
             
            return response()->json(['product'=>$product,'app_name' => env('APP_NAME'),'rowId'=>$rowId , 'cart' => Cart::getContent($rowId) , 'rowId' =>$rowId , 'all_cart' => Cart::getTotal()],200);    
         } 
         else {
-            try {
-                broadcast(new NotificationMessage($product));
-            } catch (\Throwable $th) {
-                //throw $th;
-            }
+           
            return response( 'success', 201 );
         }
         

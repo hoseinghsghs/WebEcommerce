@@ -58,10 +58,9 @@
                             <tbody>
 
                                 @foreach ($comments as $comment)
-
                                 <tr wire:key="name_{{ $comment->id }}">
                                     <td scope=" row">{{$comment->id}}</td>
-                                    <td>{{$comment->user->name == null ? "بدون نام" : $comment->user->cellphone }}
+                                    <td>{{$comment->user->name == null ? $comment->user->cellphone : $comment->user->name }}
                                     </td>
                                     <td>{{Hekmatinasser\Verta\Verta::instance($comment->created_at)->format('Y/n/j')}}
                                     </td>

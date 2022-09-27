@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Event;
 use App\Models\Product;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -14,16 +15,16 @@ use Illuminate\Queue\SerializesModels;
 class NotificationMessage implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $product;
+    public $event;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Product $product)
+    public function __construct(Event $event)
     {
-        $this->product=$product;
+        $this->event= $event;
     }
 
     /**

@@ -16408,6 +16408,7 @@ section.content {
     position: absolute;
     top: 20px;
     left: 18px;
+    display: none;
 }
 
 .notify .heartbit {
@@ -16422,7 +16423,7 @@ section.content {
     width: 25px;
     z-index: 10;
     border: 4px solid;
-    border-color: #3d4c5a;
+    border-color: red;
     animation: heartbit 1s ease-out;
     -moz-animation: heartbit 1s ease-out;
     -moz-animation-iteration-count: infinite;
