@@ -29,6 +29,8 @@ class Setting extends Component
     public $latitude;
     public $longitude;
     public $description;
+    public $site_rules;
+    public $site_privacy;
     public $logo;
     public $logo_url;
 
@@ -50,6 +52,8 @@ class Setting extends Component
         'latitude' =>  'nullable|numeric',
         'telegram' => 'nullable|string',
         'description' => 'nullable|string',
+        'site_rules' => 'nullable|string',
+        'site_privacy' => 'nullable|string',
         'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
     ];
 
@@ -58,6 +62,8 @@ class Setting extends Component
         'links.*.name' => 'عنوان دسته',
         'links.*.children.*.title' => 'عنوان لینک',
         'links.*.children.*.url' => 'آدرس لینک',
+        'site_rules' => 'قوانین سایت',
+        'site_privacy' => 'حریم خصوصی'
     ];
 
     public function mount()
@@ -72,6 +78,8 @@ class Setting extends Component
         $this->telegram = $settings->telegram;
         $this->address = $settings->address;
         $this->description = $settings->description;
+        $this->site_rules = $settings->site_rules;
+        $this->site_privacy = $settings->site_privacy;
         $this->work_days = $settings->work_days;
         $this->latitude = $settings->latitude;
         $this->longitude = $settings->longitude;
@@ -80,6 +88,7 @@ class Setting extends Component
 
     public function addEmail()
     {
+        dd($this->site_privacy, $this->site_rules);
         $this->validate([
             'email' => 'required|email',
         ]);
