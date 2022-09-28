@@ -11,8 +11,6 @@ window.Echo = new Echo({
     forceTLS: false,
     disableStats: true,
 });
-
-Pusher.logToConsole = true;
 window.c3 = require("c3");
 
 window.$ = window.jQuery = window.jquery = require("jquery");

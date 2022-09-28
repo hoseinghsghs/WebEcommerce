@@ -33017,7 +33017,6 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   forceTLS: false,
   disableStats: true
 });
-Pusher.logToConsole = true;
 })();
 
 /******/ })()
