@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\NotificationMessage;
 use App\Http\Controllers\Controller;
+use App\Models\Event;
 use App\Models\Otp;
 use App\Models\User;
 use Carbon\Carbon;
@@ -109,6 +111,20 @@ class OtpController extends Controller
                 $user = User::create([
                     'cellphone' => $otp->cellphone,
                 ]);
+                //broudcast
+                $event= Event::create([
+                    'title' => 'کاربر جدید ثبت نام کرد',
+                    'body' => 'کاربر'  . " " .  $user->cellphone,
+                    'user_id' => $user->id,
+                    'eventable_id' =>$user->id,
+                    'eventable_type' => User::class,
+                ]);
+                
+                try {
+                    broadcast(new NotificationMessage($event))->toOthers();
+                } catch (\Throwable $th) {
+                }
+                //endbroudcast
             }
             // login user
             Auth::login($user, $request->has('remember') ? $data['remember'] : null);

@@ -234,6 +234,7 @@
                                             @endforeach
                                         </ul>
                                         @endif
+                                        @if ($product->quantity_check)
                                         <ul
                                             data-title="{{App\Models\Attribute::find($product->variations->first()->attribute_id)->name}}:">
 
@@ -264,6 +265,7 @@
                                                 </div>
                                             </div>
                                         </ul>
+                                        @endif
                                     </div>
 
                                 </div>
@@ -274,6 +276,7 @@
                                                 <span class="title"> فروشنده:</span>
                                                 <a class="product-name">{{env('APP_NAME')}}</a>
                                             </div>
+                                            @if ($product->quantity_check)
                                             <div class="product-seller-row guarantee1">
                                                 <span class="title"> گارانتی:</span>
                                                 <a class="product-name" id="guarantee"></a>
@@ -282,9 +285,11 @@
                                                 <span class="title"> مدت گارانتی:</span>
                                                 <a class="product-name" id="time_guarantee"></a>
                                             </div>
+                                            @endif
                                             <div class="product-seller-row price">
                                                 <span class="title"> قیمت:</span>
                                                 <a class="product-name variation-price">
+
                                                     @if ($product->quantity_check)
 
                                                     @if ($product->sale_check)
@@ -303,12 +308,11 @@
                                                         تومان</span>
                                                     @endif
                                                     @else
-                                                    <span class="amount">نا موجود</span>
 
                                                     @endif
-
                                                 </a>
                                             </div>
+
                                             <div class="product-seller-row guarantee">
                                                 <span class="title mt-3"> تعداد:</span>
                                                 <div class="quantity pl">
@@ -322,12 +326,15 @@
                                             </div>
                                             <input type="hidden" id="product_id" name="product"
                                                 value="{{$product->id}}">
+                                            @if ($product->quantity_check)
                                             <div class="product-seller-row add-to-cart">
                                                 <a href="#" class="btn-add-to-cart btn btn-primary" data-ishome="0">
                                                     <i class="fa fa-shopping-cart"></i>
                                                     <span class="btn-add-to-cart-txt">افزودن به سبد خرید</span>
                                                 </a>
                                             </div>
+                                            @endif
+
                                         </div>
                                     </div>
                                 </div>
@@ -481,12 +488,15 @@
                                             , $product->id)->first();
                                             @endphp
                                             @endforeach
+                                            @isset($cheak_item)
                                             @if ($cheak_item)
                                             <button type="button" class="btn-add-comment btn btn-secondary"
                                                 data-toggle="modal" data-target="#comment-modal">
                                                 ارسال نظر
                                             </button>
                                             @endif
+                                            @endisset
+
                                             @endif
                                         </div>
                                     </div>
@@ -978,109 +988,149 @@ function setlable(e) {
 }
 
 $(document).ready(function(e) {
-
-    let variation = JSON.parse($('#var-select').val());
+    if (JSON.parse($('#var-select').val() != null)) {
+        let variation = JSON.parse($('#var-select').val());
+    }
     let variationPriceDiv = $('.variation-price');
-    variationPriceDiv.empty();
-    $('.sku').html(variation.sku)
+    if (typeof variation != "undefined") {
+        if (variation != null) {
+            $('.sku').html(variation.sku)
+            if (variation.is_sale) {
+                let spanSale = $('<div />', {
+                    class: 'amount text-danger',
+                    text: number_format(variation.sale_price) + ' تومان'
+                });
+                let spanPrice = $('<del />', {
+                    class: 'amount',
+                    text: number_format(variation.price) + ' تومان'
+                });
 
-    if (variation.is_sale) {
-        let spanSale = $('<div />', {
-            class: 'amount text-danger',
-            text: number_format(variation.sale_price) + ' تومان'
-        });
-        let spanPrice = $('<del />', {
-            class: 'amount',
-            text: number_format(variation.price) + ' تومان'
-        });
-
-        variationPriceDiv.append(spanSale);
-        variationPriceDiv.append(spanPrice);
+                variationPriceDiv.append(spanSale);
+                variationPriceDiv.append(spanPrice);
+            } else {
+                let spanPrice = $('<span />', {
+                    class: 'amount',
+                    text: number_format(variation.price) + ' تومان'
+                });
+                variationPriceDiv.append(spanPrice);
+            }
+        } else {
+            let spanPrice = $('<span />', {
+                class: 'amount',
+                text: 'ناموجود',
+            });
+            variationPriceDiv.append(spanPrice);
+        }
     } else {
         let spanPrice = $('<span />', {
             class: 'amount',
-            text: number_format(variation.price) + ' تومان'
+            text: 'ناموجود',
         });
         variationPriceDiv.append(spanPrice);
     }
 })
 
 $(document).ready(function(e) {
-
-    let variation = JSON.parse($('#var-select').val());
+    if (JSON.parse($('#var-select').val() != null)) {
+        let variation = JSON.parse($('#var-select').val());
+        let variationPriceDiv = $('.variation-price');
+        variationPriceDiv.empty();
+        console.log(variation);
+    }
     let variationPriceDiv = $('.variation-price');
     variationPriceDiv.empty();
-    console.log(variation);
+    if (typeof variation != "undefined") {
+        if (variation != null) {
+            $('.sku').html(variation.sku)
 
-    $('.sku').html(variation.sku);
 
-    if (variation.time_guarantee === null) {
-        $('.guarantee1').remove();
-    } else {
-        $('#time_guarantee').html(variation.time_guarantee);
-    }
+            if (variation.time_guarantee === null) {
+                $('.guarantee1').remove();
+            } else {
+                $('#time_guarantee').html(variation.time_guarantee);
+            }
 
-    if (variation.guarantee === null) {
-        $('.guarantee2').remove();
-    } else {
-        $('#guarantee').html(variation.guarantee);
+            if (variation.guarantee === null) {
+                $('.guarantee2').remove();
+            } else {
+                $('#guarantee').html(variation.guarantee);
 
-    }
+            }
+            if (variation.is_sale) {
+                let spanSale = $('<div />', {
+                    class: 'amount text-danger',
+                    text: number_format(variation.sale_price) + ' تومان'
+                });
+                let spanPrice = $('<del />', {
+                    class: 'amount',
+                    text: number_format(variation.price) + ' تومان'
+                });
 
-    if (variation.is_sale) {
-        let spanSale = $('<div />', {
-            class: 'amount text-danger',
-            text: number_format(variation.sale_price) + ' تومان'
-        });
-        let spanPrice = $('<del />', {
-            class: 'amount',
-            text: number_format(variation.price) + ' تومان'
-        });
-
-        variationPriceDiv.append(spanSale);
-        variationPriceDiv.append(spanPrice);
+                variationPriceDiv.append(spanSale);
+                variationPriceDiv.append(spanPrice);
+            } else {
+                let spanPrice = $('<span />', {
+                    class: 'amount',
+                    text: number_format(variation.price) + ' تومان'
+                });
+                variationPriceDiv.append(spanPrice);
+            }
+        } else {
+            let spanPrice = $('<span />', {
+                class: 'amount',
+                text: 'ناموجود',
+            });
+            variationPriceDiv.append(spanPrice);
+        }
     } else {
         let spanPrice = $('<span />', {
             class: 'amount',
-            text: number_format(variation.price) + ' تومان'
+            text: 'ناموجود',
         });
         variationPriceDiv.append(spanPrice);
     }
 
-    $('.numberstyle').attr('max', variation.quantity);
-    $('.numberstyle').val(1);
+    if (typeof variation != 'undefined') {
+        $('.numberstyle').attr('max', variation.quantity);
+        $('.numberstyle').val(1);
+    }
 
 });
 
 $('#var-select').on('change', function() {
-
-    let variation = JSON.parse(this.value);
-    let variationPriceDiv = $('.variation-price');
-    variationPriceDiv.empty();
-
-    $('.sku').html(variation.sku);
-    $('#time_guarantee').html(variation.time_guarantee);
-    $('#guarantee').html(variation.guarantee);
-
-    if (variation.is_sale) {
-        let spanSale = $('<span />', {
-            class: 'amount',
-            text: number_format(variation.sale_price) + ' تومان'
-        });
-        let spanPrice = $('<del />', {
-            class: 'amount',
-            text: number_format(variation.price) + ' تومان'
-        });
-
-        variationPriceDiv.append(spanSale);
-        variationPriceDiv.append(spanPrice);
-    } else {
-        let spanPrice = $('<span />', {
-            class: 'amount',
-            text: number_format(variation.price) + ' تومان'
-        });
-        variationPriceDiv.append(spanPrice);
+    if (JSON.parse($('#var-select').val() != null)) {
+        let variation = JSON.parse(this.value);
+        let variationPriceDiv = $('.variation-price');
+        variationPriceDiv.empty();
     }
+    if (variation != null) {
+        $('.sku').html(variation.sku)
+
+        $('#time_guarantee').html(variation.time_guarantee);
+        $('#guarantee').html(variation.guarantee);
+
+        if (variation.is_sale) {
+            let spanSale = $('<span />', {
+                class: 'amount',
+                text: number_format(variation.sale_price) + ' تومان'
+            });
+            let spanPrice = $('<del />', {
+                class: 'amount',
+                text: number_format(variation.price) + ' تومان'
+            });
+
+            variationPriceDiv.append(spanSale);
+            variationPriceDiv.append(spanPrice);
+        } else {
+            let spanPrice = $('<span />', {
+                class: 'amount',
+                text: number_format(variation.price) + ' تومان'
+            });
+            variationPriceDiv.append(spanPrice);
+        }
+    }
+
+
     $('.numberstyle').attr('max', variation.quantity);
     $('.numberstyle').val(1);
 

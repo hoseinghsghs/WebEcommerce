@@ -45,7 +45,7 @@ class CommentController extends Controller
             try {
                 DB::beginTransaction();
 
-                Comment::create([
+              $comment=  Comment::create([
 
                     'user_id' => auth()->id(),
                     'text' => $request->text,
@@ -63,8 +63,8 @@ class CommentController extends Controller
                     'title' => 'کامنت جدید ثبت شد',
                     'body' => 'نام کاربر' . " " . Auth::user()->name . "" . Auth::user()->cellphone . " ". 'محصول' ." ".$product->name ,
                     'user_id' => auth()->id(),
-                    'eventable_id' =>auth()->id(),
-                    'eventable_type' => User::class,
+                    'eventable_id' =>$comment->id,
+                    'eventable_type' => Comment::class,
                 ]);
                 
                 try {
