@@ -29,6 +29,8 @@ class CreateSettingsTable extends Migration
             $table->string('whatsapp')->nullable();
             $table->string('telegram')->nullable();
             $table->string('logo')->nullable();
+            $table->mediumText('site_privacy')->nullable();
+            $table->mediumText('site_rules')->nullable();
 
             $table->timestamps();
         });

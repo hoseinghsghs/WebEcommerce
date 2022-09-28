@@ -123,6 +123,18 @@
                                 <textarea wire:model.defer="description" rows="4" class="form-control no-resize">{{ $description }}</textarea>
                             </div>
                         </div>
+                        <div class="form-group col-md-12">
+                            <div class="form-line">
+                                <label class="form-label">حریم خصوصی</label>
+                                <textarea id="privacy-summernote" wire:model.defer="site_privacy">{{ $site_privacy }}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <div class="form-line">
+                                <label class="form-label">قوانین و مقررات</label>
+                                <div id="rules-summernote" wire:model.defer="site_rules">{{ $site_rules }}</div>
+                            </div>
+                        </div>
 
                         <div class="form-group form-float col-12">
                             <label class="form-label">لینک های مفید</label>
@@ -212,3 +224,18 @@
         </div>
     </div>
 </div>
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        $('#privacy-summernote').summernote({
+            height: 100,
+            callbacks: {
+                onChange: function(contents, $editable) {
+                    console.log('onChange:', contents, $editable);
+                }
+            }
+        });
+        $('#rules-summernote').summernote();
+    });
+</script>
+@endpush
