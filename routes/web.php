@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\OrderController;
@@ -43,6 +44,8 @@ require_once __DIR__.'/fortify.php';
 //admin routes
 Route::prefix('Admin-panel/managment')->name('admin.')->middleware(['auth', 'has_role', 'has_free_plan'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('home');
+    Route::get('/timeline', [EventController::class, 'index'])->name('timeline')->middleware('permission:events');
+    Route::delete('/timeline/{event}', [EventController::class, 'destroy'])->name('timeline.destroy')->middleware('permission:events');
     Route::resource('brands',         BrandController::class)->middleware('permission:brands');
     Route::resource('attributes',     AttributeController::class)->except(['show', 'destroy'])->middleware('permission:attributes');
     Route::post('/categories/order', [CategoryController::class, 'saveOrder'])->name('category.order');

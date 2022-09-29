@@ -11,7 +11,7 @@
 
                 @livewire('admin.events.event-list')
 
-                <li class="footer"> <a href="javascript:void(0);">مشاهده تمام اعلان ها</a> </li>
+                <li class="footer"> <a href={{route('admin.timeline')}}>مشاهده تمام اعلان ها</a> </li>
             </ul>
         </li>
         <li><a href="javascript:void(0);" class="js-right-sidebar" title="Setting"><i

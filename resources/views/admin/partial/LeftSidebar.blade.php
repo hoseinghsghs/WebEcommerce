@@ -186,6 +186,12 @@
             </li>
             @endcan
 
+            @can('events')
+            <li @class(['active'=>request()->routeIs('admin.timeline.*')])> <a href={{route('admin.timeline')}}>
+                    <i class="zmdi zmdi-hc-fw"></i><span>مدیریت رویداد ها</span></a>
+            </li>
+            @endcan
+
             @can('questions')
             <li @class(['active'=>request()->routeIs('admin.questions.*')])> <a href={{route('admin.questions.index')}}>
                     <i class="zmdi zmdi-help-outline"></i><span>پرسش و پاسخ</span></a>

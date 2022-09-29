@@ -9,8 +9,6 @@
                     <h2>داشبورد</h2>
                     </br>
                     <ul class="breadcrumb">
-                        <!-- <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> </a></li> -->
-                        <!-- <li class="{{route('admin.home')}}">داشبورد </li> -->
                     </ul>
                     <button class="btn btn-primary btn-icon mobile_menu" type="button"><i
                             class="zmdi zmdi-sort-amount-desc"></i></button>
@@ -27,9 +25,9 @@
                     <div class="card widget_2 big_icon traffic">
                         <div class="body">
                             <h6>سفارشات ارسالی</h6>
-                            <h2>{{$successsend_order}}<small class="info">از {{$all_order}}</small></h2>
-                            <small>{{(int)(($successsend_order/($all_order>0 ? $all_order : 1))*100)}}% تراکنش
-                                موفق</small>
+                            <h2>{{$successsend_order}}<small class="info"> از {{$all_order}} </small></h2>
+                            <small> {{(int)(($successsend_order/($all_order>0 ? $all_order : 1))*100)}}% تراکنش
+                                موفق </small>
                             <div class="progress">
                                 <div class="progress-bar l-amber" role="progressbar" aria-valuenow="45"
                                     aria-valuemin="0" aria-valuemax="{{$all_order}}"
@@ -228,64 +226,70 @@
 initC3Chart();
 
 function initC3Chart() {
-    setTimeout(function() {
-        month_visits = "{{json_encode($month_visits)}}";
-        month_visits = JSON.parse(month_visits);
-        $(document).ready(function() {
-            var chart = c3.generate({
-                bindto: "#chart-area-spline-sracke", // id of chart wrapper
-                data: {
-                    columns: [
-                        // each columns data
-                        ["data1", month_visits[0], month_visits[1], month_visits[2],
-                            month_visits[3], month_visits[4], month_visits[5], month_visits[
-                                6], month_visits[7], month_visits[8], month_visits[9],
-                            month_visits[10], month_visits[11]
-                        ],
-                    ],
-                    type: "area-spline", // default type of chart
-                    groups: [
-                        ["data1", "data2", "data3"]
-                    ],
-                    colors: {
-                        data1: Aero.colors["teal"],
-                    },
-                    names: {
-                        // name of each serie
-                        data1: "میزان بازدید",
-                    },
-                },
-                axis: {
+    month_visits = "{{json_encode($month_visits)}}";
+    month_visits = JSON.parse(month_visits);
+    if ("{{json_encode($month_visits)}}" === "[0]") {} else {
 
-                    x: {
-                        type: "category",
-                        // name of each category
-                        categories: [
-                            "فروردین",
-                            "اردیبهشت",
-                            "خرداد",
-                            "تیر",
-                            "مرداد",
-                            "شهریور",
-                            "مهر",
-                            "آبان",
-                            "آذر",
-                            "دی",
-                            "بهمن",
-                            "اسفند",
+        setTimeout(function() {
+            month_visits = "{{json_encode($month_visits)}}";
+            month_visits = JSON.parse(month_visits);
+            $(document).ready(function() {
+                var chart = c3.generate({
+                    bindto: "#chart-area-spline-sracke", // id of chart wrapper
+                    data: {
+                        columns: [
+                            // each columns data
+                            ["data1", month_visits[0], month_visits[1], month_visits[2],
+                                month_visits[3], month_visits[4], month_visits[5],
+                                month_visits[
+                                    6], month_visits[7], month_visits[8], month_visits[9],
+                                month_visits[10], month_visits[11]
+                            ],
                         ],
+                        type: "area-spline", // default type of chart
+                        groups: [
+                            ["data1", "data2", "data3"]
+                        ],
+                        colors: {
+                            data1: Aero.colors["teal"],
+                        },
+                        names: {
+                            // name of each serie
+                            data1: "میزان بازدید",
+                        },
                     },
-                },
-                legend: {
-                    show: true, //hide legend
-                },
-                padding: {
-                    bottom: 0,
-                    top: 0,
-                },
+                    axis: {
+
+                        x: {
+                            type: "category",
+                            // name of each category
+                            categories: [
+                                "فروردین",
+                                "اردیبهشت",
+                                "خرداد",
+                                "تیر",
+                                "مرداد",
+                                "شهریور",
+                                "مهر",
+                                "آبان",
+                                "آذر",
+                                "دی",
+                                "بهمن",
+                                "اسفند",
+                            ],
+                        },
+                    },
+                    legend: {
+                        show: true, //hide legend
+                    },
+                    padding: {
+                        bottom: 0,
+                        top: 0,
+                    },
+                });
             });
-        });
-    }, 500);
+        }, 500);
+    }
 
 
     setTimeout(function() {

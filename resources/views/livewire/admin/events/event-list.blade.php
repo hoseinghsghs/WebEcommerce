@@ -12,11 +12,26 @@
             </li> -->
             @foreach ($evorders as $evorder)
             <li>
+                @php
+                if($evorder->eventable_type == "App\Models\Order"){
+                $icon="zmdi zmdi-case";
+                $bg="bg-green";
+                }elseif($evorder->eventable_type == "App\Models\Comment"){
+                $icon="zmdi zmdi-assignment-o";
+                $bg="bg-blue";
+                }elseif($evorder->eventable_type == "App\Models\User"){
+                $icon="zmdi zmdi-account";
+                $bg="bg-yellow";
+                }
+                @endphp
+
+
                 <a href="javascript:void(0);">
-                    <div class="icon-circle bg-amber"><i class="zmdi zmdi-shopping-cart"></i></div>
+                    <div class="icon-circle {{$bg}}"><i class="{{$icon}}"></i></div>
                     <div class="menu-info">
-                        <h4>{{$evorder-> title}}</h4>
-                        <h4>{{$evorder-> body}}</h4>
+                        <h4 style="float: right;">{{$evorder-> title}}</h4>
+                        </br>
+                        <h4 style="float: right;">{{$evorder-> body}}</h4>
                         <!-- <h4>{{Hekmatinasser\Verta\Verta::instance($evorder->expired_at)->format('Y/n/j H:i:s')}}</h4> -->
                         <?php
                         $v2 = Hekmatinasser\Verta\Verta::instance($evorder->created_at);
@@ -34,7 +49,8 @@
                             }
                         }
                         ?>
-                        <p><i class="zmdi zmdi-time"></i><span> {{ $v4 }} </span></p>
+                        </br>
+                        <p style="float: right;"><i class="zmdi zmdi-time"></i><span> {{ $v4 }} </span></p>
                     </div>
                 </a>
             </li>

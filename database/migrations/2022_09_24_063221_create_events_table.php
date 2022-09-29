@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('body');
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->morphs('eventable');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

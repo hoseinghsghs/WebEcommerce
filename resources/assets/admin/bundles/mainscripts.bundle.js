@@ -20,7 +20,7 @@ function skinChanger() {
 }
 function CustomScrollbar() {
     $(".sidebar .menu .list").slimscroll({
-        height: "calc(100vh - 65px)",
+        height: "calc(112vh - 213px)",
         color: "#eeeeee",
         position: "right",
         size: "1px",
@@ -411,14 +411,3 @@ var edge = "Microsoft Edge",
                 $(this).attr("href", a);
             }));
     });
-var Tawk_API = Tawk_API || {},
-    Tawk_LoadStart = new Date();
-!(function () {
-    var a = document.createElement("script"),
-        b = document.getElementsByTagName("script")[0];
-    (a.async = !0),
-        (a.src = "https://embed.tawk.to/59f5afbbbb0c3f433d4c5c4c/default"),
-        (a.charset = "UTF-8"),
-        a.setAttribute("crossorigin", "*"),
-        b.parentNode.insertBefore(a, b);
-})();
