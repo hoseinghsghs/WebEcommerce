@@ -1,4 +1,30 @@
 <aside id="leftsidebar" class="sidebar">
+
+    <div class="navbar-brand p-0 d-flex d-flex justify-content-around">
+        <span class="dropdown p-2">
+            <a href="javascript:void(0);" class="dropdown-toggle" title="Notifications" data-toggle="dropdown"
+                role="button"><i class="zmdi zmdi-notifications text-black"></i>
+                <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
+            </a>
+            <ul class="dropdown-menu js-right-sidebar">
+                <li class="header">اطلاعیه ها</li>
+
+                @livewire('admin.events.event-list')
+
+                <li class="footer"> <a href="javascript:void(0);">مشاهده تمام اعلان ها</a> </li>
+            </ul>
+        </span>
+        <span class="p-2"><a href="javascript:void(0);" class="js-right-sidebar" title="Setting"><i
+                    class="zmdi zmdi-settings zmdi-hc-spin text-black"></i></a></span>
+        <span class="p-2"><a aria-disabled="true"
+                onclick="event.preventDefault(); document.getElementById('frm-logout').submit();" class="mega-menu"
+                title="Sign Out"><i class="zmdi zmdi-power"></i></a>
+            <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
+                {{ csrf_field() }}
+            </form>
+        </span>
+    </div>
+
     <div class="navbar-brand">
         <button class="btn-menu ls-toggle-btn" type="button"><i class="zmdi zmdi-menu"></i></button>
         <a href="{{route('home')}}"><img
@@ -32,6 +58,7 @@
                         داشبورد</span>
                 </a>
             </li>
+
             @canany(['users','roles','permissions'])
             <li @class(['active open'=>request()->routeIs('admin.users.*','admin.permissions','admin.roles.*')])> <a
                     href="javascript:void(0);" class="menu-toggle"><i
@@ -54,8 +81,8 @@
             @endcanany
             @canany(['products','categories','attributes','coupons'])
             <li @class(['active open'=>
-                request()->routeIs('admin.products.*','admin.categories.*','admin.attributes.*','admin.coupons.*')])> <a
-                    href="javascript:void(0);" class="menu-toggle"><i
+                request()->routeIs('admin.products.*','admin.categories.*','admin.attributes.*','admin.coupons.*')])>
+                <a href="javascript:void(0);" class="menu-toggle"><i
                         class="zmdi zmdi-hc-fw"></i><span>فروشگاه</span></a>
                 <ul class="ml-menu">
                     @can('products')

@@ -500,21 +500,23 @@
                                     <div class="product-comment-list">
                                         <ul class="comment-list">
                                             @foreach ($product->approvedComments as $comment )
-                                            <li>
+                                            <li style="border: 1px solid #d4c2f7;border-radius: 20px;">
                                                 <div class="col-lg-3 pr">
                                                     <section>
-                                                        <div class="comments-user-shopping">
-
-                                                            {{$comment->user->name == " " ? "بدون نام" : $comment->user->name }}
-                                                            <div class="cell-date">
-                                                                {{Hekmatinasser\Verta\Verta::instance($comment->created_at)->format('Y/n/j')}}
+                                                        <div class="comments-user-shopping mt-3 mr-1 p-2 row">
+                                                            <div class="col-6 mt-2">
+                                                                <img src="/assets/home/images/man.png" alt="">
                                                             </div>
+                                                            <div class="col-6">
+                                                                {{$comment->user->name == null ? "بدون نام" : $comment->user->name }}
+                                                                <div class="cell-date">
+                                                                    {{Hekmatinasser\Verta\Verta::instance($comment->created_at)->format('Y/n/j')}}
+                                                                </div>
 
-                                                            <span data-rating-stars="5" data-rating-readonly="true"
-                                                                data-rating-value="{{ceil($comment->commentable->rates->avg('satisfaction'))}}">
-                                                            </span>
-
-
+                                                                <span data-rating-stars="5" data-rating-readonly="true"
+                                                                    data-rating-value="{{ceil($comment->commentable->rates->avg('satisfaction'))}}">
+                                                                </span>
+                                                            </div>
                                                         </div>
                                                     </section>
                                                 </div>
@@ -539,8 +541,6 @@
                                                                             {{ $item }}
                                                                         </li>
                                                                         @endforeach
-
-
                                                                     </ul>
                                                                 </div>
                                                                 <div class="comments-evaluation-negative">
