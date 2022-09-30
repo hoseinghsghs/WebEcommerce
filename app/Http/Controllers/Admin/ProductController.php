@@ -219,11 +219,7 @@ class ProductController extends Controller
                 }
 
             }
-
-
             return response()->json($image_name, 200);
-
-
     }
 
 
@@ -284,5 +280,11 @@ class ProductController extends Controller
         $flasher->addSuccess('ویژگی مورد نظر ویرایش شد');
 
         return redirect()->route('admin.products.index');
+    }
+
+    public function archive()
+    {   
+        $products = Product::where('is_archive' , 1)->latest()->paginate(10);
+        return view('admin.page.products.archive', compact('products'));
     }
 }

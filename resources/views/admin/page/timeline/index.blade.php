@@ -6,12 +6,12 @@
         <div class="block-header">
             <div class="row">
                 <div class="col-lg-7 col-md-6 col-sm-12">
-                    <h2>زمان بندی</h2>
+                    <h2>زمان بندی رویداد ها</h2>
                     </br>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href={{route('admin.home')}}><i class="zmdi zmdi-home"></i>
                                 خانه</a></li>
-                        <li class="breadcrumb-item active">زمان بندی</li>
+                        <li class="breadcrumb-item active">زمان بندی رویداد ها</li>
                     </ul>
                     <button class="btn btn-primary btn-icon mobile_menu" type="button"><i
                             class="zmdi zmdi-sort-amount-desc"></i></button>
@@ -61,7 +61,7 @@
 
                                     @endphp
 
-                                    <p class="mt-2"><i class="zmdi zmdi-time"></i><span> {{ $v4 }}
+                                    <p class="mt-2"><i class="zmdi zmdi-time"></i><span> {{ $v4 }} پیش
                                         </span></p>
 
                                     <form style="float: left;" action="{{route('admin.timeline.destroy', $event->id)}}"

@@ -10,6 +10,15 @@
                     </div>
                     <div class="body">
                         <div class="row clearfix">
+
+                            <div class="col-lg-3 col-md-3 col-sm-3">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" wire:model="code"
+                                            placeholder="کد سفارش">
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-lg-3 col-md-3 col-sm-3">
                                 <div class="form-group">
                                     <div class="form-line">
@@ -79,7 +88,13 @@
                                 <tr>
                                     <td scope="row">{{$key+1}}</td>
                                     <td>{{$transaction->user->name}}</td>
-                                    <td>{{$transaction->order_id}}</td>
+
+                                    <td>
+                                        <a href="{{route('admin.orders.show',$transaction->order_id)}}">
+                                            {{$transaction->order_id}}
+                                        </a>
+                                    </td>
+
                                     <td>{{number_format($transaction->amount)}} تومان</td>
                                     <td>
                                         @if ($transaction->status =="ناموفق")

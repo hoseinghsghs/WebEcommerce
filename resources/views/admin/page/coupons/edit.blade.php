@@ -12,7 +12,8 @@
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href={{route('admin.home')}}><i class="zmdi zmdi-home"></i>
                                 خانه</a></li>
-                        <li class="breadcrumb-item"><a href="{{route('admin.coupons.index')}}">کد تخفیف</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('admin.coupons.index')}}">لیست کد های تخفیف</a>
+                        </li>
                         <li class="breadcrumb-item active">ویرایش کد: {{$coupon->name}}</li>
                     </ul>
                     <button class="btn btn-primary btn-icon mobile_menu" type="button"><i

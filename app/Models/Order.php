@@ -78,5 +78,9 @@ class Order extends Model
     public function events()
     {
         return $this->morphMany(Event::class, 'eventable');
+    } 
+    public function transaction()
+    {
+        return $this->hasOne(Transaction::class);
     }
 }

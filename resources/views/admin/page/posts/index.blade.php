@@ -6,18 +6,17 @@
         <div class="block-header">
             <div class="row">
                 <div class="col-lg-7 col-md-6 col-sm-12">
-                    <h2>لیست اخبار</h2>
+                    <h2>لیست پست ها</h2>
                     </br>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href={{route('admin.home')}}><i class="zmdi zmdi-home"></i>
                                 خانه</a></li>
-                        <li class="breadcrumb-item"><a href="javascript:void(0);">پست</a></li>
-                        <li class="breadcrumb-item active">لیست اخبار</li>
+                        <li class="breadcrumb-item active">لیست پست ها</li>
                     </ul>
                     </br>
                     <a onclick="loadbtn(event)" href="{{route('admin.posts.create')}}"
                         class="btn btn-raised btn-info waves-effect">
-                        اضافه کردن خبر </a>
+                        اضافه کردن پست </a>
                     <button class="btn btn-primary btn-icon mobile_menu" type="button"><i
                             class="zmdi zmdi-sort-amount-desc"></i></button>
                 </div>

@@ -4,14 +4,12 @@ namespace App\Http\Livewire\Admin\Products;
 
 use App\Models\product;
 use App\Models\Category;
-use App\Models\Tag;
-use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
-class ProductComponent extends Component
+class ArchiveComponent extends Component
 {
     use WithFileUploads,WithPagination;
     public $title;
@@ -75,10 +73,9 @@ class ProductComponent extends Component
                     where('name','like','%'.$this->name.'%')
                     ->where('category_id','like','%'.$this->category.'%')
                     ->where('is_active','like','%'.$this->status.'%')
-                    ->where('is_archive' , 0)
+                    ->where('is_archive' , '1')
                     ->paginate(10);
-                    
-                    return view('livewire.admin.products.product-component',['products' => $product,'categories'=>$categories]);
+                    return view('livewire.admin.products.archive-component',['products' => $product,'categories'=>$categories]);
             
                 }
                 
@@ -94,7 +91,6 @@ class ProductComponent extends Component
 
     public function ChengeActive_product (product $product){
         
-
         if($product->is_active){
             $product->update([
                 "is_active"=> false
@@ -110,8 +106,8 @@ class ProductComponent extends Component
             $this->color="success";
 
             }
-            
         }
+
         public function ChengeArchive_product (product $product){
         
             if($product->is_archive){
@@ -148,4 +144,5 @@ class ProductComponent extends Component
             $this->product->delete();
                 toastr()->livewire()->addSuccess('محصول با موفقیت حذف شد');
         }
-  }
+   
+}

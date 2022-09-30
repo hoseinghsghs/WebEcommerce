@@ -27,13 +27,22 @@
         <div class="container-fluid">
             <a class="btn btn-warning  mb-4" style="color:white" onclick="printDiv()">چاپ سفارش</a>
 
+            <a href="{{route('admin.transactions.edit', $order->transaction->id)}}"
+                class="btn btn-raised btn-warning waves-effect mb-4">
+                تراکنش
+            </a>
+
             <div class="row clearfix">
 
-
+                <div class="form-group col-md-3">
+                    <label>شماره تراکنش</label>
+                    <input class="form-control" type="text" value="{{ $order->id}}" disabled>
+                </div>
                 <div class="form-group col-md-3">
                     <label>نام کاربر</label>
                     <input class="form-control" type="text"
-                        value="{{ $order->user->name == null ? 'کاربر' : $order->user->name }}" disabled>
+                        value="{{ $order->user->name == null ? $order->user->cellphone : $order->user->name }}"
+                        disabled>
                 </div>
                 <div class="form-group col-md-3">
                     <label>کد کوپن</label>

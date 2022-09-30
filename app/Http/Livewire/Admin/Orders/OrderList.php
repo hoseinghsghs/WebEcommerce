@@ -15,6 +15,7 @@ class OrderList extends Component
     public $paying_amount;
     public $payment_status;
     public $status;
+    public $code;
     
     public function updatingName()
     {
@@ -41,8 +42,9 @@ class OrderList extends Component
         $user_name=User::where('name','like','%'.$this->name.'%')->pluck('id')->toArray();
         $orders=Order::whereIn('user_id',$user_name)
         ->where('paying_amount','like','%'.$this->paying_amount.'%')
+        ->where('id','like','%'.$this->code.'%')
         ->where('payment_status','like','%'.$this->payment_status.'%')
-        ->where('status','like','%'.$this->status.'%')->paginate(10);
+        ->where('status','like','%'.$this->status.'%')->latest()->paginate(10);
         
         return view('livewire.admin.orders.order-list',compact('orders'));
     }
