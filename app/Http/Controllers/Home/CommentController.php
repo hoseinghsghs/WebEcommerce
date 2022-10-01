@@ -13,6 +13,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class CommentController extends Controller
@@ -72,7 +73,20 @@ class CommentController extends Controller
                 } catch (\Throwable $th) {
                     //throw $th;
                 }
-               
+               try {
+                Log::info('کامنت جدید ثبت شد',
+                [
+                    'title' => 'کامنت جدید ثبت شد',
+                    'body' => 'نام کاربر' . " " . Auth::user()->name . "" . Auth::user()->cellphone . " ". 'محصول' ." ".$product->name ,
+                    'user_id' => auth()->id(),
+                    'eventable_id' =>$comment->id,
+                    'eventable_type' => Comment::class,
+                ]
+                
+                );
+               } catch (\Throwable $th) {
+                //throw $th;
+               }
 
                 if ($product->rates()->where('user_id', auth()->id())->exists()) {
                     $productRate = $product->rates()->where('user_id', auth()->id())->first();

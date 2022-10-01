@@ -9,6 +9,7 @@ use App\Models\OrderItem;
 use App\Models\Transaction;
 use App\Models\ProductVariation;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class Payment
 {
@@ -64,8 +65,19 @@ class Payment
 
         try {
             broadcast(new NotificationMessage($event))->toOthers();
+           
         } catch (\Throwable $th) {
-            //throw $th;
+            
+        }
+        try {
+            Log::info("سفارش جدید ثیت شد" , [
+                'title' => 'سفارش جدید ثبت شد',
+                'body' => 'شماره سفارش' . " " . $order->id ." ". 'آیدی کاربر' ." ".auth()->id() ,
+                'user_id' => auth()->id() ." "."شماره تماس". auth()->user()->cellphone,
+                'eventable_id' => $order->id,
+                'eventable_type' => Order::class,
+            ]);
+        } catch (\Throwable $th) {
         }
 
         return ['success' => 'success!' , 'orderId' => $order->id];
