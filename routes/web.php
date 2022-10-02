@@ -37,6 +37,7 @@ use App\Http\Livewire\Admin\Tags\TagControll;
 use App\Http\Livewire\Home\Cart\ShowCart;
 use App\Http\Livewire\Home\ProductsList;
 use App\Models\Question;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 //fortify routes
@@ -178,5 +179,6 @@ Route::get('/privacy' , [FaqController::class , 'privacy'] )->name('privacy');
 Route::get('/rules' , [FaqController::class , 'rules'] )->name('ruls');
 
 Route::get('/test', function () {
+    
 
 } );

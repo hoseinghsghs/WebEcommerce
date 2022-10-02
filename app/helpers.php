@@ -36,7 +36,7 @@ if (!function_exists('Persian_GenerateImageName')) {
     }
 }
 
-if (!function_exists('convertShamsiToGregorianDate')) {
+if (!function_exists('convert')) {
 function convert($string) {
     $persian = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
     $arabic = ['٩', '٨', '٧', '٦', '٥', '٤', '٣', '٢', '١','٠'];

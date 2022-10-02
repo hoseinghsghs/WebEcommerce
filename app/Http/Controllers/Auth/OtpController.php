@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
 
@@ -119,9 +120,18 @@ class OtpController extends Controller
                     'eventable_id' =>$user->id,
                     'eventable_type' => User::class,
                 ]);
-                
+
                 try {
                     broadcast(new NotificationMessage($event))->toOthers();
+                } catch (\Throwable $th) {
+                }
+                try {
+                    Log::info("سفارش جدید ثیت شد" , [  'title' => 'کاربر جدید ثبت نام کرد',
+                    'body' => 'کاربر'  . " " .  $user->cellphone,
+                    'user_id' => $user->id,
+                    'eventable_id' =>$user->id,
+                    'eventable_type' => User::class,
+                    ]);
                 } catch (\Throwable $th) {
                 }
                 //endbroudcast
