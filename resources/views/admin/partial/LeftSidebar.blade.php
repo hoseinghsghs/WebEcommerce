@@ -1,6 +1,12 @@
 <aside id="leftsidebar" class="sidebar">
 
-    <div class="navbar-brand p-0 d-flex d-flex justify-content-around">
+    <div class="navbar-brand">
+        <button class="btn-menu ls-toggle-btn" type="button"><i class="zmdi zmdi-menu"></i></button>
+        <a href="{{route('home')}}"><img
+        src="{{$setting->logo ? asset('storage/logo/'.$setting->logo):'/images/logo.png'}}"
+        style="margin-right:20px;max-height: 3rem;" alt="meta-webs"><span class="m-l-10"></span></a>
+    </div>
+    <div class="navbar-brand p-0 d-flex justify-content-around d-md-none">
         <span class="dropdown p-2">
             <a href="javascript:void(0);" class="dropdown-toggle" title="Notifications" data-toggle="dropdown"
                 role="button"><i class="zmdi zmdi-notifications text-black"></i>
@@ -16,24 +22,17 @@
         </span>
         <span class="p-2"><a href="javascript:void(0);" class="js-right-sidebar" title="Setting"><i
                     class="zmdi zmdi-settings zmdi-hc-spin text-black"></i></a></span>
-        <span class="p-2"><a aria-disabled="true"
-                onclick="event.preventDefault(); document.getElementById('frm-logout').submit();" class="mega-menu"
+        <span class="p-2"><a href="#"
+                onclick="event.preventDefault(); document.getElementById('frm-logout').submit();" class=""
                 title="Sign Out"><i class="zmdi zmdi-power"></i></a>
             <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
                 {{ csrf_field() }}
             </form>
         </span>
     </div>
-
-    <div class="navbar-brand">
-        <button class="btn-menu ls-toggle-btn" type="button"><i class="zmdi zmdi-menu"></i></button>
-        <a href="{{route('home')}}"><img
-                src="{{$setting->logo ? asset('storage/logo/'.$setting->logo):'/images/logo.png'}}"
-                style="margin-right:20px;max-height: 3rem;" alt="meta-webs"><span class="m-l-10"></span></a>
-    </div>
     <div class="menu">
         <ul class="list pb-4" id="myList">
-            <td>
+            <li>
                 <div class="user-info">
                     <a class="image" href="#"><img default=""
                             src="{{auth()->user()->avatar ? asset('storage/profile/'.auth()->user()->avatar) : asset('img/profile.png') }}"></a>
@@ -42,16 +41,16 @@
                         <small>{{auth()->user()->roles->first()->display_name}}</small>
                     </div>
                 </div>
-            </td>
+            </li>
 
-            <td>
+            <li>
                 <div class="form-group row mr-1" id="search-item">
                     <label for="inputEmail3" class="col-11 col-form-label">جستجو </label>
                     <div class="col-11">
                         <input id="searchInput" class="form-control col-md-11" placeholder="یک عبارت بنویسید....">
                     </div>
                 </div>
-            </td>
+            </li>
 
             <li @class(['active'=>request()->routeIs('admin.home')])>
                 <a href="{{route('admin.home')}}"><i class="zmdi zmdi-view-dashboard zmdi-hc-1x"></i><span>

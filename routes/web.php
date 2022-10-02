@@ -61,7 +61,7 @@ Route::prefix('Admin-panel/managment')->name('admin.')->middleware(['auth', 'has
     Route::get('archives',         [ProductController::class , 'archive'])->name('archive')->middleware('permission:products');
     Route::resource('orders',           OrderController::class)->middleware('permission:orders');
     Route::resource('transactions',     TransactionController::class)->middleware('permission:transactions');
-    Route::resource('users',            UserController::class)->only('index', 'edit', 'update')->middleware('permission:users');
+    Route::resource('users',            UserController::class)->except('create','destroy')->middleware('permission:users');
     Route::resource('roles',   RoleController::class)->except('show')->middleware('permission:roles');
     Route::view('permissions', 'admin.page.permissions.index')->name('permissions')->middleware('permission:permissions');
 
@@ -179,6 +179,6 @@ Route::get('/privacy' , [FaqController::class , 'privacy'] )->name('privacy');
 Route::get('/rules' , [FaqController::class , 'rules'] )->name('ruls');
 
 Route::get('/test', function () {
-    
+
 
 } );
