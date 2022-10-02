@@ -10,7 +10,16 @@
                     </div>
                     <div class="body">
                         <div class="row clearfix">
-                            <div class="col-lg-3 col-md-3 col-sm-3">
+
+                            <div class="col-lg-2 col-md-2 col-sm-2">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" wire:model="code"
+                                            placeholder="کد سفارش">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2">
                                 <div class="form-group">
                                     <div class="form-line">
                                         <input type="text" class="form-control" wire:model="name"
@@ -18,7 +27,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-sm-3">
+                            <div class="col-lg-2 col-md-2 col-sm-2">
                                 <div class="form-group">
                                     <div class="form-line">
                                         <input type="text" class="form-control" wire:model="paying_amount"
@@ -76,6 +85,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>کد سفارش</th>
                                     <th>کاربر</th>
                                     <th>مبلغ پرداختی</th>
                                     <th>وضعیت پرداهت</th>
@@ -88,7 +98,9 @@
                                 @foreach ($orders as $key => $order)
                                 <tr>
                                     <td scope="row">{{$key+1}}</td>
-                                    <td>{{$order->user->name}}</td>
+                                    <td scope="row">{{$order->id}}</td>
+                                    <td>{{$order->user->name == null ? $order->user->cellphone : $order->user->name }}
+                                    </td>
                                     <td>{{number_format($order->paying_amount)}} تومان</td>
                                     <td>
                                         @if ($order->payment_status =="ناموفق")

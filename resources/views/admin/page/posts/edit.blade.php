@@ -11,7 +11,7 @@
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href={{route('admin.home')}}><i class="zmdi zmdi-home"></i>
                                 خانه</a></li>
-                        <li class="breadcrumb-item"><a href="javascript:void(0);">پست</a></li>
+                        <li class="breadcrumb-item"><a href={{route('admin.posts.index')}}>لیست پست ها</a></li>
                         <li class="breadcrumb-item active">تغییر پست</li>
                     </ul>
                     <button class="btn btn-primary btn-icon mobile_menu" type="button"><i

@@ -14,119 +14,138 @@ use Livewire\WithPagination;
 class ProductComponent extends Component
 {
     use WithFileUploads,WithPagination;
-public $title;
+    public $title;
 
-public $product;
-//////////////////////////////////////////////
-
-
-protected $paginationTheme = 'bootstrap'; 
-public $name;
-public $category;
-public $status;
-
-public function updatingName()
-{
-    $this->resetPage();
-}
-
-public function updatingCategory()
-{
-    $this->resetPage();
-}
-
-public function updatingRefId()
-{
-    $this->resetPage();
-}
-
-public function updatingStatus()
-{
-    $this->resetPage();
-}
-///////////////////////////////////////////////
+    public $product;
+    //////////////////////////////////////////////
 
 
+    protected $paginationTheme = 'bootstrap'; 
+    public $name;
+    public $category;
+    public $status;
 
-
-protected $listeners = [
-    'sweetAlertConfirmed', // only when confirm button is clicked
-];
-
-public function mount(Product $product)
-{ 
-    if($product->is_active){
-      
-           $this->title="عدم انتشار";
-           $this->color="danger";
-
-    }else{
-       
-           $this->title="انتشار";
-           $this->color="success";
-
-        }
-}
-       
-            public function render()
-            {
-                $categories=Category::all();
-                $product=Product::
-                where('name','like','%'.$this->name.'%')
-                ->where('category_id','like','%'.$this->category.'%')
-                ->where('is_active','like','%'.$this->status.'%')
-                ->paginate(10);
-                
-                return view('livewire.admin.products.product-component',['products' => $product,'categories'=>$categories]);
-           
-            }
-            
-    public function delproduct(product $product){
-
-      $this->product=$product;
-        sweetAlert()
-        ->livewire()
-        ->showDenyButton(true,'انصراف')->confirmButtonText("تایید")
-        ->addInfo('از حذف رکورد مورد نظر اطمینان دارید؟');
-       
+    public function updatingName()
+    {
+        $this->resetPage();
     }
 
-   public function ChengeActive_product (product $product){
-       
+    public function updatingCategory()
+    {
+        $this->resetPage();
+    }
 
-    if($product->is_active){
-        $product->update([
-            "is_active"=> false
-           ]);
-           $this->title="عدم انتشار";
-           $this->color="danger";
+    public function updatingRefId()
+    {
+        $this->resetPage();
+    }
 
-    }else{
-        $product->update([
-            "is_active"=> true
-           ]);
-           $this->title="انتشار";
-           $this->color="success";
+    public function updatingStatus()
+    {
+        $this->resetPage();
+    }
+    ///////////////////////////////////////////////
 
-        }
+
+
+
+    protected $listeners = [
+        'sweetAlertConfirmed', // only when confirm button is clicked
+    ];
+
+    public function mount(Product $product)
+    { 
+        if($product->is_active){
         
-     }
-     
-     public function sweetAlertConfirmed(array $data)
-     { 
-        foreach ($this->product->images as $value) {
-            
-         if (Storage::exists("other_product_image/" .  $value->image)) {
-          
-           Storage::delete("other_product_image/" .  $value->image);
-         };        
-        }
-         
-        if (Storage::exists("primary_image/" .  $this->product->primary_image)) {
-            Storage::delete("primary_image/" .  $this->product->primary_image);
-        };
+            $this->title="عدم انتشار";
+            $this->color="danger";
 
-        $this->product->delete();
-             toastr()->livewire()->addSuccess('محصول با موفقیت حذف شد');
-     }
+        }else{
+        
+            $this->title="انتشار";
+            $this->color="success";
+
+            }
+    }
+        
+                public function render()
+                {
+                    $categories=Category::all();
+                    $product=Product::
+                    where('name','like','%'.$this->name.'%')
+                    ->where('category_id','like','%'.$this->category.'%')
+                    ->where('is_active','like','%'.$this->status.'%')
+                    ->where('is_archive' , 0)
+                    ->paginate(10);
+                    
+                    return view('livewire.admin.products.product-component',['products' => $product,'categories'=>$categories]);
+            
+                }
+                
+        public function delproduct(product $product){
+
+        $this->product=$product;
+            sweetAlert()
+            ->livewire()
+            ->showDenyButton(true,'انصراف')->confirmButtonText("تایید")
+            ->addInfo('از حذف رکورد مورد نظر اطمینان دارید؟');
+        
+        }
+
+    public function ChengeActive_product (product $product){
+        
+
+        if($product->is_active){
+            $product->update([
+                "is_active"=> false
+            ]);
+            $this->title="عدم انتشار";
+            $this->color="danger";
+
+        }else{
+            $product->update([
+                "is_active"=> true
+            ]);
+            $this->title="انتشار";
+            $this->color="success";
+
+            }
+            
+        }
+        public function ChengeArchive_product (product $product){
+        
+            if($product->is_archive){
+                $product->update([
+                    "is_archive"=> false
+                ]);
+                $this->title="بایگانی کردن";
+                $this->color="danger";
+    
+            }else{
+                $product->update([
+                    "is_archive"=> true
+                ]);
+                $this->title="خروج از بایگانی";
+                $this->color="success";
+    
+                }
+            }
+        
+        public function sweetAlertConfirmed(array $data)
+        { 
+            foreach ($this->product->images as $value) {
+                
+            if (Storage::exists("other_product_image/" .  $value->image)) {
+            
+            Storage::delete("other_product_image/" .  $value->image);
+            };        
+            }
+            
+            if (Storage::exists("primary_image/" .  $this->product->primary_image)) {
+                Storage::delete("primary_image/" .  $this->product->primary_image);
+            };
+
+            $this->product->delete();
+                toastr()->livewire()->addSuccess('محصول با موفقیت حذف شد');
+        }
   }

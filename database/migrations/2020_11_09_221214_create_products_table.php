@@ -25,6 +25,7 @@ class CreateProductsTable extends Migration
             $table->text('description');
             $table->integer('status')->default(1);
             $table->boolean('is_active')->default(1);
+            $table->boolean('is_archive')->default(0);
             $table->unsignedInteger('delivery_amount')->default(0);
             $table->unsignedInteger('delivery_amount_per_product')->nullable();
             $table->timestamps();

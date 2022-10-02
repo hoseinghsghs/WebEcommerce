@@ -12,7 +12,6 @@
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href={{route('admin.home')}}><i class="zmdi zmdi-home"></i>
                                 خانه</a></li>
-                        <li class="breadcrumb-item"><a href="javascript:void(0);">کد</a></li>
                         <li class="breadcrumb-item active">لیست کد های تخفیف</li>
                     </ul>
                     </br>

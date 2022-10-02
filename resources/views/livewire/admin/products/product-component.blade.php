@@ -68,6 +68,8 @@
                                     <th> تاریخ و زمان ثبت محصول</th>
                                     <th>نام دسته بندی</th>
                                     <th>وضعیت</th>
+
+                                    <th>بایگانی</th>
                                     <th class="text-center">عملیات</th>
                                 </tr>
                             </thead>
@@ -110,6 +112,29 @@
                                             </div>
                                         </div>
                                     </td>
+                                    @if ($product->is_archive==0)
+                                    @php
+                                    $color="danger";
+                                    $title="بایگانی کردن";
+                                    @endphp
+                                    @else
+                                    @php
+                                    $color="success";
+                                    $title="خروج از بایگانی";
+                                    @endphp
+                                    @endif
+                                    <td>
+                                        <div class="row clearfix">
+                                            <div class="col-6">
+                                                <a wire:click="ChengeArchive_product({{$product->id}})"
+                                                    wire:loading.attr="disabled"
+                                                    class="btn btn-raised btn-{{$color}} waves-effect"><span
+                                                        style="color:white;">{{$title}}</span>
+                                                </a>
+
+                                            </div>
+                                        </div>
+                                    </td>
                                     <td class="text-center js-sweetalert">
 
                                         <div class="btn-group">
@@ -137,8 +162,6 @@
                                             <span class="spinner-border spinner-border-sm text-light" wire:loading
                                                 wire:target="delproduct({{$product->id}})"></span>
                                         </button>
-
-
                                     </td>
                                 </tr>
                                 @endforeach

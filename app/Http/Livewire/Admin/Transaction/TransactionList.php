@@ -16,6 +16,7 @@ class TransactionList extends Component
     public $amount;
     public $ref_id;
     public $status;
+    public $code;
     
     public function updatingName()
     {
@@ -47,6 +48,8 @@ class TransactionList extends Component
             return $query->where('ref_id', 'like', '%' . $this->ref_id . '%');
         })
         ->where('status','like','%'.$this->status.'%')
+        ->where('order_id','like','%'.$this->code.'%')
+        ->latest()
         ->paginate(10);
         
         return view('livewire.admin.transaction.transaction-list' , compact('transactions'));

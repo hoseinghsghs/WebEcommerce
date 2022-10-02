@@ -12,7 +12,7 @@
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href={{route('admin.home')}}><i class="zmdi zmdi-home"></i>
                                 خانه</a></li>
-                        <li class="breadcrumb-item"><a href="javascript:void(0);">محصولات</a></li>
+                        <li class="breadcrumb-item"><a href={{route('admin.products.index')}}>لیست محصولات </a></li>
                         <li class="breadcrumb-item active">ایجاد محصول</li>
                     </ul>
                     <button class="btn btn-primary btn-icon mobile_menu" type="button"><i
@@ -135,7 +135,7 @@
                                 <div class="row clearfix">
                                     <div class="form-group col-md-12">
                                         <label for="description">توضیحات</label>
-                                        <textarea class="form-control" id="description" required
+                                        <textarea class="form-control" id="summernote" required
                                             name="description">{{ old('description') }}</textarea>
                                         @error('description')
                                         <span class="text-danger m-0">{{$message}}</span>

@@ -234,6 +234,7 @@
                                             @endforeach
                                         </ul>
                                         @endif
+                                        @if ($product->quantity_check)
                                         <ul
                                             data-title="{{App\Models\Attribute::find($product->variations->first()->attribute_id)->name}}:">
 
@@ -264,6 +265,7 @@
                                                 </div>
                                             </div>
                                         </ul>
+                                        @endif
                                     </div>
 
                                 </div>
@@ -274,6 +276,7 @@
                                                 <span class="title"> فروشنده:</span>
                                                 <a class="product-name">{{env('APP_NAME')}}</a>
                                             </div>
+                                            @if ($product->quantity_check)
                                             <div class="product-seller-row guarantee1">
                                                 <span class="title"> گارانتی:</span>
                                                 <a class="product-name" id="guarantee"></a>
@@ -282,6 +285,7 @@
                                                 <span class="title"> مدت گارانتی:</span>
                                                 <a class="product-name" id="time_guarantee"></a>
                                             </div>
+                                            @endif
                                             <div class="product-seller-row price">
                                                 <span class="title"> قیمت:</span>
                                                 <a class="product-name variation-price">
@@ -320,6 +324,8 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            @if ($product->quantity_check)
+
                                             <input type="hidden" id="product_id" name="product"
                                                 value="{{$product->id}}">
                                             <div class="product-seller-row add-to-cart">
@@ -328,6 +334,7 @@
                                                     <span class="btn-add-to-cart-txt">افزودن به سبد خرید</span>
                                                 </a>
                                             </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -481,7 +488,7 @@
                                             , $product->id)->first();
                                             @endphp
                                             @endforeach
-                                            @if ($cheak_item)
+                                            @if (isset($cheak_item))
                                             <button type="button" class="btn-add-comment btn btn-secondary"
                                                 data-toggle="modal" data-target="#comment-modal">
                                                 ارسال نظر
@@ -493,21 +500,23 @@
                                     <div class="product-comment-list">
                                         <ul class="comment-list">
                                             @foreach ($product->approvedComments as $comment )
-                                            <li>
+                                            <li style="border: 1px solid #d4c2f7;border-radius: 20px;">
                                                 <div class="col-lg-3 pr">
                                                     <section>
-                                                        <div class="comments-user-shopping">
-
-                                                            {{$comment->user->name == " " ? "بدون نام" : $comment->user->name }}
-                                                            <div class="cell-date">
-                                                                {{Hekmatinasser\Verta\Verta::instance($comment->created_at)->format('Y/n/j')}}
+                                                        <div class="comments-user-shopping mt-3 mr-1 p-2 row">
+                                                            <div class="col-6 mt-2">
+                                                                <img src="/assets/home/images/man.png" alt="">
                                                             </div>
+                                                            <div class="col-6">
+                                                                {{$comment->user->name == null ? "بدون نام" : $comment->user->name }}
+                                                                <div class="cell-date">
+                                                                    {{Hekmatinasser\Verta\Verta::instance($comment->created_at)->format('Y/n/j')}}
+                                                                </div>
 
-                                                            <span data-rating-stars="5" data-rating-readonly="true"
-                                                                data-rating-value="{{ceil($comment->commentable->rates->avg('satisfaction'))}}">
-                                                            </span>
-
-
+                                                                <span data-rating-stars="5" data-rating-readonly="true"
+                                                                    data-rating-value="{{ceil($comment->commentable->rates->avg('satisfaction'))}}">
+                                                                </span>
+                                                            </div>
                                                         </div>
                                                     </section>
                                                 </div>
@@ -532,8 +541,6 @@
                                                                             {{ $item }}
                                                                         </li>
                                                                         @endforeach
-
-
                                                                     </ul>
                                                                 </div>
                                                                 <div class="comments-evaluation-negative">
@@ -936,7 +943,6 @@ $(function() {
 <script>
 function setlable(e) {
 
-
     if (e == "cost") {
         var lable = $(".cost").val();
     }
@@ -946,9 +952,6 @@ function setlable(e) {
     if (e == "satisfaction") {
         var lable = $(".satisfaction").val();
     }
-
-
-
     if (lable == 1) {
         lable = "بد";
     }
@@ -974,81 +977,70 @@ function setlable(e) {
     if (e == "satisfaction") {
         $("#rangeva3").html(lable);
     }
-
 }
 
 $(document).ready(function(e) {
 
-    let variation = JSON.parse($('#var-select').val());
+
+    if (typeof $('#var-select').val() === 'undefined' || typeof $('#var-select').val() === null) {
+        variation = null;
+    } else {
+        variation = JSON.parse($('#var-select').val());
+    }
     let variationPriceDiv = $('.variation-price');
     variationPriceDiv.empty();
-    $('.sku').html(variation.sku)
 
-    if (variation.is_sale) {
-        let spanSale = $('<div />', {
-            class: 'amount text-danger',
-            text: number_format(variation.sale_price) + ' تومان'
-        });
-        let spanPrice = $('<del />', {
-            class: 'amount',
-            text: number_format(variation.price) + ' تومان'
-        });
+    if (variation == null) {
 
-        variationPriceDiv.append(spanSale);
-        variationPriceDiv.append(spanPrice);
-    } else {
         let spanPrice = $('<span />', {
             class: 'amount',
-            text: number_format(variation.price) + ' تومان'
+            text: 'ناموجود',
         });
         variationPriceDiv.append(spanPrice);
-    }
-})
 
-$(document).ready(function(e) {
-
-    let variation = JSON.parse($('#var-select').val());
-    let variationPriceDiv = $('.variation-price');
-    variationPriceDiv.empty();
-    console.log(variation);
-
-    $('.sku').html(variation.sku);
-
-    if (variation.time_guarantee === null) {
-        $('.guarantee1').remove();
     } else {
-        $('#time_guarantee').html(variation.time_guarantee);
+
+        $('.sku').html(variation.sku);
+
+        if (variation.time_guarantee === null) {
+
+            $('.guarantee1').remove();
+
+        } else {
+            $('#time_guarantee').html(variation.time_guarantee);
+        }
+
+        if (variation.guarantee === null) {
+            $('.guarantee2').remove();
+        } else {
+            $('#guarantee').html(variation.guarantee);
+
+        }
+
+        if (variation.is_sale) {
+            let spanSale = $('<div />', {
+                class: 'amount text-danger',
+                text: number_format(variation.sale_price) + ' تومان'
+            });
+            let spanPrice = $('<del />', {
+                class: 'amount',
+                text: number_format(variation.price) + ' تومان'
+            });
+
+            variationPriceDiv.append(spanSale);
+            variationPriceDiv.append(spanPrice);
+        } else {
+            let spanPrice = $('<span />', {
+                class: 'amount',
+                text: number_format(variation.price) + ' تومان'
+            });
+            variationPriceDiv.append(spanPrice);
+        }
+
+        $('.numberstyle').attr('max', variation.quantity);
+        $('.numberstyle').val(1);
     }
 
-    if (variation.guarantee === null) {
-        $('.guarantee2').remove();
-    } else {
-        $('#guarantee').html(variation.guarantee);
-
-    }
-
-    if (variation.is_sale) {
-        let spanSale = $('<div />', {
-            class: 'amount text-danger',
-            text: number_format(variation.sale_price) + ' تومان'
-        });
-        let spanPrice = $('<del />', {
-            class: 'amount',
-            text: number_format(variation.price) + ' تومان'
-        });
-
-        variationPriceDiv.append(spanSale);
-        variationPriceDiv.append(spanPrice);
-    } else {
-        let spanPrice = $('<span />', {
-            class: 'amount',
-            text: number_format(variation.price) + ' تومان'
-        });
-        variationPriceDiv.append(spanPrice);
-    }
-
-    $('.numberstyle').attr('max', variation.quantity);
-    $('.numberstyle').val(1);
 
 });
 

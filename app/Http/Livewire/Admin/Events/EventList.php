@@ -15,7 +15,7 @@ public $evorders;
     ];
 
     public function mount(){
-        $this->evorders= Event::orderBy('id', 'desc')->get();
+        $this->evorders= Event::orderBy('id', 'desc')->take(6)->get();
     }
     
     public function notifyNewOrder($payload)

@@ -12,8 +12,9 @@
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href={{route('admin.home')}}><i class="zmdi zmdi-home"></i>
                                 خانه</a></li>
-                        <li class="breadcrumb-item"><a href="{{route('admin.coupons.index')}}">بنر ها</a></li>
-                        <li class="breadcrumb-item active">ایجاد بنر</li>
+                        <li class="breadcrumb-item"><a href="{{route('admin.coupons.index')}}">لیست کد های تخفیف</a>
+                        </li>
+                        <li class="breadcrumb-item active">ایجاد کد تخفیف</li>
                     </ul>
                     <button class="btn btn-primary btn-icon mobile_menu" type="button"><i
                             class="zmdi zmdi-sort-amount-desc"></i></button>

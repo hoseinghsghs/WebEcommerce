@@ -11,7 +11,8 @@
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href={{route('admin.home')}}><i
                                     class="zmdi zmdi-home"></i>خانه</a></li>
-                        <li class="breadcrumb-item"><a href="javascript:void(0);">تراکنش</a></li>
+                        <li class="breadcrumb-item"><a href={{route('admin.transactions.index')}}>لیست تراکنش ها</a>
+                        </li>
                         <li class="breadcrumb-item active">ویرایش تراکنش</li>
                     </ul>
                     <button class="btn btn-primary btn-icon mobile_menu" type="button"><i

@@ -1,4 +1,30 @@
 <aside id="leftsidebar" class="sidebar">
+
+    <div class="navbar-brand p-0 d-flex d-flex justify-content-around">
+        <span class="dropdown p-2">
+            <a href="javascript:void(0);" class="dropdown-toggle" title="Notifications" data-toggle="dropdown"
+                role="button"><i class="zmdi zmdi-notifications text-black"></i>
+                <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
+            </a>
+            <ul class="dropdown-menu js-right-sidebar">
+                <li class="header">اطلاعیه ها</li>
+
+                @livewire('admin.events.event-list')
+
+                <li class="footer"> <a href="javascript:void(0);">مشاهده تمام اعلان ها</a> </li>
+            </ul>
+        </span>
+        <span class="p-2"><a href="javascript:void(0);" class="js-right-sidebar" title="Setting"><i
+                    class="zmdi zmdi-settings zmdi-hc-spin text-black"></i></a></span>
+        <span class="p-2"><a aria-disabled="true"
+                onclick="event.preventDefault(); document.getElementById('frm-logout').submit();" class="mega-menu"
+                title="Sign Out"><i class="zmdi zmdi-power"></i></a>
+            <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
+                {{ csrf_field() }}
+            </form>
+        </span>
+    </div>
+
     <div class="navbar-brand">
         <button class="btn-menu ls-toggle-btn" type="button"><i class="zmdi zmdi-menu"></i></button>
         <a href="{{route('home')}}"><img
@@ -12,7 +38,7 @@
                     <a class="image" href="#"><img default=""
                             src="{{auth()->user()->avatar ? asset('storage/profile/'.auth()->user()->avatar) : asset('img/profile.png') }}"></a>
                     <div class="detail">
-                        <h6><strong>{{auth()->user()->name}}</strong></h6>
+                        <h6><strong>{{auth()->user()->name??auth()->user()->cellphone}}</strong></h6>
                         <small>{{auth()->user()->roles->first()->display_name}}</small>
                     </div>
                 </div>
@@ -32,6 +58,7 @@
                         داشبورد</span>
                 </a>
             </li>
+
             @canany(['users','roles','permissions'])
             <li @class(['active open'=>request()->routeIs('admin.users.*','admin.permissions','admin.roles.*')])> <a
                     href="javascript:void(0);" class="menu-toggle"><i
@@ -54,13 +81,17 @@
             @endcanany
             @canany(['products','categories','attributes','coupons'])
             <li @class(['active open'=>
-                request()->routeIs('admin.products.*','admin.categories.*','admin.attributes.*','admin.coupons.*')])> <a
-                    href="javascript:void(0);" class="menu-toggle"><i
+                request()->routeIs('admin.archive','admin.products.*','admin.categories.*','admin.attributes.*','admin.coupons.*')])>
+                <a href="javascript:void(0);" class="menu-toggle"><i
                         class="zmdi zmdi-hc-fw"></i><span>فروشگاه</span></a>
                 <ul class="ml-menu">
                     @can('products')
                     <li @class(['active'=>request()->routeIs('admin.products.index')])><a
                             href={{ route('admin.products.index') }}>لیست محصولات</a></li>
+
+                    <li @class(['active'=>request()->routeIs('admin.archive')])><a
+                            href={{ route('admin.archive') }}>لیست محصولات بایگانی شده</a></li>
+
                     <li @class(['active'=>request()->routeIs('admin.products.create')])><a
                             href={{ route('admin.products.create') }}>ایجاد محصول</a></li>
                     @endcan
@@ -156,6 +187,12 @@
             @can('comments')
             <li @class(['active'=>request()->routeIs('admin.comments.*')])> <a href={{route('admin.comments.index')}}>
                     <i class="zmdi zmdi-hc-fw"></i><span>نظرات</span></a>
+            </li>
+            @endcan
+
+            @can('events')
+            <li @class(['active'=>request()->routeIs('admin.timeline.*')])> <a href={{route('admin.timeline')}}>
+                    <i class="zmdi zmdi-hc-fw"></i><span>مدیریت رویداد ها</span></a>
             </li>
             @endcan
 

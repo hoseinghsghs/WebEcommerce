@@ -150,7 +150,7 @@
                                 <div class="row clearfix">
                                     <div class="form-group col-md-12">
                                         <label for="description">توضیحات</label>
-                                        <textarea class="form-control" id="description" rows="6" required
+                                        <textarea class="form-control" id="summernote" rows="6" required
                                             name="description">{{ $product->description }}</textarea>
                                         @error('description')
                                         <span class="text-danger m-0">{{$message}}</span>
