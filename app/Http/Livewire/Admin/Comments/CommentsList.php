@@ -55,15 +55,23 @@ public function mount(Comment $comment)
             return view('livewire.admin.comments.comments-list',['comments' => $comments]);
         }
             
-    public function delcomment(Comment $comment){
+    
 
-      $this->comment=$comment;
-        sweetAlert()
-        ->livewire()
-        ->showDenyButton(true,'انصراف')->confirmButtonText("تایید")
-        ->addInfo('از حذف رکورد مورد نظر اطمینان دارید؟');
-       
+    public function delcomment(Comment $comment){
+        if ($comment->replies->count()) {
+            $this->comment=$comment;
+            sweetAlert()
+            ->livewire()
+            ->addInfo('ابتدا پاسخ ها حذف گردد. با حذف این پرسش تمامی پاسخ ها حذف میشوند');
+        }else{
+            $comment->delete();
+            toastr()->livewire()->addSuccess('نظر با موفقیت حذف شد');
+        }
     }
+
+    public function sweetAlertConfirmed(array $data)
+   { 
+   }
 
    public function ChengeActive_comment (Comment $comment){
       
@@ -85,14 +93,6 @@ public function mount(Comment $comment)
         }
         
      }
-     
-     public function sweetAlertConfirmed(array $data)
-     { 
-        
-        $this->comment->delete();
-             toastr()->livewire()->addSuccess('نظر با موفقیت حذف شد');
-     }
-
 
 
 }

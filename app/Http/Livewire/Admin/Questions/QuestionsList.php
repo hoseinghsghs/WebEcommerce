@@ -53,16 +53,23 @@ class QuestionsList extends Component
 
                 return view('livewire.admin.questions.questions-list',['questions' => $questions]);
             }
+            
                 
         public function delquestion(Question $question){
-
-        $this->$question=$question;
-            sweetAlert()
-            ->livewire()
-            ->showDenyButton(true,'انصراف')->confirmButtonText("تایید")
-            ->addInfo('از حذف رکورد مورد نظر اطمینان دارید؟');
-        
+            if ($question->replies->count()) {
+                $this->question=$question;
+                sweetAlert()
+                ->livewire()
+                ->addInfo('ابتدا پاسخ ها حذف گردد. با حذف این پرسش تمامی پاسخ ها حذف میشوند');
+            }else{
+                $question->delete();
+                toastr()->livewire()->addSuccess('نظر با موفقیت حذف شد');
+            }
+          
         }
+        public function sweetAlertConfirmed(array $data)
+       { 
+       }
 
     public function ChengeActive_question (Question $question){
         
@@ -85,13 +92,6 @@ class QuestionsList extends Component
             
         }
         
-        public function sweetAlertConfirmed(array $data)
-        { 
-            
-            $this->question->delete();
-                toastr()->livewire()->addSuccess('نظر با موفقیت حذف شد');
-        }
-
 
 
 }

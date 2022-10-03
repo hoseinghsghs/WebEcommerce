@@ -6,12 +6,20 @@
         <div class="block-header">
             <div class="row">
                 <div class="col-lg-7 col-md-6 col-sm-12">
-
+                    <h2>ویرایش نظر </h2>
+                    </br>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href={{route('admin.home')}}><i class="zmdi zmdi-home"></i>
+                                خانه</a></li>
+                        <li class="breadcrumb-item"><a href={{route('admin.comments.index')}}> لیست نظرات</a>
+                        </li>
+                        <li class="breadcrumb-item active">ویرایش
+                        </li>
+                    </ul>
                     <button class="btn btn-primary btn-icon mobile_menu" type="button"><i
                             class="zmdi zmdi-sort-amount-desc"></i></button>
                 </div>
                 <div class="col-lg-5 col-md-6 col-sm-12">
-
                     <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i
                             class="zmdi zmdi-arrow-right"></i></button>
                 </div>
@@ -72,7 +80,7 @@
                                     <div class="form-group">
                                         <input type="text" id="product" disabled
                                             class="form-control @error('date') is-invalid @enderror"
-                                            value="{{old('product') ?? $comment->commentable->name}}">
+                                            value="{{old('product') ?? $comment->commentable->cellphone}}">
                                     </div>
                                 </div>
                             </div>
@@ -220,7 +228,7 @@
                                 </div>
                                 <button type="submit onclick=" loadbtn(event)"
                                     class="btn btn-raised btn-success waves-effect">
-                                    پاسخ به این سوال </button>
+                                    پاسخ به این نظر </button>
                             </div>
                         </form>
                         <hr>
@@ -243,8 +251,6 @@
                         $comment , 'color' => $color , 'title' => $title , 'isquestion' => 0])
 
                         @endforeach
-
-
                     </div>
                 </div>
             </div>

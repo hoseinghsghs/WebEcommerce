@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('body');
             $table->boolean('status')->default(false);
+            $table->softDeletes();
             $table->timestamps();
            
         });

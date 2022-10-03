@@ -69,11 +69,12 @@
                                                     onclick="loadbtn(event)">
                                                     ویرایش
                                                 </a>
-                                                <button class="btn btn-raised btn-danger waves-effect"
-                                                    data-type="confirm"
-                                                    data-form-id="del-post-{{$post->id}}">حذف</button>
+
                                                 <form action="{{route('admin.posts.destroy',$post->id)}}"
                                                     id="del-post-{{$post->id}}" method="POST">
+                                                    <button class="btn btn-raised btn-danger waves-effect"
+                                                        data-type="confirm"
+                                                        data-form-id="del-post-{{$post->id}}">حذف</button>
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>

@@ -124,9 +124,10 @@ class OtpController extends Controller
                 try {
                     broadcast(new NotificationMessage($event))->toOthers();
                 } catch (\Throwable $th) {
+                    
                 }
                 try {
-                    Log::info("سفارش جدید ثیت شد" , [  'title' => 'کاربر جدید ثبت نام کرد',
+                    Log::info("کابر جدید ثبت شد" , [  'title' => 'کاربر جدید ثبت نام کرد',
                     'body' => 'کاربر'  . " " .  $user->cellphone,
                     'user_id' => $user->id,
                     'eventable_id' =>$user->id,

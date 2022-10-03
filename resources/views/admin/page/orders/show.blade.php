@@ -95,6 +95,12 @@
 شماره تماس : {{ $order->address->cellphone }}
                         </textarea>
                 </div>
+                @if ($order->description_error)
+                <div class="form-group col-md-12">
+                    <label>ارور ها</label>
+                    {{$order->description_error}}
+                </div>
+                @endif
 
                 <div class="col-md-12">
                     <hr>
