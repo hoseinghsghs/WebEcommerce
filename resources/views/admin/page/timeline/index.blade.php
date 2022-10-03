@@ -31,18 +31,21 @@
                             if($event->eventable_type == "App\Models\Order"){
                                 $icon="zmdi zmdi-case";
                                 $bg="bg-green";
+                                $url=route('admin.orders.show' , $event->eventable_id );
                             }elseif($event->eventable_type == "App\Models\Comment"){
                                 $icon="zmdi zmdi-assignment";
                                 $bg="bg-blus";
+                                $url=route('admin.comments.edit' , $event->eventable_id );
                             }elseif($event->eventable_type == "App\Models\User"){
                                 $icon="zmdi zmdi-account";
                                 $bg="";
+                                $url=route('admin.users.show' , $event->eventable_id );
                             }
                         ?>
                         <li>
                             <div class="cbp_tmicon {{$bg}}"><i class="{{$icon}}"></i></div>
                             <div class="cbp_tmlabel empty">
-                                <h5><a href="javascript:void(0);">{{$event->title}}</a></h5>
+                                <h5><a href="{{$url}}">{{$event->title}}</a></h5>
                                 <div>
                                     {{$event->body}}
                                 </div>

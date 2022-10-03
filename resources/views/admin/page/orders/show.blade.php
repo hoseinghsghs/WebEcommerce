@@ -31,6 +31,10 @@
                 class="btn btn-raised btn-warning waves-effect mb-4">
                 تراکنش
             </a>
+            <a href="{{route('admin.users.show', $order->user->id)}}"
+                class="btn btn-raised btn-warning waves-effect mb-4">
+                کاربر
+            </a>
 
             <div class="row clearfix">
 
