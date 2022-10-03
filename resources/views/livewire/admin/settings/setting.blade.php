@@ -124,15 +124,15 @@
                             </div>
                         </div>
                         <div class="form-group col-md-12">
-                            <div class="form-line">
+                            <div class="form-line" wire:ignore>
                                 <label class="form-label">حریم خصوصی</label>
-                                <textarea id="privacy-summernote" wire:model.defer="site_privacy">{{ $site_privacy }}</textarea>
+                                <textarea id="privacy-summernote">{{$site_privacy}}</textarea>
                             </div>
                         </div>
                         <div class="form-group col-md-12">
-                            <div class="form-line">
+                            <div class="form-line" wire:ignore>
                                 <label class="form-label">قوانین و مقررات</label>
-                                <div id="rules-summernote" wire:model.defer="site_rules">{{ $site_rules }}</div>
+                                <textarea id="rules-summernote">{{$site_rules}}</textarea>
                             </div>
                         </div>
 
@@ -231,11 +231,18 @@
             height: 100,
             callbacks: {
                 onChange: function(contents, $editable) {
-                    console.log('onChange:', contents, $editable);
+                    Livewire.emit('privacyChanged',contents);
                 }
             }
         });
-        $('#rules-summernote').summernote();
+        $('#rules-summernote').summernote({
+            height: 100,
+            callbacks: {
+                onChange: function(contents, $editable) {
+                    Livewire.emit('rulesChanged',contents);
+                }
+            }
+        });
     });
 </script>
 @endpush

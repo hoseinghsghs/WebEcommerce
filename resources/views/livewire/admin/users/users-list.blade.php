@@ -25,6 +25,7 @@
                                 <th>نام</th>
                                 <th>ایمیل</th>
                                 <th>شماره تلفن</th>
+                                <th>تاریخ ایجاد حساب</th>
                                 <th class="text-center">عملیات</th>
                             </tr>
                         </thead>
@@ -35,8 +36,12 @@
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->cellphone}}</td>
+                                <td>{{verta($user->created_at)->format('H:i Y/n/j')}}</td>
                                 <td class="text-center js-sweetalert">
-                                    <a href="{{route('admin.users.edit',$user->id)}}" class="btn btn-raised btn-info waves-effect" onclick="loadbtn(event)">
+                                    <a onclick="loadbtn(event)" href="{{route('admin.users.show',$user->id)}}" class="btn btn-default waves-effect waves-float btn-sm waves-green">
+                                        <i class="zmdi zmdi-eye"></i>
+                                    </a>
+                                    <a href="{{route('admin.users.edit',$user->id)}}" class="btn btn-default waves-effect waves-float btn-sm waves-green" onclick="loadbtn(event)">
                                         <i class="zmdi zmdi-edit"></i>
                                     </a>
                                 </td>

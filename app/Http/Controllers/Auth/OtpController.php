@@ -120,7 +120,7 @@ class OtpController extends Controller
                     'eventable_id' =>$user->id,
                     'eventable_type' => User::class,
                 ]);
-                
+
                 try {
                     broadcast(new NotificationMessage($event))->toOthers();
                 } catch (\Throwable $th) {

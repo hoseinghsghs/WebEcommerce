@@ -32,21 +32,21 @@
                                     شماره تماس
                                 </div>
                                 @if(json_decode($setting->phones) != null && json_decode($setting->phones) != [])
-                                @foreach(json_decode($setting->phones) as $phone)
                                 <div class="contact-us-address-text">
+                                @foreach(json_decode($setting->phones) as $phone)
                                     <a href="tel:{{$phone}}">{{$phone}}</a>{{$loop->last ? '' : ' _ '}}
+                                    @endforeach
                                 </div>
-                                @endforeach
                                 @endif
                                 <div class="contact-us-address-header">
                                     ایمیل سازمانی
                                 </div>
                                 @if(json_decode($setting->emails) != null && json_decode($setting->emails) != [])
-                                @foreach(json_decode($setting->emails) as $email)
                                 <div class="contact-us-address-text d-inline-block">
+                                @foreach(json_decode($setting->emails) as $email)
                                     <a href="mailto:{{$email}}">{{$email}}</a>{{$loop->last ? '' : ' / '}}
+                                    @endforeach
                                 </div>
-                                @endforeach
                                 @endif
                             </div>
                         </div>

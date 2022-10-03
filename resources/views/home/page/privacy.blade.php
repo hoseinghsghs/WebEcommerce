@@ -10,7 +10,7 @@
                 <div class="content-info-page">
                     <h2 class="box-rounded_headline">حریم خصوصی</h2>
                     <p>
-
+                     {!! $setting->site_privacy !!}
                     </p>
                 </div>
             </div>

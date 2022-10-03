@@ -34,14 +34,17 @@
                                                     <input class="form-control" aria-label="شماره تماس" value="{{$user->cellphone}}" disabled readonly>
                                                     <button class="btn btn-outline-info" type="button" id="cellphone" data-toggle="modal" data-target="#sendOtpModal"><small>ویرایش</small></button>
                                                 </div>
-                                                @if($user->email && empty($user->email_verified_at))
+                                                @if($user->email_verified_at)
+                                                <label for="email">ایمیل<span class="badge badge-success p-1 mr-1">تایید شده</span></label>
+                                                <input type="email" name="email" id="email" class="input-email-checkout form-control @error('email','updateProfileInformation') is-invalid @enderror"" value=" {{$user->email}}">
+                                                @elseif ($user->email)
                                                 <label>ایمیل<span class="badge badge-warning p-1 mr-1">تایید نشده</span></label>
                                                 <div class="input-group mb-3">
                                                     <input type="email" name="email" class="input-email-checkout form-control @error('email','updateProfileInformation') is-invalid @enderror"" value=" {{$user->email}}">
                                                     <button class="btn btn-outline-info" type="button" onclick="verifyEmail(event)"><small>تایید ایمیل</small></button>
                                                 </div>
                                                 @else
-                                                <label for="email">ایمیل<span class="badge badge-success p-1 mr-1">تایید شده</span></label>
+                                                <label for="email">ایمیل</label>
                                                 <input type="email" name="email" id="email" class="input-email-checkout form-control @error('email','updateProfileInformation') is-invalid @enderror"" value=" {{$user->email}}">
                                                 @endif
                                                 <div class="AR-CR">
@@ -72,17 +75,17 @@
                                             @method('PUT')
                                             <div class="form-checkout-row">
                                                 @isset($user->password)
-                                                <label for="current_password">رمز عبور قبلی <abbr class="required" title="ضروری" style="color:red;">*</abbr><a href="#" style="border-bottom: 1px blue dashed;" class="float-left" data-toggle="modal" data-target="#resetModal">فراموشی رمزعبور</a></label>
+                                                <label for="current_password">رمز عبور فعلی<abbr class="required" title="ضروری" style="color:red;">*</abbr><a href="#" style="border-bottom: 1px blue dashed;" class="float-left" data-toggle="modal" data-target="#resetModal">فراموشی رمزعبور</a></label>
                                                 <input type="password" name="current_password" id="current_password" class="@error('current_password','updatePassword') is-invalid @enderror input-password-checkout form-control">
                                                 @endisset
-                                                <label for="password">رمز عبور جدید <abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
+                                                <label for="password">رمز عبور جدید<abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
                                                 <input type="password" name="password" id="password" class="input-password-checkout form-control @error('password','updatePassword') is-invalid @enderror">
 
-                                                <label for="password_confirmation">تکرار رمز عبور جدید <abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
+                                                <label for="password_confirmation">تکرار رمز عبور جدید<abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
                                                 <input type="password" name="password_confirmation" id="password_confirmation" class="input-password-checkout form-control @error('password_confirmation','updatePassword') is-invalid @enderror">
 
                                                 <div class="AR-CR">
-                                                    <button type="submit" class="btn-registrar">تغییر</button>
+                                                    <button type="submit" class="btn-registrar">ذخیره</button>
                                                 </div>
                                             </div>
                                         </form>

@@ -34,6 +34,7 @@ class Setting extends Component
     public $logo;
     public $logo_url;
 
+    protected $listeners=['privacyChanged','rulesChanged'];
     protected $rules = [
         'site_name' => 'nullable|string',
         'emails' => 'nullable|array',
@@ -85,10 +86,18 @@ class Setting extends Component
         $this->longitude = $settings->longitude;
         $this->logo_url = $settings->logo;
     }
+    public function privacyChanged($value)
+    {
+        $this->site_privacy = $value;
+    }
+
+    public function rulesChanged($value)
+    {
+        $this->site_rules = $value;
+    }
 
     public function addEmail()
     {
-        dd($this->site_privacy, $this->site_rules);
         $this->validate([
             'email' => 'required|email',
         ]);

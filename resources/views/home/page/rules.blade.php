@@ -10,7 +10,7 @@
                 <div class="content-info-page">
                     <h2 class="box-rounded_headline">شرایط و قوانین</h2>
                     <p>
-
+                       {!! $setting->site_rules !!}
                     </p>
                 </div>
             </div>

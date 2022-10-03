@@ -1,5 +1,5 @@
 @extends('admin.layout.MasterAdmin')
-
+@section('title','تنظیمات سایت')
 @push('styles')
 <style>
     .custom-file-label::after {

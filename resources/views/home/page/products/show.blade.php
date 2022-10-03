@@ -488,14 +488,12 @@
                                             , $product->id)->first();
                                             @endphp
                                             @endforeach
-                                            @isset($cheak_item)
-                                            @if ($cheak_item)
+                                            @if (isset($cheak_item))
                                             <button type="button" class="btn-add-comment btn btn-secondary"
                                                 data-toggle="modal" data-target="#comment-modal">
                                                 ارسال نظر
                                             </button>
                                             @endif
-                                            @endisset
 
                                             @endif
                                         </div>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Comment;
+use App\Models\Order;
 use App\Models\User;
 use Flasher\Toastr\Prime\ToastrFactory;
 use Illuminate\Http\Request;
@@ -52,5 +54,12 @@ class UserController extends Controller
 
         $flasher->addSuccess('کاربر با موفقیت ویرایش شد');
         return redirect()->back();
+    }
+    public function show(User $user)
+    {
+        $orders=Order::where('user_id', $user->id)->paginate(10);
+        $comments=Comment::where('user_id', $user->id)->paginate(10);
+
+       return view('admin.page.users.show', compact('user','orders','comments'));
     }
 }
