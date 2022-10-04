@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
             $table->boolean('approved')->default(0);
             $table->text('text');
-            $table->unsignedInteger('parent_id')->default(0);
+            $table->unsignedInteger('parent_id')->default(0)->cascadeOnDelete('set null');
             $table->timestamps();
             $table->softDeletes();
         });

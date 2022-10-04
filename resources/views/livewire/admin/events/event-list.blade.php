@@ -16,17 +16,20 @@
                 if($evorder->eventable_type == "App\Models\Order"){
                 $icon="zmdi zmdi-case";
                 $bg="bg-green";
+                $url=route('admin.orders.show' , $evorder->eventable_id );
                 }elseif($evorder->eventable_type == "App\Models\Comment"){
                 $icon="zmdi zmdi-assignment-o";
                 $bg="bg-blue";
+                $url=route('admin.comments.edit' , $evorder->eventable_id );
                 }elseif($evorder->eventable_type == "App\Models\User"){
                 $icon="zmdi zmdi-account";
                 $bg="bg-yellow";
+                $url=route('admin.users.show' , $evorder->eventable_id );
                 }
                 @endphp
 
 
-                <a href="javascript:void(0);">
+                <a href="{{$url}}">
                     <div class="icon-circle {{$bg}}"><i class="{{$icon}}"></i></div>
                     <div class="menu-info">
                         <h4 style="float: right;">{{$evorder-> title}}</h4>

@@ -82,15 +82,15 @@ class ProductComponent extends Component
             
                 }
                 
-        public function delproduct(product $product){
+        // public function delproduct(product $product){
 
-        $this->product=$product;
-            sweetAlert()
-            ->livewire()
-            ->showDenyButton(true,'انصراف')->confirmButtonText("تایید")
-            ->addInfo('از حذف رکورد مورد نظر اطمینان دارید؟');
+        // $this->product=$product;
+        //     sweetAlert()
+        //     ->livewire()
+        //     ->showDenyButton(true,'انصراف')->confirmButtonText("تایید")
+        //     ->addInfo('از حذف رکورد مورد نظر اطمینان دارید؟');
         
-        }
+        // }
 
     public function ChengeActive_product (product $product){
         
@@ -131,21 +131,21 @@ class ProductComponent extends Component
                 }
             }
         
-        public function sweetAlertConfirmed(array $data)
-        { 
-            foreach ($this->product->images as $value) {
+        // public function sweetAlertConfirmed(array $data)
+        // { 
+        //     foreach ($this->product->images as $value) {
                 
-            if (Storage::exists("other_product_image/" .  $value->image)) {
+        //     if (Storage::exists("other_product_image/" .  $value->image)) {
             
-            Storage::delete("other_product_image/" .  $value->image);
-            };        
-            }
+        //     Storage::delete("other_product_image/" .  $value->image);
+        //     };        
+        //     }
             
-            if (Storage::exists("primary_image/" .  $this->product->primary_image)) {
-                Storage::delete("primary_image/" .  $this->product->primary_image);
-            };
+        //     if (Storage::exists("primary_image/" .  $this->product->primary_image)) {
+        //         Storage::delete("primary_image/" .  $this->product->primary_image);
+        //     };
 
-            $this->product->delete();
-                toastr()->livewire()->addSuccess('محصول با موفقیت حذف شد');
-        }
+        //     $this->product->delete();
+        //         toastr()->livewire()->addSuccess('محصول با موفقیت حذف شد');
+        // }
   }

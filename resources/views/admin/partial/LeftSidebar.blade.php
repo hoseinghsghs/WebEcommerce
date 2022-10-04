@@ -148,12 +148,7 @@
                 </ul>
             </li>
             @endcan
-            @can('tags')
-            <li @class(['active'=>request()->routeIs('admin.tags.*')])> <a href={{ route('admin.tags.create') }}><i
-                        class="zmdi zmdi-label"></i><span>تگ
-                        ها</span></a>
-            </li>
-            @endcan
+
             @can('banners')
             <li @class(['active open'=>request()->routeIs('admin.banners.*')])> <a href="javascript:void(0);"
                     class="menu-toggle"><i class="zmdi zmdi-aspect-ratio-alt"></i><span>بنر
@@ -178,6 +173,12 @@
                 </ul>
             </li>
             @endcan
+            @can('tags')
+            <li @class(['active'=>request()->routeIs('admin.tags.*')])> <a href={{ route('admin.tags.create') }}><i
+                        class="zmdi zmdi-label"></i><span>تگ
+                        ها</span></a>
+            </li>
+            @endcan
             <li>
                 <a target="_blank" href="https://app.raychat.io/login"><i class="zmdi zmdi-hc-fw"></i>
                     <span>چت آنلاین</span>
@@ -191,7 +192,7 @@
 
             @can('events')
             <li @class(['active'=>request()->routeIs('admin.timeline.*')])> <a href={{route('admin.timeline')}}>
-                    <i class="zmdi zmdi-hc-fw"></i><span>مدیریت رویداد ها</span></a>
+                    <i class="zmdi zmdi-notifications"></i><span>مدیریت رویداد ها</span></a>
             </li>
             @endcan
 

@@ -80,34 +80,28 @@ public function ChengeActive(Question $question){
 
    
     public function delquestion(Question $question){
-
-        $this->question=$question;
-          sweetAlert()
-          ->livewire()
-          ->showDenyButton(true,'انصراف')->confirmButtonText("تایید")
-          ->addInfo('از حذف رکورد مورد نظر اطمینان دارید؟');
+        if ($question->replies->count()) {
+            toastr()->livewire()->addWarning('ابتدا پاسخ به پرسش  حذف گردد. با حذف این نظر تمامی پاسخ ها حذف میشوند');
+        }else{
+            $question->delete();
+            toastr()->livewire()->addSuccess('پرسش با موفقیت حذف شد');
+            return redirect(request()->header('Referer'));
+        };
          
       }
 
-      public function delcomment(Comment $comment){
+        
+    public function delcomment(Comment $comment){
+        if ($comment->replies->count()) {
+            toastr()->livewire()->addWarning('ابتدا پاسخ به نظر  حذف گردد. با حذف این نظر تمامی پاسخ ها حذف میشوند');
 
-        $this->comment=$comment;
-          sweetAlert()
-          ->livewire()
-          ->showDenyButton(true,'انصراف')->confirmButtonText("تایید")
-          ->addInfo('از حذف رکورد مورد نظر اطمینان دارید؟');
+        }else{
+            $comment->delete();
+            toastr()->livewire()->addSuccess('نظر با موفقیت حذف شد');
+            return redirect(request()->header('Referer'));
+        };
          
       }
-  
-  
-       
-       public function sweetAlertConfirmed(array $data)
-       { 
-          $this->question->delete();
-          return redirect(request()->header('Referer'));
-          
-       }
-       
        public function render()
        {
            return view('livewire.admin.replay.list-replay');

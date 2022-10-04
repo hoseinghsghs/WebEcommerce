@@ -40,6 +40,7 @@
                                                                                     class="required" title="ضروری"
                                                                                     style="color:red;">*</abbr></span></label>
                                                                             <input type="text" id="name" name="title"
+                                                                                value="{{ old('title') }}"
                                                                                 class="input-name-checkout form-control m-0">
                                                                             @error('title')
                                                                             <span
@@ -52,6 +53,7 @@
                                                                                     class="required" title="ضروری"
                                                                                     style="color:red;">*</abbr></span></label>
                                                                             <input type="text" id="name" name="name"
+                                                                                value="{{ old('name') }}"
                                                                                 class="input-name-checkout form-control m-0">
                                                                             @error('name')
                                                                             <span
@@ -67,6 +69,7 @@
                                                                                     style="color:red;">*</abbr></label>
                                                                             <input type="text" id="phone-number"
                                                                                 name="cellphone"
+                                                                                value="{{ old('cellphone') }}"
                                                                                 class="input-name-checkout form-control m-0 text-left">
                                                                             @error('cellphone')
                                                                             <span
@@ -80,6 +83,7 @@
                                                                                     style="color:red;">*</abbr></label>
                                                                             <input type="text" id="fixed-number"
                                                                                 name="cellphone2"
+                                                                                value="{{ old('cellphone2') }}"
                                                                                 class="input-name-checkout form-control m-0 text-left">
                                                                             @error('cellphone2')
                                                                             <span
@@ -135,6 +139,7 @@
                                                                                 </label>
                                                                                 <input type="text" id="apt-id"
                                                                                     name="unit"
+                                                                                    value="{{ old('unit') }}"
                                                                                     class="input-name-checkout js-input-apt-id form-control m-0">
                                                                                 @error('unit')
                                                                                 <span
@@ -149,6 +154,7 @@
                                                                             <input type="text" id="post-code"
                                                                                 name="postal_code"
                                                                                 class="input-name-checkout form-control m-0"
+                                                                                value="{{ old('postal_code') }}"
                                                                                 placeholder="کد پستی را بدون خط تیره بنویسید">
                                                                             @error('postal_code')
                                                                             <span
@@ -163,7 +169,7 @@
                                                                             </label>
                                                                             <textarea rows="5" cols="30" id="address"
                                                                                 name="address"
-                                                                                class="textarea-name-checkout form-control m-0 "></textarea>
+                                                                                class="textarea-name-checkout form-control m-0 ">{{ old('address') }}</textarea>
                                                                             @error('address')
                                                                             <span
                                                                                 class="text-danger">{{ $message }}</span>
@@ -178,7 +184,7 @@
                                                                             <textarea rows="5" cols="30" id="address"
                                                                                 name="lastaddress"
                                                                                 class="textarea-name-checkout form-control mb-0"
-                                                                                placeholder="آدرس اضطراری در صورت بروز مشکل..."></textarea>
+                                                                                placeholder="آدرس اضطراری در صورت بروز مشکل...">{{ old('lastaddress') }}</textarea>
                                                                             @error('lastaddress')
                                                                             <span
                                                                                 class="text-danger">{{ $message }}</span>
@@ -325,7 +331,8 @@
                                                                             <label for="name">عنوان آدرس<abbr
                                                                                     class="required" title="ضروری"
                                                                                     style="color:red;">*</abbr></span></label>
-                                                                            <input type="text" id="name" name="title"
+                                                                            <input type="text" id="title" name="title"
+                                                                                value="{{old('title')}}"
                                                                                 class="input-name-checkout form-control m-0">
                                                                             @error('title')
                                                                             <span
@@ -337,6 +344,7 @@
                                                                                     class="required" title="ضروری"
                                                                                     style="color:red;">*</abbr></span></label>
                                                                             <input type="text" id="name" name="name"
+                                                                                value="{{old('name')}}"
                                                                                 class="input-name-checkout form-control m-0">
                                                                             @error('name')
                                                                             <span
@@ -349,6 +357,7 @@
                                                                                     style="color:red;">*</abbr></label>
                                                                             <input type="text" id="phone-number"
                                                                                 name="cellphone"
+                                                                                value="{{old('cellphone')}}"
                                                                                 class="input-name-checkout form-control m-0 text-left">
                                                                             @error('cellphone')
                                                                             <span
@@ -362,6 +371,7 @@
                                                                                     style="color:red;">*</abbr></label>
                                                                             <input type="text" id="fixed-number"
                                                                                 name="cellphone2"
+                                                                                value="{{old('cellphone2')}}"
                                                                                 class="input-name-checkout form-control m-0 text-left">
                                                                             @error('cellphone2')
                                                                             <span
@@ -416,7 +426,7 @@
                                                                                     </span>
                                                                                 </label>
                                                                                 <input type="text" id="apt-id"
-                                                                                    name="unit"
+                                                                                    name="unit" value="{{old('unit')}}"
                                                                                     class="input-name-checkout js-input-apt-id form-control m-0">
                                                                                 @error('unit')
                                                                                 <span
@@ -429,6 +439,7 @@
                                                                                     class="required" title="ضروری"
                                                                                     style="color:red;">*</abbr></label>
                                                                             <input type="text" id="post-code"
+                                                                                value="{{old('post-code')}}"
                                                                                 name="postal_code"
                                                                                 class="input-name-checkout form-control m-0"
                                                                                 placeholder="کد پستی را بدون خط تیره بنویسید">
@@ -445,7 +456,7 @@
                                                                             </label>
                                                                             <textarea rows="5" cols="30" id="address"
                                                                                 name="address"
-                                                                                class="textarea-name-checkout form-control m-0 "></textarea>
+                                                                                class="textarea-name-checkout form-control m-0 ">{{old('address')}}</textarea>
                                                                             @error('address')
                                                                             <span
                                                                                 class="text-danger">{{ $message }}</span>
@@ -460,7 +471,7 @@
                                                                             <textarea rows="5" cols="30" id="address"
                                                                                 name="lastaddress"
                                                                                 class="textarea-name-checkout form-control mb-0"
-                                                                                placeholder="آدرس اضطراری در صورت بروز مشکل..."></textarea>
+                                                                                placeholder="آدرس اضطراری در صورت بروز مشکل...">{{old('lastaddress')}}</textarea>
                                                                             @error('lastaddress')
                                                                             <span
                                                                                 class="text-danger">{{ $message }}</span>
@@ -626,11 +637,15 @@
                                     </ul>
                                     <div class="form-auth-row">
                                         <label for="#" class="ui-checkbox mt-1">
-                                            <input type="checkbox" value="1" name="login" id="remember">
+                                            <input type="checkbox" value="1" required
+                                                oninvalid="this.setCustomValidity('تیک قوانین و حریم خصوصی را پس از مطالعه بزنید')"
+                                                id="remember">
                                             <span class="ui-checkbox-check"></span>
                                         </label>
-                                        <label for="remember" class="remember-me mr-0"><a href="#">حریم خصوصی</a> و
-                                            <a href="#">شرایط قوانین </a>استفاده از سرویس های سایت دیجی‌اسمارت را
+                                        <label for="remember" class="remember-me mr-0"><a
+                                                href="{{route('privacy')}}">حریم خصوصی</a> و
+                                            <a href="{{route('ruls')}}">شرایط قوانین </a>استفاده از سرویس های سایت
+                                            را
                                             مطالعه نموده و با کلیه موارد آن موافقم <abbr class="required" title="ضروری"
                                                 style="color:red;">*</abbr></label>
                                     </div>

@@ -145,8 +145,9 @@ class PostController extends Controller
         }
         $post->image()->delete();
         $post->delete();
+        $post->comments()->delete();
 
-        $flasher->addSuccess('خبر با موفقیت حذف شد');
+        $flasher->addSuccess('پست با موفقیت حذف شد');
         return back();
     }
 }

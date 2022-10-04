@@ -143,10 +143,12 @@
 
                                             </div>
                                         </div>
-                                        <button class="btn btn-raised btn-danger waves-effect" wire:click="delproduct({{$product->id}})">
+                                        <!-- <button class="btn btn-raised btn-danger waves-effect"
+                                            wire:click="delproduct({{$product->id}})">
                                             <i class="zmdi zmdi-delete"></i>
-                                            <span class="spinner-border spinner-border-sm text-light" wire:loading wire:target="delproduct({{$product->id}})"></span>
-                                        </button>
+                                            <span class="spinner-border spinner-border-sm text-light" wire:loading
+                                                wire:target="delproduct({{$product->id}})"></span>
+                                        </button> -->
                                     </td>
                                 </tr>
                                 @endforeach
