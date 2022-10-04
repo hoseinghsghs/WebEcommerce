@@ -105,7 +105,7 @@ class OtpController extends Controller
                 $otp->delete();
                 return response()->json(['message' => 'check successfull']);
             }
-            //find or create user if not exists
+            //find or create user if user not exists
             if ($otp->user_id) {
                 $user = User::findOrFail($otp->user_id);
             } else {
@@ -139,6 +139,17 @@ class OtpController extends Controller
             // login user
             Auth::login($user, $request->has('remember') ? $data['remember'] : null);
             $otp->delete();
+
+            try {
+                Log::info("کاربر وارد سایت شد" , [  'title' => 'کاربر وارد سایت شد',
+                'body' => 'کاربر'  . " " .  $user->cellphone,
+                'user_id' => $user->id,
+                'eventable_id' =>$user->id,
+                'eventable_type' => User::class,
+                ]);
+            } catch (\Throwable $th) {
+            }
+
             return response()->json([
                 'message' => 'کد تایید صحیح است'
             ], 200);

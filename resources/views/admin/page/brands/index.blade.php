@@ -1,17 +1,17 @@
 @extends('admin.layout.MasterAdmin')
-@section('title','مشاهده برند')
+@section('title','لیست برندها')
 @section('Content')
 <section class="content">
     <div class="body_scroll">
         <div class="block-header">
             <div class="row">
                 <div class="col-lg-7 col-md-6 col-sm-12">
-                    <h2>لیست برند ها</h2>
+                    <h2>لیست برندها</h2>
                     </br>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href={{route('admin.home')}}><i class="zmdi zmdi-home"></i>
                                 خانه</a></li>
-                        <li class="breadcrumb-item active">لیست برند ها</li>
+                        <li class="breadcrumb-item active">لیست برندها</li>
                     </ul>
                     </br>
                     <a onclick="loadbtn(event)" href="{{route('admin.brands.create')}}"

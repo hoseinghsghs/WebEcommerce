@@ -13,23 +13,20 @@
                                     <input type="text" name="name" wire:model.defer="tag_name" class="form-control">
                                     @error('tag_name')
                                     <p class="text-danger">{{ $message }}</p>
-
                                     @enderror
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 ">
-                            <button wire:click="addTag" wire:loading.attr="disabled"
-                                class="btn btn-raised {{$is_edit ? 'btn-warning' : 'btn-primary'}}  waves-effect">
+                            <button wire:click="addTag" wire:loading.attr="disabled" class="btn btn-raised {{$is_edit ? 'btn-warning' : 'btn-primary'}}  waves-effect">
                                 {{$is_edit ? 'ویرایش' : 'اضافه کردن'}}
-                                <span class="spinner-border spinner-border-sm text-light" wire:loading
-                                    wire:target="addTag"></span>
+                                <span class="spinner-border spinner-border-sm text-light" wire:loading wire:target="addTag"></span>
                             </button>
-                            <button class="btn btn-raised btn-info waves-effect" wire:loading.attr="disabled"
-                                wire:click="ref">صرف نظر
-                                <span class="spinner-border spinner-border-sm text-light" wire:loading
-                                    wire:target="ref"></span>
+                            @if ($is_edit)
+                            <button class="btn btn-raised btn-info waves-effect" wire:loading.attr="disabled" wire:click="ref">صرف نظر
+                                <span class="spinner-border spinner-border-sm text-light" wire:loading wire:target="ref"></span>
                             </button>
+                            @endif
                         </div>
                     </div>
 
@@ -65,20 +62,15 @@
                                     <td>{{$tag->name}}</td>
                                     <td class="text-center js-sweetalert">
 
-                                        <button wire:click="edit_tag({{$tag->id}})" wire:loading.attr="disabled"
-                                            {{$display}} class="btn btn-raised btn-info waves-effect scroll">
+                                        <button wire:click="edit_tag({{$tag->id}})" wire:loading.attr="disabled" {{$display}} class="btn btn-raised btn-info waves-effect scroll">
                                             <i class="zmdi zmdi-edit"></i>
-                                            <span class="spinner-border spinner-border-sm text-light" wire:loading
-                                                wire:target="edit_tag({{$tag->id}}) "></span>
+                                            <span class="spinner-border spinner-border-sm text-light" wire:loading wire:target="edit_tag({{$tag->id}}) "></span>
                                         </button>
 
-                                        <button class="btn btn-raised btn-danger waves-effect"
-                                            wire:loading.attr="disabled" wire:click="del_tag({{$tag->id}})"
-                                            {{$display}}>
+                                        <button class="btn btn-raised btn-danger waves-effect" wire:loading.attr="disabled" wire:click="del_tag({{$tag->id}})" {{$display}}>
                                             <i class="zmdi zmdi-delete"></i>
 
-                                            <span class="spinner-border spinner-border-sm text-light" wire:loading
-                                                wire:target="del_tag({{$tag->id}})"></span>
+                                            <span class="spinner-border spinner-border-sm text-light" wire:loading wire:target="del_tag({{$tag->id}})"></span>
                                         </button>
 
                                     </td>
@@ -97,12 +89,12 @@
 </div>
 @push('scripts')
 <script>
-$('.scroll').click(function() {
-    $("html, body").animate({
-        scrollTop: 0
-    }, 600);
-    return false;
-});
+    $('.scroll').click(function() {
+        $("html, body").animate({
+            scrollTop: 0
+        }, 600);
+        return false;
+    });
 </script>
 
 @endpush
