@@ -38,12 +38,13 @@
 
                             </div>
                         </div>
-                        <div class="owl-nav"><button type="button" role="presentation"
+                        <div class="owl-nav">
+                            <!-- <button type="button" role="presentation"
                                 style="margin-right: -37px;box-shadow:  0px 0 0px 0 rgb(0 0 0 / 0%)"
                                 class="owl-prev disabled">&#10094</button>
                             <button type="button" role="presentation"
                                 style="margin-left: -37px;box-shadow:  0px 0 0px 0 rgb(0 0 0 / 0%)" class="owl-next">
-                                &#10095</button>
+                                &#10095</button> -->
                         </div>
                         <div class="owl-dots disabled"></div>
                     </div>
