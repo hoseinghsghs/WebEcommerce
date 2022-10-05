@@ -4,7 +4,7 @@ namespace App\PaymentGateway;
 
 class Zarinpal extends Payment
 {
-    public function send($amounts, $description, $addressId)
+    public function send($amounts, $description, $addressId ,$ip)
     {
         $data = array(
             'MerchantID' => 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
@@ -35,7 +35,7 @@ class Zarinpal extends Payment
         } else {
             if ($result["Status"] == 100) {
 
-                $createOrder = parent::createOrder($addressId, $amounts, $result["Authority"], 'zarinpal',$description);
+                $createOrder = parent::createOrder($addressId, $amounts, $result["Authority"], 'zarinpal',$description , $ip);
                 if (array_key_exists('error', $createOrder)) {
                     return $createOrder;
                 }

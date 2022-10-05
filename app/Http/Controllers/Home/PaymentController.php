@@ -49,7 +49,7 @@ public function payment(Request $request)
 
         ]);
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
+            return redirect()->back()->withErrors($validator)->withInput();
         };
 
         try {
@@ -80,6 +80,7 @@ public function payment(Request $request)
         }else{
             $description="بدون توضیح";
         }
+        $ip=$request->ip();
 
 
     $checkCart = $this->checkCart();
@@ -96,7 +97,7 @@ public function payment(Request $request)
 
     if ($request->payment_method == 'paypal') {
         $payGateway = new Pay();
-        $payGatewayResult = $payGateway->send($amounts, $address_id , $description);
+        $payGatewayResult = $payGateway->send($amounts, $address_id , $description ,$ip);
 
         if (array_key_exists('error', $payGatewayResult)) {
             alert()->error($payGatewayResult['error'])->persistent('حله');
@@ -109,7 +110,7 @@ public function payment(Request $request)
 
     if ($request->payment_method == 'zarinpal') {
         $zarinpalGateway = new Zarinpal();
-        $zarinpalGatewayResult = $zarinpalGateway->send($amounts, $description, $address_id);
+        $zarinpalGatewayResult = $zarinpalGateway->send($amounts, $description, $address_id , $ip);
 
         if (array_key_exists('error', $zarinpalGatewayResult)) {
             alert()->error($zarinpalGatewayResult['error'])->persistent('حله');

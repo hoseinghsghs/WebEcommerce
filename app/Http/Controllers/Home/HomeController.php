@@ -49,7 +49,7 @@ class HomeController extends Controller
         $Products_our_suggestion =          Product::active()->where('position', 'پیشنهاد ما')->get()->take(15);
         $Products_special =                 Product::active()->where('position', 'فروش ویژه')->get()->take(15);
 
-        $Products_our_suggestion_units =    Product::active()->where('position', 'تک محصول')->get()->take(15);
+        $Products_our_suggestion_units =    Product::active()->where('position', 'تک محصول')->get()->take(5);
 
         return view(
             'home.page.home',

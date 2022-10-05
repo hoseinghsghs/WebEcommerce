@@ -66,6 +66,41 @@
                             </div>
                         </div>
                     </div>
+                    <div class="header">
+                        <h2>
+                            جست و جو بر اساس تاریخ
+                        </h2>
+                    </div>
+                    <div class="body">
+                        <div class="row clearfix">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <label>تاریخ شروع
+                                        </label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="startDate"
+                                                wire:model="startDate" name="startDate" readonly="readonly">
+                                            <input type="hidden" id="startDate-alt" name="expired_at">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <label> تاریخ پایان </label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="endDate" wire:model="endDate"
+                                                name="endDate" readonly="readonly">
+                                            <input type="hidden" id="endDate-alt" name="expired_at">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
 
                 <div class="header">
@@ -129,6 +164,7 @@
                                     <td>{{Hekmatinasser\Verta\Verta::instance($order->created_at)->format('Y/n/j')}}
                                     </td>
 
+
                                     <td class="text-center js-sweetalert">
                                         <a onclick="loadbtn(event)" href="{{route('admin.orders.edit',$order->id)}}"
                                             class="btn btn-raised btn-warning waves-effect">
@@ -138,14 +174,6 @@
                                             class="btn btn-raised btn-info waves-effect">
                                             <i class="zmdi zmdi-eye"></i>
                                         </a>
-                                        <!-- <button class="btn btn-raised btn-danger waves-effect"
-                                                    data-type="confirm" data-form-id="del-order-{{$order->id}}"><i
-                                                        class="zmdi zmdi-delete"></i></button>
-                                                <form action="{{route('admin.orders.destroy',$order->id)}}"
-                                                    id="del-order-{{$order->id}}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                </form> -->
                                     </td>
                                 </tr>
                                 @endforeach
@@ -168,3 +196,33 @@
         </div>
     </div>
 </div>
+@push('styles')
+<!-- تاریخ -->
+<link rel="stylesheet" type="text/css"
+    href="https://unpkg.com/persian-datepicker@1.2.0/dist/css/persian-datepicker.min.css" />
+<!-- تاریخ پایان-->
+@endpush
+@push('scripts')
+<script src="https://unpkg.com/persian-date@1.1.0/dist/persian-date.min.js"></script>
+<script src="https://unpkg.com/persian-datepicker@1.2.0/dist/js/persian-datepicker.min.js"></script>
+<script>
+$("#startDate").pDatepicker({
+    format: "YYYY-MM-DD",
+
+    onSelect: function(startDate) {
+        console.log(startDate);
+        var startdate = $("#startDate").val();
+        @this.set('startDate', startdate);
+    }
+});
+
+$("#endDate").pDatepicker({
+    format: "YYYY-MM-DD",
+
+    onSelect: function(endDate) {
+        var enddate = $("#endDate").val();
+        @this.set('endDate', enddate);
+    }
+});
+</script>
+@endpush
