@@ -439,8 +439,8 @@
                                                                                     class="required" title="ضروری"
                                                                                     style="color:red;">*</abbr></label>
                                                                             <input type="text" id="post-code"
-                                                                                value="{{old('post-code')}}"
                                                                                 name="postal_code"
+                                                                                value="{{old('postal_code')}}"
                                                                                 class="input-name-checkout form-control m-0"
                                                                                 placeholder="کد پستی را بدون خط تیره بنویسید">
                                                                             @error('postal_code')
@@ -491,7 +491,7 @@
                                                 </label>
                                                 <textarea rows="5" cols="30" id="address" name="description"
                                                     class="textarea-name-checkout form-control mb-0"
-                                                    style="border-radius: 1rem;"
+                                                    style="border-radius: 1rem;" value="{{old('description')}}"
                                                     placeholder="توضیحات ضروری دریافت محصول"></textarea>
                                                 @error('description')
                                                 <span class="text-danger mb-2">{{ $message }}</span>
@@ -637,9 +637,9 @@
                                     </ul>
                                     <div class="form-auth-row">
                                         <label for="#" class="ui-checkbox mt-1">
-                                            <input type="checkbox" value="1" required
+                                            <input type="checkbox" value="1"
                                                 oninvalid="this.setCustomValidity('تیک قوانین و حریم خصوصی را پس از مطالعه بزنید')"
-                                                id="remember">
+                                                oninput="this.setCustomValidity('')" required id="remember">
                                             <span class="ui-checkbox-check"></span>
                                         </label>
                                         <label for="remember" class="remember-me mr-0"><a

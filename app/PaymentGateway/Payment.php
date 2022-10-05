@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Log;
 
 class Payment
 {
-    public function createOrder($addressId, $amounts, $token, $gateway_name , $description)
+    public function createOrder($addressId, $amounts, $token, $gateway_name , $description , $ip)
     {
         try {
             DB::beginTransaction();
@@ -46,6 +46,7 @@ class Payment
                 'order_id' => $order->id,
                 'amount' => $amounts['paying_amount'],
                 'token' => $token,
+                'ip' => $ip,
                 'gateway_name' => $gateway_name
             ]);
 
