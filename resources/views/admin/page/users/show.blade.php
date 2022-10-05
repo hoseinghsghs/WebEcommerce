@@ -155,7 +155,7 @@
                                             </td>
                                             <td>{{verta($comment->created_at)->format('Y/n/j')}}</td>
                                             <td class="text-center js-sweetalert">
-                                                <a onclick="loadbtn(event)" href="{{route('admin.comments.show',$comment->id)}}" class="btn btn-raised btn-info waves-effect">
+                                                <a onclick="loadbtn(event)" href="{{route('admin.comments.edit',$comment->id)}}" class="btn btn-raised btn-info waves-effect">
                                                     <i class="zmdi zmdi-eye"></i>
                                                 </a>
                                             </td>

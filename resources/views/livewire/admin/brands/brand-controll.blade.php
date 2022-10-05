@@ -14,7 +14,9 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>عکس</th>
                                     <th>نام</th>
+                                    <th>ترتیب</th>
                                     <th>وضعیت</th>
                                     <th class="text-center">عملیات</th>
                                 </tr>
@@ -23,13 +25,14 @@
                                 @foreach ($brands as $key => $brand)
                                 <tr wire:key="brand-field-{{ $brand->id }}">
                                     <td scope="row">{{$key+1}}</td>
-                                    @if(Storage::exists('brand/'.$brand->image))
+                                    @if(Storage::exists('brands/'.$brand->image))
                                     <td>
-                                        <img src="{{asset('storage/brand/'.$brand->image)}}" alt="{{$brand->name}}"
-                                            width="120" class="img-fluid rounded" style="min-height: 3rem;">
+                                        <img src="{{asset('storage/brands/'.$brand->image)}}" alt="{{$brand->name}}"
+                                            width="48" class="img-fluid rounded" style="min-height: 3rem;">
                                     </td>
                                     @endif
                                     <td>{{$brand->name}}</td>
+                                    <td>{{$brand->index}}</td>
                                     <td>
                                         <div class="row clearfix">
                                             <div class="col-6">

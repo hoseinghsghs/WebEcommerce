@@ -24,11 +24,13 @@
                                 <span class="spinner-border spinner-border-sm text-light" wire:loading
                                     wire:target="addAttribute"></span>
                             </button>
+                            @if ($is_edit)
                             <button class="btn btn-raised btn-info waves-effect" wire:loading.attr="disabled"
                                 wire:click="ref">صرف نظر
                                 <span class="spinner-border spinner-border-sm text-light" wire:loading
                                     wire:target="ref"></span>
                             </button>
+                            @endif
                         </div>
                     </div>
                 </div>
