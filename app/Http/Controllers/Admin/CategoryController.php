@@ -209,10 +209,7 @@ class CategoryController extends Controller
 
     public function getCategoryAttributes(Category $category)
     {
-
-
         $attrubtes = $category->attributes()->wherePivot('is_variation', 0)->get();
-
         $variation = $category->attributes()->wherePivot('is_variation', 1)->first();
 
         return ['attrubtes' => $attrubtes, 'variation' => $variation];
