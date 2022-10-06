@@ -38,7 +38,7 @@ class Pay extends Payment
             }catch (\Throwable $th) {}
             try {
                 $event= Event::create([
-                    'title' => "مشکل در ورودی اطلاعات" . "آدرس ip" . " " . $ip . " " . "درگاه پرداخت : " . " ". "پی پل",
+                    'title' => "مشکل در ورودی اطلاعات" . " " . "آدرس ip" . " " . $ip . " " . "درگاه پرداخت : " . " ". "پی پل",
                     'body' => 'شماره تلفن' . " " . auth()->user()->cellphone ." ". 'آیدی کاربر' ." ".auth()->id() . " " . "کد خطا" . $result->errorMessage . $result->errorCode ,
                     'user_id' => auth()->id(),
                     'eventable_id' => auth()->id(),

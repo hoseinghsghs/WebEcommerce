@@ -56,7 +56,7 @@ class Zarinpal extends Payment
                 }catch (\Throwable $th) {}
                 try {
                     $event= Event::create([
-                        'title' => "مشکل در ورودی اطلاعات" . "آدرس ip" . " " . $ip. " " . "درگاه پرداخت : " . " ". "زرین پال",
+                        'title' => "مشکل در ورودی اطلاعات" . " " . "آدرس ip" . " " . $ip. " " . "درگاه پرداخت : " . " ". "زرین پال",
                         'body' => 'شماره تلفن' . " " . auth()->user()->cellphone ." ". 'آیدی کاربر' ." ".auth()->id() . " " . "کد خطا" . $result["Status"],
                         'user_id' => auth()->id(),
                         'eventable_id' => auth()->id(),

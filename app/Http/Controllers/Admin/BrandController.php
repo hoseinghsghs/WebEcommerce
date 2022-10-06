@@ -44,7 +44,6 @@ class BrandController extends Controller
             [
                 'name' => 'unique:brands',
                 'index' => 'unique:brands',
-                'link' => 'required',
             ]
         );
 
@@ -64,7 +63,6 @@ class BrandController extends Controller
         Brand::create([
             'name' => $request->name,
             'index' => $request->index,
-            'link' => $request->link,
             'image' => $image_name,
             'is_active' => $request->isactive
         ]);
@@ -106,7 +104,6 @@ class BrandController extends Controller
             [
                 'name' => 'required',
                 'index' => 'required',
-                'link' => 'required',
             ]
         );
         
@@ -129,7 +126,6 @@ class BrandController extends Controller
         $brand->update([
             'name' => $request->name,
             'index' => $request->index,
-            'link' => $request->link,
             'image' => $image_name,
             'is_active' => $request->isactive
         ]);

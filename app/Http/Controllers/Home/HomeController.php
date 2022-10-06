@@ -45,7 +45,7 @@ class HomeController extends Controller
         $headers =                          Banner::active()->where('type', 'هدر')->get()->sortBy('priority')->take(4);
         $centers =                          Banner::active()->where('type', 'وسط')->get()->sortBy('priority')->take(2);
 
-        $Products_auction_today =           Product::active()->where('position', 'تخفیف روزانه')->get()->take(15);
+        // $Products_auction_today =           Product::active()->where('position', 'تخفیف روزانه')->get()->take(15);
         $Products_our_suggestion =          Product::active()->where('position', 'پیشنهاد ما')->get()->take(15);
         $Products_special =                 Product::active()->where('position', 'فروش ویژه')->get()->take(15);
 
@@ -57,7 +57,6 @@ class HomeController extends Controller
                 'categories',
                 'sliders',
                 'services',
-                'Products_auction_today',
                 'Products_our_suggestion',
                 'Products_our_suggestion_units',
                 'Products_special',

@@ -70,19 +70,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="row clearfix mt-3">
-                                    <div class="col-lg-12 col-md-12">
-                                        <label class="form-label">لینک *</label>
-                                        <div class="form-group">
-                                            <input type="text" name="link" class="form-control" maxlength="50"
-                                                value="{{ $brand->link}}" required>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-
                                 <div class="form-group">
                                     <label class="form-label">تصویر</label>
                                     <div class="col-lg-12 px-0">
