@@ -61,14 +61,23 @@ class Payment
             DB::commit();
         } catch (\Exception $ex) {
             DB::rollBack();
-            return ['error' => $ex->getMessage()];
+            try {
+                Log::info("مشکل ذخیره داده در دیتا بیس" , [
+                    'user_id' => auth()->id(),
+                    'error' => $ex->getMessage()
+                ]);
+            } catch (\Throwable $th) {
+                Log::info("مشکل ذخیره داده در دیتا بیس" , [
+                    'error' => $th->getMessage()
+                ]);
+            }
+
+            return ['error' => 'مشکل ارتباط با سرور سایت'];
         }
 
         try {
             broadcast(new NotificationMessage($event))->toOthers();
-           
         } catch (\Throwable $th) {
-            
         }
         try {
             Log::info("سفارش جدید ثیت شد" , [
@@ -119,6 +128,7 @@ class Payment
     }
     public function updateOrderErorr($token,$result)
     {
+        
         $transaction = Transaction::where('token', $token)->firstOrFail();
 
         $transaction->update([

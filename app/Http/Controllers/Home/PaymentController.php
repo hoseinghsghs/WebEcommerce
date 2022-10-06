@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
+use App\Models\Event;
 use App\Models\ProductVariation;
 use App\Models\User;
 use App\Models\UserAddress;
@@ -12,6 +13,7 @@ use App\PaymentGateway\Zarinpal;
 use App\PaymentGateway\Pay;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class PaymentController extends Controller
@@ -143,6 +145,21 @@ public function paymentVerify(Request $request, $gatewayName)
             } else {
                 alert()->success('خرید با موفقیت انجام گرفت', 'با تشکر');
                 try {
+                 Event::create([
+                    'title' => 'پرداخت نهایی انجام گرفت',
+                    'body' =>  'آیدی کاربر' ." ".auth()->id() ." ". "پی پل",
+                    'user_id' => auth()->id(),
+                    'eventable_id' => auth()->id(),
+                    'eventable_type' => User::class,
+                 ]);
+                 Log::alert("پرداخت نهایی انجام گرفت" , [
+                    'آیدی کاربر' => auth()->id(),
+                    'درگاه' =>'پی پل',
+
+                 ]);
+                 }catch (\Throwable $th) {
+                }
+                try {
                     return redirect()->route('home.user_profile.orders',['order' => Session::pull('orderId')]);
                 } catch (\Throwable $th) {
                     return redirect()->route('home.user_profile.ordersList');
@@ -167,6 +184,20 @@ public function paymentVerify(Request $request, $gatewayName)
             alert()->error($zarinpalGatewayResult['error'])->persistent('حله');
             return redirect()->route('home.user_profile.orders',['order' => Session::pull('orderId')]);
         } else {
+            try {
+                Event::create([
+                   'title' => 'پرداخت نهایی انجام گرفت',
+                   'body' =>  'آیدی کاربر' ." ".auth()->id() ." " . 'زرین پال' ,
+                   'user_id' => auth()->id(),
+                   'eventable_id' => auth()->id(),
+                   'eventable_type' => User::class,
+                ]);
+                Log::alert("پرداخت نهایی انجام گرفت" , [
+                   'آیدی کاربر' => auth()->id(),
+                   'درگاه' =>'زرین پال',
+                ]);
+                }catch (\Throwable $th) {
+               }
             alert()->success('خرید با موفقیت انجام گرفت', 'با تشکر');
             return redirect()->route('home.user_profile.orders',['order' => Session::pull('orderId')]);
         }

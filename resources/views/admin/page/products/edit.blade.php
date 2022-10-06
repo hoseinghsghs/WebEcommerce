@@ -78,8 +78,6 @@
                                         <select id="positionSelect" name="position" data-placeholder="انتخاب محل"
                                             class="form-control ms select2">
                                             <option></option>
-                                            <option {{$product->position == 'تخفیف روزانه' ? 'selected' : ''}}>تخفیف
-                                                روزانه</option>
                                             <option {{$product->position == 'فروش ویژه' ? 'selected' : ''}}>فروش
                                                 ویژه</option>
                                             <option {{$product->position == 'پیشنهاد ما' ? 'selected' : ''}}>پیشنهاد
@@ -91,8 +89,6 @@
                                         <span class="text-danger m-0">{{$message}}</span>
                                         @enderror
                                     </div>
-
-
                                     <div class="form-group col-md-4">
                                         <label for="brand_id">برند</label>
                                         <select id="brandSelect" name="brand_id" data-placeholder="انتخاب برند" required

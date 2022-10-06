@@ -78,7 +78,6 @@
                                         <select id="positionSelect" name="position" data-placeholder="انتخاب محل"
                                             class="form-control ms select2">
                                             <option></option>
-                                            <option>تخفیف روزانه</option>
                                             <option>فروش ویژه</option>
                                             <option>پیشنهاد ما</option>
                                             <option>تک محصول</option>

@@ -2,6 +2,10 @@
 
 namespace App\PaymentGateway;
 
+use App\Models\Event;
+use App\Models\User;
+use Illuminate\Support\Facades\Log;
+
 class Zarinpal extends Payment
 {
     public function send($amounts, $description, $addressId ,$ip)
@@ -42,8 +46,27 @@ class Zarinpal extends Payment
 
                 return ['success' => 'https://sandbox.zarinpal.com/pg/StartPay/' . $result["Authority"] , 'orderId' => $createOrder['orderId']];
             } else {
+                try {
+                    Log::info("مشکل در ورودی اطلاعات" , [
+                        'user_id' => auth()->id(),
+                        'موبایل' => auth()->user()->cellphone,
+                        'کد ارور' => $result["Status"]
+                    ]);
 
-                return ['error' => 'ERR: ' . $result["Status"] , ];
+                }catch (\Throwable $th) {}
+                try {
+                    $event= Event::create([
+                        'title' => "مشکل در ورودی اطلاعات" . " " . "آدرس ip" . " " . $ip. " " . "درگاه پرداخت : " . " ". "زرین پال",
+                        'body' => 'شماره تلفن' . " " . auth()->user()->cellphone ." ". 'آیدی کاربر' ." ".auth()->id() . " " . "کد خطا" . $result["Status"],
+                        'user_id' => auth()->id(),
+                        'eventable_id' => auth()->id(),
+                        'eventable_type' => User::class,
+                    ]);
+                    
+                }catch (\Throwable $th) {}
+
+                return ['error' => 'مشکل در وردی اطلاعات کد ارور: ' . $result["Status"] , ];
+
             }
         }
     }
