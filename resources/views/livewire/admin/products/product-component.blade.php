@@ -85,7 +85,6 @@
                                         <a href="{{route('admin.products.show',['product' => $product->id ])}}">
                                             {{verta($product->created_at)->format('H:i Y/n/j')}}
                                         </a>
-
                                     </td>
                                     @if ($product->is_active==0)
                                     @php

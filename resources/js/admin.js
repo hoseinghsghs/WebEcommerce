@@ -26,6 +26,8 @@ require("../assets/admin/plugins/jquery-steps/jquery.steps");
 require("../assets/admin/plugins/light-gallery/js/lightgallery-all.min.js");
 require("../assets/admin/plugins/select2/select2.min.js");
 require("../assets/admin/plugins/nestable/nestable-rtl");
+// require("../assets/admin/js/jquery-ui/ui/sortable");
+require("../assets/admin/js/jquery.mjs.nestedSortable.js");
 
 require("../assets/admin/plugins/bootstrap-notify/bootstrap-notify.js");
 require("../assets/admin/bundles/mainscripts.bundle");

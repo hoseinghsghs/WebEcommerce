@@ -34,7 +34,7 @@
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="card">
-                        {{$products->links('vendor.pagination.bootstrap-4')}}
+                        {{$products->onEachSide(1)->links('vendor.pagination.bootstrap-4')}}
                     </div>
                 </div>
             </div>

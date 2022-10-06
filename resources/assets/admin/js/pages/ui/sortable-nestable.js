@@ -1,5 +1,6 @@
 $(function () {
     $(".dd").nestable({
-        maxDepth: 2,
+        maxDepth: 1,
+        group: 1,
     });
 });

@@ -77,6 +77,27 @@
                             </div>
                             @endif
                         </div>
+
+                        <ol class="sortable">
+                            <li>
+                                <div>Some content</div>
+                            </li>
+                            <li>
+                                <div>Some content</div>
+                                <ol>
+                                    <li>
+                                        <div>Some sub-item content</div>
+                                    </li>
+                                    <li>
+                                        <div>Some sub-item content</div>
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                <div>Some content</div>
+                            </li>
+                        </ol>
+
                     </div>
                 </div>
             </div>
@@ -114,6 +135,15 @@
             .always(function() {
                 $this.parents("div.body").find('#loading').remove();
             });
+    });
+    $(document).ready(function() {
+
+        $('.sortable').nestedSortable({
+            handle: 'div',
+            items: 'li',
+            toleranceElement: '> div'
+        });
+
     });
 </script>
 @endpush
