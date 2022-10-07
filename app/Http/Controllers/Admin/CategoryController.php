@@ -153,7 +153,6 @@ class CategoryController extends Controller
                 $query->where('parent_id', $request->input('parent_id'));
             })],
             'slug' => ['required', Rule::unique('categories')->ignore($category)],
-            'parent_id' => 'required',
             'is_active' => 'nullable',
             'is_show' => 'nullable',
             'description' => 'nullable|string',

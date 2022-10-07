@@ -64,9 +64,10 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>عکس</th>
                                     <th>نام</th>
-                                    <th> تاریخ و زمان ثبت محصول</th>
-                                    <th>نام دسته بندی</th>
+                                    <th>دسته بندی</th>
+                                    <th> تاریخ و زمان ثبت </th>
                                     <th>وضعیت</th>
                                     <th>بایگانی</th>
                                     <th class="text-center">عملیات</th>
@@ -76,17 +77,26 @@
                                 @foreach ($products as $key => $product)
                                 <tr wire:key="name_{{ $product->id }}">
                                     <td scope="row">{{$key+1}}</td>
+                                    <td>
+                                        <a data-lightbox="brand-{{$loop->index}}" data-title="{{$product->name}}"
+                                            href="{{asset('storage/primary_image/'.$product->primary_image)}}">
+                                            <img src="{{asset('storage/primary_image/'.$product->primary_image)}}"
+                                                alt="{{$product->name}}" width="48" class="img-fluid rounded"
+                                                style="min-height: 3rem;">
+                                        </a>
+                                    </td>
                                     <td><a
                                             href="{{route('admin.products.show',['product' => $product->id ])}}">{{$product->name}}</a>
+                                    </td>
+
+                                    <td><a
+                                            href="{{route('admin.categories.edit',['category' => $product->category->id ])}}">{{$product->category->name}}</a>
                                     </td>
                                     <td>
                                         <a href="{{route('admin.products.show',['product' => $product->id ])}}">
                                             {{verta($product->created_at)}}
                                         </a>
 
-                                    </td>
-                                    <td><a
-                                            href="{{route('admin.categories.edit',['category' => $product->category->id ])}}">{{$product->category->name}}</a>
                                     </td>
                                     @if ($product->is_active==0)
                                     @php
@@ -155,12 +165,6 @@
 
                                             </div>
                                         </div>
-                                        <!-- <button class="btn btn-raised btn-danger waves-effect"
-                                            wire:click="delproduct({{$product->id}})">
-                                            <i class="zmdi zmdi-delete"></i>
-                                            <span class="spinner-border spinner-border-sm text-light" wire:loading
-                                                wire:target="delproduct({{$product->id}})"></span>
-                                        </button> -->
                                     </td>
                                 </tr>
                                 @endforeach

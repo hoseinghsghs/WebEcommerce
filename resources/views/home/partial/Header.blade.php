@@ -14,13 +14,28 @@
                                     @endisset
                                 </div>
                             </div>
-                            <div class="col-lg-8 pr d-none d-lg-block">
+                            <div class="col-lg-9 pr d-none d-lg-block">
                                 <div class="header-search row text-right">
                                     @livewire('home.sections.search-box')
                                 </div>
                             </div>
+
                         </div>
                     </div>
+                    @guest
+                    @if (!request()->routeIs('login') && !request()->routeIs('register'))
+                    <div class="col-lg-3 pr">
+                        <div class="account-box">
+                            <div class="nav-account d-block pl">
+                                <a href="{{route('login')}}" class="btn btn-secondary btn-sm " id="login-style"><i
+                                        class="fa fa-sign-in" aria-hidden="true"></i> ثبت
+                                    نام | ورود
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+                    @endguest
                     <div class="col-lg-3 col-md-0 col-xs-12 pl">
                         <div class="header-left">
                             <div class="header-account text-left">
@@ -35,13 +50,16 @@
                                             <div class="dropdown-menu">
                                                 <ul class="account-uls mb-0">
                                                     <li class="account-item">
-                                                        <a href="{{auth()->user()->hasRole('super-admin') ? route('admin.home'):'#'}}" class="account-link">{{Auth::user()->name ?? auth()->user()->cellphone}}</a>
+                                                        <a href="{{auth()->user()->hasRole('super-admin') ? route('admin.home'):'#'}}"
+                                                            class="account-link">{{Auth::user()->name ?? auth()->user()->cellphone}}</a>
                                                     </li>
                                                     <li class="account-item">
-                                                        <a href="{{route('home.user_profile')}}" class="account-link">پنل کاربری</a>
+                                                        <a href="{{route('home.user_profile')}}"
+                                                            class="account-link">پنل کاربری</a>
                                                     </li>
                                                     <li class="account-item">
-                                                        <a href="{{route('logout')}}" class="account-link" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">خروج</a>
+                                                        <a href="{{route('logout')}}" class="account-link"
+                                                            onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">خروج</a>
                                                     </li>
                                                     <form id="frm-logout" action="{{ route('logout') }}" method="POST">
                                                         {{ csrf_field() }}
@@ -49,17 +67,7 @@
                                                 </ul>
                                             </div>
                                             @endauth
-                                            @guest
-                                            @if (!request()->routeIs('login') && !request()->routeIs('register'))
-                                            <div class="account-box">
-                                                <div class="nav-account d-block pl">
-                                                    <a href="{{route('login')}}" class="btn btn-secondary btn-sm " id="login-style"><i class="fa fa-sign-in" aria-hidden="true"></i> ثبت
-                                                        نام | ورود
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            @endif
-                                            @endguest
+
                                         </div>
                                     </div>
                                 </div>
@@ -72,14 +80,16 @@
 
                                 @foreach ($categories as $category)
                                 <li class="menu-item nav-overlay">
-                                    <a href="{{route('home.products.search',['slug'=>$category->slug])}}" class="current-link-menu">
+                                    <a href="{{route('home.products.search',['slug'=>$category->slug])}}"
+                                        class="current-link-menu">
                                         {{$category->name}}
                                     </a>
                                     @if(count($category->children))
                                     <ul class="sub-menu is-mega-menu-small">
                                         @foreach ($category->children as $ChildrenCategory )
                                         <li class="menu-mega-item menu-item-type-mega-menu item-small">
-                                            <a href="{{route('home.products.index',['slug'=>$ChildrenCategory->slug])}}" class="mega-menu-link">
+                                            <a href="{{route('home.products.index',['slug'=>$ChildrenCategory->slug])}}"
+                                                class="mega-menu-link">
                                                 {{$ChildrenCategory->name}}
                                             </a>
                                         </li>
@@ -107,12 +117,14 @@
                                                 <i class="mdi mdi-shopping"></i>
                                             </span>
 
-                                            <span class="count-cart" id="count-cart">{{Cart::getContent()->count()}}</span>
+                                            <span class="count-cart"
+                                                id="count-cart">{{Cart::getContent()->count()}}</span>
 
 
                                         </a>
 
-                                        <div class="widget-shopping-cart" id="widget-shopping-cart" style={{\Cart::isEmpty() ? 'display:none' : ''}}>
+                                        <div class="widget-shopping-cart" id="widget-shopping-cart"
+                                            style={{\Cart::isEmpty() ? 'display:none' : ''}}>
                                             <div class="widget-shopping-cart-content">
 
                                                 <div class="wrapper">
@@ -123,14 +135,19 @@
                                                                 <li class="mini-cart-item" id="{{$item->id}}">
                                                                     <div class="mini-cart-item-content">
 
-                                                                        <a href="{{route('home.products.show',['product'=>$item->associatedModel->slug])}}" class="mini-cart-item-image d-block">
-                                                                            <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$item->associatedModel->primary_image)}}">
+                                                                        <a href="{{route('home.products.show',['product'=>$item->associatedModel->slug])}}"
+                                                                            class="mini-cart-item-image d-block">
+                                                                            <img
+                                                                                src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$item->associatedModel->primary_image)}}">
                                                                         </a>
                                                                         <span class="product-name-card">{{$item->name}}
                                                                             {{$item->attributes->value}}</span>
 
-                                                                        <a onclick="return delete_product_cart('{{$item->id}}')" class="mr-3" style="position: absolute;left: 3px;">
-                                                                            <i class="mdi mdi-close" id="del-pro-cart-{{$item->id}}"></i>
+                                                                        <a onclick="return delete_product_cart('{{$item->id}}')"
+                                                                            class="mr-3"
+                                                                            style="position: absolute;left: 3px;">
+                                                                            <i class="mdi mdi-close"
+                                                                                id="del-pro-cart-{{$item->id}}"></i>
                                                                         </a>
 
                                                                         <div class="variation">
@@ -167,7 +184,8 @@
                                                 <div class="mini-card-button">
                                                     <a href="{{route('home.cart.index')}}" class="view-card">مشاهده سبد
                                                         خرید</a>
-                                                    <a href="{{route('home.orders.checkout')}}" class="card-checkout">تسویه حساب</a>
+                                                    <a href="{{route('home.orders.checkout')}}"
+                                                        class="card-checkout">تسویه حساب</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -214,12 +232,16 @@
                     <ul class="nav-categories ul-base mt-4">
                         @foreach ($categories as $category)
                         <li>
-                            <a href="#" class="collapsed" type="button" data-toggle="collapse" data-target="#collapse-{{$category->id}}" aria-expanded="false" aria-controls="collapse-{{$category->id}}"><i class="mdi mdi-chevron-down"></i>{{$category->name}}</a>
+                            <a href="#" class="collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapse-{{$category->id}}" aria-expanded="false"
+                                aria-controls="collapse-{{$category->id}}"><i
+                                    class="mdi mdi-chevron-down"></i>{{$category->name}}</a>
                             <div id="collapse-{{$category->id}}" class="collapse" aria-labelledby="headingOne">
                                 @if(count($category->children))
                                 <ul>
                                     @foreach ($category->children as $ChildrenCategory )
-                                    <li><a href="{{route('home.products.index',['slug'=>$ChildrenCategory->slug])}}" class="category-level-3">{{$ChildrenCategory->name}}</a></li>
+                                    <li><a href="{{route('home.products.index',['slug'=>$ChildrenCategory->slug])}}"
+                                            class="category-level-3">{{$ChildrenCategory->name}}</a></li>
                                     @endforeach
                                 </ul>
                                 @endif
