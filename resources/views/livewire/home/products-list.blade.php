@@ -205,7 +205,7 @@
                 </div>
                 <div class="col-lg-9 col-md-9 col-xs-12 pl">
                     <div class="shop-archive-content mt-3 d-block">
-                        <button class="btn mb-3 products-filter-btn d-md-none" wire:click="$set('show_sidebar',true)">
+                        <button class="btn mb-3 products-filter-btn d-md-none" onclick="openSidebar(event)">
                             <i class="fas fa-filter"></i> فیلترها
                         </button>
                         <div class="archive-header d-flex flex-wrap align-items-center">
@@ -267,9 +267,11 @@
         </div>
     </div>
     <!-- mobile product filter sidebar -->
-    <div @class(["sidebar bg-light p-2","open"=>$show_sidebar])>
+    <div id="filter-sidebar" class="sidebar bg-light p-2">
         <div class="shop-archive-sidebar">
-            <div class="text-left"><span class="text-dark ml-2" wire:click="$set('show_sidebar',false)">X</span></div>
+            <div class="pl-2 pb-2">
+            <button class="sidebar-close mr-auto" onclick="closeSidebar(event)"><span aria-hidden="true">X</span></button>
+            </div>
             <div class="sidebar-archive mb-3">
                 <section class="widget-product-categories">
                     <header class="cat-header">
@@ -436,7 +438,7 @@
             </div>
         </div>
     </div>
-    <div wire:click="$set('show_sidebar',false)" @class(["filter-sidebar-overlay","d-none"=>!$show_sidebar])></div>
+    <div onclick="closeSidebar(event)" class="filter-sidebar-overlay d-none"></div>
     <!-- end mobile product filter sidebar -->
 </div>
 
@@ -495,6 +497,14 @@
             Livewire.emit('priceRangeUpdated', values)
             nonLinearStepSlider.noUiSlider.set(values);
         });
+    }
+    function openSidebar(){
+        $('#filter-sidebar').addClass('open')
+        $('.filter-sidebar-overlay').removeClass('d-none');
+    }
+    function closeSidebar(event){
+        $('#filter-sidebar').removeClass('open')
+        $('.filter-sidebar-overlay').addClass('d-none');
     }
 </script>
 @endpush
