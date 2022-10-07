@@ -79,16 +79,12 @@
                                 <tr wire:key="name_{{ $product->id }}">
                                     <td scope="row">{{$key+1}}</td>
                                     <td>
-<<<<<<< Updated upstream
-                                        <a data-lightbox="brand-{{$loop->index}}" data-title="{{$product->name}}" href="{{asset('storage/primary_image/'.$product->primary_image)}}">
-                                            <img src="{{asset('storage/primary_image/'.$product->primary_image)}}" alt="{{$product->name}}" width="48" class="img-fluid rounded" style="min-height: 3rem;">
+                                        <a data-lightbox="brand-{{$loop->index}}" data-title="{{$product->name}}"
+                                            href="{{asset('storage/primary_image/'.$product->primary_image)}}">
+                                            <img src="{{asset('storage/primary_image/'.$product->primary_image)}}"
+                                                alt="{{$product->name}}" width="48" class="img-fluid rounded"
+                                                style="min-height: 3rem;">
                                         </a>
-=======
-
-                                        <img src="{{asset('storage/primary_image/'.$product->primary_image)}}"
-                                            alt="{{$product->name}}" width="48" class="mx-auto" id="zoomA"
-                                            style="min-height: 3rem;">
->>>>>>> Stashed changes
                                     </td>
                                     <td><a
                                             href="{{route('admin.products.show',['product' => $product->id ])}}">{{$product->name}}</a>
@@ -179,29 +175,4 @@
             </div>
         </div>
     </div>
-<<<<<<< Updated upstream
 </div>
-=======
-</div>
-@push('styles')
-<style>
-#zoomA {
-    /* (A) OPTIONAL DIMENSIONS */
-    z-index: 3000;
-    width: 48px;
-
-
-    /* (B) ANIMATE ZOOM */
-    /* ease | ease-in | ease-out | linear */
-    transition: transform ease-in-out;
-}
-
-/* (C) ZOOM ON HOVER */
-#zoomA:hover {
-    transform: scale(3);
-
-}
-</style>
-
-@endpush
->>>>>>> Stashed changes

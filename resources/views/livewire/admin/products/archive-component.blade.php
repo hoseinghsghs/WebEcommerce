@@ -78,13 +78,12 @@
                                 <tr wire:key="name_{{ $product->id }}">
                                     <td scope="row">{{$key+1}}</td>
                                     <td>
-                                        <div id="static-thumbnails">
-                                            <a href="{{asset('storage/primary_image/'.$product->primary_image)}}">
-                                                <img src="{{asset('storage/primary_image/'.$product->primary_image)}}"
-                                                    alt="{{$product->name}}" width="48" class="img-fluid rounded"
-                                                    style="min-height: 3rem;">
-                                            </a>
-                                        </div>
+                                        <a data-lightbox="brand-{{$loop->index}}" data-title="{{$product->name}}"
+                                            href="{{asset('storage/primary_image/'.$product->primary_image)}}">
+                                            <img src="{{asset('storage/primary_image/'.$product->primary_image)}}"
+                                                alt="{{$product->name}}" width="48" class="img-fluid rounded"
+                                                style="min-height: 3rem;">
+                                        </a>
                                     </td>
                                     <td><a
                                             href="{{route('admin.products.show',['product' => $product->id ])}}">{{$product->name}}</a>
@@ -166,12 +165,6 @@
 
                                             </div>
                                         </div>
-                                        <!-- <button class="btn btn-raised btn-danger waves-effect"
-                                            wire:click="delproduct({{$product->id}})">
-                                            <i class="zmdi zmdi-delete"></i>
-                                            <span class="spinner-border spinner-border-sm text-light" wire:loading
-                                                wire:target="delproduct({{$product->id}})"></span>
-                                        </button> -->
                                     </td>
                                 </tr>
                                 @endforeach
