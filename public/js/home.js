@@ -537,7 +537,6 @@ $(document).ready(function (e) {
     e.preventDefault();
     var a = $(this);
     var ishome = a.attr("data-ishome");
-    console.log(ishome);
 
     if (ishome == 1) {
       producth = a.attr("data-product");

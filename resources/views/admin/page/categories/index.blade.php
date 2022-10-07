@@ -1,5 +1,17 @@
 @extends('admin.layout.MasterAdmin')
 @section('title','لیست دسته بندی ها')
+@push('styles')
+<style>
+    .ui-sortable-handle {
+        background-color: #f0f0f0;
+        padding: 0.5rem;
+        cursor: move;
+    }
+    .mjs-nestedSortable-hovering{
+         background-color: red;
+    }
+</style>
+@endpush
 @section('Content')
 <section class="content">
     <div class="body_scroll">
@@ -35,69 +47,40 @@
                             @if(count($categories)===0)
                             <p>هیچ رکوردی وجود ندارد</p>
                             @else
-                            <div class="dd nestable-with-handle m-3">
-                                <ol class="dd-list">
-                                    @foreach ($categories->where('parent_id',0)->sortBy('order') as $category )
-                                    <li class="dd-item dd3-item" data-id="{{$category->id}}">
-                                        <div class="dd-handle dd3-handle"></div>
-                                        <div class="dd3-content">
-                                            <strong>{{$category->name}}</strong>
-                                            @if ($category->is_active)
-                                            <span class="badge badge-success">فعال</span>
-                                            @else
-                                            <span class="badge badge-warning">غیرفعال</span>
-                                            @endif
-                                            <a href="{{route('admin.categories.edit',$category->id)}}" class="btn btn-raised btn-info waves-effect m-0 btn-sm float-left" onclick="loadbtn(event)">
-                                                <i class="zmdi zmdi-edit"></i>
-                                            </a>
-                                        </div>
-                                        @if($categories->where('parent_id',$category->id))
-                                        <ol class="dd-list">
-                                            @foreach ($categories->where('parent_id',$category->id)->sortBy('order') as $category )
-                                            <li class="dd-item dd3-item" data-id="{{$category->id}}">
-                                                <div class="dd-handle dd3-handle"></div>
-                                                <div class="dd3-content">
-                                                    {{$category->name}}
-                                                    @if ($category->is_active)
-                                                    <span class="badge badge-success">فعال</span>
-                                                    @else
-                                                    <span class="badge badge-warning">غیرفعال</span>
-                                                    @endif
-                                                    <a href="{{route('admin.categories.edit',$category->id)}}" class="btn btn-raised btn-info waves-effect m-0 btn-sm float-left" onclick="loadbtn(event)">
-                                                        <i class="zmdi zmdi-edit"></i>
-                                                    </a>
-                                                </div>
-                                            </li>
-                                            @endforeach
-                                        </ol>
+                            <ol class="sortable">
+                                @foreach ($categories->where('parent_id',0)->sortBy('order') as $category )
+                                <li class="my-2">
+                                    <div><i class="zmdi zmdi-hc-fw"></i> <strong>{{$category->name}}</strong> @if ($category->is_active)
+                                        <span class="badge badge-success">فعال</span>
+                                        @else
+                                        <span class="badge badge-warning">غیرفعال</span>
                                         @endif
-                                    </li>
-                                    @endforeach
-                                </ol>
-                            </div>
+                                        <a href="{{route('admin.categories.edit',$category->id)}}" class="btn btn-raised btn-info waves-effect m-0 btn-sm float-left" onclick="loadbtn(event)">
+                                            <i class="zmdi zmdi-edit"></i>
+                                        </a>
+                                    </div>
+                                    @if($categories->where('parent_id',$category->id))
+                                    <ol>
+                                        @foreach ($categories->where('parent_id',$category->id)->sortBy('order') as $category )
+                                        <li class="my-2">
+                                            <div><i class="zmdi zmdi-hc-fw"></i> <strong>{{$category->name}}</strong> @if ($category->is_active)
+                                                <span class="badge badge-success">فعال</span>
+                                                @else
+                                                <span class="badge badge-warning">غیرفعال</span>
+                                                @endif
+                                                <a href="{{route('admin.categories.edit',$category->id)}}" class="btn btn-raised btn-info waves-effect m-0 btn-sm float-left" onclick="loadbtn(event)">
+                                                    <i class="zmdi zmdi-edit"></i>
+                                                </a>
+                                            </div>
+                                        </li>
+                                        @endforeach
+                                    </ol>
+                                    @endif
+                                </li>
+                                @endforeach
+                            </ol>
                             @endif
                         </div>
-
-                        <ol class="sortable">
-                            <li>
-                                <div>Some content</div>
-                            </li>
-                            <li>
-                                <div>Some content</div>
-                                <ol>
-                                    <li>
-                                        <div>Some sub-item content</div>
-                                    </li>
-                                    <li>
-                                        <div>Some sub-item content</div>
-                                    </li>
-                                </ol>
-                            </li>
-                            <li>
-                                <div>Some content</div>
-                            </li>
-                        </ol>
-
                     </div>
                 </div>
             </div>
@@ -141,7 +124,9 @@
         $('.sortable').nestedSortable({
             handle: 'div',
             items: 'li',
-            toleranceElement: '> div'
+            toleranceElement: '> div',
+            disableParentChange: true,
+            rtl: true,
         });
 
     });

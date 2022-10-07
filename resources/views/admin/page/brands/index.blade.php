@@ -43,13 +43,4 @@
     </div>
 </section>
 @endsection
-@push('scripts')
-<script>
-function test(event) {
-    event.target.lightGallery({
-        thumbnail: true,
-        selector: 'a'
-    });
-}
-</script>
-@endpush
+

@@ -75,7 +75,10 @@
                                 @foreach ($products as $key => $product)
                                 <tr wire:key="name_{{ $product->id }}">
                                     <td scope="row">{{$key+1}}</td>
-                                    <td><img src="{{asset('storage/primary_image/'.$product->primary_image)}}" alt="{{$product->name}}" width="48" class="img-fluid rounded" style="min-height: 3rem;">
+                                    <td>
+                                        <a data-lightbox="brand-{{$loop->index}}" data-title="{{$product->name}}" href="{{asset('storage/primary_image/'.$product->primary_image)}}">
+                                            <img src="{{asset('storage/primary_image/'.$product->primary_image)}}" alt="{{$product->name}}" width="48" class="img-fluid rounded" style="min-height: 3rem;">
+                                        </a>
                                     </td>
                                     <td><a href="{{route('admin.products.show',['product' => $product->id ])}}">{{$product->name}}</a>
                                     </td>
