@@ -6,9 +6,7 @@
         background-color: #f0f0f0;
         padding: 0.5rem;
         cursor: move;
-    }
-    .mjs-nestedSortable-hovering{
-         background-color: red;
+        border-radius: 10px;
     }
 </style>
 @endpush
@@ -47,9 +45,9 @@
                             @if(count($categories)===0)
                             <p>هیچ رکوردی وجود ندارد</p>
                             @else
-                            <ol class="sortable">
+                            <ol class="sortable col-md-8 mx-auto">
                                 @foreach ($categories->where('parent_id',0)->sortBy('order') as $category )
-                                <li class="my-2">
+                                <li class="my-2" id="list_{{$category->id}}">
                                     <div><i class="zmdi zmdi-hc-fw"></i> <strong>{{$category->name}}</strong> @if ($category->is_active)
                                         <span class="badge badge-success">فعال</span>
                                         @else
@@ -62,7 +60,7 @@
                                     @if($categories->where('parent_id',$category->id))
                                     <ol>
                                         @foreach ($categories->where('parent_id',$category->id)->sortBy('order') as $category )
-                                        <li class="my-2">
+                                        <li class="my-2" id="list_{{$category->id}}">
                                             <div><i class="zmdi zmdi-hc-fw"></i> <strong>{{$category->name}}</strong> @if ($category->is_active)
                                                 <span class="badge badge-success">فعال</span>
                                                 @else
@@ -91,44 +89,43 @@
 @endsection
 @push('scripts')
 <script>
-    $(".dd").on("change", function() {
-        var $this = $(this);
-        var serializedData = window.JSON.stringify(
-            $($this).nestable("serialize")
-        );
-        $this.parents("div.body").prepend(`<div class="mb-3 text-center" id="loading"><div class="spinner-border text-info" role="status">
-  <span class="sr-only">Loading...</span>
-</div><span class="text-muted"> درحال بارگذاری...</span></div>`);
-        $.post(
-                "{{route('admin.category.order')}}", {
-                    _token: "{{csrf_token()}}",
-                    data: serializedData,
-                },
-                function(response, status) {},
-                "json"
-            )
-            .fail(function() {
-                swal({
-                    title: 'خطا',
-                    text: "خطا در برقراری ارتباط!",
-                    icon: "warning",
-                    confirmButtonText: "تایید",
-                })
-            })
-            .always(function() {
-                $this.parents("div.body").find('#loading').remove();
-            });
-    });
     $(document).ready(function() {
-
         $('.sortable').nestedSortable({
             handle: 'div',
             items: 'li',
             toleranceElement: '> div',
             disableParentChange: true,
             rtl: true,
+            relocate: function() {
+                var serializedData = window.JSON.stringify(
+                    $('.sortable').nestedSortable('toArray', {
+                        startDepthCount: 0
+                    })
+                );
+                $(this).parents("div.body").append(`<div class="mb-3 text-center" id="order-loading"><div class="spinner-border text-info" role="status">
+                                                   <span class="sr-only">Loading...</span>
+                                                   </div><span class="text-muted"> درحال بارگذاری...</span></div>`);
+                $.post(
+                        "{{route('admin.category.order')}}", {
+                            _token: "{{csrf_token()}}",
+                            data: serializedData,
+                        },
+                        function(response, status) {},
+                        "json"
+                    )
+                    .fail(function() {
+                        swal({
+                            title: 'خطا',
+                            text: "خطا در برقراری ارتباط!",
+                            icon: "warning",
+                            confirmButtonText: "تایید",
+                        })
+                    })
+                    .always(function() {
+                        $('#order-loading').remove();
+                    });
+            }
         });
-
     });
-</script>
+   </script>
 @endpush

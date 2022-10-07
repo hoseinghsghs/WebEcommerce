@@ -71,12 +71,12 @@ class CategoryController extends Controller
             'attribute_is_filter_ids.*' => 'exists:attributes,id',
             'attribute_is_main_ids' => 'nullable|array',
             'attribute_is_main_ids.*' => 'exists:attributes,id',
-            'variation_id' => ['required','exists:attributes,id',Rule::notIn($request->attribute_is_main_ids)],
+            'variation_id' => ['required', 'exists:attributes,id', Rule::notIn($request->attribute_is_main_ids)],
         ]);
 
-        $filtered = Arr::except($data, ['attribute_ids', 'variation_id','attribute_is_main_ids', 'attribute_is_filter_ids']);
-        if($request->missing('attribute_is_main_ids')){
-            $data['attribute_is_main_ids']=[];
+        $filtered = Arr::except($data, ['attribute_ids', 'variation_id', 'attribute_is_main_ids', 'attribute_is_filter_ids']);
+        if ($request->missing('attribute_is_main_ids')) {
+            $data['attribute_is_main_ids'] = [];
         }
 
         try {
@@ -88,7 +88,7 @@ class CategoryController extends Controller
                 $array[$attribute_id] = [
                     'is_filter' => in_array($attribute_id, $data['attribute_is_filter_ids']) ? 1 : 0,
                     'is_variation' => $attribute_id == $data['variation_id'] ? 1 : 0,
-                    'is_main'=>in_array($attribute_id,$data['attribute_is_main_ids'])
+                    'is_main' => in_array($attribute_id, $data['attribute_is_main_ids'])
                 ];
             }
             $category->attributes()->attach($array);
@@ -164,11 +164,12 @@ class CategoryController extends Controller
             'attribute_is_filter_ids.*' => 'exists:attributes,id',
             'attribute_is_main_ids' => 'nullable|array',
             'attribute_is_main_ids.*' => 'exists:attributes,id',
-            'variation_id' => ['required','exists:attributes,id',Rule::notIn($request->attribute_is_main_ids)],        ]);
+            'variation_id' => ['required', 'exists:attributes,id', Rule::notIn($request->attribute_is_main_ids)],
+        ]);
 
-        $filtered = Arr::except($data, ['attribute_ids', 'variation_id','attribute_is_main_ids', 'attribute_is_filter_ids']);
-        if($request->missing('attribute_is_main_ids')){
-            $data['attribute_is_main_ids']=[];
+        $filtered = Arr::except($data, ['attribute_ids', 'variation_id', 'attribute_is_main_ids', 'attribute_is_filter_ids']);
+        if ($request->missing('attribute_is_main_ids')) {
+            $data['attribute_is_main_ids'] = [];
         }
 
         try {
@@ -180,7 +181,7 @@ class CategoryController extends Controller
                 $array[$attribute_id] = [
                     'is_filter' => in_array($attribute_id, $data['attribute_is_filter_ids']) ? 1 : 0,
                     'is_variation' => $attribute_id == $data['variation_id'] ? 1 : 0,
-                    'is_main'=>in_array($attribute_id,$data['attribute_is_main_ids'])
+                    'is_main' => in_array($attribute_id, $data['attribute_is_main_ids'])
                 ];
             }
             $category->attributes()->sync($array);
@@ -220,18 +221,11 @@ class CategoryController extends Controller
         if ($request->wantsJson()) {
             $categories = Category::all();
             $categories_order = json_decode($request->data, 'true');
-
             foreach ($categories_order as $index => $item) {
-                $p_category = $categories->find($item['id']);
-                if ($p_category->parent_id != 0 || $p_category->order != $index) {
-                    $p_category->update(['parent_id' => 0, 'order' => $index]);
-                }
-                if (array_key_exists('children', $item)) {
-                    foreach ($item['children'] as $index2 => $item2) {
-                        $c_category = $categories->find($item2['id']);
-                        if ($c_category->parent_id != $item['id']  || $c_category->order != $index2) {
-                            $c_category->update(['parent_id' => $item['id'], 'order' => $index2]);
-                        }
+                if (array_key_exists('id', $item)) {
+                    $p_category = $categories->find($item['id']);
+                    if ($p_category && $p_category->order != $index) {
+                        $p_category->update(['order' => $index]);
                     }
                 }
             }
