@@ -14,12 +14,11 @@
                                     @endisset
                                 </div>
                             </div>
-                            <div class="col-lg-9 pr d-none d-lg-block">
+                            <div class="col-lg-9 pr d-none d-lg-block mt-1">
                                 <div class="header-search row text-right">
                                     @livewire('home.sections.search-box')
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     @guest
@@ -36,13 +35,14 @@
                     </div>
                     @endif
                     @endguest
+                    @auth
                     <div class="col-lg-3 col-md-0 col-xs-12 pl">
                         <div class="header-left">
                             <div class="header-account text-left">
                                 <div class="d-block">
                                     <div class="account-box">
                                         <div class="nav-account d-block pl">
-                                            @auth
+
                                             <span class="icon-account">
                                                 <img src="/assets/home/images/man.png" class="avator">
                                             </span>
@@ -66,38 +66,52 @@
                                                     </form>
                                                 </ul>
                                             </div>
-                                            @endauth
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    @endauth
                 </section>
                 <nav class="header-main-nav">
                     <div class="d-block">
                         <div class="align-items-center">
                             <ul class="menu-ul mega-menu-level-one">
-
-                                @foreach ($categories as $category)
-                                <li class="menu-item nav-overlay">
-                                    <a href="{{route('home.products.search',['slug'=>$category->slug])}}"
-                                        class="current-link-menu">
-                                        {{$category->name}}
+                                <li id="nav-menu-item" class="menu-item nav-overlay pl-3">
+                                    <a href="#" class="current-link-menu">
+                                        <i class="fa fa-bars"></i> دسته بندی
                                     </a>
-                                    @if(count($category->children))
-                                    <ul class="sub-menu is-mega-menu-small">
-                                        @foreach ($category->children as $ChildrenCategory )
-                                        <li class="menu-mega-item menu-item-type-mega-menu item-small">
-                                            <a href="{{route('home.products.index',['slug'=>$ChildrenCategory->slug])}}"
+                                    <ul class="sub-menu is-mega-menu mega-menu-level-two">
+                                        @foreach ($categories as $category)
+                                        <li class="menu-mega-item menu-item-type-mega-menu">
+                                            <a href="{{route('home.products.search',['slug'=>$category->slug])}}"
                                                 class="mega-menu-link">
-                                                {{$ChildrenCategory->name}}
+                                                {{$category->name}}
                                             </a>
+                                            @if(count($category->children))
+                                            <ul class="sub-menu mega-menu-level-three">
+                                                @foreach ($category->children as $ChildrenCategory )
+                                                <li class="menu-mega-item-three">
+                                                    <a
+                                                        href="{{route('home.products.index',['slug'=>$ChildrenCategory->slug])}}">
+                                                        {{$ChildrenCategory->name}}
+                                                    </a>
+                                                </li>
+                                                @endforeach
+                                            </ul>
+                                            @endif
                                         </li>
                                         @endforeach
+                                        @if ($menue_banner)
+                                        <li class="menu-mega-item menu-item-type-mega-menu pr-2">
+                                            <img src="{{url(env('BANNER_IMAGES_PATCH').$menue_banner->image)}}"
+                                                alt="{{$menue_banner->title}}">
+                                        </li>
+                                        @endif
+
                                     </ul>
-                                    @endif
                                 </li>
-                                @endforeach
                                 <li class="menu-item">
                                     <a href="{{route('home.posts.index')}}" class="current-link-menu">
                                         بلاگ
@@ -106,27 +120,21 @@
                                 <li class="menu-item">
                                     <a href="{{route('contact-us')}}" class="current-link-menu">تماس با ما</a>
                                 </li>
+
+
                                 @if (!request()->routeIs('home.cart.index'))
-
                                 <li class="divider-space-card d-block">
-
                                     <div class="header-cart-basket">
-
                                         <a href="{{route('home.cart.index')}}" class="cart-basket-box">
                                             <span class="icon-cart">
                                                 <i class="mdi mdi-shopping"></i>
                                             </span>
-
                                             <span class="count-cart"
                                                 id="count-cart">{{Cart::getContent()->count()}}</span>
-
-
                                         </a>
-
                                         <div class="widget-shopping-cart" id="widget-shopping-cart"
                                             style={{\Cart::isEmpty() ? 'display:none' : ''}}>
                                             <div class="widget-shopping-cart-content">
-
                                                 <div class="wrapper">
                                                     <div class="scrollbar" id="style-1">
                                                         <div class="force-overflow">
@@ -134,7 +142,6 @@
                                                                 @foreach (\Cart::getContent() as $item)
                                                                 <li class="mini-cart-item" id="{{$item->id}}">
                                                                     <div class="mini-cart-item-content">
-
                                                                         <a href="{{route('home.products.show',['product'=>$item->associatedModel->slug])}}"
                                                                             class="mini-cart-item-image d-block">
                                                                             <img
@@ -142,14 +149,12 @@
                                                                         </a>
                                                                         <span class="product-name-card">{{$item->name}}
                                                                             {{$item->attributes->value}}</span>
-
                                                                         <a onclick="return delete_product_cart('{{$item->id}}')"
                                                                             class="mr-3"
                                                                             style="position: absolute;left: 3px;">
                                                                             <i class="mdi mdi-close"
                                                                                 id="del-pro-cart-{{$item->id}}"></i>
                                                                         </a>
-
                                                                         <div class="variation">
                                                                             <span class="variation-n">فروشنده :
                                                                             </span>
@@ -182,10 +187,12 @@
                                                     </span>
                                                 </div>
                                                 <div class="mini-card-button">
-                                                    <a href="{{route('home.cart.index')}}" class="view-card">مشاهده سبد
+                                                    <a href="{{route('home.cart.index')}}" class="view-card">مشاهده
+                                                        سبد
                                                         خرید</a>
                                                     <a href="{{route('home.orders.checkout')}}"
-                                                        class="card-checkout">تسویه حساب</a>
+                                                        class="card-checkout">تسویه
+                                                        حساب</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -209,8 +216,6 @@
                                     </span>
                                 </a>
                                 @endif
-
-
                             </ul>
                         </div>
                     </div>
@@ -227,7 +232,6 @@
                             @endisset
                         </div>
                     </div>
-
                     <!-- لیست دسته بندی ها در حالت موبایل در دو سطح -->
                     <ul class="nav-categories ul-base mt-4">
                         @foreach ($categories as $category)
@@ -256,7 +260,6 @@
                         </li>
                     </ul>
                     <!-- پایان لیست دسته بندی ها در حالت موبایل در دو سطح  -->
-
                 </nav>
                 <div class="nav-btn nav-slider">
                     <span class="linee1"></span>

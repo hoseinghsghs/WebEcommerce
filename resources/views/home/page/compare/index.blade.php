@@ -2,12 +2,12 @@
 @section('title', "خانه - مقایسه")
 @section('content')
 <!-- product-comparison-------------------->
-<main class="main-row mb-4">
+<main class="main-row p-0">
     <div class="container-main">
         <div class="col-12">
             <div id="breadcrumb">
                 <i class="mdi mdi-home"></i>
-                <nav aria-label="breadcrumb">
+                <nav aria-label="breadcrumb" class="p-1">
                     <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item"><a href="#">خانه</a></li>
                         <li class="breadcrumb-item"><a href="#">کالای دیجیتال</a></li>
@@ -15,7 +15,7 @@
                     </ol>
                 </nav>
             </div>
-            <div class="comparison">
+            <div class="comparison m-0">
                 <table class="table mt-5 mb-5">
                     <thead>
                         <tr>
@@ -26,13 +26,9 @@
                                     </center>
                                 </div>
                                 <div class="form-auth-row pr">
-
                                 </div>
                             </td>
-
-
                             @foreach ($products as $product)
-
                             <td>
                                 <div class="comparison-item">
                                     <span class="remove-item">
@@ -51,7 +47,6 @@
                                 </div>
                             </td>
                             @endforeach
-
                         </tr>
                     </thead>
                     <tbody>
@@ -70,7 +65,6 @@
                                 </center>
                             </td>
                             @endforeach
-
                         </tr>
                         <!-- دسته بندی -->
                         <tr>
@@ -81,10 +75,8 @@
                                 @foreach ($products as $product)
                             <td>
                                 <center>
-
                                     <div class="compare-col compare-value">
                                         {{$product->category->parent->name}} - {{$product->category->name}} </div>
-
                                 </center>
                             </td>
                             @endforeach
@@ -141,10 +133,7 @@
                             </td>
                             @endforeach
                         </tr>
-
-
                         <!-- ویژگی ها -->
-
                         <tr>
                             <th>
                                 <center>
@@ -155,18 +144,14 @@
                             <td>
                                 <center>
                                     {{App\Models\Attribute::find($product->variations->first()->attribute_id)->name}}:
-                                    @foreach ($product->variations()->where('quantity', '>' , 0)->get() as
-                                    $variation )
-
-                                    {{$variation->value}}
-
-                                    @endforeach
+                                    @foreach($product->variations()->where('quantity', '>' , 0)->get() as $variation )
+                                    {{$variation->value}} @endforeach
                                 </center>
                             </td>
                             @endforeach
                         </tr>
                         <!-- ویژگی اصلی -->
-                        @foreach ($product->attributes()->with('attribute')->get() as $attribute )
+                        @foreach($product->attributes()->with('attribute')->get() as $attribute )
                         <tr>
                             <th>
                                 <center>
@@ -179,19 +164,11 @@
                                     @foreach ( $product->attributes as $pattributes)
                                     @if ($pattributes->attribute_id == $attribute->attribute_id)
                                     {{ $pattributes->value}}
-                                    @else
-
-                                    @endif
-
-                                    @endforeach
-
-                                </center>
+                                    @else @endif @endforeach </center>
                             </td>
                             @endforeach
                         </tr>
                         @endforeach
-
-
                     </tbody>
                 </table>
             </div>

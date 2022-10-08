@@ -41,9 +41,10 @@ class HomeController extends Controller
 
         $services =                         Service::orderBy('service_order')->get();
 
-        $sliders =                          Banner::active()->where('type', 'اسلایدر')->get();
-        $headers =                          Banner::active()->where('type', 'هدر')->get()->sortBy('priority')->take(4);
-        $centers =                          Banner::active()->where('type', 'وسط')->get()->sortBy('priority')->take(2);
+        $sliders =                          Banner::active()->where('type', 'اسلایدر')->where('is_active', 1)->get();
+        $headers =                          Banner::active()->where('type', 'هدر')->where('is_active', 1)->get()->sortBy('priority')->take(4);
+        $centers =                          Banner::active()->where('type', 'وسط')->where('is_active', 1)->get()->sortBy('priority')->take(2);
+        // $menue_banner =                     Banner::active()->where('type', 'منو')->where('is_active', 1)->first();
 
         // $Products_auction_today =           Product::active()->where('position', 'تخفیف روزانه')->get()->take(15);
         $Products_our_suggestion =          Product::active()->where('position', 'پیشنهاد ما')->get()->take(15);

@@ -3,7 +3,7 @@
 @section('content')
 
 <!-- Start of Main -->
-<main class="main-row mb-2 mt-2 p-0">
+<main class="main-row p-0">
     <div id="breadcrumb">
         <i class="mdi mdi-home"></i>
         <nav aria-label="breadcrumb" class="p-1">

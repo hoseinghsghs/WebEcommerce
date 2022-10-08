@@ -1,6 +1,7 @@
 <div class="header-search-box">
     <form autocomplete="off" wire:submit.prevent="search" class="form-search">
-        <input type="search" class="header-search-input" wire:model.debounce.500ms="search" value="{{session('search')??''}}" placeholder="نام کالای مورد نظر خود را جستجو کنید…">
+        <input type="search" class="header-search-input" wire:model.debounce.500ms="search"
+            value="{{session('search')??''}}" placeholder="جست و جوی محصول ...">
         <div class="action-btns">
             <button class="btn btn-search" type="submit" wire:loading.attr="disabled">
                 <img src="/assets/home/images/search.png" alt="search" wire:loading.remove>
@@ -23,10 +24,13 @@
         <ul class="search-result-list mb-0">
             @forelse ($sProducts as $product )
             <li>
-                <a class="d-flex align-items-center border-bottom border-light" href="{{route('home.products.show',$product->slug)}}"><i class="mdi mdi-clock-outline"></i>
-                    <img src="{{asset('storage/primary_image/'.$product->primary_image)}}" alt="image" width="70" height="70" class="suggestion-image">
+                <a class="d-flex align-items-center border-bottom border-light"
+                    href="{{route('home.products.show',$product->slug)}}"><i class="mdi mdi-clock-outline"></i>
+                    <img src="{{asset('storage/primary_image/'.$product->primary_image)}}" alt="image" width="70"
+                        height="70" class="suggestion-image">
                     {{$product->name}}
-                    <span class="mr-auto ml-1">{{$product->category->parent->name}} / {{$product->category->name}}</span>
+                    <span class="mr-auto ml-1">{{$product->category->parent->name}} /
+                        {{$product->category->name}}</span>
                     <button class="btn btn-light btn-continue-search" type="submit">
                         <i class="fa fa-angle-left"></i>
                     </button>

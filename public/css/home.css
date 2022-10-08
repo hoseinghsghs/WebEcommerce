@@ -29365,7 +29365,7 @@ header.header-main {
     line-height: 55px;
     float: right;
     background-color: #fdfdfd;
-    margin-top: 10px;
+    margin-top: 4px;
     border-bottom: 1px solid #e0e0e0;
     border-top: 1px solid #f5f5f5;
     box-shadow: 0 1px 5px 0 rgb(0 0 0 / 30%);
@@ -29457,7 +29457,9 @@ header.header-main {
 }
 
 .header-main-nav ul.menu-ul li.menu-item > ul.is-mega-menu {
-    width: 98% !important;
+    width: -webkit-fit-content !important;
+    width: -moz-fit-content !important;
+    width: fit-content !important;
     margin: 0;
     list-style: none;
     float: right;
@@ -29467,6 +29469,7 @@ header.header-main {
     background: #fff;
     border-radius: 20px;
     padding: 10px;
+    padding-left: 2rem;
     transition: all 0.2s, width 0s;
     box-shadow: rgba(0, 0, 0, 0.1) 0 2px 5px;
     border: 1px solid #ececec;
@@ -29491,7 +29494,9 @@ header.header-main {
 }
 
 .header-main-nav ul.menu-ul li.menu-item ul.is-mega-menu li.menu-mega-item {
-    width: 20%;
+    width: -webkit-fit-content !important;
+    width: -moz-fit-content !important;
+    width: fit-content !important;
     float: right;
     position: relative;
     text-align: right;
@@ -29503,12 +29508,14 @@ header.header-main {
     ul.is-mega-menu
     li.menu-mega-item
     a.mega-menu-link {
-    color: #666;
-    font-weight: 500;
+    color: rgb(128, 128, 128);
+    font-weight: 600;
     font-size: 14px;
     margin-right: 15px;
     transition: all 0.2s ease-out;
-    padding: 5px 0;
+    padding: 5px 5px;
+    border-bottom: 1px solid rgb(128, 128, 128);
+    line-height: 5px;
 }
 
 .header-main-nav
@@ -29518,7 +29525,8 @@ header.header-main {
     li.menu-mega-item
     a.mega-menu-link:hover {
     color: #651fff;
-    border-bottom: 1px dashed #651fff;
+    border-bottom: 1px solid #651fff;
+    border-radius: 50%;
     transition: all 0.2s ease-out;
 }
 
@@ -29577,9 +29585,6 @@ header.header-main {
     li.menu-mega-item-three:hover
     a {
     color: #651fff;
-    padding: 0 40px;
-    transition: all 0.4s ease-out;
-    font-weight: 600;
 }
 
 .bg-image {

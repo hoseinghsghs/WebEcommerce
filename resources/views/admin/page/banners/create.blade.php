@@ -74,6 +74,7 @@
                                                 <option value="اسلایدر">اسلایدر</option>
                                                 <option value="هدر">هدر</option>
                                                 <option value="وسط">وسط</option>
+                                                <option value="منو">منو</option>
                                                 <option value="هدر-چپ-بالا" disabled>هدر-چپ-بالا</option>
                                                 <option value="هدر-چپ-پایین" disabled>هدر-چپ-پایین</option>
                                                 <option value="راست-دسته بندی" disabled>راست-دسته بندی</option>
@@ -173,6 +174,10 @@ $("#positionSelect").change(function() {
         $('.position_message').html('(سایز تصویر 300*820)').css('color', 'red');
         $(".bone").attr("src", "/assets/images/position/2.png");
     }
+    if ($(this).val() == 'منو') {
+        $('.position_message').html('(سایز تصویر 325*350)').css('color', 'red');
+    }
+
     if ($(this).val() == 'هدر-چپ-بالا') {
         $('.position_message').html('(سایز تصویر 239*330)').css('color', 'red');
         $(".bone").attr("src", "/assets/images/position/top/2.png");
