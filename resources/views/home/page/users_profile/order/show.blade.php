@@ -248,15 +248,11 @@
                                         <div class="box-header">
                                             <span class="box-title">آدرس جایگزین</span>
                                         </div>
-
                                         <tr>
-
                                             <td>
                                                 {{ $order->address->lastaddress }}
                                             </td>
-
                                         </tr>
-
                                     </div>
                                 </div>
                             </div>

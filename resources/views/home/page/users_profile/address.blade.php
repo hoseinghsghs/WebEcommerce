@@ -7,7 +7,6 @@
         <section class="profile-home">
             <div class="col-lg">
                 <div class="post-item-profile order-1 d-block">
-
                     @include('home.page.users_profile.partial.right_side')
                     @if (!$addresses->count())
                     <div class="col-lg-9 col-md-9 col-xs-12 pl">

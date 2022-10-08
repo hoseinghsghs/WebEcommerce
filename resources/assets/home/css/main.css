@@ -4708,7 +4708,7 @@ span.shipping-destination {
     border-radius: 20px;
     background-color: #fff;
     overflow: hidden;
-    padding: 15px;
+    padding: 15px 0px;
     margin: 25px 0;
     float: right;
     border: 1px solid #eeeeee;
@@ -5191,8 +5191,10 @@ span.shipping-destination {
 
 .middle-container .form-checkout .form-checkout-row {
     width: 100%;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
     height: auto;
 }
 
@@ -5254,7 +5256,7 @@ span.shipping-destination {
 }
 
 .middle-container .form-checkout select {
-    font-size: 12px;
+    font-size: 13px;
     width: 100%;
     outline: none;
     height: 45px !important;
@@ -5281,7 +5283,7 @@ span.shipping-destination {
     border-radius: 15px;
     background-color: #651fff;
     color: #fff;
-    margin-top: 15px;
+    /* margin-top: 15px; */
     font-size: 13px;
     outline: none;
     cursor: pointer;
@@ -9733,4 +9735,15 @@ button.products-filter-btn {
     text-align: center;
     display: block;
     color: red;
+}
+
+.ret-btn {
+    border-radius: 15px;
+    font-size: 13px;
+}
+
+.checkout-address {
+    background-color: whitesmoke;
+    border-radius: 20px;
+    padding-top: 0.5rem;
 }

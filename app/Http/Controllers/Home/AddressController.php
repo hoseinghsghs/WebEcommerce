@@ -44,18 +44,18 @@ class AddressController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            
-            'name' => 'required',
-            'title' => 'required',
+
+            'name' => 'required|persian_alpha_num',
+            'title' => 'required|persian_alpha_num',
             'cellphone' => 'required|ir_mobile:zero',
-            'cellphone2' => 'required|ir_mobile:zero',
+            'cellphone2' => 'required|ir_phone_with_code',
             'province_id' => 'required',
-            'city_id' => 'required',
-            'address' => 'required',
-            'lastaddress' => 'required',
+            'city_id' => 'required|integer',
+            'address' => 'required|string',
+            'lastaddress' => 'required|string',
             'postal_code' => 'required|ir_postal_code:without_seprate'
         ]);
-        
+
         UserAddress::create([
             'user_id' => auth()->id(),
             'title' => $request->title,
@@ -66,13 +66,13 @@ class AddressController extends Controller
             'province_id' => $request->province_id,
             'city_id' => $request->city_id,
             'address' => $request->address,
-            'lastaddress' => $request->address,
+            'lastaddress' => $request->lastaddress,
             'postal_code' => $request->postal_code
         ]);
 
         alert()->success('آدرس مورد نظر ایجاد شد', 'باتشکر');
         return redirect()->route('home.addreses.index');
-        
+
     }
 
     /**
@@ -97,7 +97,7 @@ class AddressController extends Controller
         $provinces = Province::all();
         return view('home.page.users_profile.edit_address' , compact('address','provinces'));
     }
-   
+
 
     /**
      * Update the specified resource in storage.
@@ -106,29 +106,28 @@ class AddressController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    
+
     public function update(Request $request, UserAddress $address)
     {
-        
+
         $request->validate([
-            'name' => 'required',
-            'title' => 'required',
-            'cellphone2' => 'required|ir_mobile:zero',
-            'lastaddress' => 'required',
+            'name' => 'required|persian_alpha_num',
+            'title' => 'required|persian_alpha_num',
             'cellphone' => 'required|ir_mobile:zero',
-            'province_id' => 'required',
-            'city_id' => 'required',
-            'address' => 'required',
-            
+            'cellphone2' => 'required|ir_phone_with_code',
+            'province_id' => 'required|integer',
+            'city_id' => 'required|integer',
+            'address' => 'required|string',
+            'lastaddress' => 'required|string',
             'postal_code' => 'required|ir_postal_code:without_seprate'
         ]);
 
-       
+
 
         $address->update([
             'name' => $request->name,
             'cellphone2' => $request->cellphone2,
-            'lastaddress' => $request->address,
+            'lastaddress' => $request->lastaddress,
             'unit' => $request->unit,
             'title' => $request->title,
             'cellphone' => $request->cellphone,
@@ -150,12 +149,12 @@ class AddressController extends Controller
      */
     public function destroy(UserAddress $address)
     {
-       
+
         $address->delete();
-        
+
         alert()->success('آدرس مورد نظر حذف شد', 'باتشکر');
         return redirect()->back();
-        
+
     }
 
     public function getProvinceCitiesList(Request $request)
