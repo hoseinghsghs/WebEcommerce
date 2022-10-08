@@ -32,7 +32,7 @@
                             <div class="col-sm-4">
                                 <div class="blogitem">
                                     <div class="blogitem-image">
-                                        <a href="{{$user->avatar ? asset('storage/profile/'.$user->avatar) : asset('img/profile.png') }}" target="_blank">
+                                        <a class="text-center" href="{{$user->avatar ? asset('storage/profile/'.$user->avatar) : asset('img/profile.png') }}" target="_blank">
                                             <img class="img-fluid img-thumbnail w200" src="{{$user->avatar ? asset('storage/profile/'.$user->avatar) : asset('img/profile.png') }}">
                                         </a>
                                     </div>
@@ -79,45 +79,43 @@
                         <div class="header">
                             <h2><strong>لیست </strong>سفارشات</h2>
                         </div>
-                        <div class="body">
-                            <div class="table-responsive">
-                                <table class="table table-hover c_table theme-color">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>شماره سفارش</th>
-                                            <th>تاریخ ثبت سفارش</th>
-                                            <th>وضعیت</th>
-                                            <th> مجموع<span>(تومان)</span></th>
-                                            <th class="text-center">جزئیات</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @forelse ($orders as $key => $order)
-                                        <tr>
-                                            <td scope="row">{{$orders->firstItem() + $key}}</td>
-                                            <td>{{$order->id}}</td>
-                                            <td>{{verta($order->created_at)->format('Y/n/j')}}</td>
-                                            <td class="{{$order->status == 'در انتظار پرداخت' ? 'text-primary' : 'text-success'}}">
-                                                {{$order->status}}
-                                            </td>
-                                            <td>{{number_format($order->paying_amount)}}</td>
-                                            <td class="text-center js-sweetalert">
-                                                <a onclick="loadbtn(event)" href="{{route('admin.orders.show',$order->id)}}" class="btn btn-raised btn-info waves-effect">
-                                                    <i class="zmdi zmdi-eye"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        @empty
-                                        <tr>
-                                            <td colspan="6">
-                                                <p class="text-center text-muted">هیچ رکوردی یافت نشد!</p>
-                                            </td>
-                                        </tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
-                            </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover c_table theme-color">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>شماره سفارش</th>
+                                        <th>تاریخ ثبت سفارش</th>
+                                        <th>وضعیت</th>
+                                        <th> مجموع<span>(تومان)</span></th>
+                                        <th class="text-center">جزئیات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($orders as $key => $order)
+                                    <tr>
+                                        <td scope="row">{{$orders->firstItem() + $key}}</td>
+                                        <td>{{$order->id}}</td>
+                                        <td>{{verta($order->created_at)->format('Y/n/j')}}</td>
+                                        <td class="{{$order->status == 'در انتظار پرداخت' ? 'text-primary' : 'text-success'}}">
+                                            {{$order->status}}
+                                        </td>
+                                        <td>{{number_format($order->paying_amount)}}</td>
+                                        <td class="text-center js-sweetalert">
+                                            <a onclick="loadbtn(event)" href="{{route('admin.orders.show',$order->id)}}" class="btn btn-raised btn-info waves-effect">
+                                                <i class="zmdi zmdi-eye"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    @empty
+                                    <tr>
+                                        <td colspan="6">
+                                            <p class="text-center text-muted">هیچ رکوردی یافت نشد!</p>
+                                        </td>
+                                    </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
                             {{ $orders->onEachSide(1)->links() }}
                         </div>
                     </div>
@@ -127,49 +125,47 @@
                         <div class="header">
                             <h2><strong>لیست </strong>نظرات</h2>
                         </div>
-                        <div class="body">
-                            <div class="table-responsive">
-                                <table class="table table-hover c_table theme-color">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>نام محصول</th>
-                                            <th>متن</th>
-                                            <th>وضعیت</th>
-                                            <th>تاریخ ثبت</th>
-                                            <th class="text-center">جزئیات</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @forelse ($comments as $key => $comment)
-                                        <tr>
-                                            <td scope="row">{{$comments->firstItem() + $key}}</td>
-                                            <td>{{$comment->commentable->name}}</td>
-                                            <td>{{$comment->text}}</td>
-                                            <td>
-                                                @if ($comment->approved==1)
-                                                <span class="badge badge-success">تایید شده</span>
-                                                @else
-                                                <span class="badge badge-warning">تایید نشده</span>
-                                                @endif
-                                            </td>
-                                            <td>{{verta($comment->created_at)->format('Y/n/j')}}</td>
-                                            <td class="text-center js-sweetalert">
-                                                <a onclick="loadbtn(event)" href="{{route('admin.comments.edit',$comment->id)}}" class="btn btn-raised btn-info waves-effect">
-                                                    <i class="zmdi zmdi-eye"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        @empty
-                                        <tr>
-                                            <td colspan="6">
-                                                <p class="text-center text-muted">هیچ رکوردی یافت نشد!</p>
-                                            </td>
-                                        </tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
-                            </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover c_table theme-color">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>نام محصول</th>
+                                        <th>متن</th>
+                                        <th>وضعیت</th>
+                                        <th>تاریخ ثبت</th>
+                                        <th class="text-center">جزئیات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($comments as $key => $comment)
+                                    <tr>
+                                        <td scope="row">{{$comments->firstItem() + $key}}</td>
+                                        <td>{{$comment->commentable->name}}</td>
+                                        <td>{{$comment->text}}</td>
+                                        <td>
+                                            @if ($comment->approved==1)
+                                            <span class="badge badge-success">تایید شده</span>
+                                            @else
+                                            <span class="badge badge-warning">تایید نشده</span>
+                                            @endif
+                                        </td>
+                                        <td>{{verta($comment->created_at)->format('Y/n/j')}}</td>
+                                        <td class="text-center js-sweetalert">
+                                            <a onclick="loadbtn(event)" href="{{route('admin.comments.edit',$comment->id)}}" class="btn btn-raised btn-info waves-effect">
+                                                <i class="zmdi zmdi-eye"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    @empty
+                                    <tr>
+                                        <td colspan="6">
+                                            <p class="text-center text-muted">هیچ رکوردی یافت نشد!</p>
+                                        </td>
+                                    </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
                             {{ $comments->onEachSide(1)->links() }}
                         </div>
                     </div>

@@ -930,9 +930,9 @@
         padding: 0;
     }
 
-    .post-item-profile .profile-content .profile-stats {
-        padding: 10px;
-    }
+    /* .post-item-profile .profile-content .profile-stats {
+         padding: 10px;
+    } */
 
     .post-item-profile .profile-content .profile-stats .profile {
         display: block;
@@ -960,7 +960,7 @@
     }
 
     .middle-container .form-checkout .form-checkout-row .btn-registrar {
-        width: 100%;
+        /* width: 100%; */
         margin-bottom: 10px;
     }
 

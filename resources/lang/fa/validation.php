@@ -183,5 +183,6 @@ return array(
         "address_id" => "آدرس",
         "cellphone2" => "تلفن ثابت",
         "lastaddress" => "آدرس اضطراری",
+        "unit" => 'واحد'
     ),
 );

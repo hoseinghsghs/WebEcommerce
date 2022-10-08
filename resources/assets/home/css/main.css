@@ -228,6 +228,7 @@ header.header-main {
     display: block;
     z-index: 1;
 }
+
 .header-search
     .header-search-box
     .form-search
@@ -5396,7 +5397,7 @@ span.shipping-destination {
     border-radius: 20px;
     background-color: #fff;
     overflow: hidden;
-    padding: 15px;
+    padding: 15px 0px;
     margin: 25px 0;
     float: right;
     border: 1px solid #eeeeee;
@@ -6091,8 +6092,10 @@ span.shipping-destination {
 
 .middle-container .form-checkout .form-checkout-row {
     width: 100%;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
     height: auto;
 }
 
@@ -6157,7 +6160,7 @@ span.shipping-destination {
 }
 
 .middle-container .form-checkout select {
-    font-size: 12px;
+    font-size: 13px;
     width: 100%;
     outline: none;
     height: 45px !important;
@@ -6184,7 +6187,7 @@ span.shipping-destination {
     border-radius: 15px;
     background-color: #651fff;
     color: #fff;
-    margin-top: 15px;
+    /* margin-top: 15px; */
     font-size: 13px;
     outline: none;
     cursor: pointer;
@@ -11541,6 +11544,7 @@ button.products-filter-btn {
     color: #fff;
     border-radius: 20px;
 }
+
 .filter-sidebar-overlay {
     position: fixed;
     top: 0px;
@@ -11562,6 +11566,7 @@ button.products-filter-btn {
     left: 94px;
     text-align: center;
 }
+
 .compare-text {
     position: absolute;
     left: 7px;
@@ -11569,21 +11574,25 @@ button.products-filter-btn {
     font-size: 13px;
     color: white;
 }
+
 #login-style {
     background-color: white;
     border-color: #dddddd;
     color: gray;
     border-radius: 0.6rem;
 }
+
 #frm-logout {
     display: none;
 }
+
 #compare-style {
     float: left;
     font-size: 1.7rem;
     color: #676767;
     margin: 1.2rem;
 }
+
 #btn-question-show {
     color: #24c0df;
     padding: 0;
@@ -11594,6 +11603,7 @@ button.products-filter-btn {
     font-size: 13px;
     margin-bottom: 15px;
 }
+
 /* search box */
 .search-filter .custom-select:focus {
     box-shadow: unset;
@@ -11637,12 +11647,14 @@ button.products-filter-btn {
     list-style: none;
     margin: 1em;
 }
+
 .social-icons li {
     display: inline-block;
     margin: 0.15em;
     position: relative;
     font-size: 1.2em;
 }
+
 .social-icons i {
     color: #fff;
     position: absolute;
@@ -11650,9 +11662,11 @@ button.products-filter-btn {
     left: 16px;
     transition: all 265ms ease-out;
 }
+
 .social-icons a {
     display: inline-block;
 }
+
 .social-icons a:before {
     transform: scale(1);
     -ms-transform: scale(1);
@@ -11665,10 +11679,12 @@ button.products-filter-btn {
     background: linear-gradient(45deg, #00d8f5, #4321d5);
     transition: all 265ms ease-out;
 }
+
 .social-icons a:hover:before {
     transform: scale(0);
     transition: all 265ms ease-in;
 }
+
 .social-icons a:hover i {
     transform: scale(2.2);
     -ms-transform: scale(2.2);
@@ -11678,4 +11694,30 @@ button.products-filter-btn {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     transition: all 265ms ease-in;
+}
+
+/* filter sidebar close button */
+.sidebar-close {
+    left: 0px;
+    outline: none;
+    background-color: rgb(241 212 212);
+    width: 30px;
+    height: 30px;
+    font-size: 15px;
+    border-radius: 50%;
+    line-height: 0;
+    text-align: center;
+    display: block;
+    color: red;
+}
+
+.ret-btn {
+    border-radius: 15px;
+    font-size: 13px;
+}
+
+.checkout-address {
+    background-color: whitesmoke;
+    border-radius: 20px;
+    padding-top: 0.5rem;
 }

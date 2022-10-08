@@ -391,7 +391,7 @@
                                 <div class="mask pm-3">
                                     <div class="mask-text">
                                         <p>
-                                            {{$product->description}}
+                                            {!!$product->description!!}
                                         </p>
                                     </div>
                                     <a href="#" class="mask-handler">

@@ -21,7 +21,6 @@ class ProductsList extends Component
     public $category;
     public $routeName = '';
     public $initialFilter;
-    public bool $show_sidebar=false;
 
     public $filterd = [
         'variation' => [],
