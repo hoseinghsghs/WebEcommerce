@@ -289,7 +289,8 @@
     <div id="filter-sidebar" class="sidebar bg-light p-2">
         <div class="shop-archive-sidebar">
             <div class="pl-2 pb-2">
-            <button class="sidebar-close mr-auto" onclick="closeSidebar(event)"><span aria-hidden="true">X</span></button>
+                <button class="sidebar-close mr-auto" onclick="closeSidebar(event)"><span
+                        aria-hidden="true">X</span></button>
             </div>
             <div class="sidebar-archive mb-3">
                 <section class="widget-product-categories">
@@ -523,31 +524,26 @@ if ($("#slider-non-linear-step2").length) {
         },
     });
     nonLinearStepSlider2.noUiSlider.on("change", function(values) {
-        values.forEach((element, index) => {
-            values[index] = parseInt(element);
-        });
-<<<<<<< HEAD
-        Livewire.emit('priceRangeUpdated', values)
-        nonLinearStepSlider.noUiSlider.set(values);
-    });
-}
-=======
-        nonLinearStepSlider2.noUiSlider.on("change", function(values) {
-            values.forEach((element, index) => {
-                values[index] = parseInt(element);
-            });
-            Livewire.emit('priceRangeUpdated', values)
-            nonLinearStepSlider.noUiSlider.set(values);
-        });
-    }
-    function openSidebar(){
-        $('#filter-sidebar').addClass('open')
-        $('.filter-sidebar-overlay').removeClass('d-none');
-    }
-    function closeSidebar(event){
-        $('#filter-sidebar').removeClass('open')
-        $('.filter-sidebar-overlay').addClass('d-none');
-    }
->>>>>>> 62ac5d28ffc2f66cb96e9cbe965d974aa545560f
+                values.forEach((element, index) => {
+                    values[index] = parseInt(element);
+                });
+                nonLinearStepSlider2.noUiSlider.on("change", function(values) {
+                    values.forEach((element, index) => {
+                        values[index] = parseInt(element);
+                    });
+                    Livewire.emit('priceRangeUpdated', values)
+                    nonLinearStepSlider.noUiSlider.set(values);
+                });
+            }
+
+            function openSidebar() {
+                $('#filter-sidebar').addClass('open')
+                $('.filter-sidebar-overlay').removeClass('d-none');
+            }
+
+            function closeSidebar(event) {
+                $('#filter-sidebar').removeClass('open')
+                $('.filter-sidebar-overlay').addClass('d-none');
+            }
 </script>
 @endpush
