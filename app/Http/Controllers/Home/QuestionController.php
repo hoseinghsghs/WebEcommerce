@@ -20,7 +20,7 @@ class QuestionController extends Controller
 
         $validator = Validator::make($request->all(), [
             'text' => 'required|min:5|max:7000',
-            // 'rate' => 'required|digits_between:0,5', 
+            // 'rate' => 'required|digits_between:0,5',
         ]);
 
         if ($validator->fails()) {
@@ -57,14 +57,14 @@ class QuestionController extends Controller
                 DB::commit();
             } catch (\Exception $ex) {
                 DB::rollBack();
-                alert()->error('مشکل در ایجاد پرسش و پاسخ', $ex->getMessage())->persistent('حله');
+                alert()->error('مشکل در ایجاد پرسش و پاسخ', $ex->getMessage())->showConfirmButton('تایید');
                 return redirect()->back();
             }
 
             alert()->success('پرسش شما با موفقیت برای این محصول ثبت شد', 'باتشکر');
             return redirect()->back();
         } else {
-            alert()->warning('برای ثبت پرسش ابتدا وارد سایت شوید')->persistent('حله');
+            alert()->warning('برای ثبت پرسش ابتدا وارد سایت شوید')->showConfirmButton('تایید');
             return redirect()->back();
         }
     }
@@ -95,7 +95,7 @@ class QuestionController extends Controller
             //throw $th;
         }
 
-        alert()->success('پاسخ شما با موفقیت برای این محصول ثبت شد', 'باتشکر');
+        alert()->success('پاسخ شما با موفقیت برای این محصول ثبت شد', 'باتشکر')->showConfirmButton('تایید');
         return redirect()->back();
 
         return back();

@@ -482,9 +482,14 @@ $(document).ready(function (e) {
   // checkout-coupon-------------------------------
 
 
-  $(".showcoupon").submit(function (e) {
+  $(".showcoupon").on("click", function () {
+    $(".checkout-coupon").slideToggle(200);
+  });
+  $(".form-coupon").on("submit", function (e) {
     e.preventDefault();
-    var code1 = $("#fixed-coupon").val();
+    var form = $(this);
+    form.find('button').attr('disabled', true).append('<span class="mr-1"><i class="fa fa-spinner fa-spin"></i></span>');
+    var code1 = form.find('input').val();
     var url = window.location.origin + "/checkcoupon";
     $.post(url, {
       _token: $('meta[name="csrf-token"]').attr("content"),
@@ -495,11 +500,10 @@ $(document).ready(function (e) {
         $(".inc-coupon").html(number_format(message) + "تومان");
         $(".showcoupon").remove();
         Swal.fire({
-          title: "حله",
           text: "کد تخفیف اعمال گردید",
           icon: "success",
           timer: 1500,
-          ConfirmButton: "باشه"
+          confirmButtonText: "تایید"
         });
       }
 
@@ -509,21 +513,20 @@ $(document).ready(function (e) {
           text: _message,
           icon: "warning",
           timer: 1500,
-          ConfirmButton: "باشه"
+          confirmButtonText: "تایید"
         });
       }
     }).fail(function (response) {
-      var message = response.errormessage;
-      console.log(message);
+      var message = response.errormessage; // console.log(message);
+
       Swal.fire({
         text: message,
         icon: "warning",
         timer: 1500,
-        ConfirmButton: "باشه"
+        confirmButtonText: "تایید"
       });
     }).always(function () {
-      a.find("i").removeClass("fa fa-circle-o-notch fa-spin");
-      a.find("i").addClass("fa fa-shopping-cart");
+      form.find('button').attr('disabled', false).find('span').remove();
     });
   }); // checkout-coupon-------------------------------
 
@@ -580,11 +583,10 @@ $(document).ready(function (e) {
         $("#product-list-widget").append("<li class=\"mini-cart-item\" id=\"" + rowid + "\">\n                          <div class=\"mini-cart-item-content\">\n                              <a onclick=\"return delete_product_cart('" + rowid + "')\"\n                                  class=\"mr-3\" style=\"position: absolute;left: 3px;\">\n                                  <i class=\"mdi mdi-close\" id=\"del-pro-cart-" + rowid + "\"></i>\n                              </a>\n                              <a href=\"  " + href_product + " \"\n                                  class=\"mini-cart-item-image d-block\">\n                                  <img\n                                      src=\"" + image_url + "\">\n                              </a>\n                              <span class=\"product-name-card\">" + pro.name + "-\n                                  " + response.cart[rowid].attributes.value + "</span>\n                            <div class=\"variation\">\n                            <span class=\"variation-n\">\u0641\u0631\u0648\u0634\u0646\u062F\u0647 :\n                            </span>\n                            <p class=\"mb-0\">" + app_name + "</p>\n                            </div>\n                              <div class=\"quantity\">\n                                  <span class=\"quantity-Price-amount\">\n                                      " + response.cart[rowid].quantity + " *\n                                      " + number_format(response.cart[rowid].price) + "\n                            " + number_format(response.cart[rowid].quantity * response.cart[rowid].price) + "\n                                      <span>\u062A\u0648\u0645\u0627\u0646</span>\n                                  </span>\n                              </div>\n                          </div>\n                      </li>");
         $(".price-total").html(number_format(response.all_cart) + "تومان");
         Swal.fire({
-          title: "حله",
           text: "محصول به سبد خرید اضافه شد",
           icon: "success",
           timer: 1500,
-          ConfirmButton: "باشه"
+          confirmButtonText: "تایید"
         });
       }
 
@@ -593,7 +595,7 @@ $(document).ready(function (e) {
           text: "محصول قبلا به سبد خرید اضافه شده",
           icon: "warning",
           timer: 1500,
-          ConfirmButton: "باشه"
+          confirmButtonText: "تایید"
         });
       }
     }).fail(function (response) {
@@ -824,7 +826,7 @@ $(document).ready(function (e) {
 
   /* if ($("#countdown-verify-end").length) {
       var $countdownOptionEnd = $("#countdown-verify-end");
-        $countdownOptionEnd.countdown({
+       $countdownOptionEnd.countdown({
           date: new Date().getTime() + 180 * 1000, // 1 minute later
           text: '<span class="day">%s</span><span class="hour">%s</span><span>: %s</span><span>%s</span>',
           end: function () {
@@ -934,7 +936,7 @@ $(document).ready(function (e) {
         text: " اینترنت شما قطع است",
         icon: "error",
         timer: 1500,
-        ConfirmButton: "باشه"
+        confirmButtonText: "تایید"
       });
     }).always(function () {
       $("#" + "del-pro-cart-" + id).removeClass("fa fa-circle-o-notch fa-spin");

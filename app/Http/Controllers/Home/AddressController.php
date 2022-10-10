@@ -8,6 +8,7 @@ use App\Models\Province;
 use App\Models\UserAddress;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class AddressController extends Controller
 {
@@ -18,9 +19,9 @@ class AddressController extends Controller
      */
     public function index()
     {
-        $addresses = UserAddress::where('user_id', auth()->id())->get();
+        $addresses = UserAddress::where('user_id', auth()->id())->paginate(1);
         $provinces = Province::all();
-        return view('home.page.users_profile.address' , compact('provinces','addresses'));
+        return view('home.page.users_profile.address', compact('provinces', 'addresses'));
     }
 
     /**
@@ -32,7 +33,7 @@ class AddressController extends Controller
     {
         $addresses = UserAddress::where('user_id', auth()->id())->get();
         $provinces = Province::all();
-        return view('home.page.users_profile.create_address', compact('provinces','addresses'));
+        return view('home.page.users_profile.create_address', compact('provinces', 'addresses'));
     }
 
     /**
@@ -44,12 +45,14 @@ class AddressController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-
             'name' => 'required|persian_alpha_num',
-            'title' => 'required|persian_alpha_num',
+            'title' => ['required', 'persian_alpha_num', Rule::unique('user_addresses')->where(function ($query) {
+                $query->where('user_id', auth()->id());
+            })],
             'cellphone' => 'required|ir_mobile:zero',
             'cellphone2' => 'required|ir_phone_with_code',
             'province_id' => 'required',
+            'unit' => 'nullable|string',
             'city_id' => 'required|integer',
             'address' => 'required|string',
             'lastaddress' => 'required|string',
@@ -70,9 +73,8 @@ class AddressController extends Controller
             'postal_code' => $request->postal_code
         ]);
 
-        alert()->success('آدرس مورد نظر ایجاد شد', 'باتشکر');
+        alert()->success('آدرس مورد نظر ایجاد شد', 'باتشکر')->showConfirmButton('تایید');
         return redirect()->route('home.addreses.index');
-
     }
 
     /**
@@ -95,7 +97,7 @@ class AddressController extends Controller
     public function edit(UserAddress $address)
     {
         $provinces = Province::all();
-        return view('home.page.users_profile.edit_address' , compact('address','provinces'));
+        return view('home.page.users_profile.edit_address', compact('address', 'provinces'));
     }
 
 
@@ -112,10 +114,13 @@ class AddressController extends Controller
 
         $request->validate([
             'name' => 'required|persian_alpha_num',
-            'title' => 'required|persian_alpha_num',
+            'title' => ['required', 'persian_alpha_num', Rule::unique('user_addresses')->where(function ($query) {
+                $query->where('user_id', auth()->id());
+            })->ignore($address)],
             'cellphone' => 'required|ir_mobile:zero',
             'cellphone2' => 'required|ir_phone_with_code',
             'province_id' => 'required|integer',
+            'unit' => 'nullable|string',
             'city_id' => 'required|integer',
             'address' => 'required|string',
             'lastaddress' => 'required|string',
@@ -137,7 +142,7 @@ class AddressController extends Controller
             'postal_code' => $request->postal_code
         ]);
 
-        alert()->success('آدرس مورد نظر ویرایش شد', 'باتشکر');
+        alert()->success('آدرس مورد نظر ویرایش شد', 'باتشکر')->showConfirmButton('تایید');
         return redirect()->route('home.addreses.index');
     }
 
@@ -152,9 +157,8 @@ class AddressController extends Controller
 
         $address->delete();
 
-        alert()->success('آدرس مورد نظر حذف شد', 'باتشکر');
+        alert()->success('آدرس مورد نظر حذف شد', 'باتشکر')->showConfirmButton('تایید');
         return redirect()->back();
-
     }
 
     public function getProvinceCitiesList(Request $request)

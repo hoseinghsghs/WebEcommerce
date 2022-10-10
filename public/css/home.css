@@ -40273,6 +40273,7 @@ button.products-filter-btn {
     border-radius: 15px 0px 0px 15px;
 }
 
+
 .verify-phone-modal {
     width: auto;
     border-radius: 10px;
@@ -40374,6 +40375,16 @@ button.products-filter-btn {
     padding-top: 0.5rem;
 }
 
+.coupon-code{
+        height: 40px;
+        border-radius: 0px 15px 15px 0px;
+        border: 1px solid #eeeeee;
+        outline: none;
+        color: #666;
+        font-size: 12px;
+        background: #f9f9f9;
+        padding: 0 15px;
+}
 @media (max-width: 992px) {
     .header-main-nav ul.menu-ul li.menu-item {
         display: none;
