@@ -1,8 +1,6 @@
 @extends('home.layout.MasterHome')
 @section('title' , 'آدرس ها')
-@section('content')
-
-<div class="container-main">
+@section('content')<div class="container-main">
     <div class="d-block">
         <section class="profile-home">
             <div class="col-lg">
@@ -44,7 +42,6 @@
                                                     class="btn-remove-address btn btn-danger" type="submit">حذف</a>
                                             </div>
                                         </div>
-
                                         <div class="profile-address-content">
                                             <ul class="profile-address-info">
                                                 <li>
@@ -58,7 +55,6 @@
                                                     <div class="profile-address-info-item location">
                                                         <i class="mdi mdi-email-outline"></i>
                                                         {{ $address->postal_code }}
-
                                                     </div>
                                                 </li>
                                                 <li>
@@ -91,12 +87,9 @@
     </div>
 </div>
 @endif
-
-
 @push('scripts')
 <script>
 $('.province-select').change(function() {
-
     var provinceID = $(this).val();
     if (provinceID) {
         $.ajax({
@@ -105,12 +98,10 @@ $('.province-select').change(function() {
             success: function(res) {
                 if (res) {
                     $(".city-select").empty();
-
                     $.each(res, function(key, city) {
                         $(".city-select").append('<option value="' + city.id + '">' +
                             city.name + '</option>');
                     });
-
                 } else {
                     $(".city-select").empty();
                 }

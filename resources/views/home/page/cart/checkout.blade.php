@@ -9,7 +9,8 @@
                 <div class="checkout woocommerce-checkout">
                     <div class="content-checkout">
                         <div class="middle-container">
-                            <form class="form form-checkout" id="checkout" action="{{route('home.payment')}}" method="POST">
+                            <form class="form form-checkout" id="checkout" action="{{route('home.payment')}}"
+                                method="POST">
                                 @csrf
                                 <div class="col2-set" id="customer-details">
                                     <div class="billing-fields">
@@ -19,7 +20,8 @@
                                             <div class="Order-another-shipping-address mt-2 mb-2">
                                                 <div class="validate-required mb-3">
                                                     <label>انتخاب آدرس</label>
-                                                    <select class="form-control form-control-md mb-0" name="address_id" id="address-option">
+                                                    <select class="form-control form-control-md mb-0" name="address_id"
+                                                        id="address-option">
                                                         <option value="new">آدرس جدید</option>
                                                     </select>
                                                     @error('address_id')
@@ -32,16 +34,24 @@
                                                             <form class="form-checkout">
                                                                 <div class="row form-checkout-row">
                                                                     <div class="col-lg-4 col-md-4 col-12 mb-3">
-                                                                        <label for="name">عنوان آدرس<abbr class="required" title="ضروری" style="color:red;">*</abbr></span></label>
-                                                                        <input type="text" id="name" name="title" value="{{ old('title') }}" class="input-name-checkout form-control m-0">
+                                                                        <label for="name">عنوان آدرس<abbr
+                                                                                class="required" title="ضروری"
+                                                                                style="color:red;">*</abbr></span></label>
+                                                                        <input type="text" id="name" name="title"
+                                                                            value="{{ old('title') }}"
+                                                                            class="input-name-checkout form-control m-0">
                                                                         @error('title')
                                                                         <span class="text-danger">{{ $message }}</span>
                                                                         @enderror
                                                                     </div>
 
                                                                     <div class="col-lg-4 col-md-4 col-12 mb-3">
-                                                                        <label for="name">نام تحویل گیرنده <abbr class="required" title="ضروری" style="color:red;">*</abbr></span></label>
-                                                                        <input type="text" id="name" name="name" value="{{ old('name') }}" class="input-name-checkout form-control m-0">
+                                                                        <label for="name">نام تحویل گیرنده <abbr
+                                                                                class="required" title="ضروری"
+                                                                                style="color:red;">*</abbr></span></label>
+                                                                        <input type="text" id="name" name="name"
+                                                                            value="{{ old('name') }}"
+                                                                            class="input-name-checkout form-control m-0">
                                                                         @error('name')
                                                                         <span class="text-danger">{{ $message }}</span>
                                                                         @enderror
@@ -50,8 +60,13 @@
                                                                     </div>
 
                                                                     <div class="col-lg-4 col-md-4 col-12 mb-3">
-                                                                        <label for="phone-number">شماره موبایل <abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
-                                                                        <input type="text" id="phone-number" name="cellphone" value="{{ old('cellphone') }}" class="input-name-checkout form-control m-0 text-left">
+                                                                        <label for="phone-number">شماره موبایل <abbr
+                                                                                class="required" title="ضروری"
+                                                                                style="color:red;">*</abbr></label>
+                                                                        <input type="text" id="phone-number"
+                                                                            name="cellphone"
+                                                                            value="{{ old('cellphone') }}"
+                                                                            class="input-name-checkout form-control m-0 text-left">
                                                                         @error('cellphone')
                                                                         <span class="text-danger">{{ $message }}</span>
                                                                         @enderror
@@ -59,8 +74,12 @@
 
                                                                     <div class="col-lg-4 col-md-4 col-12 mb-3">
                                                                         <label for="fixed-number">شماره تلفن ثابت
-                                                                            <abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
-                                                                        <input type="text" id="fixed-number" name="cellphone2" value="{{ old('cellphone2') }}" class="input-name-checkout form-control m-0 text-left">
+                                                                            <abbr class="required" title="ضروری"
+                                                                                style="color:red;">*</abbr></label>
+                                                                        <input type="text" id="fixed-number"
+                                                                            name="cellphone2"
+                                                                            value="{{ old('cellphone2') }}"
+                                                                            class="input-name-checkout form-control m-0 text-left">
                                                                         @error('cellphone2')
                                                                         <span class="text-danger">{{ $message }}</span>
                                                                         @enderror
@@ -69,10 +88,13 @@
                                                                     <div class="col-lg-4 col-md-4 col-12 mb-3">
                                                                         <div class="form-checkout-valid-row">
                                                                             <label for="province">استان
-                                                                                <abbr class="required" title="ضروری" style="color:red;">*</abbr>
+                                                                                <abbr class="required" title="ضروری"
+                                                                                    style="color:red;">*</abbr>
                                                                             </label>
-                                                                            <select id="province_id" name="province_id" class="form-control m-0 province-select">
-                                                                                <option selected="selected" disabled>استان
+                                                                            <select id="province_id" name="province_id"
+                                                                                class="form-control m-0 province-select">
+                                                                                <option selected="selected" disabled>
+                                                                                    استان
                                                                                     مورد
                                                                                     نظر خود را انتخاب کنید </option>
                                                                                 @foreach ($provinces as $province)
@@ -82,7 +104,8 @@
                                                                                 @endforeach
                                                                             </select>
                                                                             @error('province_id')
-                                                                            <span class="text-danger">{{ $message }}</span>
+                                                                            <span
+                                                                                class="text-danger">{{ $message }}</span>
                                                                             @enderror
                                                                         </div>
                                                                     </div>
@@ -90,28 +113,41 @@
                                                                     <div class="col-lg-4 col-md-4 col-12 mb-3">
                                                                         <div class="form-checkout-valid-row">
                                                                             <label for="city">شهر
-                                                                                <abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
-                                                                            <select name="city_id" id="city" class="city-select form-control m-0">
+                                                                                <abbr class="required" title="ضروری"
+                                                                                    style="color:red;">*</abbr></label>
+                                                                            <select name="city_id" id="city"
+                                                                                class="city-select form-control m-0">
                                                                             </select>
                                                                             @error('city_id')
-                                                                            <span class="text-danger">{{ $message }}</span>
+                                                                            <span
+                                                                                class="text-danger">{{ $message }}</span>
                                                                             @enderror
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-4 col-md-4 col-12 mb-3">
                                                                         <div class="form-checkout-valid-row">
                                                                             <label for="apt-id">واحد
-                                                                                <abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
+                                                                                <abbr class="required" title="ضروری"
+                                                                                    style="color:red;">*</abbr></label>
                                                                             </label>
-                                                                            <input type="text" id="apt-id" name="unit" value="{{ old('unit') }}" class="input-name-checkout js-input-apt-id form-control m-0">
+                                                                            <input type="text" id="apt-id" name="unit"
+                                                                                value="{{ old('unit') }}"
+                                                                                class="input-name-checkout js-input-apt-id form-control m-0">
                                                                             @error('unit')
-                                                                            <span class="text-danger">{{ $message }}</span>
+                                                                            <span
+                                                                                class="text-danger">{{ $message }}</span>
                                                                             @enderror
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-4 col-md-4 col-12 mb-3">
-                                                                        <label for="post-code">کد پستی<abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
-                                                                        <input type="text" id="post-code" name="postal_code" class="input-name-checkout form-control m-0" value="{{ old('postal_code') }}" placeholder="کد پستی را بدون خط تیره بنویسید">
+                                                                        <label for="post-code">کد پستی<abbr
+                                                                                class="required" title="ضروری"
+                                                                                style="color:red;">*</abbr></label>
+                                                                        <input type="text" id="post-code"
+                                                                            name="postal_code"
+                                                                            class="input-name-checkout form-control m-0"
+                                                                            value="{{ old('postal_code') }}"
+                                                                            placeholder="کد پستی را بدون خط تیره بنویسید">
                                                                         @error('postal_code')
                                                                         <span class="text-danger">{{ $message }}</span>
                                                                         @enderror
@@ -119,9 +155,12 @@
 
                                                                     <div class="col-lg-12 col-md-12 col-12 mb-3">
                                                                         <label for="address">آدرس
-                                                                            <abbr class="required" title="ضروری" style="color:red;">*</abbr>
+                                                                            <abbr class="required" title="ضروری"
+                                                                                style="color:red;">*</abbr>
                                                                         </label>
-                                                                        <textarea rows="5" cols="30" id="address" name="address" class="textarea-name-checkout form-control m-0 ">{{ old('address') }}</textarea>
+                                                                        <textarea rows="5" cols="30" id="address"
+                                                                            name="address"
+                                                                            class="textarea-name-checkout form-control m-0 ">{{ old('address') }}</textarea>
                                                                         @error('address')
                                                                         <span class="text-danger">{{ $message }}</span>
                                                                         @enderror
@@ -129,9 +168,13 @@
 
                                                                     <div class="col-lg-12 col-md-12 col-12 mb-3">
                                                                         <label for="address">آدرس اضطراری
-                                                                            <abbr class="required" title="ضروری" style="color:red;">*</abbr>
+                                                                            <abbr class="required" title="ضروری"
+                                                                                style="color:red;">*</abbr>
                                                                         </label>
-                                                                        <textarea rows="5" cols="30" id="address" name="lastaddress" class="textarea-name-checkout form-control mb-0" placeholder="آدرس اضطراری در صورت بروز مشکل...">{{ old('lastaddress') }}</textarea>
+                                                                        <textarea rows="5" cols="30" id="address"
+                                                                            name="lastaddress"
+                                                                            class="textarea-name-checkout form-control mb-0"
+                                                                            placeholder="آدرس اضطراری در صورت بروز مشکل...">{{ old('lastaddress') }}</textarea>
                                                                         @error('lastaddress')
                                                                         <span class="text-danger">{{ $message }}</span>
                                                                         @enderror
@@ -145,7 +188,8 @@
                                             @else
                                             <div class="col-md-4">
                                                 <label>انتخاب آدرس</label>
-                                                <select class="form-control form-control-md mb-0" name="address_id" id="address-option">
+                                                <select class="form-control form-control-md mb-0" name="address_id"
+                                                    id="address-option">
                                                     <option value="new">آدرس جدید</option>
                                                     @foreach ($addresses as $address)
                                                     <option value="{{$address->id}}">
@@ -159,7 +203,8 @@
                                             </div>
                                             @foreach ($addresses as $address)
                                             <div id="dchange">
-                                                <div class="row mx-0 Order-another-shipping-address mt-2 checkout-address" style="display: none" ; id="{{$address->id}}">
+                                                <div class="row mx-0 Order-another-shipping-address mt-2 checkout-address"
+                                                    style="display: none" ; id="{{$address->id}}">
                                                     <div class="col-md-6 col-12">
                                                         <div class="box-header">
                                                             <span class="box-title">اطلاعات آدرس</span>
@@ -256,7 +301,8 @@
                                                     <div class="col-lg-12 col-12 mt-3 mb-4">
                                                         <tr>
                                                             <td>
-                                                                <a href="{{ route('home.addreses.edit', ['address' => $address->id]) }}" class="edit-address-link btn-Order btn btn-warning btn-sm">ویرایش
+                                                                <a href="{{ route('home.addreses.edit', ['address' => $address->id]) }}"
+                                                                    class="edit-address-link btn-Order btn btn-warning btn-sm">ویرایش
                                                                     آدرس</a>
                                                             </td>
                                                         </tr>
@@ -264,112 +310,147 @@
                                                 </div>
                                             </div>
                                             @endforeach
-                                            <div class=" Order-another-shipping-address mt-2" id="sub-address" style="display: none;">
+                                            <div class=" Order-another-shipping-address mt-2" id="sub-address"
+                                                style="display: none;">
                                                 <div class="shipping-address">
-                                                        <div class="middle-container">
-                                                            <form class="form-checkout">
-                                                                <div class="row form-checkout-row checkout-address">
-                                                                    <div class="col-lg-4 col-md-4 col-12 mb-3">
-                                                                        <label for="name">عنوان آدرس<abbr class="required" title="ضروری" style="color:red;">*</abbr></span></label>
-                                                                        <input type="text" id="title" name="title" value="{{old('title')}}" class="input-name-checkout form-control m-0">
-                                                                        @error('title')
-                                                                        <span class="text-danger">{{ $message }}</span>
-                                                                        @enderror
-                                                                    </div>
-                                                                    <div class="col-lg-4 col-md-4 col-12 mb-3">
-                                                                        <label for="name">نام تحویل گیرنده <abbr class="required" title="ضروری" style="color:red;">*</abbr></span></label>
-                                                                        <input type="text" id="name" name="name" value="{{old('name')}}" class="input-name-checkout form-control m-0">
-                                                                        @error('name')
-                                                                        <span class="text-danger">{{ $message }}</span>
-                                                                        @enderror
-                                                                    </div>
-                                                                    <div class="col-lg-4 col-md-4 col-12 mb-3">
-                                                                        <label for="phone-number">شماره موبایل <abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
-                                                                        <input type="number" dir="ltr" id="phone-number" name="cellphone" value="{{old('cellphone')}}" class="input-name-checkout form-control m-0 text-left">
-                                                                        @error('cellphone')
-                                                                        <span class="text-danger">{{ $message }}</span>
-                                                                        @enderror
-                                                                    </div>
+                                                    <div class="middle-container">
+                                                        <form class="form-checkout">
+                                                            <div class="row form-checkout-row checkout-address">
+                                                                <div class="col-lg-4 col-md-4 col-12 mb-3">
+                                                                    <label for="name">عنوان آدرس<abbr class="required"
+                                                                            title="ضروری"
+                                                                            style="color:red;">*</abbr></span></label>
+                                                                    <input type="text" id="title" name="title"
+                                                                        value="{{old('title')}}"
+                                                                        class="input-name-checkout form-control m-0">
+                                                                    @error('title')
+                                                                    <span class="text-danger">{{ $message }}</span>
+                                                                    @enderror
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-4 col-12 mb-3">
+                                                                    <label for="name">نام تحویل گیرنده <abbr
+                                                                            class="required" title="ضروری"
+                                                                            style="color:red;">*</abbr></span></label>
+                                                                    <input type="text" id="name" name="name"
+                                                                        value="{{old('name')}}"
+                                                                        class="input-name-checkout form-control m-0">
+                                                                    @error('name')
+                                                                    <span class="text-danger">{{ $message }}</span>
+                                                                    @enderror
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-4 col-12 mb-3">
+                                                                    <label for="phone-number">شماره موبایل <abbr
+                                                                            class="required" title="ضروری"
+                                                                            style="color:red;">*</abbr></label>
+                                                                    <input type="number" dir="ltr" id="phone-number"
+                                                                        name="cellphone" value="{{old('cellphone')}}"
+                                                                        class="input-name-checkout form-control m-0 text-left">
+                                                                    @error('cellphone')
+                                                                    <span class="text-danger">{{ $message }}</span>
+                                                                    @enderror
+                                                                </div>
 
-                                                                    <div class="col-lg-4 col-md-4 col-12 mb-3">
-                                                                        <label for="fixed-number">شماره تلفن ثابت(با پیش شماره)
-                                                                            <abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
-                                                                        <input type="number" dir="ltr" id="fixed-number" name="cellphone2" value="{{old('cellphone2')}}" class="input-name-checkout form-control m-0 text-left">
-                                                                        @error('cellphone2')
-                                                                        <span class="text-danger">{{ $message }}</span>
-                                                                        @enderror
-                                                                    </div>
+                                                                <div class="col-lg-4 col-md-4 col-12 mb-3">
+                                                                    <label for="fixed-number">شماره تلفن ثابت(با پیش
+                                                                        شماره)
+                                                                        <abbr class="required" title="ضروری"
+                                                                            style="color:red;">*</abbr></label>
+                                                                    <input type="number" dir="ltr" id="fixed-number"
+                                                                        name="cellphone2" value="{{old('cellphone2')}}"
+                                                                        class="input-name-checkout form-control m-0 text-left">
+                                                                    @error('cellphone2')
+                                                                    <span class="text-danger">{{ $message }}</span>
+                                                                    @enderror
+                                                                </div>
 
-                                                                    <div class="col-lg-4 col-md-4 col-12 mb-3">
-                                                                        <div class="form-checkout-valid-row">
-                                                                            <label for="province">استان
-                                                                                <abbr class="required" title="ضروری" style="color:red;">*</abbr>
-                                                                            </label>
-                                                                            <select id="province_id" name="province_id" class="form-control m-0 province-select">
-                                                                                <option selected="selected" disabled>استان
-                                                                                    مورد
-                                                                                    نظر خود را انتخاب کنید </option>
-                                                                                @foreach ($provinces as $province)
-                                                                                <option value="{{ $province->id }}">
-                                                                                    {{ $province->name }}
-                                                                                </option>
-                                                                                @endforeach
-                                                                            </select>
-                                                                            @error('province_id')
-                                                                            <span class="text-danger">{{ $message }}</span>
-                                                                            @enderror
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-4 col-md-4 col-12 mb-3">
-                                                                        <div class="form-checkout-valid-row">
-                                                                            <label for="city">شهر
-                                                                                <abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
-                                                                            <select name="city_id" id="city" class="city-select form-control m-0">
-                                                                            </select>
-                                                                            @error('city_id')
-                                                                            <span class="text-danger">{{ $message }}</span>
-                                                                            @enderror
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-4 col-md-4 col-12 mb-3">
-                                                                        <div class="form-checkout-valid-row">
-                                                                            <label for="apt-id">واحد
-                                                                                <span class="optional"> (اختیاری)
-                                                                                </span>
-                                                                            </label>
-                                                                            <input type="text" id="apt-id" name="unit" value="{{old('unit')}}" class="input-name-checkout js-input-apt-id form-control m-0">
-                                                                            @error('unit')
-                                                                            <span class="text-danger">{{ $message }}</span>
-                                                                            @enderror
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-4 col-md-4 col-12 mb-3">
-                                                                        <label for="post-code">کد پستی<abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
-                                                                        <input type="number" dir="ltr" id="post-code" name="postal_code" value="{{old('postal_code')}}" class="input-name-checkout form-control m-0">
-                                                                        @error('postal_code')
-                                                                        <span class="text-danger">{{ $message }}</span>
-                                                                        @enderror
-                                                                    </div>
-                                                                    <div class="col-md-6 col-12 mb-3">
-                                                                        <label for="address">آدرس
-                                                                            <abbr class="required" title="ضروری" style="color:red;">*</abbr>
+                                                                <div class="col-lg-4 col-md-4 col-12 mb-3">
+                                                                    <div class="form-checkout-valid-row">
+                                                                        <label for="province">استان
+                                                                            <abbr class="required" title="ضروری"
+                                                                                style="color:red;">*</abbr>
                                                                         </label>
-                                                                        <textarea rows="5" cols="30" id="address" name="address" class="textarea-name-checkout form-control m-0 ">{{old('address')}}</textarea>
-                                                                        @error('address')
-                                                                        <span class="text-danger">{{ $message }}</span>
-                                                                        @enderror
-                                                                    </div>
-                                                                    <div class="col-md-6 col-12 mb-3">
-                                                                        <label for="address">آدرس اضطراری
-                                                                            <abbr class="required" title="ضروری" style="color:red;">*</abbr>
-                                                                        </label>
-                                                                        <textarea rows="5" cols="30" id="address" name="lastaddress" class="textarea-name-checkout form-control mb-0" placeholder="آدرس اضطراری در صورت بروز مشکل...">{{old('lastaddress')}}</textarea>
-                                                                        @error('lastaddress')
+                                                                        <select id="province_id" name="province_id"
+                                                                            class="form-control m-0 province-select">
+                                                                            <option selected="selected" disabled>استان
+                                                                                مورد
+                                                                                نظر خود را انتخاب کنید </option>
+                                                                            @foreach ($provinces as $province)
+                                                                            <option value="{{ $province->id }}">
+                                                                                {{ $province->name }}
+                                                                            </option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                        @error('province_id')
                                                                         <span class="text-danger">{{ $message }}</span>
                                                                         @enderror
                                                                     </div>
                                                                 </div>
-                                                        </div>
+                                                                <div class="col-lg-4 col-md-4 col-12 mb-3">
+                                                                    <div class="form-checkout-valid-row">
+                                                                        <label for="city">شهر
+                                                                            <abbr class="required" title="ضروری"
+                                                                                style="color:red;">*</abbr></label>
+                                                                        <select name="city_id" id="city"
+                                                                            class="city-select form-control m-0">
+                                                                        </select>
+                                                                        @error('city_id')
+                                                                        <span class="text-danger">{{ $message }}</span>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-4 col-12 mb-3">
+                                                                    <div class="form-checkout-valid-row">
+                                                                        <label for="apt-id">واحد
+                                                                            <span class="optional"> (اختیاری)
+                                                                            </span>
+                                                                        </label>
+                                                                        <input type="text" id="apt-id" name="unit"
+                                                                            value="{{old('unit')}}"
+                                                                            class="input-name-checkout js-input-apt-id form-control m-0">
+                                                                        @error('unit')
+                                                                        <span class="text-danger">{{ $message }}</span>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-4 col-12 mb-3">
+                                                                    <label for="post-code">کد پستی<abbr class="required"
+                                                                            title="ضروری"
+                                                                            style="color:red;">*</abbr></label>
+                                                                    <input type="number" dir="ltr" id="post-code"
+                                                                        name="postal_code"
+                                                                        value="{{old('postal_code')}}"
+                                                                        class="input-name-checkout form-control m-0">
+                                                                    @error('postal_code')
+                                                                    <span class="text-danger">{{ $message }}</span>
+                                                                    @enderror
+                                                                </div>
+                                                                <div class="col-md-6 col-12 mb-3">
+                                                                    <label for="address">آدرس
+                                                                        <abbr class="required" title="ضروری"
+                                                                            style="color:red;">*</abbr>
+                                                                    </label>
+                                                                    <textarea rows="5" cols="30" id="address"
+                                                                        name="address"
+                                                                        class="textarea-name-checkout form-control m-0 ">{{old('address')}}</textarea>
+                                                                    @error('address')
+                                                                    <span class="text-danger">{{ $message }}</span>
+                                                                    @enderror
+                                                                </div>
+                                                                <div class="col-md-6 col-12 mb-3">
+                                                                    <label for="address">آدرس اضطراری
+                                                                        <abbr class="required" title="ضروری"
+                                                                            style="color:red;">*</abbr>
+                                                                    </label>
+                                                                    <textarea rows="5" cols="30" id="address"
+                                                                        name="lastaddress"
+                                                                        class="textarea-name-checkout form-control mb-0"
+                                                                        placeholder="آدرس اضطراری در صورت بروز مشکل...">{{old('lastaddress')}}</textarea>
+                                                                    @error('lastaddress')
+                                                                    <span class="text-danger">{{ $message }}</span>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             @endif
@@ -378,7 +459,10 @@
                                             <label for="address">توضیحات سفارش
                                                 <span class="optional">(اختیاری)</span>
                                             </label>
-                                            <textarea rows="5" cols="30" id="address" name="description" class="textarea-name-checkout form-control mb-0" style="border-radius: 1rem;" value="{{old('description')}}" placeholder="توضیحات ضروری دریافت محصول"></textarea>
+                                            <textarea rows="5" cols="30" id="address" name="description"
+                                                class="textarea-name-checkout form-control mb-0"
+                                                style="border-radius: 1rem;" value="{{old('description')}}"
+                                                placeholder="توضیحات ضروری دریافت محصول"></textarea>
                                             @error('description')
                                             <span class="text-danger mb-2">{{ $message }}</span>
                                             @enderror
@@ -430,7 +514,8 @@
                                         <tr class="cart-subtotal">
                                             <th>مجموع</th>
                                             <td>
-                                                <span class="amount">{{ number_format( \Cart::getTotal() + cartTotalSaleAmount() ) }}
+                                                <span
+                                                    class="amount">{{ number_format( \Cart::getTotal() + cartTotalSaleAmount() ) }}
                                                     <span>تومان</span>
                                                 </span>
                                             </td>
@@ -499,7 +584,8 @@
                                 <ul class="checkout-payment-methods">
                                     <li class="checkout-payment-method-item d-block">
                                         <label for="#" class="outline-radio">
-                                            <input type="radio" name="payment_method" value="zarinpal" id="payment-option-online" checked>
+                                            <input type="radio" name="payment_method" value="zarinpal"
+                                                id="payment-option-online" checked>
                                             <span class="outline-radio-check"></span>
                                         </label>
                                         <label for="#" class="shipping-totals-title-row">
@@ -509,7 +595,8 @@
                                     </li>
                                     <li class="checkout-payment-method-item d-block">
                                         <label for="#" class="outline-radio">
-                                            <input type="radio" name="payment_method" value="paypal" id="payment-option-online">
+                                            <input type="radio" name="payment_method" value="paypal"
+                                                id="payment-option-online">
                                             <span class="outline-radio-check"></span>
                                         </label>
                                         <label for="#" class="shipping-totals-title-row">
@@ -519,13 +606,17 @@
                                 </ul>
                                 <div class="form-auth-row">
                                     <label for="#" class="ui-checkbox mt-1">
-                                        <input type="checkbox" value="1" oninvalid="this.setCustomValidity('تیک قوانین و حریم خصوصی را پس از مطالعه بزنید')" oninput="this.setCustomValidity('')" required id="remember">
+                                        <input type="checkbox" value="1"
+                                            oninvalid="this.setCustomValidity('تیک قوانین و حریم خصوصی را پس از مطالعه بزنید')"
+                                            oninput="this.setCustomValidity('')" required id="remember">
                                         <span class="ui-checkbox-check"></span>
                                     </label>
-                                    <label for="remember" class="remember-me mr-0"><a href="{{route('privacy')}}">حریم خصوصی</a> و
+                                    <label for="remember" class="remember-me mr-0"><a href="{{route('privacy')}}">حریم
+                                            خصوصی</a> و
                                         <a href="{{route('ruls')}}">شرایط قوانین </a>استفاده از سرویس های سایت
                                         را
-                                        مطالعه نموده و با کلیه موارد آن موافقم <abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
+                                        مطالعه نموده و با کلیه موارد آن موافقم <abbr class="required" title="ضروری"
+                                            style="color:red;">*</abbr></label>
                                 </div>
 
                                 <button class="btn-Order btn btn-primary mt-4 mb-3" type="submit">ثبت
@@ -537,7 +628,8 @@
                                 <form class="mr-3 showcoupon">
                                     <label for="fixed-number">اعمال کد تخفیف
                                     </label>
-                                    <input type="text" id="fixed-coupon" name="code" style="border-radius: 1rem;" class="input-name-checkout form-control m-0 text-left mb-3">
+                                    <input type="text" id="fixed-coupon" name="code" style="border-radius: 1rem;"
+                                        class="input-name-checkout form-control m-0 text-left mb-3">
                                     @error('code')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -561,95 +653,95 @@
 @endsection
 @push('scripts')
 <script>
-    var previous;
-    $('#address-option').on('focus', function() {
+var previous;
+$('#address-option').on('focus', function() {
 
-        previous = $(this).val();
-    }).change(function() {
+    previous = $(this).val();
+}).change(function() {
 
-        let categoryId = $(this).val();
+    let categoryId = $(this).val();
 
-        if (categoryId == "new") {
-            $('#sub-address').show();
-        } else {
-            $('#sub-address').hide();
-        }
+    if (categoryId == "new") {
+        $('#sub-address').show();
+    } else {
+        $('#sub-address').hide();
+    }
 
-        $("#" + previous + "").hide();
-        $("#" + categoryId + "").show();
+    $("#" + previous + "").hide();
+    $("#" + categoryId + "").show();
 
-        Swal.fire({
-            text: 'آدرس ارسال محصول تغییر کرد',
-            icon: "success",
-            timer: 1500,
-        });
-
-
-    })
-</script>
-
-<script>
-    $('.province-select').change(function() {
-
-        var provinceID = $(this).val();
-        if (provinceID) {
-            $.ajax({
-                type: "GET",
-                url: "{{ url('/get-province-cities-list') }}?province_id=" + provinceID,
-                success: function(res) {
-                    if (res) {
-                        $(".city-select").empty();
-
-                        $.each(res, function(key, city) {
-                            $(".city-select").append('<option value="' + city.id + '">' +
-                                city.name + '</option>');
-                        });
-
-                    } else {
-                        $(".city-select").empty();
-                    }
-                }
-            });
-        } else {
-            $(".city-select").empty();
-        }
+    Swal.fire({
+        text: 'آدرس ارسال محصول تغییر کرد',
+        icon: "success",
+        timer: 1500,
     });
-</script>
-<script>
-    $('#address-checkout').click(function() {
-        $('#address-form').toggle();
 
-    })
+
+})
 </script>
 
 <script>
-    $(document).ready(function(e) {
+$('.province-select').change(function() {
 
-        if ($('#zarinpal').hasClass('collapse')) {
-            $('#pay-methode').val('zarinpal');
-        }
-        if ($('#paypal-1').hasClass('collapse')) {
-            $('#pay-methode').val('pay');
-        }
+    var provinceID = $(this).val();
+    if (provinceID) {
+        $.ajax({
+            type: "GET",
+            url: "{{ url('/get-province-cities-list') }}?province_id=" + provinceID,
+            success: function(res) {
+                if (res) {
+                    $(".city-select").empty();
 
-        let categoryId = $('#address-option').val();
-        if (categoryId == "new") {
+                    $.each(res, function(key, city) {
+                        $(".city-select").append('<option value="' + city.id + '">' +
+                            city.name + '</option>');
+                    });
 
-            $('#sub-address').show();
-        } else {
-            $('#sub-address').hide();
-        }
+                } else {
+                    $(".city-select").empty();
+                }
+            }
+        });
+    } else {
+        $(".city-select").empty();
+    }
+});
+</script>
+<script>
+$('#address-checkout').click(function() {
+    $('#address-form').toggle();
 
+})
+</script>
 
-    })
+<script>
+$(document).ready(function(e) {
 
-    $('#zarinpal').click(function() {
+    if ($('#zarinpal').hasClass('collapse')) {
         $('#pay-methode').val('zarinpal');
-    })
-
-    $('#paypal-1').click(function() {
+    }
+    if ($('#paypal-1').hasClass('collapse')) {
         $('#pay-methode').val('pay');
-    })
+    }
+
+    let categoryId = $('#address-option').val();
+    if (categoryId == "new") {
+
+        $('#sub-address').show();
+    } else {
+        $('#sub-address').hide();
+    }
+
+
+})
+
+$('#zarinpal').click(function() {
+    $('#pay-methode').val('zarinpal');
+})
+
+$('#paypal-1').click(function() {
+    $('#pay-methode').val('pay');
+})
 </script>
 
 @endpush

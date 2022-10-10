@@ -11,7 +11,6 @@ use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Facades\Route;
 use Livewire\Component;
 use Livewire\WithPagination;
-
 class ProductsList extends Component
 {
     use WithPagination;

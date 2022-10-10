@@ -55,17 +55,13 @@
                                 <span>اشتراک گذاری:</span>
                                 <a href="https://web.whatsapp.com/send?text={{route('home.posts.show' , ['post' => $post->slug] )}}"
                                     target="_blank" title="اشتراک در واتس‌اپ" rel="nofollow" class="p-2"><i
-                                        class="fa fa-whatsapp"></i></a>
-
-                                <a href="https://telegram.me/share/url?url={{route('home.posts.show' , ['post' => $post->slug] )}}"
+                                        class="fa fa-whatsapp"></i></a> <a
+                                    href="https://telegram.me/share/url?url={{route('home.posts.show' , ['post' => $post->slug] )}}"
                                     title="اشتراک گزاری در تلگرام" target="_blank" rel="noopener noreferrer" class="p-2"
                                     target="_blank"><i class="fa fa-telegram"></i></a>
-
-
                                 <a href="https://www.linkedin.com/shareArticle?mini=true&title={{$post->title}}&url={{route('home.posts.show' , ['post' => $post->slug] )}}"
                                     title="اشتراک گذاری در لینکدین" target="_blank" rel="noopener noreferrer"
                                     class="p-2" target="_blank"><i class="fa fa-linkedin"></i></a>
-
                             </ul>
                         </div>
                     </article>
@@ -80,9 +76,8 @@
                                 <li class="comment-even">
                                     <div class="comment-body">
                                         <header class="comment-meta">
-                                            <div class="comment-author">
-
-                                                <img src="/assets/home/images/man.png" class="">
+                                            <div class="comment-author"> <img src="/assets/home/images/man.png"
+                                                    class="">
                                                 توسط
                                                 {{$comment->user->name == " " ? "بدون نام" : $comment->user->name }} در
                                                 تاریخ
@@ -90,7 +85,6 @@
                                             </div>
                                         </header>
                                         <p>{{$comment->text}}</p>
-
                                     </div>
                                 </li>
                                 @foreach ($comment->replies as $reply)
@@ -98,14 +92,11 @@
                                     <div class="comment-body">
                                         <header class="comment-meta">
                                             <div class="comment-author">
-                                                <img src="/assets/home/images/man.png" class="">
-
-                                                پاسخ :
+                                                <img src="/assets/home/images/man.png" class=""> پاسخ :
                                                 {{$reply->user->name == null ? "بدون نام" : $reply->user->name }}
                                                 در
                                                 تاریخ :
                                                 <em>{{Hekmatinasser\Verta\Verta::instance($reply->created_at)->format('Y/n/j')}}</em>
-
                                             </div>
                                             <div style="word-wrap: break-word;">
                                                 <span>{!!$reply->text!!}</span>
@@ -121,7 +112,6 @@
                                     <div class="col-md-12 col-sm-12">
                                         <div class="form-ui">
                                             <div class="row">
-
                                                 <div class="col-12 mt-5">
                                                     <div class="form-row-title mb-2">متن نظر شما (اجباری)</div>
                                                     <div class="form-row">
@@ -184,7 +174,6 @@
                                             <img src="{{url('storage/'.$post->image->url)}}" alt="{{$post->title}}">
                                         </a>
                                     </div>
-
                                     <div class="title">
                                         <a href="{{route('home.posts.show' , ['post' => $post->slug] )}}">
                                             <h2 class="title-tag ">{{$post->title}}
@@ -200,7 +189,6 @@
                         </div>
                     </section>
                     @endif
-
                 </div>
             </div>
         </div>

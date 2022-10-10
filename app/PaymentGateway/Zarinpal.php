@@ -8,12 +8,12 @@ use Illuminate\Support\Facades\Log;
 
 class Zarinpal extends Payment
 {
-    public function send($amounts, $description, $addressId ,$ip)
+    public function send($amounts, $description, $addressId, $ip)
     {
         $data = array(
             'MerchantID' => 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
             'Amount' => $amounts['paying_amount'],
-            'CallbackURL' => route('home.payment_verify' , ['gatewayName' => 'zarinpal']),
+            'CallbackURL' => route('home.payment_verify', ['gatewayName' => 'zarinpal']),
             'Description' => $description
         );
 
@@ -39,34 +39,33 @@ class Zarinpal extends Payment
         } else {
             if ($result["Status"] == 100) {
 
-                $createOrder = parent::createOrder($addressId, $amounts, $result["Authority"], 'zarinpal',$description , $ip);
+                $createOrder = parent::createOrder($addressId, $amounts, $result["Authority"], 'zarinpal', $description, $ip);
                 if (array_key_exists('error', $createOrder)) {
                     return $createOrder;
                 }
 
-                return ['success' => 'https://sandbox.zarinpal.com/pg/StartPay/' . $result["Authority"] , 'orderId' => $createOrder['orderId']];
+                return ['success' => 'https://sandbox.zarinpal.com/pg/StartPay/' . $result["Authority"], 'orderId' => $createOrder['orderId']];
             } else {
                 try {
-                    Log::info("مشکل در ورودی اطلاعات" , [
+                    Log::info("مشکل در ورودی اطلاعات", [
                         'user_id' => auth()->id(),
                         'موبایل' => auth()->user()->cellphone,
                         'کد ارور' => $result["Status"]
                     ]);
-
-                }catch (\Throwable $th) {}
+                } catch (\Throwable $th) {
+                }
                 try {
-                    $event= Event::create([
-                        'title' => "مشکل در ورودی اطلاعات" . " " . "آدرس ip" . " " . $ip. " " . "درگاه پرداخت : " . " ". "زرین پال",
-                        'body' => 'شماره تلفن' . " " . auth()->user()->cellphone ." ". 'آیدی کاربر' ." ".auth()->id() . " " . "کد خطا" . $result["Status"],
+                    $event = Event::create([
+                        'title' => "مشکل در ورودی اطلاعات" . " " . "آدرس ip" . " " . $ip . " " . "درگاه پرداخت : " . " " . "زرین پال",
+                        'body' => 'شماره تلفن' . " " . auth()->user()->cellphone . " " . 'آیدی کاربر' . " " . auth()->id() . " " . "کد خطا" . $result["Status"],
                         'user_id' => auth()->id(),
                         'eventable_id' => auth()->id(),
                         'eventable_type' => User::class,
                     ]);
-                    
-                }catch (\Throwable $th) {}
+                } catch (\Throwable $th) {
+                }
 
-                return ['error' => 'مشکل در وردی اطلاعات کد ارور: ' . $result["Status"] , ];
-
+                return ['error' => 'مشکل در وردی اطلاعات کد ارور: ' . $result["Status"],];
             }
         }
     }
@@ -92,7 +91,7 @@ class Zarinpal extends Payment
         curl_close($ch);
         $result = json_decode($result, true);
         if ($err) {
-            $updateOrder = parent::updateOrderErorr($authority,$err);
+            $updateOrder = parent::updateOrderErorr($authority, $err);
             return ['error' => "درگاه بانکی قطع است"];
         } else {
             if ($result['Status'] == 100) {
@@ -103,7 +102,7 @@ class Zarinpal extends Payment
                 \Cart::clear();
                 return ['success' => 'Transation success. RefID:' . $result['RefID']];
             } else {
-                $updateOrder = parent::updateOrderErorr($authority,$result['Status']);
+                $updateOrder = parent::updateOrderErorr($authority, $result['Status']);
                 return ['error' => 'پرداخت با خطا مواجه شد'];
             }
         }

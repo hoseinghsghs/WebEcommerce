@@ -6,15 +6,11 @@
         <section class="profile-home">
             <div class="col-lg">
                 <div class="post-item-profile order-1 d-block">
-                    @include('home.page.users_profile.partial.right_side')
-
-                    <div class="col-lg-9 col-md-9 col-xs-12 pl content-pro">
+                    @include('home.page.users_profile.partial.right_side') <div
+                        class="col-lg-9 col-md-9 col-xs-12 pl content-pro">
                         <a class="btn btn-warning m-3" style="color:white" onclick="printDiv()">چاپ سفارش</a>
-
-
-                        <div class="table-order-view row">
-
-                            @if (URL::previous() != route('home.user_profile.ordersList'))
+                        <div class="table-order-view row"> @if (URL::previous() !=
+                            route('home.user_profile.ordersList'))
                             <div class="p-5">
                                 @if ($order->status == "آماده برای ارسال")
                                 <p class="p-3 mb-2 bg-success text-white">
@@ -36,9 +32,7 @@
                                 </p>
                                 @endif
                             </div>
-                            @endif
-
-                            <div class="col-lg-6 col-12 mt-3 ">
+                            @endif <div class="col-lg-6 col-12 mt-3 ">
                                 <div class="profile-content">
                                     <div class="profile-stats">
                                         <div class="box-header">
@@ -71,9 +65,7 @@
                                                 </tr>
                                                 @endforeach
                                             </tbody>
-                                            <tfoot>
-
-                                            </tfoot>
+                                            <tfoot> </tfoot>
                                         </table>
                                     </div>
                                 </div>
@@ -89,7 +81,6 @@
                                                         <th scope="row">مجموع:</th>
                                                         <td>
                                                             <span class="amount">
-
                                                                 {{number_format($order->total_amount)}}
                                                                 <span>تومان</span>
                                                             </span>
@@ -100,14 +91,12 @@
                                                         <td>{{number_format($order->delivery_amount )}}
                                                             <span>تومان</span>
                                                         </td>
-
                                                     </tr>
                                                     <tr>
                                                         <th scope="row">کد تخفیف:</th>
                                                         <td>{{number_format($order->coupon_amount )}}
                                                             <span>تومان</span>
                                                         </td>
-
                                                     </tr>
                                                     <tr>
                                                         <th scope="row">روش پرداخت:</th>
@@ -117,7 +106,6 @@
                                                         <th scope="row">قیمت نهایی:</th>
                                                         <td>
                                                             <span class="amount">
-
                                                                 {{number_format($order->paying_amount )}}
                                                                 <span>تومان</span>
                                                             </span>
@@ -131,7 +119,6 @@
                             </div>
                             <br>
                             <br>
-
                             <div class="col-lg-6 col-12 mt-3 ">
                                 <div class="profile-content">
                                     <div class="profile-stats p-3">
@@ -143,23 +130,17 @@
                                                 <tr>
                                                     <th scope="row">عنوان:</th>
                                                     <td>
-                                                        <span class="amount">
-
-                                                            {{ $order->address->title }}
+                                                        <span class="amount"> {{ $order->address->title }}
                                                         </span>
                                                     </td>
                                                 </tr>
-
                                                 <tr>
                                                     <th scope="row">نام تحویل گیرنده:</th>
                                                     <td>
-                                                        <span class="amount">
-
-                                                            {{ $order->address->name }}
+                                                        <span class="amount"> {{ $order->address->name }}
                                                         </span>
                                                     </td>
                                                 </tr>
-
                                                 <tr>
                                                     <th scope="row">
                                                         روش پرداخت:
@@ -170,9 +151,7 @@
                                                     <th scope="row">استان:</th>
                                                     <td>
                                                         <span class="amount">
-                                                            {{ province_name($order->address->province_id) }}
-
-                                                        </span>
+                                                            {{ province_name($order->address->province_id) }} </span>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -187,9 +166,7 @@
                                                     <th scope="row">استان:</th>
                                                     <td>
                                                         <span class="amount">
-                                                            {{ province_name($order->address->province_id) }}
-
-                                                        </span>
+                                                            {{ province_name($order->address->province_id) }} </span>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -223,25 +200,19 @@
                             </div>
                             <br>
                             <br>
-
                             <div class="col-lg-12 col-12 mt-3 ">
                                 <div class="profile-content">
                                     <div class="profile-stats p-3">
                                         <div class="box-header">
                                             <span class="box-title">آدرس اول</span>
                                         </div>
-
                                         <tr>
-
                                             <td>{{ $order->address->address }}
                                             </td>
-
                                         </tr>
-
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-lg-12 col-12 mt-3 mb-4">
                                 <div class="profile-content">
                                     <div class="profile-stats p-3">
@@ -262,9 +233,7 @@
             </div>
         </section>
     </div>
-</div>
-
-<!-- فاکتور -->
+</div><!-- فاکتور -->
 <div class="container-xl mt-4" style="margin-top: 100px; display:none ">
     <div class="row mt-4">
         <div class="col-3 text-center"><img src="{{asset('storage/logo/'.$setting->logo)}}" alt="logo" /></div>
@@ -290,7 +259,8 @@
                             <div class="col-4">
                                 <p>نام شخص حقیق / حقوقی:{{env('APP_NAME')}}</p>
                                 <p>آدرس کامل: {{ province_name($order->address->province_id) }}، شهر
-                                    {{ city_name($order->address->city_id) }}، {{ $order->address->address }}</p>
+                                    {{ city_name($order->address->city_id) }}، {{ $order->address->address }}
+                                </p>
                             </div>
                             <div class="col-4">
                                 <p>شماره اقتصادی:</p>
@@ -316,7 +286,8 @@
                             <div class="col-4">
                                 <p>نام شخص حقیق / حقوقی: {{$order->address->name}}</p>
                                 <p>آدرس کامل:{{ province_name($order->address->province_id) }}، شهر
-                                    {{ city_name($order->address->city_id) }}، {{ $order->address->address }}</p>
+                                    {{ city_name($order->address->city_id) }}، {{ $order->address->address }}
+                                </p>
                             </div>
                             <div class="col-4">
                                 <p>کد پستی:{{ $order->address->postal_code }}</p>
@@ -342,7 +313,6 @@
                     <th>واحد انداز گیری</th>
                     <th>مبلغ واحد (ریال)</th>
                     <th>مبلغ کل (ریال)</th>
-
                 </tr>
             </thead>
             <tbody>
@@ -358,33 +328,22 @@
                     <td>عدد</td>
                     <td class="text-center">{{number_format($item->price)}}</td>
                     <td class="text-center">{{number_format($item->subtotal)}}</td>
-
                 </tr>
-                @endforeach
-
-                <tr>
+                @endforeach <tr>
                     <th colspan="6" class="text-center">جمع کل</th>
-
                     <th class="text-center" colspan="2">{{number_format($order->total_amount)}}</th>
-
                 </tr>
                 <tr>
                     <th colspan="6" class="text-center">هزینه ارسال</th>
-
                     <th class="text-center" colspan="2">{{number_format($order->delivery_amount )}}</th>
-
                 </tr>
                 <tr>
                     <th colspan="6" class="text-center">کد تخفیف</th>
-
                     <th class="text-center" colspan="2">{{number_format($order->coupon_amount )}}</th>
-
                 </tr>
                 <tr>
                     <th colspan="6" class="text-center">مبلغ قابل پرداخت</th>
-
                     <th class="text-center" colspan="2">{{number_format($order->paying_amount )}}</th>
-
                 </tr>
                 <tr>
                     <th colspan="5" class="text-right">شرایط و نحوه فروش: {{$order->payment_type}} </th>
@@ -397,12 +356,9 @@
             </tbody>
         </table>
     </div>
-</div>
-
-@push('scripts')
+</div>@push('scripts')
 <script>
 function printDiv() {
-
     var divContents = $(".container-xl").html();
     let url = window.location.origin + "/css/home.css";
     var a = window.open('', '', 'height=768px, width=1366px');
@@ -417,10 +373,7 @@ function printDiv() {
     setTimeout(function() {
         a.print();
     }, 1000);
-
-
     return true;
-
 }
 </script>
 @endpush

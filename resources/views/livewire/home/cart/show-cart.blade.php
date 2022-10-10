@@ -36,6 +36,7 @@
                                                 <th scope="col" class="product-cart-price">قیمت</th>
                                                 <th scope="col" class="product-cart-quantity">تعداد مورد نیاز</th>
                                                 <th scope="col" class="product-cart-Total">مجموع</th>
+                                                <th scope="col" class="product-cart-Total"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -43,36 +44,35 @@
                                             <tr wire:key="cart-'{{$item->id}}'">
                                                 @php
                                                 $quantity = $item->quantity;
-                                                @endphp <th scope="row" class="product-cart-name">
+                                                @endphp
+                                                <td class="d-md-none">
+                                                    <a class="remove" wire:click="delete('{{$item->id}}')">
+                                                        <i class="mdi mdi-close" wire:loading.remove
+                                                            wire:target="delete('{{$item->id}}')"></i>
+                                                        <i class="fa fa-circle-o-notch fa-spin" wire:loading
+                                                            wire:target="delete('{{$item->id}}')"></i> </a>
+                                                </td>
+                                                <th scope="row" class="product-cart-name">
                                                     <div class="product-thumbnail-img">
                                                         <a
                                                             href="{{route('home.products.show',['product'=>$item->associatedModel->slug])}}">
                                                             <img
                                                                 src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$item->associatedModel->primary_image)}}">
                                                         </a>
-                                                        <div class="product-remove">
-                                                            <a class="remove" wire:click="delete('{{$item->id}}')">
-                                                                <i class="mdi mdi-close" wire:loading.remove
-                                                                    wire:target="delete('{{$item->id}}')"></i>
-                                                                <i class="fa fa-circle-o-notch fa-spin" wire:loading
-                                                                    wire:target="delete('{{$item->id}}')"></i> </a>
-                                                        </div>
                                                     </div>
-                                                    <div class="product-title">
-                                                        <a
-                                                            href="{{route('home.products.show',['product'=>$item->associatedModel->slug])}}">
-                                                            {{$item->name}}
-                                                        </a>
-                                                        <div class="variation"> <span class="variant-color-title">
-                                                                {{ \App\Models\Attribute::find($item->attributes->attribute_id)->name }}
-                                                                :
-                                                                {{ $item->attributes->value }}</span>
-                                                            <div class="variant-shape"></div>
-                                                            <div class="seller">
-                                                                <i class="mdi mdi-storefront"></i>
-                                                                فروشنده :
-                                                                <span>{{env('APP_NAME')}}</span>
-                                                            </div>
+                                                    <a
+                                                        href="{{route('home.products.show',['product'=>$item->associatedModel->slug])}}">
+                                                        {{$item->name}}
+                                                    </a>
+                                                    <div class="variation"> <span class="variant-color-title">
+                                                            {{ \App\Models\Attribute::find($item->attributes->attribute_id)->name }}
+                                                            :
+                                                            {{ $item->attributes->value }}</span>
+                                                        <div class="variant-shape"></div>
+                                                        <div class="seller">
+                                                            <i class="mdi mdi-storefront"></i>
+                                                            فروشنده :
+                                                            <span>{{env('APP_NAME')}}</span>
                                                         </div>
                                                     </div>
                                                 </th>
@@ -107,13 +107,22 @@
                                                     </div>
                                                 </td>
                                                 <td class="product-cart-Total product-subtotal">
-                                                    <span class="loader" wire:loading.flex>
+                                                    <center class="amount" id="product-subtotal"
+                                                        style="align-items: center;justify-content: center;"
+                                                        wire:loading.flex>
                                                         <i class="fa fa-circle-o-notch fa-spin"></i>
-                                                    </span>
+                                                    </center>
                                                     <span class="amount" id="product-subtotal" wire:loading.remove>
                                                         {{number_format($item->price*$item->quantity)}}
                                                         <span>تومان</span>
                                                     </span>
+                                                </td>
+                                                <td class="d-none d-md-block">
+                                                    <a class="remove" wire:click="delete('{{$item->id}}')">
+                                                        <i class="mdi mdi-close" wire:loading.remove
+                                                            wire:target="delete('{{$item->id}}')"></i>
+                                                        <i class="fa fa-circle-o-notch fa-spin" wire:loading
+                                                            wire:target="delete('{{$item->id}}')"></i> </a>
                                                 </td>
                                             </tr>
                                             @endforeach
@@ -183,7 +192,7 @@
                                             </ul>
                                             <ul>
                                                 <li>
-                                                    <span class="loader" wire:loading.flex>
+                                                    <span wire:loading.flex>
                                                         <i class="fa fa-circle-o-notch fa-spin"></i>
                                                     </span>
                                                 </li>

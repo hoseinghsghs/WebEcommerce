@@ -1,7 +1,6 @@
 @extends('home.layout.MasterHome')
 @section('title', "خانه -". $product->slug)
 @section('content')
-
 <div class="container-main">
     <div class="d-block">
         <div class="page-content page-row">
@@ -51,7 +50,6 @@
                                                         <span>محبوب</span>
                                                     </a>
                                                     @endif
-
                                                 </li>
                                                 <li class="option-social">
                                                     <a href="#" class="btn-option btn-option-social" data-toggle="modal"
@@ -77,9 +75,7 @@
                                                                 <div class="modal-body">
                                                                     <div class="title">با استفاده از روش‌های زیر
                                                                         می‌توانید این صفحه را با دیگران به اشتراک
-                                                                        بگذارید.
-
-                                                                        <div class="share-options">
+                                                                        بگذارید. <div class="share-options">
                                                                             <div
                                                                                 class="share-social-buttons text-center">
                                                                                 <a href="https://www.linkedin.com/shareArticle?mini=true&title={{route('home.products.show' , ['product' => $product->slug])}}"
@@ -101,34 +97,26 @@
                                                             </div>
                                                         </div>
                                                 </li>
-                                                <li class="Three-dimensional">
-
-                                                    @if (session()->has('compareProducts'))
-
+                                                <li class="Three-dimensional"> @if (session()->has('compareProducts'))
                                                     @if (in_array($product->id,
                                                     session()->get('compareProducts')) )
                                                     <a href="product-comparison.html" data-product="{{$product->id}}"
                                                         class="btn-option btn-compare" style="color: #651fff;">
                                                         <i class="fa fa-random"></i>
                                                         <span>مقایسه</span>
+                                                    </a> @else
+                                                    <a href="product-comparison.html" data-product="{{$product->id}}"
+                                                        class="btn-option btn-compare">
+                                                        <i class="fa fa-random"></i>
+                                                        <span>مقایسه</span>
                                                     </a>
-
-                                                    @else
+                                                    @endif @else
                                                     <a href="product-comparison.html" data-product="{{$product->id}}"
                                                         class="btn-option btn-compare">
                                                         <i class="fa fa-random"></i>
                                                         <span>مقایسه</span>
                                                     </a>
                                                     @endif
-
-                                                    @else
-                                                    <a href="product-comparison.html" data-product="{{$product->id}}"
-                                                        class="btn-option btn-compare">
-                                                        <i class="fa fa-random"></i>
-                                                        <span>مقایسه</span>
-                                                    </a>
-                                                    @endif
-
                                                 </li>
                                             </ul>
                                         </div>
@@ -195,12 +183,10 @@
                                             <span>
                                                 <i class="fa fa-tags"></i> برچسب:
                                             </span>
-                                            @foreach ($product->tags as $tag )
-
-                                            <a href="{{route('home.products.search',['tag'=>$tag->name])}}"
+                                            @foreach ($product->tags as $tag ) <a
+                                                href="{{route('home.products.search',['tag'=>$tag->name])}}"
                                                 class="product-link product-tag-title">{{$tag->name}} ،</a>
                                             @endforeach
-
                                         </li>
                                         <li>
                                             <span>
@@ -220,9 +206,7 @@
                                 }
                                 @endphp
                                 <div class="col=lg-6 col-md-6 col-xs-12 pr">
-                                    <div class="product-variants mb-2">
-
-                                    </div>
+                                    <div class="product-variants mb-2"> </div>
                                     <div class="product-params pt-3">
                                         @if ($main_attributes->count()>0)
                                         <ul data-title="ویژگی‌های محصول">
@@ -237,12 +221,9 @@
                                         @if ($product->quantity_check)
                                         <ul
                                             data-title="{{App\Models\Attribute::find($product->variations->first()->attribute_id)->name}}:">
-
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-lg-8 col-md-8 col-xs-12 pr">
-
-
                                                         <select name="variation" id="var-select"
                                                             style="display: inline; width: 75%;"
                                                             class="select-var form-control form-control-sm"
@@ -250,9 +231,7 @@
                                                             @php
                                                             $var=$product->variations()->where('quantity', '>' ,
                                                             0)->get();
-                                                            @endphp
-
-                                                            @foreach($var as $variation )
+                                                            @endphp @foreach($var as $variation )
                                                             <option
                                                                 value="{{ json_encode($variation->only(['id' , 'sku' ,'guarantee' ,'time_guarantee' , 'quantity','is_sale' , 'sale_price' , 'price'])) }}"
                                                                 {{ $variationProductSelected->id == $variation->id ? 'selected' : '' }}>
@@ -260,14 +239,12 @@
                                                             </option>
                                                             @endforeach
                                                         </select>
-
                                                     </div>
                                                 </div>
                                             </div>
                                         </ul>
                                         @endif
                                     </div>
-
                                 </div>
                                 <div class="col=lg-6 col-md-6 col-xs-12 pr">
                                     <div class="product-seller-info">
@@ -289,16 +266,11 @@
                                             <div class="product-seller-row price">
                                                 <span class="title"> قیمت:</span>
                                                 <a class="product-name variation-price">
-                                                    @if ($product->quantity_check)
-
-                                                    @if ($product->sale_check)
-
-                                                    <div class="amount">
+                                                    @if ($product->quantity_check) @if ($product->sale_check) <div
+                                                        class="amount">
                                                         {{number_format($product->sale_check->sale_price)}}
                                                         تومان
-                                                    </div>
-
-                                                    </br>
+                                                    </div> </br>
                                                     <del> {{number_format($product->sale_check->price)}}
                                                         تومان </del>
                                                     @else
@@ -307,11 +279,7 @@
                                                         تومان</span>
                                                     @endif
                                                     @else
-                                                    <span class="amount">نا موجود</span>
-
-                                                    @endif
-
-                                                </a>
+                                                    <span class="amount">نا موجود</span> @endif </a>
                                             </div>
                                             <div class="product-seller-row guarantee">
                                                 <span class="title mt-3"> تعداد:</span>
@@ -324,10 +292,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            @if ($product->quantity_check)
-
-                                            <input type="hidden" id="product_id" name="product"
-                                                value="{{$product->id}}">
+                                            @if ($product->quantity_check) <input type="hidden" id="product_id"
+                                                name="product" value="{{$product->id}}">
                                             <div class="product-seller-row add-to-cart">
                                                 <a href="#" class="btn-add-to-cart btn btn-primary" data-ishome="0">
                                                     <i class="fa fa-shopping-cart"></i>
@@ -344,7 +310,6 @@
                 </div>
             </div>
         </div>
-
         <div class="tabs" id="respon">
             <div class="tab-box">
                 <ul class="tab nav nav-tabs" id="myTab" role="tablist">
@@ -401,7 +366,6 @@
                                     <div class="shadow-box"></div>
                                 </div>
                             </section>
-
                         </div>
                         <div class="tab-pane fade" id="Specifications" role="tabpanel"
                             aria-labelledby="Specifications-tab">
@@ -425,7 +389,6 @@
                                         @endforeach
                                     </ul>
                                 </section>
-
                             </article>
                         </div>
                         <div class="tab-pane fade" id="User-comments" role="tabpanel"
@@ -478,9 +441,7 @@
                                                 محصول را قبلا از دیجی‌کالا خریده باشید،
                                                 نظر
                                                 شما به عنوان مالک محصول ثبت خواهد شد.
-                                            </p>
-
-                                            @if (auth()->user())
+                                            </p> @if (auth()->user())
                                             @foreach ( auth()->user()->orders as $order)
                                             @php
                                             $cheak_item=App\Models\OrderItem::where('order_id' ,
@@ -493,9 +454,7 @@
                                                 data-toggle="modal" data-target="#comment-modal">
                                                 ارسال نظر
                                             </button>
-                                            @endif
-
-                                            @endif
+                                            @endif @endif
                                         </div>
                                     </div>
                                     <div class="product-comment-list">
@@ -512,9 +471,8 @@
                                                                 {{$comment->user->name == null ? "بدون نام" : $comment->user->name }}
                                                                 <div class="cell-date">
                                                                     {{Hekmatinasser\Verta\Verta::instance($comment->created_at)->format('Y/n/j')}}
-                                                                </div>
-
-                                                                <span data-rating-stars="5" data-rating-readonly="true"
+                                                                </div> <span data-rating-stars="5"
+                                                                    data-rating-readonly="true"
                                                                     data-rating-value="{{ceil($comment->commentable->rates->avg('satisfaction'))}}">
                                                                 </span>
                                                             </div>
@@ -526,7 +484,6 @@
                                                         <ul class="comment-text">
                                                             <div class="header">
                                                                 <div>{{$comment->title}}</div>
-
                                                                 <p>{{$comment->text}}</p>
                                                             </div>
                                                             <div class="comments-evaluation">
@@ -556,10 +513,8 @@
                                                                             {{ $item }}
                                                                         </li>
                                                                         @endforeach
-
                                                                     </ul>
                                                                 </div>
-
                                                             </div>
                                                         </ul>
                                                     </div>
@@ -584,9 +539,7 @@
                                     </div>
                                 </div>
                                 @endforeach
-                                @endif
-
-                                <form action="{{route('home.questions.store' , ['product' => $product->id])}}"
+                                @endif <form action="{{route('home.questions.store' , ['product' => $product->id])}}"
                                     method="POST" class="review-form">
                                     @csrf
                                     <div class="form-faq-row mt-4">
@@ -625,8 +578,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-
                                     <div class="form-faq-row mt-4">
                                         <div class="form-faq-col form-faq-col-submit">
                                             <button class="btn-tertiary btn btn-secondary" type="submit">ثبت
@@ -634,9 +585,7 @@
                                         </div>
                                     </div>
                                 </form>
-                                <div id="product-questions-list">
-
-                                    @foreach ($product->approvedQuestions as $question )
+                                <div id="product-questions-list"> @foreach ($product->approvedQuestions as $question )
                                     <div class="questions-list mb-2">
                                         <ul class="faq-list">
                                             <li class="is-question">
@@ -649,7 +598,6 @@
                                                         </p>
                                                         <p>{!!$question->text!!}</p>
                                                     </div>
-
                                                     <div class="faq-date">
                                                         <em>{{Hekmatinasser\Verta\Verta::instance($question->created_at)->format('Y/n/j')}}</em>
                                                     </div>
@@ -658,7 +606,6 @@
                                                         پاسخ
                                                         <i class="fa fa-reply"></i>
                                                     </a>
-
                                                 </div>
                                             </li>
                                         </ul>
@@ -667,9 +614,7 @@
                                         id="reply-form-{{$question->id}}"
                                         action="{{route('questions.reply.add' , ['product' => $product->id , 'question' => $question->id])}}"
                                         method="POST" class="review-form ">
-                                        @csrf
-
-                                        <div class="form-faq-col">
+                                        @csrf <div class="form-faq-col">
                                             <textarea name="text" cols="30" rows="5"
                                                 style="background-color:#fbfbfb; border-radius: 1rem;"
                                                 placeholder="پاسخ ..." class="form-control mt-2" id="review"></textarea>
@@ -679,8 +624,6 @@
                                             <button class="btn-tertiary btn btn-secondary mt-2" type="submit">ثبت
                                                 پاسخ</button>
                                         </div>
-
-
                                     </form>
                                     @foreach ($question->replies as $reply)
                                     @if ($reply->approved == 1)
@@ -698,17 +641,13 @@
                                                     <div style="word-wrap: break-word;">
                                                         <span>{!!$reply->text!!}</span>
                                                     </div>
-
                                                     <div class="faq-date">
                                                         <em>{{Hekmatinasser\Verta\Verta::instance($reply->created_at)->format('Y/n/j')}}</em>
                                                     </div>
                                                 </div>
                                             </li>
                                         </ul>
-
-                                    </div>
-
-                                    @foreach ($reply->replies as $reply)
+                                    </div> @foreach ($reply->replies as $reply)
                                     @if ($reply->approved == 1)
                                     <div class="questions-list answer-questions" style="width: 89% !important;">
                                         <ul class="faq-list">
@@ -731,9 +670,7 @@
                                         </ul>
                                     </div>
                                     @endif
-                                    @endforeach
-
-                                    @endif
+                                    @endforeach @endif
                                     @endforeach
                                     @endforeach
                                 </div>
@@ -744,15 +681,13 @@
             </div>
         </div>
     </div>
-</div>
-
-<!-- modal -->
+</div><!-- modal -->
 <div class="modal fade bd-example-modal-lg" id="comment-modal" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">نظر خریدار</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -760,22 +695,17 @@
             <div class="modal-body">
                 <form action="{{route('home.comments.store' , ['product' => $product->id])}}" method="POST"
                     id="addCommentForm">
-                    @csrf
-
-                    <section class="product-comment">
+                    @csrf <section class="product-comment">
                         <div class="comments-product">
                             <div class="comments-product-row">
                                 <div class="col-lg-12 col-md-12 col-xs-12 pull-left">
                                     <div class="comments-product-col-info">
                                         <div class="comments-product-attributes px-3">
-
                                             <div class="row">
                                                 <div class="col-sm-12 col-12 mb-3">
                                                     <div class="comments-product-attributes-title">ارزش خرید نسبت به
-                                                        قیمت</div>
-
-                                                    <input type="range" class="cost form-control-range" name="cost"
-                                                        id="formControlRange" min="1" max="5" step="1"
+                                                        قیمت</div> <input type="range" class="cost form-control-range"
+                                                        name="cost" id="formControlRange" min="1" max="5" step="1"
                                                         onInput="setlable('cost')">
                                                 </div>
                                                 <center>
@@ -784,15 +714,12 @@
                                                         خوب
                                                     </span>
                                                 </center>
-
                                             </div>
-
                                             <div class="row">
                                                 <div class="col-sm-12 col-12 mb-3">
-                                                    <div class="comments-product-attributes-title">کیفیت</div>
-
-                                                    <input type="range" class="quality form-control-range"
-                                                        name="quality" id="formControlRange" min="1" max="5" step="1"
+                                                    <div class="comments-product-attributes-title">کیفیت</div> <input
+                                                        type="range" class="quality form-control-range" name="quality"
+                                                        id="formControlRange" min="1" max="5" step="1"
                                                         onInput="setlable('quality')">
                                                 </div>
                                                 <center>
@@ -801,29 +728,22 @@
                                                         خوب
                                                     </span>
                                                 </center>
-
                                             </div>
-
                                             <div class="row">
                                                 <div class="col-sm-12 col-12 mb-3">
                                                     <div class="comments-product-attributes-title">میزان رضایت کلی از
-                                                        محصول</div>
-
-                                                    <input type="range" class="satisfaction form-control-range"
-                                                        name="satisfaction" id="formControlRange" min="1" max="5"
-                                                        step="1" onInput="setlable('satisfaction')">
-
+                                                        محصول</div> <input type="range"
+                                                        class="satisfaction form-control-range" name="satisfaction"
+                                                        id="formControlRange" min="1" max="5" step="1"
+                                                        onInput="setlable('satisfaction')">
                                                 </div>
-
                                                 <center>
                                                     <span id="rangeva3" class="bg-primary text-white p-1"
                                                         style="border-radius: 1rem;">
                                                         خوب
                                                     </span>
                                                 </center>
-
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -849,7 +769,6 @@
                                                                             @enderror
                                                                         </div>
                                                                     </div>
-
                                                                     <div
                                                                         class="col-12 form-comment-title--positive mt-4">
                                                                         <div class="form-row-title mb-2 pr-3">
@@ -864,6 +783,10 @@
                                                                                 <button
                                                                                     class="ui-input-point js-icon-form-add"
                                                                                     type="button"></button>
+                                                                                @error('strengthss')
+                                                                                <span
+                                                                                    class="text-danger">{{ $message }}</span>
+                                                                                @enderror
                                                                             </div>
                                                                             <div
                                                                                 class="form-comment-dynamic-labels js-advantages-list">
@@ -884,6 +807,10 @@
                                                                                 <button
                                                                                     class="ui-input-point js-icon-form-add"
                                                                                     type="button"></button>
+                                                                                @error('weak-points')
+                                                                                <span
+                                                                                    class="text-danger">{{ $message }}</span>
+                                                                                @enderror
                                                                             </div>
                                                                             <div
                                                                                 class="form-comment-dynamic-labels js-disadvantages-list">
@@ -929,12 +856,8 @@
         </div>
     </div>
 </div>
-<!-- end modal -->
-
-
-
-@push('scripts')
-@if(Session::get('status'))
+<!-- end modal -->@push('scripts')
+@if(Session::get('status_show'))
 <script>
 $(function() {
     $('#comment-modal').modal('show');
@@ -943,7 +866,6 @@ $(function() {
 @endif
 <script>
 function setlable(e) {
-
     if (e == "cost") {
         var lable = $(".cost").val();
     }
@@ -968,7 +890,6 @@ function setlable(e) {
     if (lable == 5) {
         lable = "عالی";
     }
-
     if (e == "cost") {
         $("#rangeva1").html(lable);
     }
@@ -979,10 +900,7 @@ function setlable(e) {
         $("#rangeva3").html(lable);
     }
 }
-
 $(document).ready(function(e) {
-
-
     if (typeof $('#var-select').val() === 'undefined' || typeof $('#var-select').val() === null) {
         variation = null;
     } else {
@@ -990,34 +908,24 @@ $(document).ready(function(e) {
     }
     let variationPriceDiv = $('.variation-price');
     variationPriceDiv.empty();
-
     if (variation == null) {
-
         let spanPrice = $('<span />', {
             class: 'amount',
             text: 'ناموجود',
         });
         variationPriceDiv.append(spanPrice);
-
     } else {
-
         $('.sku').html(variation.sku);
-
         if (variation.time_guarantee === null) {
-
             $('.guarantee1').remove();
-
         } else {
             $('#time_guarantee').html(variation.time_guarantee);
         }
-
         if (variation.guarantee === null) {
             $('.guarantee2').remove();
         } else {
             $('#guarantee').html(variation.guarantee);
-
         }
-
         if (variation.is_sale) {
             let spanSale = $('<div />', {
                 class: 'amount text-danger',
@@ -1027,7 +935,6 @@ $(document).ready(function(e) {
                 class: 'amount',
                 text: number_format(variation.price) + ' تومان'
             });
-
             variationPriceDiv.append(spanSale);
             variationPriceDiv.append(spanPrice);
         } else {
@@ -1037,24 +944,17 @@ $(document).ready(function(e) {
             });
             variationPriceDiv.append(spanPrice);
         }
-
         $('.numberstyle').attr('max', variation.quantity);
         $('.numberstyle').val(1);
     }
-
-
 });
-
 $('#var-select').on('change', function() {
-
     let variation = JSON.parse(this.value);
     let variationPriceDiv = $('.variation-price');
     variationPriceDiv.empty();
-
     $('.sku').html(variation.sku);
     $('#time_guarantee').html(variation.time_guarantee);
     $('#guarantee').html(variation.guarantee);
-
     if (variation.is_sale) {
         let spanSale = $('<span />', {
             class: 'amount',
@@ -1064,7 +964,6 @@ $('#var-select').on('change', function() {
             class: 'amount',
             text: number_format(variation.price) + ' تومان'
         });
-
         variationPriceDiv.append(spanSale);
         variationPriceDiv.append(spanPrice);
     } else {
@@ -1076,11 +975,9 @@ $('#var-select').on('change', function() {
     }
     $('.numberstyle').attr('max', variation.quantity);
     $('.numberstyle').val(1);
-
 });
 
 function reply(id) {
-
     let sid = 'reply-form-' + id;
     console.log(sid);
     $('#' + sid).toggle();
@@ -1088,9 +985,7 @@ function reply(id) {
 </script>
 <script>
 (function($) {
-
     $.fn.numberstyle = function(options) {
-
         /*
          * Default settings
          */
@@ -1100,27 +995,22 @@ function reply(id) {
             min: undefined,
             max: undefined
         }, options);
-
         /*
          * Init every element
          */
         return this.each(function(i) {
-
             /*
              * Base options
              */
             var input = $(this);
-
             /*
              * Add new DOM
              */
-
             /*
              * Attach events
              */
             // use .off() to prevent triggering twice
             $(document).off('click', '.qty-btn').on('click', '.qty-btn', function(e) {
-
                 var input = $(this).siblings('input'),
                     sibBtn = $(this).siblings('.qty-btn'),
                     step = (settings.step) ? parseFloat(settings.step) : parseFloat(input.attr(
@@ -1130,71 +1020,48 @@ function reply(id) {
                     max = (settings.max) ? settings.max : (input.attr('max')) ? input.attr(
                         'max') : undefined,
                     oldValue = parseFloat(input.val()),
-                    newVal;
-
-                //Add value
+                    newVal; //Add value
                 if ($(this).hasClass('qty-add')) {
-
                     newVal = (oldValue >= max) ? oldValue : oldValue + step,
                         newVal = (newVal > max) ? max : newVal;
-
                     if (newVal == max) {
                         $(this).addClass('disabled');
                     }
-                    sibBtn.removeClass('disabled');
-
-                    //Remove value
+                    sibBtn.removeClass('disabled'); //Remove value
                 } else {
-
                     newVal = (oldValue <= min) ? oldValue : oldValue - step,
                         newVal = (newVal < min) ? min : newVal;
-
                     if (newVal == min) {
                         $(this).addClass('disabled');
                     }
                     sibBtn.removeClass('disabled');
-
-                }
-
-                //Update value
+                } //Update value
                 input.val(newVal).trigger('change');
-
             });
-
             input.on('change', function() {
-
                 const val = parseFloat(input.val()),
                     min = (settings.min) ? settings.min : (input.attr('min')) ? input.attr(
                         'min') : undefined,
                     max = (settings.max) ? settings.max : (input.attr('max')) ? input.attr(
                         'max') : undefined;
-
                 if (val > max) {
                     input.val(max);
                 }
-
                 if (val < min) {
                     input.val(min);
                 }
             });
-
         });
     };
     $('.numberstyle').numberstyle();
-
 }(jQuery));
-</script>
-
-@endpush
+</script>@endpush
 @push('styles')
-
 <link rel="stylesheet" type="text/css" href="{{asset('/assets/home/css/number.css')}}" />
 <style>
 .owl-carousel {
     touch-action: manipulation;
 }
 </style>
-
-
 @endpush
 @endsection

@@ -40461,7 +40461,7 @@ button.products-filter-btn {
     }
 
     .post-item-cart .content-page .cart-form .table tbody th .product-remove {
-        line-height: 35px;
+        line-height: 24px;
     }
 
     .product .product-usp .product-feature .product-feature-col {
@@ -40691,8 +40691,8 @@ button.products-filter-btn {
     }
 
     .post-item-cart .content-page .cart-form .table tbody th .product-remove {
-        height: 50px;
-        line-height: 50px;
+        height: 24px;
+        line-height: 24px;
         opacity: 1;
         visibility: visible;
         background: #f5f5f5;
@@ -40703,7 +40703,6 @@ button.products-filter-btn {
         margin-bottom: 20px;
         display: block;
         border-radius: 20px;
-        padding: 20px;
     }
 
     .post-item-cart
@@ -40739,7 +40738,6 @@ button.products-filter-btn {
         th
         .product-thumbnail-img
         img {
-        margin-top: 80px;
         border-radius: 20px;
     }
 

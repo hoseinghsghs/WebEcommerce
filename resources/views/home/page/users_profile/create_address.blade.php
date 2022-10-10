@@ -5,9 +5,7 @@
     <div class="d-block">
         <section class="profile-home">
             <div class="col-lg">
-                <div class="post-item-profile order-1 d-block">
-
-                    @include('home.page.users_profile.partial.right_side')
+                <div class="post-item-profile order-1 d-block"> @include('home.page.users_profile.partial.right_side')
                     <div class="col-lg-9 col-md-9 col-xs-12 pl">
                         <div class="profile-content">
                             <div class="profile-stats">
@@ -44,7 +42,6 @@
                                                     <small class="text-danger">{{ $message }}</small>
                                                     @enderror
                                                 </div>
-
                                                 <div class="col-lg-4 col-md-4 col-12 mb-3">
                                                     <label for="fixed-number">شماره تلفن ثابت
                                                         <abbr class="required" title="ضروری"
@@ -113,7 +110,6 @@
                                                     <small class="text-danger">{{ $message }}</small>
                                                     @enderror
                                                 </div>
-
                                                 <div class="col-lg-12 col-md-12 col-12 mb-3">
                                                     <label for="address">آدرس
                                                         <abbr class="required" title="ضروری" style="color:red;">*</abbr>
@@ -152,20 +148,22 @@
     </div>
 </div>
 @push('scripts')
+@if($errors->any())
 <script>
-    @if ($errors->any())
-    Swal.fire({
-        text: "لطفا خطاها را رفع نمایید",
-        icon: 'warning',
-        showConfirmButton: false,
-        toast: true,
-        position: 'top-right',
-        timer: 5000,
-        timerProgressBar: true,
-    })
-    @endif
-$('.province-select').change(function() {
+Swal.fire({
+    text: "لطفا خطاها را رفع نمایید",
+    icon: 'warning',
+    showConfirmButton: false,
+    toast: true,
+    position: 'top-right',
+    timer: 5000,
+    timerProgressBar: true,
+})
+</script>
 
+@endif
+<script>
+$('.province-select').change(function() {
     var provinceID = $(this).val();
     if (provinceID) {
         $.ajax({
@@ -174,12 +172,10 @@ $('.province-select').change(function() {
             success: function(res) {
                 if (res) {
                     $(".city-select").empty();
-
                     $.each(res, function(key, city) {
                         $(".city-select").append('<option value="' + city.id + '">' +
                             city.name + '</option>');
                     });
-
                 } else {
                     $(".city-select").empty();
                 }

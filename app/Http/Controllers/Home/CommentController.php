@@ -28,6 +28,7 @@ class CommentController extends Controller
 
     {
         $validator = Validator::make($request->all(), [
+            'title' => 'required|min:5|max:100',
             'text' => 'required|min:5|max:7000',
             'comment.*.advantages.*' => 'min:5|max:7000',
             'comment.*.disadvantages.*' => 'min:5|max:7000',
@@ -39,26 +40,36 @@ class CommentController extends Controller
         ]);
         
         if ($validator->fails()) {
-            return redirect()->to(url()->previous())->withErrors($validator)->with('status' , 1);
+            return redirect()->to(url()->previous())->withErrors($validator)->with('status_show' , 1);
         }
 
         if (auth()->check()) {
+            
             try {
                 DB::beginTransaction();
 
+                if(isset($request->comment['advantages'])){
+                $advantages=json_encode($request->comment['advantages']);
+                }else{
+                    $advantages=null  ;
+                }
+                if(isset($request->comment['advantages'])){
+                $disadvantages=json_encode($request->comment['disadvantages']);
+                }else{
+                    $disadvantages=null;  
+                }
               $comment=  Comment::create([
 
                     'user_id' => auth()->id(),
                     'text' => $request->text,
                     
-                    'advantages' =>json_encode($request->comment['advantages']),
-                    'disadvantages' =>json_encode($request->comment['disadvantages']) ,
+                    'advantages' =>$advantages,
+                    'disadvantages' =>$disadvantages ,
 
                     'commentable_id' => $product->id,
                     'commentable_type' => Product::class,
                  
                 ]);
-
 
                 $event= Event::create([
                     'title' => 'کامنت جدید ثبت شد',

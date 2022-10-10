@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Log;
 
 class Payment
 {
-    public function createOrder($addressId, $amounts, $token, $gateway_name , $description , $ip)
+    public function createOrder($addressId, $amounts, $token, $gateway_name, $description, $ip)
     {
         try {
             DB::beginTransaction();
@@ -50,9 +50,9 @@ class Payment
                 'gateway_name' => $gateway_name
             ]);
 
-           $event= Event::create([
+            $event = Event::create([
                 'title' => 'سفارش جدید ثبت شد',
-                'body' => 'شماره سفارش' . " " . $order->id ." ". 'آیدی کاربر' ." ".auth()->id() ,
+                'body' => 'شماره سفارش' . " : " . $order->id . " " . 'آیدی کاربر' . " : " . auth()->id(),
                 'user_id' => auth()->id(),
                 'eventable_id' => $order->id,
                 'eventable_type' => Order::class,
@@ -62,12 +62,12 @@ class Payment
         } catch (\Exception $ex) {
             DB::rollBack();
             try {
-                Log::info("مشکل ذخیره داده در دیتا بیس" , [
+                Log::info("مشکل ذخیره داده در دیتا بیس", [
                     'user_id' => auth()->id(),
                     'error' => $ex->getMessage()
                 ]);
             } catch (\Throwable $th) {
-                Log::info("مشکل ذخیره داده در دیتا بیس" , [
+                Log::info("مشکل ذخیره داده در دیتا بیس", [
                     'error' => $th->getMessage()
                 ]);
             }
@@ -80,17 +80,17 @@ class Payment
         } catch (\Throwable $th) {
         }
         try {
-            Log::info("سفارش جدید ثیت شد" , [
+            Log::info("سفارش جدید ثیت شد", [
                 'title' => 'سفارش جدید ثبت شد',
-                'body' => 'شماره سفارش' . " " . $order->id ." ". 'آیدی کاربر' ." ".auth()->id() ,
-                'user_id' => auth()->id() ." "."شماره تماس". auth()->user()->cellphone,
+                'body' => 'شماره سفارش' . " : " . $order->id . " " . 'آیدی کاربر' . " : " . auth()->id() . " " . "شماره تماس" . " : " . auth()->user()->cellphone,
+                'user_id' => auth()->id(),
                 'eventable_id' => $order->id,
                 'eventable_type' => Order::class,
             ]);
         } catch (\Throwable $th) {
         }
 
-        return ['success' => 'success!' , 'orderId' => $order->id];
+        return ['success' => 'success!', 'orderId' => $order->id];
     }
 
     public function updateOrder($token, $refId)
@@ -126,9 +126,9 @@ class Payment
 
         return ['success' => 'success!'];
     }
-    public function updateOrderErorr($token,$result)
+    public function updateOrderErorr($token, $result)
     {
-        
+
         $transaction = Transaction::where('token', $token)->firstOrFail();
 
         $transaction->update([

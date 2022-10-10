@@ -1,16 +1,13 @@
 @extends('home.layout.MasterHome')
 @section('title' , 'پروفایل کاربری')
 @section('content')
-
 <!-- profile------------------------------->
 <div class="container-main">
     <div class="d-block">
         <section class="profile-home">
             <div class="col-lg">
                 <div class="post-item-profile order-1 d-block">
-
                     @include('home.page.users_profile.partial.right_side')
-
                     <div class="col-lg-9 col-md-9 col-xs-12 pl">
                         <div class="profile-content">
                             <div class="profile-stats">
@@ -33,9 +30,7 @@
                                                 <th scope="col">مجموع</th>
                                                 <th scope="col">جزئیات</th>
                                             </tr>
-                                        </thead>
-
-                                        @foreach ($orders as $order)
+                                        </thead> @foreach ($orders as $order)
                                         <tbody>
                                             <tr>
                                                 <td class="order-code">{{$order->id}}</td>
@@ -43,7 +38,8 @@
                                                 </td>
                                                 <td
                                                     class="{{$order->status == 'در انتظار پرداخت' ? 'text-primary' : 'text-success'}}">
-                                                    {{$order->status}}</td>
+                                                    {{$order->status}}
+                                                </td>
                                                 <td class="totla">
                                                     <span class="amount">{{number_format($order->paying_amount)}}
                                                         <span>تومان</span>
@@ -106,6 +102,4 @@
         </section>
     </div>
 </div>
-<!-- profile------------------------------->
-
 @endsection

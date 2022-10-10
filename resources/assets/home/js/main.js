@@ -535,11 +535,15 @@ $(document).ready(function (e) {
                         timer: 1500,
                         ConfirmButton: "باشه",
                     });
+                } else {
+                    alert("اتصال شما به اینترنت قطع");
+                    location.reload();
                 }
             }
         )
             .fail(function (response) {
-                alert(response);
+                alert("اتصال شما به اینترنت قطع");
+                location.reload();
             })
             .always(function () {
                 a.find("i").removeClass("fa fa-circle-o-notch fa-spin");
