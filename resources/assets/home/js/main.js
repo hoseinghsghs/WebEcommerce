@@ -347,9 +347,16 @@ $(document).ready(function (e) {
     // });
 
     // checkout-coupon-------------------------------
-    $(".showcoupon").submit(function (e) {
+    $(".showcoupon").on("click", function () {
+        $(".checkout-coupon").slideToggle(200);
+    });
+
+    $(".form-coupon").on("submit", function (e) {
         e.preventDefault();
-        var code1 = $("#fixed-coupon").val();
+        var form=$(this);
+            form.find('button').attr('disabled', true).append(
+            '<span class="mr-1"><i class="fa fa-spinner fa-spin"></i></span>');
+        var code1 = form.find('input').val();
         let url = window.location.origin + "/checkcoupon";
         $.post(
             url,
@@ -364,11 +371,10 @@ $(document).ready(function (e) {
                     $(".showcoupon").remove();
 
                     Swal.fire({
-                        title: "حله",
                         text: "کد تخفیف اعمال گردید",
                         icon: "success",
                         timer: 1500,
-                        ConfirmButton: "باشه",
+                        confirmButtonText: "تایید",
                     });
                 }
                 if (xhr.status == 201) {
@@ -377,24 +383,24 @@ $(document).ready(function (e) {
                         text: message,
                         icon: "warning",
                         timer: 1500,
-                        ConfirmButton: "باشه",
+                        confirmButtonText: "تایید",
                     });
                 }
             }
         )
             .fail(function (response) {
                 let message = response.errormessage;
-                console.log(message);
+                // console.log(message);
                 Swal.fire({
                     text: message,
                     icon: "warning",
                     timer: 1500,
-                    ConfirmButton: "باشه",
+                    confirmButtonText: "تایید",
                 });
             })
             .always(function () {
-                a.find("i").removeClass("fa fa-circle-o-notch fa-spin");
-                a.find("i").addClass("fa fa-shopping-cart");
+                form.find('button').attr('disabled', false).find('span')
+                .remove();
             });
     });
 
@@ -521,11 +527,10 @@ $(document).ready(function (e) {
                     );
 
                     Swal.fire({
-                        title: "حله",
                         text: "محصول به سبد خرید اضافه شد",
                         icon: "success",
                         timer: 1500,
-                        ConfirmButton: "باشه",
+                        confirmButtonText: "تایید",
                     });
                 }
                 if (xhr.status == 201) {
@@ -533,7 +538,7 @@ $(document).ready(function (e) {
                         text: "محصول قبلا به سبد خرید اضافه شده",
                         icon: "warning",
                         timer: 1500,
-                        ConfirmButton: "باشه",
+                        confirmButtonText: "تایید",
                     });
                 }
             }
@@ -908,7 +913,7 @@ $(document).ready(function (e) {
                     text: " اینترنت شما قطع است",
                     icon: "error",
                     timer: 1500,
-                    ConfirmButton: "باشه",
+                    confirmButtonText: "تایید",
                 });
             })
             .always(function () {

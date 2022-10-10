@@ -15,8 +15,8 @@ use SebastianBergmann\Environment\Console;
 
 class CartController extends Controller
 {
-    public function add(Request $request)   
-    {       
+    public function add(Request $request)
+    {
         $request->validate([
             'product' => 'required',
             'qtybutton' => 'required'
@@ -24,10 +24,10 @@ class CartController extends Controller
 
         $product = Product::findOrFail($request->product);
         $productVariation = ProductVariation::findOrFail(json_decode($request->variation)->id);
-        
+
 
         if ($request->qtybutton > $productVariation->quantity) {
-            
+
             response( 'success', 404 );
         }
 
@@ -41,19 +41,19 @@ class CartController extends Controller
                 'quantity' => $request->qtybutton,
                 'attributes' => $productVariation->toArray(),
                 'associatedModel' => $product,
-                
+
             ));
-            
-           return response()->json(['product'=>$product,'app_name' => env('APP_NAME'),'rowId'=>$rowId , 'cart' => Cart::getContent($rowId) , 'rowId' =>$rowId , 'all_cart' => Cart::getTotal()],200);    
-        } 
+
+           return response()->json(['product'=>$product,'app_name' => env('APP_NAME'),'rowId'=>$rowId , 'cart' => Cart::getContent($rowId) , 'rowId' =>$rowId , 'all_cart' => Cart::getTotal()],200);
+        }
         else {
-           
+
            return response( 'success', 201 );
         }
-        
+
 
     }
-    
+
     public function index()
     {
     return view('home.page.cart.index');
@@ -69,7 +69,7 @@ class CartController extends Controller
     public function checkout()
     {
         if (\Cart::isEmpty()) {
-            alert()->warning('سبد خرید شما خالی میباشد');
+            alert()->warning('سبد خرید شما خالی میباشد')->showConfirmButton('تایید');
             return redirect()->route('home');
         }
 

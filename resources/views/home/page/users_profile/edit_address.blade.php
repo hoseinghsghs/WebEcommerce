@@ -78,9 +78,7 @@
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-12 mb-3">
                                                     <div class="form-checkout-valid-row">
-                                                        <label for="apt-id">واحد
-                                                            <abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
-                                                        </label>
+                                                        <label for="apt-id">واحد</label>
                                                         <input type="text" id="apt-id" name="unit" value="{{ old('unit')??$address->unit }}" class="input-name-checkout js-input-apt-id form-control m-0">
                                                         @error('unit')
                                                         <small class="text-danger">{{ $message }}</small>

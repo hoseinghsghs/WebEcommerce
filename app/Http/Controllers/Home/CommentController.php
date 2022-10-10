@@ -19,9 +19,9 @@ use Illuminate\Support\Facades\Validator;
 class CommentController extends Controller
 {
     public function create(Request $request){
-        
+
         return view('home.page.comment.comments');
-        
+
     }
 
     public function store(Product $product , Request $request)
@@ -31,13 +31,13 @@ class CommentController extends Controller
             'text' => 'required|min:5|max:7000',
             'comment.*.advantages.*' => 'min:5|max:7000',
             'comment.*.disadvantages.*' => 'min:5|max:7000',
-           
+
             // 'cost'=>'required|digits_between:0,5',
             // 'quality'=>'required|digits_between:0,5',
             // 'strengthss'=>'required|digits_between:0,5',
-            // 'rate' => 'required|digits_between:0,5', 
+            // 'rate' => 'required|digits_between:0,5',
         ]);
-        
+
         if ($validator->fails()) {
             return redirect()->to(url()->previous())->withErrors($validator)->with('status' , 1);
         }
@@ -50,13 +50,13 @@ class CommentController extends Controller
 
                     'user_id' => auth()->id(),
                     'text' => $request->text,
-                    
+
                     'advantages' =>json_encode($request->comment['advantages']),
                     'disadvantages' =>json_encode($request->comment['disadvantages']) ,
 
                     'commentable_id' => $product->id,
                     'commentable_type' => Product::class,
-                 
+
                 ]);
 
 
@@ -67,7 +67,7 @@ class CommentController extends Controller
                     'eventable_id' =>$comment->id,
                     'eventable_type' => Comment::class,
                 ]);
-                
+
                 try {
                     broadcast(new NotificationMessage($event))->toOthers();
                 } catch (\Throwable $th) {
@@ -82,7 +82,7 @@ class CommentController extends Controller
                     'eventable_id' =>$comment->id,
                     'eventable_type' => Comment::class,
                 ]
-                
+
                 );
                } catch (\Throwable $th) {
                 //throw $th;
@@ -102,53 +102,53 @@ class CommentController extends Controller
                         'cost'=>$request->cost,
                         'quality'=>$request->quality,
                         'satisfaction'=>$request->satisfaction,
-                        
+
                     ]);
                 }
 
                 DB::commit();
             } catch (\Exception $ex) {
                 DB::rollBack();
-                alert()->error('مشکل در ایجاد پست', $ex->getMessage())->persistent('حله');
+                alert()->error('مشکل در ایجاد پست', $ex->getMessage())->showConfirmButton('تایید');
                 return redirect()->back();
             }
 
             alert()->success('نظر شما با موفقیت برای این محصول ثبت شد', 'باتشکر');
             return redirect()->back();
         } else {
-            alert()->warning('برای ثبت نظر ابتدا وارد سایت شوید')->persistent('حله');
+            alert()->warning('برای ثبت نظر ابتدا وارد سایت شوید')->showConfirmButton('تایید');
             return redirect()->back();
         }
     }
 
     public function replyStore(Request $request)
     {
-        
+
         Comment::create([
             'user_id' => auth()->id(),
             'text' => $request->text,
             'commentable_id' => $request->product,
             'commentable_type' => Product::class,
             'parent_id' => $request->comment,
-          
+
         ]);
-        alert()->success('پاسخ شما با موفقیت برای این محصول ثبت شد', 'باتشکر');
+        alert()->success('پاسخ شما با موفقیت برای این محصول ثبت شد', 'باتشکر')->showConfirmButton('تایید');
         return redirect()->back();
-   
+
         return back();
     }
-   
+
 
 
     //posts comment
-    
+
     public function poststore(Post $post , Request $request)
     {
-        
+
         $validator = Validator::make($request->all(), [
             'text' => 'required|min:5|max:7000',
         ]);
-        
+
         if ($validator->fails()) {
             return redirect()->to(url()->previous() . '#scform')->withErrors($validator)->with('status' , 1);
         }
@@ -163,20 +163,20 @@ class CommentController extends Controller
                     'text' => $request->text,
                     'commentable_id' => $post->id,
                     'commentable_type' => Post::class,
-                 
+
                 ]);
 
                 DB::commit();
             } catch (\Exception $ex) {
                 DB::rollBack();
-                alert()->error('مشکل در ایجاد پست', $ex->getMessage())->persistent('حله');
+                alert()->error('مشکل در ایجاد پست', $ex->getMessage())->showConfirmButton('تایید');
                 return redirect()->back();
             }
 
             alert()->success('نظر شما با موفقیت برای این پست ثبت شد', 'باتشکر');
             return redirect()->back();
         } else {
-            alert()->warning('برای ثبت نظر ابتدا وارد سایت شوید')->persistent('حله');
+            alert()->warning('برای ثبت نظر ابتدا وارد سایت شوید')->showConfirmButton('تایید');
             return redirect()->back();
         }
     }

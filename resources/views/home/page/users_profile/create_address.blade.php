@@ -46,7 +46,7 @@
                                                 </div>
 
                                                 <div class="col-lg-4 col-md-4 col-12 mb-3">
-                                                    <label for="fixed-number">شماره تلفن ثابت
+                                                    <label for="fixed-number">شماره تلفن ثابت(با پیش شماره)
                                                         <abbr class="required" title="ضروری"
                                                             style="color:red;">*</abbr></label>
                                                     <input dir="ltr" type="number" id="fixed-number" name="cellphone2"
@@ -107,8 +107,7 @@
                                                     <label for="post-code">کد پستی<abbr class="required" title="ضروری"
                                                             style="color:red;">*</abbr></label>
                                                     <input dir="ltr" type="number" id="post-code" name="postal_code"
-                                                        class="input-name-checkout form-control m-0"
-                                                        placeholder="کد پستی را بدون خط تیره بنویسید">
+                                                        class="input-name-checkout form-control m-0">
                                                     @error('postal_code')
                                                     <small class="text-danger">{{ $message }}</small>
                                                     @enderror
@@ -125,20 +124,20 @@
                                                     @enderror
                                                 </div>
                                                 <div class="col-lg-12 col-md-12 col-12 mb-3">
-                                                    <label for="address">آدرس اضطراری
+                                                    <label for="address">آدرس جایگزین
                                                         <abbr class="required" title="ضروری" style="color:red;">*</abbr>
                                                     </label>
                                                     <textarea rows="5" cols="30" id="address" name="lastaddress"
                                                         class="textarea-name-checkout form-control mb-0"
-                                                        placeholder="آدرس اضطراری در صورت بروز مشکل..."></textarea>
+                                                        placeholder="آدرس جایگزین در صورت ضرورت..."></textarea>
                                                     @error('lastaddress')
                                                     <small class="text-danger">{{ $message }}</small>
                                                     @enderror
                                                 </div>
-                                                <div class="AR-CR mr-3">
+                                                <div class="col-12">
                                                     <button class="btn-registrar" type="submit"> ثبت آدرس</button>
+                                                    <a href="{{ route('home.addreses.index') }}" class="cancel-edit-address mt-0" aria-label="Close">بازگشت</a>
                                                 </div>
-                                                <a href="{{ url()->previous() }}" class="btn-registrar mr-3">بازگشت</a>
                                             </div>
                                         </form>
                                     </div>

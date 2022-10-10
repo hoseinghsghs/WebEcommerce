@@ -58,7 +58,6 @@
                                                     <div class="profile-address-info-item location">
                                                         <i class="mdi mdi-email-outline"></i>
                                                         {{ $address->postal_code }}
-
                                                     </div>
                                                 </li>
                                                 <li>

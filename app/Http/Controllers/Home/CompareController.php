@@ -23,7 +23,7 @@ class CompareController extends Controller
                 return response(['errors' => 'deleted']);
             }
             else{
-              session()->push('compareProducts', $product->id);  
+              session()->push('compareProducts', $product->id);
               return response(['errors' => 'saved']);
             };
         } else {
@@ -33,8 +33,8 @@ class CompareController extends Controller
     }
 
     public function index()
-    {   
-        
+    {
+
         if (session()->has('compareProducts')) {
 
             $products = Product::findOrFail(session()->get('compareProducts'));
@@ -42,11 +42,11 @@ class CompareController extends Controller
             return view('home.page.compare.index', compact('products'));
         }
 
-        alert()->warning('لیست علاقه مندی خالی است');
+        alert()->warning('لیست علاقه مندی خالی است')->showConfirmButton('تایید');
         return redirect()->back();
-        
+
     }
-    
+
     public function remove($prodcutId)
     {
         if (session()->has('compareProducts')) {
@@ -59,12 +59,12 @@ class CompareController extends Controller
                 session()->forget('compareProducts');
                 return redirect()->route('home');
             }
-            alert()->warning('محصول حذف شد');
+            alert()->warning('محصول حذف شد')->showConfirmButton('تایید');
 
             return redirect()->route('home.compare.index');
         }
 
-        alert()->warning('ابتدا محصول را به لیست مقایسه اضافه کنید');
+        alert()->warning('ابتدا محصول را به لیست مقایسه اضافه کنید')->showConfirmButton('تایید');
         return redirect()->back();
     }
 }

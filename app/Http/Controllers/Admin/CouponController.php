@@ -37,7 +37,7 @@ class CouponController extends Controller
      */
     public function store(Request $request)
     {
-    
+
         $request->validate([
             'name' => 'required',
             'code' => 'required|unique:coupons,code',
@@ -59,7 +59,7 @@ class CouponController extends Controller
             'expired_at' => $request->expired_at
         ]);
 
-        alert()->success('کد تخفیف مورد نظر ایجاد شد', 'باتشکر');
+        alert()->success('کد تخفیف مورد نظر ایجاد شد', 'باتشکر')->showConfirmButton('تایید');
         return redirect()->route('admin.coupons.index');
     }
 
@@ -84,7 +84,7 @@ class CouponController extends Controller
     {
         return view('admin.page.coupons.edit' , compact('coupon'));
     }
-   
+
 
     /**
      * Update the specified resource in storage.
@@ -95,7 +95,7 @@ class CouponController extends Controller
      */
     public function update(Request $request, Coupon $coupon)
     {
-        
+
         $request->validate([
             'name' => 'required',
             'code' => 'required|unique:coupons,code,'.$coupon->id,
@@ -116,10 +116,10 @@ class CouponController extends Controller
             'max_percentage_amount' => $request->max_percentage_amount,
             'expired_at' => $request->expired_at
         ]);
-      
-       
 
-        alert()->success('کد تخفیف مورد نظر ویرایش شد', 'باتشکر');
+
+
+        alert()->success('کد تخفیف مورد نظر ویرایش شد', 'باتشکر')->showConfirmButton('تایید');
         return redirect()->route('admin.coupons.index');
     }
 

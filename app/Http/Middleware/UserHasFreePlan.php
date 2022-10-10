@@ -37,13 +37,13 @@ class UserHasFreePlan
                     DB::commit();
                 } catch (\Exception $th) {
                     DB::rollBack();
-                    alert()->error('خطا', $th->getMessage());
+                    alert()->error('خطا', $th->getMessage())->showConfirmButton('تایید');
                 }
 
-                alert()->error('خطا', 'مهلت تست شما به اتمام رسیده است')->timerProgressBar();
+                alert()->error('خطا', 'مهلت تست شما به اتمام رسیده است')->showConfirmButton('تایید')->timerProgressBar();
                 return redirect()->route('home');
             }
-            
+
             DB::disconnect('mysql');
             Config::set('database.connections.mysql.database', 'ecommerce');
         }
