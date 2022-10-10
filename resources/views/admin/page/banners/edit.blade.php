@@ -78,6 +78,8 @@
                                             </option>
                                             <option {{$banner->type == 'وسط' ? 'selected' : ''}}>وسط
                                             </option>
+                                            <option {{$banner->type == 'منو' ? 'selected' : ''}}>منو
+                                            </option>
                                             <option {{$banner->type == 'هدر-چپ-بالا' ? 'selected' : ''}} disabled>
                                                 هدر-چپ-بالا
                                             </option>
@@ -197,6 +199,9 @@ $(document).ready(function(e) {
         $('.position_message').html('(سایز تصویر 300*820)').css('color', 'red');
         $(".bone").attr("src", "/assets/images/position/2.png");
     }
+    if ($('#positionSelect').val() == 'منو') {
+        $('.position_message').html('(سایز تصویر 325*350)').css('color', 'red');
+    }
     if ($('#positionSelect').val() == 'هدر-چپ-بالا') {
         $('.position_message').html('(سایز تصویر 239*330)').css('color', 'red');
         $(".bone").attr("src", "/assets/images/position/top/2.png");
@@ -261,6 +266,10 @@ $(document).ready(function(e) {
         }
         if ($(this).val() == 'وسط') {
             $('.position_message').html('(سایز تصویر 300*820)').css('color', 'red');
+            $(".bone").attr("src", "/assets/images/position/2.png");
+        }
+        if ($(this).val() == 'منو') {
+            $('.position_message').html('(سایز تصویر 325*350)').css('color', 'red');
             $(".bone").attr("src", "/assets/images/position/2.png");
         }
         if ($(this).val() == 'هدر-چپ-بالا') {

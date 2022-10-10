@@ -3,11 +3,11 @@
     <!-- cart---------------------------------->
     <div class="container-main">
         <div class="d-block">
-            <div class="main-row">
+            <div class="main-row p-0">
                 <div id="breadcrumb">
                     <i class="mdi mdi-home"></i>
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
+                    <nav aria-label="breadcrumb" class="p-1">
+                        <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('home')}}">خانه</a></li>
                             <li class="breadcrumb-item active" aria-current="page">سبد خرید</li>
                         </ol>
@@ -43,9 +43,7 @@
                                             <tr wire:key="cart-'{{$item->id}}'">
                                                 @php
                                                 $quantity = $item->quantity;
-                                                @endphp
-
-                                                <th scope="row" class="product-cart-name">
+                                                @endphp <th scope="row" class="product-cart-name">
                                                     <div class="product-thumbnail-img">
                                                         <a
                                                             href="{{route('home.products.show',['product'=>$item->associatedModel->slug])}}">
@@ -57,9 +55,7 @@
                                                                 <i class="mdi mdi-close" wire:loading.remove
                                                                     wire:target="delete('{{$item->id}}')"></i>
                                                                 <i class="fa fa-circle-o-notch fa-spin" wire:loading
-                                                                    wire:target="delete('{{$item->id}}')"></i>
-
-                                                            </a>
+                                                                    wire:target="delete('{{$item->id}}')"></i> </a>
                                                         </div>
                                                     </div>
                                                     <div class="product-title">
@@ -67,14 +63,11 @@
                                                             href="{{route('home.products.show',['product'=>$item->associatedModel->slug])}}">
                                                             {{$item->name}}
                                                         </a>
-                                                        <div class="variation">
-
-                                                            <span class="variant-color-title">
+                                                        <div class="variation"> <span class="variant-color-title">
                                                                 {{ \App\Models\Attribute::find($item->attributes->attribute_id)->name }}
                                                                 :
                                                                 {{ $item->attributes->value }}</span>
                                                             <div class="variant-shape"></div>
-
                                                             <div class="seller">
                                                                 <i class="mdi mdi-storefront"></i>
                                                                 فروشنده :
@@ -93,18 +86,13 @@
                                                         {{ $item->attributes->percent_sale }}%
                                                         تخفیف
                                                     </p>
-                                                    @endif
-
-                                                    </span>
+                                                    @endif </span>
                                                 </td>
                                                 <td class="product-cart-quantity">
                                                     <div class="required-number before">
-                                                        <div class="quantity">
-
-                                                            <input class="quantity form-control" readonly
-                                                                value="{{$item->quantity}}" type="number" min="1"
-                                                                step="1" max="{{$item->attributes->quantity}}">
-
+                                                        <div class="quantity"> <input class="quantity form-control"
+                                                                readonly value="{{$item->quantity}}" type="number"
+                                                                min="1" step="1" max="{{$item->attributes->quantity}}">
                                                             <div class="quantity-nav">
                                                                 <div class="quantity-button quantity-up"
                                                                     wire:loading.attr="disabled"
@@ -115,11 +103,9 @@
                                                                     wire:click="decrement('{{$item->id}}')"
                                                                     wire:touchstart="decrement('{{$item->id}}')">-</div>
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </td>
-
                                                 <td class="product-cart-Total product-subtotal">
                                                     <span class="loader" wire:loading.flex>
                                                         <i class="fa fa-circle-o-notch fa-spin"></i>
@@ -139,7 +125,6 @@
                                         <h3 class="Total-cart-total">مجموع کل سبد خرید</h3>
                                         <div class="checkout-summary">
                                             <ul class="checkout-summary-summary" wire:loading.remove>
-
                                                 <li class="cart-subtotal">
                                                     <span class="amount">مبلغ سفارش</span>
                                                     <span>
@@ -153,9 +138,7 @@
                                                         {{ number_format( cartTotalSaleAmount() ) }}
                                                         تومان</span>
                                                 </li>
-                                                @endif
-
-                                                <li class="shipping-totals">
+                                                @endif <li class="shipping-totals">
                                                     <span class="amount">حمل و نقل</span>
                                                     <span>@if(cartTotalDeliveryAmount() == 0)
                                                         <span style="color: red">
@@ -176,24 +159,18 @@
                                                         تومان</span>
                                                 </li>
                                                 @endif
-
-
                                                 <li class=" order-total">
                                                     <span class="amount"> مجموع</span>
                                                     <span>{{ number_format( cartTotalAmount() ) }} تومان </span>
                                                 </li>
-
-
                                                 <li class="discount-code">
                                                     <div class=" align-items-center">
-
                                                         <div class="col-md-2 pl mt-5">
                                                             <div class="proceed-to-checkout">
                                                                 <a wire:click="clearCart()"
                                                                     class="checkout-button d-block">پاک کردن سبد</a>
                                                             </div>
                                                         </div>
-
                                                         <div class="col-md-2 pl mt-5">
                                                             <div class="proceed-to-checkout">
                                                                 <a href="{{route('home.orders.checkout')}}"

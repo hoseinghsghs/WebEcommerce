@@ -1,7 +1,7 @@
 @extends('home.layout.MasterHome')
 @section('title', "خانه -". $post->title)
 @section('content')
-<main class="main-row mb-2 mt-2 d-block p-0">
+<main class="main-row d-block p-0">
     <div id="breadcrumb">
         <i class="mdi mdi-home"></i>
         <nav aria-label="breadcrumb" class="p-1">
@@ -16,7 +16,7 @@
     </div>
     <div class="container-main">
         <div class="d-block">
-            <div class="col-lg-9 col-md-8 col-xs-12 pr mt-3">
+            <div class="col-lg-9 col-md-8 col-xs-12 pr ">
                 <section class="blog-home">
                     <article class="post-item">
                         <header class="entry-header mb-3">
