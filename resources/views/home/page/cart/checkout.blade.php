@@ -466,10 +466,12 @@
                                             </li>
                                         </ul>
                                         <div class="form-auth-row">
+
                                             <label for="#" class="ui-checkbox mt-1">
                                                 <input type="checkbox" value="1"
                                                     oninvalid="this.setCustomValidity('تیک قوانین و حریم خصوصی را پس از مطالعه بزنید')"
-                                                    oninput="this.setCustomValidity('')" required id="remember">
+                                                    oninput="this.setCustomValidity('')" required form="checkout"
+                                                    id="remember">
                                                 <span class="ui-checkbox-check"></span>
                                             </label>
                                             <label for="remember" class="remember-me mr-0"><a
@@ -528,32 +530,29 @@ $('#address-option').on('focus', function() {
 <script>
 $('.province-select').change(function() {
 
-var provinceID = $(this).val();
-if (provinceID) {
-    $.ajax({
-        type: "GET",
-        url: "{{ url('/get-province-cities-list') }}?province_id=" + provinceID,
-        success: function(res) {
-            if (res) {
-                $(".city-select").empty();
+    var provinceID = $(this).val();
+    if (provinceID) {
+        $.ajax({
+            type: "GET",
+            url: "{{ url('/get-province-cities-list') }}?province_id=" + provinceID,
+            success: function(res) {
+                if (res) {
+                    $(".city-select").empty();
 
-                $.each(res, function(key, city) {
-                    $(".city-select").append('<option value="' + city.id + '">' +
-                        city.name + '</option>');
-                });
+                    $.each(res, function(key, city) {
+                        $(".city-select").append('<option value="' + city.id + '">' +
+                            city.name + '</option>');
+                    });
 
-            } else {
-                $(".city-select").empty();
+                } else {
+                    $(".city-select").empty();
+                }
             }
-        }
-    });
-} else {
-    $(".city-select").empty();
-}
+        });
+    } else {
+        $(".city-select").empty();
+    }
 });
-
-
-})
 </script>
 
 <script>

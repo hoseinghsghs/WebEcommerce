@@ -41,7 +41,8 @@
                                         </thead>
                                         <tbody>
                                             @foreach($cartitems->sort() as $item)
-                                            <tr wire:key="cart-'{{$item->id}}'">
+                                            <tr wire:key="cart-'{{$item->id}}'"
+                                                style="border-bottom: 1px solid #e1dfdf;">
                                                 @php
                                                 $quantity = $item->quantity;
                                                 @endphp
@@ -132,55 +133,67 @@
                                 <div class="cart-collaterals">
                                     <div class="totals d-block">
                                         <h3 class="Total-cart-total">مجموع کل سبد خرید</h3>
-                                        <div class="checkout-summary">
-                                            <ul class="checkout-summary-summary" wire:loading.remove>
-                                                <li class="cart-subtotal">
-                                                    <span class="amount">مبلغ سفارش</span>
-                                                    <span>
-                                                        {{ number_format( \Cart::getTotal() + cartTotalSaleAmount() ) }}
-                                                        تومان</span>
-                                                </li>
-                                                @if (cartTotalSaleAmount())
-                                                <li class="cart-subtotal">
-                                                    <span class="amount text-success">مبلغ تخفیف کالا</span>
-                                                    <span class="text-success">
-                                                        {{ number_format( cartTotalSaleAmount() ) }}
-                                                        تومان</span>
-                                                </li>
-                                                @endif <li class="shipping-totals">
-                                                    <span class="amount">حمل و نقل</span>
-                                                    <span>@if(cartTotalDeliveryAmount() == 0)
-                                                        <span style="color: red">
-                                                            رایگان
-                                                        </span>
-                                                        @else
-                                                        <span>
-                                                            {{ number_format( cartTotalDeliveryAmount() ) }}
-                                                            تومان
-                                                        </span>
-                                                        @endif</span>
-                                                </li>
-                                                @if (session()->get('coupon.amount') )
-                                                <li>
-                                                    <span class="amount text-success">کد تخفیف</span>
-                                                    <span
-                                                        class="text-success">{{ number_format( session()->get('coupon.amount') ) }}
-                                                        تومان</span>
-                                                </li>
-                                                @endif
-                                                <li class=" order-total">
-                                                    <span class="amount"> مجموع</span>
-                                                    <span>{{ number_format( cartTotalAmount() ) }} تومان </span>
-                                                </li>
-                                                <li class="discount-code">
+                                        <div class="checkout-summary row align-items-end">
+                                            <ul class="checkout-summary-summary col-md-6" wire:loading.remove>
+                                                <table
+                                                    class="checkout-review-order-table table table-borderless revieworder mb-3">
+                                                    <tfoot>
+                                                        <tr class="cart-subtotal">
+                                                            <th class="amount">مبلغ سفارش</th>
+                                                            <td>
+                                                                {{ number_format( \Cart::getTotal() + cartTotalSaleAmount() ) }}
+                                                                تومان
+                                                            </td>
+                                                        </tr>
+                                                        @if (cartTotalSaleAmount())
+                                                        <tr class="cart-subtotal">
+                                                            <td class="amount text-success">مبلغ تخفیف کالا</td>
+                                                            <td class="text-success">
+                                                                {{ number_format( cartTotalSaleAmount() ) }}
+                                                                تومان
+                                                            </td>
+                                                        </tr>
+                                                        @endif
+                                                        <tr class="shipping-totals">
+                                                            <td class="amount">حمل و نقل</td>
+                                                            @if(cartTotalDeliveryAmount() == 0)
+                                                            <td style="color: red">
+                                                                رایگان
+                                                            </td>
+                                                            @else
+                                                            <td>
+                                                                {{ number_format( cartTotalDeliveryAmount() ) }}
+                                                                تومان
+                                                            </td>
+                                                            @endif</td>
+                                                        </tr>
+                                                        @if (session()->get('coupon.amount') )
+                                                        <tr>
+                                                            <td class="amount text-success">کد تخفیف</td>
+                                                            <td class="text-success">
+                                                                {{ number_format( session()->get('coupon.amount') ) }}
+                                                                تومان
+                                                            </td>
+                                                        </tr>
+                                                        @endif
+                                                        <tr class=" order-total">
+                                                            <td class="amount"> مجموع</td>
+                                                            <td>{{ number_format( cartTotalAmount() ) }} تومان </span>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </ul>
+                                            <ul class="checkout-summary-summary col-md-6" wire:loading.remove>
+                                                <li class="discount-code ">
                                                     <div class=" align-items-center">
-                                                        <div class="col-md-2 pl mt-5">
+                                                        <div class="col-md-6 pl mt-5">
                                                             <div class="proceed-to-checkout">
                                                                 <a wire:click="clearCart()"
-                                                                    class="checkout-button d-block">پاک کردن سبد</a>
+                                                                    class="checkout-button d-block">پاک کردن
+                                                                    سبد</a>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-2 pl mt-5">
+                                                        <div class="col-md-6 pl mt-5">
                                                             <div class="proceed-to-checkout">
                                                                 <a href="{{route('home.orders.checkout')}}"
                                                                     class="checkout-button d-block">تسویه
