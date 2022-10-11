@@ -28,7 +28,7 @@ class CartController extends Controller
 
         if ($request->qtybutton > $productVariation->quantity) {
 
-            response( 'success', 404 );
+            response('success', 404);
         }
 
         $rowId = $product->id . '-' . $productVariation->id;
@@ -43,27 +43,24 @@ class CartController extends Controller
                 'associatedModel' => $product,
 
             ));
-
-           return response()->json(['product'=>$product,'app_name' => env('APP_NAME'),'rowId'=>$rowId , 'cart' => Cart::getContent($rowId) , 'rowId' =>$rowId , 'all_cart' => Cart::getTotal()],200);
+            session()->forget('coupon');
+            return response()->json(['product' => $product, 'app_name' => env('APP_NAME'), 'rowId' => $rowId, 'cart' => Cart::getContent($rowId), 'rowId' => $rowId, 'all_cart' => Cart::getTotal()], 200);
+        } else {
+            return response('success', 201);
         }
-        else {
-
-           return response( 'success', 201 );
-        }
-
-
     }
 
     public function index()
     {
-    return view('home.page.cart.index');
+        return view('home.page.cart.index');
     }
 
     public function remove($rowId)
     {
         Cart::remove($rowId);
-        $prices=Cart::getTotal();
-        return response($prices , 200);
+        session()->forget('coupon');
+        $prices = Cart::getTotal();
+        return response($prices, 200);
     }
 
     public function checkout()
@@ -77,7 +74,6 @@ class CartController extends Controller
         // dd($addresses->all());
         $provinces = Province::all();
 
-        return view('home.page.cart.checkout', compact('addresses' , 'provinces'));
+        return view('home.page.cart.checkout', compact('addresses', 'provinces'));
     }
-
 }

@@ -16,7 +16,7 @@ class QuestionsList extends Component
     //////////////////////////////////
 
 
-    protected $paginationTheme = 'bootstrap'; 
+    protected $paginationTheme = 'bootstrap';
     public $name;
     public $product_name;
 
@@ -27,71 +27,64 @@ class QuestionsList extends Component
     ];
 
     public function mount(Question $question)
-    { 
-        if($question->approved){
-        
-            $this->title="عدم انتشار";
-            $this->color="danger";
+    {
+        if ($question->approved) {
 
-        }else{
-        
-            $this->title="انتشار";
-            $this->color="success";
+            $this->title = "عدم انتشار";
+            $this->color = "danger";
+        } else {
 
-            }
-            }
-        
-            public function render()
-            {
-                $user_name=User::where('name','like','%'.$this->name.'%')->pluck('id')->toArray();
-                $product_name=Product::where('name','like','%'.$this->product_name.'%')->pluck('id')->toArray();
-                $questions = Question::whereIn('user_id',$user_name)
-                ->whereIn('product_id',$product_name)
-                ->where('parent_id',0)
-                ->paginate(10);
+            $this->title = "انتشار";
+            $this->color = "success";
+        }
+    }
+
+    public function render()
+    {
+        $user_name = User::where('name', 'like', '%' . $this->name . '%')->pluck('id')->toArray();
+        $product_name = Product::where('name', 'like', '%' . $this->product_name . '%')->pluck('id')->toArray();
+        $questions = Question::when($this->name, function ($query) use ($user_name) {
+            $query->whereIn('user_id', $user_name);
+        })->when($this->product_name, function ($query) use ($product_name) {
+            $query->whereIn('product_id', $product_name);
+        })->where('parent_id', 0)->paginate(10);
+
+        return view('livewire.admin.questions.questions-list', ['questions' => $questions]);
+    }
 
 
-                return view('livewire.admin.questions.questions-list',['questions' => $questions]);
-            }
-            
-                
-        public function delquestion(Question $question){
-            if ($question->replies->count()) {
-                $this->question=$question;
-                sweetAlert()
+    public function delquestion(Question $question)
+    {
+        if ($question->replies->count()) {
+            $this->question = $question;
+            sweetAlert()
                 ->livewire()
                 ->addInfo('ابتدا پاسخ ها حذف گردد. با حذف این پرسش تمامی پاسخ ها حذف میشوند');
-            }else{
-                $question->delete();
-                toastr()->livewire()->addSuccess('نظر با موفقیت حذف شد');
-            }
-          
+        } else {
+            $question->delete();
+            toastr()->livewire()->addSuccess('نظر با موفقیت حذف شد');
         }
-        public function sweetAlertConfirmed(array $data)
-       { 
-       }
+    }
+    public function sweetAlertConfirmed(array $data)
+    {
+    }
 
-    public function ChengeActive_question (Question $question){
-        
+    public function ChengeActive_question(Question $question)
+    {
 
-        if($question->approved){
+
+        if ($question->approved) {
             $question->update([
-                "approved"=> false
+                "approved" => false
             ]);
-            $this->title="عدم انتشار";
-            $this->color="danger";
-
-        }else{
+            $this->title = "عدم انتشار";
+            $this->color = "danger";
+        } else {
             $question->update([
-                "approved"=> true
+                "approved" => true
             ]);
-            $this->title="انتشار";
-            $this->color="success";
-
-            }
-            
+            $this->title = "انتشار";
+            $this->color = "success";
         }
-        
-
-
+    }
 }

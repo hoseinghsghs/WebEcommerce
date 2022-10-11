@@ -387,7 +387,7 @@
                                                 @endif
                                                 <tr class="cart-discount">
                                                     <th>مبلغ کسر شده کد تخفیف</th>
-                                                    <td data-title=" تخفیف شما از این خرید ">
+                                                    <td data-title="مبلغ کسر شده کد تخفیف">
                                                         <div class="price">
                                                             <span class="inc-coupon text-success">
                                                                 {{ number_format( session()->get('coupon.amount') ) }}
@@ -400,7 +400,7 @@
                                                     <th><strong>مبلغ قابل پرداخت</strong></th>
                                                     <td data-title="مبلغ قابل پرداخت">
                                                         <div class="price">
-                                                            <strong>
+                                                            <strong id="final-amounts">
                                                                 {{ number_format( cartTotalAmount() ) }}
                                                                 تومان
                                                             </strong>
@@ -413,7 +413,7 @@
                                     </div>
                                     <div class="col-lg-6 mt-4">
                                         @if (!session()->has('coupon'))
-                                        <div class="content-checkout">
+                                        <div class="content-checkout" id="coupon-box">
                                             <div class="notices-wrapper">
                                                 <div class="form-coupon-toggle">
                                                     <div class="info">

@@ -368,8 +368,9 @@ $(document).ready(function (e) {
                 if (xhr.status == 200) {
                     let message = response.message;
                     $(".inc-coupon").html(number_format(message) + "تومان");
-                    $(".showcoupon").remove();
-
+                    $("#final-amounts").html(number_format(response.total_amounts) + "تومان");
+                    $("#coupon-box").remove();
+                    $("").html(number_format(message) + "تومان");
                     Swal.fire({
                         text: "کد تخفیف اعمال گردید",
                         icon: "success",
@@ -533,7 +534,7 @@ $(document).ready(function (e) {
                         confirmButtonText: "تایید",
                     });
                 }
-                if (xhr.status == 201) {
+                else if (xhr.status == 201) {
                     Swal.fire({
                         text: "محصول قبلا به سبد خرید اضافه شده",
                         icon: "warning",

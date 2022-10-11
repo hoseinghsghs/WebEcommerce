@@ -498,7 +498,9 @@ $(document).ready(function (e) {
       if (xhr.status == 200) {
         var message = response.message;
         $(".inc-coupon").html(number_format(message) + "تومان");
-        $(".showcoupon").remove();
+        $("#final-amounts").html(number_format(response.total_amounts) + "تومان");
+        $("#coupon-box").remove();
+        $("").html(number_format(message) + "تومان");
         Swal.fire({
           text: "کد تخفیف اعمال گردید",
           icon: "success",
@@ -588,18 +590,20 @@ $(document).ready(function (e) {
           timer: 1500,
           confirmButtonText: "تایید"
         });
-      }
-
-      if (xhr.status == 201) {
+      } else if (xhr.status == 201) {
         Swal.fire({
           text: "محصول قبلا به سبد خرید اضافه شده",
           icon: "warning",
           timer: 1500,
           confirmButtonText: "تایید"
         });
+      } else {
+        alert("اتصال شما به اینترنت قطع");
+        location.reload();
       }
     }).fail(function (response) {
-      alert(response);
+      alert("اتصال شما به اینترنت قطع");
+      location.reload();
     }).always(function () {
       a.find("i").removeClass("fa fa-circle-o-notch fa-spin");
       a.find("i").addClass("fa fa-shopping-cart");

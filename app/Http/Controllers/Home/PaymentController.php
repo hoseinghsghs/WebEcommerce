@@ -255,7 +255,7 @@ class PaymentController extends Controller
 
             return response()->json(['message' => $result['error']], 201);
         } else {
-            return response()->json(['message' => $result['amount']], 200);
+            return response()->json(['message' => $result['amount'],'total_amounts'=>cartTotalAmount()], 200);
         }
     }
 }

@@ -42,5 +42,5 @@ class Comment extends Model
     {
         return $this->morphMany(Event::class, 'eventable');
     }
-    
+
 }
