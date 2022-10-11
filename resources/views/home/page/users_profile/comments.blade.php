@@ -1,7 +1,6 @@
 @extends('home.layout.MasterHome')
 @section('title' , 'پروفایل کاربری - علاقه مندی ها')
-@section('content')
-<div class="container-main">
+@section('content')<div class="container-main">
     <div class="d-block">
         <section class="profile-home">
             <div class="col-lg">
@@ -11,7 +10,7 @@
                         <div class="profile-content">
                             <div class="profile-stats">
                                 <div class="profile-comment">
-                                    @if ($comments->count())
+                                    @if (!$comments->count())
                                     <div class="cart-empty text-center d-block p-5">
                                         <p class="cart-empty-title">لیست نظرات خالی است</p>
                                         <div class="return-to-shop">
@@ -100,12 +99,7 @@
         </section>
     </div>
 </div>
-
-
-
-@endsection
-
-@push('scripts')
+@endsection@push('scripts')
 <script>
 function send(product) {
     let url =
@@ -113,7 +107,6 @@ function send(product) {
         "/profile/add-to-wishlist" +
         "/" + [product];
     console.log(url);
-
     $.get(url,
         function(response, status) {
             if (response.errors == 'deleted') {

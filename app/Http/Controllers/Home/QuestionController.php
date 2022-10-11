@@ -8,12 +8,14 @@ use App\Models\Product;
 use App\Models\ProductRate;
 use App\Models\Question;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class QuestionController extends Controller
 {
-    public function store(Product $product , Request $request)
+    public function store(Product $product, Request $request)
     {
 
         $validator = Validator::make($request->all(), [
@@ -36,6 +38,21 @@ class QuestionController extends Controller
                     'product_id' => $product->id,
 
                 ]);
+                try {
+                    Log::info(
+                        'پرسش جدید ثبت شد',
+                        [
+                            'title' => 'پرسش جدید ثبت شد',
+                            'body' => 'نام کاربر' . " " . Auth::user()->name . "" . Auth::user()->cellphone . " " . 'محصول' . " " . $product->name,
+                            'user_id' => auth()->id(),
+                            'eventable_id' => $request->id,
+                            'eventable_type' => Question::class,
+                        ]
+
+                    );
+                } catch (\Throwable $th) {
+                    //throw $th;
+                }
 
                 DB::commit();
             } catch (\Exception $ex) {
@@ -62,12 +79,25 @@ class QuestionController extends Controller
             'parent_id' => $request->question,
 
         ]);
+        try {
+            Log::info(
+                'جواب جدید ثبت شد',
+                [
+                    'title' => 'جواب جدید برای سوال با آیدی' . ' : ' . $request->question . ' ' . 'ثبت شد',
+                    'body' => 'نام کاربر' . " " . Auth::user()->name . "" . Auth::user()->cellphone,
+                    'user_id' => auth()->id(),
+                    'eventable_id' => $request->id,
+                    'eventable_type' => Question::class,
+                ]
+
+            );
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
         alert()->success('پاسخ شما با موفقیت برای این محصول ثبت شد', 'باتشکر')->showConfirmButton('تایید');
         return redirect()->back();
 
         return back();
     }
-
-
-
 }

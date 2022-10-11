@@ -36,43 +36,44 @@
                                                 <th scope="col" class="product-cart-price">قیمت</th>
                                                 <th scope="col" class="product-cart-quantity">تعداد مورد نیاز</th>
                                                 <th scope="col" class="product-cart-Total">مجموع</th>
+                                                <th scope="col" class="product-cart-Total"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach($cartitems->sort() as $item)
-                                            <tr wire:key="cart-'{{$item->id}}'">
+                                            <tr wire:key="cart-'{{$item->id}}'"
+                                                style="border-bottom: 1px solid #e1dfdf;">
                                                 @php
                                                 $quantity = $item->quantity;
-                                                @endphp <th scope="row" class="product-cart-name">
+                                                @endphp
+                                                <td class="d-md-none">
+                                                    <a class="remove" wire:click="delete('{{$item->id}}')">
+                                                        <i class="mdi mdi-close" wire:loading.remove
+                                                            wire:target="delete('{{$item->id}}')"></i>
+                                                        <i class="fa fa-circle-o-notch fa-spin" wire:loading
+                                                            wire:target="delete('{{$item->id}}')"></i> </a>
+                                                </td>
+                                                <th scope="row" class="product-cart-name">
                                                     <div class="product-thumbnail-img">
                                                         <a
                                                             href="{{route('home.products.show',['product'=>$item->associatedModel->slug])}}">
                                                             <img
                                                                 src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$item->associatedModel->primary_image)}}">
                                                         </a>
-                                                        <div class="product-remove">
-                                                            <a class="remove" wire:click="delete('{{$item->id}}')">
-                                                                <i class="mdi mdi-close" wire:loading.remove
-                                                                    wire:target="delete('{{$item->id}}')"></i>
-                                                                <i class="fa fa-circle-o-notch fa-spin" wire:loading
-                                                                    wire:target="delete('{{$item->id}}')"></i> </a>
-                                                        </div>
                                                     </div>
-                                                    <div class="product-title">
-                                                        <a
-                                                            href="{{route('home.products.show',['product'=>$item->associatedModel->slug])}}">
-                                                            {{$item->name}}
-                                                        </a>
-                                                        <div class="variation"> <span class="variant-color-title">
-                                                                {{ \App\Models\Attribute::find($item->attributes->attribute_id)->name }}
-                                                                :
-                                                                {{ $item->attributes->value }}</span>
-                                                            <div class="variant-shape"></div>
-                                                            <div class="seller">
-                                                                <i class="mdi mdi-storefront"></i>
-                                                                فروشنده :
-                                                                <span>{{env('APP_NAME')}}</span>
-                                                            </div>
+                                                    <a
+                                                        href="{{route('home.products.show',['product'=>$item->associatedModel->slug])}}">
+                                                        {{$item->name}}
+                                                    </a>
+                                                    <div class="variation"> <span class="variant-color-title">
+                                                            {{ \App\Models\Attribute::find($item->attributes->attribute_id)->name }}
+                                                            :
+                                                            {{ $item->attributes->value }}</span>
+                                                        <div class="variant-shape"></div>
+                                                        <div class="seller">
+                                                            <i class="mdi mdi-storefront"></i>
+                                                            فروشنده :
+                                                            <span>{{env('APP_NAME')}}</span>
                                                         </div>
                                                     </div>
                                                 </th>
@@ -107,13 +108,22 @@
                                                     </div>
                                                 </td>
                                                 <td class="product-cart-Total product-subtotal">
-                                                    <span class="loader" wire:loading.flex>
+                                                    <center class="amount" id="product-subtotal"
+                                                        style="align-items: center;justify-content: center;"
+                                                        wire:loading.flex>
                                                         <i class="fa fa-circle-o-notch fa-spin"></i>
-                                                    </span>
+                                                    </center>
                                                     <span class="amount" id="product-subtotal" wire:loading.remove>
                                                         {{number_format($item->price*$item->quantity)}}
                                                         <span>تومان</span>
                                                     </span>
+                                                </td>
+                                                <td class="d-none d-md-block">
+                                                    <a class="remove" wire:click="delete('{{$item->id}}')">
+                                                        <i class="mdi mdi-close" wire:loading.remove
+                                                            wire:target="delete('{{$item->id}}')"></i>
+                                                        <i class="fa fa-circle-o-notch fa-spin" wire:loading
+                                                            wire:target="delete('{{$item->id}}')"></i> </a>
                                                 </td>
                                             </tr>
                                             @endforeach
@@ -123,55 +133,67 @@
                                 <div class="cart-collaterals">
                                     <div class="totals d-block">
                                         <h3 class="Total-cart-total">مجموع کل سبد خرید</h3>
-                                        <div class="checkout-summary">
-                                            <ul class="checkout-summary-summary" wire:loading.remove>
-                                                <li class="cart-subtotal">
-                                                    <span class="amount">مبلغ سفارش</span>
-                                                    <span>
-                                                        {{ number_format( \Cart::getTotal() + cartTotalSaleAmount() ) }}
-                                                        تومان</span>
-                                                </li>
-                                                @if (cartTotalSaleAmount())
-                                                <li class="cart-subtotal">
-                                                    <span class="amount text-success">مبلغ تخفیف کالا</span>
-                                                    <span class="text-success">
-                                                        {{ number_format( cartTotalSaleAmount() ) }}
-                                                        تومان</span>
-                                                </li>
-                                                @endif <li class="shipping-totals">
-                                                    <span class="amount">حمل و نقل</span>
-                                                    <span>@if(cartTotalDeliveryAmount() == 0)
-                                                        <span style="color: red">
-                                                            رایگان
-                                                        </span>
-                                                        @else
-                                                        <span>
-                                                            {{ number_format( cartTotalDeliveryAmount() ) }}
-                                                            تومان
-                                                        </span>
-                                                        @endif</span>
-                                                </li>
-                                                @if (session()->get('coupon.amount') )
-                                                <li>
-                                                    <span class="amount text-success">کد تخفیف</span>
-                                                    <span
-                                                        class="text-success">{{ number_format( session()->get('coupon.amount') ) }}
-                                                        تومان</span>
-                                                </li>
-                                                @endif
-                                                <li class=" order-total">
-                                                    <span class="amount"> مجموع</span>
-                                                    <span>{{ number_format( cartTotalAmount() ) }} تومان </span>
-                                                </li>
-                                                <li class="discount-code">
+                                        <div class="checkout-summary row align-items-end">
+                                            <ul class="checkout-summary-summary col-md-6" wire:loading.remove>
+                                                <table
+                                                    class="checkout-review-order-table table table-borderless revieworder mb-3">
+                                                    <tfoot>
+                                                        <tr class="cart-subtotal">
+                                                            <th class="amount">مبلغ سفارش</th>
+                                                            <td>
+                                                                {{ number_format( \Cart::getTotal() + cartTotalSaleAmount() ) }}
+                                                                تومان
+                                                            </td>
+                                                        </tr>
+                                                        @if (cartTotalSaleAmount())
+                                                        <tr class="cart-subtotal">
+                                                            <td class="amount text-success">مبلغ تخفیف کالا</td>
+                                                            <td class="text-success">
+                                                                {{ number_format( cartTotalSaleAmount() ) }}
+                                                                تومان
+                                                            </td>
+                                                        </tr>
+                                                        @endif
+                                                        <tr class="shipping-totals">
+                                                            <td class="amount">حمل و نقل</td>
+                                                            @if(cartTotalDeliveryAmount() == 0)
+                                                            <td style="color: red">
+                                                                رایگان
+                                                            </td>
+                                                            @else
+                                                            <td>
+                                                                {{ number_format( cartTotalDeliveryAmount() ) }}
+                                                                تومان
+                                                            </td>
+                                                            @endif</td>
+                                                        </tr>
+                                                        @if (session()->get('coupon.amount') )
+                                                        <tr>
+                                                            <td class="amount text-success">کد تخفیف</td>
+                                                            <td class="text-success">
+                                                                {{ number_format( session()->get('coupon.amount') ) }}
+                                                                تومان
+                                                            </td>
+                                                        </tr>
+                                                        @endif
+                                                        <tr class=" order-total">
+                                                            <td class="amount"> مجموع</td>
+                                                            <td>{{ number_format( cartTotalAmount() ) }} تومان </span>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </ul>
+                                            <ul class="checkout-summary-summary col-md-6" wire:loading.remove>
+                                                <li class="discount-code ">
                                                     <div class=" align-items-center">
-                                                        <div class="col-md-2 pl mt-5">
+                                                        <div class="col-md-6 pl mt-5">
                                                             <div class="proceed-to-checkout">
                                                                 <a wire:click="clearCart()"
-                                                                    class="checkout-button d-block">پاک کردن سبد</a>
+                                                                    class="checkout-button d-block">پاک کردن
+                                                                    سبد</a>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-2 pl mt-5">
+                                                        <div class="col-md-6 pl mt-5">
                                                             <div class="proceed-to-checkout">
                                                                 <a href="{{route('home.orders.checkout')}}"
                                                                     class="checkout-button d-block">تسویه
@@ -183,7 +205,7 @@
                                             </ul>
                                             <ul>
                                                 <li>
-                                                    <span class="loader" wire:loading.flex>
+                                                    <span wire:loading.flex>
                                                         <i class="fa fa-circle-o-notch fa-spin"></i>
                                                     </span>
                                                 </li>

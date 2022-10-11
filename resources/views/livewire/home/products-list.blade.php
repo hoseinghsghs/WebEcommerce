@@ -2,11 +2,11 @@
 <div class="container-main">
     <div class="d-block">
         <div class="page-content page-row">
-            <div class="main-row p-0">
+            <div class="main-row">
                 <div id="breadcrumb">
                     <i class="mdi mdi-home"></i>
-                    <nav aria-label="breadcrumb" class="p-1">
-                        <ol class="breadcrumb m-0">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0">
                             <li class="breadcrumb-item"><a href="{{route('home')}}">خانه</a></li>
                             <li class="breadcrumb-item"><a href="{{route('home.products.search')}}">فروشگاه</a></li>
                             @if ($category)
@@ -524,26 +524,22 @@ if ($("#slider-non-linear-step2").length) {
         },
     });
     nonLinearStepSlider2.noUiSlider.on("change", function(values) {
-                values.forEach((element, index) => {
-                    values[index] = parseInt(element);
-                });
-                nonLinearStepSlider2.noUiSlider.on("change", function(values) {
-                    values.forEach((element, index) => {
-                        values[index] = parseInt(element);
-                    });
-                    Livewire.emit('priceRangeUpdated', values)
-                    nonLinearStepSlider.noUiSlider.set(values);
-                });
-            }
+        values.forEach((element, index) => {
+            values[index] = parseInt(element);
+        });
+        Livewire.emit('priceRangeUpdated', values)
+        nonLinearStepSlider.noUiSlider.set(values);
+    });
+}
 
-            function openSidebar() {
-                $('#filter-sidebar').addClass('open')
-                $('.filter-sidebar-overlay').removeClass('d-none');
-            }
+function openSidebar() {
+    $('#filter-sidebar').addClass('open')
+    $('.filter-sidebar-overlay').removeClass('d-none');
+}
 
-            function closeSidebar(event) {
-                $('#filter-sidebar').removeClass('open')
-                $('.filter-sidebar-overlay').addClass('d-none');
-            }
+function closeSidebar(event) {
+    $('#filter-sidebar').removeClass('open')
+    $('.filter-sidebar-overlay').addClass('d-none');
+}
 </script>
 @endpush

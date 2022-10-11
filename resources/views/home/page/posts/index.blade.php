@@ -1,7 +1,6 @@
 @extends('home.layout.MasterHome')
 @section('title', "خانه - پست ها")
 @section('content')
-
 <!-- Start of Main -->
 <main class="main-row p-0">
     <div id="breadcrumb">
@@ -21,11 +20,9 @@
                 <div class="col-12 col-md-4 col-lg-4 col-xl-4 items-2 pr">
                     <article class="blog-item">
                         <figure class="figure">
-                            <div class="post-thumbnail">
-
-                                <img src="{{url('storage/'.$post->image->url)}}" alt="{{$post->title}}">
+                            <div class="post-thumbnail"> <img src="{{url('storage/'.$post->image->url)}}"
+                                    alt="{{$post->title}}">
                             </div>
-
                             <div class="post-title">
                                 <a href="{{route('home.posts.show' , ['post' => $post->slug] )}}" class="d-block">
                                     <h4>{{$post->title}}</h4>
@@ -39,17 +36,12 @@
                     </article>
                 </div>
                 @endforeach
-
             </section>
             <div class="pagination-product pr-3 pl-3 pr">
                 <nav aria-label="Page navigation example">
-                    {{ $posts->links() }}
-
-                </nav>
+                    {{ $posts->links() }} </nav>
             </div>
         </div>
     </div>
 </main>
-<!-- End of Main -->
-
-@endsection
+<!-- End of Main -->@endsection
