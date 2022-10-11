@@ -336,11 +336,13 @@
                                                     </td>
                                                 </tr>
                                                 <tr class="cart-discount">
-                                                    <th>مبلغ قابل پرداخت</th>
+                                                    <th><strong>مبلغ قابل پرداخت</strong></th>
                                                     <td data-title="مبلغ قابل پرداخت">
                                                         <div class="price">
-                                                            {{ number_format( cartTotalAmount() ) }}
-                                                            تومان
+                                                            <strong>
+                                                                {{ number_format( cartTotalAmount() ) }}
+                                                                تومان
+                                                            </strong>
                                                         </div>
                                                     </td>
                                                 </tr>

@@ -105,8 +105,8 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <a href="{{route('admin.users.index')}}" class="btn btn-secondary ml-md-3">بازگشت</a>
                                     <button type="submit" class="btn btn-raised btn-primary waves-effect">ذخیره</button>
-                                    <a href="{{route('admin.users.index')}}" class="btn btn-default">بازگشت</a>
                                 </div>
                             </form>
                         </div>

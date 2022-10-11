@@ -1,13 +1,11 @@
 @extends('home.layout.MasterHome')
 @section('title' , 'پروفایل کاربری - علاقه مندی ها')
 @section('content')
-
 <div class="container-main">
     <div class="d-block">
         <section class="profile-home">
             <div class="col-lg">
                 <div class="post-item-profile order-1 d-block">
-
                     @include('home.page.users_profile.partial.right_side')
                     <div class="col-lg-9 col-md-9 col-xs-12 pl">
                         <div class="profile-content">

@@ -31766,7 +31766,7 @@ section.content {
 }
 
 .panel-group .panel-primary .panel-title {
-    background-color: #f7f7f7;
+    background-color: #e5e4e4;
     font-size: 16px;
     border-bottom: 1px solid #f0f0f0;
     color: #777;
@@ -37056,3 +37056,9 @@ a[aria-expanded="true"] span {
     border-color: #adadad;
 }
 
+.text-overflow {
+    width: 30vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

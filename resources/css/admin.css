@@ -215,3 +215,10 @@ a[aria-expanded="true"] span {
     background-color: #e6e6e6;
     border-color: #adadad;
 }
+
+.text-overflow {
+    width: 30vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

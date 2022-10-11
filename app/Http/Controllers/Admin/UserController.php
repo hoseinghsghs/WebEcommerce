@@ -23,7 +23,7 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        $user->load(['roles','permissions']);
+        $user->load(['roles', 'permissions']);
         $roles = Role::with('permissions')->get();
         $permissions = Permission::all();
         return view('admin.page.users.edit', compact('user', 'roles', 'permissions'));
@@ -42,10 +42,9 @@ class UserController extends Controller
         try {
             DB::beginTransaction();
             $user->update(Arr::except($data, ['role']));
-            $user->syncRoles($data['role']!='false' ? [$data['role']] : []);
-            $user->syncPermissions($data['permissions']??[]);
+            $user->syncRoles($data['role'] != 'false' ? [$data['role']] : []);
+            $user->syncPermissions($data['permissions'] ?? []);
             DB::commit();
-
         } catch (\Exception $ex) {
             DB::rollBack();
             $flasher->addError($ex->getMessage());
@@ -57,9 +56,9 @@ class UserController extends Controller
     }
     public function show(User $user)
     {
-        $orders = Order::where('user_id', $user->id)->paginate(10);
-        $comments = Comment::where('user_id', $user->id)->paginate(10);
+        $orders = Order::where('user_id', $user->id)->latest()->paginate(10, ['*'], 'orders')->withQueryString();
+        $comments = Comment::where('user_id', $user->id)->latest()->paginate(10, ['*'], 'comments')->withQueryString();
 
-       return view('admin.page.users.show', compact('user','orders','comments'));
+        return view('admin.page.users.show', compact('user', 'orders', 'comments'));
     }
 }

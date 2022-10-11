@@ -142,7 +142,7 @@
                                     <tr>
                                         <td scope="row">{{$comments->firstItem() + $key}}</td>
                                         <td>{{$comment->commentable->name}}</td>
-                                        <td>{{$comment->text}}</td>
+                                        <td><p class="text-overflow">{{$comment->text}}</p></td>
                                         <td>
                                             @if ($comment->approved==1)
                                             <span class="badge badge-success">تایید شده</span>
