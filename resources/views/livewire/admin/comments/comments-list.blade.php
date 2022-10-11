@@ -67,9 +67,7 @@
                                             href="{{route('admin.products.show',['product' => $comment->commentable_id])}}">
                                             {{$comment->commentable->name ? $comment->commentable->name : $comment->commentable->title }}
                                         </a>
-
                                     </td>
-
                                     <td>
                                         <span class="badge badge-success p-2">{{$comment->appro(1)->count()}}</span>
                                         @if ($comment->appro(0)->count() > 0)
@@ -105,7 +103,6 @@
                                                 class="btn btn-raised btn-info waves-effect">
                                                 <i class="zmdi zmdi-edit"></i>
                                             </a>
-
                                             <button class="btn btn-raised btn-danger waves-effect"
                                                 wire:loading.attr="disabled" wire:click="delcomment({{$comment->id}})">
                                                 <i class="zmdi zmdi-delete"></i>

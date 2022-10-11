@@ -1,6 +1,12 @@
 <div class="header-search-box">
     <form autocomplete="off" wire:submit.prevent="search" class="form-search">
-        <input type="search" class="header-search-input" wire:model.debounce.500ms="search"
+        <div class="form1">
+            <i class="fa fa-search"></i>
+            <input type="text" class="form-control form-input" placeholder="Search anything...">
+            <span class="left-pan1"><i class="fa fa-microphone"></i></span>
+        </div>
+
+        <!-- <input type="search" class="header-search-input" wire:model.debounce.500ms="search"
             value="{{session('search')??''}}" placeholder="جست و جوی محصول ...">
         <div class="action-btns">
             <button class="btn btn-search" type="submit" wire:loading.attr="disabled">
@@ -17,7 +23,7 @@
                     </select>
                 </div>
             </div>
-        </div>
+        </div> -->
     </form>
     @if($sProducts && !$errors->has('search'))
     <div class="search-result">

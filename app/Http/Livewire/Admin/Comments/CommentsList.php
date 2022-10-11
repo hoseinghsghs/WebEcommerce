@@ -11,17 +11,14 @@ use Livewire\WithPagination;
 
 class CommentsList extends Component
 {
+
     use WithPagination;
     public $title;
     public $comment;
     //////////////////////////////////
-
-
     protected $paginationTheme = 'bootstrap';
     public $name;
     public $product_name;
-
-
     /////////////////////////////////
     protected $listeners = [
         'sweetAlertConfirmed', // only when confirm button is clicked
@@ -29,6 +26,7 @@ class CommentsList extends Component
 
     public function mount(Comment $comment)
     {
+
         if ($comment->approved) {
 
             $this->title = "عدم انتشار";
