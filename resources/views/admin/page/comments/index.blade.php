@@ -27,14 +27,8 @@
             <!-- Hover Rows -->
 
             <!-- Hover Rows -->
-            @livewire('admin.comments.comments-list',key($comments->id))
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <div class="card">
-                        {{$comments->links('vendor.pagination.bootstrap-4')}}
-                    </div>
-                </div>
-            </div>
+            @livewire('admin.comments.comments-list')
+
             <!-- #END# Hover Rows -->
             <!-- #END# Hover Rows -->
         </div>

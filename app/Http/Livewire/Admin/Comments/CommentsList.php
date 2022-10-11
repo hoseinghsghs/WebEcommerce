@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Livewire\Admin\Comments;
+
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Product;
@@ -9,90 +11,84 @@ use Livewire\WithPagination;
 
 class CommentsList extends Component
 {
+
     use WithPagination;
-public $title;
-public $comment;
-//////////////////////////////////
+    public $title;
+    public $comment;
+    //////////////////////////////////
+    protected $paginationTheme = 'bootstrap';
+    public $name;
+    public $product_name;
+    /////////////////////////////////
+    protected $listeners = [
+        'sweetAlertConfirmed', // only when confirm button is clicked
+    ];
 
+    public function mount(Comment $comment)
+    {
 
-protected $paginationTheme = 'bootstrap'; 
-public $name;
-public $product_name;
+        if ($comment->approved) {
 
+            $this->title = "عدم انتشار";
+            $this->color = "danger";
+        } else {
 
-/////////////////////////////////
-protected $listeners = [
-    'sweetAlertConfirmed', // only when confirm button is clicked
-];
-
-public function mount(Comment $comment)
-{ 
-    if($comment->approved){
-      
-           $this->title="عدم انتشار";
-           $this->color="danger";
-
-    }else{
-       
-           $this->title="انتشار";
-           $this->color="success";
-
+            $this->title = "انتشار";
+            $this->color = "success";
         }
-        }
-      
-        public function render()
-        {
-            
-            $user_name=User::where('name','like','%'.$this->name.'%')->pluck('id')->toArray();
-            $product_name=Product::where('name','like','%'.$this->product_name.'%')->pluck('id')->toArray();
-            $post_name=Post::where('title','like','%'.$this->product_name.'%')->pluck('id')->toArray();
-            $data = array_merge( $post_name, $product_name);
-            $comments = Comment::whereIn('user_id',$user_name)
+    }
+
+    public function render()
+    {
+
+        $user_name = User::where('name', 'like', '%' . $this->name . '%')->pluck('id')->toArray();
+        $product_name = Product::where('name', 'like', '%' . $this->product_name . '%')->pluck('id')->toArray();
+        $post_name = Post::where('title', 'like', '%' . $this->product_name . '%')->pluck('id')->toArray();
+        $data = array_merge($post_name, $product_name);
+        $comments = Comment::whereIn('user_id', $user_name)
             ->whereIn('commentable_id', $data)
-            ->where('parent_id',0)
+            ->where('parent_id', 0)
+            ->latest()
             ->paginate(10);
 
-            return view('livewire.admin.comments.comments-list',['comments' => $comments]);
-        }
-            
-    
+        return view('livewire.admin.comments.comments-list', ['comments' => $comments]);
+    }
 
-    public function delcomment(Comment $comment){
+
+
+    public function delcomment(Comment $comment)
+    {
         if ($comment->replies->count()) {
-            $this->comment=$comment;
+            $this->comment = $comment;
             sweetAlert()
-            ->livewire()
-            ->addInfo('ابتدا پاسخ ها حذف گردد. با حذف این پرسش تمامی پاسخ ها حذف میشوند');
-        }else{
+                ->livewire()
+                ->addInfo('ابتدا کامنت ها حذف گردد. با حذف این پرسش تمامی کامنت ها حذف میشوند');
+        } else {
             $comment->delete();
             toastr()->livewire()->addSuccess('نظر با موفقیت حذف شد');
         }
     }
 
     public function sweetAlertConfirmed(array $data)
-   { 
-   }
+    {
+    }
 
-   public function ChengeActive_comment (Comment $comment){
-      
+    public function ChengeActive_comment(Comment $comment)
+    {
 
-    if($comment->approved){
-        $comment->update([
-            "approved"=> false
-           ]);
-           $this->title="عدم انتشار";
-           $this->color="danger";
 
-    }else{
-        $comment->update([
-            "approved"=> true
-           ]);
-           $this->title="انتشار";
-           $this->color="success";
-
+        if ($comment->approved) {
+            $comment->update([
+                "approved" => false
+            ]);
+            $this->title = "عدم انتشار";
+            $this->color = "danger";
+        } else {
+            $comment->update([
+                "approved" => true
+            ]);
+            $this->title = "انتشار";
+            $this->color = "success";
         }
-        
-     }
-
-
+    }
 }

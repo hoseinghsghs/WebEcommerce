@@ -16,19 +16,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-
-        $comments = Comment::latest()->paginate(10);
-        return view('admin.page.comments.index', compact('comments'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view('admin.page.comments.index');
     }
 
     /**
@@ -39,12 +27,12 @@ class CommentController extends Controller
      */
     public function store(Request $request, ToastrFactory $flasher)
     {
-        
+
         $request->validate([
             'text' => 'required',
         ]);
-    
-        $approved = (auth()->user()->hasRole('super-admin')) ? 1 : 0 ;
+
+        $approved = (auth()->user()->hasRole('super-admin')) ? 1 : 0;
         Comment::create([
             'parent_id' => $request->comment_id,
             'user_id' => auth()->id(),
@@ -55,19 +43,9 @@ class CommentController extends Controller
 
 
         ]);
-        
-        $flasher->addSuccess('تغییرات با موفقیت ذخیره شد');
-        return redirect()->route('admin.comments.index');    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $flasher->addSuccess('تغییرات با موفقیت ذخیره شد');
+        return redirect()->route('admin.comments.index');
     }
 
     /**
@@ -78,7 +56,7 @@ class CommentController extends Controller
      */
     public function edit(Comment $comment)
     {
-        return view('admin.page.comments.edit' , compact('comment'));
+        return view('admin.page.comments.edit', compact('comment'));
     }
 
     /**
@@ -88,21 +66,19 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comment $comment ,ToastrFactory $flasher)
+    public function update(Request $request, Comment $comment, ToastrFactory $flasher)
     {
         $request->validate([
             'text' => 'required|min:5',
         ]);
         try {
-                $comment->update([
-                    "text" => $request->text
-                ]); 
+            $comment->update([
+                "text" => $request->text
+            ]);
 
-                $flasher->addSuccess('تغییرات با موفقیت ذخیره شد');
-                return redirect()->route('admin.comments.index');
-        } 
-        
-        catch (\Throwable $th) {
+            $flasher->addSuccess('تغییرات با موفقیت ذخیره شد');
+            return redirect()->route('admin.comments.index');
+        } catch (\Throwable $th) {
             $flasher->addError('مشکل در تغییر');
             return redirect()->route('admin.comments.index');
         }
@@ -114,11 +90,10 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comment $comment,ToastrFactory $flasher)
+    public function destroy(Comment $comment, ToastrFactory $flasher)
     {
         $comment->delete();
         $flasher->addSuccess('کامنت مورد نظر حذف شد');
         return back();
-
     }
 }
