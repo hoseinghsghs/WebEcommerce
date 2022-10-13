@@ -34,7 +34,7 @@ class Setting extends Component
     public $logo;
     public $logo_url;
 
-    protected $listeners=['privacyChanged','rulesChanged'];
+    protected $listeners = ['privacyChanged', 'rulesChanged'];
     protected $rules = [
         'site_name' => 'nullable|string',
         'emails' => 'nullable|array',
@@ -68,7 +68,8 @@ class Setting extends Component
     ];
 
     public function mount()
-    {   $this->links=[];
+    {
+        $this->links = [];
         $settings = ModelsSetting::findOrNew(1);
         $this->site_name = $settings->site_name;
         $this->emails = json_decode($settings->emails, true);
@@ -160,7 +161,7 @@ class Setting extends Component
         if ($this->logo) {
             Storage::deleteDirectory('logo');
             $image_controller = new ImageController();
-            $image_name = $image_controller->UploadeImage($this->logo, "logo", null, null);
+            $image_name = $image_controller->UploadeImage($this->logo, "logo", 48, 170);
             $data['logo'] = $image_name;
         } else {
             unset($data['logo']);
