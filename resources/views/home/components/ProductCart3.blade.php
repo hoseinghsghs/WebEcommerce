@@ -1,27 +1,14 @@
-<div class="col-lg-3 col-md-4 col-sm-6 order-1 d-block mb-3">
-    <section class="product-box product product-type-simple">
+<div class="col-lg-3 col-md-4 col-sm-6 col-6 p-1 order-1 d-block mb-3">
+    <section class="product-box product product-type-simple h-100 ">
         <div class="thumb">
             <a href="{{route('home.products.show' , ['product' => $product->slug])}}" class="d-block">
                 @if ($product->quantity_check && $product->sale_check)
                 <div class="promotion-badge">فروش ویژه</div>
                 @endif
-
-                <span class="p-2"><span data-rating-stars="5" data-rating-readonly="true"
+                <span><span data-rating-stars="5" data-rating-readonly="true"
                         data-rating-value="{{ceil($product->rates->avg('satisfaction'))}}">
                     </span></span>
 
-                @php
-                $percents=$product->discountPercent();
-                @endphp
-                @if ($product->quantity_check && $product->sale_check && $percents)
-                <div class="discount-d">
-                    @if (count($percents)==1)
-                    <span>{{$percents[0]}}٪</span>
-                    @else
-                    <span>{{end($percents)}}٪ - {{$percents[0]}}٪</span>
-                    @endif
-                </div>
-                @endif
                 <div class="position-relative d-inline-block">
                     <div style="position: absolute;left:0;top:1rem">
                         <ul>
@@ -116,6 +103,18 @@
             @if ($product->sale_check)
             <del><span>{{number_format($product->sale_check->price)}}<span>تومان</span></span></del>
             <ins><span class="amount">{{number_format($product->sale_check->sale_price)}}<span>تومان</span></span>
+                @php
+                $percents=$product->discountPercent();
+                @endphp
+                @if ($product->quantity_check && $product->sale_check && $percents)
+                <div class="discount-d">
+                    @if (count($percents)==1)
+                    <span>{{$percents[0]}}٪</span>
+                    @else
+                    <span>{{end($percents)}}٪ - {{$percents[0]}}٪</span>
+                    @endif
+                </div>
+                @endif
             </ins>
             @else
             <ins><span class="amount">{{ number_format($product->price_check->price) }}<span>تومان</span></span></ins>

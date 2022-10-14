@@ -1,7 +1,7 @@
   <!-- slider-main--------------------------->
   <div class="container-main">
       <div class="d-block">
-          <div class="col-lg-12 col-xs-12 pr mb-4 p-0">
+          <div class="col-lg-12 col-xs-12 pr  p-0">
               <div class="slider-main-container d-block">
                   <div id="carouselExampleIndicators" class="carousel slide" data-interval="5000" data-touch="true"
                       data-ride="carousel">
