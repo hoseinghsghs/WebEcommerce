@@ -30,11 +30,7 @@
                                         <span class="icon-cart">
                                             <i class="mdi mdi-shopping"></i>
                                         </span>
-                                        <span class="count-cart" id="count-cart">
-                                            <span>
-                                                {{Cart::getContent()->count()}}
-                                            </span>
-                                        </span>
+                                        <span class="count-cart" id="count-cart">{{Cart::getContent()->count()}}</span>
                                     </a>
                                     <div class="widget-shopping-cart" id="widget-shopping-cart"
                                         style={{\Cart::isEmpty() ? 'display:none' : ''}}>

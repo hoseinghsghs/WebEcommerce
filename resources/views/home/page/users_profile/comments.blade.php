@@ -99,7 +99,8 @@
         </section>
     </div>
 </div>
-@endsection@push('scripts')
+@endsection
+@push('scripts')
 <script>
 function send(product) {
     let url =
@@ -120,3 +121,4 @@ function send(product) {
     })
 }
 </script>
+@endpush

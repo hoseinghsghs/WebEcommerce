@@ -34801,6 +34801,7 @@ span.shipping-destination {
     float: right;
     margin-top: 40px;
     text-align: center;
+    width: 100%;
 }
 
 .profile-stats .profile-recent-fav a img {
@@ -34812,6 +34813,7 @@ span.shipping-destination {
     float: right;
     display: inline-block;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .profile-stats .profile-recent-fav .profile-recent-fav-col a {
@@ -34820,17 +34822,18 @@ span.shipping-destination {
 }
 
 .profile-stats .profile-recent-fav .profile-recent-fav-price {
-    color: #ff5858;
+    color: black;
     font-size: 14px;
     display: block;
     float: right;
     margin-top: 10px;
+    width: 100%;
 }
 
 .profile-stats .profile-recent-fav .profile-recent-fav-remove {
     float: left;
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     margin-top: 0;
     overflow: hidden;
     border-radius: 20px;
