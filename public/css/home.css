@@ -36565,9 +36565,9 @@ main.single-product .product .gallery-items li img:hover {
     left: 0;
 }
 
-.product .product-info .product-config-wrapper .product-params {
+/* .product .product-info .product-config-wrapper .product-params {
     padding: 12px 0 0;
-}
+} */
 
 .product .product-info .product-config-wrapper .product-params ul {
     padding: 0;
@@ -36681,7 +36681,7 @@ main.single-product .product .gallery-items li img:hover {
     border-radius: 20px;
     padding: 16px;
     width: 100%;
-    margin-top: 40px;
+    margin-top: 1rem;
     float: right;
 }
 
