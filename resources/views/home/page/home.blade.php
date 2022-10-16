@@ -11,19 +11,23 @@
 <section class="section-slider amazing-section pt-0">
     <div class="container-amazing col-12">
         <div class="col-lg-3 display-md-none pull-right">
+
+
             <div class="amazing-product text-center">
+
                 <a href="#">
                     <img src="assets/home/images/slider-amazing/shopping-cart.svg" alt="special">
                 </a>
-                <h3 class="amazing-heading-title amazing-size-default">فروش ویژه</h3>
-
+                </br>
+                <a href="#" class="title-one text-white ">مشاهده همه <i class="fa fa-angle-left"></i>
+                </a>
             </div>
         </div>
 
 
         <div class="col-lg-9 col-md-12 pull-left pr-1">
             <div class="slider-widget-products mb-0">
-                <div class="widget widget-product card" style="padding:32px ;">
+                <div class="widget widget-product card" style="padding:10px ;">
                     <header class="card-header">
                         <span class="title-one">فروش ویژه</span>
                         <h3 class="card-title">مشاهده همه</h3>
@@ -61,6 +65,7 @@
                 <div class="widget widget-product card">
                     <header class="card-header">
                         <span class="title-one">پیشنهاد ما</span>
+                        <span class="title-one-0 pl">مشاهده همه</span>
                         <h3 class="card-title"></h3>
                     </header>
                     <div class="product-carousel owl-carousel owl-theme owl-rtl owl-loaded owl-drag">
@@ -90,11 +95,8 @@
                         <div class="owl-stage-outer">
                             <div class="owl-stage"
                                 style="transform: translate3d(1369px, 0px, 0px); transition: all 0.25s ease 0s; width: 2190px;">
-
                                 @each('home.components.ProductSuggestion', $Products_our_suggestion_units,
                                 'Products_our_suggestion_unit')
-
-
                             </div>
                         </div>
                     </div>
@@ -129,6 +131,8 @@
                 <div class="widget widget-product card">
                     <header class="card-header">
                         <span class="title-one">{{$product_is_show->name}}</span>
+                        <span class="title-one-0 pl">مشاهده همه</span>
+
                         <h3 class="card-title"></h3>
                     </header>
                     <div class="product-carousel owl-carousel owl-theme owl-rtl owl-loaded owl-drag">

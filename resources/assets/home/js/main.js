@@ -353,10 +353,13 @@ $(document).ready(function (e) {
 
     $(".form-coupon").on("submit", function (e) {
         e.preventDefault();
-        var form=$(this);
-            form.find('button').attr('disabled', true).append(
-            '<span class="mr-1"><i class="fa fa-spinner fa-spin"></i></span>');
-        var code1 = form.find('input').val();
+        var form = $(this);
+        form.find("button")
+            .attr("disabled", true)
+            .append(
+                '<span class="mr-1"><i class="fa fa-spinner fa-spin"></i></span>'
+            );
+        var code1 = form.find("input").val();
         let url = window.location.origin + "/checkcoupon";
         $.post(
             url,
@@ -368,7 +371,9 @@ $(document).ready(function (e) {
                 if (xhr.status == 200) {
                     let message = response.message;
                     $(".inc-coupon").html(number_format(message) + "تومان");
-                    $("#final-amounts").html(number_format(response.total_amounts) + "تومان");
+                    $("#final-amounts").html(
+                        number_format(response.total_amounts) + "تومان"
+                    );
                     $("#coupon-box").remove();
                     $("").html(number_format(message) + "تومان");
                     Swal.fire({
@@ -400,8 +405,10 @@ $(document).ready(function (e) {
                 });
             })
             .always(function () {
-                form.find('button').attr('disabled', false).find('span')
-                .remove();
+                form.find("button")
+                    .attr("disabled", false)
+                    .find("span")
+                    .remove();
             });
     });
 
@@ -533,8 +540,7 @@ $(document).ready(function (e) {
                         timer: 1500,
                         confirmButtonText: "تایید",
                     });
-                }
-                else if (xhr.status == 201) {
+                } else if (xhr.status == 201) {
                     Swal.fire({
                         text: "محصول قبلا به سبد خرید اضافه شده",
                         icon: "warning",

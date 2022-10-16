@@ -37,7 +37,7 @@ class HomeController extends Controller
         $posts =                            Post::active()->get()->take(5);
 
         $categories =                       Category::where('parent_id', 0)->where('is_active', 1)->get();
-        $products_is_show =                 Category::where('parent_id','!=', 0)->where('is_active', 1)->where('is_show', 1)->get();
+        $products_is_show =                 Category::where('parent_id', '!=', 0)->where('is_active', 1)->where('is_show', 1)->get();
 
         $services =                         Service::orderBy('service_order')->get();
 
@@ -50,7 +50,7 @@ class HomeController extends Controller
         $Products_our_suggestion =          Product::active()->where('position', 'پیشنهاد ما')->get()->take(15);
         $Products_special =                 Product::active()->where('position', 'فروش ویژه')->get()->take(15);
 
-        $Products_our_suggestion_units =    Product::active()->where('position', 'تک محصول')->get()->take(5);
+        $Products_our_suggestion_units =    Product::active()->where('position', 'تک محصول')->get()->take(2);
 
         return view(
             'home.page.home',
@@ -82,7 +82,7 @@ class HomeController extends Controller
         SEOTools::opengraph()->addProperty('type', 'articles');
         SEOTools::twitter()->setSite('@metawebs_ir');
         SEOTools::jsonLd()->addImage(asset('storage/logo/' . $settings->logo));
-        
+
         return view('home.page.contact-us');
     }
 }

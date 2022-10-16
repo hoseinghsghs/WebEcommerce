@@ -26,6 +26,9 @@
                                     دفتر مرکزی
                                 </div>
                                 <div class="contact-us-address-text">
+                                    <i class="fa fa-map-marker fa-2x text-danger">
+
+                                    </i>
                                     {{$setting->address}}
                                 </div>
                                 <div class="contact-us-address-header">
@@ -33,18 +36,21 @@
                                 </div>
                                 @if(json_decode($setting->phones) != null && json_decode($setting->phones) != [])
                                 <div class="contact-us-address-text">
-                                @foreach(json_decode($setting->phones) as $phone)
-                                    <a href="tel:{{$phone}}">{{$phone}}</a>{{$loop->last ? '' : ' _ '}}
+                                    <i class="fa fa-phone fa-2x text-danger"></i>
+                                    @foreach(json_decode($setting->phones) as $phone)
+                                    <a href="tel:{{$phone}}">{{$phone}}</a>{{$loop->last ? '' : ' - '}}
                                     @endforeach
                                 </div>
                                 @endif
                                 <div class="contact-us-address-header">
                                     ایمیل سازمانی
                                 </div>
+                                <i class="fa fa fa-envelope-o fa-2x text-danger"></i>
                                 @if(json_decode($setting->emails) != null && json_decode($setting->emails) != [])
                                 <div class="contact-us-address-text d-inline-block">
-                                @foreach(json_decode($setting->emails) as $email)
-                                    <a href="mailto:{{$email}}">{{$email}}</a>{{$loop->last ? '' : ' / '}}
+                                    @foreach(json_decode($setting->emails) as $email)
+                                    <a href="mailto:{{$email}}">{{$email}}</a>{{$loop->last ? '' : ' - '}}
+
                                     @endforeach
                                 </div>
                                 @endif

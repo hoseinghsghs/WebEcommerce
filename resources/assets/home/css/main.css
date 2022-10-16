@@ -146,7 +146,7 @@ div {
 }
 
 .h-main-row {
-    margin: 15px 0;
+    margin: 2px 0;
     display: block;
     float: right;
     width: 100%;
@@ -381,7 +381,7 @@ header.header-main {
     background-color: #fff;
     color: #555 !important;
     line-height: 44px;
-    padding: 5px 10px 5px 43px;
+    padding: 5px 10px 5px 20px;
     float: left;
     margin-top: 0;
     font-size: 1.03em;
@@ -430,6 +430,18 @@ header.header-main {
     transition: all 0.1s ease-in;
     opacity: 0.01;
     visibility: hidden;
+}
+#nav-cart-style {
+    padding-left: 0.75rem;
+    border-left: 1px solid #938f8f;
+}
+#nav-account-style {
+    padding-left: 35px;
+    margin-left: 16px;
+    border-left: 1px solid #938f8f;
+}
+#nav-account-style-0 {
+    margin-left: 22px;
 }
 
 .account-box .nav-account:hover .dropdown-menu {
@@ -553,6 +565,36 @@ header.header-main {
     border-bottom: 1px solid #e0e0e0;
     border-top: 1px solid #f5f5f5;
     box-shadow: 0 1px 5px 0 rgb(0 0 0 / 30%);
+}
+.header-cart-nav {
+    width: fit-content;
+    height: 60px;
+    position: relative;
+    line-height: 55px;
+    float: right;
+    background-color: white;
+    margin-top: 4px;
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0 0px 0px 0;
+    border-bottom: 0px;
+    border-top: 0px;
+    margin-right: 13px;
+}
+@media (max-width: 480px) {
+    .header-cart-nav {
+        width: fit-content;
+        height: 60px;
+        position: relative;
+        line-height: 55px;
+        float: right;
+        background-color: white;
+        margin-top: 4px;
+        border-bottom: 1px solid #e0e0e0;
+        box-shadow: 0 0px 0px 0;
+        border-bottom: 0px;
+        border-top: 0px;
+        margin-right: 0px;
+    }
 }
 
 .header-main-nav ul.menu-ul {
@@ -898,6 +940,18 @@ header.header-main {
 
 .header-main-nav .divider-space-card .header-cart-basket .cart-basket-box {
     height: 50px;
+    color: #838181;
+    padding: 0;
+    border-radius: 50px;
+    width: 100%;
+    display: block;
+    margin-top: 4px;
+    line-height: 50px;
+    overflow: hidden;
+}
+
+.divider-space-card .header-cart-basket .cart-basket-box {
+    height: 50px;
     color: gray;
     padding: 0;
     border-radius: 50px;
@@ -928,8 +982,8 @@ header.header-main {
     .header-cart-basket
     .cart-basket-box
     span.count-cart {
-    width: 20px;
-    height: 20px;
+    width: 1.2rem;
+    height: 1.2rem;
     background: #fd6b6b;
     color: #ffffff;
     position: absolute;
@@ -1686,7 +1740,28 @@ header.header-main {
     float: left;
 }
 
-/* bottom-menu-joomy-- */
+@media (max-width: 448px) {
+    .bottom-menu-joomy {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 99;
+        width: fit-content !important;
+        padding: 1px;
+        height: 60px;
+        background-color: #f4f4f4;
+        text-align: center;
+        box-shadow: 0 -3px 5px rgb(0 0 0 / 37%);
+        display: none;
+    }
+    .bottom-menu-joomy {
+        display: block;
+        margin-bottom: 0.25rem !important;
+        border-radius: 1rem !important;
+    }
+}
+
 .bottom-menu-joomy {
     position: fixed;
     bottom: 0;
@@ -1694,7 +1769,7 @@ header.header-main {
     z-index: 99;
     width: 100%;
     height: 60px;
-    background-color: #651fff;
+    background-color: #f4f4f4;
     text-align: center;
     box-shadow: 0 -3px 5px rgb(0 0 0 / 37%);
     display: none;
@@ -1706,7 +1781,7 @@ header.header-main {
 }
 
 .bottom-menu-joomy ul li a {
-    color: #fff;
+    color: rgb(26, 26, 26);
     display: inline-block;
     padding: 2% 4px;
     position: relative;
@@ -2098,7 +2173,7 @@ header.header-main {
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-    margin-bottom: 25px;
+    margin-bottom: 12px;
 }
 
 .adplacement-container-row a.adplacement-item .adplacement-sponsored_box {
@@ -2739,7 +2814,7 @@ header.header-main {
     position: relative;
     overflow: hidden;
     background: #fff;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
 }
 
 .slider-content-tabs {
@@ -2791,6 +2866,16 @@ header.header-main {
     padding-bottom: 10px;
     color: #651fff;
     border-bottom: 2px solid #651fff;
+    display: inline-block;
+    position: relative;
+    top: 2px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.widget .card-header span.title-one-0 {
+    padding-bottom: 10px;
+    color: #651fff;
     display: inline-block;
     position: relative;
     top: 2px;
@@ -3229,7 +3314,7 @@ header.header-main {
 .amazing-section {
     border-radius: unset;
     box-shadow: unset;
-    margin-bottom: 20px;
+    margin-bottom: 13px;
     padding-top: 0;
     float: right;
     width: 100%;
@@ -3240,7 +3325,7 @@ header.header-main {
 
 .amazing-product img {
     max-width: 80%;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 .amazing-product .amazing-heading-title {
@@ -3505,7 +3590,7 @@ header.header-main {
     padding: 15px;
     border-radius: 20px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+    margin-bottom: 14px;
 }
 
 .slider-moments .widget-suggestion .card-header {
@@ -4243,7 +4328,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
     border-bottom: 1px solid #f7858d;
     font-weight: 400;
     margin-bottom: 0;
-    text-align: center;
+    padding: 3px;
     font-size: 13px;
     height: 24px;
     line-height: 7px;
@@ -5905,6 +5990,7 @@ span.shipping-destination {
     float: right;
     margin-top: 40px;
     text-align: center;
+    width: 100%;
 }
 
 .profile-stats .profile-recent-fav a img {
@@ -5916,6 +6002,7 @@ span.shipping-destination {
     float: right;
     display: inline-block;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .profile-stats .profile-recent-fav .profile-recent-fav-col a {
@@ -5924,17 +6011,18 @@ span.shipping-destination {
 }
 
 .profile-stats .profile-recent-fav .profile-recent-fav-price {
-    color: #ff5858;
+    color: black;
     font-size: 14px;
     display: block;
     float: right;
     margin-top: 10px;
+    width: 100%;
 }
 
 .profile-stats .profile-recent-fav .profile-recent-fav-remove {
     float: left;
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     margin-top: 0;
     overflow: hidden;
     border-radius: 20px;
@@ -11382,8 +11470,8 @@ footer.footer-main-site
 
 .progress-wrap {
     position: fixed;
-    left: 50px;
-    bottom: 50px;
+    left: 25px;
+    bottom: 80px;
     height: 55px;
     width: 55px;
     cursor: pointer;
@@ -11577,7 +11665,7 @@ button.products-filter-btn {
 
 #login-style {
     background-color: white;
-    border-color: #dddddd;
+    border-color: #838181;
     color: gray;
     border-radius: 0.6rem;
 }
@@ -11620,7 +11708,6 @@ button.products-filter-btn {
 .input-group button {
     border-radius: 15px 0px 0px 15px;
 }
-
 
 .verify-phone-modal {
     width: auto;
@@ -11723,13 +11810,13 @@ button.products-filter-btn {
     padding-top: 0.5rem;
 }
 
-.coupon-code{
-        height: 40px;
-        border-radius: 0px 15px 15px 0px;
-        border: 1px solid #eeeeee;
-        outline: none;
-        color: #666;
-        font-size: 12px;
-        background: #f9f9f9;
-        padding: 0 15px;
+.coupon-code {
+    height: 40px;
+    border-radius: 0px 15px 15px 0px;
+    border: 1px solid #eeeeee;
+    outline: none;
+    color: #666;
+    font-size: 12px;
+    background: #f9f9f9;
+    padding: 0 15px;
 }

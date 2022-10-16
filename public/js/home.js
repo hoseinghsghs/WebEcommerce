@@ -488,8 +488,8 @@ $(document).ready(function (e) {
   $(".form-coupon").on("submit", function (e) {
     e.preventDefault();
     var form = $(this);
-    form.find('button').attr('disabled', true).append('<span class="mr-1"><i class="fa fa-spinner fa-spin"></i></span>');
-    var code1 = form.find('input').val();
+    form.find("button").attr("disabled", true).append('<span class="mr-1"><i class="fa fa-spinner fa-spin"></i></span>');
+    var code1 = form.find("input").val();
     var url = window.location.origin + "/checkcoupon";
     $.post(url, {
       _token: $('meta[name="csrf-token"]').attr("content"),
@@ -528,7 +528,7 @@ $(document).ready(function (e) {
         confirmButtonText: "تایید"
       });
     }).always(function () {
-      form.find('button').attr('disabled', false).find('span').remove();
+      form.find("button").attr("disabled", false).find("span").remove();
     });
   }); // checkout-coupon-------------------------------
 
@@ -830,7 +830,7 @@ $(document).ready(function (e) {
 
   /* if ($("#countdown-verify-end").length) {
       var $countdownOptionEnd = $("#countdown-verify-end");
-       $countdownOptionEnd.countdown({
+        $countdownOptionEnd.countdown({
           date: new Date().getTime() + 180 * 1000, // 1 minute later
           text: '<span class="day">%s</span><span class="hour">%s</span><span>: %s</span><span>%s</span>',
           end: function () {

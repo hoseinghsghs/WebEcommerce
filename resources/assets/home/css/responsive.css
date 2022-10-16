@@ -139,7 +139,6 @@
     }
 
     .account-box {
-        margin-top: -50px;
         background-color: transparent;
         z-index: 999;
     }
@@ -153,7 +152,7 @@
     }
 
     .nav-btn {
-        top: 100px;
+        top: 77px;
     }
 
     .btn-h4 {
@@ -173,7 +172,7 @@
     }
 
     .slider-main-container {
-        margin-bottom: 20px;
+        margin-bottom: 0px;
     }
 
     .content-widget-amazing {
@@ -448,7 +447,7 @@
     }
 
     .account-box .dropdown-menu {
-        top: -65px;
+        top: 46px;
     }
 
     .slider-widget-products .modal-body .product-box-modal-title h2 {
@@ -513,7 +512,6 @@
     }
 
     .account-box {
-        margin-top: -50px;
         background-color: transparent;
         z-index: 999;
     }
@@ -719,12 +717,8 @@
         left: 5px;
     }
 
-    .account-box {
-        margin-top: -45px;
-    }
-
     .nav-btn {
-        top: 100px;
+        top: 77px;
     }
 
     .header-main-nav .divider-space-card .header-cart-basket .cart-basket-box {
@@ -765,7 +759,7 @@
         background: #fd6b6b;
         top: 7px;
         color: #fff;
-        left: 15px;
+        left: 22px;
     }
 
     .carousel-control-next {
@@ -1156,7 +1150,7 @@
     }
 
     .account-box .dropdown-menu {
-        top: -58px;
+        top: 46px;
     }
 
     .slider-widget-products

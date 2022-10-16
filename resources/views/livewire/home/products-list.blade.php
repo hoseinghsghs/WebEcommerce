@@ -267,7 +267,7 @@
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="Most-visited" role="tabpanel"
                                     aria-labelledby="Most-visited-tab">
-                                    <div class="row">
+                                    <div class="row m-0">
                                         @each('home.components.ProductCart3',$products,'product','home.partial.empty-products-list')
                                     </div>
                                 </div>

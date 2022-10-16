@@ -1,10 +1,10 @@
 <!-- adplacement--------------------------->
 <div class="container-fluid">
     <div class="row">
-        <div class="adplacement-container-row">
+        <div class="adplacement-container-row ml-2 my-1">
             @foreach ($headers as $header )
-            <div class="col-6 col-lg-3 pr">
-                <a href="{{$header->link}}" class="adplacement-item">
+            <div class="col-6 col-lg-3 p-1 pr">
+                <a href="{{$header->link}}" class="adplacement-item m-1 ">
                     <div class="adplacement-sponsored_box">
                         <img src="{{url(env('BANNER_IMAGES_PATCH').$header->image)}}" alt="{{$header->title}}">
                     </div>

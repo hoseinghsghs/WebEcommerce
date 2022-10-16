@@ -1,31 +1,25 @@
 @extends('home.layout.MasterHome')
 @section('title' , 'پروفایل کاربری - علاقه مندی ها')
 @section('content')
-
 <div class="container-main">
     <div class="d-block">
         <section class="profile-home">
             <div class="col-lg">
                 <div class="post-item-profile order-1 d-block">
-
                     @include('home.page.users_profile.partial.right_side')
                     <div class="col-lg-9 col-md-9 col-xs-12 pl" id="loading1"></div>
-
                     <div class="col-lg-9 col-md-9 col-xs-12 pl" id="loading">
                         <div class="profile-content">
                             <div class="profile-stats">
                                 <div class="table-favorites">
                                     @if ($wishlist->isEmpty())
-
                                     <div class="cart-empty text-center d-block p-5">
-
                                         <p class="cart-empty-title">لیست علاقه مندی ها خالی است</p>
                                         <div class="return-to-shop">
                                             <a href="{{route('home')}}" class="backward btn btn-warning">بازگشت به
                                                 خانه</a>
                                         </div>
                                     </div>
-
                                     @else
                                     <table class="table ns-table table-profile-favorites">
                                         <thead>
@@ -56,12 +50,9 @@
                                                 <td>
                                                     <span class="amount">
                                                         @if ($item->product->quantity_check)
-
                                                         @if ($item->product->sale_check)
-
                                                         <ins class="new-price">{{number_format($item->product->sale_check->sale_price)}}
                                                             تومان</ins>
-
                                                         <del class="old-price">{{number_format($item->product->sale_check->price)}}
                                                             تومان</del>
                                                         @else
@@ -70,7 +61,6 @@
                                                         @endif
                                                         @else
                                                         <ins class="new-price">نا موجود</ins>
-
                                                         @endif
                                                     </span>
                                                 </td>
@@ -85,47 +75,47 @@
                                         </tbody>
                                     </table>
                                     @endif
-
                                     @foreach ($wishlist as $item )
                                     <div class="profile-recent-fav" id="{{$item->product->id}}-wish1">
+                                        <div class="profile-recent-fav-remove">
+                                            <button onclick="return send('{{$item->product->id}}')"
+                                                class="remove-product btn"><i class="mdi mdi-close"></i></button>
+                                        </div>
                                         <a href="{{route('home.products.show' , ['product' => $item->product->slug])}}"
                                             class="img-profile-favorites">
                                             <img
                                                 src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$item->product->primary_image)}}">
                                         </a>
+
                                         <div class="profile-recent-fav-col">
                                             <a
                                                 href="{{route('home.products.show' , ['product' => $item->product->slug])}}">{{$item->product->name}}</a>
                                         </div>
+
                                         <div class="profile-recent-fav-price">
                                             <span class="amount">
-                                                @if ($item->product->quantity_check)
+                                                <center>
+                                                    @if ($item->product->quantity_check)
+                                                    @if ($item->product->sale_check)
+                                                    {{number_format($item->product->sale_check->sale_price)}}
+                                                    تومان
+                                                    </br>
+                                                    <del class="old-price">{{number_format($item->product->sale_check->price)}}
+                                                        تومان</del>
+                                                    @else
+                                                    {{ number_format($item->product->price_check->price) }}
+                                                    تومان
+                                                    @endif
+                                                    @else
+                                                    <ins class="new-price">نا موجود</ins>
+                                                    @endif
+                                                </center>
 
-                                                @if ($item->product->sale_check)
-
-                                                <ins class="new-price">{{number_format($item->product->sale_check->sale_price)}}
-                                                    تومان</ins>
-
-                                                <del class="old-price">{{number_format($item->product->sale_check->price)}}
-                                                    تومان</del>
-                                                @else
-                                                <ins class="new-price">{{ number_format($item->product->price_check->price) }}
-                                                    تومان</ins>
-                                                @endif
-                                                @else
-                                                <ins class="new-price">نا موجود</ins>
-
-                                                @endif
                                             </span>
                                         </div>
-                                        <div class="profile-recent-fav-remove">
-                                            <button onclick="return send('{{$item->product->id}}')"
-                                                class="remove-product btn"><i class="mdi mdi-close"></i></button>
-                                        </div>
+
                                     </div>
                                     @endforeach
-
-
                                 </div>
                             </div>
                         </div>
@@ -135,8 +125,6 @@
         </section>
     </div>
 </div>
-
-
 
 @endsection
 
