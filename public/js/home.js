@@ -218,7 +218,7 @@ $(document).ready(function (e) {
   }); //    resposive-megamenu-mobile------------------
   // searchResult--------------------------------------
 
-  $(".header-search .header-search-box .form-search .header-search-input").on("click", function () {
+  $(".header-search .header-search-box .form-search input").on("click", function () {
     $(this).parents(".header-search").addClass("show-result").find(".search-result").fadeIn();
     $(".overlay-search-box").css({
       opacity: "1",
@@ -830,7 +830,7 @@ $(document).ready(function (e) {
 
   /* if ($("#countdown-verify-end").length) {
       var $countdownOptionEnd = $("#countdown-verify-end");
-        $countdownOptionEnd.countdown({
+       $countdownOptionEnd.countdown({
           date: new Date().getTime() + 180 * 1000, // 1 minute later
           text: '<span class="day">%s</span><span class="hour">%s</span><span>: %s</span><span>%s</span>',
           end: function () {

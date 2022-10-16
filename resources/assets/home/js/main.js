@@ -51,7 +51,7 @@ $(document).ready(function (e) {
     //    resposive-megamenu-mobile------------------
 
     // searchResult--------------------------------------
-    $(".header-search .header-search-box .form-search .header-search-input").on(
+    $(".header-search .header-search-box .form-search input").on(
         "click",
         function () {
             $(this)

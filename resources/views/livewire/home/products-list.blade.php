@@ -227,7 +227,7 @@
                             <i class="fas fa-filter"></i> فیلترها
                         </button>
                         <div class="archive-header d-flex flex-wrap align-items-center">
-                            <h2 class="archive-header-title ml-sm-auto">لیست محصولات ({{$products->count()}})</h2>
+                            <h2 class="archive-header-title ml-sm-auto">لیست محصولات</h2>
                             @if ($initialFilter !== $filterd)
                             <div class="ml-2">
                                 <button class="btn btn-range" wire:click="resetFilters()">

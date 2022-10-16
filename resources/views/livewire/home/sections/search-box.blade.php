@@ -1,40 +1,27 @@
 <div class="header-search-box">
     <form autocomplete="off" wire:submit.prevent="search" class="form-search">
         <div class="form1">
-            <i class="fa fa-search"></i>
-            <input type="text" class="form-control form-input" placeholder="Search anything...">
-            <span class="left-pan1"><i class="fa fa-microphone"></i></span>
+            <i class="fa fa-search" wire:click="search" wire:loading.remove></i>
+            <i class="mdi mdi-loading mdi-spin" wire:loading></i>
+            <input type="text" class="form-control form-input" value="{{session('search')??''}}" wire:model.debounce.500ms="search" placeholder="محصول خود را جستجو کنید...">
+            <span class="left-pan1">
+                <select class="custom-select border-0" wire:model="categoryId">
+                    <option value="">همه دسته ها</option>
+                    @foreach($categories as $category)
+                    <option value="{{$category->id}}">{{$category->name}}</option>
+                    @endforeach
+                </select>
+            </span>
         </div>
-
-        <!-- <input type="search" class="header-search-input" wire:model.debounce.500ms="search"
-            value="{{session('search')??''}}" placeholder="جست و جوی محصول ...">
-        <div class="action-btns">
-            <button class="btn btn-search" type="submit" wire:loading.attr="disabled">
-                <img src="/assets/home/images/search.png" alt="search" wire:loading.remove>
-                <i class="mdi mdi-loading mdi-spin" wire:loading></i>
-            </button>
-            <div class="search-filter">
-                <div class="form-ui">
-                    <select class="custom-select border-0 mt-1" wire:model="categoryId">
-                        <option value="">همه دسته ها</option>
-                        @foreach($categories as $category)
-                        <option value="{{$category->id}}">{{$category->name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-        </div> -->
     </form>
     @if($sProducts && !$errors->has('search'))
     <div class="search-result">
         <ul class="search-result-list mb-0">
             @forelse ($sProducts as $product )
             <li>
-                <a class="d-flex align-items-center border-bottom border-light"
-                    href="{{route('home.products.show',$product->slug)}}"><i class="mdi mdi-clock-outline"></i>
-                    <img src="{{asset('storage/primary_image/'.$product->primary_image)}}" alt="image" width="70"
-                        height="70" class="suggestion-image">
-                    {{$product->name}}
+                <a class="d-flex align-items-center border-bottom border-light" href="{{route('home.products.show',$product->slug)}}"><i class="mdi mdi-clock-outline"></i>
+                    <img src="{{asset('storage/primary_image/'.$product->primary_image)}}" alt="image" width="60" height="60" class="suggestion-image border rounded">
+                    <span class="mr-2">{{$product->name}}</span>
                     <span class="mr-auto ml-1">{{$product->category->parent->name}} /
                         {{$product->category->name}}</span>
                     <button class="btn btn-light btn-continue-search" type="submit">

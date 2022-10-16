@@ -40,7 +40,7 @@ class StoreProductRequest extends FormRequest
             'attribute_ids' => 'required|array',
             'attribute_ids.*' => 'required|string',
             'variation_values' => 'required|array',
-            'variation_values.*' => 'required|string',
+            'variation_values.value.*' => 'required|string|distinct',
             'variation_values.price.*' => 'required|integer',
             'variation_values.quantity.*' => 'required|integer',
             'variation_values.sku.*' => 'nullable|string|distinct|unique:product_variations,sku',
