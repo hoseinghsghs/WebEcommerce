@@ -24,9 +24,7 @@
                 </div>
             </div>
         </div>
-
         <div class="container-fluid">
-
             <!-- Hover Rows -->
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12">
@@ -182,9 +180,7 @@
                                             <label for="chec"> نمایش در صفحه اصلی </label>
                                         </div>
                                     </div>
-
                                 </div>
-
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-raised btn-primary waves-effect">ذخیره</button>
                                 </div>

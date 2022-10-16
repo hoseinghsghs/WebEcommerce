@@ -24,11 +24,7 @@
         </div>
 
         <div class="container-fluid">
-            <!-- Hover Rows -->
-            <!-- Hover Rows -->
             @livewire('admin.comments.comments-list')
-            <!-- #END# Hover Rows -->
-            <!-- #END# Hover Rows -->
         </div>
     </div>
 </section>

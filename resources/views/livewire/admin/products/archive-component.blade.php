@@ -49,8 +49,11 @@
                         </div>
                     </div>
                 </form>
-                <div class="header">
-                    <h2><strong>لیست محصولات </strong>( {{$products->total()}} )</h2>
+                <div class="header d-flex align-items-center">
+                    <h2><strong>لیست محصولات</strong>( {{$products->total()}} )</h2>
+                    <a onclick="loadbtn(event)" href="{{route('admin.products.create')}}"
+                        class="btn btn-raised btn-info waves-effect mr-auto">
+                        افزودن<i class="zmdi zmdi-plus mr-1 align-middle"></i></a>
                 </div>
                 <div class="body">
                     <div class="loader" wire:loading.flex>

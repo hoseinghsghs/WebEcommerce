@@ -88,8 +88,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-raised btn-primary waves-effect">ذخیره</button>
                                     <a href="{{route('admin.roles.index')}}" class="btn btn-default">بازگشت</a>
+                                    <button type="submit" class="btn btn-raised btn-primary waves-effect">ذخیره</button>
                                 </div>
                             </form>
                         </div>

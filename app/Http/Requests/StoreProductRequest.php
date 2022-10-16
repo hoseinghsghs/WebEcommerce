@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreProductRequest extends FormRequest
 {
@@ -13,7 +14,11 @@ class StoreProductRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return [
+            'variation_values.time_guarantee.*' => 'زمان گارانتی',
+            'variation_values.guarantee.*'=>'گارانتی',
+            'variation_values.sku.*'=>'شناسه انبار',
+        ];
     }
 
     /**
@@ -23,21 +28,24 @@ class StoreProductRequest extends FormRequest
      */
     public function rules()
     {
-        
         return [
-            'name' => 'required',
-            'brand_id' => 'required',
-            'is_active' => 'required',
-            'tag_ids' => 'required',
-            'description' => 'required',
-            'primary_image' => 'required|mimes:jpg,jpeg,png,svg',
-            'category_id' => 'required',
-            'attribute_ids' => 'required',
-            'attribute_ids.*' => 'required',
-            'variation_values' => 'required',
-            'variation_values.*.*' => 'required',
-            'variation_values.price.*' => 'integer',
-            'variation_values.quantity.*' => 'integer',
+            'name' => 'required|string|max:100',
+            'brand_id' => 'nullable|exists:brands,id',
+            'position' => ['required', Rule::in(['پیش فرض', 'فروش ویژه', 'پیشنهاد ما', 'تک محصول'])],
+            'tag_ids' => 'nullable|array',
+            'tag_ids.*' => 'nullable|exists:tads,id',
+            'description' => 'required|string',
+            'primary_image' => 'required|image|mimes:jpg,jpeg,png,svg|max:2000',
+            'category_id' => 'required|exists:categories,id',
+            'attribute_ids' => 'required|array',
+            'attribute_ids.*' => 'required|string',
+            'variation_values' => 'required|array',
+            'variation_values.*' => 'required|string',
+            'variation_values.price.*' => 'required|integer',
+            'variation_values.quantity.*' => 'required|integer',
+            'variation_values.sku.*' => 'nullable|string|distinct|unique:product_variations,sku',
+            'variation_values.guarantee.*' => 'nullable|string',
+            'variation_values.time_guarantee.*' => 'nullable|string',
             'delivery_amount' => 'required|integer',
             'delivery_amount_per_product' => 'nullable|integer',
         ];

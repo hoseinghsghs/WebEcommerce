@@ -119,11 +119,13 @@ class RoleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Permission  $permission
+     * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Permission $permission)
+    public function destroy(Role $role)
     {
-        //
+        $role->delete();
+        alert()->success('نقش مورد نظر با موفقیت حذف گردید.')->timerProgressBar()->toToast();
+        return redirect()->back();
     }
 }

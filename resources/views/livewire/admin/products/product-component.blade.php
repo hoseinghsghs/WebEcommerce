@@ -13,16 +13,14 @@
                             <div class="col-lg-3 col-md-3 col-sm-3">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" wire:model="name"
-                                            placeholder="نام محصول">
+                                        <input type="text" class="form-control" wire:model="name" placeholder="نام محصول">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-3">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <select data-placeholder="دسته بندی" class="form-control ms"
-                                            wire:model.deferred="category" class="form-control ms select2">
+                                        <select data-placeholder="دسته بندی" class="form-control ms" wire:model.deferred="category" class="form-control ms select2">
                                             <option value="">دسته بندی</option>
                                             @foreach ($categories as $category)
                                             <option value="{{ $category->id }}">
@@ -37,8 +35,7 @@
                             <div class="col-lg-3 col-md-3 col-sm-3">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <select data-placeholder="وضعیت" class="form-control ms"
-                                            wire:model.deferred="status" class="form-control ms select2">
+                                        <select data-placeholder="وضعیت" class="form-control ms" wire:model.deferred="status" class="form-control ms select2">
                                             <option value="">وضعیت</option>
                                             <option value="1">انتشار</option>
                                             <option value="0">عدم انتشار</option>
@@ -49,8 +46,10 @@
                         </div>
                     </div>
                 </form>
-                <div class="header">
-                    <h2><strong>لیست محصولات </strong>( {{$products->total()}} )</h2>
+                <div class="header d-flex align-items-center">
+                    <h2><strong>لیست محصولات </strong> ( {{$products->total()}} )</h2>
+                    <a onclick="loadbtn(event)" href="{{route('admin.products.create')}}" class="btn btn-raised btn-info waves-effect mr-auto">
+                        افزودن<i class="zmdi zmdi-plus mr-1"></i></a>
                 </div>
                 <div class="body">
                     <div class="loader" wire:loading.flex>
@@ -79,18 +78,13 @@
                                 <tr wire:key="name_{{ $product->id }}">
                                     <td scope="row">{{$key+1}}</td>
                                     <td>
-                                        <a data-lightbox="brand-{{$loop->index}}" data-title="{{$product->name}}"
-                                            href="{{asset('storage/primary_image/'.$product->primary_image)}}">
-                                            <img src="{{asset('storage/primary_image/'.$product->primary_image)}}"
-                                                alt="{{$product->name}}" width="48" class="img-fluid rounded"
-                                                style="min-height: 3rem;">
+                                        <a data-lightbox="brand-{{$loop->index}}" data-title="{{$product->name}}" href="{{asset('storage/primary_image/'.$product->primary_image)}}">
+                                            <img src="{{asset('storage/primary_image/'.$product->primary_image)}}" alt="{{$product->name}}" width="48" class="img-fluid rounded" style="min-height: 3rem;">
                                         </a>
                                     </td>
-                                    <td><a
-                                            href="{{route('admin.products.show',['product' => $product->id ])}}">{{$product->name}}</a>
+                                    <td><a href="{{route('admin.products.show',['product' => $product->id ])}}">{{$product->name}}</a>
                                     </td>
-                                    <td><a
-                                            href="{{route('admin.categories.edit',['category' => $product->category->id ])}}">{{$product->category->name}}</a>
+                                    <td><a href="{{route('admin.categories.edit',['category' => $product->category->id ])}}">{{$product->category->name}}</a>
                                     </td>
                                     <td>
                                         <a href="{{route('admin.products.show',['product' => $product->id ])}}">
@@ -111,10 +105,7 @@
                                     <td>
                                         <div class="row clearfix">
                                             <div class="col-6">
-                                                <a wire:click="ChengeActive_product({{$product->id}})"
-                                                    wire:loading.attr="disabled"
-                                                    class="btn btn-raised btn-{{$color}} waves-effect"><span
-                                                        style="color:white;">{{$title}}</span>
+                                                <a wire:click="ChengeActive_product({{$product->id}})" wire:loading.attr="disabled" class="btn btn-raised btn-{{$color}} waves-effect"><span style="color:white;">{{$title}}</span>
                                                 </a>
 
                                             </div>
@@ -134,33 +125,23 @@
                                     <td>
                                         <div class="row clearfix">
                                             <div class="col-6">
-                                                <a wire:click="ChengeArchive_product({{$product->id}})"
-                                                    wire:loading.attr="disabled"
-                                                    class="btn btn-raised btn-{{$color}} waves-effect"><span
-                                                        style="color:white;">{{$title}}</span>
+                                                <a wire:click="ChengeArchive_product({{$product->id}})" wire:loading.attr="disabled" class="btn btn-raised btn-{{$color}} waves-effect"><span style="color:white;">{{$title}}</span>
                                                 </a>
-
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="text-center js-sweetalert">
-
+                                    <td class="text-center">
                                         <div class="btn-group">
-                                            <button type="button"
-                                                class="btn btn-md btn-warning btn-outline-primary dropdown-toggle"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <button type="button" class="btn btn-md btn-warning btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <i class="zmdi zmdi-edit"></i>
                                             </button>
                                             <div class="dropdown-menu">
 
-                                                <a href="{{ route('admin.products.edit', ['product' => $product->id]) }}"
-                                                    class="dropdown-item text-right"> ویرایش محصول </a>
+                                                <a href="{{ route('admin.products.edit', ['product' => $product->id]) }}" class="dropdown-item text-right"> ویرایش محصول </a>
 
-                                                <a href="{{ route('admin.products.images.edit', ['product' => $product->id]) }}"
-                                                    class="dropdown-item text-right"> ویرایش تصاویر </a>
+                                                <a href="{{ route('admin.products.images.edit', ['product' => $product->id]) }}" class="dropdown-item text-right"> ویرایش تصاویر </a>
 
-                                                <a href="{{ route('admin.products.category.edit', ['product' => $product->id]) }}"
-                                                    class="dropdown-item text-right"> ویرایش دسته بندی و ویژگی </a>
+                                                <a href="{{ route('admin.products.category.edit', ['product' => $product->id]) }}" class="dropdown-item text-right"> ویرایش دسته بندی و ویژگی </a>
 
                                             </div>
                                         </div>
@@ -173,6 +154,7 @@
                     @endif
                 </div>
             </div>
+            {{$products->onEachSide(1)->links()}}
         </div>
     </div>
 </div>

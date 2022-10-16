@@ -84,7 +84,7 @@
                 </div>
                 @endif
             </div>
-            {{ $permissions->links() }}
+            {{ $permissions->onEachSide(1)->links() }}
         </div>
     </div>
 </div>

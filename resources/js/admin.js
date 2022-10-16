@@ -45,8 +45,7 @@ require("../assets/admin/js/dropzone.js");
 require("../assets/admin/js/pages/forms/advanced-form-elements.js");
 require("../assets/admin/js/jquery.czMore-latest.js");
 require("../assets/admin/js/rating.js");
-window.Swal =
-    window.swal = require("../assets/home/js/vendor/sweetalert2.all.min.js");
+window.Swal = require("../assets/home/js/vendor/sweetalert2.all.min.js");
 window.Echo = new Echo({
     broadcaster: "pusher",
     key: process.env.MIX_PUSHER_APP_KEY,

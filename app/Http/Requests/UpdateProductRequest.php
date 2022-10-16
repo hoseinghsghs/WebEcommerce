@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\ProductVariation;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateProductRequest extends FormRequest
 {
@@ -13,7 +15,7 @@ class UpdateProductRequest extends FormRequest
      */
     public function authorize()
     {
-        return true ;
+        return true;
     }
 
     /**
@@ -24,16 +26,23 @@ class UpdateProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'brand_id' => 'required|exists:brands,id',
-            'is_active' => 'required',
-            'tag_ids' => 'required',
-            'tag_ids.*' => 'exists:tags,id',
-            'description' => 'required',
-            'attribute_values.*' => 'required',
-            'variation_values' => 'required',
+            'name' => 'required|string|max:100',
+            'brand_id' => 'nullable|exists:brands,id',
+            'position' => ['required', Rule::in(['پیش فرض', 'فروش ویژه', 'پیشنهاد ما', 'تک محصول'])],
+            'tag_ids' => 'nullable|array',
+            'tag_ids.*' => 'nullable|exists:tads,id',
+            'description' => 'required|string',
+            'attribute_values' => 'required|array',
             'variation_values.*.price' => 'required|integer',
             'variation_values.*.quantity' => 'required|integer',
+            'variation_values.*.sku' =>'nullable|distinct',
+            'variation_values.*.sku' => Rule::forEach(function ($value, $attribute) {
+                $res = explode('.', $attribute);
+                $variation = ProductVariation::findOrFail($res[1]);
+                return [Rule::unique('product_variations', 'sku')->ignore($variation)];
+            }),
+            'variation_values.*.guarantee' => 'nullable|string',
+            'variation_values.*.time_guarantee' => 'nullable|string',
             'variation_values.*.sale_price' => 'nullable|integer',
             'variation_values.*.date_on_sale_from' => 'nullable',
             'variation_values.*.date_on_sale_to' => 'nullable',

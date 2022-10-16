@@ -21,7 +21,6 @@
                 </div>
             </div>
         </div>
-
         <div class="container-fluid">
             @livewire('admin.attributes.attribute-list')
         </div>

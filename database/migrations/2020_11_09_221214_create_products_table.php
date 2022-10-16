@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('position')->nullable();
             $table->string('lable')->nullable();
-            $table->foreignId('brand_id')->constrained('brands')->cascadeOnDelete();
+            $table->foreignId('brand_id')->nullable()->constrained('brands')->cascadeOnDelete();
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
             $table->string('slug')->unique();
             $table->string('primary_image');

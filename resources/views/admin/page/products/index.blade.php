@@ -13,10 +13,6 @@
                                 خانه</a></li>
                         <li class="breadcrumb-item active">لیست محصولات</li>
                     </ul>
-                    </br>
-                    <a onclick="loadbtn(event)" href="{{route('admin.products.create')}}"
-                        class="btn btn-raised btn-info waves-effect">
-                        افزودن<i class="zmdi zmdi-plus mr-1 align-middle"></i></a>
                     <button class="btn btn-primary btn-icon mobile_menu" type="button"><i
                             class="zmdi zmdi-sort-amount-desc"></i></button>
                 </div>
@@ -28,13 +24,11 @@
         </div>
 
         <div class="container-fluid">
-
             <!-- Hover Rows -->
             @livewire('admin.products.product-component',key($products->id))
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="card">
-                        {{$products->onEachSide(1)->links('vendor.pagination.bootstrap-4')}}
                     </div>
                 </div>
             </div>
