@@ -33,7 +33,7 @@ class StoreProductRequest extends FormRequest
             'brand_id' => 'nullable|exists:brands,id',
             'position' => ['required', Rule::in(['پیش فرض', 'فروش ویژه', 'پیشنهاد ما', 'تک محصول'])],
             'tag_ids' => 'nullable|array',
-            'tag_ids.*' => 'nullable|exists:tads,id',
+            'tag_ids.*' => 'nullable|exists:tags,id',
             'description' => 'required|string',
             'primary_image' => 'required|image|mimes:jpg,jpeg,png,svg|max:2000',
             'category_id' => 'required|exists:categories,id',

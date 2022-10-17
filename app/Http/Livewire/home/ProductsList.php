@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Home;
 
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductVariation;
@@ -59,6 +60,13 @@ class ProductsList extends Component
         request()->whenFilled('tag', function () {
             $this->filterd['tag'] = request()->query('tag');
         });
+        request()->whenFilled('label', function () {
+            $this->filterd['position'] = request()->query('label');
+        });
+        request()->whenFilled('brand', function () {
+            $brand=Brand::where('slug',request()->query('brand'))->firstOrFail();
+            $this->filterd['brand'] = $brand->id;
+        });
         // get maximum of price
         $max_price = ProductVariation::max('price');
         if ($max_price) {
@@ -75,6 +83,7 @@ class ProductsList extends Component
         // $this->reset('filterd');
         $this->filterd=$this->initialFilter;
         $this->emit('filterReset');
+        $this->resetPage();
     }
     public function updatingFilterdDisplayCount($field, $value)
     {

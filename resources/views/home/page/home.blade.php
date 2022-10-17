@@ -11,35 +11,28 @@
 <section class="section-slider amazing-section pt-0">
     <div class="container-amazing col-12">
         <div class="col-lg-3 display-md-none pull-right">
-
-
             <div class="amazing-product text-center">
-
                 <a href="#">
                     <img src="assets/home/images/slider-amazing/shopping-cart.svg" alt="special">
                 </a>
                 </br>
-                <a href="#" class="title-one text-white ">مشاهده همه <i class="fa fa-angle-left"></i>
+                <a href="{{route('home.products.search',['label'=>'فروش ویژه'])}}" class="title-one text-white ">مشاهده همه <i class="fa fa-angle-left"></i>
                 </a>
             </div>
         </div>
-
-
         <div class="col-lg-9 col-md-12 pull-left pr-1">
             <div class="slider-widget-products mb-0">
                 <div class="widget widget-product card" style="padding:10px ;">
                     <header class="card-header">
                         <span class="title-one">فروش ویژه</span>
-                        <h3 class="card-title">مشاهده همه</h3>
+                        <a href="{{route('home.products.search',['label'=>'فروش ویژه'])}}" class="card-title">مشاهده همه <i class="fa fa-angle-left"></i></a>
                     </header>
                     <div class="product-carousel productcar owl-carousel owl-theme owl-rtl owl-loaded owl-drag">
                         <div class="owl-stage-outer">
                             <div class="owl-stage"
                                 style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 827px;">
-
                                 @each('home.components.ProductCart2', $Products_special,
                                 'Product_special')
-
                             </div>
                         </div>
                         <div class="owl-nav">
@@ -49,12 +42,10 @@
                 </div>
             </div>
         </div>
-
     </div>
 </section>
 @endif
 <!--  پایان محصولات ویژه -->
-
 <!-- پیشنهاد ما -->
 <div class="container-main">
     <div class="d-block">
@@ -65,8 +56,7 @@
                 <div class="widget widget-product card">
                     <header class="card-header">
                         <span class="title-one">پیشنهاد ما</span>
-                        <span class="title-one-0 pl">مشاهده همه</span>
-                        <h3 class="card-title"></h3>
+                        <a href="{{route('home.products.search',['label'=>'پیشنهاد ما'])}}"><span class="title-one-0 pl">مشاهده همه <i class="fa fa-angle-left"></i></span></a>
                     </header>
                     <div class="product-carousel owl-carousel owl-theme owl-rtl owl-loaded owl-drag">
                         <div class="owl-stage-outer">
@@ -100,7 +90,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div id="progressBar">
                         <div class="slide-progress" style="width: 100%; transition: width 5000ms ease 0s;"></div>
                     </div>
@@ -131,9 +120,7 @@
                 <div class="widget widget-product card">
                     <header class="card-header">
                         <span class="title-one">{{$product_is_show->name}}</span>
-                        <span class="title-one-0 pl">مشاهده همه</span>
-
-                        <h3 class="card-title"></h3>
+                        <a href="{{route('home.products.index',$product_is_show->slug)}}"><span class="title-one-0 pl">مشاهده همه <i class="fa fa-angle-left"></i></span></a>
                     </header>
                     <div class="product-carousel owl-carousel owl-theme owl-rtl owl-loaded owl-drag">
                         <div class="owl-stage-outer">

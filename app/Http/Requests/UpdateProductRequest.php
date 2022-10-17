@@ -30,7 +30,7 @@ class UpdateProductRequest extends FormRequest
             'brand_id' => 'nullable|exists:brands,id',
             'position' => ['required', Rule::in(['پیش فرض', 'فروش ویژه', 'پیشنهاد ما', 'تک محصول'])],
             'tag_ids' => 'nullable|array',
-            'tag_ids.*' => 'nullable|exists:tads,id',
+            'tag_ids.*' => 'nullable|exists:tags,id',
             'description' => 'required|string',
             'attribute_values' => 'required|array',
             'variation_values.*.price' => 'required|integer',
@@ -39,7 +39,7 @@ class UpdateProductRequest extends FormRequest
             'variation_values.*.sku' => Rule::forEach(function ($value, $attribute) {
                 $res = explode('.', $attribute);
                 $variation = ProductVariation::findOrFail($res[1]);
-                return [Rule::unique('product_variations', 'sku')->ignore($variation)];
+                return [Rule::unique('product_variations', 'sku')->where(fn ($query) => $query->where('sku','<>',null))->ignore($variation)];
             }),
             'variation_values.*.guarantee' => 'nullable|string',
             'variation_values.*.time_guarantee' => 'nullable|string',

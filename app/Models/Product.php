@@ -143,6 +143,10 @@ class Product extends Model
                 $q->where('name', $filters['tag']);
             });
         }
+        
+        if (isset($filters['position'])) {
+            $query->where('position',$filters['position']);
+        }
 
         if (isset($filters['brand'])) {
             $query->where('brand_id', $filters['brand']);

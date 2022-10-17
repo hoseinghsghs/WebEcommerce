@@ -24,10 +24,19 @@
             padding: 2px 0px;
             border-left: 1px solid #d1d5db;
         }
+        .form1 .left-pan1 select{
+            font-size: 14px;
+            text-align: center;
+        }
+        .form1 .left-pan1 select:focus{
+            border: none;
+            box-shadow: none;
+        }
         .form-input {
             height: 55px;
             text-indent: 120px;
             border-radius: 10px;
+            font-size: 14px;
         }
         .form-input:focus {
             box-shadow: none;

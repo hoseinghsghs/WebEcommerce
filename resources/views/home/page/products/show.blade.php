@@ -165,7 +165,7 @@
                                                 <span>
                                                     برند:
                                                 </span>
-                                                <a href="#" class="product-link product-tag-title">{{$product->brand->slug}}</a>
+                                                <a href="{{route('home.products.search',['brand'=>$product->brand->slug])}}" class="product-link product-tag-title">{{$product->brand->name}}</a>
                                             </li>
                                             @endif
                                         </ul>
