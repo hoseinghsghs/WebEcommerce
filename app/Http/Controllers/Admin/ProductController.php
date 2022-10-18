@@ -234,13 +234,16 @@ class ProductController extends Controller
     public function updateCategory(Request $request, Product $product, ToastrFactory $flasher)
     {
         $request->validate([
-            'category_id' => 'required',
-            'attribute_ids' => 'required',
-            'attribute_ids.*' => 'required',
-            'variation_values' => 'required',
-            'variation_values.*.*' => 'required',
-            'variation_values.price.*' => 'integer',
-            'variation_values.quantity.*' => 'integer'
+            'category_id' => 'required|exists:categories,id|not_in:'.$product->category->id,
+            'attribute_ids' => 'required|array',
+            'attribute_ids.*' => 'required|string',
+            'variation_values' => 'required|array',
+            'variation_values.value.*' => 'required|string|distinct',
+            'variation_values.price.*' => 'required|integer',
+            'variation_values.quantity.*' => 'required|integer',
+            'variation_values.sku.*' => 'nullable|string|distinct|unique:product_variations,sku',
+            'variation_values.guarantee.*' => 'nullable|string',
+            'variation_values.time_guarantee.*' => 'nullable|string',
         ]);
 
         $product->update([
@@ -256,7 +259,7 @@ class ProductController extends Controller
             $productVariationController = new ProductVariationController();
             $productVariationController->change($request->variation_values, $category->attributes()->wherePivot('is_variation', 1)->first()->id, $product);
         }
-        $flasher->addSuccess('ویژگی مورد نظر ویرایش شد');
+        $flasher->addSuccess('دسته‌بندی محصول مورد نظر ویرایش شد');
 
         return redirect()->route('admin.products.index');
     }
