@@ -21,7 +21,7 @@
                                     @else
                                     <table class="table table-borderless table-profile-comment">
                                         <thead>
-                                            <tr>
+                                            <tr style="border-bottom:solid 1px #dddddd;">
                                                 <th scope="col"></th>
                                                 <th scope="col">نام محصول</th>
                                                 <th scope="col">نظر</th>
@@ -32,7 +32,7 @@
                                         <tbody>
                                             @foreach ($comments as $comment )
                                             <tr>
-                                                <th scope="row" class="th-img">
+                                                <td scope="row" class="th-img">
                                                     <div class="thumb-img">
                                                         <a
                                                             href="{{route('home.products.show' , ['product' => $comment->commentable->slug])}}">
@@ -40,7 +40,7 @@
                                                                 height="50px" width="50px">
                                                         </a>
                                                     </div>
-                                                </th>
+                                                </td>
                                                 <td>
                                                     <a
                                                         href="{{route('home.products.show' , ['product' => $comment->commentable->slug])}}">
@@ -64,7 +64,8 @@
                                         </tbody>
                                     </table>
                                     @foreach ($comments as $comment )
-                                    <div class="profile-comment-thumb">
+                                    <div class="profile-comment-thumb p-2 my-2"
+                                        style="border: solid 1px #dddddd; border-radius: 1rem;">
                                         <div class="profile-comment-img">
                                             <a href="{{route('home.products.show' , ['product' => $comment->commentable->slug])}}"">
                                                 <img src="
@@ -77,15 +78,17 @@
                                                     href="{{route('home.products.show' , ['product' => $comment->commentable->slug])}}">
                                                     {{$comment->commentable->name}}
                                                 </a>
+                                                @if ($comment->approved==1)
                                                 <span class="profile-comment-status-review">تایید شده</span>
+                                                @else
+                                                <span class="bg-danger text-white">تایید
+                                                    نشده</span>
+                                                @endif
+
                                                 <p>{{$comment->text}}</p>
+                                                <p> تاریخ:{{Hekmatinasser\Verta\Verta::instance($comment->created_at)->format('Y/n/j')}}
+                                                </p>
                                             </h4>
-                                            <!-- <ul class="profile-comment-actions mb-0">
-                                                <li>
-                                                    <button class="profile-comment-remove"><i
-                                                            class="fa fa-trash"></i></button>
-                                                </li>
-                                            </ul> -->
                                         </div>
                                     </div>
                                     @endforeach

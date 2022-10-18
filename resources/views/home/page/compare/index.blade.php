@@ -9,9 +9,9 @@
                 <i class="mdi mdi-home"></i>
                 <nav aria-label="breadcrumb" class="p-1">
                     <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="#">خانه</a></li>
-                        <li class="breadcrumb-item"><a href="#">کالای دیجیتال</a></li>
-                        <li class="breadcrumb-item active open" aria-current="page">موبایل</li>
+                        <li class="breadcrumb-item"><a href="{{route('home')}}">خانه</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('home.user_profile')}}">پروفایل</a></li>
+                        <li class="breadcrumb-item active open" aria-current="page">لیست مقایسه</li>
                     </ol>
                 </nav>
             </div>
@@ -20,7 +20,7 @@
                     <thead>
                         <tr>
                             <td class="align-middle">
-                                <div class="form-ui">
+                                <div class="form-ui px-0">
                                     <center>
                                         <h6>تصویر و نام محصول</h6>
                                     </center>
@@ -76,7 +76,8 @@
                             <td>
                                 <center>
                                     <div class="compare-col compare-value">
-                                        {{$product->category->parent->name}} - {{$product->category->name}} </div>
+                                        {{$product->category->parent->name}} - {{$product->category->name}}
+                                    </div>
                                 </center>
                             </td>
                             @endforeach
@@ -95,9 +96,11 @@
                                     <div class="compare-col compare-value">
                                         <div class="product-price">
                                             <span class="new-price">{{number_format($product->sale_check->sale_price)}}
-                                                تومان</span>
-                                            <span class="old-price">{{number_format($product->sale_check->price)}}
-                                                تومان</span>
+                                                تومان</span></br>
+                                            <del>
+                                                <span class="old-price">{{number_format($product->sale_check->price)}}
+                                                    تومان</span>
+                                            </del>
                                         </div>
                                     </div>
                                     @else
@@ -164,7 +167,8 @@
                                     @foreach ( $product->attributes as $pattributes)
                                     @if ($pattributes->attribute_id == $attribute->attribute_id)
                                     {{ $pattributes->value}}
-                                    @else @endif @endforeach </center>
+                                    @else @endif @endforeach
+                                </center>
                             </td>
                             @endforeach
                         </tr>
