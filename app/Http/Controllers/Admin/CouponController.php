@@ -16,7 +16,7 @@ class CouponController extends Controller
     public function index()
     {
         $coupons = Coupon::latest()->paginate(20);
-        return view('admin.page.coupons.index' , compact('coupons'));
+        return view('admin.page.coupons.index', compact('coupons'));
     }
 
     /**
@@ -59,7 +59,7 @@ class CouponController extends Controller
             'expired_at' => $request->expired_at
         ]);
 
-        alert()->success('کد تخفیف مورد نظر ایجاد شد', 'باتشکر')->showConfirmButton('تایید');
+        alert()->success('کد تخفیف مورد نظر ایجاد شد')->showConfirmButton('تایید');
         return redirect()->route('admin.coupons.index');
     }
 
@@ -82,7 +82,7 @@ class CouponController extends Controller
      */
     public function edit(Coupon $coupon)
     {
-        return view('admin.page.coupons.edit' , compact('coupon'));
+        return view('admin.page.coupons.edit', compact('coupon'));
     }
 
 
@@ -98,7 +98,7 @@ class CouponController extends Controller
 
         $request->validate([
             'name' => 'required',
-            'code' => 'required|unique:coupons,code,'.$coupon->id,
+            'code' => 'required|unique:coupons,code,' . $coupon->id,
             'type' => 'required',
             'amount' => 'required_if:type,=,amount',
             'percentage' => 'required_if:type,=,percentage',
@@ -119,7 +119,7 @@ class CouponController extends Controller
 
 
 
-        alert()->success('کد تخفیف مورد نظر ویرایش شد', 'باتشکر')->showConfirmButton('تایید');
+        alert()->success('کد تخفیف مورد نظر ویرایش شد')->showConfirmButton('تایید');
         return redirect()->route('admin.coupons.index');
     }
 

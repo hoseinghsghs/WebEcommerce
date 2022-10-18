@@ -81,6 +81,8 @@
                                             <button onclick="return send('{{$item->product->id}}')"
                                                 class="remove-product btn"><i class="mdi mdi-close"></i></button>
                                         </div>
+                                        <div class="col-lg-9 col-md-9 col-xs-12 pl" id="loading-{{$item->product->id}}">
+                                        </div>
                                         <a href="{{route('home.products.show' , ['product' => $item->product->slug])}}"
                                             class="img-profile-favorites">
                                             <img
@@ -136,6 +138,7 @@ function send(product) {
         "/profile/add-to-wishlist" +
         "/" + [product];
     $("#loading1").html('<i class="fa fa-circle-o-notch fa-spin" id="loading1"></i>');
+    $("#loading-" + product).html('<i class="fa fa-circle-o-notch fa-spin" id="loading1"></i>');
     $.get(url,
         function(response, status) {
             if (response.errors == 'deleted') {
@@ -144,6 +147,7 @@ function send(product) {
             }
         }).always(function() {
         $("#loading1").html('');
+        $("#loading2").html('');
         $("#loading").show();
     }).fail(function() {
         alert('اینترنت شما قطع است')

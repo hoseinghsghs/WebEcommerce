@@ -19,7 +19,7 @@ class AddressController extends Controller
      */
     public function index()
     {
-        $addresses = UserAddress::where('user_id', auth()->id())->paginate(1);
+        $addresses = UserAddress::where('user_id', auth()->id())->get();
         $provinces = Province::all();
         return view('home.page.users_profile.address', compact('provinces', 'addresses'));
     }
@@ -73,7 +73,7 @@ class AddressController extends Controller
             'postal_code' => $request->postal_code
         ]);
 
-        alert()->success('آدرس مورد نظر ایجاد شد', 'باتشکر')->showConfirmButton('تایید');
+        alert()->success('آدرس مورد نظر ایجاد شد')->showConfirmButton('تایید');
         return redirect()->route('home.addreses.index');
     }
 
@@ -142,7 +142,7 @@ class AddressController extends Controller
             'postal_code' => $request->postal_code
         ]);
 
-        alert()->success('آدرس مورد نظر ویرایش شد', 'باتشکر')->showConfirmButton('تایید');
+        alert()->success('آدرس مورد نظر ویرایش شد')->showConfirmButton('تایید');
         return redirect()->route('home.addreses.index');
     }
 
@@ -157,7 +157,7 @@ class AddressController extends Controller
 
         $address->delete();
 
-        alert()->success('آدرس مورد نظر حذف شد', 'باتشکر')->showConfirmButton('تایید');
+        alert()->success('آدرس مورد نظر حذف شد')->showConfirmButton('تایید');
         return redirect()->back();
     }
 

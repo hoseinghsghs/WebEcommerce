@@ -396,7 +396,6 @@ $(document).ready(function (e) {
         )
             .fail(function (response) {
                 let message = response.errormessage;
-                // console.log(message);
                 Swal.fire({
                     text: message,
                     icon: "warning",
@@ -580,7 +579,6 @@ $(document).ready(function (e) {
         var s = $(this);
         let id = this.dataset.product;
         let url = window.location.origin + "/add-to-compare" + "/" + [id];
-        console.log(url);
         n.preventDefault();
         s.find("i").removeClass("fa fa-random");
         s.find("i").addClass("fa fa-circle-o-notch fa-spin");
@@ -650,7 +648,6 @@ $(document).ready(function (e) {
         a.find("i").removeClass("fa fa-heart-o");
         a.find("i").addClass("fa fa-circle-o-notch fa-spin");
         $.get(url, function (response, status) {
-            console.log(response);
             if (response.errors == "deleted") {
                 e.preventDefault(), a.removeClass("active");
                 Toast.fire({

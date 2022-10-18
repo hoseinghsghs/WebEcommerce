@@ -144,7 +144,7 @@ class PaymentController extends Controller
                     alert()->error($payGatewayResult['error'])->showConfirmButton('تایید');
                     return redirect()->route('home.user_profile.orders', ['order' => Session::pull('orderId')]);
                 } else {
-                    alert()->success('خرید با موفقیت انجام گرفت', 'با تشکر')->showConfirmButton('تایید');
+                    alert()->success('خرید با موفقیت انجام گرفت')->showConfirmButton('تایید');
                     try {
                         Event::create([
                             'title' => 'پرداخت نهایی انجام گرفت',
@@ -196,7 +196,7 @@ class PaymentController extends Controller
                     ]);
                 } catch (\Throwable $th) {
                 }
-                alert()->success('خرید با موفقیت انجام گرفت', 'با تشکر')->showConfirmButton('تایید');
+                alert()->success('خرید با موفقیت انجام گرفت')->showConfirmButton('تایید');
                 return redirect()->route('home.user_profile.orders', ['order' => Session::pull('orderId')]);
             }
         }
@@ -255,7 +255,7 @@ class PaymentController extends Controller
 
             return response()->json(['message' => $result['error']], 201);
         } else {
-            return response()->json(['message' => $result['amount'],'total_amounts'=>cartTotalAmount()], 200);
+            return response()->json(['message' => $result['amount'], 'total_amounts' => cartTotalAmount()], 200);
         }
     }
 }
