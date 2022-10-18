@@ -6,42 +6,48 @@
     @stack('styles')
     @livewireStyles()
     <style>
-        .form1 {
-            position: relative;
-        }
-        .form1 i {
-            position: absolute;
-            top: 8px;
-            left: 10px;
-            padding: 10px;
-            color: #9ca3af;
-            cursor: pointer;
-        }
-        .form1 span {
-            position: absolute;
-            right: 0px;
-            top: 7px;
-            padding: 2px 0px;
-            border-left: 1px solid #d1d5db;
-        }
-        .form1 .left-pan1 select{
-            font-size: 14px;
-            text-align: center;
-        }
-        .form1 .left-pan1 select:focus{
-            border: none;
-            box-shadow: none;
-        }
-        .form-input {
-            height: 55px;
-            text-indent: 120px;
-            border-radius: 10px;
-            font-size: 14px;
-        }
-        .form-input:focus {
-            box-shadow: none;
-            border: none;
-        }
+    .form1 {
+        position: relative;
+    }
+
+    .form1 i {
+        position: absolute;
+        top: 4px;
+        left: 10px;
+        padding: 10px;
+        color: #9ca3af;
+        cursor: pointer;
+    }
+
+    .form1 span {
+        position: absolute;
+        right: 0px;
+        top: 1px;
+        padding: 2px 5px;
+        border-left: 1px solid #d1d5db;
+    }
+
+    .form1 .left-pan1 select {
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .form1 .left-pan1 select:focus {
+        border: none;
+        box-shadow: none;
+    }
+
+    .form-input {
+        height: 44px;
+        text-indent: 110px;
+        border-radius: 10px;
+        font-size: 14px;
+    }
+
+    .form-input:focus {
+        box-shadow: none;
+        border: none;
+    }
     </style>
 </head>
 
@@ -63,46 +69,46 @@
     @stack('scripts')
 
     <script>
-        @if(session('status'))
-        @if(session('status') == "profile-information-updated")
-        Swal.fire({
-            text: "حساب کاربری با موفقیت ویرایش شد",
-            icon: 'success',
-            showConfirmButton: false,
-            toast: true,
-            position: 'top-right',
-            timer: 5000,
-            timerProgressBar: true,
-        })
-        @elseif(session('status') == 'verification-link-sent')
-        Swal.fire({
-            title: 'لینک تایید ارسال شد',
-            text: 'ایمیل خود را باز کنید و روی لینک تایید ایمیل کلیک کنید.',
-            icon: 'success',
-            confirmButtonText: 'تایید',
-        })
-        @elseif(session('status') == 'passwords.reset')
-        Swal.fire({
-            text: 'رمز عبور با موفقیت ذخیره شد.',
-            icon: 'success',
-            showConfirmButton: false,
-            toast: true,
-            position: 'top-right',
-            timer: 5000,
-            timerProgressBar: true,
-        })
-        @else
-        Swal.fire({
-            text: "{{ session('status') }}",
-            icon: 'success',
-            showConfirmButton: false,
-            toast: true,
-            position: 'top-right',
-            timer: 5000,
-            timerProgressBar: true,
-        })
-        @endif
-        @endif
+    @if(session('status'))
+    @if(session('status') == "profile-information-updated")
+    Swal.fire({
+        text: "حساب کاربری با موفقیت ویرایش شد",
+        icon: 'success',
+        showConfirmButton: false,
+        toast: true,
+        position: 'top-right',
+        timer: 5000,
+        timerProgressBar: true,
+    })
+    @elseif(session('status') == 'verification-link-sent')
+    Swal.fire({
+        title: 'لینک تایید ارسال شد',
+        text: 'ایمیل خود را باز کنید و روی لینک تایید ایمیل کلیک کنید.',
+        icon: 'success',
+        confirmButtonText: 'تایید',
+    })
+    @elseif(session('status') == 'passwords.reset')
+    Swal.fire({
+        text: 'رمز عبور با موفقیت ذخیره شد.',
+        icon: 'success',
+        showConfirmButton: false,
+        toast: true,
+        position: 'top-right',
+        timer: 5000,
+        timerProgressBar: true,
+    })
+    @else
+    Swal.fire({
+        text: "{{ session('status') }}",
+        icon: 'success',
+        showConfirmButton: false,
+        toast: true,
+        position: 'top-right',
+        timer: 5000,
+        timerProgressBar: true,
+    })
+    @endif
+    @endif
     </script>
     <script type="text/javascript" src="{{asset('assets/home/js/vendor/bootstrap.bundle.min.js')}}">
     </script>

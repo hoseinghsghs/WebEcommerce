@@ -24,15 +24,16 @@
                     </div>
                     @else
                     <a class="btn btn-warning btn-sm mr-5 my-3 " href="{{route('home.addreses.create')}}">آدرس جدید</a>
-                    @foreach ($addresses as $address)
                     <div class="col-lg-9 col-md-9 col-xs-12 pl">
                         <div class="profile-content">
-                            <div class="profile-stats">
-                                <div class="profile-address">
-                                    <div class="box-header">
-                                        <span class="box-title">آدرس ها</span>
-                                    </div>
-                                    <div class="profile-address-item">
+
+                            <div class="profile-address">
+                                <div class="box-header">
+                                    <span class="box-title">آدرس ها</span>
+                                </div>
+                                @foreach ($addresses as $address)
+                                <div class="profile-address-item">
+                                    <div class="profile-stats m-1 p-3">
                                         <div class="profile-address-item-top">
                                             <div class="profile-address-item-title">
                                                 {{$address->address}}
@@ -76,11 +77,12 @@
                                             </ul>
                                         </div>
                                     </div>
+                                    </hr>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
                     </div>
-                    @endforeach
                 </div>
             </div>
         </section>

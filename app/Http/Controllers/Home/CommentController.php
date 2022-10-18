@@ -123,7 +123,7 @@ class CommentController extends Controller
                 return redirect()->back();
             }
 
-            alert()->success('نظر شما با موفقیت برای این محصول ثبت شد', 'باتشکر')->showConfirmButton('تایید');
+            alert()->success('نظر شما با موفقیت برای این محصول ثبت شد')->showConfirmButton('تایید');
             return redirect()->back();
         } else {
             alert()->warning('برای ثبت نظر ابتدا وارد سایت شوید')->showConfirmButton('تایید');
@@ -142,7 +142,7 @@ class CommentController extends Controller
             'parent_id' => $request->comment,
 
         ]);
-        alert()->success('پاسخ شما با موفقیت برای این محصول ثبت شد', 'باتشکر')->showConfirmButton('تایید');
+        alert()->success('پاسخ شما با موفقیت برای این محصول ثبت شد')->showConfirmButton('تایید');
         return redirect()->back();
 
         return back();

@@ -5788,8 +5788,9 @@ span.shipping-destination {
     .table-orders
     .collapse
     .profile-orders-item {
-    padding: 10px 25px 10px 20px;
+    padding: 10px 25px 30px 20px;
     border-radius: 20px;
+    border: solid 1px;
 }
 
 .post-item-profile
@@ -9523,6 +9524,13 @@ span.show-less {
     background-color: #fff;
     -webkit-box-shadow: 0 10px 30px 0 rgba(31, 45, 61, 0.1);
     box-shadow: 0 10px 30px 0 rgba(31, 45, 61, 0.1);
+}
+
+#search-input {
+    height: calc(2.25rem + 2px);
+    padding-left: 2px;
+    padding-right: 25px;
+    padding-bottom: 4px;
 }
 
 .comparison .form-ui .custom-select-ui .nice-select:after {

@@ -61,7 +61,7 @@ class QuestionController extends Controller
                 return redirect()->back();
             }
 
-            alert()->success('پرسش شما با موفقیت برای این محصول ثبت شد', 'باتشکر');
+            alert()->success('پرسش شما با موفقیت برای این محصول ثبت شد');
             return redirect()->back();
         } else {
             alert()->warning('برای ثبت پرسش ابتدا وارد سایت شوید')->showConfirmButton('تایید');
@@ -95,7 +95,7 @@ class QuestionController extends Controller
             //throw $th;
         }
 
-        alert()->success('پاسخ شما با موفقیت برای این محصول ثبت شد', 'باتشکر')->showConfirmButton('تایید');
+        alert()->success('پاسخ شما با موفقیت برای این محصول ثبت شد')->showConfirmButton('تایید');
         return redirect()->back();
 
         return back();
