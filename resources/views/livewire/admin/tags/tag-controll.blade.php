@@ -4,22 +4,16 @@
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="card">
                 <div class="body">
-
                     <div class="row clearfix">
-                        <div class="col-12">
-                            <div class="form-group form-float">
-                                <div class="form-line">
-                                    <label class="form-label">تگ ها</label>
-                                    <input type="text" name="name" wire:model.defer="tag_name" class="form-control">
-                                    @error('tag_name')
-                                    <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
+                        <div class="col-sm-6">
+                            <input type="text" placeholder="عنوان" name="name" wire:model.defer="tag_name" class="form-control">
+                            @error('tag_name')
+                            <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
-                        <div class="col-12 ">
+                        <div class="col-sm-6">
                             <button wire:click="addTag" wire:loading.attr="disabled" class="btn btn-raised {{$is_edit ? 'btn-warning' : 'btn-primary'}}  waves-effect">
-                                {{$is_edit ? 'ویرایش' : 'اضافه کردن'}}
+                                {{$is_edit ? 'ویرایش' : 'افزودن'}}
                                 <span class="spinner-border spinner-border-sm text-light" wire:loading wire:target="addTag"></span>
                             </button>
                             @if ($is_edit)

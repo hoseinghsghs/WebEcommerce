@@ -16,7 +16,7 @@
                     </br>
                     <a onclick="loadbtn(event)" href="{{route('admin.posts.create')}}"
                         class="btn btn-raised btn-info waves-effect">
-                        اضافه کردن پست </a>
+                        افزودن پست </a>
                     <button class="btn btn-primary btn-icon mobile_menu" type="button"><i
                             class="zmdi zmdi-sort-amount-desc"></i></button>
                 </div>
@@ -83,7 +83,7 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                {{ $posts->links() }}
+                                {{ $posts->onEachSide(1)->links() }}
                             </div>
                             @endif
                         </div>

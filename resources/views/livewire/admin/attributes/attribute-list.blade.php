@@ -8,27 +8,19 @@
                 <div class="body">
                     <div class="row clearfix">
                         <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="form-group">
-                                <input type="text" name="name"
-                                    class="form-control @error('attribute_name') is-invalid @enderror"
-                                    placeholder="عنوان" wire:model.defer="attribute_name">
-                                @error('attribute_name')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
+                            <input type="text" name="name" class="form-control @error('attribute_name') is-invalid @enderror" placeholder="عنوان" wire:model.defer="attribute_name">
+                            @error('attribute_name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
-                            <button wire:click="addAttribute" wire:loading.attr="disabled"
-                                class="btn btn-raised {{$is_edit ? 'btn-warning' : 'btn-primary'}}  waves-effect">
+                            <button wire:click="addAttribute" wire:loading.attr="disabled" class="btn btn-raised {{$is_edit ? 'btn-warning' : 'btn-primary'}}  waves-effect">
                                 {{$is_edit ? 'ویرایش' : 'اضافه کردن'}}
-                                <span class="spinner-border spinner-border-sm text-light" wire:loading
-                                    wire:target="addAttribute"></span>
+                                <span class="spinner-border spinner-border-sm text-light" wire:loading wire:target="addAttribute"></span>
                             </button>
                             @if ($is_edit)
-                            <button class="btn btn-raised btn-info waves-effect" wire:loading.attr="disabled"
-                                wire:click="ref">صرف نظر
-                                <span class="spinner-border spinner-border-sm text-light" wire:loading
-                                    wire:target="ref"></span>
+                            <button class="btn btn-raised btn-info waves-effect" wire:loading.attr="disabled" wire:click="ref">صرف نظر
+                                <span class="spinner-border spinner-border-sm text-light" wire:loading wire:target="ref"></span>
                             </button>
                             @endif
                         </div>
@@ -62,20 +54,14 @@
                                     <td scope="row">{{$attributes->firstItem() + $key}}</td>
                                     <td>{{$attribute->name}}</td>
                                     <td class="text-center">
-                                        <button wire:click="edit_attribute({{$attribute->id}})"
-                                            wire:loading.attr="disabled" {{$display}}
-                                            class="btn btn-raised btn-info waves-effect scroll">
+                                        <button wire:click="edit_attribute({{$attribute->id}})" wire:loading.attr="disabled" {{$display}} class="btn btn-raised btn-info waves-effect scroll">
                                             <i class="zmdi zmdi-edit"></i>
-                                            <span class="spinner-border spinner-border-sm text-light" wire:loading
-                                                wire:target="edit_attribute({{$attribute->id}}) "></span>
+                                            <span class="spinner-border spinner-border-sm text-light" wire:loading wire:target="edit_attribute({{$attribute->id}}) "></span>
                                         </button>
 
-                                        <button class="btn btn-raised btn-danger waves-effect"
-                                            wire:loading.attr="disabled" wire:click="del_attribute({{$attribute->id}})"
-                                            {{$display}}>
+                                        <button class="btn btn-raised btn-danger waves-effect" wire:loading.attr="disabled" wire:click="del_attribute({{$attribute->id}})" {{$display}}>
                                             <i class="zmdi zmdi-delete"></i>
-                                            <span class="spinner-border spinner-border-sm text-light" wire:loading
-                                                wire:target="del_attribute({{$attribute->id}})"></span>
+                                            <span class="spinner-border spinner-border-sm text-light" wire:loading wire:target="del_attribute({{$attribute->id}})"></span>
                                         </button>
                                     </td>
                                 </tr>
@@ -87,17 +73,17 @@
                     @endif
                 </div>
             </div>
-            {{ $attributes->links() }}
+            {{ $attributes->onEachSide(1)->links() }}
         </div>
     </div>
 </div>
 @push('scripts')
 <script>
-$('.scroll').click(function() {
-    $("html, body").animate({
-        scrollTop: 0
-    }, 600);
-    return false;
-});
+    $('.scroll').click(function() {
+        $("html, body").animate({
+            scrollTop: 0
+        }, 600);
+        return false;
+    });
 </script>
 @endpush

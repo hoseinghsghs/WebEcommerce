@@ -45,13 +45,12 @@
                                 </td>
                             </tr>
                             @endforeach
-
                         </tbody>
                     </table>
                 </div>
                 @endif
             </div>
         </div>
-        {{ $banners->links() }}
+        {{ $banners->onEachSide(1)->links() }}
     </div>
 </div>
