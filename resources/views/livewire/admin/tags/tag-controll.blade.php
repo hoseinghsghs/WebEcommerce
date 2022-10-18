@@ -5,13 +5,13 @@
             <div class="card">
                 <div class="body">
                     <div class="row clearfix">
-                        <div class="col-sm-6">
+                        <div class="col-md-4 col-sm-6">
                             <input type="text" placeholder="عنوان" name="name" wire:model.defer="tag_name" class="form-control">
                             @error('tag_name')
                             <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-auto">
                             <button wire:click="addTag" wire:loading.attr="disabled" class="btn btn-raised {{$is_edit ? 'btn-warning' : 'btn-primary'}}  waves-effect">
                                 {{$is_edit ? 'ویرایش' : 'افزودن'}}
                                 <span class="spinner-border spinner-border-sm text-light" wire:loading wire:target="addTag"></span>
