@@ -1,5 +1,4 @@
 <div>
-
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="card">
@@ -7,7 +6,6 @@
                     @if(count($coupons)===0)
                     <p>هیچ رکوردی وجود ندارد</p>
                     @else
-                    <p>برای تایید نظر روی وضعیت آن کلیک کنید</p>
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
@@ -62,7 +60,6 @@
                                                 class="btn btn-raised btn-info waves-effect">
                                                 <i class="zmdi zmdi-edit"></i>
                                             </a>
-
                                             <button class="btn btn-raised btn-danger waves-effect"
                                                 wire:loading.attr="disabled" wire:click="delcoupon({{$coupon->id}})">
                                                 <i class="zmdi zmdi-delete"></i>
@@ -70,7 +67,6 @@
                                                     wire:target="delcoupon({{$coupon->id}})"></span>
                                             </button>
                                         </center>
-
                                     </td>
                                 </tr>
                                 @endforeach
@@ -83,5 +79,4 @@
             </div>
         </div>
     </div>
-
 </div>
