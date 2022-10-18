@@ -7,7 +7,6 @@
             <div class="col-lg">
                 <div class="post-item-profile order-1 d-block">
                     @include('home.page.users_profile.partial.right_side')
-                    <div class="col-lg-9 col-md-9 col-xs-12 pl" id="loading1"></div>
                     <div class="col-lg-9 col-md-9 col-xs-12 pl" id="loading">
                         <div class="profile-content">
                             <div class="profile-stats">
@@ -88,12 +87,10 @@
                                             <img
                                                 src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$item->product->primary_image)}}">
                                         </a>
-
                                         <div class="profile-recent-fav-col">
                                             <a
                                                 href="{{route('home.products.show' , ['product' => $item->product->slug])}}">{{$item->product->name}}</a>
                                         </div>
-
                                         <div class="profile-recent-fav-price">
                                             <span class="amount">
                                                 <center>
@@ -112,10 +109,8 @@
                                                     <ins class="new-price">نا موجود</ins>
                                                     @endif
                                                 </center>
-
                                             </span>
                                         </div>
-
                                     </div>
                                     @endforeach
                                 </div>
@@ -127,9 +122,7 @@
         </section>
     </div>
 </div>
-
 @endsection
-
 @push('scripts')
 <script>
 function send(product) {
@@ -154,3 +147,4 @@ function send(product) {
     })
 }
 </script>
+@endpush

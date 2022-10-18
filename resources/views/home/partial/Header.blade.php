@@ -192,13 +192,26 @@
                                     </ul>
                                 </li>
                                 <li class="menu-item">
+                                    <i class=" fa fa-star-o"></i>
+                                    <a href="{{route('home.products.search',['label'=>'فروش ویژه'])}}"
+                                        class="current-link-menu">فروش ویژه</a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="{{route('home.products.search',['label'=>'پیشنهاد ما'])}}"
+                                        class="current-link-menu">پیشنهاد ما</a>
+                                </li>
+                                <li class="menu-item">
                                     <a href="{{route('home.posts.index')}}" class="current-link-menu">
                                         بلاگ
                                     </a>
                                 </li>
                                 <li class="menu-item">
+                                    <a href="{{route('home.compare.index')}}" class="current-link-menu">مقایسه</a>
+                                </li>
+                                <li class="menu-item">
                                     <a href="{{route('contact-us')}}" class="current-link-menu">تماس با ما</a>
                                 </li>
+
                             </ul>
                         </div>
                     </div>
@@ -236,7 +249,18 @@
                         </li>
                         @endforeach
                         <li>
+                            <a href="{{route('home.products.search',['label'=>'فروش ویژه'])}}"
+                                class="current-link-menu">فروش ویژه</a>
+                        </li>
+                        <li>
+                            <a href="{{route('home.products.search',['label'=>'پیشنهاد ما'])}}"
+                                class="current-link-menu">پیشنهاد ما</a>
+                        </li>
+                        <li>
                             <a href="{{route('home.posts.index')}}">بلاگ</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="{{route('home.compare.index')}}" class="current-link-menu">مقایسه</a>
                         </li>
                         <li>
                             <a href="{{route('contact-us')}}">تماس با ما</a>
@@ -260,11 +284,10 @@
                             </a>
                         </li>
                         <li class="m-1">
-                            <a href="#">
-                                <div class="nav-btn nav-slider">
-                                    <i class="fa fa-bars" aria-hidden="true"></i>
-                                </div>
-                                دسته بندی ها
+                            <a href="{{route('home.compare.index')}}" class="cart-basket-box">
+                                <i class="fa fa-random">
+                                </i>
+                                لیست مقایسه
                             </a>
                         </li>
                         <li class="m-1">

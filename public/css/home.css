@@ -29519,8 +29519,8 @@ header.header-main {
     right: 15px;
     z-index: 9999;
     background: #fff;
-    border-radius: 20px;
-    padding: 10px;
+    border-radius: 10px;
+    padding: 0px;
     padding-left: 2rem;
     transition: all 0.2s, width 0s;
     box-shadow: rgba(0, 0, 0, 0.1) 0 2px 5px;
@@ -30557,7 +30557,7 @@ header.header-main {
         height: 60px;
         background-color: #f4f4f4;
         text-align: center;
-        box-shadow: 0 -3px 5px rgb(0 0 0 / 37%);
+        box-shadow: 0 3px 3px 3px rgb(0 0 0 / 37%);
         display: none;
     }
     .bottom-menu-joomy {
@@ -38388,8 +38388,8 @@ span.show-less {
 .comparison .remove-item {
     display: block;
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: -20px;
+    left: -20px;
     width: 27px;
     height: 27px;
     padding-left: 0.0625rem;
@@ -40318,7 +40318,7 @@ button.products-filter-btn {
     margin-top: -31px;
     background-color: #fd6b6b;
     border-radius: 62%;
-    margin-left: 1px;
+    margin-left: -48px;
     height: 20px;
     width: 20px;
     position: absolute;
