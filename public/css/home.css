@@ -38353,6 +38353,10 @@ span.show-less {
     box-shadow: 0 10px 30px 0 rgba(31, 45, 61, 0.1);
 }
 
+#search-input{
+    height: calc(2.25rem + 2px) ; padding-left: 2px; padding-right: 25px; padding-bottom: 4px;
+}
+
 .comparison .form-ui .custom-select-ui .nice-select:after {
     left: 12px;
     right: auto;
