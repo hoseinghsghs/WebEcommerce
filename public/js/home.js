@@ -8781,11 +8781,11 @@ if (typeof Object.create !== 'function') {
                    if(!self.bgyp){self.bgyp = self.largeHeight/self.newvalue ;}
                    if (!self.bgloop){
                    self.bgloop = setInterval(function(){
-                    self.bgxp += (self.largeWidth/self.newvalue  - self.bgxp) / self.options.easingAmount;
+                     self.bgxp += (self.largeWidth/self.newvalue  - self.bgxp) / self.options.easingAmount;
                    self.bgyp += (self.largeHeight/self.newvalue  - self.bgyp) / self.options.easingAmount;
-                    self.zoomWindow.css('background-size', self.bgxp + 'px ' + self.bgyp + 'px' );
-                     }, 16);
-                    }
+                     self.zoomWindow.css('background-size', self.bgxp + 'px ' + self.bgyp + 'px' );
+                       }, 16);
+                     }
                    */
 
 
@@ -33012,7 +33012,7 @@ __webpack_require__(/*! ../assets/home/js/main.js */ "./resources/assets/home/js
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: "pusher",
-  key: "local",
+  key: "",
   wsHost: window.location.hostname,
   wsPort: 6001,
   forceTLS: false,

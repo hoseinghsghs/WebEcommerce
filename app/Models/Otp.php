@@ -9,6 +9,29 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Notification;
 
+/**
+ * App\Models\Otp
+ *
+ * @property string $id
+ * @property string $code
+ * @property string $cellphone
+ * @property int|null $user_id
+ * @property int $used
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Otp newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Otp newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Otp query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Otp whereCellphone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Otp whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Otp whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Otp whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Otp whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Otp whereUsed($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Otp whereUserId($value)
+ * @mixin \Eloquent
+ */
 class Otp extends Model
 {
     use HasFactory, Uuid;

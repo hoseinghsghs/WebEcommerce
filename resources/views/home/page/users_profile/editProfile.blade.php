@@ -1,5 +1,5 @@
 @extends('home.layout.MasterHome')
-@section('title' , 'پروفایل کاربری - علاقه مندی ها')
+@section('title' , 'پروفایل کاربری - اطلاعات حساب')
 @section('content')
 <div class="container-main">
     <div class="d-block">
@@ -7,116 +7,122 @@
             <div class="col-lg">
                 <div class="post-item-profile order-1 d-block">
                     @include('home.page.users_profile.partial.right_side')
-                    <div class="col-lg-9 col-md-9 col-xs-12 pl">
-                        <h5 class="text-secondary">ویرایش اطلاعات:</h5>
-                        <div class="profile-content">
-                            <div class="profile-stats">
-                                <div class="profile-address">
-                                    <div class="middle-container">
-                                        @if ($errors->updateProfileInformation->any())
-                                        <div class="alert alert-danger mt-3">
-                                            <ul>
-                                                @foreach ($errors->updateProfileInformation->all() as $error)
-                                                <li>{{ $error }}</li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                        @endif
-                                        <form action="{{route('user-profile-information.update')}}" method="POST"
-                                            class="form-checkout">
-                                            @csrf
-                                            @method('PUT')
-                                            <div class="form-checkout-row">
-                                                <label for="fullname">نام و نام خانوادگی</label>
-                                                <input type="text" id="fullname" name="name"
-                                                    class="input-namefirst-checkout form-control @error('name','updateProfileInformation') is-invalid @enderror"
-                                                    value="{{old('name')??$user->name}}">
-
-                                                <label>شماره موبایل<abbr class="required" title="ضروری"
-                                                        style="color:red;">*</abbr></label>
-                                                <div class="input-group mb-3">
-                                                    <input class="form-control" aria-label="شماره تماس"
-                                                        value="{{$user->cellphone}}" disabled readonly>
-                                                    <button class="btn btn-outline-info" type="button" id="cellphone"
-                                                        data-toggle="modal"
-                                                        data-target="#sendOtpModal"><small>ویرایش</small></button>
-                                                </div>
-                                                @if($user->email_verified_at)
-                                                <label for="email">ایمیل<span class="badge badge-success p-1 mr-1">تایید
-                                                        شده</span></label>
-                                                <input type="email" name="email" id="email"
-                                                    class="input-email-checkout form-control @error('email','updateProfileInformation') is-invalid @enderror"" value="
-                                                    {{$user->email}}">
-                                                @elseif ($user->email)
-                                                <label>ایمیل<span class="badge badge-warning p-1 mr-1">تایید
-                                                        نشده</span></label>
-                                                <div class="input-group mb-3">
-                                                    <input type="email" name="email"
-                                                        class="input-email-checkout form-control @error('email','updateProfileInformation') is-invalid @enderror"" value="
-                                                        {{$user->email}}">
-                                                    <button class="btn btn-outline-info" type="button"
-                                                        onclick="verifyEmail(event)"><small>تایید ایمیل</small></button>
-                                                </div>
-                                                @else
-                                                <label for="email">ایمیل</label>
-                                                <input type="email" name="email" id="email"
-                                                    class="input-email-checkout form-control @error('email','updateProfileInformation') is-invalid @enderror"" value="
-                                                    {{$user->email}}">
+                    <div class="col-lg-9 col-md-8 col-sm-7 col-12 pl">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h5 class="text-secondary">ویرایش اطلاعات:</h5>
+                                <div class="profile-content">
+                                    <div class="profile-stats">
+                                        <div class="profile-address">
+                                            <div class="middle-container">
+                                                @if ($errors->updateProfileInformation->any())
+                                                    <div class="alert alert-danger mt-3">
+                                                        <ul>
+                                                            @foreach ($errors->updateProfileInformation->all() as $error)
+                                                                <li>{{ $error }}</li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
                                                 @endif
-                                                <div class="AR-CR">
-                                                    <button class="btn-registrar">ذخیره</button>
-                                                </div>
+                                                <form action="{{route('user-profile-information.update')}}" method="POST"
+                                                      class="form-checkout">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <div class="form-checkout-row">
+                                                        <label for="fullname">نام و نام خانوادگی</label>
+                                                        <input type="text" id="fullname" name="name"
+                                                               class="input-namefirst-checkout form-control @error('name','updateProfileInformation') is-invalid @enderror"
+                                                               value="{{old('name')??$user->name}}">
+
+                                                        <label>شماره موبایل<abbr class="required" title="ضروری"
+                                                                                 style="color:red;">*</abbr></label>
+                                                        <div class="input-group mb-3">
+                                                            <input class="form-control" aria-label="شماره تماس"
+                                                                   value="{{$user->cellphone}}" disabled readonly>
+                                                            <button class="btn btn-outline-info" type="button" id="cellphone"
+                                                                    data-toggle="modal"
+                                                                    data-target="#sendOtpModal"><small>ویرایش</small></button>
+                                                        </div>
+                                                        @if($user->email_verified_at)
+                                                            <label for="email">ایمیل<span class="badge badge-success p-1 mr-1">تایید
+                                                        شده</span></label>
+                                                            <input type="email" name="email" id="email"
+                                                                   class="input-email-checkout form-control @error('email','updateProfileInformation') is-invalid @enderror"" value="
+                                                            {{$user->email}}">
+                                                        @elseif ($user->email)
+                                                            <label>ایمیل<span class="badge badge-warning p-1 mr-1">تایید
+                                                        نشده</span></label>
+                                                            <div class="input-group mb-3">
+                                                                <input type="email" name="email"
+                                                                       class="input-email-checkout form-control @error('email','updateProfileInformation') is-invalid @enderror"" value="
+                                                                {{$user->email}}">
+                                                                <button class="btn btn-outline-info" type="button"
+                                                                        onclick="verifyEmail(event)"><small>تایید ایمیل</small></button>
+                                                            </div>
+                                                        @else
+                                                            <label for="email">ایمیل</label>
+                                                            <input type="email" name="email" id="email"
+                                                                   class="input-email-checkout form-control @error('email','updateProfileInformation') is-invalid @enderror"" value="
+                                                            {{$user->email}}">
+                                                        @endif
+                                                        <div class="AR-CR">
+                                                            <button class="btn-registrar">ذخیره</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <h5 class="text-secondary">@empty($user->password)ثبت رمزعبور@elseتغییر رمزعبور:@endempty</h5>
-                        <div class="profile-content">
-                            <div class="profile-stats">
-                                <div class="profile-address">
-                                    <div class="middle-container">
-                                        @if ($errors->updatePassword->any())
-                                        <div class="alert alert-danger mt-3">
-                                            <ul>
-                                                @foreach ($errors->updatePassword->all() as $error)
-                                                <li>{{ $error }}</li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                        @endif
-                                        <form action="{{route('user-password.update')}}" method="POST"
-                                            class="form-checkout">
-                                            @csrf
-                                            @method('PUT')
-                                            <div class="form-checkout-row">
-                                                @isset($user->password)
-                                                <label for="current_password">رمز عبور فعلی<abbr class="required"
-                                                        title="ضروری" style="color:red;">*</abbr><a href="#"
-                                                        style="border-bottom: 1px blue dashed;" class="float-left"
-                                                        data-toggle="modal" data-target="#resetModal">فراموشی
-                                                        رمزعبور</a></label>
-                                                <input type="password" name="current_password" id="current_password"
-                                                    class="@error('current_password','updatePassword') is-invalid @enderror input-password-checkout form-control">
-                                                @endisset
-                                                <label for="password">رمز عبور جدید<abbr class="required" title="ضروری"
-                                                        style="color:red;">*</abbr></label>
-                                                <input type="password" name="password" id="password"
-                                                    class="input-password-checkout form-control @error('password','updatePassword') is-invalid @enderror">
+                            <div class="col-lg-6">
+                                <h5 class="text-secondary">@empty($user->password)ثبت رمزعبور@elseتغییر رمزعبور:@endempty</h5>
+                                <div class="profile-content">
+                                    <div class="profile-stats">
+                                        <div class="profile-address">
+                                            <div class="middle-container">
+                                                @if ($errors->updatePassword->any())
+                                                    <div class="alert alert-danger mt-3">
+                                                        <ul>
+                                                            @foreach ($errors->updatePassword->all() as $error)
+                                                                <li>{{ $error }}</li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                @endif
+                                                <form action="{{route('user-password.update')}}" method="POST"
+                                                      class="form-checkout">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <div class="form-checkout-row">
+                                                        @isset($user->password)
+                                                            <label for="current_password">رمز عبور فعلی<abbr class="required"
+                                                                                                             title="ضروری" style="color:red;">*</abbr><a href="#"
+                                                                                                                                                         style="border-bottom: 1px blue dashed;" class="float-left"
+                                                                                                                                                         data-toggle="modal" data-target="#resetModal">فراموشی
+                                                                    رمزعبور</a></label>
+                                                            <input type="password" name="current_password" id="current_password"
+                                                                   class="@error('current_password','updatePassword') is-invalid @enderror input-password-checkout form-control">
+                                                        @endisset
+                                                        <label for="password">رمز عبور جدید<abbr class="required" title="ضروری"
+                                                                                                 style="color:red;">*</abbr></label>
+                                                        <input type="password" name="password" id="password"
+                                                               class="input-password-checkout form-control @error('password','updatePassword') is-invalid @enderror">
 
-                                                <label for="password_confirmation">تکرار رمز عبور جدید<abbr
-                                                        class="required" title="ضروری"
-                                                        style="color:red;">*</abbr></label>
-                                                <input type="password" name="password_confirmation"
-                                                    id="password_confirmation"
-                                                    class="input-password-checkout form-control @error('password_confirmation','updatePassword') is-invalid @enderror">
+                                                        <label for="password_confirmation">تکرار رمز عبور جدید<abbr
+                                                                class="required" title="ضروری"
+                                                                style="color:red;">*</abbr></label>
+                                                        <input type="password" name="password_confirmation"
+                                                               id="password_confirmation"
+                                                               class="input-password-checkout form-control @error('password_confirmation','updatePassword') is-invalid @enderror">
 
-                                                <div class="AR-CR">
-                                                    <button type="submit" class="btn-registrar">ذخیره</button>
-                                                </div>
+                                                        <div class="AR-CR">
+                                                            <button type="submit" class="btn-registrar">ذخیره</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -1,4 +1,4 @@
-<div class="col-lg-3 col-md-3 col-xs-12 pr">
+<div class="col-lg-3 col-md-4 col-sm-5 col-12 pr">
     <div class="sidebar-profile sidebar-navigation">
         <section class="profile-box">
             <header class="profile-box-header-inline mb-0">

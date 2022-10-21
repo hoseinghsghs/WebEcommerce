@@ -7,6 +7,75 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\Product
+ *
+ * @property int $id
+ * @property string $name
+ * @property string|null $position
+ * @property string|null $lable
+ * @property int|null $brand_id
+ * @property int $category_id
+ * @property string $slug
+ * @property string $primary_image
+ * @property string $description
+ * @property int $status
+ * @property int $is_active
+ * @property int $is_archive
+ * @property int $delivery_amount
+ * @property int|null $delivery_amount_per_product
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Comment[] $approvedComments
+ * @property-read int|null $approved_comments_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Question[] $approvedQuestions
+ * @property-read int|null $approved_questions_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ProductAttribute[] $attributes
+ * @property-read int|null $attributes_count
+ * @property-read \App\Models\Brand|null $brand
+ * @property-read \App\Models\Category|null $category
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Comment[] $comments
+ * @property-read int|null $comments_count
+ * @property-read mixed $price_check
+ * @property-read mixed $pro_check
+ * @property-read mixed $quantity_check
+ * @property-read mixed $sale_check
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ProductImage[] $images
+ * @property-read int|null $images_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Question[] $question
+ * @property-read int|null $question_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ProductRate[] $rates
+ * @property-read int|null $rates_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tag[] $tags
+ * @property-read int|null $tags_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ProductVariation[] $variations
+ * @property-read int|null $variations_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Product active()
+ * @method static \Database\Factories\ProductFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product filter($filters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product findSimilarSlugs(string $attribute, array $config, string $slug)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Product newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Product query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereBrandId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereCategoryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereDeliveryAmount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereDeliveryAmountPerProduct($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereIsActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereIsArchive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereLable($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product wherePosition($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product wherePrimaryImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product withUniqueSlugConstraints(\Illuminate\Database\Eloquent\Model $model, string $attribute, array $config, string $slug)
+ * @mixin \Eloquent
+ */
 class Product extends Model
 {
     use HasFactory, Sluggable;

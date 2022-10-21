@@ -7,13 +7,13 @@
                 </div>
                 <div class="body">
                     <div class="row clearfix">
-                        <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="col-md-4 col-sm-6">
                             <input type="text" name="name" class="form-control @error('attribute_name') is-invalid @enderror" placeholder="عنوان" wire:model.defer="attribute_name">
                             @error('attribute_name')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="col-auto">
                             <button wire:click="addAttribute" wire:loading.attr="disabled" class="btn btn-raised {{$is_edit ? 'btn-warning' : 'btn-primary'}}  waves-effect">
                                 {{$is_edit ? 'ویرایش' : 'اضافه کردن'}}
                                 <span class="spinner-border spinner-border-sm text-light" wire:loading wire:target="addAttribute"></span>

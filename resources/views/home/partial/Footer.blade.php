@@ -79,6 +79,7 @@
                      </div>
                      @endif
                      <div class="footer-more-info">
+                         @if($setting->site_name || $setting->description)
                          <div class="col-lg-10 pr">
                              <div class="footer-content d-block">
                                  <div class="text pr-1">
@@ -91,6 +92,7 @@
                                  </div>
                              </div>
                          </div>
+                         @endif
                          <div class="col-lg-2 pl">
                              <div class="footer-safety-partner">
                                  <div class="widget widget-product card mb-0">

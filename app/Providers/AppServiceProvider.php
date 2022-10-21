@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Setting;
 use GuzzleHttp\Middleware;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Broadcast;
@@ -28,8 +29,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Schema::defaultStringLength(191);
         Paginator::useBootstrap();
-
         View::share('setting', Setting::firstOrNew());
     }
 }
