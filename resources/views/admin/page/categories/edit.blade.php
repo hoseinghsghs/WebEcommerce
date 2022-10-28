@@ -51,7 +51,7 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="row clearfix">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <label for="name">عنوان دسته بندی</label>
                                         <div class="form-group">
                                             <input type="text" name="name" id="name"
@@ -59,7 +59,7 @@
                                                 value="{{old('name') ?? $category->name}}" required>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <label for="slug">عنوان انگلیسی</label>
                                         <div class="form-group">
                                             <input type="text" name="slug" id="slug"
@@ -67,7 +67,23 @@
                                                 value="{{old('slug') ?? $category->slug}}" required>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    @if($category->products->exists())
+                                    <div class="col-md-3">
+                                        <label for="parent_id">والد</label>
+                                        <div class="form-group">
+                                            <select id="parent_id" name="parent_id"
+                                                    class="form-control show-tick ms select2" required>
+                                                <option value="0">بدون والد</option>
+                                                @foreach ($parentCategories as $parentCategory)
+                                                    <option
+                                                        {{ old('parent_id') === $parentCategory->id || $category->parent_id === $parentCategory->id ? "selected":null}}
+                                                        value="{{$parentCategory->id}}">{{$parentCategory->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    @endif
+                                    <div class="col-auto">
                                         <label for="switch">وضعیت</label>
                                         <div class="switchToggle">
                                             <input type="checkbox" name="is_active" id="switch"
@@ -75,7 +91,6 @@
                                             <label for="switch">Toggle</label>
                                         </div>
                                     </div>
-
                                     <div class="col-md-3">
                                         <label for="attributesId">ویژگی</label>
                                         <div class="form-group">

@@ -167,6 +167,7 @@ return array(
         "variation_values.quantity.2" => "3تعداد",
         "variation_values.sku.2" => "3شناسه انبار",
         "variation_values.price.2" => "3قیمت",
+        'attribute_is_filter_ids.*' => 'ویژگی های متغیر',
         "code" => "کد تخفیف",
         "cellphone" => "شماره تماس",
         "province_id" => "استان",
@@ -178,6 +179,5 @@ return array(
         "cellphone2" => "تلفن ثابت",
         "lastaddress" => "آدرس اضطراری",
         "unit" => 'واحد',
-        'attribute_is_filter_ids' => 'ویژگی های متغیر',
     ),
 );
