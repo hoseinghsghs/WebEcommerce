@@ -67,7 +67,7 @@
                                                 value="{{old('slug') ?? $category->slug}}" required>
                                         </div>
                                     </div>
-                                    @if(count($category->products))
+                                    @if(count($category->products)>0)
                                     <div class="col-md-3">
                                         <label for="parent_id">والد</label>
                                         <div class="form-group">
