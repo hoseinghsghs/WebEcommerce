@@ -152,24 +152,18 @@ return array(
         "variation_values.*.quantity" => "تعداد",
         "variation_values.*.sku" => "شناسه انبار",
         "variation_values.value.*" => "ویژگی متغییر",
-
         "variation_values.value.0" => "1ویژگی متغییر",
         "variation_values.value.1" => "2ویژگی متغییر",
         "variation_values.value.2" => "3ویژگی متغییر",
-
         "variation_values.quantity.*" => "تعداد",
         "variation_values.sku.*" => "شناسه انبار",
         "variation_values.price.*" => "قیمت",
-
         "variation_values.quantity.0" => "1تعداد",
         "variation_values.sku.0" => "1شناسه انبار",
         "variation_values.price.0" => "1قیمت",
-
         "variation_values.quantity.1" => "2تعداد",
         "variation_values.sku.1" => "2شناسه انبار",
         "variation_values.price.1" => "2قیمت",
-
-
         "variation_values.quantity.2" => "3تعداد",
         "variation_values.sku.2" => "3شناسه انبار",
         "variation_values.price.2" => "3قیمت",
@@ -183,6 +177,7 @@ return array(
         "address_id" => "آدرس",
         "cellphone2" => "تلفن ثابت",
         "lastaddress" => "آدرس اضطراری",
-        "unit" => 'واحد'
+        "unit" => 'واحد',
+        'attribute_is_filter_ids' => 'ویژگی های متغیر',
     ),
 );
