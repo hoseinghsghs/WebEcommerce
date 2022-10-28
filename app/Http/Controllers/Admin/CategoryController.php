@@ -155,6 +155,7 @@ class CategoryController extends Controller
             'slug' => ['required', Rule::unique('categories')->ignore($category)],
             'is_active' => 'nullable',
             'is_show' => 'nullable',
+            'parent_id' => [Rule::requiredIf($category->products->isEmpty())],
             'description' => 'nullable|string',
             'icon' => 'nullable|string',
             'attribute_ids' => 'required',

@@ -67,7 +67,7 @@
                                                 value="{{old('slug') ?? $category->slug}}" required>
                                         </div>
                                     </div>
-                                    @if(count($category->products)>0)
+                                    @if($category->products->isEmpty())
                                     <div class="col-md-3">
                                         <label for="parent_id">والد</label>
                                         <div class="form-group">
@@ -83,7 +83,7 @@
                                         </div>
                                     </div>
                                     @endif
-                                    <div class="col-auto">
+                                    <div class="col-md-3">
                                         <label for="switch">وضعیت</label>
                                         <div class="switchToggle">
                                             <input type="checkbox" name="is_active" id="switch"
