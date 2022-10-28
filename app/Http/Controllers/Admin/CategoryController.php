@@ -72,7 +72,7 @@ class CategoryController extends Controller
             'attribute_is_main_ids' => 'nullable|array',
             'attribute_is_main_ids.*' => 'exists:attributes,id',
             'variation_id' => ['required', 'exists:attributes,id', Rule::notIn($request->attribute_is_main_ids)],
-        ]);
+        ],['attribute_is_filter_ids' => 'ویژگی های متغیر']);
 
         $filtered = Arr::except($data, ['attribute_ids', 'variation_id', 'attribute_is_main_ids', 'attribute_is_filter_ids']);
         if ($request->missing('attribute_is_main_ids')) {
