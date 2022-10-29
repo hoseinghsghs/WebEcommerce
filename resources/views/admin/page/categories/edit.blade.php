@@ -103,7 +103,7 @@
                                             <label for="switch">وضعیت</label>
                                             <div class="switchToggle">
                                                 <input type="checkbox" name="is_active" id="switch"
-                                                    {{old('is_active') || !$category->is_active ? 'checked': null}}>
+                                                    {{old('is_active') || !$category->is_active ? null : 'checked'}}>
                                                 <label for="switch">Toggle</label>
                                             </div>
                                         </div>
@@ -154,7 +154,8 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div @if($category->parent_id == 0) style="display: none" @endif class="sub-feature col-lg-3 col-md-4 col-sm-6">
+                                        <div @if($category->parent_id == 0) style="display: none"
+                                             @endif class="sub-feature col-lg-3 col-md-4 col-sm-6">
                                             <label for="attributeIsMain">انتخاب ویژگی های اصلی دسته</label>
                                             <div class="form-group">
                                                 <select id="attributeIsMain" name="attribute_is_main_ids[]"
@@ -177,7 +178,8 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div @if($category->parent_id == 0) style="display: none" @endif class="sub-feature col-lg-3 col-md-4 col-sm-6">
+                                        <div @if($category->parent_id == 0) style="display: none"
+                                             @endif class="sub-feature col-lg-3 col-md-4 col-sm-6">
                                             <label for="attributeVariation">انتخاب ویژگی متغیر</label>
                                             <div class="form-group">
                                                 <select id="attributeVariation" name="variation_id"
