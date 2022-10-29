@@ -28,9 +28,6 @@
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="card">
                         <div class="row clearfix">
-                            @if (count($errors)>0)
-                             dd{{$errors}}
-                            @endif
                             @error('variation_values.*')
                             <div class="col-auto">
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
