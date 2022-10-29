@@ -8,7 +8,6 @@
             <div class="row">
                 <div class="col-lg-7 col-md-6 col-sm-12">
                     <h2>ایجاد محصول</h2>
-                    </br>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href={{route('admin.home')}}><i class="zmdi zmdi-home"></i>
                                 خانه</a></li>
@@ -38,7 +37,7 @@
                                 </div>
                             </div>
                             @enderror
-                            @error('attribute_ids.*')
+                            @error('attribute_ids.*' || 'attribute_ids')
                             <div class="col-auto">
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                     {{$message}}
@@ -67,7 +66,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group col-md-3 col-sm-6">
-                                        <label for="position_id">محل قرار گیری </label>
+                                        <label for="positionSelect">محل قرار گیری </label>
                                         <select id="positionSelect" name="position" data-placeholder="انتخاب محل" class="form-control ms select2">
                                             <option>پیش فرض</option>
                                             <option>فروش ویژه</option>
@@ -103,7 +102,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col-sm-9">
-                                        <label for="tag_ids">تگ ها</label>
+                                        <label for="tagSelect">تگ ها</label>
                                         <select id="tagSelect" name="tag_ids[]" data-placeholder="انتخاب تگ" class="form-control ms select2 @error('tag_ids.*') is-invalid @enderror" multiple data-close-on-select="false">
                                             @foreach ($tags as $tag)
                                             <option value="{{ $tag->id }}">{{ $tag->name }}</option>
@@ -129,7 +128,7 @@
                                 <hr>
                                 <div class="row clearfix">
                                     <div class="form-group col-sm-4">
-                                        <label for="category_id">دسته بندی*</label>
+                                        <label for="categorySelect">دسته بندی*</label>
                                         <select id="categorySelect" name="category_id" data-placeholder="انتخاب دسته" required class="form-control ms select2" data-live-search="true">
                                             <option></option>
                                             @foreach ($categories as $category)
