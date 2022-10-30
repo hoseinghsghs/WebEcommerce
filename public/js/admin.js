@@ -39550,7 +39550,7 @@ __webpack_require__(/*! ../assets/admin/js/rating.js */ "./resources/assets/admi
 window.Swal = __webpack_require__(/*! ../assets/home/js/vendor/sweetalert2.all.min.js */ "./resources/assets/home/js/vendor/sweetalert2.all.min.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: "pusher",
-  key: "",
+  key: "local",
   wsHost: window.location.hostname,
   wsPort: 6001,
   forceTLS: false,

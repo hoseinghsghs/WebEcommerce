@@ -7,19 +7,19 @@ use Livewire\Component;
 
 class ShowCart extends Component
 {
-    
+
     public $price;
     public $quantity;
     public $code;
     protected $listeners = ['delete' => 'delete'];
-    
+
     protected $rules = [
         'code' => 'required|exists:coupons,code',
     ];
-    
+
     public function mount()
     {
-        
+
     }
 
     public function increment($rowId)
@@ -40,13 +40,13 @@ class ShowCart extends Component
                 ]);
             }
         }else{
-           
+
             if(\Cart::remove($rowId)){
                 \Cart::remove($rowId);
             toastr()->livewire()->addError('محصول از سبد خرید حذف شده ');
-    
+
             }
-        }   
+        }
     }
 
     //کاهش
@@ -76,13 +76,12 @@ class ShowCart extends Component
  }
 
     public function clearCart()
-    {   
-        
+    {
         \Cart::clear();
         session()->forget('coupon');
         toastr()->livewire()->addSuccess('سبد خرید حذف شد');
     }
-    
+
     //coupon
     public function checkCoupon()
     {
@@ -100,13 +99,12 @@ class ShowCart extends Component
             return toastr()->livewire()->addSuccess($result['success']);
         }
     }
-    
+
 
     public function render()
-    { 
+    {
         return view('livewire.home.cart.show-cart',['cartitems'=>\Cart::getContent()])
         ->extends('home.layout.MasterHome')
         ->section('content');
-        
     }
 }
