@@ -37,9 +37,8 @@
                                     </div>
                                     {{ $error }}
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">
-                                    <i class="zmdi zmdi-close"></i>
-                                </span>
+                                        <span aria-hidden="true"><i class="zmdi zmdi-close"></i>
+                                        </span>
                                     </button>
                                 </div>
                             </div>
@@ -103,7 +102,7 @@
                                             <label for="switch">وضعیت</label>
                                             <div class="switchToggle">
                                                 <input type="checkbox" name="is_active" id="switch"
-                                                    {{old('is_active') || !$category->is_active ? null : 'checked'}}>
+                                                    {{old('is_active') || $category->is_active ? null : 'checked'}}>
                                                 <label for="switch">Toggle</label>
                                             </div>
                                         </div>

@@ -168,6 +168,7 @@ return array(
         "variation_values.price.2" => "3قیمت",
         "attribute_is_filter_ids" => "ویژگی های قابل فیلتر",
         "attribute_is_filter_ids.*" => "ویژگی های قابل فیلتر",
+        "parent_id"=>"والد",
         "code" => "کد تخفیف",
         "cellphone" => "شماره تماس",
         "province_id" => "استان",
