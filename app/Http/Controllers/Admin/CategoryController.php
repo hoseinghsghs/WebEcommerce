@@ -45,16 +45,6 @@ class CategoryController extends Controller
      */
     public function store(Request $request, ToastrFactory $flasher)
     {
-        $request->whenHas('is_active', function ($input) use ($request) {
-            $request['is_active'] = false;
-        }, function () use ($request) {
-            $request['is_active'] = true;
-        });
-        if (isset($request->is_show) && $request->$request['parent_id'] != 0) {
-            $request['is_show'] = true;
-        } else {
-            $request['is_show'] = false;
-        };
         $pCategories = Category::where('parent_id', 0)->pluck('id')->toArray();
         $pCategories[] = 0;
 
@@ -76,9 +66,18 @@ class CategoryController extends Controller
             'attribute_is_main_ids.*' => 'exists:attributes,id',
             'variation_id' => [Rule::requiredIf($request['parent_id'] != 0), 'exists:attributes,id', Rule::notIn($request->attribute_is_main_ids)],
         ]);
-
+        $request->whenHas('is_active', function ($input) use ($request) {
+            $data['is_active'] = false;
+        }, function () use ($request) {
+            $data['is_active'] = true;
+        });
+        if (isset($request->is_show)) {
+            $data['is_show'] = true;
+        } else {
+            $data['is_show'] = false;
+        };
         $filtered = Arr::except($data, ['attribute_ids', 'variation_id', 'attribute_is_main_ids', 'attribute_is_filter_ids']);
-        if ($request->missing('attribute_is_main_ids') && $request['parent_id'] == 0) {
+        if ($request->missing('attribute_is_main_ids') || $request['parent_id'] == 0) {
             $data['attribute_is_main_ids'] = [];
         }
         if ($request['parent_id'] == 0) {
@@ -148,7 +147,7 @@ class CategoryController extends Controller
         }, function () use ($request) {
             $request['is_active'] = true;
         });
-        if (isset($request->is_show) && $request['parent_id'] != 0) {
+        if (isset($request->is_show)) {
             $request['is_show'] = true;
         } else {
             $request['is_show'] = false;
