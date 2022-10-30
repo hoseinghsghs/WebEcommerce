@@ -68,9 +68,9 @@ class CategoryController extends Controller
             'is_show' => 'nullable',
             'description' => 'nullable|string',
             'icon' => 'nullable|string',
-            'attribute_ids' => 'required',
+            'attribute_ids' => 'required|array|min:2',
             'attribute_ids.*' => 'exists:attributes,id',
-            'attribute_is_filter_ids' => 'required',
+            'attribute_is_filter_ids' => 'required|array',
             'attribute_is_filter_ids.*' => 'exists:attributes,id',
             'attribute_is_main_ids' => 'nullable|array',
             'attribute_is_main_ids.*' => 'exists:attributes,id',
@@ -166,20 +166,25 @@ class CategoryController extends Controller
             'parent_id' => [Rule::in($pCategories), Rule::excludeIf($category->products->isNotEmpty() && $category->children->isNotEmpty())],
             'description' => 'nullable|string',
             'icon' => 'nullable|string',
-            'attribute_ids' => 'required',
+            'attribute_ids' => 'required|array|min:2',
             'attribute_ids.*' => 'exists:attributes,id',
-            'attribute_is_filter_ids' => 'required',
+            'attribute_is_filter_ids' => 'required|array',
             'attribute_is_filter_ids.*' => 'exists:attributes,id',
             'attribute_is_main_ids' => 'nullable|array',
             'attribute_is_main_ids.*' => 'exists:attributes,id',
-            'variation_id' => [Rule::requiredIf($request['parent_id'] != 0), 'exists:attributes,id', Rule::notIn($request->attribute_is_main_ids)],
+            'variation_id' => [Rule::requiredIf(function () use ($request, $category) {
+                if ($request->has('parent_id')) {
+                    return $request['parent_id'] != 0;
+                } else {
+                    return $category->parent_id != 0;
+                }
+            }), 'exists:attributes,id', Rule::notIn($request->attribute_is_main_ids)],
         ]);
-
         $filtered = Arr::except($data, ['attribute_ids', 'variation_id', 'attribute_is_main_ids', 'attribute_is_filter_ids']);
-        if ($request->missing('attribute_is_main_ids') || $request['parent_id'] == 0) {
+        if ($request->missing('attribute_is_main_ids') || $request->has('parent_id') && $request['parent_id'] == 0) {
             $data['attribute_is_main_ids'] = [];
         }
-        if ($request['parent_id'] == 0) {
+        if ($request->has('parent_id') && $request['parent_id'] == 0) {
             $data['variation_id'] = null;
         }
 

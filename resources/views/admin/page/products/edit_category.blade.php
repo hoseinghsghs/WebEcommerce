@@ -54,9 +54,6 @@
                                         <select id="categorySelect" name="category_id" data-placeholder="انتخاب دسته" class="form-control ms select2 @error('category_id') is-invalid @enderror" data-live-search="true">
                                             <option></option>
                                             @foreach ($categories as $category)
-                                            @if ($category->id == $product->category->id)
-                                            @continue
-                                            @endif
                                             <option value="{{ $category->id }}">
                                                 {{ $category->name }}-{{ $category->parent->name }}
                                             </option>
