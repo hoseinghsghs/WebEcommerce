@@ -27,10 +27,6 @@
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="card">
                         <div class="row clearfix">
-                            <?php if(count($errors)>0): ?>
-                             dd<?php echo e($errors); ?>
-
-                            <?php endif; ?>
                             <?php $__errorArgs = ['variation_values.*'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :

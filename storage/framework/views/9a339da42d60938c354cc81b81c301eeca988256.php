@@ -7,7 +7,6 @@
             <div class="row">
                 <div class="col-lg-7 col-md-6 col-sm-12">
                     <h2>ایجاد دسته بندی</h2>
-                    </br>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href=<?php echo e(route('admin.home')); ?>><i class="zmdi zmdi-home"></i>
                                 خانه</a></li>
@@ -124,7 +123,7 @@ unset($__errorArgs, $__bag); ?>"
                                         <div class="form-group">
                                             <select id="attributeIsFilter" name="attribute_is_filter_ids[]"
                                                 class="form-control show-tick ms select2" multiple
-                                                data-close-on-select="false" data-placeholder="انتخاب فیلتر" required>
+                                                data-close-on-select="false" data-placeholder="انتخاب فیلتر">
                                                 <?php if(old('attribute_ids') && old('attribute_is_filter_ids')): ?>
                                                 <?php $__currentLoopData = $attributes->only(old('attribute_ids')); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $selected_attribute): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <option value="<?php echo e($selected_attribute->id); ?>"
@@ -176,10 +175,10 @@ unset($__errorArgs, $__bag); ?>"
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <label for="decription">توضیحات</label>
+                                        <label for="description">توضیحات</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <textarea rows="4" name="description" class="form-control no-resize"
+                                                <textarea rows="4" id="description" name="description" class="form-control no-resize"
                                                     placeholder="لطفا آنچه را که میخواهید تایپ کنید..."><?php echo e(old('description')); ?></textarea>
                                             </div>
                                         </div>
