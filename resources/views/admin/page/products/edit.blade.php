@@ -167,8 +167,8 @@
                                             <div class="row">
                                                 <div class="form-group col-sm-4">
                                                     <label> قیمت </label>
-                                                    <input dir="ltr" type="number" class="form-control price_values without-spin" id="variation_values[price][]" onkeyup="show_price(this.value,'formated_1_price')" onfocus="show_price(this.value,'formated_1_price')" name="variation_values[{{ $variation->id }}][price]" value="{{ $variation->price }}" required>
-                                                    <span class="pt-1" id="formated_1_price"></span>
+                                                    <input dir="ltr" type="number" class="form-control price_values without-spin" id="variation_values[price][]" onkeyup="show_price(this.value,'formated_{{$variation->id}}_price')" onfocus="show_price(this.value,'formated_1_price')" name="variation_values[{{ $variation->id }}][price]" value="{{ $variation->price }}" required>
+                                                    <span class="pt-1" id="formated_{{$variation->id}}_price"></span>
                                                 </div>
                                                 <div class="form-group col-sm-4">
                                                     <label> تعداد </label>
