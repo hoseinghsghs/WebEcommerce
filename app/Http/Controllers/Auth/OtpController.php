@@ -21,7 +21,7 @@ class OtpController extends Controller
     {
         if (is_numeric($request->username)) {
             $data = $request->validate([
-                'username' => 'required|ir_mobile'
+                'username' => 'required|ir_mobile:zero'
             ]);
         } else {
             $data = $request->validate([
@@ -124,7 +124,7 @@ class OtpController extends Controller
                 try {
                     broadcast(new NotificationMessage($event))->toOthers();
                 } catch (\Throwable $th) {
-                    
+
                 }
                 try {
                     Log::info("کابر جدید ثبت شد" , [  'title' => 'کاربر جدید ثبت نام کرد',
@@ -164,7 +164,7 @@ class OtpController extends Controller
         if ($request->session()->has($request->cellphone) && session($request->cellphone) == 'checked') {
             $validator = Validator::make($request->all(), [
                 'password' => ['required', 'confirmed', Password::min(8)],
-                'cellphone' => 'required|ir_mobile|exists:users,cellphone'
+                'cellphone' => 'required|ir_mobile:zero|exists:users,cellphone'
             ]);
             if ($validator->fails()) {
                 $request->session()->keep([$request->cellphone]);
@@ -187,7 +187,7 @@ class OtpController extends Controller
     {
         if ($request->expectsJson()) {
             $data = $request->validate([
-                'phone' => 'required|unique:users,cellphone|ir_mobile',
+                'phone' => 'required|unique:users,cellphone|ir_mobile:zero',
             ]);
 
             $otp = Otp::create([
