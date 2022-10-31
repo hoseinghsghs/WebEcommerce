@@ -16,7 +16,6 @@
         "guzzlehttp/guzzle": "^7.2",
         "hekmatinasser/verta": "^2.1",
         "intervention/image": "^2.7",
-        "jantinnerezo/livewire-alert": "^2.2",
         "laravel/fortify": "^1.13",
         "laravel/framework": "^9.4",
         "laravel/helpers": "^1.5",
