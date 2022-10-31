@@ -25,8 +25,8 @@
                                                     @enderror
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-12 mb-3">
-                                                    <label for="name">نام تحویل گیرنده <abbr class="required"
-                                                            title="ضروری" style="color:red;">*</abbr></span></label>
+                                                    <label for="name">نام و نام خانوادگی تحویل گیرنده <abbr class="required"
+                                                            title="ضروری" style="color:red;">*</abbr></label>
                                                     <input type="text" id="name" name="name"
                                                         class="input-name-checkout form-control m-0">
                                                     @error('name')

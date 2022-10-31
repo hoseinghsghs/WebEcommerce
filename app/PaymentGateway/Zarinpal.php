@@ -18,7 +18,7 @@ class Zarinpal extends Payment
         );
 
         $jsonData = json_encode($data);
-        $ch = curl_init('https://api.zarinpal.com/pg/v4/payment/request.json'); //https://sandbox.zarinpal.com/pg/rest/WebGate/PaymentRequest.json
+        $ch = curl_init('https://www.zarinpal.com/pg/rest/WebGate/PaymentRequest.json'); //https://sandbox.zarinpal.com/pg/rest/WebGate/PaymentRequest.json
         curl_setopt($ch, CURLOPT_USERAGENT, 'ZarinPal Rest Api v1');
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
         curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
@@ -37,6 +37,7 @@ class Zarinpal extends Payment
             return ['error' => "خطای اتصال به درگاه بانکی"];
             // return ['error' => "cURL Error #:" . $err];
         } else {
+//            dd($result);
             if ($result["Status"] == 100) {
 
                 $createOrder = parent::createOrder($addressId, $amounts, $result["Authority"], 'zarinpal', $description, $ip);
@@ -76,7 +77,7 @@ class Zarinpal extends Payment
 
         $data = array('MerchantID' => $MerchantID, 'Authority' => $authority, 'Amount' => $amount);
         $jsonData = json_encode($data);
-        $ch = curl_init('https://api.zarinpal.com/pg/v4/payment/verify.json'); //https://sandbox.zarinpal.com/pg/rest/WebGate/PaymentVerification.json
+        $ch = curl_init('https://www.zarinpal.com/pg/rest/WebGate/PaymentVerification.json'); //https://sandbox.zarinpal.com/pg/rest/WebGate/PaymentVerification.json
         curl_setopt($ch, CURLOPT_USERAGENT, 'ZarinPal Rest Api v1');
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
         curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
