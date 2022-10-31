@@ -1,6 +1,5 @@
 <div class="navbar-right">
     <ul class="navbar-nav">
-
         <li class="dropdown">
             <a href="javascript:void(0);" class="dropdown-toggle" title="Notifications" data-toggle="dropdown"
                 role="button"><i class="zmdi zmdi-notifications"></i>
