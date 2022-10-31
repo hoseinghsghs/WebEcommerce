@@ -140,14 +140,14 @@
                                                             <form class="form-checkout">
                                                                 <div class="row form-checkout-row">
                                                                     <div class="col-lg-4 col-md-4 col-12 mb-3">
-                                                                        <label for="name">عنوان آدرس<abbr class="required" title="ضروری">*</abbr></span></label>
+                                                                        <label for="name">عنوان آدرس<abbr class="required text-danger" title="ضروری">*</abbr></span></label>
                                                                         <input type="text" id="name" name="title" value="{{ old('title') }}" class="input-name-checkout form-control m-0">
                                                                         @error('title')
                                                                         <small class="text-danger">{{ $message }}</small>
                                                                         @enderror
                                                                     </div>
                                                                     <div class="col-lg-4 col-md-4 col-12 mb-3">
-                                                                        <label for="name">نام و نام خانوادگی تحویل گیرنده <abbr text-danger class="required" title="ضروری">*</abbr></span></label>
+                                                                        <label for="name">نام و نام خانوادگی تحویل گیرنده <abbr text-danger class="required text-danger" title="ضروری">*</abbr></span></label>
                                                                         <input type="text" id="name" name="name" value="{{ old('name') }}" class="input-name-checkout form-control m-0">
                                                                         @error('name')
                                                                         <small class="text-danger">{{ $message }}</small>
@@ -211,7 +211,7 @@
                                                                     </div>
                                                                     <div class="col-lg-4 col-md-4 col-12 mb-3">
                                                                         <label for="post-code">کد پستی<abbr class="required text-danger" title="ضروری">*</abbr></label>
-                                                                        <input type="number" dir="ltr" id="post-code" name="postal_code" class="input-name-checkout form-control m-0" value="{{ old('postal_code') }}" placeholder="کد پستی را بدون خط تیره بنویسید">
+                                                                        <input type="number" dir="ltr" id="post-code" name="postal_code" class="input-name-checkout form-control m-0 text-center" value="{{ old('postal_code') }}" placeholder="کد پستی را بدون خط تیره بنویسید">
                                                                         @error('postal_code')
                                                                         <small class="text-danger">{{ $message }}</small>
                                                                         @enderror
@@ -410,7 +410,7 @@
                                             <label for="remember" class="remember-me mr-0"><a href="{{route('privacy')}}">حریم خصوصی</a> و
                                                 <a href="{{route('ruls')}}">شرایط قوانین </a>استفاده از سرویس های سایت
                                                 را
-                                                مطالعه نموده و ب text-dangerا کلیه موارد آن موافقم <abbr class="required" title="ضروری">*</abbr></label>
+                                                مطالعه نموده و با کلیه موارد آن موافقم <abbr class="required text-danger" title="ضروری">*</abbr></label>
                                         </div>
                                         <button form="checkout" class="btn-Order btn btn-primary mt-4 mb-3" type="submit"> <i class="fa fa-shopping-cart fa-flip-horizontal fa-lg"></i>
                                             ثبت سفارش</button>
