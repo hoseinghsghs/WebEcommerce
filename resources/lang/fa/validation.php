@@ -138,7 +138,6 @@ return array(
         "delivery_amount" => "هزینه ارسال",
         "slug" => "عنوان انگلیسی",
         "brand_id" => "برند",
-        "code" => "کد تایید",
         "tag_ids" => "تگ",
         "primary_image" => "تصویر اصلی",
         "category_id" => "دسته بندی",
@@ -152,27 +151,24 @@ return array(
         "variation_values.*.quantity" => "تعداد",
         "variation_values.*.sku" => "شناسه انبار",
         "variation_values.value.*" => "ویژگی متغییر",
-
         "variation_values.value.0" => "1ویژگی متغییر",
         "variation_values.value.1" => "2ویژگی متغییر",
         "variation_values.value.2" => "3ویژگی متغییر",
-
         "variation_values.quantity.*" => "تعداد",
         "variation_values.sku.*" => "شناسه انبار",
         "variation_values.price.*" => "قیمت",
-
         "variation_values.quantity.0" => "1تعداد",
         "variation_values.sku.0" => "1شناسه انبار",
         "variation_values.price.0" => "1قیمت",
-
         "variation_values.quantity.1" => "2تعداد",
         "variation_values.sku.1" => "2شناسه انبار",
         "variation_values.price.1" => "2قیمت",
-
-
         "variation_values.quantity.2" => "3تعداد",
         "variation_values.sku.2" => "3شناسه انبار",
         "variation_values.price.2" => "3قیمت",
+        "attribute_is_filter_ids" => "ویژگی های قابل فیلتر",
+        "attribute_is_filter_ids.*" => "ویژگی های قابل فیلتر",
+        "parent_id"=>"والد",
         "code" => "کد تخفیف",
         "cellphone" => "شماره تماس",
         "province_id" => "استان",
@@ -183,6 +179,6 @@ return array(
         "address_id" => "آدرس",
         "cellphone2" => "تلفن ثابت",
         "lastaddress" => "آدرس اضطراری",
-        "unit" => 'واحد'
+        "unit" => 'واحد',
     ),
 );

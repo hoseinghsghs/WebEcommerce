@@ -1,5 +1,5 @@
 @extends('home.layout.MasterHome')
-@section('title','فروشگاه اینترنتی کالا مارکت')
+@section('title',env('APP_NAME'))
 
 @section('content')
 @include('home.partial.SliderMain')

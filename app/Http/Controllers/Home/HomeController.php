@@ -32,25 +32,27 @@ class HomeController extends Controller
         SEOTools::twitter()->setSite('@metawebs_ir');
         SEOTools::jsonLd()->addImage(asset('storage/logo/' . $settings->logo));
 
-        $brands =                           Brand::active()->get();
+        $brands = Brand::active()->get();
 
-        $posts =                            Post::active()->get()->take(5);
+        $posts = Post::active()->get()->take(5);
 
-        $categories =                       Category::where('parent_id', 0)->where('is_active', 1)->get();
-        $products_is_show =                 Category::where('parent_id', '!=', 0)->where('is_active', 1)->where('is_show', 1)->get();
+        $main_categories=Category::active()->get();
+        $categories = $main_categories->where('parent_id', 0)->all();
+        $products_is_show = $main_categories->where('parent_id', '!=', 0)->where('is_show', '==',1)->all();
 
-        $services =                         Service::orderBy('service_order')->get();
+        $services = Service::orderBy('service_order')->get();
 
-        $sliders =                          Banner::active()->where('type', 'اسلایدر')->where('is_active', 1)->get();
-        $headers =                          Banner::active()->where('type', 'هدر')->where('is_active', 1)->get()->sortBy('priority')->take(4);
-        $centers =                          Banner::active()->where('type', 'وسط')->where('is_active', 1)->get()->sortBy('priority')->take(2);
+        $banners = Banner::active()->get();
+        $sliders = $banners->where('type', 'اسلایدر')->all();
+        $headers = $banners->where('type', 'هدر')->sortBy('priority')->values()->take(4);
+        $centers = $banners->where('type', 'وسط')->sortBy('priority')->values()->take(2);
         // $menue_banner =                     Banner::active()->where('type', 'منو')->where('is_active', 1)->first();
 
-        // $Products_auction_today =           Product::active()->where('position', 'تخفیف روزانه')->get()->take(15);
-        $Products_our_suggestion =          Product::active()->where('position', 'پیشنهاد ما')->get()->take(15);
-        $Products_special =                 Product::active()->where('position', 'فروش ویژه')->get()->take(15);
-
-        $Products_our_suggestion_units =    Product::active()->where('position', 'تک محصول')->get()->take(2);
+        $products = Product::active()->get();
+//        $Products_auction_today = $products->where('position', 'تخفیف روزانه')->take(15);
+        $Products_our_suggestion = $products->where('position', 'پیشنهاد ما')->take(15);
+        $Products_special = $products->where('position', 'فروش ویژه')->take(15);
+        $Products_our_suggestion_units = $products->where('position', 'تک محصول')->take(2);
 
         return view(
             'home.page.home',

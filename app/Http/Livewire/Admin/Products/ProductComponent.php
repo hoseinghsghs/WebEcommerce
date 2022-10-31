@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\Admin\Products;
 
-use App\Models\product;
 use App\Models\Category;
+use App\Models\Product;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
@@ -15,10 +15,7 @@ class ProductComponent extends Component
 {
     use WithFileUploads, WithPagination;
     public $title;
-
     public $product;
-    //////////////////////////////////////////////
-
 
     protected $paginationTheme = 'bootstrap';
     public $name;
@@ -44,10 +41,6 @@ class ProductComponent extends Component
     {
         $this->resetPage();
     }
-    ///////////////////////////////////////////////
-
-
-
 
     protected $listeners = [
         'sweetAlertConfirmed', // only when confirm button is clicked

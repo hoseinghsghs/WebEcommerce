@@ -66,7 +66,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group col-md-3 col-sm-6">
-                                        <label for="position_id">محل قرار گیری</label>
+                                        <label for="positionSelect">محل قرار گیری</label>
                                         <select id="positionSelect" name="position" data-placeholder="انتخاب محل" class="form-control ms select2">
                                             <option {{$product->position == 'پیش فرض' ? 'selected' : ''}}>پیش فرض</option>
                                             <option {{$product->position == 'فروش ویژه' ? 'selected' : ''}}>فروش
@@ -90,9 +90,9 @@
                                         <span class="text-danger m-0">{{$message}}</span>
                                         @enderror
                                     </div>
-                                    <div class="form-group col-md-3 col-sm-6">
-                                        <label for="brand_id">برند</label>
-                                        <select id="brandSelect" name="brand_id" data-placeholder="انتخاب برند" class="form-control ms ms search-select select2">
+                                    <div class="form-group col-md-3 col-sm-4">
+                                        <label for="brandSelect">برند</label>
+                                        <select id="brandSelect" name="brand_id" data-placeholder="انتخاب برند" class="form-control ms select2">
                                             <option></option>
                                             @if ($brands->count()>0)
                                             @foreach ($brands as $brand)
@@ -106,7 +106,7 @@
                                         <span class="text-danger m-0">{{$message}}</span>
                                         @enderror
                                     </div>
-                                    <div class="form-group col-sm-9">
+                                    <div class="form-group col-lg-6 col-sm">
                                         <label for="tag_ids">تگ ها</label>
                                         <select id="tagSelect" name="tag_ids[]" data-placeholder="انتخاب تگ" data-close-on-select="false" class="form-control ms select2" multiple>
                                             @php
@@ -122,7 +122,6 @@
                                         <span class="text-danger m-0">{{$message}}</span>
                                         @enderror
                                     </div>
-
                                 </div>
                                 <div class="row clearfix">
                                     <div class="form-group col-md-12">
@@ -150,13 +149,11 @@
                                     @endforeach
                                 </div>
                                 <!-- ویژگی های ثابت -->
-
                                 <!-- ویژگی های متغییر -->
                                 @foreach ($product_variation as $variation)
                                 <div class="col-md-12">
                                     <hr>
                                     <div class="d-flex">
-
                                         <p class="mb-0 mr-3">
                                             <button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#collapse-{{ $variation->id }}">
                                                 قیمت و موجودی برای متغیر ( {{ $variation->value }} )
@@ -165,13 +162,13 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="collapse mt-2" id="collapse-{{ $variation->id }}">
+                                    <div class="collapse mt-2 rounded bg-light" id="collapse-{{ $variation->id }}">
                                         <div class="card card-body">
                                             <div class="row">
                                                 <div class="form-group col-sm-4">
                                                     <label> قیمت </label>
-                                                    <input dir="ltr" type="number" class="form-control price_values without-spin" id="variation_values[price][]" onkeyup="show_price(this.value,'formated_1_price')" onfocus="show_price(this.value,'formated_1_price')" name="variation_values[{{ $variation->id }}][price]" value="{{ $variation->price }}" required>
-                                                    <span class="pt-1" id="formated_1_price"></span>
+                                                    <input dir="ltr" type="number" class="form-control price_values without-spin" id="variation_values[price][]" onkeyup="show_price(this.value,'formated_{{$variation->id}}_price')" onfocus="show_price(this.value,'formated_1_price')" name="variation_values[{{ $variation->id }}][price]" value="{{ $variation->price }}" required>
+                                                    <span class="pt-1" id="formated_{{$variation->id}}_price"></span>
                                                 </div>
                                                 <div class="form-group col-sm-4">
                                                     <label> تعداد </label>

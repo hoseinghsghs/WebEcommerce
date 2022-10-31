@@ -19,6 +19,20 @@ class UpdateProductRequest extends FormRequest
     }
 
     /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes(): array
+    {
+        return [
+            'variation_values.time_guarantee.*' => 'زمان گارانتی',
+            'variation_values.guarantee.*'=>'گارانتی',
+            'variation_values.sku.*'=>'شناسه انبار',
+        ];
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array

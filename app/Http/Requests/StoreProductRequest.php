@@ -14,6 +14,15 @@ class StoreProductRequest extends FormRequest
      */
     public function authorize()
     {
+        return true;
+    }
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes(): array
+    {
         return [
             'variation_values.time_guarantee.*' => 'زمان گارانتی',
             'variation_values.guarantee.*'=>'گارانتی',
