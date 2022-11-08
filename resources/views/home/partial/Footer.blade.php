@@ -93,7 +93,7 @@
                              </div>
                          </div>
                          @endif
-                         <div class="col-lg-2 pl">
+                         {{--<div class="col-lg-2 pl">
                              <div class="footer-safety-partner">
                                  <div class="widget widget-product card mb-0">
                                      <div
@@ -124,7 +124,7 @@
                                      </div>
                                  </div>
                              </div>
-                         </div>
+                         </div>--}}
                          <div class="footer-copyright">
                              <div class="footer-copyright-text">
                                  <p>تمامی حقوق متعلق به سایت فروشگاهی {{$setting->site_name}} می باشد.</p>
