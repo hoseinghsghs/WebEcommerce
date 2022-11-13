@@ -51,7 +51,7 @@
     </style>
 </head>
 
-<body class="container-main-xlg">
+<body class="container-main-xlg mx-auto">
     @includeUnless(request()->routeIs('login','register'),'home.partial.Header')
     @includeUnless(request()->routeIs('login','register'),'home.partial.Modal')
 

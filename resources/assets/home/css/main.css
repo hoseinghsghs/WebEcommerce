@@ -2836,7 +2836,7 @@ header.header-main {
 .widget,
 .brand-slider {
     border-radius: 5px;
-    background: #fff;
+    /*background: #fff;*/
     padding: 15px;
     border: none;
     /*margin-bottom: 15px;*/
@@ -11229,11 +11229,12 @@ span.show-less {
 
 footer.footer-main-site {
     width: 100%;
-    background: #fff;
     height: auto;
     position: relative;
     padding: 0;
     float: left;
+    background: #dee2e6 url("../images/cities-footer.png") no-repeat bottom;
+    background-size: 100%;
 }
 
 footer.footer-main-site .footer-shopping-features {
@@ -11846,4 +11847,6 @@ button.products-filter-btn {
     width: 1336px;
     max-width: 100%;
 }
+
+
 
