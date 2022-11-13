@@ -93,7 +93,7 @@
                              </div>
                          </div>
                          @endif
-                         {{--<div class="col-lg-2 pl">
+                         <div class="col-lg-2 pl">
                              <div class="footer-safety-partner">
                                  <div class="widget widget-product card mb-0">
                                      <div
@@ -105,12 +105,11 @@
                                                      style="width: 300.75px; margin-left: 10px;">
                                                      <div class="item">
                                                          <a href="#" class="d-block hover-img-link">
-                                                             <img src="/assets/home/images/footer/license/L-1.png"
-                                                                 class="img-fluid img-brand" alt="">
+                                                           <img referrerpolicy='origin' id = 'rgvjnbqeesgtesgtjxlzwlao' style = 'cursor:pointer' onclick = 'window.open("https://logo.samandehi.ir/Verify.aspx?id=320014&p=xlaouiwkobpdobpdrfthaods", "Popup","toolbar=no, scrollbars=no, location=no, statusbar=no, menubar=no, resizable=0, width=450, height=630, top=30")' alt = 'logo-samandehi' src = 'https://logo.samandehi.ir/logo.aspx?id=320014&p=qftiodrflymalymanbpdshwl' />
                                                          </a>
                                                      </div>
                                                  </div>
-                                                 <div class="owl-item active"
+                                                 <!-- <div class="owl-item active"
                                                      style="width: 300.75px; margin-left: 10px;">
                                                      <div class="item">
                                                          <a href="#" class="d-block hover-img-link mt-0">
@@ -118,13 +117,13 @@
                                                                  class="img-fluid img-brand" alt="">
                                                          </a>
                                                      </div>
-                                                 </div>
+                                                 </div> -->
                                              </div>
                                          </div>
                                      </div>
                                  </div>
                              </div>
-                         </div>--}}
+                         </div>
                          <div class="footer-copyright">
                              <div class="footer-copyright-text">
                                  <p>تمامی حقوق متعلق به سایت فروشگاهی {{$setting->site_name}} می باشد.</p>
