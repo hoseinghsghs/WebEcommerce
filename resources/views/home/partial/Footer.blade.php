@@ -23,33 +23,17 @@
         <div class="container-fluid">
             <div class="col-12">
                 <div class="footer-middlebar">
-                    @if (!empty(json_decode($setting->links,true)))
-                        <div class="col-lg-8 d-block pr">
-                            <div class="footer-links">
-                                @foreach (json_decode($setting->links,true) as $pLink )
-                                    <div class="col-lg-3 col-md-3 col-xs-12 pr">
-                                        <div class="row">
-                                            <section class="footer-links-col">
-                                                <div class="headline-links">
-                                                    <a href="#">
-                                                        {{$pLink['name']}}
-                                                    </a>
-                                                </div>
-                                                @isset ($pLink['children'])
-                                                    <ul class="footer-menu-ul">
-                                                        @foreach ($pLink['children'] as $link)
-                                                            <li class="menu-item-type-custom">
-                                                                <a href="{{$link['url']}}">
-                                                                    {{$link['title']}}
-                                                                </a>
-                                                            </li>
-                                                        @endforeach
-                                                    </ul>
-                                                @endisset
-                                            </section>
-                                        </div>
-                                    </div>
-                                @endforeach
+                    @if($setting->site_name || $setting->description)
+                        <div class="col-lg-8 pr">
+                            <div class="footer-content d-block">
+                                <div class="text pr-1">
+                                    @isset($setting->site_name)
+                                        <h2 class="title">فروشگاه اینترنتی {{$setting->site_name}}</h2>
+                                    @endisset
+                                    @isset($setting->description)
+                                        <p class="desc">{{$setting->description}}</p>
+                                    @endisset
+                                </div>
                             </div>
                         </div>
                     @endif
@@ -83,17 +67,33 @@
                         </div>
                     @endif
                     <div class="footer-more-info">
-                        @if($setting->site_name || $setting->description)
-                            <div class="col-lg-10 pr">
-                                <div class="footer-content d-block">
-                                    <div class="text pr-1">
-                                        @isset($setting->site_name)
-                                            <h2 class="title">فروشگاه اینترنتی {{$setting->site_name}}</h2>
-                                        @endisset
-                                        @isset($setting->description)
-                                            <p class="desc">{{$setting->description}}</p>
-                                        @endisset
-                                    </div>
+                        @if (!empty(json_decode($setting->links,true)))
+                            <div class="col-lg-10 d-block pr">
+                                <div class="footer-links">
+                                    @foreach (json_decode($setting->links,true) as $pLink )
+                                        <div class="col-lg-3 col-md-3 col-xs-12 pr">
+                                            <div class="row">
+                                                <section class="footer-links-col">
+                                                    <div class="headline-links">
+                                                        <a href="#">
+                                                            {{$pLink['name']}}
+                                                        </a>
+                                                    </div>
+                                                    @isset ($pLink['children'])
+                                                        <ul class="footer-menu-ul">
+                                                            @foreach ($pLink['children'] as $link)
+                                                                <li class="menu-item-type-custom">
+                                                                    <a href="{{$link['url']}}">
+                                                                        {{$link['title']}}
+                                                                    </a>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    @endisset
+                                                </section>
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                         @endif
@@ -117,7 +117,7 @@
                                                         </a>
                                                     </div>
                                                 </div>
-                                                <div class="owl-item active"
+                                                <!-- <div class="owl-item active"
                                                     style="width: 300.75px; margin-left: 10px;">
                                                     <div class="item">
                                                         <a href="#" class="d-block hover-img-link mt-0">
@@ -125,15 +125,7 @@
                                                                 class="img-fluid img-brand" alt="">
                                                         </a>
                                                     </div>
-                                                </div><div class="owl-item active"
-                                                    style="width: 300.75px; margin-left: 10px;">
-                                                    <div class="item">
-                                                        <a href="#" class="d-block hover-img-link mt-0">
-                                                            <img src="/assets/home/images/footer/license/L-2.png"
-                                                                class="img-fluid img-brand" alt="">
-                                                        </a>
-                                                    </div>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                     </div>
