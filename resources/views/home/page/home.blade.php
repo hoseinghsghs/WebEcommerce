@@ -3,7 +3,7 @@
 
 @section('content')
 @include('home.partial.SliderMain')
-@include('home.partial.Adplacement')
+@includeWhen($headers->count()>0,'home.partial.Adplacement')
 
 <!-- slidre-product------------------------>
 <!-- فروش ویژه -->
@@ -47,7 +47,7 @@
 @endif
 <!--  پایان محصولات ویژه -->
 <!-- پیشنهاد ما -->
-<div class="container-main">
+<div class="container-main container-xlg">
     <div class="d-block">
         @if ($Products_our_suggestion->count())
         <div

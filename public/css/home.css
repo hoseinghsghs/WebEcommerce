@@ -40496,6 +40496,14 @@ button.products-filter-btn {
         margin-bottom: 75px;
     }
 }
+.container-main-xlg{
+    width: 1676px;
+    max-width: 100%;
+}
+.container-xlg{
+    width: 1336px;
+    max-width: 100%;
+}
 
 
 @media (max-width: 992px) {
