@@ -73,7 +73,7 @@
                                                     <option value="0">بدون والد</option>
                                                     @foreach ($parentCategories as $parentCategory)
                                                         <option
-                                                            {{ old('parent_id') === $parentCategory->id ? "selected":null}}
+                                                            {{ old('parent_id') == $parentCategory->id ? "selected":null}}
                                                             value="{{$parentCategory->id}}">{{$parentCategory->name}}</option>
                                                     @endforeach
                                                 </select>

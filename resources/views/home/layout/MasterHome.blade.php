@@ -51,7 +51,7 @@
     </style>
 </head>
 
-<body>
+<body class="container-main-xlg">
     @includeUnless(request()->routeIs('login','register'),'home.partial.Header')
     @includeUnless(request()->routeIs('login','register'),'home.partial.Modal')
 
@@ -82,8 +82,8 @@
     })
     @elseif(session('status') == 'verification-link-sent')
     Swal.fire({
-        title: 'لینک تایید ارسال شد',
-        text: 'ایمیل خود را باز کنید و روی لینک تایید ایمیل کلیک کنید.',
+        title: 'لینک ارسال شد',
+        text: 'ایمیل خود(اسپم) را بررسی کنید و بر روی لینک تایید ایمیل کلیک کنید.',
         icon: 'success',
         confirmButtonText: 'تایید',
     })
