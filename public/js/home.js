@@ -260,7 +260,7 @@ $(document).ready(function (e) {
         slideBy: 2
       },
       1400: {
-        items: 5,
+        items: 7,
         slideBy: 3
       }
     }
@@ -293,7 +293,7 @@ $(document).ready(function (e) {
         slideBy: 2
       },
       1400: {
-        items: 5,
+        items: 7,
         slideBy: 3
       }
     }
@@ -826,7 +826,7 @@ $(document).ready(function (e) {
 
   /* if ($("#countdown-verify-end").length) {
       var $countdownOptionEnd = $("#countdown-verify-end");
-        $countdownOptionEnd.countdown({
+       $countdownOptionEnd.countdown({
           date: new Date().getTime() + 180 * 1000, // 1 minute later
           text: '<span class="day">%s</span><span class="hour">%s</span><span>: %s</span><span>%s</span>',
           end: function () {

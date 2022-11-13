@@ -1,6 +1,6 @@
-<div class="owl-item active" style="width: 100.25px; margin-left: 10px;">
+<div class="owl-item active" style="margin-left: 10px;">
     <div class="item">
-        <div style="position: absolute;left:.2rem;top:-.5rem">
+        <div style="position: absolute;left:.2rem;top:0">
             <ul>
                 <!-- علاقه مندی -->
                 @if (Auth::check())
@@ -77,7 +77,7 @@
             </ul>
         </div>
         <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$Product_special->primary_image)}}"
-             style="padding: 2rem;" class="img-fluid" alt="">
+             style="padding: 0 1rem 1rem 2rem;" class="img-fluid" alt="">
         <h2 class="post-title pt-0">
             <a href="{{route('home.products.show' , ['product' => $Product_special->slug])}}">
                 {{$Product_special->name}}

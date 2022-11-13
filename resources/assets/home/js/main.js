@@ -98,7 +98,7 @@ $(document).ready(function (e) {
                 slideBy: 2,
             },
             1400: {
-                items: 5,
+                items: 7,
                 slideBy: 3,
             },
         },
@@ -132,7 +132,7 @@ $(document).ready(function (e) {
                 slideBy: 2,
             },
             1400: {
-                items: 5,
+                items: 7,
                 slideBy: 3,
             },
         },
