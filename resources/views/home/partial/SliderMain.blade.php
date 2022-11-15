@@ -3,7 +3,7 @@
     <div class="d-block">
         <div class="col-lg-12 col-xs-12 mb-2 pr  p-0">
             <div class="slider-main-container d-block">
-                <div id="carouselExampleIndicators" class="carousel slide" data-interval="5000" data-touch="true"
+                <div id="carouselExampleIndicators" class="carousel slide" data-touch="true"
                      data-ride="carousel">
                     <ol class="carousel-indicators">
                         @foreach ($sliders as $key=>$slider)

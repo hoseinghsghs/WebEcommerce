@@ -973,8 +973,8 @@ $(document).ready(function (e) {
     });
 
     $(".carousel").carousel({
-        interval: false,
-        pause: true,
+        interval: 5000,
+        pause: 'hover',
         touch: true,
     });
 

@@ -826,7 +826,7 @@ $(document).ready(function (e) {
 
   /* if ($("#countdown-verify-end").length) {
       var $countdownOptionEnd = $("#countdown-verify-end");
-        $countdownOptionEnd.countdown({
+       $countdownOptionEnd.countdown({
           date: new Date().getTime() + 180 * 1000, // 1 minute later
           text: '<span class="day">%s</span><span class="hour">%s</span><span>: %s</span><span>%s</span>',
           end: function () {
@@ -980,8 +980,8 @@ $(document).ready(function (e) {
     $(".mini-card-total").remove();
   });
   $(".carousel").carousel({
-    interval: false,
-    pause: true,
+    interval: 5000,
+    pause: 'hover',
     touch: true
   });
   $(".carousel .carousel-inner").swipe({
