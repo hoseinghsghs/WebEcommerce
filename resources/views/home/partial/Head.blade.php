@@ -14,6 +14,7 @@
 <meta property="business:contact_data:country_name" content="ایران">
 <meta property="business:contact_data:phone_number" content="09139035692 , 09162418808">
 <meta property="business:contact_data:website" content="{{env('APP_URL')}}">
+<link rel="icon" href="{{asset('images/logo.ico')}}">
 {!! SEO::generate() !!}
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 <title> @yield('title')
