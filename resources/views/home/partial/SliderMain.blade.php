@@ -21,8 +21,8 @@
                                 <div @class(["carousel-item carousel-item-h4","active"=>$loop->first])>
                                     <picture>
                                         <source srcset="{{url(env('BANNER_IMAGES_PATCH').$slider->image)}}" media="(min-width: 970px)">
-                                        <source srcset="{{route('fly-manipulation',['name'=>$slider->image,'width'=>1400,'height'=>700])}}" media="(min-width: 768px)">
-                                        <source srcset="{{route('fly-manipulation',['name'=>$slider->image,'width'=>800,'height'=>370])}}" media="(min-width: 270px)">
+                                        <source srcset="{{route('fly-manipulation',['name'=>$slider->image,'width'=>1750,'height'=>700])}}" media="(min-width: 768px)">
+                                        <source srcset="{{route('fly-manipulation',['name'=>$slider->image,'width'=>1500,'height'=>500])}}" media="(min-width: 270px)">
                                         <img class="d-block w-100 h-four-img" srcset="{{url(env('BANNER_IMAGES_PATCH').$slider->image)}}" alt="…">
                                     </picture>
                                     {{--<img src="{{route('fly-manipulation',['name'=>$slider->image,'width'=>360,'height'=>270])}}"

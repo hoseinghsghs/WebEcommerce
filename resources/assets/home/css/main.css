@@ -11849,7 +11849,7 @@ button.products-filter-btn {
 @media (max-width: 480px) {
     .carousel-control-prev, .carousel-control-next{
         top: unset;
-        bottom: 8px;
+        bottom: 5px;
     }
     .carousel-control-next{
         right: unset;

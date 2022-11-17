@@ -125,7 +125,9 @@ class ImageController extends Controller
         $img = Image::make(env('BANNER_IMAGES_PATCH').$request->name);
 
         //manipulate image
-        $img->resize($request->width,$request->height);
+        $img->resize($request->width, function ($constraint) {
+            $constraint->aspectRatio();
+        });
 
         // create response and add encoded image data
         $response = Response::make($img->encode('jpg'));
