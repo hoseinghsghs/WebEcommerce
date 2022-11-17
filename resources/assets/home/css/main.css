@@ -11838,12 +11838,23 @@ button.products-filter-btn {
     }
 }
 .container-main-xlg{
-    width: 1676px;
-    max-width: 100%;
+    width: 100%;
+    max-width: 1676px;
 }
 .container-xlg{
-    width: 1336px;
-    max-width: 100%;
+    width: 100%;
+    max-width: 1336px;
+}
+/*main carousel*/
+@media (max-width: 480px) {
+    .carousel-control-prev, .carousel-control-next{
+        top: unset;
+        bottom: 8px;
+    }
+    .carousel-control-next{
+        right: unset;
+        left: 55px;
+    }
 }
 
 

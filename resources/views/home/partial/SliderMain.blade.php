@@ -19,8 +19,14 @@
                         @foreach ($sliders as $slider)
                             <a href="{{$slider->button_link}}">
                                 <div @class(["carousel-item carousel-item-h4","active"=>$loop->first])>
-                                    <img src="{{url(env('BANNER_IMAGES_PATCH').$slider->image)}}"
-                                         class="d-block w-100 h-four-img" alt="{{$slider->title}}">
+                                    <picture>
+                                        <source srcset="{{url(env('BANNER_IMAGES_PATCH').$slider->image)}}" media="(min-width: 970px)">
+                                        <source srcset="{{route('fly-manipulation',['name'=>$slider->image,'width'=>1400,'height'=>700])}}" media="(min-width: 768px)">
+                                        <source srcset="{{route('fly-manipulation',['name'=>$slider->image,'width'=>800,'height'=>370])}}" media="(min-width: 270px)">
+                                        <img class="d-block w-100 h-four-img" srcset="{{url(env('BANNER_IMAGES_PATCH').$slider->image)}}" alt="…">
+                                    </picture>
+                                    {{--<img src="{{route('fly-manipulation',['name'=>$slider->image,'width'=>360,'height'=>270])}}"
+                                         class="d-block w-100 h-four-img" alt="{{$slider->title}}">--}}
                                     <div class="carousel-caption d-none d-md-block">
                                         @if($slider->title && $slider->text)
                                             <h3>{{$slider->title}}</h3>
