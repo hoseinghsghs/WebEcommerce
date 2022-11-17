@@ -86,20 +86,20 @@ $(document).ready(function (e) {
                 slideBy: 2,
             },
             576: {
-                items: 1,
-                slideBy: 1,
+                items: 3,
+                slideBy: 3,
             },
             768: {
-                items: 3,
-                slideBy: 2,
+                items: 4,
+                slideBy: 4,
             },
             992: {
                 items: 5,
-                slideBy: 2,
+                slideBy: 5,
             },
             1400: {
                 items: 7,
-                slideBy: 3,
+                slideBy: 7,
             },
         },
     });
@@ -116,24 +116,24 @@ $(document).ready(function (e) {
         responsiveClass: true,
         responsive: {
             0: {
-                items: 1,
-                slideBy: 1,
+                items: 2,
+                slideBy: 2,
             },
             576: {
-                items: 1,
-                slideBy: 1,
+                items: 3,
+                slideBy: 3,
             },
             768: {
-                items: 3,
-                slideBy: 2,
+                items: 4,
+                slideBy: 4,
             },
             992: {
                 items: 5,
-                slideBy: 2,
+                slideBy: 5,
             },
             1400: {
                 items: 7,
-                slideBy: 3,
+                slideBy: 7,
             },
         },
     });
@@ -231,15 +231,15 @@ $(document).ready(function (e) {
             },
             768: {
                 items: 1,
-                slideBy: 2,
+                slideBy: 1,
             },
             992: {
                 items: 1,
-                slideBy: 2,
+                slideBy: 1,
             },
             1400: {
                 items: 1,
-                slideBy: 3,
+                slideBy: 1,
             },
         },
     });

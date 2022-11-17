@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Response;
 use Intervention\Image\Facades\Image;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
@@ -118,6 +119,21 @@ class ImageController extends Controller
             return redirect()->back();
     }
 
+    public function flyManipulation(Request $request)
+    {
+//        dd(public_path('banners/'.$request->name));
+        $img = Image::make(env('BANNER_IMAGES_PATCH').$request->name);
 
+        //manipulate image
+        $img->resize($request->width,$request->height);
 
+        // create response and add encoded image data
+        $response = Response::make($img->encode('jpg'));
+
+        // set content-type
+        $response->header('Content-Type', 'image/jpg');
+
+        // output
+        return $response;
+    }
 }

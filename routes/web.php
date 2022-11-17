@@ -178,7 +178,4 @@ Route::get('/faq' , [FaqController::class , 'index'] )->name('faq');
 Route::get('/privacy' , [FaqController::class , 'privacy'] )->name('privacy');
 Route::get('/rules' , [FaqController::class , 'rules'] )->name('ruls');
 
-Route::get('/test', function () {
-
-
-} );
+Route::get('/image_manipulation/{name}', [ImageController::class,'flyManipulation'])->name('fly-manipulation');

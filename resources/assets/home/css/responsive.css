@@ -543,7 +543,9 @@
 
     .slider-main-container .carousel-inner .carousel-item img.h-four-img {
         max-width: 100%;
-        height: auto !important;
+        /*height: auto !important;*/
+        max-height: 60vw;
+        object-fit: cover;
     }
 
     .elementor .blog-item .figure img {
