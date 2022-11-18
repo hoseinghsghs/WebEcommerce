@@ -283,7 +283,7 @@
                     icon: 'success',
                     showConfirmButton: false
                 });
-                window.location.replace("{{Redirect::intended('/')->getTargetUrl()}}");
+                window.location.replace("{{request()->session()->get('url.intended')}}");
 
             }, 'json').fail(function(response) {
             if (response.responseJSON.errors.otp_code) {

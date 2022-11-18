@@ -47,7 +47,7 @@ class FortifyServiceProvider extends ServiceProvider
             public function toResponse($request)
             {
                 return $request->wantsJson()
-                    ? response()->json(['two_factor' => false, 'redirect' => Redirect::intended('/')->getTargetUrl()])
+                    ? response()->json(['two_factor' => false, 'redirect' => request()->session()->get('url.intended')])
                     : (url()->previous() == url('admin/login') ? redirect()->route('admin.home') : redirect()->intended());
             }
         });

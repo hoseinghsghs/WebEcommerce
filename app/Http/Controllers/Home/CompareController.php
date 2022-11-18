@@ -42,7 +42,7 @@ class CompareController extends Controller
             return view('home.page.compare.index', compact('products'));
         }
 
-        alert()->warning('لیست علاقه مندی خالی است')->showConfirmButton('تایید');
+        alert()->warning('لیست مقایسه خالی است','')->showConfirmButton('تایید');
         return redirect()->back();
 
     }
