@@ -7,7 +7,7 @@
                 <div class="post-item-profile order-1 d-block">
                     @include('home.page.users_profile.partial.right_side')
                     @if (!$addresses->count())
-                    <div class="col-lg-9 col-md-9 col-xs-12 pl">
+                    <div class="col-lg-9 col-12 pl">
                         <div class="profile-content">
                             <div class="profile-stats">
                                 <div class="profile-address">
@@ -23,13 +23,12 @@
                         </div>
                     </div>
                     @else
-                    <a class="btn btn-warning btn-sm mr-5 my-3 " href="{{route('home.addreses.create')}}">آدرس جدید</a>
-                    <div class="col-lg-9 col-md-9 col-xs-12 pl">
+                    <div class="col-lg-9 col-12 pl">
                         <div class="profile-content">
-
                             <div class="profile-address">
                                 <div class="box-header">
                                     <span class="box-title">آدرس ها</span>
+                                    <a class="btn btn-info btn-sm float-left" href="{{route('home.addreses.create')}}">آدرس جدید</a>
                                 </div>
                                 @foreach ($addresses as $address)
                                 <div class="profile-address-item">

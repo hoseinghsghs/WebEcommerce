@@ -1,14 +1,14 @@
-<div class="col-lg-3 col-md-4 col-sm-5 col-12 pr">
+<div class="col-lg-3 d-lg-block d-none pr">
     <div class="sidebar-profile sidebar-navigation">
         <section class="profile-box">
             <header class="profile-box-header-inline mb-0">
                 <div class="profile-avatar user-avatar profile-img">
-                    <img src="/assets/home/images/man.png">
+                    <img src="/assets/home/images/user.png">
                 </div>
             </header>
             <footer class="profile-box-content-footer">
                 <span class="profile-box-nameuser">{{Auth::user()->name ?? auth()->user()->cellphone}}</span>
-
+                <button onclick="openSidebar()">ckuck</button>
                 <ul class="profile-account-navs mt-4">
                     <li class="profile-account-nav-item navigation-link-dashboard">
                         <a href="{{route('home.user_profile')}}"
@@ -61,8 +61,8 @@
                 </ul>
                 <div class="profile-box-tabs">
                     <a href="javascript:void(0);"
-                        onclick="event.preventDefault(); document.getElementById('frm-logout').submit();"
-                        class="profile-box-tab-sign-out"><i class="mdi mdi-logout-variant"></i>خروج از حساب</a>
+                       onclick="event.preventDefault(); document.getElementById('frm-logout').submit();"
+                       class="profile-box-tab-sign-out"><i class="mdi mdi-logout-variant"></i>خروج از حساب</a>
                     <form id="frm-logout" action="{{ route('logout') }}" method="POST">
                         {{ csrf_field() }}
                     </form>
@@ -71,3 +71,4 @@
         </section>
     </div>
 </div>
+

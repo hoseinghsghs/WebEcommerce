@@ -47,7 +47,7 @@ class FortifyServiceProvider extends ServiceProvider
             public function toResponse($request)
             {
                 return $request->wantsJson()
-                    ? response()->json(['two_factor' => false, 'redirect' => request()->session()->get('url.intended')])
+                    ? response()->json(['two_factor' => false, 'redirect' => request()->session()->get('url.intended') ?? '/'])
                     : (url()->previous() == url('admin/login') ? redirect()->route('admin.home') : redirect()->intended());
             }
         });
@@ -85,7 +85,7 @@ class FortifyServiceProvider extends ServiceProvider
 
 
         Fortify::authenticateUsing(function (Request $request) {
-            $user = User::where('email', $request->username)->orWhere('cellphone',$request->username)->first();
+            $user = User::where('email', $request->username)->orWhere('cellphone', $request->username)->first();
 
             if ($user &&
                 Hash::check($request->password, $user->password)) {
@@ -94,9 +94,9 @@ class FortifyServiceProvider extends ServiceProvider
         });
 
         RateLimiter::for('login', function (Request $request) {
-            $email = (string) $request->email;
+            $email = (string)$request->email;
 
-            return Limit::perMinute(5)->by($email.$request->ip());
+            return Limit::perMinute(5)->by($email . $request->ip());
         });
 
         RateLimiter::for('two-factor', function (Request $request) {

@@ -8,10 +8,8 @@
         <section class="profile-home">
             <div class="col-lg">
                 <div class="post-item-profile order-1 d-block">
-
                     @include('home.page.users_profile.partial.right_side')
-
-                    <div class="col-lg-9 col-md-9 col-xs-12 pl">
+                    <div class="col-lg-9 col-12 pl">
                         <div class="profile-content">
                             <div class="profile-stats">
                                 <table class="table table-profile">
