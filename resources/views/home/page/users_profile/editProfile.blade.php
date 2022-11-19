@@ -7,7 +7,7 @@
             <div class="col-lg">
                 <div class="post-item-profile order-1 d-block">
                     @include('home.page.users_profile.partial.right_side')
-                    <div class="col-lg-9 col-md-8 col-sm-7 col-12 pl">
+                    <div class="col-lg-9 col-12 pl">
                         <div class="row">
                             <div class="col-lg-6">
                                 <h5 class="text-secondary">ویرایش اطلاعات:</h5>
@@ -474,8 +474,8 @@ function verifyEmail(event) {
         '_token': "{{csrf_token()}}"
     }, function(response, status) {
         Swal.fire({
-            title: 'لینک تایید ارسال شد',
-            text: 'ایمیل خود را باز کنید و روی لینک تایید ایمیل کلیک کنید.',
+            title: 'لینک ارسال شد',
+            text: 'ایمیل خود(اسپم) را بررسی کنید و بر روی لینک تایید ایمیل کلیک کنید.',
             icon: 'success',
             confirmButtonText: 'تایید',
         })
