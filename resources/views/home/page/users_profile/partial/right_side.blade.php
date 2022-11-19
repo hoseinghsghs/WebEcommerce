@@ -8,8 +8,7 @@
             </header>
             <footer class="profile-box-content-footer">
                 <span class="profile-box-nameuser">{{Auth::user()->name ?? auth()->user()->cellphone}}</span>
-                <button onclick="openSidebar()">ckuck</button>
-                <ul class="profile-account-navs mt-4">
+                <ul class="profile-account-navs">
                     <li class="profile-account-nav-item navigation-link-dashboard">
                         <a href="{{route('home.user_profile')}}"
                             @class(['active'=>request()->routeIs('home.user_profile')]) ><i
