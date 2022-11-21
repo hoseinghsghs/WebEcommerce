@@ -142,41 +142,15 @@ $(document).ready(function (e) {
     // Symbol--------------------------------------
     $(".product-carousel-symbol").owlCarousel({
         rtl: true,
-        items: 2,
+        items: 1,
         loop: true,
         margin: 10,
         dots: false,
+        center:true,
         autoplay: true,
         autoplayTimeout: 3000,
         autoplayHoverPause: true,
-        responsiveClass: true,
-        responsive: {
-            0: {
-                items: 1,
-                slideBy: 1,
-                autoplay: true,
-            },
-            576: {
-                items: 1,
-                slideBy: 1,
-                autoplay: true,
-            },
-            768: {
-                items: 1,
-                slideBy: 1,
-                autoplay: true,
-            },
-            992: {
-                items: 1,
-                slideBy: 1,
-                autoplay: true,
-            },
-            1400: {
-                items: 1,
-                slideBy: 1,
-                autoplay: true,
-            },
-        },
+        responsiveClass: false,
     });
     // Symbol--------------------------------------
 

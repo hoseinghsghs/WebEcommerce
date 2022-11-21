@@ -102,15 +102,15 @@
                                     <div class="product-carousel-symbol owl-carousel owl-theme owl-rtl owl-loaded owl-drag">
                                         <div class="owl-stage-outer">
                                             <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 2234px;">
-                                                <div class="owl-item active" style="width: 300.75px; margin-left: 10px;">
-                                                    <div class="item">
+                                                <div class="owl-item active" style="width: 200.75px; margin-left: 10px;">
+                                                    <div class="item" style="width: 100px">
                                                         <a href="#" class="d-block hover-img-link">
                                                             <img referrerpolicy='origin' id='rgvjnbqeesgtesgtjxlzwlao' style='cursor:pointer' onclick='window.open("https://logo.samandehi.ir/Verify.aspx?id=320014&p=xlaouiwkobpdobpdrfthaods", "Popup","toolbar=no, scrollbars=no, location=no, statusbar=no, menubar=no, resizable=0, width=450, height=630, top=30")' alt='logo-samandehi' src='https://logo.samandehi.ir/logo.aspx?id=320014&p=qftiodrflymalymanbpdshwl' />
                                                         </a>
                                                     </div>
                                                 </div>
-                                                <div class="owl-item active" style="width: 300.75px; margin-left: 10px;">
-                                                    <div class="item">
+                                                <div class="owl-item active" style="width: 200.75px; margin-left: 10px;">
+                                                    <div class="item" style="width: 100px">
                                                         <a class="d-block hover-img-link" referrerpolicy="origin" target="_blank" href="https://trustseal.enamad.ir/?id=306946&amp;Code=zXLWtyHj1hfgbjnHBLOv"><img referrerpolicy="origin" src="https://Trustseal.eNamad.ir/logo.aspx?id=306946&amp;Code=zXLWtyHj1hfgbjnHBLOv" alt="" style="cursor:pointer" id="zXLWtyHj1hfgbjnHBLOv"></a>
                                                     </div>
                                                 </div>
