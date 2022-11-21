@@ -54,7 +54,7 @@
                         <a href="{{route('home.user_profile.edit')}}"
                             @class(['active'=>request()->routeIs('home.user_profile.edit')])><i
                                 class="mdi mdi-tooltip-text-outline"></i>
-                            اطلاعات حساب
+                             ویرایش اطلاعات
                         </a>
                     </li>
                 </ul>

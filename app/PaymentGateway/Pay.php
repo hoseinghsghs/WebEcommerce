@@ -11,7 +11,7 @@ class Pay extends Payment
     public $orderID;
     public function send($amounts, $addressId , $description , $ip)
     {
-        $api = 'test';
+        $api = '92b62008e431ebb20b46ab7b7147bc7b';
         $amount = $amounts['paying_amount'] . '0';
         $redirect = route('home.payment_verify' , ['gatewayName' => 'pay']);
         $phone=auth()->user()->cellphone;
@@ -21,7 +21,7 @@ class Pay extends Payment
         if ($result->status) {
 
             $createOrder = parent::createOrder($addressId, $amounts, $result->token, 'pay' , $description ,  $ip);
-            
+
             if (array_key_exists('error', $createOrder)) {
                 return $createOrder;
             }
@@ -44,14 +44,13 @@ class Pay extends Payment
                     'eventable_id' => auth()->id(),
                     'eventable_type' => User::class,
                 ]);
-                
+
             }catch (\Throwable $th) {}
             return ['error' => $result->errorMessage];
         }
         }else{
             return ['error' => 'مشکل ارتباط با درگاه پرداخت'];
         }
-        
     }
 
     public function verify($token , $status)
@@ -63,7 +62,7 @@ class Pay extends Payment
         if (isset($result->status)) {
             if ($result->status == 1) {
                 $updateOrder = parent::updateOrder($token, $result->transId);
-                
+
                 if (array_key_exists('error', $updateOrder)) {
                     return $updateOrder;
                 }
@@ -71,7 +70,6 @@ class Pay extends Payment
                 return ['success' => ' پرداخت با موفقیت انجام شد.شماره تراکنش' . $result->transId ];
             } else {
                 $updateOrder = parent::updateOrderErorr($token,$result['Status']);
-
                 return ['error' => 'پرداخت با خطا مواجه شد'];
             }
         } else {
@@ -82,12 +80,10 @@ class Pay extends Payment
         }
         return ['error' => 'درگاه پرداخت مشکل دارد' ];
       }
-      
     }
 
     public function sendRequest($api, $amount, $redirect,$description = null, $mobile = null, $factorNumber = null, )
     {
-
         return $this->curl_post('https://pay.ir/pg/send', [
             'api'          => $api,
             'amount'       => $amount,

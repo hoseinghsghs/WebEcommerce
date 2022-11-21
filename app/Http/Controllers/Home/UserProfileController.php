@@ -11,14 +11,12 @@ class UserProfileController extends Controller
 {
     public function index()
     {
-
-        $comments= Comment::where('user_id', auth()->id())->where('approved' , 1)->get();
-        return view('home.page.users_profile.index' , compact('comments'));
+        return view('home.page.users_profile.index');
     }
 
     public function orderList()
     {
-        $orders=Order::where('user_id', auth()->id())->get();
+        $orders=Order::where('user_id', auth()->id())->paginate(10);
         return view('home.page.users_profile.order.orderList' , compact('orders'));
     }
 
@@ -29,7 +27,7 @@ class UserProfileController extends Controller
 
      public function commentsList()
     {
-        $comments= Comment::where('user_id', auth()->id())->get();
+        $comments= Comment::where('user_id', auth()->id())->paginate(10);
         return view('home.page.users_profile.comments' , compact('comments'));
     }
 

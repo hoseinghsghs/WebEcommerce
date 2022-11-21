@@ -631,7 +631,7 @@
     }
 
     .post-item-profile .profile-content .profile-stats .table-profile-orders {
-        display: none;
+        /*display: none;*/
     }
 
     .post-item-profile .profile-content .profile-stats .table-orders .collapse {

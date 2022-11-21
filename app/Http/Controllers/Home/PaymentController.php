@@ -133,7 +133,6 @@ class PaymentController extends Controller
         if ($gatewayName == 'pay') {
             $payGateway = new Pay();
 
-
             $payGatewayResult = $payGateway->verify($request->token, $request->status);
             if ($payGatewayResult == null) {
                 alert()->error('پرداخت با مشکل مواجه شد');

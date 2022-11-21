@@ -399,7 +399,7 @@ li {
     border-radius: 20px;
     position: absolute;
     left: 15px;
-    top: 45px;
+    top: 50px;
     text-align: right;
     background: #fff;
     text-align: center;
@@ -5659,7 +5659,7 @@ a.active {
 
 .post-item-profile .profile-content {
     width: 100%;
-    border-radius: 20px;
+    /*border-radius: 20px;*/
     overflow: hidden;
     background: #ffffff;
     padding: 10px;
@@ -5691,9 +5691,8 @@ a.active {
     border-top: 1px solid #f1f1f1;
     line-height: 1.833;
     height: auto;
-    margin-top: -1px;
     width: 100%;
-    margin-top: 15px;
+    /*margin-top: 15px;*/
 }
 
 .post-item-profile
@@ -11843,7 +11842,7 @@ button.products-filter-btn {
     max-width: 1336px;
 }
 .footer-safety-partner .item{
-    max-width: 140px;
+    max-width: 120px;
 }
 /*main carousel*/
 @media (max-width: 480px) {

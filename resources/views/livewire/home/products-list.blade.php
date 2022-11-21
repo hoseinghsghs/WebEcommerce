@@ -30,7 +30,6 @@
                         </ol>
                     </nav>
                 </div>
-
                 <!-- start sidebar--------------------->
                 <div class="col-md-3 d-none d-md-block pr sticky-sidebar">
                     <div class="shop-archive-sidebar">
