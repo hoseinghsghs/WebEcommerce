@@ -11842,7 +11842,9 @@ button.products-filter-btn {
     width: 100%;
     max-width: 1336px;
 }
-
+.footer-safety-partner .item{
+    max-width: 140px;
+}
 /*main carousel*/
 @media (max-width: 480px) {
     .carousel-control-prev, .carousel-control-next {
