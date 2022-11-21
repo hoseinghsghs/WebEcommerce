@@ -17,6 +17,15 @@
 <link rel="icon" href="{{asset('images/logo.ico')}}">
 {!! SEO::generate() !!}
 <meta name="csrf-token" content="{{ csrf_token() }}" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VRVBW2KSRL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-VRVBW2KSRL');
+</script>
 <title> @yield('title')
 </title>
 <link rel="stylesheet" href="{{asset('css/home.css')}}">
