@@ -111,6 +111,7 @@
                                                 </div>
                                                 <div class="owl-item active" style="width: 200.75px; margin-left: 10px;">
                                                     <div class="item">
+                                                        <a referrerpolicy="origin" target="_blank" href="https://trustseal.enamad.ir/?id=306946&amp;Code=zXLWtyHj1hfgbjnHBLOv"><img referrerpolicy="origin" src="https://Trustseal.eNamad.ir/logo.aspx?id=306946&amp;Code=zXLWtyHj1hfgbjnHBLOv" alt="" style="cursor:pointer" id="zXLWtyHj1hfgbjnHBLOv"></a>
                                                     </div>
                                                 </div>
                                             </div>
