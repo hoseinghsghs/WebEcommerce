@@ -368,7 +368,7 @@ li {
 }
 
 .account-box span.icon-account {
-    width: 43px;
+    width: 33px;
     height: 43px;
     position: absolute;
     overflow: hidden;
@@ -386,7 +386,7 @@ li {
 .account-box span.title-account {
     float: right;
     font-size: 14px;
-    margin-left: 20px;
+    margin-left: 10px;
     color: #8a8a8a;
     font-weight: 500;
 }
@@ -11841,7 +11841,7 @@ button.products-filter-btn {
     width: 100%;
     max-width: 1336px;
 }
-.footer-safety-partner .item{
+.footer-safety-partner .item image{
     max-width: 120px;
 }
 /*main carousel*/

@@ -67,7 +67,7 @@
                     @endif
                     <div class="footer-more-info">
                         @if (!empty(json_decode($setting->links,true)))
-                        <div class="col-lg-10 d-block pr">
+                        <div class="col-md-10 d-block pr">
                             <div class="footer-links">
                                 @foreach (json_decode($setting->links,true) as $pLink )
                                 <div class="col-lg-3 col-md-3 col-xs-12 pr">
@@ -96,7 +96,7 @@
                             </div>
                         </div>
                         @endif
-                        <div class="col-lg-2 pl">
+                        <div class="col-md-2 pl">
                             <div class="footer-safety-partner">
                                 <div class="widget widget-product card mb-0">
                                     <div class="product-carousel-symbol owl-carousel owl-theme owl-rtl owl-loaded owl-drag">
