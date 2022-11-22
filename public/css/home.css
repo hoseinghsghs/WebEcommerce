@@ -35362,7 +35362,7 @@ h2.order-view-title {
     font-size: 14px;
     line-height: 2;
     color: #777;
-    padding-bottom: 15px;
+    /*padding-bottom: 15px;*/
     font-weight: 400;
 }
 
@@ -40075,7 +40075,7 @@ footer.footer-main-site
 .footer-safety-partner
 .widget-product
 img {
-    max-width: 100%;
+    max-width: 120px;
 }
 
 footer.footer-main-site
@@ -40450,7 +40450,8 @@ button.products-filter-btn {
 }
 
 .checkout-address {
-    background-color: whitesmoke;
+    border-right: 7px solid #108d9e;
+    background-color: #f9f9f9;
     border-radius: 20px;
     padding-top: 0.5rem;
 }
@@ -40468,7 +40469,7 @@ button.products-filter-btn {
 
 @media (max-width: 992px) {
     .footer-main-site {
-        margin-bottom: 75px;
+        margin-bottom: 60px;
     }
     .account-sidebar{
     background-color: #f2f5f9;
@@ -40499,9 +40500,20 @@ button.products-filter-btn {
     width: 100%;
     max-width: 1336px;
 }
-.footer-safety-partner .item image{
-    max-width: 120px;
+
+.checkout
+.content-checkout
+.notices-wrapper
+.form-coupon-toggle
+.checkout-coupon
+.form-row
+.append
+.btn-append {
+    position: absolute;
+    left: 0;
+    border-radius: 50px 0 0 50px;
 }
+
 /*main carousel*/
 @media (max-width: 480px) {
     .carousel-control-prev, .carousel-control-next {
@@ -40563,19 +40575,6 @@ button.products-filter-btn {
         .form-row
         input.checkout-discount-code {
         width: 100%;
-    }
-
-    .checkout
-        .content-checkout
-        .notices-wrapper
-        .form-coupon-toggle
-        .checkout-coupon
-        .form-row
-        .append
-        .btn-append {
-        position: absolute;
-        left: 0;
-        border-radius: 50px 0 0 50px;
     }
 
     .contact-us .contact-us-section .contact-us-form .form-field-container {
@@ -40717,7 +40716,7 @@ button.products-filter-btn {
         .footer-safety-partner
         .widget-product
         img {
-        max-width: 20%;
+        /*max-width: 20%;*/
         margin: 0 auto;
     }
 
@@ -41394,30 +41393,6 @@ button.products-filter-btn {
 
     .post-item-cart .content-page .cart-empty a.account-btn {
         padding: 7px 20px;
-    }
-
-    .checkout
-        .content-checkout
-        .notices-wrapper
-        .form-coupon-toggle
-        .checkout-coupon
-        .form-row
-        .append {
-        width: 100%;
-    }
-
-    .checkout
-        .content-checkout
-        .notices-wrapper
-        .form-coupon-toggle
-        .checkout-coupon
-        .form-row
-        .append
-        .btn-append {
-        position: static;
-        width: 100%;
-        margin-top: 10px;
-        border-radius: 50px;
     }
 
     .checkout .content-checkout .Order-address button span {

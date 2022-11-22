@@ -67,7 +67,7 @@
                     @endif
                     <div class="footer-more-info">
                         @if (!empty(json_decode($setting->links,true)))
-                        <div class="col-md-10 d-block pr">
+                        <div class="col-lg-2 col-md-9 d-block pr">
                             <div class="footer-links">
                                 @foreach (json_decode($setting->links,true) as $pLink )
                                 <div class="col-lg-3 col-md-3 col-xs-12 pr">
@@ -96,7 +96,7 @@
                             </div>
                         </div>
                         @endif
-                        <div class="col-md-2 pl">
+                        <div class="col-lg-2 col-md-3 pl">
                             <div class="footer-safety-partner">
                                 <div class="widget widget-product card mb-0">
                                     <div class="product-carousel-symbol owl-carousel owl-theme owl-rtl owl-loaded owl-drag">
@@ -112,6 +112,11 @@
                                                 <div class="owl-item active" style="width: 200.75px; margin-left: 10px;">
                                                     <div class="item">
                                                         <a referrerpolicy="origin" target="_blank" href="https://trustseal.enamad.ir/?id=306946&amp;Code=zXLWtyHj1hfgbjnHBLOv"><img referrerpolicy="origin" src="https://Trustseal.eNamad.ir/logo.aspx?id=306946&amp;Code=zXLWtyHj1hfgbjnHBLOv" alt="" style="cursor:pointer" id="zXLWtyHj1hfgbjnHBLOv"></a>
+                                                    </div>
+                                                </div>
+                                                <div class="owl-item active" style="width: 200.75px; margin-left: 10px;">
+                                                    <div class="item">
+                                                        <img src="/assets/home/images/footer/license/L-2.png">
                                                     </div>
                                                 </div>
                                             </div>
