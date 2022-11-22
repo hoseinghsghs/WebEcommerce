@@ -495,7 +495,7 @@
         .footer-safety-partner
         .widget-product
         img {
-        max-width: 50%;
+        /*max-width: 50%;*/
     }
 
     .account-box {
