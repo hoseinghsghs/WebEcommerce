@@ -6068,7 +6068,7 @@ li.profile-item
     font-size: 16px;
     line-height: 1.375;
     font-weight: 500;
-    border-bottom: 2px solid #1a5faa;
+    border-bottom: 2px solid #188cac;
     color: #424242;
 }
 
@@ -10102,7 +10102,7 @@ a {
 }
 
 .contact-us .contact-us-section {
-    background-color: #fff;
+    background-color: #eaeef1;
     border-radius: 20px;
     border: 1px solid #ededed;
     padding: 16px 24px 24px;
@@ -10240,8 +10240,8 @@ textarea {
 }
 
 .contact-us .contact-us-section .contact-us-row .contact-us-address-header {
-    font-size: 20px;
-    font-size: 1.429rem;
+    font-size: 18px;
+    /*font-size: 1.429rem;*/
     line-height: 50px;
     color: #232933;
 }
@@ -11751,7 +11751,7 @@ button.products-filter-btn {
     height: 50px;
     border-radius: 100%;
     display: block;
-    background: linear-gradient(45deg, #00d8f5, #4321d5);
+    background: linear-gradient(45deg, #088e9a, #33c5ff);
     transition: all 265ms ease-out;
 }
 
@@ -11854,6 +11854,11 @@ button.products-filter-btn {
     position: absolute;
     left: 0;
     border-radius: 50px 0 0 50px;
+}
+
+.contact-us .box-header .box-title{
+    border-bottom: 3px solid #17a2b8;
+    font-size: 22px;
 }
 
 /*main carousel*/

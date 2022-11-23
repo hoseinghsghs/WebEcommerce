@@ -1,6 +1,7 @@
 @import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css";
 @import "../assets/home/css/vendor/font-awesome.min.css";
-@import "../assets/home/css/vendor/materialdesignicons.css";
+@import "//cdn.jsdelivr.net/npm/@mdi/font@6.9.96/css/materialdesignicons.min.css";
+/*@import "../assets/home/css/vendor/materialdesignicons.css";*/
 @import "../assets/home/css/vendor/bootstrap.css";
 
 @import "../assets/home/css/vendor/owl.carousel.min.css";

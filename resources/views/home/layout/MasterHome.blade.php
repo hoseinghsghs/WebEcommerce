@@ -61,12 +61,24 @@
     @include('home.partial.Scroll')
     @include('home.partial.Loader')
 
+
     <script type="text/javascript" src="{{asset('js/home.js')}}"></script>
 
     @include('sweetalert::alert')
     @livewireScripts()
     @flasher_livewire_render
     @stack('scripts')
+
+    <script type="text/javascript">
+        window.RAYCHAT_TOKEN = "cedac5cd-4b19-488d-b7a8-be5ab3dffa8d";
+        (function () {
+            d = document;
+            s = d.createElement("script");
+            s.src = "https://widget-react.raychat.io/install/widget.js";
+            s.async = 1;
+            d.getElementsByTagName("head")[0].appendChild(s);
+        })();
+    </script>
 
     <script>
     @if(session('status'))

@@ -114,10 +114,11 @@ $(document).ready(function (e) {
         navText: ["&#10094", "&#10095"],
         dots: false,
         responsiveClass: true,
+        autoplay:true,
         responsive: {
             0: {
-                items: 2,
-                slideBy: 2,
+                items: 1,
+                slideBy: 1,
             },
             576: {
                 items: 3,

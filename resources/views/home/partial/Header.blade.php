@@ -28,7 +28,7 @@
                                 <div class="header-cart-basket">
                                     <a class="cart-basket-box">
                                         <span class="icon-cart">
-                                            <i class="mdi mdi-shopping"></i>
+                                              <i class="mdi mdi-shopping-outline"></i>
                                         </span>
                                         <span class="count-cart" id="count-cart">{{Cart::getContent()->count()}}</span>
                                     </a>
@@ -192,7 +192,7 @@
                                 </ul>
                             </li>
                             <li class="menu-item">
-                                <i class=" fa fa-star-o"></i>
+                                <i class="fas fa-fire"></i>
                                 <a href="{{route('home.products.search',['label'=>'فروش ویژه'])}}"
                                    class="current-link-menu">فروش ویژه</a>
                             </li>
