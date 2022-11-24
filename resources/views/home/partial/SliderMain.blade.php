@@ -34,7 +34,7 @@
                                         @endif
                                         @isset($slider->button_text)
                                             <a href="{{$slider->button_link}}" type="submit"
-                                               class="btn btn-warning btn-buy mt-4">@isset($slider->button_icon)
+                                               class="btn liko-danger-btn mt-4">@isset($slider->button_icon)
                                                     <i class="{{$slider->button_icon}}"></i>
                                                 @endisset {{$slider->button_text}}</a>
                                         @endisset

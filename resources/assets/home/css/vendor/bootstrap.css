@@ -3294,7 +3294,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-link:hover {
-    color: #651fff;
+    color: #0aa6f9;
     text-decoration: underline;
     background-color: transparent;
     border-color: transparent;
@@ -6441,7 +6441,7 @@ button.close {
 }
 
 .carousel-indicators .active {
-    background-color: #651fff !important;
+    background-color: #0aa6f9 !important;
     color: #fff !important;
     width: 25px;
     transition: all 300ms ease;

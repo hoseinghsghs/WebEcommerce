@@ -2954,7 +2954,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-link:hover {
-    color: #651fff;
+    color: #0aa6f9;
     text-decoration: underline;
     background-color: transparent;
     border-color: transparent;
@@ -5866,7 +5866,7 @@ button.close {
 }
 
 .carousel-indicators .active {
-    background-color: #651fff !important;
+    background-color: #0aa6f9 !important;
     color: #fff !important;
     width: 25px;
     transition: all 300ms ease;
@@ -12385,7 +12385,7 @@ header.header-main {
     span.count-cart {
     width: 1.2rem;
     height: 1.2rem;
-    background: #fd6b6b;
+    background: #3a7795;
     color: #ffffff;
     position: absolute;
     margin: 1px;
@@ -14243,8 +14243,8 @@ header.header-main {
 
 .widget .card-header span.title-one {
     padding-bottom: 10px;
-    color: #651fff;
-    border-bottom: 2px solid #651fff;
+    color: #008297;
+    border-bottom: 2px solid #0099b5;
     display: inline-block;
     position: relative;
     top: 2px;
@@ -14254,7 +14254,7 @@ header.header-main {
 
 .widget .card-header span.title-one-0 {
     padding-bottom: 10px;
-    color: #651fff;
+    color: #008297;
     display: inline-block;
     position: relative;
     top: 2px;
@@ -14581,8 +14581,8 @@ header.header-main {
 .widget-product .product-carousel .item ins,
 .brand-slider .product-carousel .item ins,
 .product-items .product-box .price ins {
-    color: #651fff !important;
-    font-size: 17px;
+    color: #008297 !important;
+    font-size: 15px;
     height: auto;
     display: block;
     text-decoration: none;
@@ -23115,6 +23115,11 @@ button.products-filter-btn {
 .header-main .header-logo img{
     width: 170px;
     height: 48px;
+}
+.liko-danger-btn{
+    background-color: #feaf38;
+    border-color: #ffd608;
+    border-radius: 20px;
 }
 /*main carousel*/
 @media (max-width: 480px) {
