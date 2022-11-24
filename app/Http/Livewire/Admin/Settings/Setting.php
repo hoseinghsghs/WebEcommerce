@@ -161,7 +161,7 @@ class Setting extends Component
         if ($this->logo) {
             Storage::deleteDirectory('logo');
             $image_controller = new ImageController();
-            $image_name = $image_controller->UploadeImage($this->logo, "logo", 48, 170);
+            $image_name = $image_controller->UploadeImage($this->logo, "logo", 96, 340);
             $data['logo'] = $image_name;
         } else {
             unset($data['logo']);
