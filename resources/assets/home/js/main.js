@@ -111,10 +111,12 @@ $(document).ready(function (e) {
         rtl: true,
         margin: 10,
         nav: true,
+        loop:true,
         navText: ["&#10094", "&#10095"],
         dots: false,
         responsiveClass: true,
         autoplay:true,
+        autoplayTimeout: 3000,
         responsive: {
             0: {
                 items: 1,
@@ -125,15 +127,15 @@ $(document).ready(function (e) {
                 slideBy: 3,
             },
             768: {
-                items: 4,
+                items: 5,
                 slideBy: 4,
             },
             992: {
-                items: 5,
+                items: 7,
                 slideBy: 5,
             },
             1400: {
-                items: 7,
+                items: 9,
                 slideBy: 7,
             },
         },

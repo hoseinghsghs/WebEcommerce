@@ -1,3 +1,11 @@
+@font-face {
+    font-family: "Material Design Icons";
+    src: url("../fonts/materialdesignicons-webfont.eot?v=4.2.95");
+    src: url("../fonts/materialdesignicons-webfont.eot?#iefix&v=4.2.95") format("embedded-opentype"), url("../fonts/materialdesignicons-webfont.woff2?v=4.2.95") format("woff2"), url("../fonts/materialdesignicons-webfont.woff?v=4.2.95") format("woff"), url("../fonts/materialdesignicons-webfont.ttf?v=4.2.95") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -1809,7 +1817,7 @@ header.header-main {
     top: -3px;
     right: 28px;
     color: #fff;
-    background: #fd6b6b;
+    background: #3a7795;
     border-radius: 3.75rem;
     font-weight: 500;
     font-size: 12px;
@@ -5268,8 +5276,8 @@ span.shipping-destination {
 .account-box-content a.account-link-password {
     display: inline-block;
     font-size: 11px;
-    color: #651fff;
-    border-bottom: 1px dashed #651fff;
+    color: #07b2ce;
+    border-bottom: 1px dashed #07b2ce;
     text-decoration: none;
     font-weight: 700;
     float: left;
@@ -5284,8 +5292,8 @@ span.shipping-destination {
     line-height: 14px;
     margin-top: 2rem;
     border-radius: 20px;
-    background: #651fff;
-    border-color: #651fff;
+    background: #008297;
+    border-color: #008297;
     font-size: 14px;
     outline: none;
     transition: 0.2s;
@@ -5303,8 +5311,8 @@ span.shipping-destination {
 }
 
 .form-auth-row .remember-me a {
-    color: #651fff;
-    border-bottom: 1px dashed #651fff;
+    color: #008297;
+    border-bottom: 1px dashed #008297;
     text-decoration: none;
     display: inline-block;
     margin-left: 5px;
@@ -6886,7 +6894,7 @@ span.shipping-destination {
     right: 7px;
     -webkit-transform: translate(50%, -50%);
     transform: translate(50%, -50%);
-    background-color: #651fff;
+    background-color: #008297;
     width: 10px;
     height: 10px;
 }
@@ -6905,8 +6913,8 @@ span.shipping-destination {
 }
 
 .checkout .content-checkout .checkout-review-order .btn-Order {
-    background-color: #651fff;
-    border-color: #651fff;
+    background-color: #108e91;
+    border-color: #108e91;
     border-radius: 20px;
     font-size: 14px;
     outline: none !important;
@@ -11292,7 +11300,7 @@ footer.footer-main-site .footer-shopping-features .item span.desc-shopping {
 
 footer.footer-main-site .footer-middlebar {
     width: 100%;
-    padding: 20px 0 0 15px;
+    padding: 25px 0 0 15px;
     float: right;
 }
 
