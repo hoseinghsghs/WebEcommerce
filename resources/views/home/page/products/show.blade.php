@@ -25,7 +25,7 @@
                             <div class="col-lg-5 col-xs-12 pr d-block" style="padding: 0;">
                                 <section class="product-gallery">
                                     <div class="gallery">
-                                        <div class="gallery-item">
+                                        <div class="gallery-item col-lg-2 col-xs-2 pr ">
                                             <div>
                                                 <ul class="gallery-actions">
                                                     <li>
@@ -111,7 +111,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="gallery-item">
+                                        <div class="gallery-item col-lg-10 col-xs-10 pr ">
                                             <div class="gallery-img">
                                                 <a href="#">
                                                     <img class="zoom-img" id="img-product-zoom"
@@ -139,7 +139,7 @@
                                     </div>
                                 </section>
                             </div>
-                            <div class="col-lg-7 col-xs-12 pl mt-5 d-block">
+                            <div class="col-lg-7 col-xs-12 pl  d-block">
                                 <section class="product-info">
                                     <div class="product-headline">
                                         <h1 class="product-title">
