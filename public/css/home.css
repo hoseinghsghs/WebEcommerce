@@ -12017,7 +12017,7 @@ header.header-main {
 }
 
 .header-main-nav ul.menu-ul li.menu-item:hover a.current-link-menu {
-    color: #651fff;
+    color: #008297;
     transition: 0.2s;
 }
 
@@ -12031,7 +12031,7 @@ header.header-main {
     left: 0;
     right: 0;
     margin: 0 auto;
-    background-color: #651fff;
+    background-color: #0099b5;
     transition: all 0.3s ease-in-out;
 }
 
@@ -12637,8 +12637,8 @@ header.header-main {
     .widget-shopping-cart
     .widget-shopping-cart-content
     .mini-card-total {
-    color: #651fff;
-    background-color: rgba(145 119 251 / 14%);
+    color: #006797;
+    background-color: rgb(119 209 251 / 14%);
     width: 100%;
     font-size: 14px;
     line-height: 3;
@@ -12676,7 +12676,7 @@ header.header-main {
     .widget-shopping-cart-content
     .mini-card-button
     a.view-card:hover {
-    color: #651fff;
+    color: #008297;
 }
 
 .header-main-nav
@@ -12701,7 +12701,7 @@ header.header-main {
     .widget-shopping-cart-content
     .mini-card-button
     a.card-checkout:hover {
-    background: #651fff;
+    background: #008297;
     transition: all 300ms ease;
     color: #fff;
 }
@@ -22784,7 +22784,7 @@ footer.footer-main-site
 }
 
 .progress-wrap svg.progress-circle path {
-    stroke: #651fff;
+    stroke: #008297;
     stroke-width: 5;
     box-sizing: border-box;
     transition: all 200ms linear;
@@ -23087,12 +23087,12 @@ button.products-filter-btn {
 
 .container-main-xlg {
     width: 100%;
-    max-width: 1676px;
+    max-width: 1920px;
 }
 
 .container-xlg {
     width: 100%;
-    max-width: 1336px;
+    max-width: 1676px;
 }
 
 .checkout
@@ -23117,7 +23117,8 @@ button.products-filter-btn {
     height: 48px;
 }
 .liko-danger-btn{
-    background-color: #feaf38;
+    color: #000000;
+    background-color: #ffb749;
     border-color: #ffd608;
     border-radius: 20px;
 }
