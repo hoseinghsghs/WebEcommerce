@@ -35,7 +35,7 @@
                                                 <small class="text-danger font-weight-bold pr-2 password-error d-block"></small>
                                             </div>
                                             <div class="form-auth-row d-flex">
-                                                <label for="#" class="ui-checkbox mt-1">
+                                                <label for="#" class="ui-checkbox">
                                                     <input type="checkbox" value="1" name="remember" id="remember">
                                                     <span class="ui-checkbox-check"></span>
                                                 </label>

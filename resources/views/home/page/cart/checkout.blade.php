@@ -107,15 +107,15 @@
                                                                     </div>
                                                                     <div class="col-md-6 col-12">
                                                                         <div class="h-50">
-                                                                            <div class="box-header">
+                                                                            <div class="box-header mb-1">
                                                                                 <span class="box-title">آدرس اصلی</span>
                                                                             </div>
                                                                             <tr>
                                                                                 <td>{{ $address->address }}</td>
                                                                             </tr>
                                                                         </div>
-                                                                        <div class="h-50">
-                                                                            <div class="box-header">
+                                                                        <div class="h-50">fg
+                                                                            <div class="box-header mb-1">
                                                                                 <span
                                                                                     class="box-title">آدرس جایگزین</span>
                                                                             </div>
@@ -130,7 +130,7 @@
                                                                         <tr>
                                                                             <td>
                                                                                 <a href="{{ route('home.addreses.edit', ['address' => $address->id]) }}"
-                                                                                   class="edit-address-link btn-Order btn btn-warning btn-sm">ویرایش
+                                                                                   class="edit-address-link btn-Order btn liko-danger-btn btn btn-sm">ویرایش
                                                                                     آدرس</a>
                                                                             </td>
                                                                         </tr>

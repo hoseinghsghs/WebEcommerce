@@ -24,7 +24,7 @@
             <div class="col-12">
                 <div class="footer-middlebar">
                     @if($setting->site_name || $setting->description)
-                    <div class="col-lg-8 pr mt-2">
+                    <div class="col-lg-8 pr">
                         <div class="footer-content d-block">
                             <div class="text pr-1">
                                 @isset($setting->site_name)
@@ -38,7 +38,7 @@
                     </div>
                     @endif
                     @if($setting->instagram || $setting->whatsapp || $setting->telegram)
-                    <div class="col-lg-4 d-block pl mt-2">
+                    <div class="col-lg-4 d-block pl mt-lg-0 mt-3">
                         <div class="shortcode-widget-area">
                             <form action="#" class="form-newsletter">
                                 <fieldset>

@@ -11373,6 +11373,14 @@ body.swal2-toast-column .swal2-toast .swal2-input {
 body.swal2-toast-column .swal2-toast .swal2-validation-message {
     font-size: 1em
 }
+@font-face {
+    font-family: "Material Design Icons";
+    src: url(/fonts/materialdesignicons-webfont.eot?0ff6b9cb70ffeffba8ef8c605ea4fe32);
+    src: url(/fonts/materialdesignicons-webfont.eot?0ff6b9cb70ffeffba8ef8c605ea4fe32?#iefix&v=4.2.95) format("embedded-opentype"), url(/fonts/materialdesignicons-webfont.woff2?5bd209b1b93ed8799f6acd3eb3a0e2da) format("woff2"), url(/fonts/materialdesignicons-webfont.woff?578e66eb2e2225a0e2813c43da0411a4) format("woff"), url(/fonts/materialdesignicons-webfont.ttf?79631403ff2a9490f4f94307bd767cb0) format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -13178,7 +13186,7 @@ header.header-main {
     top: -3px;
     right: 28px;
     color: #fff;
-    background: #fd6b6b;
+    background: #3a7795;
     border-radius: 3.75rem;
     font-weight: 500;
     font-size: 12px;
@@ -16648,8 +16656,8 @@ span.shipping-destination {
 .account-box-content a.account-link-password {
     display: inline-block;
     font-size: 11px;
-    color: #651fff;
-    border-bottom: 1px dashed #651fff;
+    color: #07b2ce;
+    border-bottom: 1px dashed #07b2ce;
     text-decoration: none;
     font-weight: 700;
     float: left;
@@ -16664,8 +16672,8 @@ span.shipping-destination {
     line-height: 14px;
     margin-top: 2rem;
     border-radius: 20px;
-    background: #651fff;
-    border-color: #651fff;
+    background: #008297;
+    border-color: #008297;
     font-size: 14px;
     outline: none;
     transition: 0.2s;
@@ -16683,8 +16691,8 @@ span.shipping-destination {
 }
 
 .form-auth-row .remember-me a {
-    color: #651fff;
-    border-bottom: 1px dashed #651fff;
+    color: #008297;
+    border-bottom: 1px dashed #008297;
     text-decoration: none;
     display: inline-block;
     margin-left: 5px;
@@ -18279,7 +18287,7 @@ span.shipping-destination {
     top: 7px;
     right: 7px;
     transform: translate(50%, -50%);
-    background-color: #651fff;
+    background-color: #008297;
     width: 10px;
     height: 10px;
 }
@@ -18298,8 +18306,8 @@ span.shipping-destination {
 }
 
 .checkout .content-checkout .checkout-review-order .btn-Order {
-    background-color: #651fff;
-    border-color: #651fff;
+    background-color: #108e91;
+    border-color: #108e91;
     border-radius: 20px;
     font-size: 14px;
     outline: none !important;
@@ -22529,7 +22537,7 @@ footer.footer-main-site .footer-shopping-features .item span.desc-shopping {
 
 footer.footer-main-site .footer-middlebar {
     width: 100%;
-    padding: 20px 0 0 15px;
+    padding: 25px 0 0 15px;
     float: right;
 }
 
@@ -23885,7 +23893,7 @@ button.products-filter-btn {
         .header-cart-basket
         .cart-basket-box
         span.count-cart {
-        background: #fd6b6b;
+        background: #3a7795;
         top: 7px;
         color: #fff;
         left: 22px;
