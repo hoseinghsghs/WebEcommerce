@@ -23112,7 +23112,10 @@ button.products-filter-btn {
     border-bottom: 3px solid #17a2b8;
     font-size: 22px;
 }
-
+.header-main .header-logo img{
+    width: 170px;
+    height: 48px;
+}
 /*main carousel*/
 @media (max-width: 480px) {
     .carousel-control-prev,
@@ -23126,6 +23129,7 @@ button.products-filter-btn {
         left: 55px;
     }
 }
+
 
 @media (max-width: 992px) {
     .header-main-nav ul.menu-ul li.menu-item {
