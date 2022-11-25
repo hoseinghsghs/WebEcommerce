@@ -89,7 +89,7 @@
             @if ($Product_special->quantity_check)
                 @if ($Product_special->sale_check)
                     <span>{{number_format($Product_special->sale_check->sale_price)}}<span> تومان </span></span>
-                    <del><span>{{number_format($Product_special->sale_check->price)}}<span> تومان </span></span></del>
+                    <del><span>{{number_format($Product_special->sale_check->price)}} تومان </span></del>
                 @else
                     <ins><span>{{ number_format($Product_special->price_check->price) }}<span> تومان </span></span>
                     </ins>
