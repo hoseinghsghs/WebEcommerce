@@ -7788,7 +7788,7 @@ main.single-product .product .gallery-items li img:hover {
     content: attr(data-title);
     font-size: 13px;
     font-size: 0.929rem;
-    line-height: 1.692;
+    line-height: 2.1;
     display: list-item;
     font-weight: 700;
 }
