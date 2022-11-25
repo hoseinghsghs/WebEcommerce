@@ -1129,9 +1129,9 @@
 }
 
 @media (max-width: 400px) {
-    .product .product-gallery .gallery .gallery-item .gallery-img .zoomWrapper {
+    /*.product .product-gallery .gallery .gallery-item .gallery-img .zoomWrapper {
         height: 280px !important;
-    }
+    }*/
 
     .product
         .product-gallery
