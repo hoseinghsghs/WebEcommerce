@@ -1,7 +1,7 @@
 // index
-import Echo from "laravel-echo";
+//import Echo from "laravel-echo";
 
-window.Pusher = require("pusher-js");
+//window.Pusher = require("pusher-js");
 
 window.c3 = require("c3");
 
@@ -46,12 +46,12 @@ require("../assets/admin/js/pages/forms/advanced-form-elements.js");
 require("../assets/admin/js/jquery.czMore-latest.js");
 require("../assets/admin/js/rating.js");
 window.Swal = require("../assets/home/js/vendor/sweetalert2.all.min.js");
-window.Echo = new Echo({
-    broadcaster: "pusher",
-    key: process.env.MIX_PUSHER_APP_KEY,
-    wsHost: window.location.hostname,
-    wsPort: 6001,
-    forceTLS: false,
-    disableStats: true,
-});
+//window.Echo = new Echo({
+//   broadcaster: "pusher",
+//    key: process.env.MIX_PUSHER_APP_KEY,
+//   wsHost: window.location.hostname,
+//   wsPort: 6001,
+//   forceTLS: false,
+//   disableStats: true,
+//});
 // index

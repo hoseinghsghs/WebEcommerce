@@ -16,7 +16,7 @@
                 @if ($Product_special->sale_check)
                     <ins><span>{{number_format($Product_special->sale_check->sale_price)}}<span> تومان </span></span>
                     </ins>
-                    <del><span>{{number_format($Product_special->sale_check->price)}}<span> تومان </span></span></del>
+                    <del><span>{{number_format($Product_special->sale_check->price)}} تومان </span></del>
                 @else
                     <ins><span>{{ number_format($Product_special->price_check->price) }}<span> تومان </span></span>
                     </ins>

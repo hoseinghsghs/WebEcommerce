@@ -1,7 +1,13 @@
 @font-face {
     font-family: "Material Design Icons";
     src: url("../fonts/materialdesignicons-webfont.eot?v=4.2.95");
-    src: url("../fonts/materialdesignicons-webfont.eot?#iefix&v=4.2.95") format("embedded-opentype"), url("../fonts/materialdesignicons-webfont.woff2?v=4.2.95") format("woff2"), url("../fonts/materialdesignicons-webfont.woff?v=4.2.95") format("woff"), url("../fonts/materialdesignicons-webfont.ttf?v=4.2.95") format("truetype");
+    src: url("../fonts/materialdesignicons-webfont.eot?#iefix&v=4.2.95")
+            format("embedded-opentype"),
+        url("../fonts/materialdesignicons-webfont.woff2?v=4.2.95")
+            format("woff2"),
+        url("../fonts/materialdesignicons-webfont.woff?v=4.2.95") format("woff"),
+        url("../fonts/materialdesignicons-webfont.ttf?v=4.2.95")
+            format("truetype");
     font-weight: normal;
     font-style: normal;
 }
@@ -767,8 +773,8 @@ header.header-main {
     ul.is-mega-menu
     li.menu-mega-item
     a.mega-menu-link:hover {
-    color: #651fff;
-    border-bottom: 1px solid #651fff;
+    color: #008297;
+    border-bottom: 1px solid #008297;
     border-radius: 50%;
     transition: all 0.2s ease-out;
 }
@@ -827,7 +833,7 @@ header.header-main {
     > ul
     li.menu-mega-item-three:hover
     a {
-    color: #651fff;
+    color: #008297;
 }
 
 .bg-image {
@@ -3340,10 +3346,11 @@ header.header-main {
     background-color: transparent;
     background-image: linear-gradient(0deg, #ec4f4f 0%, #f2295b 100%);
     float: right;
+    padding: 10px;
 }
 
 .amazing-product img {
-    max-width: 80%;
+    max-width: 70%;
     margin-bottom: 10px;
 }
 
@@ -3363,6 +3370,12 @@ header.header-main {
     padding: 9px 16px;
     border: 1px solid #e0e0e0;
     border-radius: 50px;
+}
+
+.p-info-style {
+    border-radius: 0.5rem;
+    background-color: #f5f5f5;
+    padding: 0.42rem;
 }
 
 .amazing-section
@@ -5691,7 +5704,7 @@ span.shipping-destination {
     li.profile-account-nav-item
     a.active {
     background-color: #e5edf8 !important;
-    color: #651fff !important;
+    color: #008297 !important;
 }
 
 .post-item-profile .profile-content {
@@ -7775,7 +7788,7 @@ main.single-product .product .gallery-items li img:hover {
     content: attr(data-title);
     font-size: 13px;
     font-size: 0.929rem;
-    line-height: 1.692;
+    line-height: 2.1;
     display: list-item;
     font-weight: 700;
 }
@@ -7884,6 +7897,7 @@ main.single-product .product .gallery-items li img:hover {
     .product-config-wrapper
     .product-seller-info
     .product-seller-row {
+    text-align: center;
     padding: 10px;
     font-size: 15px;
     color: #666666;
@@ -7923,7 +7937,7 @@ main.single-product .product .gallery-items li img:hover {
     span.amount {
     font-size: 16px;
     font-weight: 500;
-    color: #ef4343;
+    color: #0089ff;
 }
 
 .product
@@ -7955,12 +7969,12 @@ main.single-product .product .gallery-items li img:hover {
     .product-seller-info
     .product-seller-row
     .btn-add-to-cart {
-    width: 100%;
+    width: 80%;
     border-radius: 20px;
     font-size: 14px;
     margin-top: 10px;
     border-color: #f5f5f5;
-    background-image: linear-gradient(135deg, #f99ca7 10%, #f15062 100%);
+    background-image: linear-gradient(135deg, #2cbcee 10%, #35bbe9 100%);
 }
 
 .product
@@ -8063,7 +8077,7 @@ main.single-product .product .gallery-items li img:hover {
 }
 
 .nav-tabs .nav-link.active {
-    color: #651fff !important;
+    color: #0089ff !important;
 }
 
 .tabs .tabs-content {
@@ -8115,7 +8129,7 @@ main.single-product .product .gallery-items li img:hover {
     width: 100%;
     text-align: center;
     bottom: 15px;
-    color: #651fff;
+    color: #0089ff;
     background: #fff;
     cursor: pointer;
     font-size: 14px;
@@ -8506,7 +8520,7 @@ span.show-less {
     li
     .rating-general
     .rating-value {
-    background-color: #651fff;
+    background-color: #24afdf;
     width: 80%;
     float: right;
     height: 100%;
@@ -8918,7 +8932,7 @@ span.show-less {
 }
 
 .tabs .tabs-content .faq .form-faq-row .form-faq-col .btn-tertiary {
-    padding: 10px 50px;
+    padding: 7px 16px;
     border-radius: 20px;
 }
 
@@ -11429,6 +11443,10 @@ footer.footer-main-site .footer-middlebar .footer-content .text .desc {
     color: #888;
     margin: 0;
 }
+.btn-question-singel {
+    color: white;
+    background-image: linear-gradient(135deg, #2cbcee 10%, #35bbe9 100%);
+}
 
 footer.footer-main-site
     .footer-middlebar
@@ -11893,11 +11911,11 @@ button.products-filter-btn {
     border-bottom: 3px solid #17a2b8;
     font-size: 22px;
 }
-.header-main .header-logo img{
+.header-main .header-logo img {
     width: 170px;
     height: 48px;
 }
-.liko-danger-btn{
+.liko-danger-btn {
     color: #000000;
     background-color: #ffb749;
     border-color: #ffd608;
@@ -11916,4 +11934,3 @@ button.products-filter-btn {
         left: 55px;
     }
 }
-

@@ -16,7 +16,6 @@
                                 <li class="breadcrumb-item"><a
                                         href="{{route('home.products.index',$product->category->slug)}}">
                                         {{$product->category->name}}</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">{{$product->name}}</li>
                             </ol>
                         </nav>
                     </div>
@@ -25,7 +24,7 @@
                             <div class="col-lg-5 col-xs-12 pr d-block" style="padding: 0;">
                                 <section class="product-gallery">
                                     <div class="gallery">
-                                        <div class="gallery-item col-lg-2 col-xs-2 pr ">
+                                        <div class="gallery-item col-lg-1 col-xs-1 pr ">
                                             <div>
                                                 <ul class="gallery-actions">
                                                     <li>
@@ -111,7 +110,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="gallery-item col-lg-10 col-xs-10 pr ">
+                                        <div class="gallery-item col-lg-11 col-xs-11 pr ">
                                             <div class="gallery-img">
                                                 <a href="#">
                                                     <img class="zoom-img" id="img-product-zoom"
@@ -140,12 +139,12 @@
                                 </section>
                             </div>
                             <div class="col-lg-7 col-xs-12 pl  d-block">
-                                <section class="product-info">
+                                <section class="product-info p-info-style ml-2">
                                     <div class="product-headline">
                                         <h1 class="product-title">
                                             {{$product->name}}
                                         </h1>
-                                        <div class="product-guaranteed" style="color: #651fff !important;">
+                                        <div class="product-guaranteed" style="color: #0089ff !important;">
                                             میزان رضایت:
                                             <span><span data-rating-stars="5" data-rating-readonly="true"
                                                         data-rating-value="{{ceil($product->rates->avg('satisfaction'))}}">
@@ -203,18 +202,8 @@
                                             }
                                         @endphp
                                         <div class="col=lg-6 col-md-6 col-xs-12 pr">
-                                            <div class="product-params">
-                                                @if ($main_attributes->count()>0)
-                                                    <ul data-title="ویژگی‌های محصول">
-                                                        @foreach ($main_attributes as $attribute )
-                                                            <li>
-                                                                <span>{{$attribute->attribute->name}}:</span>
-                                                                <span>{{$attribute->value}}</span>
-                                                            </li>
-                                                        @endforeach
-                                                    </ul>
-                                                @endif
-                                                @if ($product->quantity_check)
+                                            <div class="product-params p-3">
+                                                       @if ($product->quantity_check)
                                                     <ul data-title="{{App\Models\Attribute::find($product->variations->first()->attribute_id)->name}}:">
                                                         <div class="form-group">
                                                             <div class="row">
@@ -238,6 +227,17 @@
                                                         </div>
                                                     </ul>
                                                 @endif
+                                                @if ($main_attributes->count()>0)
+                                                    <ul data-title="ویژگی‌های محصول">
+                                                        @foreach ($main_attributes as $attribute )
+                                                            <li>
+                                                                <span>{{$attribute->attribute->name}}:</span>
+                                                                <span>{{$attribute->value}}</span>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
+                                         
                                             </div>
                                         </div>
                                         <div class="col=lg-6 col-md-6 col-xs-12 pr">
@@ -352,7 +352,7 @@
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade {{ count($errors) > 0 ? '' : 'show active' }}" id="Review"
                                  role="tabpanel" aria-labelledby="Review-tab">
-                                <h2 class="params-headline">نقد و بررسی اجمالی</h2>
+                                <h5 class="params-headline">نقد و بررسی اجمالی</h5>
                                 <section class="content-expert-summary">
                                     <div class="mask pm-3">
                                         <div class="mask-text">
@@ -584,7 +584,7 @@
                                         </div>
                                         <div class="form-faq-row mt-4">
                                             <div class="form-faq-col form-faq-col-submit">
-                                                <button class="btn-tertiary btn btn-secondary" type="submit">ثبت
+                                                <button class="btn-tertiary btn-question-singel" type="submit">ثبت
                                                     پرسش
                                                 </button>
                                             </div>
@@ -954,11 +954,11 @@
                 }
                 if (variation.is_sale) {
                     let spanSale = $('<div />', {
-                        class: 'amount text-danger',
+                        class: 'amount text-success',
                         text: number_format(variation.sale_price) + ' تومان'
                     });
                     let spanPrice = $('<del />', {
-                        class: 'amount',
+                        class: 'amount text-danger',
                         text: number_format(variation.price) + ' تومان'
                     });
                     variationPriceDiv.append(spanSale);

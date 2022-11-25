@@ -16,8 +16,8 @@
                         {{number_format($Products_our_suggestion_unit->sale_check->sale_price)}}<span> تومان</span>
                     </span>
 
-                    <del><span class="amount">{{number_format($Products_our_suggestion_unit->sale_check->price)}}<span> تومان
-                    </span></span></del>
+                    <del><span class="amount">{{number_format($Products_our_suggestion_unit->sale_check->price)}} تومان
+                    </span></del>
                 @else
                     <span class="amount">{{ number_format($Products_our_suggestion_unit->price_check->price) }}<span> تومان
                 </span></span>
