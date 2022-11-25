@@ -140,7 +140,7 @@
                                 </section>
                             </div>
                             <div class="col-lg-7 col-xs-12 pl  d-block">
-                                <section class="product-info">
+                                <section class="product-info p-info-style ml-2">
                                     <div class="product-headline">
                                         <h1 class="product-title">
                                             {{$product->name}}
@@ -203,7 +203,7 @@
                                             }
                                         @endphp
                                         <div class="col=lg-6 col-md-6 col-xs-12 pr">
-                                            <div class="product-params">
+                                            <div class="product-params p-3">
                                                 @if ($main_attributes->count()>0)
                                                     <ul data-title="ویژگی‌های محصول">
                                                         @foreach ($main_attributes as $attribute )
@@ -352,7 +352,7 @@
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade {{ count($errors) > 0 ? '' : 'show active' }}" id="Review"
                                  role="tabpanel" aria-labelledby="Review-tab">
-                                <h2 class="params-headline">نقد و بررسی اجمالی</h2>
+                                <h5 class="params-headline">نقد و بررسی اجمالی</h5>
                                 <section class="content-expert-summary">
                                     <div class="mask pm-3">
                                         <div class="mask-text">
@@ -954,11 +954,11 @@
                 }
                 if (variation.is_sale) {
                     let spanSale = $('<div />', {
-                        class: 'amount text-danger',
+                        class: 'amount text-success',
                         text: number_format(variation.sale_price) + ' تومان'
                     });
                     let spanPrice = $('<del />', {
-                        class: 'amount',
+                        class: 'amount text-danger',
                         text: number_format(variation.price) + ' تومان'
                     });
                     variationPriceDiv.append(spanSale);
