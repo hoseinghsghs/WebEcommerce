@@ -25,7 +25,7 @@
                             <div class="col-lg-5 col-xs-12 pr d-block" style="padding: 0;">
                                 <section class="product-gallery">
                                     <div class="gallery">
-                                        <div class="gallery-item col-lg-2 col-xs-2 pr ">
+                                        <div class="gallery-item col-lg-1 col-xs-1 pr ">
                                             <div>
                                                 <ul class="gallery-actions">
                                                     <li>
@@ -111,7 +111,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="gallery-item col-lg-10 col-xs-10 pr ">
+                                        <div class="gallery-item col-lg-11 col-xs-11 pr ">
                                             <div class="gallery-img">
                                                 <a href="#">
                                                     <img class="zoom-img" id="img-product-zoom"
@@ -145,7 +145,7 @@
                                         <h1 class="product-title">
                                             {{$product->name}}
                                         </h1>
-                                        <div class="product-guaranteed" style="color: #651fff !important;">
+                                        <div class="product-guaranteed" style="color: #0089ff !important;">
                                             میزان رضایت:
                                             <span><span data-rating-stars="5" data-rating-readonly="true"
                                                         data-rating-value="{{ceil($product->rates->avg('satisfaction'))}}">
@@ -584,7 +584,7 @@
                                         </div>
                                         <div class="form-faq-row mt-4">
                                             <div class="form-faq-col form-faq-col-submit">
-                                                <button class="btn-tertiary btn btn-secondary" type="submit">ثبت
+                                                <button class="btn-tertiary btn-question-singel" type="submit">ثبت
                                                     پرسش
                                                 </button>
                                             </div>
