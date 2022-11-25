@@ -676,7 +676,8 @@
     }
 
     .header-logo img {
-        max-width: 110px;
+        max-width: 125px;
+        max-height: 45px;
     }
 
     .header-search .header-search-box .form-search .header-search-input {
