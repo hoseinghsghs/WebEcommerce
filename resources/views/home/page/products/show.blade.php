@@ -16,7 +16,6 @@
                                 <li class="breadcrumb-item"><a
                                         href="{{route('home.products.index',$product->category->slug)}}">
                                         {{$product->category->name}}</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">{{$product->name}}</li>
                             </ol>
                         </nav>
                     </div>

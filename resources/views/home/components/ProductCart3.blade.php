@@ -107,7 +107,7 @@
         <div class="price">
             @if ($product->quantity_check)
                 @if ($product->sale_check)
-                    <del><span>{{number_format($product->sale_check->price)}}<span>تومان</span></span></del>
+                    <del><span>{{number_format($product->sale_check->price)}} تومان </span></del>
                     <ins><span
                             class="amount">{{number_format($product->sale_check->sale_price)}}<span>تومان</span></span>
                         @php
