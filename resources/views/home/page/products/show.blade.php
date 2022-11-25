@@ -204,17 +204,7 @@
                                         @endphp
                                         <div class="col=lg-6 col-md-6 col-xs-12 pr">
                                             <div class="product-params p-3">
-                                                @if ($main_attributes->count()>0)
-                                                    <ul data-title="ویژگی‌های محصول">
-                                                        @foreach ($main_attributes as $attribute )
-                                                            <li>
-                                                                <span>{{$attribute->attribute->name}}:</span>
-                                                                <span>{{$attribute->value}}</span>
-                                                            </li>
-                                                        @endforeach
-                                                    </ul>
-                                                @endif
-                                                @if ($product->quantity_check)
+                                                       @if ($product->quantity_check)
                                                     <ul data-title="{{App\Models\Attribute::find($product->variations->first()->attribute_id)->name}}:">
                                                         <div class="form-group">
                                                             <div class="row">
@@ -238,6 +228,17 @@
                                                         </div>
                                                     </ul>
                                                 @endif
+                                                @if ($main_attributes->count()>0)
+                                                    <ul data-title="ویژگی‌های محصول">
+                                                        @foreach ($main_attributes as $attribute )
+                                                            <li>
+                                                                <span>{{$attribute->attribute->name}}:</span>
+                                                                <span>{{$attribute->value}}</span>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
+                                         
                                             </div>
                                         </div>
                                         <div class="col=lg-6 col-md-6 col-xs-12 pr">
