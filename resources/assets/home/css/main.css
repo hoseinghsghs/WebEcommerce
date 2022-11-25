@@ -3346,10 +3346,11 @@ header.header-main {
     background-color: transparent;
     background-image: linear-gradient(0deg, #ec4f4f 0%, #f2295b 100%);
     float: right;
+    padding: 10px;
 }
 
 .amazing-product img {
-    max-width: 80%;
+    max-width: 70%;
     margin-bottom: 10px;
 }
 
@@ -5697,7 +5698,7 @@ span.shipping-destination {
     li.profile-account-nav-item
     a.active {
     background-color: #e5edf8 !important;
-    color: #651fff !important;
+    color: #008297 !important;
 }
 
 .post-item-profile .profile-content {
