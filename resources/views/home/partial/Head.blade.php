@@ -18,13 +18,13 @@
 {!! SEO::generate() !!}
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-VRVBW2KSRL"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-230148298-3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-VRVBW2KSRL');
+  gtag('config', 'UA-230148298-3');
 </script>
 <title> @yield('title')
 </title>
