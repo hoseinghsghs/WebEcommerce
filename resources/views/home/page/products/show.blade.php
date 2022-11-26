@@ -23,8 +23,8 @@
                         <div class="product type-product">
                             <div class="col-lg-5 col-xs-12 pr d-block" style="padding: 0;">
                                 <section class="product-gallery">
-                                    <div class="gallery">
-                                        <div class="gallery-item col-lg-1 col-xs-1 pr ">
+                                    <div class="gallery row">
+                                        <div class="gallery-item col-lg-auto col-xs-1 pr ">
                                             <div>
                                                 <ul class="gallery-actions">
                                                     <li>
@@ -110,7 +110,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="gallery-item col-lg-11 col-xs-11 pr">
+                                        <div class="gallery-item col-lg col-xs-11 pr">
                                             <div class="gallery-img">
                                                 <a href="javascript:void(0);">
                                                     <img class="zoom-img" id="img-product-zoom" alt="{{$product->name}}"

@@ -4048,8 +4048,8 @@ aside.main-row-bg .card-product-horizontal .card-product-horizontal-content {
 
 .main-row #breadcrumb i {
     position: absolute;
-    right: 12px;
-    top: 2px;
+    right: 20px;
+    top: 4px;
     font-size: 25px;
     color: #ababab;
     border-radius: 20px;
@@ -6988,7 +6988,7 @@ span.shipping-destination {
 
 .product .product-gallery .gallery .gallery-item {
     padding: 0;
-    width: 100%;
+    /*width: 100%;*/
 }
 
 .product .product-gallery .gallery .gallery-item ul.gallery-actions {
@@ -11855,8 +11855,12 @@ button.products-filter-btn {
     background: #f9f9f9;
     padding: 0 15px;
 }
-
-@media (max-width: 992px) {
+@media (min-width: 992px) {
+    .product .product-gallery .gallery .gallery-item ul.gallery-actions li{
+        display: block;
+    }
+}
+@media (max-width: 991px) {
     .footer-main-site {
         margin-bottom: 60px;
     }
@@ -11881,6 +11885,10 @@ button.products-filter-btn {
         position: absolute;
         top: 6px;
         left: 8px;
+    }
+    .product .product-gallery .gallery .gallery-item ul.gallery-actions li a.btn-option{
+        height: auto;
+        margin-bottom: 0;
     }
 }
 
