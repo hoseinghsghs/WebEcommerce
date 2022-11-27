@@ -77,11 +77,11 @@ class CommentController extends Controller
                     'eventable_type' => Comment::class,
                 ]);
 
-                try {
-                    broadcast(new NotificationMessage($event))->toOthers();
-                } catch (\Throwable $th) {
+                //try {
+                //    broadcast(new NotificationMessage($event))->toOthers();
+                //} catch (\Throwable $th) {
                     //throw $th;
-                }
+                //}
                 try {
                     Log::info(
                         'کامنت جدید ثبت شد',

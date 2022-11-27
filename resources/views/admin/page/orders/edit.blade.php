@@ -50,9 +50,7 @@
                                     <select id="statusSelect" name="status" data-placeholder=""
                                         class="form-control ms select2">
                                         <option></option>
-                                        <option value="0" {{$order->status == 'در انتظار پرداخت' ? 'selected' : ''}}>در
-                                            انتظار پرداخت
-                                        </option>
+                                        <option value="0" {{$order->status == 'پرداخت نشده' ? 'selected' : ''}}>پرداخت نشده</option>
                                         <option value="1" {{$order->status == 'آماده برای ارسال' ? 'selected' : ''}}>
                                             آماده
                                             برای ارسال</option>

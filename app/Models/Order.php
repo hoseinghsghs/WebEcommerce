@@ -62,7 +62,7 @@ class Order extends Model
     {
         switch($status){
             case '0' :
-                $status = 'در انتظار پرداخت';
+                $status = 'پرداخت نشده';
                 break;
             case '1' :
                 $status = 'آماده برای ارسال';

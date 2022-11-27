@@ -75,10 +75,10 @@ class Payment
             return ['error' => 'مشکل ارتباط با سرور سایت'];
         }
 
-        try {
-            broadcast(new NotificationMessage($event))->toOthers();
-        } catch (\Throwable $th) {
-        }
+       // try {
+       //   broadcast(new NotificationMessage($event))->toOthers();
+       //} catch (\Throwable $th) {
+       //}
         try {
             Log::info("سفارش جدید ثیت شد", [
                 'title' => 'سفارش جدید ثبت شد',

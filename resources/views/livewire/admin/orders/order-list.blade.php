@@ -147,7 +147,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if ($order->status =="در انتظار پرداخت")
+                                        @if ($order->status =="پرداخت نشده")
                                         <span class="badge badge-warning p-2">
                                             {{$order->status}}</span>
                                         @elseif ($order->status =="آماده برای ارسال")
