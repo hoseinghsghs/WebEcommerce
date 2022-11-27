@@ -121,11 +121,10 @@ class OtpController extends Controller
                     'eventable_type' => User::class,
                 ]);
 
-                try {
-                    broadcast(new NotificationMessage($event))->toOthers();
-                } catch (\Throwable $th) {
-
-                }
+                //try {
+                //    broadcast(new NotificationMessage($event))->toOthers();
+                //} catch (\Throwable $th) {
+                //}
                 try {
                     Log::info("کابر جدید ثبت شد" , [  'title' => 'کاربر جدید ثبت نام کرد',
                     'body' => 'کاربر'  . " " .  $user->cellphone,

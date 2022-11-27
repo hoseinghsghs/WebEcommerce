@@ -29,7 +29,7 @@
                             <small> {{(int)(($successsend_order/($all_order>0 ? $all_order : 1))*100)}}% تراکنش
                                 موفق </small>
                             <div class="progress">
-                                <div class="progress-bar l-amber" role="progressbar" aria-valuenow="45"
+                                <div class="progress-bar l-blue" role="progressbar" aria-valuenow="45"
                                     aria-valuemin="0" aria-valuemax="{{$all_order}}"
                                     style="width: {{($successsend_order/($all_order>0 ? $all_order : 1))*100}}%;"></div>
                             </div>
@@ -44,7 +44,7 @@
                             <small>{{(int)(($successpay_order/($all_order>0 ? $all_order : 1))*100)}}% سفارشات آماده
                                 برای ارسال</small>
                             <div class="progress">
-                                <div class="progress-bar l-blue" role="progressbar" aria-valuenow="38" aria-valuemin="0"
+                                <div class="progress-bar l-green" role="progressbar" aria-valuenow="38" aria-valuemin="0"
                                     aria-valuemax="{{$all_order}}"
                                     style="width: {{($successpay_order/($all_order>0 ? $all_order : 1))*100}}%;"></div>
                             </div>
@@ -59,7 +59,7 @@
                             <small> {{(int)(($returned_order/($all_order>0 ? $all_order : 1))*100)}}% سفارشات
                                 مرجوعی</small>
                             <div class="progress">
-                                <div class="progress-bar l-purple" role="progressbar" aria-valuenow="39"
+                                <div class="progress-bar l-amber" role="progressbar" aria-valuenow="39"
                                     aria-valuemin="{{$all_order}}" aria-valuemax="100"
                                     style="width: {{($returned_order/($all_order>0 ? $all_order : 1))*100}}%;"></div>
                             </div>
@@ -69,12 +69,11 @@
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="card widget_2 big_icon domains">
                         <div class="body">
-                            <h6> در انتظار پرداخت</h6>
+                            <h6>پرداخت نشده</h6>
                             <h2>{{$notpay_order}} <small class="info">از {{$all_order}}</small></h2>
-                            <small>{{(int)(($notpay_order/($all_order>0 ? $all_order : 1))*100)}}% در انتظار
-                                پرداخت</small>
+                            <small>{{(int)(($notpay_order/($all_order>0 ? $all_order : 1))*100)}}% پرداخت نشده</small>
                             <div class="progress">
-                                <div class="progress-bar l-green" role="progressbar" aria-valuenow="89"
+                                <div class="progress-bar l-purple" role="progressbar" aria-valuenow="89"
                                     aria-valuemin="0" aria-valuemax="{{$all_order}}"
                                     style="width: {{($notpay_order/($all_order>0 ? $all_order : 1))*100}}%;"></div>
                             </div>

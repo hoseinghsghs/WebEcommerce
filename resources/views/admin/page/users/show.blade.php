@@ -97,7 +97,7 @@
                                         <td scope="row">{{$orders->firstItem() + $key}}</td>
                                         <td>{{$order->id}}</td>
                                         <td>{{verta($order->created_at)->format('Y/n/j')}}</td>
-                                        <td class="{{$order->status == 'در انتظار پرداخت' ? 'text-primary' : 'text-success'}}">
+                                        <td class="{{$order->status == 'پرداخت نشده' ? 'text-primary' : 'text-success'}}">
                                             {{$order->status}}
                                         </td>
                                         <td>{{number_format($order->paying_amount)}}</td>

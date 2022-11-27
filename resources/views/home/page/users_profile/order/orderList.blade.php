@@ -41,7 +41,7 @@
                                                         <td> {{Hekmatinasser\Verta\Verta::instance($order->created_at)->format('Y/n/j')}}
                                                         </td>
                                                         <td
-                                                            class="{{$order->status == 'در انتظار پرداخت' ? 'text-primary' : 'text-success'}}">
+                                                            class="{{$order->status == 'پرداخت نشده' ? 'text-primary' : 'text-success'}}">
                                                             {{$order->status}}
                                                         </td>
                                                         <td class="totla">
@@ -57,58 +57,7 @@
                                                 </tbody>
                                             </table>
                                         @endif
-                                        {{--<div class="profile-orders">
-                                            <div class="collapse">
-                                                @foreach ($orders as $order)
-                                                    <div class="profile-orders-item">
-                                                        <div class="profile-orders-header">
-                                                            <!-- <hr class="ui-separator"> -->
-                                                            <div class="profile-orders-header-data">
-                                                                <div class="profile-info-row">
-                                                                    <div class="profile-info-row">
-                                                                        <div class="profile-info-row">
-                                                                            <div class="profile-info-label">شماره
-                                                                                سفارش
-                                                                            </div>
-                                                                            <div
-                                                                                class="profile-info-value">{{$order->id}}</div>
-                                                                        </div>
-                                                                        <div class="profile-info-label">وضعیت</div>
-                                                                        <div
-                                                                            class="profile-info-value {{$order->status == 'در انتظار پرداخت' ? 'text-primary' : 'text-success'}}">
-                                                                            {{$order->status}}
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="profile-info-label">تاریخ ثبت سفارش
-                                                                    </div>
-                                                                    <div class="profile-info-value">
-                                                                        {{Hekmatinasser\Verta\Verta::instance($order->created_at)->format('Y/n/j')}}
-                                                                    </div>
-                                                                </div>
-                                                                <div class="profile-info-row">
-                                                                    <div class="profile-info-label">مبلغ کل</div>
-                                                                    <div class="profile-info-value">
-                                                                <span
-                                                                    class="amount">{{number_format($order->paying_amount)}}
-                                                                    <span>تومان</span>
-                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                                <a href="{{route('home.user_profile.orders',['order' => $order->id])}}"
-                                                                   class="profile-orders-header-details">
-                                                                    <div class="profile-orders-header-summary">
-                                                                        <div class="profile-orders-header-row">
-                                                                        </div>
-                                                                    </div>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                        </div>--}}
-
+                                        
                                     </div>
                                 </div>
                             </div>
