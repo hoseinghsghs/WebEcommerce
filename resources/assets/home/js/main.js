@@ -816,7 +816,6 @@ $(document).ready(function (e) {
     // product-img-----------------------------
     $("#gallery-slider").owlCarousel({
         rtl: true,
-        margin: 10,
         nav: true,
         navText: [
             '<i class="fa fa-angle-right"></i>',
@@ -838,16 +837,12 @@ $(document).ready(function (e) {
     });
 
     if ($("#img-product-zoom").length) {
-        $("#img-product-zoom").ezPlus({
-            zoomType: "inner",
-            containLensZoom: true,
-            gallery: "gallery_01f",
-            cursor: "crosshair",
-            galleryActiveClass: "active",
-            responsive: true,
+        $("#img-product-zoom").elevateZoom({
+            zoomType: 'inner',
+            cursor: 'crosshair',
+            gallery:'gallery_01f',
+            galleryActiveClass: 'active',
             imageCrossfade: true,
-            zoomWindowFadeIn: 500,
-            zoomWindowFadeOut: 500,
         });
     }
 
