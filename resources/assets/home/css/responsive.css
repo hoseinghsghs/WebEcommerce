@@ -676,7 +676,8 @@
     }
 
     .header-logo img {
-        max-width: 110px;
+        max-width: 143px;
+        max-height: 45px;
     }
 
     .header-search .header-search-box .form-search .header-search-input {
@@ -1128,9 +1129,9 @@
 }
 
 @media (max-width: 400px) {
-    .product .product-gallery .gallery .gallery-item .gallery-img .zoomWrapper {
+    /*.product .product-gallery .gallery .gallery-item .gallery-img .zoomWrapper {
         height: 280px !important;
-    }
+    }*/
 
     .product
         .product-gallery
