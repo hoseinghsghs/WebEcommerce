@@ -44,7 +44,7 @@ class HomeController extends Controller
 
         $banners = Banner::active()->get();
         $sliders = $banners->where('type', 'اسلایدر')->all();
-        $headers = $banners->where('type', 'هدر')->sortBy('priority')->values()->take(4);
+        $headers = $banners->where('type', 'هدر')->sortBy('priority')->values()->take(6);
         $centers = $banners->where('type', 'وسط')->sortBy('priority')->values()->take(2);
         // $menue_banner =                     Banner::active()->where('type', 'منو')->where('is_active', 1)->first();
 
