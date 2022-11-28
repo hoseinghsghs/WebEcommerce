@@ -79,7 +79,7 @@ class ArchiveComponent extends Component
             
                 }
                 
-        public function delproduct(product $product){
+        public function delproduct(Product $product){
 
         $this->product=$product;
             sweetAlert()
@@ -89,7 +89,7 @@ class ArchiveComponent extends Component
         
         }
 
-    public function ChengeActive_product (product $product){
+    public function ChengeActive_product (Product $product){
         
         if($product->is_active){
             $product->update([
@@ -108,7 +108,7 @@ class ArchiveComponent extends Component
             }
         }
 
-        public function ChengeArchive_product (product $product){
+        public function ChengeArchive_product (Product $product){
         
             if($product->is_archive){
                 $product->update([
