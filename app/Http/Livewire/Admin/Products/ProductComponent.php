@@ -68,7 +68,7 @@ class ProductComponent extends Component
 
     // }
 
-    public function ChengeActive_product(product $product)
+    public function ChengeActive_product(Product $product)
     {
         if ($product->is_active) {
             $product->update([
@@ -84,7 +84,7 @@ class ProductComponent extends Component
             $this->color = "success";
         }
     }
-    public function ChengeArchive_product(product $product)
+    public function ChengeArchive_product(Product $product)
     {
 
         if ($product->is_archive) {
