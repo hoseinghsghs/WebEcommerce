@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Products;
 
-use App\Models\product;
+use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
