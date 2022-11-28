@@ -23145,7 +23145,10 @@ button.products-filter-btn {
 .footer-main-site .footer-more-info .licences img{
     max-width: 100%;
 }
-
+.header-main-nav .mobile-search button{
+    border-radius: 20px;
+    box-shadow: none;
+}
 /*main carousel*/
 @media (max-width: 480px) {
     .carousel-control-prev,

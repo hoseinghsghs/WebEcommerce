@@ -137,11 +137,11 @@
                                                         <li class="account-item">
                                                             <a href="{{route('logout')}}" class="account-link"
                                                                onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">خروج</a>
+                                                            <form id="frm-logout" action="{{ route('logout') }}"
+                                                                  method="POST">
+                                                                {{ csrf_field() }}
+                                                            </form>
                                                         </li>
-                                                        <form id="frm-logout" action="{{ route('logout') }}"
-                                                              method="POST">
-                                                            {{ csrf_field() }}
-                                                        </form>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -214,6 +214,9 @@
 
                         </ul>
                     </div>
+                </div>
+                <div class="mobile-search float-left ml-md-4 ml-3 d-lg-none">
+                    <button class="btn btn-sm  btn-outline-secondary px-3" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-search"></i> جستجو </button>
                 </div>
             </nav>
             <!--    responsive-megamenu-mobile----------------->
