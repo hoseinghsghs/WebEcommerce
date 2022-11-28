@@ -39,12 +39,12 @@ class HomeController extends Controller
         $main_categories=Category::active()->get();
         $categories = $main_categories->where('parent_id', 0)->all();
         $products_is_show = $main_categories->where('parent_id', '!=', 0)->where('is_show', '==',1)->all();
-        $products_is_show->load(['products']);
+
         $services = Service::orderBy('service_order')->get();
 
         $banners = Banner::active()->get();
         $sliders = $banners->where('type', 'اسلایدر')->all();
-        $headers = $banners->where('type', 'هدر')->sortBy('priority')->values()->take(4);
+        $headers = $banners->where('type', 'هدر')->sortBy('priority')->values()->take(6);
         $centers = $banners->where('type', 'وسط')->sortBy('priority')->values()->take(2);
         // $menue_banner =                     Banner::active()->where('type', 'منو')->where('is_active', 1)->first();
 
