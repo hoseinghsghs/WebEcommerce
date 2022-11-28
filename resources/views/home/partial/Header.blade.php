@@ -215,8 +215,8 @@
                         </ul>
                     </div>
                 </div>
-                <div class="mobile-search float-left ml-md-4 ml-3 d-lg-none">
-                    <button class="btn btn-sm  btn-outline-secondary px-3" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-search"></i> جستجو </button>
+                <div class="mobile-search d-lg-none">
+                    <button class="btn btn-sm  btn-outline-secondary text-right" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-search"></i> جستجو </button>
                 </div>
             </nav>
             <!--    responsive-megamenu-mobile----------------->

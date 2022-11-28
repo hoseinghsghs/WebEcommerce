@@ -11918,9 +11918,14 @@ button.products-filter-btn {
 .footer-main-site .footer-more-info .licences img{
     max-width: 100%;
 }
+.header-main-nav .mobile-search{
+    width: 70%;
+    margin-right: 5rem;
+}
 .header-main-nav .mobile-search button{
-    border-radius: 20px;
+    border-radius: 10px;
     box-shadow: none;
+    width: 100%;
 }
 /*main carousel*/
 @media (max-width: 480px) {

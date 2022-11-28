@@ -126,7 +126,7 @@
                         <div class="owl-stage-outer">
                             <div class="owl-stage"
                                 style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 2234px;">
-                                @each('home.components.ProductCart1', $product_is_show->products,
+                                @each('home.components.ProductCart1', $product_is_show->products->active(),
                                 'Product_special')
                             </div>
                         </div>
