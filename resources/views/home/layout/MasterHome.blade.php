@@ -69,16 +69,11 @@
     @flasher_livewire_render
     @stack('scripts')
 
+    <!---start GOFTINO code--->
     <script type="text/javascript">
-        window.RAYCHAT_TOKEN = "cedac5cd-4b19-488d-b7a8-be5ab3dffa8d";
-        (function () {
-            d = document;
-            s = d.createElement("script");
-            s.src = "https://widget-react.raychat.io/install/widget.js";
-            s.async = 1;
-            d.getElementsByTagName("head")[0].appendChild(s);
-        })();
+        !function(){var i="REbu0W",a=window,d=document;function g(){var g=d.createElement("script"),s="https://www.goftino.com/widget/"+i,l=localStorage.getItem("goftino_"+i);g.async=!0,g.src=l?s+"?o="+l:s;d.getElementsByTagName("head")[0].appendChild(g);}"complete"===d.readyState?g():a.attachEvent?a.attachEvent("onload",g):a.addEventListener("load",g,!1);}();
     </script>
+    <!---end GOFTINO code--->
 
     <script>
     @if(session('status'))

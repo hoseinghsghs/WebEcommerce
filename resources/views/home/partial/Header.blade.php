@@ -279,7 +279,7 @@
             </div>
             <div class="overlay"></div>
             <!-- bottom-menu-joomy -->
-            <div class="bottom-menu-joomy mx-auto">
+            <div class="bottom-menu-joomy mx-auto active-progress">
                 <ul class="m-1">
                     <li class="m-1">
                         <a href="{{route('home')}}">
