@@ -21,10 +21,10 @@
                     </div>
                     <div class="col-lg">
                         <div class="product type-product">
-                            <div class="col-lg-5 col-xs-12 pr d-block" style="padding: 0;">
+                            <div class="col-lg-5 col-xs-12 pr d-block pr-lg-0">
                                 <section class="product-gallery">
-                                    <div class="gallery row">
-                                        <div class="gallery-item col-lg-auto col-xs-1 pr ">
+                                    <div class="gallery row mx-0">
+                                        <div class="gallery-item col-lg-auto col-xs-1 pr p-0">
                                             <div>
                                                 <ul class="gallery-actions">
                                                     <li>
@@ -111,28 +111,39 @@
                                             </div>
                                         </div>
                                         <div class="gallery-item col-lg col-xs-11 pr">
-                                            <div class="gallery-img">
-                                                <a href="javascript:void(0);">
-                                                    <img class="zoom-img" id="img-product-zoom" alt="{{$product->name}}"
-                                                         src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}"
-                                                         data-zoom-image="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}"
-                                                         width="411"/>
-                                                    <div id="gallery_01f" style="width:420px;float:right;">
-                                                </a>
-                                                <ul class="gallery-items owl-carousel owl-theme" id="gallery-slider">
-                                                    @foreach ($product->images as $image_value )
+                                            <div class="gallery-img mx-auto" style="max-width: 420px">
+                                                <img class="zoom-img w-100" id="img-product-zoom"
+                                                     alt="{{$product->name}}"
+                                                     src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}"
+                                                     data-zoom-image="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}"
+                                                />
+                                                <div id="gallery_01f">
+                                                    <ul class="gallery-items owl-carousel owl-theme"
+                                                        id="gallery-slider">
                                                         <li class="item">
                                                             <a href="#" class="elevatezoom-gallery active"
                                                                data-update=""
-                                                               data-image="{{url(env('PRODUCT_IMAGES_UPLOAD_PATCH').$image_value->image)}}"
-                                                               data-zoom-image="{{url(env('PRODUCT_IMAGES_UPLOAD_PATCH').$image_value->image)}}">
+                                                               data-image="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}"
+                                                               data-zoom-image="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}">
                                                                 <img
-                                                                    src="{{url(env('PRODUCT_IMAGES_UPLOAD_PATCH').$image_value->image)}}"
+                                                                    src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}"
                                                                     width="100" alt="{{$product->name}}"/>
                                                             </a>
                                                         </li>
-                                                    @endforeach
-                                                </ul>
+                                                        @foreach ($product->images as $image_value )
+                                                            <li class="item">
+                                                                <a href="#" class="elevatezoom-gallery"
+                                                                   data-update=""
+                                                                   data-image="{{url(env('PRODUCT_IMAGES_UPLOAD_PATCH').$image_value->image)}}"
+                                                                   data-zoom-image="{{url(env('PRODUCT_IMAGES_UPLOAD_PATCH').$image_value->image)}}">
+                                                                    <img
+                                                                        src="{{url(env('PRODUCT_IMAGES_UPLOAD_PATCH').$image_value->image)}}"
+                                                                        width="100" alt="{{$product->name}}"/>
+                                                                </a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -203,7 +214,7 @@
                                         @endphp
                                         <div class="col=lg-6 col-md-6 col-sm-6 pr p-0">
                                             <div class="product-params p-lg-3">
-                                                       @if ($product->quantity_check)
+                                                @if ($product->quantity_check)
                                                     <ul data-title="{{App\Models\Attribute::find($product->variations->first()->attribute_id)->name}}:">
                                                         <div class="form-group">
                                                             <div class="row">
@@ -396,7 +407,7 @@
                                  aria-labelledby="User-comments-tab">
                                 <div class="comments">
                                     <h2 class="params-headline">امتیاز کاربران به
-                                        <span>Samsung Galaxy Note 10 Dual SIM 256GB Mobile Phone</span>
+                                        <span>{{$product->name}}</span>
                                     </h2>
                                     <div class="comments-summary">
                                         <div class="col-lg-6 col-md-6 col-xs-12 pr">
