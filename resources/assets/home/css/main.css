@@ -11912,6 +11912,12 @@ button.products-filter-btn {
     border-color: #ffd608;
     border-radius: 20px;
 }
+.footer-main-site .footer-more-info .licences{
+    max-width: 15rem;
+}
+.footer-main-site .footer-more-info .licences img{
+    max-width: 100%;
+}
 
 /*main carousel*/
 @media (max-width: 480px) {
