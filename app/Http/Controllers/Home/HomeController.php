@@ -38,7 +38,7 @@ class HomeController extends Controller
 
         $main_categories=Category::active()->get();
         $categories = $main_categories->where('parent_id', 0)->all();
-        $products_is_show = $main_categories->where('parent_id', '!=', 0)->where('is_show', '==',1)->all();
+        $products_is_show = $main_categories->where('parent_id', '!=', 0)->where('is_show', '==',1)->load(['products'])->all();
 
         $services = Service::orderBy('service_order')->get();
 
