@@ -54,7 +54,7 @@ class ServiceController extends Controller
 
         if (isset($request->image)) {
             $ImageController = new ImageController();
-            $image_name = $image_controller->UploadeImage($request->image, "services", 56 , 56);
+            $image_name = $ImageController->UploadeImage($request->image, "services", 56 , 56);
         } else {
             $image_name = null;
         }

@@ -40,7 +40,7 @@
                                 </ul>
                             </div>
                             @endif
-                            <form id="form_advanced_validation" class="needs-validation"
+                            <form id="form_advanced_validation" class="needs-validation" enctype="multipart/form-data"
                                 action="{{route('admin.services.update',$service->id)}}" method="POST">
                                 @csrf
                                 @method('PUT')
