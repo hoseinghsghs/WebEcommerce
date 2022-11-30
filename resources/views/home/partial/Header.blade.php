@@ -168,9 +168,9 @@
                                                class="mega-menu-link">
                                                 {{$category->name}}
                                             </a>
-                                            @if(count($category->children))
+                                            @if(count($category->children->where('is_active',1)))
                                                 <ul class="sub-menu mega-menu-level-three">
-                                                    @foreach ($category->children as $ChildrenCategory )
+                                                    @foreach ($category->children->where('is_active',1) as $ChildrenCategory )
                                                         <li class="menu-mega-item-three">
                                                             <a
                                                                 href="{{route('home.products.index',['slug'=>$ChildrenCategory->slug])}}">

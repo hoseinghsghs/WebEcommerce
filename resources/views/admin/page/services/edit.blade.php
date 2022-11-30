@@ -75,6 +75,26 @@
                                     </div>
                                 </div>
 
+                                 <div class="col-md-6">
+                                        <label for="image">تصویر</label>
+                                        <span class="position_message" id="position_message"></span>
+
+                                        <div class="form-group">
+                                            <input name="image" id="image" type="file" class="dropify form-controll"
+                                                data-show-remove="false"
+                                                data-default-file="{{asset('storage/services/'.$service->image)}}"
+                                                data-allowed-file-extensions="jpg png jpeg svg"
+                                                data-max-file-size="1024K">
+                                            @error('image')
+                                            <span class="text-danger m-0">{{$message}}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <img class="bone mt-5" />
+                                    </div>
+
+
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                         <label class="form-label">مرتب سازی</label>
