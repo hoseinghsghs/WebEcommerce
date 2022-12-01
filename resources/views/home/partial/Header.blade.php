@@ -448,26 +448,26 @@
     </div>
     <div onclick="closeAccountSidebar(event)" class="account-sidebar-overlay d-none"></div>
     <!-- end mobile account sidebar -->
-    @push('scripts')
-        <script>
-            let activeChildBox
-            function openAccountSidebar() {
-                $('.account-sidebar').addClass('open')
-                $('.account-sidebar-overlay').removeClass('d-none');
-            }
-
-            function closeAccountSidebar(event) {
-                $('.account-sidebar').removeClass('open')
-                $('.account-sidebar-overlay').addClass('d-none');
-            }
-
-            function showChildCategory(id) {
-                if (activeChildBox != null) {
-                    $('#child-category-' + activeChildBox).hide();
-                }
-                $('#child-category-' + id).show()
-                activeChildBox = id;
-            }
-        </script>
-    @endpush
 @endauth
+@push('scripts')
+    <script>
+        let activeChildBox
+        function openAccountSidebar() {
+            $('.account-sidebar').addClass('open')
+            $('.account-sidebar-overlay').removeClass('d-none');
+        }
+
+        function closeAccountSidebar(event) {
+            $('.account-sidebar').removeClass('open')
+            $('.account-sidebar-overlay').addClass('d-none');
+        }
+
+        function showChildCategory(id) {
+            if (activeChildBox != null) {
+                $('#child-category-' + activeChildBox).hide();
+            }
+            $('#child-category-' + id).show()
+            activeChildBox = id;
+        }
+    </script>
+@endpush
