@@ -176,7 +176,7 @@
                                         </div>
                                         <div class="child-cat">
                                             @foreach ($categories->sortBy('order')->where('is_active' , 1) as $category1)
-                                                @if($category1->children->count()->where('is_active' , 1)> 0)
+                                                @if($category1->children->where('is_active' , 1)->count()> 0)
                                                     <ul class="sub-menu is-mega-menu mega-menu-level-two"
                                                         id="child-category-{{$category1->id}}" style="display: none">
                                                         @foreach($category1->children->sortBy('order')->where('is_active' , 1) as $category2)
