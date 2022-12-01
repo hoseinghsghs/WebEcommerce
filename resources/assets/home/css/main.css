@@ -11978,7 +11978,7 @@ button.products-filter-btn {
     cursor: pointer;
 }
 
-.header-main-nav .main-cat li a:hover {
+.active-main-cat {
     border-right: 3px solid #0f74a8;
     background-color: whitesmoke;
 }

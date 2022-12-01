@@ -169,7 +169,7 @@
                                             <ul class="">
                                                 @foreach ($categories->sortBy('order')->where('is_active' , 1) as $category)
                                                     <li>
-                                                        <a onmouseover="showChildCategory({{$category->id}})">@isset($category->icon)<i class="{{$category->icon}}"></i>@endisset {{$category->name}}</a>
+                                                        <a onmouseover="showChildCategory(event,{{$category->id}})">@isset($category->icon)<i class="{{$category->icon}}"></i>@endisset {{$category->name}}</a>
                                                     </li>
                                                 @endforeach
                                             </ul>
@@ -462,11 +462,13 @@
             $('.account-sidebar-overlay').addClass('d-none');
         }
 
-        function showChildCategory(id) {
+        function showChildCategory(event,id) {
             if (activeChildBox != null) {
                 $('#child-category-' + activeChildBox).hide();
             }
+            $('.main-cat a').removeClass('active-main-cat');
             $('#child-category-' + id).show()
+            $(event.currentTarget).addClass('active-main-cat');
             activeChildBox = id;
         }
     </script>

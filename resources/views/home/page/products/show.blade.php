@@ -6,17 +6,15 @@
             <div class="page-content page-row">
                 <div class="main-row p-0">
                     <div id="breadcrumb">
-
                         <nav aria-label="breadcrumb" class="p-1">
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="mdi mdi-home"></i>خانه </a></li>
-                                <li class="breadcrumb-item"><a
-                                        href="{{route('home.products.search',$product->category->parent->slug)}}">{{$product->category->parent->name}}</a>
-                                </li>
-                                <li class="breadcrumb-item"><a
-                                        href="{{route('home.products.index',$product->category->slug)}}">
-                                        {{$product->category->name}}</a>
-                                </li>
+                                <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="mdi mdi-home"></i>خانه
+                                    </a></li>
+                                @foreach($product_categories as $category)
+                                    <li class="breadcrumb-item"><a
+                                            href="{{route('home.products.search',$category->slug)}}">{{$category->name}}</a>
+                                    </li>
+                                @endforeach
                             </ol>
                         </nav>
                     </div>
@@ -176,11 +174,13 @@
                                                 <span>
                                                     <i class="fa fa-archive"></i> دسته:
                                                 </span>
-                                                    <a href="{{route('home.products.search',$product->category->parent->slug)}}"
-                                                       class="product-link product-cat-title">{{$product->category->parent->name}}</a>
-                                                    ,
-                                                    <a href="{{route('home.products.index',$product->category->slug)}}"
-                                                       class="product-link product-cat-title">{{$product->category->name}}</a>
+                                                    @foreach($product_categories as $category)
+                                                    <a href="{{route('home.products.search',$category->slug)}}"
+                                                       class="product-link product-cat-title">{{$category->name}}</a>
+                                                        @if(!$loop->last)
+                                                            ,
+                                                        @endif
+                                                    @endforeach
                                                 </li>
                                                 @if($product->tags->count()>0)
                                                     <li>
