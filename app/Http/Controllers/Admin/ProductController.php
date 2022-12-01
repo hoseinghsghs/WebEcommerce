@@ -227,7 +227,7 @@ class ProductController extends Controller
     //دسته بندی
     public function editCategory(Request $request, Product $product)
     {
-        $categories = Category::where('parent_id', '!=', 0)->orderBy('parent_id')->get();
+        $categories = Category::with('children.children')->get();
         return view('admin.page.products.edit_category', compact('product', 'categories'));
     }
 
