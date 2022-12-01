@@ -263,7 +263,7 @@
                                data-target="#collapse-{{$category1->id}}" aria-expanded="false"
                                aria-controls="collapse-{{$category1->id}}"><i
                                     class="mdi mdi-chevron-down"></i>{{$category1->name}}</a>
-                            @if(count($category1->children)->where('is_active' , 1)>0)
+                            @if(count($category1->children->where('is_active' , 1))>0)
                                 <div id="collapse-{{$category1->id}}" class="collapse" aria-labelledby="headingOne">
                                     <ul>
                                         @foreach($category1->children->sortBy('order')->where('is_active' , 1) as $category2)
@@ -271,7 +271,7 @@
                                                     href="{{route('home.products.index',['slug'=>$category2->slug])}}"
                                                     class="category-level-2">{{$category2->name}}</a>
                                                 <ul>
-                                                    @if(count($category2->children)->where('is_active' , 1)>0)
+                                                    @if(count($category2->children->where('is_active' , 1))>0)
                                                         @foreach ($category2->children->sortBy('order')->where('is_active' , 1) as $category3 )
                                                             <li>
                                                                 <a href="{{route('home.products.index',['slug'=>$category3->slug])}}"
