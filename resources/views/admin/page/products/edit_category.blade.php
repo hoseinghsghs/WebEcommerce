@@ -51,7 +51,7 @@
                                 <div class="row clearfix">
                                     <div class="form-group col-md-4 col-sm-6">
                                         <label for="category_id">دسته بندی محصول:</label>
-                                        <select id="categorySelect" name="category_id" data-placeholder="انتخاب دسته" class="form-control ms select2 @error('category_id') is-invalid @enderror" data-live-search="true">
+                                        <select id="categorySelect" name="category_id" data-placeholder="انتخاب دسته" class="form-control ms select2-styled @error('category_id') is-invalid @enderror" data-live-search="true">
                                             <option></option>
                                             @foreach ($categories->sortBy('order') as $category1)
                                                 <optgroup label="{{$category1->name}}">
