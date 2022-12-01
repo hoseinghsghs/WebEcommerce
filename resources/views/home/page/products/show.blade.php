@@ -6,16 +6,17 @@
             <div class="page-content page-row">
                 <div class="main-row p-0">
                     <div id="breadcrumb">
-                        <i class="mdi mdi-home"></i>
+
                         <nav aria-label="breadcrumb" class="p-1">
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="{{route('home')}}">خانه</a></li>
+                                <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="mdi mdi-home"></i>خانه </a></li>
                                 <li class="breadcrumb-item"><a
                                         href="{{route('home.products.search',$product->category->parent->slug)}}">{{$product->category->parent->name}}</a>
                                 </li>
                                 <li class="breadcrumb-item"><a
                                         href="{{route('home.products.index',$product->category->slug)}}">
-                                        {{$product->category->name}}</a></li>
+                                        {{$product->category->name}}</a>
+                                </li>
                             </ol>
                         </nav>
                     </div>

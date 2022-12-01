@@ -29,12 +29,9 @@
             <div class="row clearfix">
                 <div class="col-lg-6">
                     <div class="card">
-
                         <div class=" list-group">
                             <button type="button" class="list-group-item list-group-item-primary">
-
                                 مشخصات اصلی محصول
-
                             </button>
                             <button type="button" class="list-group-item list-group-item-action">
                                 <div class="row clearfix">
