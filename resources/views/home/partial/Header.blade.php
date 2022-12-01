@@ -167,7 +167,7 @@
                                     <div class="d-flex p-2">
                                         <div class="main-cat">
                                             <ul class="">
-                                                @foreach ($categories as $category)
+                                                @foreach ($categories->sortBy('order')->where('is_active' , 1) as $category)
                                                     <li>
                                                         <a onmouseover="showChildCategory({{$category->id}})">@isset($category->icon)<i class="{{$category->icon}}"></i>@endisset {{$category->name}}</a>
                                                     </li>
@@ -175,19 +175,19 @@
                                             </ul>
                                         </div>
                                         <div class="child-cat">
-                                            @foreach ($categories as $category1)
-                                                @if($category1->children->count()> 0)
+                                            @foreach ($categories->sortBy('order')->where('is_active' , 1) as $category1)
+                                                @if($category1->children->count()->where('is_active' , 1)> 0)
                                                     <ul class="sub-menu is-mega-menu mega-menu-level-two"
                                                         id="child-category-{{$category1->id}}" style="display: none">
-                                                        @foreach($category1->children as $category2)
+                                                        @foreach($category1->children->sortBy('order')->where('is_active' , 1) as $category2)
                                                             <li class="menu-mega-item menu-item-type-mega-menu">
                                                                 <a href="{{route('home.products.search',['slug'=>$category2->slug])}}"
                                                                    class="mega-menu-link">
                                                                     {{$category2->name}}
                                                                 </a>
-                                                                @if(count($category2->children))
+                                                                @if(count($category2->children->where('is_active' , 1)))
                                                                     <ul class="sub-menu mega-menu-level-three">
-                                                                        @foreach ($category2->children as $category3 )
+                                                                        @foreach ($category2->children->sortBy('order')->where('is_active' , 1) as $category3 )
                                                                             <li class="menu-mega-item-three">
                                                                                 <a
                                                                                     href="{{route('home.products.index',['slug'=>$category3->slug])}}">
@@ -257,22 +257,22 @@
                 </div>
                 <!-- لیست دسته بندی ها در حالت موبایل در دو سطح -->
                 <ul class="nav-categories ul-base mt-4">
-                    @foreach ($categories->sortBy('order') as $category1)
+                    @foreach ($categories->sortBy('order')->where('is_active' , 1) as $category1)
                         <li>
                             <a href="#" class="collapsed" type="button" data-toggle="collapse"
                                data-target="#collapse-{{$category1->id}}" aria-expanded="false"
                                aria-controls="collapse-{{$category1->id}}"><i
                                     class="mdi mdi-chevron-down"></i>{{$category1->name}}</a>
-                            @if(count($category1->children)>0)
+                            @if(count($category1->children)->where('is_active' , 1)>0)
                                 <div id="collapse-{{$category1->id}}" class="collapse" aria-labelledby="headingOne">
                                     <ul>
-                                        @foreach($category1->children->sortBy('order') as $category2)
+                                        @foreach($category1->children->sortBy('order')->where('is_active' , 1) as $category2)
                                             <li @class(["has-sub"=>count($category2->children)>0])><a
                                                     href="{{route('home.products.index',['slug'=>$category2->slug])}}"
                                                     class="category-level-2">{{$category2->name}}</a>
                                                 <ul>
-                                                    @if(count($category2->children)>0)
-                                                        @foreach ($category2->children->sortBy('order') as $category3 )
+                                                    @if(count($category2->children)->where('is_active' , 1)>0)
+                                                        @foreach ($category2->children->sortBy('order')->where('is_active' , 1) as $category3 )
                                                             <li>
                                                                 <a href="{{route('home.products.index',['slug'=>$category3->slug])}}"
                                                                    class="category-level-3">{{$category3->name}}</a>
