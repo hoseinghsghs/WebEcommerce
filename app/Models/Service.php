@@ -30,6 +30,6 @@ use Illuminate\Database\Eloquent\Model;
 class Service extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'description', 'icon', 'service_order'];
+    protected $fillable = ['title', 'description', 'icon', 'service_order' , 'image'];
 
 }

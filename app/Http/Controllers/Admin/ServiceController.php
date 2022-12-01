@@ -6,6 +6,7 @@ use App\Models\Service;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Flasher\Toastr\Prime\ToastrFactory;
+use Illuminate\Support\Facades\Storage;
 
 class ServiceController extends Controller
 {
@@ -43,6 +44,7 @@ class ServiceController extends Controller
             'description'   => 'required|max:200',
             'icon'          => 'required',
             'service_order' => 'required',
+            'image' => 'required|mimes:jpg,jpeg,png,svg',
         ]);
 
         $service = new Service();
@@ -50,6 +52,16 @@ class ServiceController extends Controller
         $service->description   = $request->description;
         $service->icon          = $request->icon;
         $service->service_order = $request->service_order;
+
+        if (isset($request->image)) {
+            $ImageController = new ImageController();
+            $image_name = $ImageController->UploadeImage($request->image, "services", 56 , 56);
+        } else {
+            $image_name = null;
+        }
+
+        $service->image   = $image_name;
+
         $service->save();
 
         $flasher->addSuccess( 'سرویس با موفقیت ثبت شد');
@@ -83,11 +95,24 @@ class ServiceController extends Controller
             'icon'          => 'required',
             'service_order' => 'required',
         ]);
+    if (isset($request->image)) {
+            if (Storage::exists('services/' . $service->image)) {
+                Storage::delete('services/' . $service->image);
+            }
+            $ImageController = new ImageController();
+            $image_name = $ImageController->UploadeImage($request->image, "services", 56, 56);
+        } else {
+            $image_name = $service->image;
+        }
+
+
+
 
         $service->title         = $request->title;
         $service->description   = $request->description;
         $service->icon          = $request->icon;
         $service->service_order = $request->service_order;
+        $service->image   = $image_name;
         $service->save();
 
         $flasher->addSuccess('سرویس با موفقیت تغییر کرد');

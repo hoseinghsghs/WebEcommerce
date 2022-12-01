@@ -62,7 +62,7 @@
                                             <th>#</th>
                                             <th>عنوان</th>
                                             <th>توضیحات</th>
-                                            <th>آیکن</th>
+                                            <th>تصویر</th>
                                             <th>ترتیب</th>
                                             <th class="text-center">عملیات</th>
                                         </tr>
@@ -74,7 +74,7 @@
                                             <td>{{$service->title}}</td>
                                             <td>{{$service->description}}</td>
                                             <td>
-                                                <i class="{{$service->icon}} icon-3x"></i>
+                                                <a href="{{asset('storage/services/'.$service->image)}}" data-lightbox="{{'service-'.$service->id}}" data-title="{{$service->title}}"><img class="rounded avatar" src="{{asset('storage/services/'.$service->image)}}" width="55" alt="{{$service->title}}"></a>
                                             </td>
                                             <td>{{$service->service_order}}</td>
 

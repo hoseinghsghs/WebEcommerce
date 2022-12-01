@@ -8,7 +8,7 @@
                         @foreach ($services as $service)
                             <div class="item">
                         <span class="icon-shopping">
-                            <i class="{{$service->icon}}"></i>
+                        <img src="{{asset('storage/services/'.$service->image)}}" alt="{{$service->title}}" width="56" height="56">
                         </span>
                                 <span class="title-shopping">{{$service->title}}</span>
                                 <span class="desc-shopping">{{$service->description}}</span>
