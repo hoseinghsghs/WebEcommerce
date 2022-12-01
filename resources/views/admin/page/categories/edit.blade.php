@@ -71,13 +71,20 @@
                                                 <label for="parent_id">والد</label>
                                                 <div class="form-group">
                                                     <select id="parent_id" name="parent_id"
-                                                            class="form-control show-tick ms select2" required>
-                                                        <option value="0">بدون والد</option>
+                                                            class="form-control show-tick ms select2-styled" required>
+                                                        <option value="0" class="font-weight-bold">بدون والد</option>
                                                         @foreach ($parentCategories as $parentCategory)
-                                                            @continue($parentCategory->id == $category->id)
-                                                            <option
-                                                                {{ old('parent_id') === $parentCategory->id || $category->parent_id === $parentCategory->id ? "selected":null}}
-                                                                value="{{$parentCategory->id}}">{{$parentCategory->name}}</option>
+                                                            <option class="font-weight-bold"
+                                                                    {{ old('parent_id') == $parentCategory->id || $category->parent_id === $parentCategory->id ? "selected":null}}
+                                                                    value="{{$parentCategory->id}}">{{$parentCategory->name}}</option>
+                                                            @if($parentCategory->children->count()>0)
+                                                                @foreach($parentCategory->children as $childCategory)
+                                                                    <option class="pr-2"
+                                                                            {{ old('parent_id') == $childCategory->id || $category->parent_id === $childCategory->id  ? "selected":null}}
+                                                                            value="{{$childCategory->id}}">&#8617;
+                                                                        {{$childCategory->name}}</option>
+                                                                @endforeach
+                                                            @endif
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -101,8 +108,8 @@
                                         <div class="col-lg-3 col-md-4 col-sm-6">
                                             <label for="switch">وضعیت</label>
                                             <div class="switchToggle">
-                                                <input type="checkbox" name="is_active" id="switch"
-                                                    {{old('is_active') || $category->is_active ? null : 'checked'}}>
+                                                <input type="checkbox" name="is_active" id="switch" value="active"
+                                                    {{$errors->any() && !old('is_active') || !$category->is_active ? 'checked':null}}>
                                                 <label for="switch">Toggle</label>
                                             </div>
                                         </div>

@@ -24,6 +24,7 @@
                     </div>
                     @else
                     <div class="col-lg-9 col-12 pl">
+                        <button onclick="openAccountSidebar()" class="btn btn-sm btn-info d-lg-none mb-3"><i class="fas fa-ellipsis-v"></i> منو کاربری</button>
                         <div class="profile-content">
                             <div class="profile-address">
                                 <div class="box-header">

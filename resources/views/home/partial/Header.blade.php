@@ -122,13 +122,15 @@
                                                 <span class="icon-account">
                                                     <img src="/assets/home/images/header-user.png" class="avator">
                                                 </span>
-                                                <span class="title-account">حساب کاربری</span>
+                                                <span class="title-account">{{Auth::user()->name ?? auth()->user()->cellphone}}</span>
                                                 <div class="dropdown-menu">
                                                     <ul class="account-uls mb-0">
+                                                        @if(auth()->user()->hasRole('super-admin'))
                                                         <li class="account-item">
-                                                            <a href="{{auth()->user()->hasRole('super-admin') ? route('admin.home'):'#'}}"
-                                                               class="account-link">{{Auth::user()->name ?? auth()->user()->cellphone}}</a>
+                                                            <a href="{{ route('admin.home')}}"
+                                                               class="account-link">پنل ادمین</a>
                                                         </li>
+                                                        @endif
                                                         <li class="account-item">
                                                             <a href="{{route('home.user_profile')}}"
                                                                class="account-link">پنل
@@ -161,35 +163,55 @@
                                 <a href="#" class="current-link-menu">
                                     <i class="fa fa-bars"></i> دسته بندی
                                 </a>
-                                <ul class="sub-menu is-mega-menu mega-menu-level-two">
-                                    @foreach ($categories as $category)
-                                        <li class="menu-mega-item menu-item-type-mega-menu">
-                                            <a href="{{route('home.products.search',['slug'=>$category->slug])}}"
-                                               class="mega-menu-link">
-                                                {{$category->name}}
-                                            </a>
-                                            @if(count($category->children))
-                                                <ul class="sub-menu mega-menu-level-three">
-                                                    @foreach ($category->children as $ChildrenCategory )
-                                                        <li class="menu-mega-item-three">
-                                                            <a
-                                                                href="{{route('home.products.index',['slug'=>$ChildrenCategory->slug])}}">
-                                                                {{$ChildrenCategory->name}}
-                                                            </a>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            @endif
-                                        </li>
-                                    @endforeach
-                                    @if ($menue_banner)
-                                        <li class="menu-mega-item menu-item-type-mega-menu pr-2">
-                                            <img src="{{url(env('BANNER_IMAGES_PATCH').$menue_banner->image)}}"
-                                                 alt="{{$menue_banner->title}}">
-                                        </li>
-                                    @endif
-
-                                </ul>
+                                <div class="is-mega-menu">
+                                    <div class="d-flex p-2">
+                                        <div class="main-cat">
+                                            <ul class="">
+                                                @foreach ($categories as $category)
+                                                    <li>
+                                                        <a onmouseover="showChildCategory({{$category->id}})">@isset($category->icon)<i class="{{$category->icon}}"></i>@endisset {{$category->name}}</a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                        <div class="child-cat">
+                                            @foreach ($categories as $category1)
+                                                @if($category1->children->count()> 0)
+                                                    <ul class="sub-menu is-mega-menu mega-menu-level-two"
+                                                        id="child-category-{{$category1->id}}" style="display: none">
+                                                        @foreach($category1->children as $category2)
+                                                            <li class="menu-mega-item menu-item-type-mega-menu">
+                                                                <a href="{{route('home.products.search',['slug'=>$category2->slug])}}"
+                                                                   class="mega-menu-link">
+                                                                    {{$category2->name}}
+                                                                </a>
+                                                                @if(count($category2->children))
+                                                                    <ul class="sub-menu mega-menu-level-three">
+                                                                        @foreach ($category2->children as $category3 )
+                                                                            <li class="menu-mega-item-three">
+                                                                                <a
+                                                                                    href="{{route('home.products.index',['slug'=>$category3->slug])}}">
+                                                                                    {{$category3->name}}
+                                                                                </a>
+                                                                            </li>
+                                                                        @endforeach
+                                                                    </ul>
+                                                                @endif
+                                                            </li>
+                                                        @endforeach
+                                                        @if ($menue_banner)
+                                                            <li class="menu-mega-item menu-item-type-mega-menu pr-2">
+                                                                <img
+                                                                    src="{{url(env('BANNER_IMAGES_PATCH').$menue_banner->image)}}"
+                                                                    alt="{{$menue_banner->title}}">
+                                                            </li>
+                                                        @endif
+                                                    </ul>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
                             </li>
                             <li class="menu-item">
                                 <i class="fas fa-fire"></i>
@@ -216,7 +238,9 @@
                     </div>
                 </div>
                 <div class="mobile-search d-lg-none">
-                    <button class="btn btn-sm  btn-outline-secondary text-right" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-search"></i> جستجو </button>
+                    <button class="btn btn-sm  btn-outline-secondary text-right" data-toggle="modal"
+                            data-target="#exampleModalCenter"><i class="fa fa-search"></i> جستجو
+                    </button>
                 </div>
             </nav>
             <!--    responsive-megamenu-mobile----------------->
@@ -233,23 +257,34 @@
                 </div>
                 <!-- لیست دسته بندی ها در حالت موبایل در دو سطح -->
                 <ul class="nav-categories ul-base mt-4">
-                    @foreach ($categories->sortBy('order') as $category)
+                    @foreach ($categories->sortBy('order') as $category1)
                         <li>
                             <a href="#" class="collapsed" type="button" data-toggle="collapse"
-                               data-target="#collapse-{{$category->id}}" aria-expanded="false"
-                               aria-controls="collapse-{{$category->id}}"><i
-                                    class="mdi mdi-chevron-down"></i>{{$category->name}}</a>
-                            <div id="collapse-{{$category->id}}" class="collapse" aria-labelledby="headingOne">
-                                @if(count($category->children))
+                               data-target="#collapse-{{$category1->id}}" aria-expanded="false"
+                               aria-controls="collapse-{{$category1->id}}"><i
+                                    class="mdi mdi-chevron-down"></i>{{$category1->name}}</a>
+                            @if(count($category1->children)>0)
+                                <div id="collapse-{{$category1->id}}" class="collapse" aria-labelledby="headingOne">
                                     <ul>
-                                        @foreach ($category->children->sortBy('order') as $ChildrenCategory )
-                                            <li>
-                                                <a href="{{route('home.products.index',['slug'=>$ChildrenCategory->slug])}}"
-                                                   class="category-level-3">{{$ChildrenCategory->name}}</a></li>
+                                        @foreach($category1->children->sortBy('order') as $category2)
+                                            <li @class(["has-sub"=>count($category2->children)>0])><a
+                                                    href="{{route('home.products.index',['slug'=>$category2->slug])}}"
+                                                    class="category-level-2">{{$category2->name}}</a>
+                                                <ul>
+                                                    @if(count($category2->children)>0)
+                                                        @foreach ($category2->children->sortBy('order') as $category3 )
+                                                            <li>
+                                                                <a href="{{route('home.products.index',['slug'=>$category3->slug])}}"
+                                                                   class="category-level-3">{{$category3->name}}</a>
+                                                            </li>
+                                                        @endforeach
+                                                    @endif
+                                                </ul>
+                                            </li>
                                         @endforeach
                                     </ul>
-                                @endif
-                            </div>
+                                </div>
+                            @endif
                         </li>
                     @endforeach
                     <li>
@@ -415,6 +450,7 @@
     <!-- end mobile account sidebar -->
     @push('scripts')
         <script>
+            let activeChildBox
             function openAccountSidebar() {
                 $('.account-sidebar').addClass('open')
                 $('.account-sidebar-overlay').removeClass('d-none');
@@ -423,6 +459,14 @@
             function closeAccountSidebar(event) {
                 $('.account-sidebar').removeClass('open')
                 $('.account-sidebar-overlay').addClass('d-none');
+            }
+
+            function showChildCategory(id) {
+                if (activeChildBox != null) {
+                    $('#child-category-' + activeChildBox).hide();
+                }
+                $('#child-category-' + id).show()
+                activeChildBox = id;
             }
         </script>
     @endpush

@@ -10,6 +10,7 @@
                     <div class="col-lg-9 col-12 pl">
                         <div class="row">
                             <div class="col-lg-6">
+                                <button onclick="openAccountSidebar()" class="btn btn-sm btn-info d-lg-none mb-3"><i class="fas fa-ellipsis-v"></i> منو کاربری</button>
                                 <h5 class="text-secondary">ویرایش اطلاعات:</h5>
                                 <div class="profile-content">
                                     <div class="profile-stats">

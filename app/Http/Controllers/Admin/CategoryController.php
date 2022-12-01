@@ -21,7 +21,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::latest()->paginate(10);
+        $categories = Category::withCount('products')->with('children')->get();
+//        dd($categories);
         return view('admin.page.categories.index', compact('categories'));
     }
 
@@ -32,7 +33,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $parentCategories = Category::where('parent_id', 0)->get();
+        $parentCategories = Category::where('parent_id', 0)->with('children')->get();
         $attributes = Attribute::all();
         return view('admin.page.categories.create', compact('parentCategories', 'attributes'));
     }
@@ -53,7 +54,7 @@ class CategoryController extends Controller
                 $query->where('parent_id', $request->input('parent_id'));
             })],
             'slug' => 'required|unique:categories,slug',
-            'parent_id' => ['required', Rule::in($pCategories)],
+            'parent_id' => ['required', 'exists:categories,id'],
             'is_active' => 'nullable',
             'is_show' => 'nullable',
             'description' => 'nullable|string',
@@ -162,7 +163,7 @@ class CategoryController extends Controller
             'slug' => ['required', Rule::unique('categories')->ignore($category)],
             'is_active' => 'nullable',
             'is_show' => 'nullable',
-            'parent_id' => [Rule::in($pCategories), Rule::excludeIf($category->products->isNotEmpty() && $category->children->isNotEmpty())],
+            'parent_id' => ['exists:categories,id', Rule::excludeIf($category->products->isNotEmpty() && $category->children->isNotEmpty())],
             'description' => 'nullable|string',
             'icon' => 'nullable|string',
             'attribute_ids' => 'required|array|min:2',

@@ -78,7 +78,7 @@
                                             <label for="is_active">وضعیت</label>
                                             <div class="switchToggle">
                                                 <input type="checkbox" name="is_active"
-                                                       id="switch" {{old('is_active') ? 'checked' : null}}>
+                                                       id="switch" {{$errors->any() && old('is_active') ? 'checked':null}}>
                                                 <label for="switch">Toggle</label>
                                             </div>
                                             @error('is_active')
@@ -133,13 +133,33 @@
                                             <label for="categorySelect">دسته بندی*</label>
                                             <select id="categorySelect" name="category_id"
                                                     data-placeholder="انتخاب دسته" required
-                                                    class="form-control ms select2" data-live-search="true">
+                                                    class="form-control ms select2-styled" data-live-search="true">
                                                 <option></option>
-                                                @foreach ($categories as $category)
+                                                @foreach ($categories->sortBy('order') as $category1)
+                                                    <optgroup label="{{$category1->name}}">
+                                                    @if($category1->children->count()>0)
+                                                        @foreach($category1->children->sortBy('order') as $category2)
+                                                            <option class="pr-2"
+                                                                    {{ old('parent_id') == $category2->id ? "selected":null}}
+                                                                    value="{{$category2->id}}">&#8617;
+                                                                {{$category2->name}}</option>
+                                                            @if($category2->children->count()>0)
+                                                                @foreach($category2->children->sortBy('order') as $category3)
+                                                                    <option class="pr-4"
+                                                                            {{ old('parent_id') == $category3->id ? "selected":null}}
+                                                                            value="{{$category3->id}}">&#10510;
+                                                                        {{$category3->name}}</option>
+                                                                @endforeach
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                    </optgroup>
+                                                @endforeach
+                                                {{--@foreach ($categories as $category)
                                                     <option value="{{ $category->id }}">
                                                         {{ $category->name }}-{{ $category->parent->name }}
                                                     </option>
-                                                @endforeach
+                                                @endforeach--}}
                                             </select>
                                             @error('category_id')
                                             <span class="text-danger m-0">{{$message}}</span>

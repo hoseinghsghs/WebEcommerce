@@ -40,7 +40,7 @@ class ProductController extends Controller
         Session::forget('images');
         $brands = Brand::all();
         $tags = Tag::all();
-        $categories = Category::where('parent_id', '!=', 0)->orderBy('parent_id')->get();
+        $categories = Category::where('parent_id', 0)->with('children.children')->get();
         return view('admin.page.products.create', compact('brands', 'tags', 'categories'));
     }
 
@@ -130,7 +130,7 @@ class ProductController extends Controller
     {
         $brands = Brand::all();
         $tags = Tag::all();
-        $categories = Category::where('parent_id', '!=', 0)->get();
+        $categories = Category::where('parent_id', 0)->with('children.children')->get();;
         $product_attributes = $product->attributes()->with('attribute')->get();
         $product_variation = $product->variations()->with('attribute')->get();
         // dd($brands);

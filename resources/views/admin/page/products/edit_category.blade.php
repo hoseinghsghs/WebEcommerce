@@ -53,10 +53,25 @@
                                         <label for="category_id">دسته بندی محصول:</label>
                                         <select id="categorySelect" name="category_id" data-placeholder="انتخاب دسته" class="form-control ms select2 @error('category_id') is-invalid @enderror" data-live-search="true">
                                             <option></option>
-                                            @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}">
-                                                {{ $category->name }}-{{ $category->parent->name }}
-                                            </option>
+                                            @foreach ($categories->sortBy('order') as $category1)
+                                                <optgroup label="{{$category1->name}}">
+                                                    @if($category1->children->count()>0)
+                                                        @foreach($category1->children->sortBy('order') as $category2)
+                                                            <option class="pr-2"
+                                                                    {{ old('parent_id') == $category2->id ? "selected":null}}
+                                                                    value="{{$category2->id}}">&#8617;
+                                                                {{$category2->name}}</option>
+                                                            @if($category2->children->count()>0)
+                                                                @foreach($category2->children->sortBy('order') as $category3)
+                                                                    <option class="pr-4"
+                                                                            {{ old('parent_id') == $category3->id ? "selected":null}}
+                                                                            value="{{$category3->id}}">&#10510;
+                                                                        {{$category3->name}}</option>
+                                                                @endforeach
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                </optgroup>
                                             @endforeach
                                         </select>
                                         @error('category_id')

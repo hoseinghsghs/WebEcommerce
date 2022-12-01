@@ -19125,6 +19125,23 @@ $(function () {
     language: "fa",
     width: "100%"
   });
+  $(".select2-styled").select2({
+    dir: "rtl",
+    language: "fa",
+    width: "100%",
+    templateResult: function templateResult(data) {
+      // We only really care if there is an element to pull classes from
+      if (!data.element) {
+        return data.text;
+      }
+
+      var $element = $(data.element);
+      var $wrapper = $('<span></span>');
+      $wrapper.addClass($element[0].className);
+      $wrapper.text(data.text);
+      return $wrapper;
+    }
+  });
   $(".search-select").select2({
     allowClear: true
   });

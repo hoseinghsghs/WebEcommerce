@@ -83,7 +83,7 @@
                                     <div class="form-group col-md-3 col-auto">
                                         <label for="is_active">وضعیت</label>
                                         <div class="switchToggle">
-                                            <input type="checkbox" name="is_active" id="switch" {{old('is_active') || !$product->is_active ? 'checked' : null}}>
+                                            <input type="checkbox" name="is_active" id="switch" {{$errors->any() && !old('is_active') || !$product->is_active ? 'checked':null}}>
                                             <label for="switch">Toggle</label>
                                         </div>
                                         @error('is_active')

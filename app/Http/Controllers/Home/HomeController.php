@@ -36,7 +36,7 @@ class HomeController extends Controller
 
         $posts = Post::active()->get()->take(5);
 
-        $main_categories=Category::active()->get();
+        $main_categories=Category::active()->with('children.children')->get();
         $categories = $main_categories->where('parent_id', 0)->all();
         $products_is_show = $main_categories->where('parent_id', '!=', 0)->where('is_show', '==',1)->load(['products'])->all();
 

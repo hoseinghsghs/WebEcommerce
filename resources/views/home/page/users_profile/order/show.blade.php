@@ -8,6 +8,7 @@
                     <div class="post-item-profile order-1 d-block">
                         @include('home.page.users_profile.partial.right_side')
                         <div class="col-lg-9 col-12 pl content-pro">
+                            <button onclick="openAccountSidebar()" class="btn btn-sm btn-info d-lg-none mb-3"><i class="fas fa-ellipsis-v"></i> منو کاربری</button>
                             <a class="btn btn-info m-3" style="color:white" onclick="printDiv()">چاپ سفارش</a>
                             <div class="table-order-view row"> @if (URL::previous() !=
                             route('home.user_profile.ordersList'))

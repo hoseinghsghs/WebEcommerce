@@ -66,7 +66,7 @@
                             </div>
                         </div>
                     @endif
-                    <div class="footer-more-info mb-2">
+                    <div class="footer-more-info mb-2 mb-lg-5">
                         @if (!empty(json_decode($setting->links,true)))
                             <div class="col-lg-9 col-md-8 d-block pr">
                                 <div class="footer-links">

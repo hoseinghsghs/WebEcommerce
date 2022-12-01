@@ -12064,7 +12064,7 @@ a.account-link {
     width: 100%;
 }
 
-.header-main-nav ul.menu-ul li.menu-item > ul.is-mega-menu {
+.header-main-nav ul.menu-ul li.menu-item > div.is-mega-menu {
     width: -webkit-fit-content !important;
     width: -moz-fit-content !important;
     width: fit-content !important;
@@ -12090,7 +12090,7 @@ a.account-link {
     margin-top: 5px;
 }
 
-.header-main-nav ul.menu-ul li.menu-item:hover > ul.is-mega-menu {
+.header-main-nav ul.menu-ul li.menu-item:hover > div.is-mega-menu {
     transition: all 0.2s ease-out;
     opacity: 1;
     visibility: visible;
@@ -12122,7 +12122,7 @@ a.mega-menu-link {
     margin-right: 15px;
     transition: all 0.2s ease-out;
     padding: 5px 5px;
-    border-bottom: 1px solid rgb(128, 128, 128);
+    border-bottom: 3px solid #0f74a8;
     line-height: 5px;
 }
 
@@ -12132,9 +12132,9 @@ li.menu-item
 ul.is-mega-menu
 li.menu-mega-item
 a.mega-menu-link:hover {
-    color: #008297;
-    border-bottom: 1px solid #008297;
-    border-radius: 50%;
+    color: #000000;
+    border-bottom: 3px dashed #0f74a8;
+    /*border-radius: 50%;*/
     transition: all 0.2s ease-out;
 }
 
@@ -12192,7 +12192,10 @@ li.menu-mega-item
 > ul
 li.menu-mega-item-three:hover
 a {
-    color: #008297;
+    color: #0f74a8;
+    padding: 0 40px;
+    transition: all 0.4s ease-out;
+    font-weight: 600;
 }
 
 .bg-image {
@@ -12936,7 +12939,7 @@ a.card-checkout:hover {
     color: #666666;
     padding: 7px 0;
     text-decoration: none;
-    font-size: 12px;
+    font-size: 14px;
     margin-right: 25px;
     transition: all 400ms ease;
     background: none;
@@ -23057,6 +23060,7 @@ button.products-filter-btn {
     .product .product-gallery .gallery .gallery-item ul.gallery-actions li {
         display: block;
     }
+
     .product .product-gallery .gallery .gallery-item ul.gallery-actions li a.btn-option {
         width: 33px;
         height: 40px;
@@ -23139,21 +23143,77 @@ button.products-filter-btn {
     border-color: #ffd608;
     border-radius: 20px;
 }
-.footer-main-site .footer-more-info .licences{
+
+.footer-main-site .footer-more-info .licences {
     max-width: 15rem;
 }
-.footer-main-site .footer-more-info .licences img{
+
+.footer-main-site .footer-more-info .licences img {
     max-width: 100%;
 }
-.header-main-nav .mobile-search{
+
+.header-main-nav .mobile-search {
     width: 70%;
     margin-right: 5rem;
 }
-.header-main-nav .mobile-search button{
+
+.header-main-nav .mobile-search button {
     border-radius: 10px;
     box-shadow: none;
     width: 100%;
 }
+
+.header-main-nav .main-cat {
+    border-left: 2px solid lightgrey;
+}
+
+.header-main-nav .main-cat ul {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.header-main-nav .child-cat {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.header-main-nav .main-cat ul::-webkit-scrollbar, .header-main-nav .child-cat::-webkit-scrollbar {
+    width: 6px;
+}
+
+.header-main-nav .main-cat ul::-webkit-scrollbar-thumb, .header-main-nav .child-cat::-webkit-scrollbar-thumb {
+    background: #0fabc6;
+    border-radius: 5px
+}
+
+.header-main-nav .main-cat ul::-webkit-scrollbar-thumb:hover, .header-main-nav .child-cat::-webkit-scrollbar-thumb:hover {
+    background: #0f74a8;
+}
+
+.header-main-nav .main-cat ul::-webkit-scrollbar-track, .header-main-nav .child-cat::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.header-main-nav .main-cat li {
+    line-height: initial;
+    font-size: 14px;
+}
+
+.header-main-nav .main-cat li a {
+    display: block;
+    padding: 5px 20px;
+    cursor: pointer;
+}
+
+.header-main-nav .main-cat li a:hover {
+    border-right: 3px solid #0f74a8;
+    background-color: whitesmoke;
+}
+
+.header-main-nav .mega-menu-level-two li {
+    line-height: 40px;
+}
+
 /*main carousel*/
 @media (max-width: 480px) {
     .carousel-control-prev,
