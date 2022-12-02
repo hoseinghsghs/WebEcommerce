@@ -55,7 +55,7 @@ class Pay extends Payment
 
     public function verify($token , $status)
     {
-        $api = 'test';
+        $api = '92b62008e431ebb20b46ab7b7147bc7b';
         $token = $token;
         $result = json_decode($this->verifyRequest($api, $token));
         if($result){
