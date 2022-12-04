@@ -27,6 +27,7 @@ class WishList extends Model
     use HasFactory;
     protected $table = "wishlist";
     protected $guarded = [];
+    public $incrementing = false;
 
     public function product()
     {

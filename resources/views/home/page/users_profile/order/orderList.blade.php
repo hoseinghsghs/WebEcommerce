@@ -9,7 +9,6 @@
                     <div class="post-item-profile order-1 d-block">
                         @include('home.page.users_profile.partial.right_side')
                         <div class="col-lg-9 col-12 pl">
-                            <button onclick="openAccountSidebar()" class="btn btn-sm btn-info d-lg-none mb-3"><i class="fas fa-ellipsis-v"></i> منو کاربری</button>
                             <div class="profile-content">
                                 <h5 class="text-secondary">لیست سفارشات</h5>
                                 <div class="profile-stats">
@@ -27,8 +26,8 @@
                                             <table class="table table-profile-orders table-responsive-md table-hover">
                                                 <thead class="thead-light">
                                                 <tr>
-                                                    <th scope="col">شماره سفارش</th>
-                                                    <th scope="col">تاریخ ثبت سفارش</th>
+                                                    <th scope="col"> شماره <span class="d-none d-sm-inline-block">سفارش</span></th>
+                                                    <th scope="col"> تاریخ <span class="d-none d-sm-inline-block">ثبت سفارش</span> </th>
                                                     <th scope="col">وضعیت</th>
                                                     <th scope="col">مجموع</th>
                                                     <th scope="col">جزئیات</th>
@@ -42,7 +41,7 @@
                                                         <td> {{Hekmatinasser\Verta\Verta::instance($order->created_at)->format('Y/n/j')}}
                                                         </td>
                                                         <td
-                                                            class="{{$order->status == 'پرداخت نشده' ? 'text-primary' : 'text-success'}}">
+                                                            class="{{$order->status == 'پرداخت نشده' ? 'text-warning' : 'text-success'}}">
                                                             {{$order->status}}
                                                         </td>
                                                         <td class="totla">
@@ -62,9 +61,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="pagination-product m-0 p-2">
-                                {{$orders->onEachSide(1)->links()}}
-                            </div>
+                            {{$orders->onEachSide(1)->links()}}
                         </div>
                     </div>
                 </div>

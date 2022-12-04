@@ -125,7 +125,7 @@ Route::get('/assets/ajax', function () {
 Route::prefix('profile')->name('home.')->middleware(['auth'])->group(function () {
     Route::get('/', [UserProfileController::class, 'index'])->name('user_profile');
     Route::get('/editProfile', [UserProfileController::class, 'editProfile'])->name('user_profile.edit');
-    Route::post('/forgot-password', [UserProfileController::class, 'forgetPassword'])->name('password.email');
+//    Route::post('/forgot-password', [UserProfileController::class, 'forgetPassword'])->name('password.email');
     Route::get('/wishlist', [WishListController::class, 'usersProfileIndex'])->name('profile.wishlist.index');
     Route::get('/add-to-wishlist/{product:id}', [WishListController::class, 'add'])->name('home.wishlist.add');
     Route::get('/addreses',  [AddressController::class, 'index'])->name('addreses.index');

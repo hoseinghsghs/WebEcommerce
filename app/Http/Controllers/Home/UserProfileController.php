@@ -16,7 +16,7 @@ class UserProfileController extends Controller
 
     public function orderList()
     {
-        $orders = Order::where('user_id', auth()->id())->paginate(10);
+        $orders = Order::where('user_id', auth()->id())->latest()->paginate(10);
         return view('home.page.users_profile.order.orderList', compact('orders'));
     }
 
@@ -31,7 +31,7 @@ class UserProfileController extends Controller
 
     public function commentsList()
     {
-        $comments = Comment::where('user_id', auth()->id())->paginate(10);
+        $comments = Comment::where('user_id', auth()->id())->latest()->paginate(10);
         return view('home.page.users_profile.comments', compact('comments'));
     }
 
@@ -40,5 +40,4 @@ class UserProfileController extends Controller
         $user = auth()->user();
         return view('home.page.users_profile.editProfile', compact('user'));
     }
-
 }
