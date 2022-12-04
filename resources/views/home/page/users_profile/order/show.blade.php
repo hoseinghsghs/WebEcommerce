@@ -8,12 +8,13 @@
                     <div class="post-item-profile order-1 d-block">
                         @include('home.page.users_profile.partial.right_side')
                         <div class="col-lg-9 col-12 pl content-pro pt-2">
-                            <a class="btn btn-secondary btn-sm text-white" onclick="printDiv()">چاپ سفارش</a>
+                            <a class="btn btn-secondary btn-sm text-white" onclick="printDiv()"><i
+                                    class="fa fa-print"></i> چاپ سفارش</a>
                             <div class="table-order-view row">
                                 @if (URL::previous() != route('home.user_profile.ordersList'))
-                                    <div class="mx-4">
+                                    <div class="col-12 mt-2">
                                         @if ($order->status == "آماده برای ارسال")
-                                            <div class="alert alert-success" role="alert">
+                                            <div class="alert alert-success m-0" role="alert">
                                                 <p>
                                                     پرداخت با موفقیت انجام شد. سفارش شما با موفقیت ثبت شد و در زمان
                                                     تعیین
@@ -28,7 +29,7 @@
                                             </div>
                                         @endif
                                         @if ($order->status == "پرداخت نشده")
-                                            <div class="alert alert-danger" role="alert">
+                                            <div class="alert alert-danger m-0" role="alert">
                                                 <p>
                                                     سفارش دریافت نشد
                                                     پرداخت ناموفق. برای جلوگیری از لغو سیستمی سفارش،تا 24 ساعت آینده
@@ -63,8 +64,10 @@
                                                             <a
                                                                 href="{{route('home.products.show' , ['product' => $item->product->slug])}}">
                                                                 ({{$item->product->name}})
+                                                                <span class="text-muted">
                                                                 {{$item->quantity}} عدد
                                                                 * {{number_format($item->price)}} تومان
+                                                            </span>
                                                             </a>
                                                         </td>
                                                         <td class="product-total">
@@ -76,7 +79,6 @@
                                                     </tr>
                                                 @endforeach
                                                 </tbody>
-                                                <tfoot></tfoot>
                                             </table>
                                         </div>
                                     </div>
