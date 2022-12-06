@@ -32,21 +32,24 @@ class CartController extends Controller
         }
 
         $rowId = $product->id . '-' . $productVariation->id;
+        if ($product->is_active) {
+            if (Cart::get($rowId) == null) {
+                    Cart::add(array(
+                        'id' => $rowId,
+                        'name' => $product->name,
+                        'price' => $productVariation->is_sale ? $productVariation->sale_price : $productVariation->price,
+                        'quantity' => $request->qtybutton,
+                        'attributes' => $productVariation->toArray(),
+                        'associatedModel' => $product,
 
-        if (Cart::get($rowId) == null) {
-            Cart::add(array(
-                'id' => $rowId,
-                'name' => $product->name,
-                'price' => $productVariation->is_sale ? $productVariation->sale_price : $productVariation->price,
-                'quantity' => $request->qtybutton,
-                'attributes' => $productVariation->toArray(),
-                'associatedModel' => $product,
-
-            ));
-            session()->forget('coupon');
-            return response()->json(['product' => $product, 'app_name' => env('APP_NAME'), 'rowId' => $rowId, 'cart' => Cart::getContent($rowId), 'rowId' => $rowId, 'all_cart' => Cart::getTotal()], 200);
+                    ));
+                    session()->forget('coupon');
+                    return response()->json(['product' => $product, 'app_name' => env('APP_NAME'), 'rowId' => $rowId, 'cart' => Cart::getContent($rowId), 'rowId' => $rowId, 'all_cart' => Cart::getTotal()], 200);
+                } else {
+                    return response('success', 201);
+                }
         } else {
-            return response('success', 201);
+        return response('not found', 202);
         }
     }
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\ProductVariation;
 use App\Models\User;
+use App\Models\Product;
 use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
+
 
 class PaymentController extends Controller
 {
@@ -205,12 +207,18 @@ class PaymentController extends Controller
     }
     public function checkCart()
     {
+        
         if (\Cart::isEmpty()) {
             return ['error' => 'سبد خرید شما خالی می باشد'];
         }
         foreach (\Cart::getContent() as $item) {
             $variation = ProductVariation::find($item->attributes->id);
             $price = $variation->is_sale ? $variation->sale_price : $variation->price;
+
+            if (!Product::find($item->attributes->product_id)->is_active) {
+               \Cart::clear();
+               return ['error' => 'محصول مورد نظر یافت نشد'];
+            }
             if ($item->price != $price) {
                 \Cart::clear();
                 return ['error' => 'قیمت محصول تغییر پیدا کرد'];

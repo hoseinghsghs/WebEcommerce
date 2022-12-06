@@ -573,9 +573,13 @@ $(document).ready(function (e) {
           timer: 1500,
           confirmButtonText: "تایید"
         });
-      } else {
-        alert("اتصال شما به اینترنت قطع");
-        location.reload();
+      } else if (xhr.status == 202) {
+        Swal.fire({
+          text: "محصول مورد نظر یافت نشد",
+          icon: "error",
+          timer: 1500,
+          confirmButtonText: "تایید"
+        });
       }
     }).fail(function (response) {
       alert("اتصال شما به اینترنت قطع");
@@ -803,7 +807,7 @@ $(document).ready(function (e) {
 
   /* if ($("#countdown-verify-end").length) {
       var $countdownOptionEnd = $("#countdown-verify-end");
-       $countdownOptionEnd.countdown({
+        $countdownOptionEnd.countdown({
           date: new Date().getTime() + 180 * 1000, // 1 minute later
           text: '<span class="day">%s</span><span class="hour">%s</span><span>: %s</span><span>%s</span>',
           end: function () {
@@ -863,10 +867,10 @@ $(document).ready(function (e) {
 
   if ($("#img-product-zoom").length) {
     $("#img-product-zoom").elevateZoom({
-      zoomType: 'inner',
-      cursor: 'crosshair',
-      gallery: 'gallery_01f',
-      galleryActiveClass: 'active',
+      zoomType: "inner",
+      cursor: "crosshair",
+      gallery: "gallery_01f",
+      galleryActiveClass: "active",
       imageCrossfade: true
     });
   } //zoomgallerymodal---------------------------
@@ -953,7 +957,7 @@ $(document).ready(function (e) {
   });
   $(".carousel").carousel({
     interval: 5000,
-    pause: 'hover',
+    pause: "hover",
     touch: true
   });
   $(".carousel .carousel-inner").swipe({

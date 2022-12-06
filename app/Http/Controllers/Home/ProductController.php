@@ -18,6 +18,10 @@ class ProductController extends Controller
 {
     public function show(Product $product)
     {
+        if (!$product->is_active) {
+            abort(404);
+        }
+        
         $product->load(['category.parent', 'attributes', 'tags', 'brand', 'rates']);
         $settings = Setting::findOrNew(1);
         SEOTools::setDescription($settings->description);
