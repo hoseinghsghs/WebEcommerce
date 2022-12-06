@@ -8,7 +8,6 @@
                 <div class="post-item-profile order-1 d-block">
                     @include('home.page.users_profile.partial.right_side')
                     <div class="col-lg-9 col-12 pl">
-                        <button onclick="openAccountSidebar()" class="btn btn-sm btn-info d-lg-none mb-3"><i class="fas fa-ellipsis-v"></i> منو کاربری</button>
                         <div class="profile-content">
                             <div class="profile-stats">
                                 <div class="profile-address">
@@ -122,9 +121,7 @@
                                                     @enderror
                                                 </div>
                                                 <div class="col-lg-12 col-md-12 col-12 mb-3">
-                                                    <label for="address">آدرس جایگزین
-                                                        <abbr class="required" title="ضروری" style="color:red;">*</abbr>
-                                                    </label>
+                                                    <label for="address">آدرس جایگزین</label>
                                                     <textarea rows="5" cols="30" id="address" name="lastaddress"
                                                         class="textarea-name-checkout form-control mb-0"
                                                         placeholder="آدرس جایگزین در صورت ضرورت..."></textarea>

@@ -70,4 +70,8 @@
         </section>
     </div>
 </div>
+<div class="col-12">
+    <button onclick="openAccountSidebar()" class="btn btn-sm btn-info d-lg-none mb-3"><i class="fas fa-ellipsis-v"></i> منو کاربری</button>
+</div>
+
 

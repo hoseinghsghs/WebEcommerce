@@ -16,25 +16,28 @@ class UserProfileController extends Controller
 
     public function orderList()
     {
-        $orders=Order::where('user_id', auth()->id())->paginate(10);
-        return view('home.page.users_profile.order.orderList' , compact('orders'));
+        $orders = Order::where('user_id', auth()->id())->latest()->paginate(10);
+        return view('home.page.users_profile.order.orderList', compact('orders'));
     }
 
     public function order(Order $order)
     {
-        return view('home.page.users_profile.order.show' , compact('order'));
+        if ($order->user_id == auth()->id()) {
+            return view('home.page.users_profile.order.show', compact('order'));
+        } else {
+            abort(401);
+        }
     }
 
-     public function commentsList()
+    public function commentsList()
     {
-        $comments= Comment::where('user_id', auth()->id())->paginate(10);
-        return view('home.page.users_profile.comments' , compact('comments'));
+        $comments = Comment::where('user_id', auth()->id())->latest()->paginate(10);
+        return view('home.page.users_profile.comments', compact('comments'));
     }
 
     public function editProfile()
     {
-        $user=auth()->user();
-        return view('home.page.users_profile.editProfile',compact('user'));
+        $user = auth()->user();
+        return view('home.page.users_profile.editProfile', compact('user'));
     }
-
 }

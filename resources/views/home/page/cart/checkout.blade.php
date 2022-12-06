@@ -282,10 +282,7 @@
                                                                         @enderror
                                                                     </div>
                                                                     <div class="col-md-6 col-12 mb-3">
-                                                                        <label for="address">آدرس جایگزین
-                                                                            <abbr class="required text-danger"
-                                                                                  title="ضروری">*</abbr>
-                                                                        </label>
+                                                                        <label for="address">آدرس جایگزین</label>
                                                                         <textarea rows="5" cols="30" id="address"
                                                                                   name="lastaddress"
                                                                                   class="textarea-name-checkout form-control mb-0"

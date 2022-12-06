@@ -122,10 +122,10 @@ Route::get('/assets/ajax', function () {
     return view('home.partial.login');
 });
 
-Route::prefix('profile')->name('home.')->middleware('auth')->group(function () {
+Route::prefix('profile')->name('home.')->middleware(['auth'])->group(function () {
     Route::get('/', [UserProfileController::class, 'index'])->name('user_profile');
     Route::get('/editProfile', [UserProfileController::class, 'editProfile'])->name('user_profile.edit');
-    Route::post('/forgot-password', [UserProfileController::class, 'forgetPassword'])->name('password.email');
+//    Route::post('/forgot-password', [UserProfileController::class, 'forgetPassword'])->name('password.email');
     Route::get('/wishlist', [WishListController::class, 'usersProfileIndex'])->name('profile.wishlist.index');
     Route::get('/add-to-wishlist/{product:id}', [WishListController::class, 'add'])->name('home.wishlist.add');
     Route::get('/addreses',  [AddressController::class, 'index'])->name('addreses.index');
@@ -139,11 +139,7 @@ Route::prefix('profile')->name('home.')->middleware('auth')->group(function () {
     Route::get('/commentsList', [UserProfileController::class, 'commentsList'])->name('user_profile.commentsList');
 });
 
-
-
 //user route
-
-
 Route::get('/add-to-compare/{product:id}', [CompareController::class, 'add'])->name('home.compare.add');
 
 Route::get('/compare', [CompareController::class, 'index'])->name('home.compare.index');

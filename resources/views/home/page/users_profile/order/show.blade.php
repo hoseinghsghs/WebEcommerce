@@ -7,33 +7,40 @@
                 <div class="col-lg">
                     <div class="post-item-profile order-1 d-block">
                         @include('home.page.users_profile.partial.right_side')
-                        <div class="col-lg-9 col-12 pl content-pro">
-                            <button onclick="openAccountSidebar()" class="btn btn-sm btn-info d-lg-none mb-3"><i class="fas fa-ellipsis-v"></i> منو کاربری</button>
-                            <a class="btn btn-info m-3" style="color:white" onclick="printDiv()">چاپ سفارش</a>
-                            <div class="table-order-view row"> @if (URL::previous() !=
-                            route('home.user_profile.ordersList'))
-                                    <div class="p-5">
+                        <div class="col-lg-9 col-12 pl content-pro pt-2">
+                            <a class="btn btn-secondary btn-sm text-white" onclick="printDiv()"><i
+                                    class="fa fa-print"></i> چاپ سفارش</a>
+                            <div class="table-order-view row">
+                                @if (URL::previous() != route('home.user_profile.ordersList'))
+                                    <div class="col-12 mt-2">
                                         @if ($order->status == "آماده برای ارسال")
-                                            <p class="p-3 mb-2 bg-success text-white">
-                                                پرداخت با موفقیت انجام شد. سفارش شما با موفقیت ثبت شد و در زمان تعیین
-                                                شده
-                                                برای
-                                                شما
-                                                ارسال خواهد شد. از اینکه {{env('APP_NAME')}} را برای خرید انتخاب کردید
-                                                از
-                                                شما
-                                                سپاسگزاریم.</p>
+                                            <div class="alert alert-success m-0" role="alert">
+                                                <p>
+                                                    پرداخت با موفقیت انجام شد. سفارش شما با موفقیت ثبت شد و در زمان
+                                                    تعیین
+                                                    شده
+                                                    برای
+                                                    شما
+                                                    ارسال خواهد شد. از اینکه {{env('APP_NAME')}} را برای خرید انتخاب
+                                                    کردید
+                                                    از
+                                                    شما
+                                                    سپاسگزاریم.</p>
+                                            </div>
                                         @endif
                                         @if ($order->status == "پرداخت نشده")
-                                            <p class="p-3 mb-2 bg-danger text-white">
-                                                سفارش دریافت نشد
-                                                پرداخت ناموفق. برای جلوگیری از لغو سیستمی سفارش،تا 24 ساعت آینده
-                                                پرداخت را انجام دهید. چنانچه طی این فرایند مبلغی از حساب شما کسر شده
-                                                است،طی
-                                                72 ساعت آینده به حساب شما باز خواهد گشت.
-                                                </br>
-                                                کد سفارش برای پیگیری : {{$order->id}}
-                                            </p>
+                                            <div class="alert alert-danger m-0" role="alert">
+                                                <p>
+                                                    سفارش دریافت نشد
+                                                    پرداخت ناموفق. برای جلوگیری از لغو سیستمی سفارش،تا 24 ساعت آینده
+                                                    پرداخت را انجام دهید. چنانچه طی این فرایند مبلغی از حساب شما کسر شده
+                                                    است،طی
+                                                    72 ساعت آینده به حساب شما باز خواهد گشت.
+                                                </p>
+                                                <p>
+                                                    کد سفارش برای پیگیری : {{$order->id}}
+                                                </p>
+                                            </div>
                                         @endif
                                     </div>
                                 @endif
@@ -57,8 +64,10 @@
                                                             <a
                                                                 href="{{route('home.products.show' , ['product' => $item->product->slug])}}">
                                                                 ({{$item->product->name}})
+                                                                <span class="text-muted">
                                                                 {{$item->quantity}} عدد
                                                                 * {{number_format($item->price)}} تومان
+                                                            </span>
                                                             </a>
                                                         </td>
                                                         <td class="product-total">
@@ -70,59 +79,55 @@
                                                     </tr>
                                                 @endforeach
                                                 </tbody>
-                                                <tfoot></tfoot>
                                             </table>
                                         </div>
                                     </div>
-                                    <div class="col-12 mt-3">
-                                        <div class="profile-content">
-                                            <div class="profile-stats p-3 p-3">
-                                                <div class="box-header">
-                                                    <span class="box-title">جمع هزینه و تخفیف</span>
-                                                </div>
-                                                <table class="table table-borderless">
-                                                    <tbody>
-                                                    <tr>
-                                                        <th scope="row">مجموع:</th>
-                                                        <td>
+                                    <div class="profile-content mt-3">
+                                        <div class="profile-stats p-3">
+                                            <div class="box-header">
+                                                <span class="box-title">جمع هزینه و تخفیف</span>
+                                            </div>
+                                            <table class="table table-borderless">
+                                                <tbody>
+                                                <tr>
+                                                    <th scope="row">مجموع:</th>
+                                                    <td>
                                                             <span class="amount">
                                                                 {{number_format($order->total_amount)}}
                                                                 <span>تومان</span>
                                                             </span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">حمل و نقل:</th>
-                                                        <td>{{number_format($order->delivery_amount )}}
-                                                            <span>تومان</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">کد تخفیف:</th>
-                                                        <td>{{number_format($order->coupon_amount )}}
-                                                            <span>تومان</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">روش پرداخت:</th>
-                                                        <td>{{$order->payment_type}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">قیمت نهایی:</th>
-                                                        <td>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">حمل و نقل:</th>
+                                                    <td>{{number_format($order->delivery_amount )}}
+                                                        <span>تومان</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">کد تخفیف:</th>
+                                                    <td>{{number_format($order->coupon_amount )}}
+                                                        <span>تومان</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">روش پرداخت:</th>
+                                                    <td>{{$order->payment_type}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">قیمت نهایی:</th>
+                                                    <td>
                                                             <span class="amount">
                                                                 {{number_format($order->paying_amount )}}
                                                                 <span>تومان</span>
                                                             </span>
-                                                        </td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
-                                <br>
                                 <br>
                                 <div class="col-lg-6 col-12 mt-3 ">
                                     <div class="profile-content">
@@ -209,7 +214,7 @@
                                     <div class="profile-content">
                                         <div class="profile-stats p-3">
                                             <div class="box-header">
-                                                <span class="box-title">آدرس اول</span>
+                                                <span class="box-title">آدرس اصلی</span>
                                             </div>
                                             <tr>
                                                 <td>{{ $order->address->address }}

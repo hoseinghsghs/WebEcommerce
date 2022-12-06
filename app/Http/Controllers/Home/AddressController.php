@@ -19,7 +19,7 @@ class AddressController extends Controller
      */
     public function index()
     {
-        $addresses = UserAddress::where('user_id', auth()->id())->get();
+        $addresses = UserAddress::where('user_id', auth()->id())->latest()->paginate(5);
         $provinces = Province::all();
         return view('home.page.users_profile.address', compact('provinces', 'addresses'));
     }
@@ -55,7 +55,7 @@ class AddressController extends Controller
             'unit' => 'nullable|string',
             'city_id' => 'required|integer',
             'address' => 'required|string',
-            'lastaddress' => 'required|string',
+            'lastaddress' => 'nullable|string',
             'postal_code' => 'required|ir_postal_code:without_seprate'
         ]);
 
@@ -123,12 +123,9 @@ class AddressController extends Controller
             'unit' => 'nullable|string',
             'city_id' => 'required|integer',
             'address' => 'required|string',
-            'lastaddress' => 'required|string',
+            'lastaddress' => 'nullable|string',
             'postal_code' => 'required|ir_postal_code:without_seprate'
         ]);
-
-
-
         $address->update([
             'name' => $request->name,
             'cellphone2' => $request->cellphone2,
@@ -141,7 +138,6 @@ class AddressController extends Controller
             'address' => $request->address,
             'postal_code' => $request->postal_code
         ]);
-
         alert()->success('آدرس مورد نظر ویرایش شد')->showConfirmButton('تایید');
         return redirect()->route('home.addreses.index');
     }
@@ -154,16 +150,13 @@ class AddressController extends Controller
      */
     public function destroy(UserAddress $address)
     {
-
         $address->delete();
-
         alert()->success('آدرس مورد نظر حذف شد')->showConfirmButton('تایید');
         return redirect()->back();
     }
 
     public function getProvinceCitiesList(Request $request)
     {
-        $cities = City::where('province_id', $request->province_id)->get();
-        return $cities;
+        return City::where('province_id', $request->province_id)->get();
     }
 }

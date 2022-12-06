@@ -5519,7 +5519,7 @@ input.line-number-account:focus {
 .profile-avatar {
     width: 70px;
     height: 70px;
-    margin: 20px auto;
+    margin: 20px auto 0 auto;
     overflow: hidden;
     padding: 0px;
     /*border: 1px solid #281e75;*/
@@ -5683,7 +5683,7 @@ a.active {
     /*border-radius: 20px;*/
     overflow: hidden;
     background: #ffffff;
-    padding: 10px;
+    /*padding: 10px;*/
 }
 
 .post-item-profile .profile-content .profile-stats {
@@ -6117,6 +6117,9 @@ li.profile-item
     padding: 5px 10px;
     background: #ff7373;
     border-color: #ff7373;
+}
+.profile-address-item .ui-more .btn-remove-address i{
+    font-size: 1.1rem;
 }
 
 .profile-address-item .profile-address-content .profile-address-info li {
