@@ -72,6 +72,13 @@ class GenerateSitemap extends Command
             );
         });
         
+          $sitemap->hasCrawled(function (Url $url) {
+            if ($url->segment(1) === 'cart') {
+             return;
+             }
+                return $url;
+             });
+
         $sitemap->writeToFile(public_path('sitemap.xml'));
       
     }
