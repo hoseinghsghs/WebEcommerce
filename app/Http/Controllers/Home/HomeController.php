@@ -57,7 +57,7 @@ class HomeController extends Controller
         $Products_our_suggestion_units = $products->where('position', 'تک محصول')->take(2);
 
         try{
-                    Notification::route('cellphone', '09139035692')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
+                    Notification::route('cellphone', ['09139035692', '09162418808'])->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
                 }catch (\Throwable $th) {
                      dd($th);
                 }
