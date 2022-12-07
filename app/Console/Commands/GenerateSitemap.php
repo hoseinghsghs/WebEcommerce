@@ -33,7 +33,7 @@ class GenerateSitemap extends Command
     public function handle()
     {
 
-        $sitemap = SitemapGenerator::create(config('app.url'));
+        $sitemap = Sitemap::create();
 
         // $sitemap->add(Url::create('/')->setPriority(1.0));
         // $sitemap->add(Url::create('/faq')->setPriority(0.8));
