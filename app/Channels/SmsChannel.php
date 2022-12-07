@@ -18,6 +18,7 @@ class SmsChannel
         } else {
             $toNum = $notifiable->cellphone;
         }
+        dd($toNum);
         $client = new SoapClient("http://ippanel.com/class/sms/wsdlservice/server.php?wsdl");
         $user = "09162418808";
         $pass = "Faraz@5650064490";
