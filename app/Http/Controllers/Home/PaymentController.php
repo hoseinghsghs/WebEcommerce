@@ -162,10 +162,13 @@ class PaymentController extends Controller
                         ]);
                     } catch (\Throwable $th) {
                     }
-                     try{
-                    Notification::route('cellphone', '09162418808')->notify(new OtpSms('  پی پال سفارش جدید دارید'));
-                }catch (\Throwable $th) {
-                }
+
+                    try{
+                    Notification::route('cellphone', ['09162418808','09139035692'])->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
+                    }catch (\Throwable $th) {
+                        dd($th);
+                    }
+
                     try {
                         return redirect()->route('home.user_profile.orders', ['order' => Session::pull('orderId')]);
                     } catch (\Throwable $th) {
@@ -204,8 +207,9 @@ class PaymentController extends Controller
                 }
 
                 try{
-                    Notification::route('cellphone', '09162418808')->notify(new OtpSms('  زرین پال سفارش جدید دارید'));
+                    Notification::route('cellphone', ['09162418808','09139035692'])->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
                 }catch (\Throwable $th) {
+                     dd($th);
                 }
                 alert()->success('خرید با موفقیت انجام گرفت')->showConfirmButton('تایید');
                 return redirect()->route('home.user_profile.orders', ['order' => Session::pull('orderId')]);
