@@ -8,6 +8,7 @@ use App\Models\Tag;
 use Illuminate\Console\Command;
 use Spatie\Sitemap\SitemapGenerator;
 use Spatie\Sitemap\Tags\Url;
+use Carbon\Carbon;
 
 class GenerateSitemap extends Command
 {
@@ -35,30 +36,6 @@ class GenerateSitemap extends Command
 
         $sitemap = SitemapGenerator::create(config('app.url'));
 
-
-       $sitemap ->hasCrawled(function (Url $url) {
-       if ($url->segment(1) === 'cart') {
-           return;
-       }
-       return $url; });
-
-        $sitemap ->hasCrawled(function (Url $url) {
-       if ($url->segment(1) === 'checkout') {
-           return;
-       }
-       return $url; });
-
-         $sitemap ->hasCrawled(function (Url $url) {
-       if ($url->segment(1) === 'login') {
-           return;
-       }
-       return $url; });
-
-        $sitemap ->hasCrawled(function (Url $url) {
-       if ($url->segment(1) === 'compare') {
-           return;
-       }
-       return $url; });
 
 
         $sitemap->add(Url::create('/')->setPriority(1.0));
@@ -97,6 +74,30 @@ class GenerateSitemap extends Command
             ->setPriority(0.7)
             );
         });
+
+        $sitemap ->hasCrawled(function (Url $url) {
+       if ($url->segment(1) === 'cart') {
+           return;
+       }
+       return $url; });
+
+        $sitemap ->hasCrawled(function (Url $url) {
+       if ($url->segment(1) === 'checkout') {
+           return;
+       }
+       return $url; });
+
+         $sitemap ->hasCrawled(function (Url $url) {
+       if ($url->segment(1) === 'login') {
+           return;
+       }
+       return $url; });
+
+        $sitemap ->hasCrawled(function (Url $url) {
+       if ($url->segment(1) === 'compare') {
+           return;
+       }
+       return $url; });
         
         $sitemap->writeToFile(public_path('sitemap.xml'));
       
