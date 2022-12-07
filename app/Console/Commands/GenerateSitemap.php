@@ -34,6 +34,32 @@ class GenerateSitemap extends Command
     {
 
         $sitemap = SitemapGenerator::create(config('app.url'))->getSitemap() ;
+       $sitemap ->hasCrawled(function (Url $url) {
+       if ($url->segment(1) === 'cart') {
+           return;
+       }
+       return $url; });
+
+        $sitemap ->hasCrawled(function (Url $url) {
+       if ($url->segment(1) === 'checkout') {
+           return;
+       }
+       return $url; });
+
+         $sitemap ->hasCrawled(function (Url $url) {
+       if ($url->segment(1) === 'login') {
+           return;
+       }
+       return $url; });
+
+        $sitemap ->hasCrawled(function (Url $url) {
+       if ($url->segment(1) === 'compare') {
+           return;
+       }
+       return $url; });
+
+
+       
 
         $sitemap->add(Url::create('/')->setPriority(1.0));
         $sitemap->add(Url::create('/faq')->setPriority(0.8));
