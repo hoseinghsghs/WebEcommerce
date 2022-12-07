@@ -163,11 +163,11 @@ class PaymentController extends Controller
                     } catch (\Throwable $th) {
                     }
 
-                    try{
-                    Notification::route('cellphone', ['09162418808','09139035692'])->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
-                    }catch (\Throwable $th) {
-                        dd($th);
-                    }
+                        try{
+                    Notification::route('cellphone', '09139035692')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
+                    Notification::route('cellphone','09162418808')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
+                }catch (\Throwable $th) {
+                }
 
                     try {
                         return redirect()->route('home.user_profile.orders', ['order' => Session::pull('orderId')]);
@@ -206,10 +206,10 @@ class PaymentController extends Controller
                 } catch (\Throwable $th) {
                 }
 
-                try{
-                    Notification::route('cellphone', ['09162418808','09139035692'])->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
+                  try{
+                    Notification::route('cellphone', '09139035692')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
+                    Notification::route('cellphone','09162418808')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
                 }catch (\Throwable $th) {
-                     dd($th);
                 }
                 alert()->success('خرید با موفقیت انجام گرفت')->showConfirmButton('تایید');
                 return redirect()->route('home.user_profile.orders', ['order' => Session::pull('orderId')]);

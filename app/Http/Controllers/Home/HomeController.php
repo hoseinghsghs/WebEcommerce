@@ -14,8 +14,6 @@ use App\Models\Service;
 use App\Models\Setting;
 use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\SEOTools;
-use Illuminate\Support\Facades\Notification;
-use App\Notifications\OtpSms;
 
 use function PHPSTORM_META\type;
 
@@ -55,14 +53,6 @@ class HomeController extends Controller
         $Products_our_suggestion = $products->where('position', 'پیشنهاد ما')->take(15);
         $Products_special = $products->where('position', 'فروش ویژه')->take(15);
         $Products_our_suggestion_units = $products->where('position', 'تک محصول')->take(2);
-
-        try{
-                    Notification::route('cellphone', '09139035692')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
-                    Notification::route('cellphone','09162418808')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
-
-                }catch (\Throwable $th) {
-                     dd($th);
-                }
 
         return view(
             'home.page.home',
