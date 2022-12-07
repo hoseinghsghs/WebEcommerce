@@ -91,7 +91,7 @@ class PaymentController extends Controller
 
         $checkCart = $this->checkCart();
         if (array_key_exists('error', $checkCart)) {
-            alert()->error($checkCart['error'], 'دقت کنید')->showConfirmButton('تایید');
+            alert()->error('',$checkCart['error'])->showConfirmButton('تایید');
             return redirect()->route('home');
         }
 
