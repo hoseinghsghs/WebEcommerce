@@ -35,7 +35,9 @@ class GenerateSitemap extends Command
     public function handle()
     {
 
-        $sitemap = SitemapGenerator::create(config('app.url'))->getSitemap();
+        $sitemap = SitemapGenerator::create(config('app.url'))->shouldCrawl(function (UriInterface $url) {
+       return strpos($url->getPath(), '/cart') === false;
+        });;
 
 
 
@@ -74,11 +76,6 @@ class GenerateSitemap extends Command
             $sitemap->add(Url::create("/post/{$post->slug}")
             ->setPriority(0.7)
             );
-        });
-
-
-        $sitemap->shouldCrawl(function (UriInterface $url) {
-       return strpos($url->getPath(), '/cart') === false;
         });
         
         $sitemap->writeToFile(public_path('sitemap.xml'));
