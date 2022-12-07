@@ -8,8 +8,6 @@ use App\Models\Tag;
 use Illuminate\Console\Command;
 use Spatie\Sitemap\SitemapGenerator;
 use Spatie\Sitemap\Tags\Url;
-use Carbon\Carbon;
-use Psr\Http\Message\UriInterface;
 
 class GenerateSitemap extends Command
 {
@@ -35,7 +33,7 @@ class GenerateSitemap extends Command
     public function handle()
     {
 
-        $sitemap = SitemapGenerator::create(config('app.url'));
+        $sitemap = SitemapGenerator::create(config('app.url'))->getSitemap() ;
 
         $sitemap->add(Url::create('/')->setPriority(1.0));
         $sitemap->add(Url::create('/faq')->setPriority(0.8));
