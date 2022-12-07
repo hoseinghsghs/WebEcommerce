@@ -9,6 +9,7 @@ use Illuminate\Console\Command;
 use Spatie\Sitemap\SitemapGenerator;
 use Spatie\Sitemap\Tags\Url;
 use Carbon\Carbon;
+use Psr\Http\Message\UriInterface;
 
 class GenerateSitemap extends Command
 {
@@ -75,29 +76,10 @@ class GenerateSitemap extends Command
             );
         });
 
-        $sitemap ->hasCrawled(function (Url $url) {
-       if ($url->segment(1) === 'cart') {
-           return;
-       }
-       return $url; });
 
-        $sitemap ->hasCrawled(function (Url $url) {
-       if ($url->segment(1) === 'checkout') {
-           return;
-       }
-       return $url; });
-
-         $sitemap ->hasCrawled(function (Url $url) {
-       if ($url->segment(1) === 'login') {
-           return;
-       }
-       return $url; });
-
-        $sitemap ->hasCrawled(function (Url $url) {
-       if ($url->segment(1) === 'compare') {
-           return;
-       }
-       return $url; });
+        $sitemap->shouldCrawl(function (UriInterface $url) {
+       return strpos($url->getPath(), '/cart') === false;
+        });
         
         $sitemap->writeToFile(public_path('sitemap.xml'));
       
