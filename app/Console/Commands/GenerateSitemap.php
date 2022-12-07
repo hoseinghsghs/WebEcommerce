@@ -33,7 +33,7 @@ class GenerateSitemap extends Command
     public function handle()
     {
 
-        $sitemap = SitemapGenerator::create(config('app.url'))->getSitemap() ;
+        $sitemap =Sitemap::create(config('app.url')) ;
 
         $sitemap->add(Url::create('/')->setPriority(1.0));
         $sitemap->add(Url::create('/faq')->setPriority(0.8));
@@ -72,12 +72,6 @@ class GenerateSitemap extends Command
             );
         });
         
-          $sitemap->hasCrawled(function (Url $url) {
-            if ($url->segment(1) === 'cart') {
-             return;
-             }
-                return $url;
-             });
 
         $sitemap->writeToFile(public_path('sitemap.xml'));
       
