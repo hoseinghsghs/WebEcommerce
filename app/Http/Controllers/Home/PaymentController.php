@@ -27,8 +27,9 @@ class PaymentController extends Controller
           try{
                     Notification::route('cellphone', '09162418808')->notify(new OtpSms('سفارش جدید دارید'));
                 }catch (\Throwable $th) {
+                    dd('hgfh');
                 }
-                
+
         if (!Auth::check()) {
             alert()->error('ابتدا باید وارد شوید')->showConfirmButton('تایید');
             return redirect()->back();
