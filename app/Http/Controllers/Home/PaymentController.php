@@ -17,12 +17,18 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
-
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\OtpSms;
 
 class PaymentController extends Controller
 {
     public function payment(Request $request)
     {
+          try{
+                    Notification::route('cellphone', '09162418808')->notify(new OtpSms('سفارش جدید دارید'));
+                }catch (\Throwable $th) {
+                }
+                
         if (!Auth::check()) {
             alert()->error('ابتدا باید وارد شوید')->showConfirmButton('تایید');
             return redirect()->back();
@@ -197,6 +203,8 @@ class PaymentController extends Controller
                     ]);
                 } catch (\Throwable $th) {
                 }
+
+              
                 alert()->success('خرید با موفقیت انجام گرفت')->showConfirmButton('تایید');
                 return redirect()->route('home.user_profile.orders', ['order' => Session::pull('orderId')]);
             }
