@@ -10,7 +10,9 @@ class SmsChannel
 
     public function send($notifiable, Notification $notification)
     {
-        
+         if(!env('SEND_SMS')){
+            return 'done!';
+        }
         if ($notifiable->routes) {
             $toNum = $notifiable->routes['cellphone'];
         } else {
