@@ -36,10 +36,8 @@ class GenerateSitemap extends Command
     {
 
         $sitemap = SitemapGenerator::create(config('app.url'))->shouldCrawl(function (UriInterface $url) {
-       return strpos($url->getPath(), '/cart') === false;
-        });;
-
-
+        return strpos($url->getPath(), '/cart') === false;
+        });
 
         $sitemap->add(Url::create('/')->setPriority(1.0));
         $sitemap->add(Url::create('/faq')->setPriority(0.8));
