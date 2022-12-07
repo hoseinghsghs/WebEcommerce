@@ -34,7 +34,7 @@ class GenerateSitemap extends Command
     public function handle()
     {
 
-        $sitemap = SitemapGenerator::create(config('app.url'));
+        $sitemap = SitemapGenerator::create(config('app.url'))->getSitemap();
 
 
 
