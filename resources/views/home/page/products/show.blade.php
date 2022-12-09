@@ -562,8 +562,7 @@
                                             <div class="form-faq-col">
                                                 <div class="ui-textarea">
                                                     <label>نام شما</label>
-                                                    <input type="text" name="name" class="form-control" id="author"
-                                                           class="ui-textarea-field">
+                                                    <input type="text" name="name" class="form-control" id="author">
                                                     @error('name')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror

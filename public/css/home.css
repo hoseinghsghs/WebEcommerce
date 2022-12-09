@@ -15368,7 +15368,7 @@ i.active {
 
 .main-row {
     width: 100%;
-    padding: 30px 0;
+    padding: 15px 0;
     float: right;
 }
 
@@ -23217,6 +23217,13 @@ button.products-filter-btn {
     line-height: 40px;
 }
 
+.breadcrumb-item + .breadcrumb-item::before {
+    display: inline-block;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    color: #6c757d;
+    content: "\276F";
+}
 /*main carousel*/
 @media (max-width: 480px) {
     .carousel-control-prev,
