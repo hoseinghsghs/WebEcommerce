@@ -130,7 +130,7 @@
                                                             </a>
                                                         </li>
                                                         @foreach ($product->images as $image_value )
-                                                            <li class="item">
+                                                            <li class="item" style="padding: 4px">
                                                                 <a href="#" class="elevatezoom-gallery"
                                                                    data-update=""
                                                                    data-image="{{url(env('PRODUCT_IMAGES_UPLOAD_PATCH').$image_value->image)}}"
