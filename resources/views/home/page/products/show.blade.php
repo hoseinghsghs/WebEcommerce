@@ -119,7 +119,7 @@
                                                 <div id="gallery_01f">
                                                     <ul class="gallery-items owl-carousel owl-theme"
                                                         id="gallery-slider">
-                                                        <li class="item">
+                                                        <li class="item" style="padding: 4px">
                                                             <a href="#" class="elevatezoom-gallery active"
                                                                data-update=""
                                                                data-image="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}"
