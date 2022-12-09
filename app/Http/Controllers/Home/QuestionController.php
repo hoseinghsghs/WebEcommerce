@@ -71,6 +71,17 @@ class QuestionController extends Controller
 
     public function replyStore(Request $request)
     {
+        
+         $validator = Validator::make($request->all(), [
+            'text' => 'required|min:5|max:7000',
+            // 'rate' => 'required|digits_between:0,5',
+        ]);
+
+           if ($validator->fails()) {
+            alert()->warning('متن پاسخ خالی است');
+
+            return redirect()->back();
+        }
 
         Question::create([
             'user_id' => auth()->id(),

@@ -544,17 +544,6 @@
                             <div class="tab-pane fade {{ count($errors) > 0 ? 'show active' : '' }}"
                                  id="question-and-answer" role="tabpanel" aria-labelledby="question-and-answer-tab">
                                 <div class="faq">
-                                    @if ($errors->any())
-                                        @foreach ($errors->all() as $error)
-                                            <div class=" col-md-6 mb-4">
-                                                <div class="alert alert-icon alert-error alert-bg alert-inline">
-                                                    <h4 class="alert-title">
-                                                        <i class="w-icon-times-circle"></i>
-                                                    </h4> {{ $error }}
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    @endif
                                     <form action="{{route('home.questions.store' , ['product' => $product->id])}}"
                                           method="POST" class="review-form">
                                         @csrf
@@ -572,7 +561,7 @@
                                         </div>
                                         <div class="form-faq-row mt-2">
                                             <div class="form-faq-col form-faq-col-submit">
-                                                <button class="btn btn-sm btn-tertiary btn-question-singel" type="submit">ثبت
+                                                <button class="btn-tertiary btn-question-singel" type="submit">ثبت
                                                     
                                                 </button>
                                             </div>
@@ -588,7 +577,11 @@
                                                                 <span class="icon-faq">?</span>
                                                                 <h6>
                                                                     پرسش :
-                                                                    <span>{{$question->user->name == null ? "بدون نام" : $question->user->name }}</span>
+                                                                    @if($question->user->hasRole('super-admin'))
+                                                                                    <span style="color: orange">مدیر سایت</span>
+                                                                                    @else
+                                                                                    <span>{{$question->user->name == null ? "بدون نام" : $question->user->name }}</span>
+                                                                                    @endif
                                                                 </h6>
                                                                 <p>{!!$question->text!!}</p>
                                                             </div>
@@ -613,7 +606,7 @@
                                                     @error('text')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
-                                                    <button class="btn btn-sm btn-tertiary btn-question-singel mt-2" type="submit">
+                                                    <button class="btn btn-sm btn-primary mt-2" type="submit">
                                                         ثبت
                                                         پاسخ
                                                     </button>
@@ -630,7 +623,11 @@
                                                                                 class="fa fa-reply"></i></span>
                                                                         <h6>
                                                                             پاسخ :
-                                                                            <span>{{$reply->user->name == null ? "بدون نام" : $reply->user->name }}</span>
+                                                                            @if($reply->user->hasRole('super-admin'))
+                                                                                    <span style="color: orange">مدیر سایت</span>
+                                                                                    @else
+                                                                                    <span>{{$reply->user->name == null ? "بدون نام" : $reply->user->name }}</span>
+                                                                                    @endif
                                                                         </h6>
                                                                     </div>
                                                                     <div style="word-wrap: break-word;">
@@ -653,10 +650,14 @@
                                                                                 <span class="icon-faq"
                                                                                       style="size:3rem ;"><i
                                                                                         class="fa fa-reply-all"></i></span>
-                                                                                <p class="h5">
+                                                                                <h6>
                                                                                     پاسخ :
+                                                                                    @if($reply->user->hasRole('super-admin'))
+                                                                                    <span style="color: orange">مدیر سایت</span>
+                                                                                    @else
                                                                                     <span>{{$reply->user->name == null ? "بدون نام" : $reply->user->name }}</span>
-                                                                                </p>
+                                                                                    @endif
+                                                                                </h6>
                                                                             </div>
                                                                             <p>{!!$reply->text!!}</p>
                                                                             <div class="faq-date">
