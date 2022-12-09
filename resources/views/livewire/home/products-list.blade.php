@@ -41,7 +41,7 @@
                 <!-- start sidebar--------------------->
                 <div class="col-md-3 d-none d-md-block pr sticky-sidebar">
                     <div class="shop-archive-sidebar">
-                        <div class="sidebar-archive mb-3">
+                        <div class="sidebar-archive">
                             <section class="widget-product-categories">
                                 <header class="cat-header">
                                     <h2 class="mb-0">
@@ -231,7 +231,7 @@
                     </div>
                 </div>
                 <div class="col-lg-9 col-md-9 col-xs-12 pl">
-                    <div class="shop-archive-content mt-3 d-block">
+                    <div class="shop-archive-content d-block">
                         <button class="btn mb-3 products-filter-btn d-md-none" onclick="openSidebar(event)">
                             <i class="fas fa-filter"></i> فیلترها
                         </button>
