@@ -4,10 +4,10 @@
     <div class="container-main">
         <div class="d-block">
             <div class="page-content page-row">
-                <div class="main-row p-0">
+                <div class="main-row">
                     <div id="breadcrumb">
-                        <nav aria-label="breadcrumb" class="p-1">
-                            <ol class="breadcrumb m-0">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb mb-0">
                                 <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="mdi mdi-home"></i>خانه
                                     </a></li>
                                 @foreach($product_categories as $category)

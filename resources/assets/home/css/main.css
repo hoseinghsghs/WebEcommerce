@@ -4040,7 +4040,7 @@ aside.main-row-bg .card-product-horizontal .card-product-horizontal-content {
 .main-row #breadcrumb {
     width: 100%;
     font-size: 14px;
-    padding: 8px 30px 8px 10px;
+    padding: 0 30px 15px 10px;
     color: #bbb;
     margin-bottom: 0;
     position: relative;
@@ -4050,9 +4050,9 @@ aside.main-row-bg .card-product-horizontal .card-product-horizontal-content {
 
 .main-row #breadcrumb i {
     position: absolute;
-    right: 20px;
-    top: 4px;
-    font-size: 25px;
+    right: 18px;
+    top: -6px;
+    font-size: 20px;
     color: #ababab;
     border-radius: 20px;
     width: 30px;
