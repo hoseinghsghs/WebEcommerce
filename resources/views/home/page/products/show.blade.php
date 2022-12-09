@@ -323,7 +323,7 @@
                     </div>
                 </div>
             </div>
-            <div class="tabs" id="respon">
+            <div class="tabs mt-0" id="respon" >
                 <div class="tab-box">
                     <ul class="tab nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
@@ -331,7 +331,7 @@
                                style="margin-left: -1.6rem;" data-toggle="tab" href="#Review" role="tab"
                                aria-controls="Review" aria-selected="{{ count($errors) > 0 ? 'false' : 'true' }}">
                                 <i class="mdi mdi-glasses"></i>
-                                نقد و بررسی
+                            توضیح
                             </a>
                         </li>
                         <li class="nav-item">
@@ -345,7 +345,7 @@
                             <a class="nav-link" id="User-comments-tab" style="margin-left: -1.6rem;" data-toggle="tab"
                                href="#User-comments" role="tab" aria-controls="User-comments" aria-selected="false">
                                 <i class="mdi mdi-comment-text-multiple-outline"></i>
-                                نظرات کاربران
+                        نظرات
                             </a>
                         </li>
                         <li class="nav-item">
@@ -558,31 +558,7 @@
                                     <form action="{{route('home.questions.store' , ['product' => $product->id])}}"
                                           method="POST" class="review-form">
                                         @csrf
-                                        <div class="form-faq-row mt-4">
-                                            <div class="form-faq-col">
-                                                <div class="ui-textarea">
-                                                    <label>نام شما</label>
-                                                    <input type="text" name="name" class="form-control" id="author"
-                                                           class="ui-textarea-field">
-                                                    @error('name')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-faq-row mt-4">
-                                            <div class="form-faq-col">
-                                                <div class="ui-textarea">
-                                                    <label>ایمیل</label>
-                                                    <input type="text" name="email" class="form-control" id="email_1"
-                                                           class="ui-textarea-field">
-                                                    @error('email')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-faq-row mt-4">
+                                        <div class="form-faq-row mt-2">
                                             <div class="form-faq-col">
                                                 <div class="ui-textarea">
                                                     <textarea title="متن سوال" placeholder="متن پرسش و پاسخ ..... "
@@ -594,10 +570,10 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-faq-row mt-4">
+                                        <div class="form-faq-row mt-2">
                                             <div class="form-faq-col form-faq-col-submit">
-                                                <button class="btn-tertiary btn-question-singel" type="submit">ثبت
-                                                    پرسش
+                                                <button class="btn btn-sm btn-tertiary btn-question-singel" type="submit">ثبت
+                                                    
                                                 </button>
                                             </div>
                                         </div>
@@ -610,14 +586,11 @@
                                                         <div class="section">
                                                             <div class="faq-header">
                                                                 <span class="icon-faq">?</span>
-                                                                <p class="h5">
+                                                                <h6>
                                                                     پرسش :
                                                                     <span>{{$question->user->name == null ? "بدون نام" : $question->user->name }}</span>
-                                                                </p>
+                                                                </h6>
                                                                 <p>{!!$question->text!!}</p>
-                                                            </div>
-                                                            <div class="faq-date">
-                                                                <em>{{Hekmatinasser\Verta\Verta::instance($question->created_at)->format('Y/n/j')}}</em>
                                                             </div>
                                                             <a onclick="reply('{{$question->id}}')" class="btn btn-link"
                                                                id="btn-question-show">
@@ -635,13 +608,12 @@
                                                 @csrf
                                                 <div class="form-faq-col">
                                                     <textarea name="text" cols="30" rows="5"
-                                                              style="background-color:#fbfbfb; border-radius: 1rem;"
                                                               placeholder="پاسخ ..." class="form-control mt-2"
                                                               id="review"></textarea>
                                                     @error('text')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
-                                                    <button class="btn-tertiary btn btn-secondary mt-2" type="submit">
+                                                    <button class="btn btn-sm btn-tertiary btn-question-singel mt-2" type="submit">
                                                         ثبت
                                                         پاسخ
                                                     </button>
@@ -656,10 +628,10 @@
                                                                     <div class="faq-header">
                                                                         <span class="icon-faq"><i
                                                                                 class="fa fa-reply"></i></span>
-                                                                        <p class="h5">
+                                                                        <h6>
                                                                             پاسخ :
                                                                             <span>{{$reply->user->name == null ? "بدون نام" : $reply->user->name }}</span>
-                                                                        </p>
+                                                                        </h6>
                                                                     </div>
                                                                     <div style="word-wrap: break-word;">
                                                                         <span>{!!$reply->text!!}</span>
