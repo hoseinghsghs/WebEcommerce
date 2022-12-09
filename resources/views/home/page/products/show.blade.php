@@ -119,7 +119,7 @@
                                                 <div id="gallery_01f">
                                                     <ul class="gallery-items owl-carousel owl-theme"
                                                         id="gallery-slider">
-                                                        <li class="item">
+                                                        <li class="item" style="padding: 4px">
                                                             <a href="#" class="elevatezoom-gallery active"
                                                                data-update=""
                                                                data-image="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}"
@@ -130,7 +130,7 @@
                                                             </a>
                                                         </li>
                                                         @foreach ($product->images as $image_value )
-                                                            <li class="item">
+                                                            <li class="item" style="padding: 4px">
                                                                 <a href="#" class="elevatezoom-gallery"
                                                                    data-update=""
                                                                    data-image="{{url(env('PRODUCT_IMAGES_UPLOAD_PATCH').$image_value->image)}}"
@@ -323,7 +323,7 @@
                     </div>
                 </div>
             </div>
-            <div class="tabs" id="respon">
+            <div class="tabs mt-0" id="respon" >
                 <div class="tab-box">
                     <ul class="tab nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
@@ -331,7 +331,7 @@
                                style="margin-left: -1.6rem;" data-toggle="tab" href="#Review" role="tab"
                                aria-controls="Review" aria-selected="{{ count($errors) > 0 ? 'false' : 'true' }}">
                                 <i class="mdi mdi-glasses"></i>
-                                نقد و بررسی
+                            توضیح
                             </a>
                         </li>
                         <li class="nav-item">
@@ -345,7 +345,7 @@
                             <a class="nav-link" id="User-comments-tab" style="margin-left: -1.6rem;" data-toggle="tab"
                                href="#User-comments" role="tab" aria-controls="User-comments" aria-selected="false">
                                 <i class="mdi mdi-comment-text-multiple-outline"></i>
-                                نظرات کاربران
+                        نظرات
                             </a>
                         </li>
                         <li class="nav-item">
@@ -451,7 +451,7 @@
                                                 <h6>شما هم می‌توانید در مورد این کالا نظر بدهید.</h6>
                                                 <p>
                                                     برای ثبت نظر، لازم است ابتدا وارد حساب کاربری خود شوید. اگر این
-                                                    محصول را قبلا از دیجی‌کالا خریده باشید،
+                                                    محصول را قبلا  خریده باشید،
                                                     نظر
                                                     شما به عنوان مالک محصول ثبت خواهد شد.
                                                 </p> @if (auth()->user())
@@ -544,44 +544,10 @@
                             <div class="tab-pane fade {{ count($errors) > 0 ? 'show active' : '' }}"
                                  id="question-and-answer" role="tabpanel" aria-labelledby="question-and-answer-tab">
                                 <div class="faq">
-                                    @if ($errors->any())
-                                        @foreach ($errors->all() as $error)
-                                            <div class=" col-md-6 mb-4">
-                                                <div class="alert alert-icon alert-error alert-bg alert-inline">
-                                                    <h4 class="alert-title">
-                                                        <i class="w-icon-times-circle"></i>
-                                                    </h4> {{ $error }}
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    @endif
                                     <form action="{{route('home.questions.store' , ['product' => $product->id])}}"
                                           method="POST" class="review-form">
                                         @csrf
-                                        <div class="form-faq-row mt-4">
-                                            <div class="form-faq-col">
-                                                <div class="ui-textarea">
-                                                    <label>نام شما</label>
-                                                    <input type="text" name="name" class="form-control" id="author">
-                                                    @error('name')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-faq-row mt-4">
-                                            <div class="form-faq-col">
-                                                <div class="ui-textarea">
-                                                    <label>ایمیل</label>
-                                                    <input type="text" name="email" class="form-control" id="email_1"
-                                                           class="ui-textarea-field">
-                                                    @error('email')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-faq-row mt-4">
+                                        <div class="form-faq-row mt-2">
                                             <div class="form-faq-col">
                                                 <div class="ui-textarea">
                                                     <textarea title="متن سوال" placeholder="متن پرسش و پاسخ ..... "
@@ -593,10 +559,10 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-faq-row mt-4">
+                                        <div class="form-faq-row mt-2">
                                             <div class="form-faq-col form-faq-col-submit">
                                                 <button class="btn-tertiary btn-question-singel" type="submit">ثبت
-                                                    پرسش
+
                                                 </button>
                                             </div>
                                         </div>
@@ -609,14 +575,15 @@
                                                         <div class="section">
                                                             <div class="faq-header">
                                                                 <span class="icon-faq">?</span>
-                                                                <p class="h5">
+                                                                <h6>
                                                                     پرسش :
-                                                                    <span>{{$question->user->name == null ? "بدون نام" : $question->user->name }}</span>
-                                                                </p>
+                                                                    @if($question->user->hasRole('super-admin'))
+                                                                                    <span style="color: orange">مدیر سایت</span>
+                                                                                    @else
+                                                                                    <span>{{$question->user->name == null ? "بدون نام" : $question->user->name }}</span>
+                                                                                    @endif
+                                                                </h6>
                                                                 <p>{!!$question->text!!}</p>
-                                                            </div>
-                                                            <div class="faq-date">
-                                                                <em>{{Hekmatinasser\Verta\Verta::instance($question->created_at)->format('Y/n/j')}}</em>
                                                             </div>
                                                             <a onclick="reply('{{$question->id}}')" class="btn btn-link"
                                                                id="btn-question-show">
@@ -634,13 +601,12 @@
                                                 @csrf
                                                 <div class="form-faq-col">
                                                     <textarea name="text" cols="30" rows="5"
-                                                              style="background-color:#fbfbfb; border-radius: 1rem;"
                                                               placeholder="پاسخ ..." class="form-control mt-2"
                                                               id="review"></textarea>
                                                     @error('text')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
-                                                    <button class="btn-tertiary btn btn-secondary mt-2" type="submit">
+                                                    <button class="btn btn-sm btn-primary mt-2" type="submit">
                                                         ثبت
                                                         پاسخ
                                                     </button>
@@ -655,10 +621,14 @@
                                                                     <div class="faq-header">
                                                                         <span class="icon-faq"><i
                                                                                 class="fa fa-reply"></i></span>
-                                                                        <p class="h5">
+                                                                        <h6>
                                                                             پاسخ :
-                                                                            <span>{{$reply->user->name == null ? "بدون نام" : $reply->user->name }}</span>
-                                                                        </p>
+                                                                            @if($reply->user->hasRole('super-admin'))
+                                                                                    <span style="color: orange">مدیر سایت</span>
+                                                                                    @else
+                                                                                    <span>{{$reply->user->name == null ? "بدون نام" : $reply->user->name }}</span>
+                                                                                    @endif
+                                                                        </h6>
                                                                     </div>
                                                                     <div style="word-wrap: break-word;">
                                                                         <span>{!!$reply->text!!}</span>
@@ -680,10 +650,14 @@
                                                                                 <span class="icon-faq"
                                                                                       style="size:3rem ;"><i
                                                                                         class="fa fa-reply-all"></i></span>
-                                                                                <p class="h5">
+                                                                                <h6>
                                                                                     پاسخ :
+                                                                                    @if($reply->user->hasRole('super-admin'))
+                                                                                    <span style="color: orange">مدیر سایت</span>
+                                                                                    @else
                                                                                     <span>{{$reply->user->name == null ? "بدون نام" : $reply->user->name }}</span>
-                                                                                </p>
+                                                                                    @endif
+                                                                                </h6>
                                                                             </div>
                                                                             <p>{!!$reply->text!!}</p>
                                                                             <div class="faq-date">

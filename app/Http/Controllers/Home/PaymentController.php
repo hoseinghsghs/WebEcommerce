@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\ProductVariation;
 use App\Models\User;
+use App\Models\Product;
 use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -16,6 +17,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\OtpSms;
 
 class PaymentController extends Controller
 {
@@ -88,7 +91,7 @@ class PaymentController extends Controller
 
         $checkCart = $this->checkCart();
         if (array_key_exists('error', $checkCart)) {
-            alert()->error($checkCart['error'], 'دقت کنید')->showConfirmButton('تایید');
+            alert()->error('',$checkCart['error'])->showConfirmButton('تایید');
             return redirect()->route('home');
         }
 
@@ -159,6 +162,13 @@ class PaymentController extends Controller
                         ]);
                     } catch (\Throwable $th) {
                     }
+
+                        try{
+                    Notification::route('cellphone', '09139035692')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
+                    Notification::route('cellphone','09162418808')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
+                }catch (\Throwable $th) {
+                }
+
                     try {
                         return redirect()->route('home.user_profile.orders', ['order' => Session::pull('orderId')]);
                     } catch (\Throwable $th) {
@@ -195,6 +205,12 @@ class PaymentController extends Controller
                     ]);
                 } catch (\Throwable $th) {
                 }
+
+                  try{
+                    Notification::route('cellphone', '09139035692')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
+                    Notification::route('cellphone','09162418808')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
+                }catch (\Throwable $th) {
+                }
                 alert()->success('خرید با موفقیت انجام گرفت')->showConfirmButton('تایید');
                 return redirect()->route('home.user_profile.orders', ['order' => Session::pull('orderId')]);
             }
@@ -205,12 +221,18 @@ class PaymentController extends Controller
     }
     public function checkCart()
     {
+        
         if (\Cart::isEmpty()) {
             return ['error' => 'سبد خرید شما خالی می باشد'];
         }
         foreach (\Cart::getContent() as $item) {
             $variation = ProductVariation::find($item->attributes->id);
             $price = $variation->is_sale ? $variation->sale_price : $variation->price;
+
+            if (!Product::find($item->attributes->product_id)->is_active) {
+               \Cart::clear();
+               return ['error' => 'محصول مورد نظر یافت نشد'];
+            }
             if ($item->price != $price) {
                 \Cart::clear();
                 return ['error' => 'قیمت محصول تغییر پیدا کرد'];

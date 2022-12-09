@@ -71,7 +71,19 @@ class QuestionController extends Controller
 
     public function replyStore(Request $request)
     {
+        
+         $validator = Validator::make($request->all(), [
+            'text' => 'required|min:5|max:7000',
+            // 'rate' => 'required|digits_between:0,5',
+        ]);
 
+           if ($validator->fails()) {
+            alert()->warning('متن پاسخ خالی است');
+
+            return redirect()->back();
+        }
+
+        if (auth()->check()) {
         Question::create([
             'user_id' => auth()->id(),
             'text' => $request->text,
@@ -95,9 +107,14 @@ class QuestionController extends Controller
             //throw $th;
         }
 
+
         alert()->success('پاسخ شما با موفقیت برای این محصول ثبت شد')->showConfirmButton('تایید');
         return redirect()->back();
 
-        return back();
+        return back();}
+        else {
+            alert()->warning('برای ثبت پاسخ ابتدا وارد سایت شوید')->showConfirmButton('تایید');
+            return redirect()->back();
+        }
     }
 }

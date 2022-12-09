@@ -53,6 +53,7 @@
                                             <table class="table table-borderless">
                                                 <thead>
                                                 <tr>
+                                                    <th scope="col">تصویر </th>
                                                     <th scope="col">نام محصول</th>
                                                     <th scope="col">جمع</th>
                                                 </tr>
@@ -60,10 +61,17 @@
                                                 <tbody>
                                                 @foreach ($order->orderItems as $item)
                                                     <tr>
+                                                         <td class="product-name">
+                                                             <a
+                                                                href="{{route('home.products.show' , ['product' => $item->product->slug])}}">
+                                                              <img src="{{asset('storage/primary_image/'.$item->product->primary_image)}}" alt="{{$item->product->name}}" width="48" class="img-fluid rounded" style="min-height: 3rem;">
+                                                              </a>
+                                                         </td>
                                                         <td class="product-name">
-                                                            <a
+                                                            <a style="color: #17a2b8"
                                                                 href="{{route('home.products.show' , ['product' => $item->product->slug])}}">
                                                                 ({{$item->product->name}})
+                                                        </br>
                                                                 <span class="text-muted">
                                                                 {{$item->quantity}} عدد
                                                                 * {{number_format($item->price)}} تومان
@@ -111,8 +119,8 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">روش پرداخت:</th>
-                                                    <td>{{$order->payment_type}}</td>
+                                                    <th scope="row">شماره تراکنش:</th>
+                                                    <td>{{$order->transaction->ref_id}}</td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">قیمت نهایی:</th>

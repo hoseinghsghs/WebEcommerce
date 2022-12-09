@@ -111,11 +111,11 @@ $(document).ready(function (e) {
         rtl: true,
         margin: 10,
         nav: true,
-        loop:true,
+        loop: true,
         navText: ["&#10094", "&#10095"],
         dots: false,
         responsiveClass: true,
-        autoplay:true,
+        autoplay: true,
         autoplayTimeout: 3000,
         responsive: {
             0: {
@@ -149,7 +149,7 @@ $(document).ready(function (e) {
         loop: true,
         margin: 10,
         dots: false,
-        center:true,
+        center: true,
         autoplay: true,
         autoplayTimeout: 3000,
         autoplayHoverPause: true,
@@ -523,9 +523,13 @@ $(document).ready(function (e) {
                         timer: 1500,
                         confirmButtonText: "تایید",
                     });
-                } else {
-                    alert("اتصال شما به اینترنت قطع");
-                    location.reload();
+                } else if (xhr.status == 202) {
+                    Swal.fire({
+                        text: "محصول مورد نظر یافت نشد",
+                        icon: "error",
+                        timer: 1500,
+                        confirmButtonText: "تایید",
+                    });
                 }
             }
         )
@@ -838,10 +842,10 @@ $(document).ready(function (e) {
 
     if ($("#img-product-zoom").length) {
         $("#img-product-zoom").elevateZoom({
-            zoomType: 'inner',
-            cursor: 'crosshair',
-            gallery:'gallery_01f',
-            galleryActiveClass: 'active',
+            zoomType: "inner",
+            cursor: "crosshair",
+            gallery: "gallery_01f",
+            galleryActiveClass: "active",
             imageCrossfade: true,
         });
     }
@@ -946,7 +950,7 @@ $(document).ready(function (e) {
 
     $(".carousel").carousel({
         interval: 5000,
-        pause: 'hover',
+        pause: "hover",
         touch: true,
     });
 

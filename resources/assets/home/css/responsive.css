@@ -550,7 +550,7 @@
     }
 
     .tabs .tab-box ul.tab {
-        width: 457px;
+        width: 395px;
         text-align: right;
     }
 
@@ -747,7 +747,7 @@
         .cart-basket-box
         span.count-cart {
         background: #3a7795;
-        top: 7px;
+        top: -1px;
         color: #fff;
         left: 22px;
     }

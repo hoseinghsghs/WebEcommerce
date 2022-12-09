@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Tag;
 use Illuminate\Console\Command;
 use Spatie\Sitemap\SitemapGenerator;
+use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url;
 
 class GenerateSitemap extends Command
@@ -33,7 +34,7 @@ class GenerateSitemap extends Command
     public function handle()
     {
 
-        $sitemap = SitemapGenerator::create(config('app.url'))->getSitemap() ;
+        $sitemap =Sitemap::create(config('app.url')) ;
 
         $sitemap->add(Url::create('/')->setPriority(1.0));
         $sitemap->add(Url::create('/faq')->setPriority(0.8));
@@ -72,6 +73,7 @@ class GenerateSitemap extends Command
             );
         });
         
+
         $sitemap->writeToFile(public_path('sitemap.xml'));
       
     }

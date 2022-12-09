@@ -28,7 +28,7 @@
                                 <div class="header-cart-basket">
                                     <a class="cart-basket-box">
                                         <span class="icon-cart">
-                                              <i class="mdi mdi-shopping-outline"></i>
+                                              <i class="fa fa-shopping-cart"></i>
                                         </span>
                                         <span class="count-cart" id="count-cart">{{Cart::getContent()->count()}}</span>
                                     </a>

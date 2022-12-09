@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Home\Cart;
 
 use App\Models\Category;
 use Livewire\Component;
+use App\Models\Product;
 
 class ShowCart extends Component
 {
@@ -103,7 +104,17 @@ class ShowCart extends Component
 
     public function render()
     {
-        return view('livewire.home.cart.show-cart',['cartitems'=>\Cart::getContent()])
+        $cartitems = \Cart::getContent();
+
+        foreach ($cartitems as $item)
+        {
+            if(!Product::find($item->associatedModel->id)->is_active){
+            \Cart::clear();
+          }
+
+        }
+        $cartitems = \Cart::getContent();
+        return view('livewire.home.cart.show-cart',['cartitems'=> $cartitems])
         ->extends('home.layout.MasterHome')
         ->section('content');
     }
