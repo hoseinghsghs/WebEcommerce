@@ -12408,7 +12408,6 @@ header.header-main {
     margin: 1px;
     line-height: 20px;
     text-align: center;
-    top: 10px;
     border-radius: 50px;
     font-size: 12px;
 }
@@ -24027,7 +24026,7 @@ button.products-filter-btn {
         .cart-basket-box
         span.count-cart {
         background: #3a7795;
-        top: 7px;
+        top: -1px;
         color: #fff;
         left: 22px;
     }
