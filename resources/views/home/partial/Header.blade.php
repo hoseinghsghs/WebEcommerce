@@ -118,18 +118,18 @@
                                     <div class="d-block">
                                         <div class="account-box">
                                             <div class="nav-account d-block pl">
-
                                                 <span class="icon-account">
                                                     <img src="/assets/home/images/header-user.png" class="avator">
                                                 </span>
-                                                <span class="title-account">{{Auth::user()->name ?? auth()->user()->cellphone}}</span>
+                                                <span
+                                                    class="title-account">{{Auth::user()->name ?? auth()->user()->cellphone}}</span>
                                                 <div class="dropdown-menu">
                                                     <ul class="account-uls mb-0">
                                                         @if(auth()->user()->hasRole('super-admin'))
-                                                        <li class="account-item">
-                                                            <a href="{{ route('admin.home')}}"
-                                                               class="account-link">پنل ادمین</a>
-                                                        </li>
+                                                            <li class="account-item">
+                                                                <a href="{{ route('admin.home')}}"
+                                                                   class="account-link">پنل ادمین</a>
+                                                            </li>
                                                         @endif
                                                         <li class="account-item">
                                                             <a href="{{route('home.user_profile')}}"
@@ -169,7 +169,9 @@
                                             <ul class="">
                                                 @foreach ($categories->sortBy('order')->where('is_active' , 1) as $category)
                                                     <li>
-                                                        <a onmouseover="showChildCategory(event,{{$category->id}})">@isset($category->icon)<i class="{{$category->icon}}"></i>@endisset {{$category->name}}</a>
+                                                        <a onmouseover="showChildCategory(event,{{$category->id}})">@isset($category->icon)
+                                                                <i class="{{$category->icon}}"></i>
+                                                            @endisset {{$category->name}}</a>
                                                     </li>
                                                 @endforeach
                                             </ul>
@@ -214,7 +216,7 @@
                                 </div>
                             </li>
                             <li class="menu-item">
-                                <i class="fas fa-fire"></i>
+                                <i class="fas fa-fire text-secondary"></i>
                                 <a href="{{route('home.products.search',['label'=>'فروش ویژه'])}}"
                                    class="current-link-menu">فروش ویژه</a>
                             </li>
@@ -452,6 +454,7 @@
 @push('scripts')
     <script>
         let activeChildBox
+
         function openAccountSidebar() {
             $('.account-sidebar').addClass('open')
             $('.account-sidebar-overlay').removeClass('d-none');
@@ -462,7 +465,7 @@
             $('.account-sidebar-overlay').addClass('d-none');
         }
 
-        function showChildCategory(event,id) {
+        function showChildCategory(event, id) {
             if (activeChildBox != null) {
                 $('#child-category-' + activeChildBox).hide();
             }

@@ -4033,14 +4033,14 @@ aside.main-row-bg .card-product-horizontal .card-product-horizontal-content {
 
 .main-row {
     width: 100%;
-    padding: 30px 0;
+    padding: 15px 0;
     float: right;
 }
 
 .main-row #breadcrumb {
     width: 100%;
     font-size: 14px;
-    padding: 8px 30px 8px 10px;
+    padding: 0 30px 15px 10px;
     color: #bbb;
     margin-bottom: 0;
     position: relative;
@@ -4050,9 +4050,9 @@ aside.main-row-bg .card-product-horizontal .card-product-horizontal-content {
 
 .main-row #breadcrumb i {
     position: absolute;
-    right: 20px;
-    top: 4px;
-    font-size: 25px;
+    right: 18px;
+    top: -6px;
+    font-size: 20px;
     color: #ababab;
     border-radius: 20px;
     width: 30px;
@@ -11865,7 +11865,6 @@ button.products-filter-btn {
     .product .product-gallery .gallery .gallery-item ul.gallery-actions li {
         display: block;
     }
-
     .product
         .product-gallery
         .gallery
@@ -11875,6 +11874,10 @@ button.products-filter-btn {
         a.btn-option {
         width: 33px;
         height: 40px;
+    }
+    .slider-main-container .carousel-inner .carousel-item img.h-four-img {
+        max-width: 100%;
+        height: auto;
     }
 }
 
@@ -12035,6 +12038,13 @@ button.products-filter-btn {
     line-height: 40px;
 }
 
+.breadcrumb-item + .breadcrumb-item::before {
+    display: inline-block;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    color: #6c757d;
+    content: "\276F";
+}
 /*main carousel*/
 @media (max-width: 480px) {
     .carousel-control-prev,

@@ -25,7 +25,7 @@ class CompareController extends Controller
             else{
               session()->push('compareProducts', $product->id);
               return response(['errors' => 'saved']);
-            };
+            }
         } else {
             session()->put('compareProducts', [$product->id]);
             return response(['errors' => 'saved']);
@@ -34,17 +34,12 @@ class CompareController extends Controller
 
     public function index()
     {
-
         if (session()->has('compareProducts')) {
-
             $products = Product::findOrFail(session()->get('compareProducts'));
-
             return view('home.page.compare.index', compact('products'));
         }
-
         alert()->warning('لیست مقایسه خالی است','')->showConfirmButton('تایید');
         return redirect()->back();
-
     }
 
     public function remove($prodcutId)

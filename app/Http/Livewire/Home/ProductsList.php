@@ -21,6 +21,7 @@ class ProductsList extends Component
     public $category;
     public $routeName = '';
     public $initialFilter;
+    public $nav_categories = [];
 
     public $filterd = [
         'variation' => [],
@@ -29,7 +30,7 @@ class ProductsList extends Component
         'price' => ['high' => 5000000, 'low' => 0],
         'displayCount' => 12,
         'search' => '',
-        'tag'=>null,
+        'tag' => null,
     ];
 
     public function seoparameter()
@@ -49,9 +50,16 @@ class ProductsList extends Component
     {
         $this->routeName = Route::currentRouteName();
         if (Route::currentRouteName() == 'home.products.index') {
-            $this->category = Category::where('parent_id', '<>', 0)->where('slug', $slug)->firstOrFail();
+            $this->category = Category::where('parent_id', '<>', 0)->active()->where('slug', $slug)->firstOrFail();
         } elseif ($slug) {
-            $this->category = Category::where('parent_id', 0)->where('slug', $slug)->firstOrFail();
+            $this->category = Category::where('slug', $slug)->active()->with(['children.children', 'parent'])->firstOrFail();
+        }
+        //get parents of current category
+        if ($this->category) {
+            for ($pc = $this->category; $pc; $pc = $pc->parent) {
+                $this->nav_categories[] = $pc;
+            }
+            $this->nav_categories = array_reverse($this->nav_categories);
         }
 
         request()->whenFilled('q', function () {
@@ -64,7 +72,7 @@ class ProductsList extends Component
             $this->filterd['position'] = request()->query('label');
         });
         request()->whenFilled('brand', function () {
-            $brand=Brand::where('slug',request()->query('brand'))->firstOrFail();
+            $brand = Brand::where('slug', request()->query('brand'))->firstOrFail();
             $this->filterd['brand'] = $brand->id;
         });
         // get maximum of price
@@ -81,18 +89,21 @@ class ProductsList extends Component
     public function resetFilters()
     {
         // $this->reset('filterd');
-        $this->filterd=$this->initialFilter;
+        $this->filterd = $this->initialFilter;
         $this->emit('filterReset');
         $this->resetPage();
     }
+
     public function updatingFilterdDisplayCount($field, $value)
     {
         $this->resetPage();
     }
+
     public function updatingFilterdOrderBy($field, $value)
     {
         $this->resetPage();
     }
+
     public function priceRangeUpdated($values)
     {
         $this->filterd['price']['low'] = $values[0];
@@ -126,17 +137,29 @@ class ProductsList extends Component
     public function render()
     {
         if ($this->routeName == 'home.products.index') {
-            SEOTools::setCanonical(env('APP_URL').'/main');
+            SEOTools::setCanonical(env('APP_URL') . '/main');
             $this->seoparameter();
             $attributes = $this->category->attributes()->where('is_filter', 1)->has('categoryValues')->with('categoryValues')->get();
             $variation = $this->category->attributes()->where('is_variation', 1)->with('variationValues')->first();
             $products = $this->category->products()->active()->filter($this->filterd)->latest()->paginate($this->filterd['displayCount']);
             return view('livewire.home.products-list', compact('attributes', 'variation', 'products'))->extends('home.layout.MasterHome');
         } elseif ($this->routeName == 'home.products.search' && isset($this->category)) {
-            SEOTools::setCanonical(env('APP_URL').'/search');
+            SEOTools::setCanonical(env('APP_URL') . '/search');
             $this->seoparameter();
             $attributes = $this->category->attributes()->where('is_filter', 1)->has('categoryValues')->with('categoryValues')->get();
-            $products = $this->category->productsFromParent()->active()->filter($this->filterd)->latest()->paginate($this->filterd['displayCount']);
+            // get all sub categories of current category
+            $children_categories = collect([$this->category]);
+            if (count($this->category->children()->active()->get()) > 0) {
+                $children_categories=$children_categories->concat($this->category->children()->active()->get());
+                foreach ($this->category->children as $category3) {
+                    if (count($category3->children()->active()->get()) > 0) {
+                        $children_categories=$children_categories->concat($category3->children()->active()->get());
+                    }
+                }
+            }
+
+            $products = Product::whereIn('category_id',$children_categories->pluck('id')->all())->active()->filter($this->filterd)->latest()->paginate($this->filterd['displayCount']);
+
             return view('livewire.home.products-list', compact('attributes', 'products'))->extends('home.layout.MasterHome');
         } else {
             $this->seoparameter();
