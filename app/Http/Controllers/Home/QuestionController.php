@@ -64,7 +64,7 @@ class QuestionController extends Controller
             alert()->success('','پرسش شما با موفقیت برای این محصول ثبت شد');
             return redirect()->back();
         } else {
-            alert()->warning(''.'برای ثبت پرسش ابتدا وارد سایت شوید')->showConfirmButton('تایید');
+            alert()->warning('','برای ثبت پرسش ابتدا وارد سایت شوید')->showConfirmButton('تایید');
             return redirect()->back();
         }
     }
@@ -113,7 +113,7 @@ class QuestionController extends Controller
 
         return back();}
         else {
-            alert()->warning(''.'برای ثبت پاسخ ابتدا وارد سایت شوید')->showConfirmButton('تایید');
+            alert()->warning('','برای ثبت پاسخ ابتدا وارد سایت شوید')->showConfirmButton('تایید');
             return redirect()->back();
         }
     }
