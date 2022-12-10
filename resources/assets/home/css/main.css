@@ -11865,7 +11865,6 @@ button.products-filter-btn {
     .product .product-gallery .gallery .gallery-item ul.gallery-actions li {
         display: block;
     }
-
     .product
         .product-gallery
         .gallery
@@ -11875,6 +11874,10 @@ button.products-filter-btn {
         a.btn-option {
         width: 33px;
         height: 40px;
+    }
+    .slider-main-container .carousel-inner .carousel-item img.h-four-img {
+        max-width: 100%;
+        height: auto;
     }
 }
 
