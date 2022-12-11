@@ -6,7 +6,6 @@
 <meta name="designer" content="hosein ghasemi, amir rajabi" />
 <meta name="apple-mobile-web-app-title" content="meta_webs">
 <meta name="application-name" content="meta_webs">
-<meta name="robots" content="index, follow" />
 <meta property="place:location:latitude" content="32.690131419897455">
 <meta property="place:location:longitude" content="51.71408350961521">
 <meta property="business:contact_data:street_address" content="Isfahan، Iran">

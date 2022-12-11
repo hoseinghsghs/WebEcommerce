@@ -14,6 +14,7 @@ use App\Models\Service;
 use App\Models\Setting;
 use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\SEOTools;
+use Artesaos\SEOTools\Facades\SEOMeta;
 
 use function PHPSTORM_META\type;
 
