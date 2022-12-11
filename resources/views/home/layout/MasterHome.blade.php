@@ -66,7 +66,6 @@
 
     @include('sweetalert::alert')
     @livewireScripts()
-    @flasher_livewire_render
     @stack('scripts')
 
     <!---start GOFTINO code--->

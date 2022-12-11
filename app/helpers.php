@@ -9,15 +9,15 @@ use Carbon\Carbon;
 if (!function_exists('generateImageName')) {
     function generateImageName($extension)
     {
-        $date_now=Carbon::now();
+        $date_now = Carbon::now();
         $year = $date_now->year;
-        $month =$date_now->month;
+        $month = $date_now->month;
         $day = $date_now->day;
         $hour = $date_now->hour;
         $minute = $date_now->minute;
         $second = $date_now->second;
         $microsecond = $date_now->microsecond;
-        return $year . $month . $day . $hour . $minute . $second . $microsecond . '.'. $extension;
+        return $year . $month . $day . $hour . $minute . $second . $microsecond . '.' . $extension;
     }
 }
 if (!function_exists('Persian_GenerateImageName')) {
@@ -25,28 +25,29 @@ if (!function_exists('Persian_GenerateImageName')) {
     {
         $v = verta();
         $v->timezone = 'Asia/Tehran';
-        $year=$v->year;
-        $month=$v->month;
-        $day=$v->day;
-        $hour=$v->hour;
-        $minute=$v->minute;
-        $second=$v->second;
-        $micro=$v->micro;
-        return $year . $month . $day . $hour .$minute . $second . $micro .'.'. $extension;
+        $year = $v->year;
+        $month = $v->month;
+        $day = $v->day;
+        $hour = $v->hour;
+        $minute = $v->minute;
+        $second = $v->second;
+        $micro = $v->micro;
+        return $year . $month . $day . $hour . $minute . $second . $micro . '.' . $extension;
     }
 }
 
 if (!function_exists('convert')) {
-function convert($string) {
-    $persian = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
-    $arabic = ['٩', '٨', '٧', '٦', '٥', '٤', '٣', '٢', '١','٠'];
+    function convert($string)
+    {
+        $persian = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+        $arabic = ['٩', '٨', '٧', '٦', '٥', '٤', '٣', '٢', '١', '٠'];
 
-    $num = range(0, 9);
-    $convertedPersianNums = str_replace($persian, $num, $string);
-    $englishNumbersOnly = str_replace($arabic, $num, $convertedPersianNums);
+        $num = range(0, 9);
+        $convertedPersianNums = str_replace($persian, $num, $string);
+        $englishNumbersOnly = str_replace($arabic, $num, $convertedPersianNums);
 
-    return $englishNumbersOnly;
-}
+        return $englishNumbersOnly;
+    }
 }
 
 if (!function_exists('cartTotalSaleAmount')) {
@@ -68,7 +69,7 @@ if (!function_exists('cartTotalDeliveryAmount')) {
     {
         $cartTotalDeliveryAmount = 0;
         foreach (\Cart::getContent() as $item) {
-            $cartTotalDeliveryAmount += ($item->associatedModel->delivery_amount + (($item->quantity-1)*$item->associatedModel->delivery_amount_per_product));
+            $cartTotalDeliveryAmount += ($item->associatedModel->delivery_amount + (($item->quantity - 1) * $item->associatedModel->delivery_amount_per_product));
         }
 
         return $cartTotalDeliveryAmount;
@@ -93,7 +94,7 @@ if (!function_exists('cartTotalAmount')) {
 if (!function_exists('checkCoupon')) {
     function checkCoupon($code)
     {
-        
+
         $coupon = Coupon::where('code', $code)->where('expired_at', '>', Carbon::now())->first();
 
         if ($coupon == null) {
@@ -115,8 +116,8 @@ if (!function_exists('checkCoupon')) {
 
             session()->put('coupon', ['id' => $coupon->id, 'code' => $coupon->code, 'amount' => $amount]);
         }
-        
-        return ['success' => 'کد تخفیف برای شما ثبت شد' , 'amount'=>session()->get('coupon.amount')];
+
+        return ['success' => 'کد تخفیف برای شما ثبت شد', 'amount' => session()->get('coupon.amount')];
     }
 
 }
@@ -133,7 +134,20 @@ if (!function_exists('city_name')) {
     {
         return City::findOrFail($cityId)->name;
     }
+}
+
+if (!function_exists('category_children')) {
+    function category_children($category): \Illuminate\Support\Collection
+    {
+        $children_categories = collect([$category]);
+        if (count($category->children()->active()->get()) > 0) {
+            $children_categories = $children_categories->concat($category->children()->active()->get());
+            foreach ($category->children as $category2) {
+                if (count($category2->children()->active()->get()) > 0) {
+                    $children_categories = $children_categories->concat($category2->children()->active()->get());
+                }
+            }
+        }
+        return $children_categories;
     }
-
-
-?>
+}
