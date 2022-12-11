@@ -20,7 +20,7 @@ class PostController extends Controller
         OpenGraph::addProperty('site_name', env('APP_NAME'));
         OpenGraph::addProperty('locale', 'fa');
         SEOTools::opengraph()->addProperty('type', 'articles');
-        SEOTools::twitter()->setSite('@metawebs_ir');
+        SEOTools::twitter()->setSite('@likoshop_ir');
         SEOTools::jsonLd()->addImage(asset('storage/logo/' . $settings->logo)); 
     }
 

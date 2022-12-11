@@ -15,11 +15,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Artesaos\SEOTools\Facades\SEOMeta;
 
 class CommentController extends Controller
 {
     public function create(Request $request)
     {
+        SEOMeta::setRobots('noindex, nofollow');
+
         return view('home.page.comment.comments');
     }
 

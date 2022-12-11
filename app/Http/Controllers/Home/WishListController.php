@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\WishList;
 use Illuminate\Http\Request;
+use Artesaos\SEOTools\Facades\SEOMeta;
+
 
 class WishListController extends Controller
 {
@@ -31,6 +33,7 @@ class WishListController extends Controller
 
     public function show()
     {
+        
         return view('home.pages.UserProfile.wish_list');
     }
 
@@ -38,7 +41,7 @@ class WishListController extends Controller
     {
 
         $wishlist = Wishlist::where('user_id', auth()->id())->get();
-
+        SEOMeta::setRobots('noindex, nofollow');
         return view('home.page.users_profile.wishlist', compact('wishlist'));
     }
 }

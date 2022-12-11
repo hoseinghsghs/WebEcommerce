@@ -78,6 +78,7 @@ class CartController extends Controller
 
         $addresses = UserAddress::where('user_id', auth()->id())->get();
         // dd($addresses->all());
+        SEOMeta::setRobots('noindex, nofollow');
         $provinces = Province::all();
 
         return view('home.page.cart.checkout', compact('addresses', 'provinces'));

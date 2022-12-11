@@ -5,6 +5,8 @@ namespace App\Http\Livewire\Home\Cart;
 use App\Models\Category;
 use Livewire\Component;
 use App\Models\Product;
+use Artesaos\SEOTools\Facades\SEOMeta;
+
 
 class ShowCart extends Component
 {
@@ -114,6 +116,7 @@ class ShowCart extends Component
 
         }
         $cartitems = \Cart::getContent();
+        SEOMeta::setRobots('noindex, nofollow');
         return view('livewire.home.cart.show-cart',['cartitems'=> $cartitems])
         ->extends('home.layout.MasterHome')
         ->section('content');

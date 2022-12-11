@@ -9,6 +9,8 @@ use App\Models\UserAddress;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Artesaos\SEOTools\Facades\SEOMeta;
+
 
 class AddressController extends Controller
 {
@@ -21,6 +23,8 @@ class AddressController extends Controller
     {
         $addresses = UserAddress::where('user_id', auth()->id())->latest()->paginate(5);
         $provinces = Province::all();
+        SEOMeta::setRobots('noindex, nofollow');
+
         return view('home.page.users_profile.address', compact('provinces', 'addresses'));
     }
 
@@ -33,6 +37,8 @@ class AddressController extends Controller
     {
         $addresses = UserAddress::where('user_id', auth()->id())->get();
         $provinces = Province::all();
+        SEOMeta::setRobots('noindex, nofollow');
+
         return view('home.page.users_profile.create_address', compact('provinces', 'addresses'));
     }
 
@@ -96,6 +102,7 @@ class AddressController extends Controller
      */
     public function edit(UserAddress $address)
     {
+        SEOMeta::setRobots('noindex, nofollow');
         $provinces = Province::all();
         return view('home.page.users_profile.edit_address', compact('address', 'provinces'));
     }
