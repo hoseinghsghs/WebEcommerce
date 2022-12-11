@@ -57,14 +57,14 @@ class QuestionController extends Controller
                 DB::commit();
             } catch (\Exception $ex) {
                 DB::rollBack();
-                alert()->error('مشکل در ایجاد پرسش و پاسخ', $ex->getMessage())->showConfirmButton('تایید');
+                alert()->error('','مشکل در ایجاد پرسش و پاسخ', $ex->getMessage())->showConfirmButton('تایید');
                 return redirect()->back();
             }
 
-            alert()->success('پرسش شما با موفقیت برای این محصول ثبت شد');
+            alert()->success('','پرسش شما با موفقیت برای این محصول ثبت شد');
             return redirect()->back();
         } else {
-            alert()->warning('برای ثبت پرسش ابتدا وارد سایت شوید')->showConfirmButton('تایید');
+            alert()->warning('','برای ثبت پرسش ابتدا وارد سایت شوید')->showConfirmButton('تایید');
             return redirect()->back();
         }
     }
@@ -108,12 +108,12 @@ class QuestionController extends Controller
         }
 
 
-        alert()->success('پاسخ شما با موفقیت برای این محصول ثبت شد')->showConfirmButton('تایید');
+        alert()->success('','پاسخ شما با موفقیت برای این محصول ثبت شد')->showConfirmButton('تایید');
         return redirect()->back();
 
         return back();}
         else {
-            alert()->warning('برای ثبت پاسخ ابتدا وارد سایت شوید')->showConfirmButton('تایید');
+            alert()->warning('','برای ثبت پاسخ ابتدا وارد سایت شوید')->showConfirmButton('تایید');
             return redirect()->back();
         }
     }

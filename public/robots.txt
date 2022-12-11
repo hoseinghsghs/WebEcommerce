@@ -1,8 +1,25 @@
 User-agent: *
-Disallow: /Admin-panel/
-Disallow: /admin/
-Disallow: /profile/
+Disallow: /Admin-panel/*
+Disallow: /profile
+Disallow: /admin/*
+Disallow: /profile/*
+Disallow: /otp/*
+Disallow: /outh/*
+Disallow: /cart
+Disallow: /payment
+Disallow: /login
+Disallow: /faq
+Disallow: /privacy
+Disallow: /rules
+Disallow: /checkout
+Disallow: /compare
+Disallow: /get-province-cities-list
+Disallow: /remove-from-compare/*
+Disallow: /add-to-compare/*
+Disallow: /image_manipulation/*
+Disallow: /home/question/*
 
+Sitemap: http://www.likoshop.ir/sitemap.xml
 
 
 

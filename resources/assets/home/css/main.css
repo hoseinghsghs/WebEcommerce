@@ -591,7 +591,7 @@ header.header-main {
 
 .header-cart-nav {
     width: fit-content;
-    height: 60px;
+    height: 53px;
     position: relative;
     line-height: 55px;
     float: right;
@@ -607,7 +607,7 @@ header.header-main {
 @media (max-width: 480px) {
     .header-cart-nav {
         width: fit-content;
-        height: 60px;
+        height: 53px;
         position: relative;
         line-height: 55px;
         float: right;
@@ -11953,8 +11953,8 @@ button.products-filter-btn {
 }
 
 .header-main .header-logo img {
-    width: 170px;
-    height: 48px;
+    width: 144px;
+    height: 42px;
 }
 
 .liko-danger-btn {

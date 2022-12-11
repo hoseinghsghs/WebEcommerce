@@ -14,6 +14,7 @@ use App\Models\Service;
 use App\Models\Setting;
 use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\SEOTools;
+use Artesaos\SEOTools\Facades\SEOMeta;
 
 use function PHPSTORM_META\type;
 
@@ -29,7 +30,7 @@ class HomeController extends Controller
         OpenGraph::addProperty('site_name', env('APP_NAME'));
         OpenGraph::addProperty('locale', 'fa');
         SEOTools::opengraph()->addProperty('type', 'articles');
-        SEOTools::twitter()->setSite('@metawebs_ir');
+        SEOTools::twitter()->setSite('@likoshop_ir');
         SEOTools::jsonLd()->addImage(asset('storage/logo/' . $settings->logo));
 
         $brands = Brand::active()->get();

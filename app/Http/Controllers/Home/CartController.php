@@ -12,6 +12,8 @@ use App\Models\UserAddress;
 use Cart;
 use Illuminate\Http\Request;
 use SebastianBergmann\Environment\Console;
+use Artesaos\SEOTools\Facades\SEOMeta;
+use Artesaos\SEOTools\Facades\SEOTools;
 
 class CartController extends Controller
 {
@@ -55,6 +57,7 @@ class CartController extends Controller
 
     public function index()
     {
+        SEOMeta::setRobots('noindex, nofollow');
         return view('home.page.cart.index');
     }
 
@@ -75,6 +78,7 @@ class CartController extends Controller
 
         $addresses = UserAddress::where('user_id', auth()->id())->get();
         // dd($addresses->all());
+        SEOMeta::setRobots('noindex, nofollow');
         $provinces = Province::all();
 
         return view('home.page.cart.checkout', compact('addresses', 'provinces'));
