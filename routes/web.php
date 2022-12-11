@@ -39,6 +39,7 @@ use App\Http\Livewire\Home\ProductsList;
 use App\Models\Question;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Artesaos\SEOTools\Facades\SEOMeta;
 
 //fortify routes
 require_once __DIR__.'/fortify.php';
