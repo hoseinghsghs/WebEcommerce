@@ -232,8 +232,8 @@
                 </div>
                 <div class="col-lg-9 col-md-9 col-xs-12 pl">
                     <div class="shop-archive-content d-block">
-                        <button class="btn mb-3 products-filter-btn d-md-none" onclick="openSidebar(event)">
-                            <i class="fas fa-filter"></i> فیلترها
+                        <button class="btn mb-3 products-filter-btn d-md-none btn-sm" onclick="openSidebar(event)">
+                            <i class="fas fa-filter"></i> فیلتر
                         </button>
                         <div class="archive-header d-flex flex-wrap align-items-center">
                             <h2 class="archive-header-title ml-sm-auto">لیست محصولات</h2>
