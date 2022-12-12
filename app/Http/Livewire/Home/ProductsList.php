@@ -147,18 +147,8 @@ class ProductsList extends Component
             SEOTools::setCanonical(env('APP_URL') . '/search');
             $this->seoparameter();
             $attributes = $this->category->attributes()->where('is_filter', 1)->has('categoryValues')->with('categoryValues')->get();
-            // get all sub categories of current category
-            $children_categories = collect([$this->category]);
-            if (count($this->category->children()->active()->get()) > 0) {
-                $children_categories=$children_categories->concat($this->category->children()->active()->get());
-                foreach ($this->category->children as $category3) {
-                    if (count($category3->children()->active()->get()) > 0) {
-                        $children_categories=$children_categories->concat($category3->children()->active()->get());
-                    }
-                }
-            }
 
-            $products = Product::whereIn('category_id',$children_categories->pluck('id')->all())->active()->filter($this->filterd)->latest()->paginate($this->filterd['displayCount']);
+            $products = Product::whereIn('category_id',category_children($this->category)->pluck('id')->all())->active()->filter($this->filterd)->latest()->paginate($this->filterd['displayCount']);
 
             return view('livewire.home.products-list', compact('attributes', 'products'))->extends('home.layout.MasterHome');
         } else {

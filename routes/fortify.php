@@ -46,8 +46,8 @@ Route::group(['middleware' => config('fortify.middleware', ['web'])], function (
     // Password Reset...
     if (Features::enabled(Features::resetPasswords())) {
         if ($enableViews) {
-            Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])
-                ->name('password.request');
+            /*Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])
+                ->name('password.request');*/
 
             Route::get('/reset-password/{token}', [NewPasswordController::class, 'create'])
                 ->name('password.reset');

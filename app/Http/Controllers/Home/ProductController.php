@@ -21,7 +21,7 @@ class ProductController extends Controller
         if (!$product->is_active) {
             abort(404);
         }
-        
+
         $product->load(['category.parent', 'attributes', 'tags', 'brand', 'rates']);
         $settings = Setting::findOrNew(1);
         SEOTools::setDescription($settings->description);
@@ -37,7 +37,7 @@ class ProductController extends Controller
         $categories = Category::all();
 //        $brands=Brand::all();
         $services = Service::orderBy('service_order')->get();
-
+        //navigation product categories
         $product_categories = [];
         for ($pc = $product->category; $pc; $pc = $pc->parent) {
             $product_categories[] = $pc;
@@ -45,7 +45,7 @@ class ProductController extends Controller
         $product_categories = array_reverse($product_categories);
         // $category_simulation=Category::active()->where('name',$product->category->name)->get()->first();
         // $product_simulation=$category_simulation->products->take(3)->sortBy('desc');
-//        $products_latest=Product::active()->latest()->take(3)->get();
+        //$products_latest=Product::active()->latest()->take(3)->get();
         $wishlist = WishList::where('user_id', auth()->id())->get();
         $banner_product = Banner::active()->where('type', 'محصول')->get()->first();
         $main_attributes = $product->attributes()->whereIn('attribute_id', $product->category->attributes()->where('is_main', true)->pluck('id')->toArray())->with('attribute')->get();
