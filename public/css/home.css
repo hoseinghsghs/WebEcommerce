@@ -40489,15 +40489,15 @@ button.products-filter-btn {
 .sidebar-close {
     left: 0px;
     outline: none;
-    background-color: rgb(241 212 212);
-    width: 30px;
-    height: 30px;
-    font-size: 15px;
+
+    width: 27px;
+    height: 27px;
+    font-size: 12px;
     border-radius: 50%;
     line-height: 0;
     text-align: center;
     display: block;
-    color: red;
+    color: black;
 }
 
 .ret-btn {
