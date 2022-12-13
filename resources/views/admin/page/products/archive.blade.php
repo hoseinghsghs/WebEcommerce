@@ -24,16 +24,8 @@
         </div>
 
         <div class="container-fluid">
-
             <!-- Hover Rows -->
-            @livewire('admin.products.archive-component',key($products->id))
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <div class="card">
-                        {{$products->links('vendor.pagination.bootstrap-4')}}
-                    </div>
-                </div>
-            </div>
+            @livewire('admin.products.archive-component')
             <!-- #END# Hover Rows -->
         </div>
     </div>

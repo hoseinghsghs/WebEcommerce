@@ -14,6 +14,7 @@ use Livewire\WithPagination;
 class ProductComponent extends Component
 {
     use WithFileUploads, WithPagination;
+
     public $title;
     public $product;
 
@@ -48,15 +49,7 @@ class ProductComponent extends Component
 
     public function mount(Product $product)
     {
-        if ($product->is_active) {
 
-            $this->title = "عدم انتشار";
-            $this->color = "danger";
-        } else {
-
-            $this->title = "انتشار";
-            $this->color = "success";
-        }
     }
     // public function delproduct(product $product){
 
@@ -68,38 +61,18 @@ class ProductComponent extends Component
 
     // }
 
-    public function ChengeActive_product(Product $product)
+    public function ChangeActive_product(Product $product)
     {
-        if ($product->is_active) {
-            $product->update([
-                "is_active" => false
-            ]);
-            $this->title = "عدم انتشار";
-            $this->color = "danger";
-        } else {
-            $product->update([
-                "is_active" => true
-            ]);
-            $this->title = "انتشار";
-            $this->color = "success";
-        }
+        $product->update([
+            "is_active" => !$product->is_active
+        ]);
     }
-    public function ChengeArchive_product(Product $product)
-    {
 
-        if ($product->is_archive) {
-            $product->update([
-                "is_archive" => false
-            ]);
-            $this->title = "بایگانی کردن";
-            $this->color = "danger";
-        } else {
-            $product->update([
-                "is_archive" => true
-            ]);
-            $this->title = "خروج از بایگانی";
-            $this->color = "success";
-        }
+    public function ChangeArchive_product(Product $product)
+    {
+        $product->update([
+            "is_archive" => true
+        ]);
     }
 
     // public function sweetAlertConfirmed(array $data)
@@ -121,13 +94,12 @@ class ProductComponent extends Component
     // }
     public function render()
     {
-        $categories = Category::all();
-        $product = Product::where('name', 'like', '%' . $this->name . '%')
+        $products = Product::where('name', 'like', '%' . $this->name . '%')
             ->where('category_id', 'like', '%' . $this->category . '%')
             ->where('is_active', 'like', '%' . $this->status . '%')
             ->where('is_archive', 0)->latest()
             ->paginate(10);
 
-        return view('livewire.admin.products.product-component', ['products' => $product, 'categories' => $categories]);
+        return view('livewire.admin.products.product-component', ['products' => $products, 'categories' => Category::all()]);
     }
 }

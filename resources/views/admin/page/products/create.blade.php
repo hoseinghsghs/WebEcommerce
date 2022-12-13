@@ -88,7 +88,7 @@
                                         <div class="form-group col-md-3 col-sm-6">
                                             <label for="brandSelect">برند</label>
                                             <select id="brandSelect" name="brand_id" data-placeholder="انتخاب برند"
-                                                    class="form-control ms select2">
+                                                    class="form-control ms search-select">
                                                 <option></option>
                                                 @foreach ($brands as $brand)
                                                     <option value="{{ $brand->id }}">

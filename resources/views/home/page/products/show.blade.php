@@ -10,7 +10,7 @@
                             <ol class="breadcrumb mb-0">
                                 <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="mdi mdi-home"></i>خانه
                                     </a></li>
-                                @foreach($product_categories as $category)
+                                @foreach(product_categories($product) as $category)
                                     <li class="breadcrumb-item"><a
                                             href="{{route('home.products.search',$category->slug)}}">{{$category->name}}</a>
                                     </li>

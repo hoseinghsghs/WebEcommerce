@@ -14,9 +14,10 @@
         position: absolute;
         top: 4px;
         left: 10px;
-        padding: 10px;
+        padding: 7px;
         color: #9ca3af;
         cursor: pointer;
+        font-size: 1.2em;
     }
 
     .form1 span {

@@ -22,22 +22,11 @@
                 </div>
             </div>
         </div>
-
         <div class="container-fluid">
             <!-- Hover Rows -->
-            @livewire('admin.products.product-component',key($products->id))
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <div class="card">
-                    </div>
-                </div>
-            </div>
+            @livewire('admin.products.product-component')
             <!-- #END# Hover Rows -->
         </div>
     </div>
 </section>
 @endsection
-@push('scripts')
-
-
-@endpush
