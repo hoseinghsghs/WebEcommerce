@@ -95,6 +95,7 @@
     $(document).ready(function() {
         $('#summernote2').summernote({
             height: 200,
+            fontNames: ['Arial', 'IRANSans', 'Comic Sans MS', 'Courier New' , 'IRANSansDN' ],
             toolbar: [
                 ['style', ['style']],
                 ['font', ['bold', 'italic', 'underline', 'strikethrough',
