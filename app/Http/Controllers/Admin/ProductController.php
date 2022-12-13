@@ -233,7 +233,7 @@ class ProductController extends Controller
     public function updateCategory(Request $request, Product $product, ToastrFactory $flasher)
     {
         $request->validate([
-            'category_id' => 'required|exists:categories,id|not_in:'.$product->category->id,
+            'category_id' => 'required|exists:categories,id',
             'attribute_ids' => 'required|array',
             'attribute_ids.*' => 'required|string',
             'variation_values' => 'required|array',

@@ -174,7 +174,7 @@
                                                 <span>
                                                     <i class="fa fa-archive"></i> دسته:
                                                 </span>
-                                                    @foreach($product_categories as $category)
+                                                    @foreach(product_categories($product) as $category)
                                                     <a href="{{route('home.products.search',$category->slug)}}"
                                                        class="product-link product-cat-title">{{$category->name}}</a>
                                                         @if(!$loop->last)
