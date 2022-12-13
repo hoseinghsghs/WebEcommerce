@@ -1,8 +1,8 @@
 <div class="header-search-box">
     <form autocomplete="off" wire:submit.prevent="search" class="form-search">
         <div class="form1">
-            <i class="fa fa-search" wire:click="search" wire:loading.remove></i>
-            <i class="mdi mdi-loading mdi-spin" wire:loading></i>
+            <i class="fa fa-search" wire:click="search" wire:loading.remove wire:target="categoryId,search"></i>
+            <i class="fa fa-spinner fa-spin" wire:loading></i>
             <input type="text" class="form-control form-input" value="{{session('search')??''}}"
                 wire:model.debounce.500ms="search" placeholder="محصول خود را جستجو کنید...">
             <span class="left-pan1">
@@ -21,24 +21,31 @@
             @forelse ($sProducts as $product )
             <li>
                 <a class="d-flex align-items-center border-bottom border-light"
-                    href="{{route('home.products.show',$product->slug)}}"><i class="mdi mdi-clock-outline"></i>
+                    href="{{route('home.products.show',$product->slug)}}"><i class="mdi mdi-clock-outline d-none d-md-inline-block"></i>
                     <img src="{{asset('storage/primary_image/'.$product->primary_image)}}" alt="image" width="60"
                         height="60" class="suggestion-image border rounded">
-                    <span class="mr-2">{{$product->name}}</span>
-                    <span class="mr-auto ml-1">{{$product->category->parent->name}} /
-                        {{$product->category->name}}</span>
-                    <button class="btn btn-light btn-continue-search" type="submit">
+                    <div class="mr-2">
+                        <div>{{$product->name}}</div>
+                        <small class="text-muted">
+                            @foreach(product_categories($product) as $category)
+                            {{$category->name}}
+                                @if(!$loop->last)
+                                    <i class="fa fa-angle-left mx-1"></i>
+                                @endif
+                            @endforeach
+                        </small>
+                    </div>
+                    <button class="btn btn-light btn-continue-search mr-auto" type="submit">
                         <i class="fa fa-angle-left"></i>
                     </button>
                 </a>
             </li>
             @empty
-            <li class="mx-auto mt-3 mb-3">
+            <div class="mx-auto mt-3 mb-3">
                 <p class="text-muted text-center">موردی یافت نشد!</p>
-            </li>
+            </div>
             @endforelse
         </ul>
-        <div class="localSearchSimple"></div>
     </div>
     @endif
 </div>

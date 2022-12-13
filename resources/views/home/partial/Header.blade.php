@@ -26,12 +26,12 @@
                         @if (!request()->routeIs('home.cart.index'))
                             <li class="divider-space-card d-block">
                                 <div class="header-cart-basket">
-                                    <a class="cart-basket-box">
+                                    <p class="cart-basket-box">
                                         <span class="icon-cart">
                                               <i class="fa fa-shopping-cart"></i>
                                         </span>
                                         <span class="count-cart" id="count-cart">{{Cart::getContent()->count()}}</span>
-                                    </a>
+                                    </p>
                                     <div class="widget-shopping-cart" id="widget-shopping-cart"
                                          style={{\Cart::isEmpty() ? 'display:none' : ''}}>
                                         <div class="widget-shopping-cart-content">
@@ -263,17 +263,25 @@
                         <li>
                             <a href="#" class="collapsed" type="button" data-toggle="collapse"
                                data-target="#collapse-{{$category1->id}}" aria-expanded="false"
-                               aria-controls="collapse-{{$category1->id}}"><i
-                                    class="mdi mdi-chevron-down"></i>{{$category1->name}}</a>
+                               aria-controls="collapse-{{$category1->id}}">
+                                @if(count($category1->children->where('is_active' , 1))>0)
+                                <i class="mdi mdi-chevron-down"></i>
+                                @endif
+                                {{$category1->name}}
+                            </a>
                             @if(count($category1->children->where('is_active' , 1))>0)
                                 <div id="collapse-{{$category1->id}}" class="collapse" aria-labelledby="headingOne">
                                     <ul>
                                         @foreach($category1->children->sortBy('order')->where('is_active' , 1) as $category2)
                                             <li @class(["has-sub"=>count($category2->children)>0])><a
-                                                    href="{{route('home.products.index',['slug'=>$category2->slug])}}"
+                                                    href="{{route('home.products.search',['slug'=>$category2->slug])}}"
                                                     class="category-level-2">{{$category2->name}}</a>
                                                 <ul>
                                                     @if(count($category2->children->where('is_active' , 1))>0)
+                                                        <li><a
+                                                                href="{{route('home.products.search',['slug'=>$category2->slug])}}"
+                                                                class="category-level-3">همه موارد این دسته</a>
+                                                        </li>
                                                         @foreach ($category2->children->sortBy('order')->where('is_active' , 1) as $category3 )
                                                             <li>
                                                                 <a href="{{route('home.products.index',['slug'=>$category3->slug])}}"
