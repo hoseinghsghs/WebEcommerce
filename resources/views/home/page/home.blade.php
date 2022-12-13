@@ -139,6 +139,7 @@
 
 
         <!-- brand--------------------------------------->
+         @if ($brands->count())
         <div class="col-lg-12 col-md-12 col-xs-12 pr order-1 d-block">
             <div class="slider-widget-products">
                 <div class="widget widget-product card mb-0">
@@ -162,6 +163,7 @@
                 </div>
             </div>
         </div>
+        @endif
         <!-- brand end----------------------------------------->
     </div>
 </div>
