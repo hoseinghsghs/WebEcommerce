@@ -45,6 +45,6 @@ class ProductController extends Controller
         $banner_product = Banner::active()->where('type', 'محصول')->get()->first();
         $main_attributes = $product->attributes()->whereIn('attribute_id', $product->category->attributes()->where('is_main', true)->pluck('id')->toArray())->with('attribute')->get();
 
-        return view('home.page.products.show', compact('product', 'product_categories', 'categories', 'services', 'wishlist', 'banner_product', 'main_attributes'));
+        return view('home.page.products.show', compact('product', 'categories', 'services', 'wishlist', 'banner_product', 'main_attributes'));
     }
 }
