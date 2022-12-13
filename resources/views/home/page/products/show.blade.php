@@ -129,8 +129,8 @@
                                                                     width="100" alt="{{$product->name}}"/>
                                                             </a>
                                                         </li>
-                                                        @foreach(product_categories($product) as $category)
-                                                        <li class="item" style="padding: 4px">
+                                                        @foreach ($product->images as $image_value )
+                                                            <li class="item" style="padding: 4px">
                                                                 <a href="#" class="elevatezoom-gallery"
                                                                    data-update=""
                                                                    data-image="{{url(env('PRODUCT_IMAGES_UPLOAD_PATCH').$image_value->image)}}"
@@ -174,7 +174,7 @@
                                                 <span>
                                                     <i class="fa fa-archive"></i> دسته:
                                                 </span>
-                                                    @foreach($product_categories as $category)
+                                                    @foreach(product_categories($product) as $category)
                                                     <a href="{{route('home.products.search',$category->slug)}}"
                                                        class="product-link product-cat-title">{{$category->name}}</a>
                                                         @if(!$loop->last)
