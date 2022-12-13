@@ -26,12 +26,12 @@
                         @if (!request()->routeIs('home.cart.index'))
                             <li class="divider-space-card d-block">
                                 <div class="header-cart-basket">
-                                    <a class="cart-basket-box">
+                                    <p class="cart-basket-box">
                                         <span class="icon-cart">
                                               <i class="fa fa-shopping-cart"></i>
                                         </span>
                                         <span class="count-cart" id="count-cart">{{Cart::getContent()->count()}}</span>
-                                    </a>
+                                    </p>
                                     <div class="widget-shopping-cart" id="widget-shopping-cart"
                                          style={{\Cart::isEmpty() ? 'display:none' : ''}}>
                                         <div class="widget-shopping-cart-content">

@@ -73,11 +73,13 @@
 
         $('#summernote').summernote({
             height: 200,
+            fontNames: ['Arial', 'IRANSans', 'Comic Sans MS', 'Courier New' , 'IRANSansDN' ],
             toolbar: [
                 ['style', ['style']],
                 ['font', ['bold', 'italic', 'underline', 'strikethrough',
                     'clear'
-                ]],
+                ]
+                ],
                 ['fontname', ['fontname']],
                 ['fontsize', ['fontsize']],
                 ['color', ['color']],
