@@ -151,3 +151,13 @@ if (!function_exists('category_children')) {
         return $children_categories;
     }
 }
+if (!function_exists('product_categories')) {
+    function product_categories($product): array
+    {
+        $product_categories = [];
+        for ($pc = $product->category; $pc; $pc = $pc->parent) {
+            $product_categories[] = $pc;
+        }
+        return array_reverse($product_categories);
+    }
+}

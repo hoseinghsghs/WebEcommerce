@@ -37,12 +37,7 @@ class ProductController extends Controller
         $categories = Category::all();
 //        $brands=Brand::all();
         $services = Service::orderBy('service_order')->get();
-        //navigation product categories
-        $product_categories = [];
-        for ($pc = $product->category; $pc; $pc = $pc->parent) {
-            $product_categories[] = $pc;
-        }
-        $product_categories = array_reverse($product_categories);
+
         // $category_simulation=Category::active()->where('name',$product->category->name)->get()->first();
         // $product_simulation=$category_simulation->products->take(3)->sortBy('desc');
         //$products_latest=Product::active()->latest()->take(3)->get();

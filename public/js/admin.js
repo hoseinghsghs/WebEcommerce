@@ -19143,6 +19143,8 @@ $(function () {
     }
   });
   $(".search-select").select2({
+    dir: "rtl",
+    language: "fa",
     allowClear: true
   });
   $("#max-select").select2({

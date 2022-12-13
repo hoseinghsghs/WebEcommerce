@@ -26,8 +26,7 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::latest()->paginate(10);
-        return view('admin.page.products.index', compact('products'));
+        return view('admin.page.products.index');
     }
 
     /**
@@ -266,7 +265,6 @@ class ProductController extends Controller
 
     public function archive()
     {
-        $products = Product::where('is_archive', 1)->latest()->paginate(10);
-        return view('admin.page.products.archive', compact('products'));
+        return view('admin.page.products.archive');
     }
 }
