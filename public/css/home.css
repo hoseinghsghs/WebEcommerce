@@ -33107,9 +33107,9 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 }
 
 .shop-archive-content .archive-header h2.archive-header-title {
-    font-size: 20px;
+    font-size: 14px;
     color: #868686;
-    padding: 5px;
+    padding-left: 7px;
     font-weight: 400;
 }
 
@@ -40328,9 +40328,9 @@ body.light .progress-wrap svg.progress-circle path {
 
 /* filter btn */
 button.products-filter-btn {
-    background-color: #651fff;
+    background-color: #087d9a;
     color: #fff;
-    border-radius: 20px;
+    border-radius: 6px;
 }
 
 .filter-sidebar-overlay,
@@ -40489,15 +40489,15 @@ button.products-filter-btn {
 .sidebar-close {
     left: 0px;
     outline: none;
-    background-color: rgb(241 212 212);
-    width: 30px;
-    height: 30px;
-    font-size: 15px;
+
+    width: 27px;
+    height: 27px;
+    font-size: 12px;
     border-radius: 50%;
     line-height: 0;
     text-align: center;
     display: block;
-    color: red;
+    color: black;
 }
 
 .ret-btn {
@@ -41432,7 +41432,7 @@ button.products-filter-btn {
     }
 
     .nav-btn {
-        top: 77px;
+        top: 70px;
     }
 
     .header-main-nav .divider-space-card .header-cart-basket .cart-basket-box {
