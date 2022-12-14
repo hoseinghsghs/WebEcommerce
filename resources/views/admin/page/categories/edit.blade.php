@@ -191,8 +191,7 @@
                                                 <select id="attributeVariation" name="variation_id"
                                                         class="form-control show-tick ms select2">
                                                     @if (old('attribute_ids') && old('variation_id'))
-                                                        @foreach ($attributes->only(old('attribute_ids')) as $selected_attribute
-                                                        )
+                                                        @foreach ($attributes->only(old('attribute_ids')) as $selected_attribute)
                                                             <option value="{{$selected_attribute->id}}"
                                                                 {{$selected_attribute->id == old('variation_id') ? "selected" : null}}>
                                                                 {{$selected_attribute->name}}</option>

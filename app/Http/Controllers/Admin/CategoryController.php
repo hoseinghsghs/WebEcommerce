@@ -198,7 +198,7 @@ class CategoryController extends Controller
         if ($request->missing('attribute_is_main_ids') || $request->has('parent_id') && $request['parent_id'] == 0) {
             $data['attribute_is_main_ids'] = [];
         }
-        if ($request->has('parent_id') && $request['parent_id'] == 0) {
+        if ($request->missing('parent_id')|| $request->parent_id ==0) {
             $data['variation_id'] = null;
         }
 
@@ -206,7 +206,6 @@ class CategoryController extends Controller
             DB::beginTransaction();
 
             $category->update($filtered);
-
             foreach ($data['attribute_ids'] as $attribute_id) {
                 $array[$attribute_id] = [
                     'is_filter' => in_array($attribute_id, $data['attribute_is_filter_ids']) ? 1 : 0,
@@ -224,7 +223,7 @@ class CategoryController extends Controller
         }
 
         $flasher->addSuccess('تغییرات با موفقیت ذخیره شد');
-        return redirect()->route('admin.categories.index');
+        return redirect()->back();
     }
 
     /**
