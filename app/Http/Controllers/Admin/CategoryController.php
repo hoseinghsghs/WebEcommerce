@@ -46,15 +46,22 @@ class CategoryController extends Controller
      */
     public function store(Request $request, ToastrFactory $flasher)
     {
-        $pCategories = Category::where('parent_id', 0)->pluck('id')->toArray();
-        $pCategories[] = 0;
+        //categories that can select as parent
+        $categories_id = [0];
+        $pCategories = Category::where('parent_id', 0)->with('children')->get();
+        $categories_id = array_merge($categories_id, $pCategories->pluck('id')->toArray());
+        foreach ($pCategories as $pCategory) {
+            if ($pCategory->children->isNotEmpty()) {
+                $categories_id = array_merge($categories_id, $pCategory->children->pluck('id')->toArray());
+            }
+        }
 
         $data = $request->validate([
             'name' => ['required', Rule::unique('categories')->where(function ($query) use ($request) {
                 $query->where('parent_id', $request->input('parent_id'));
             })],
             'slug' => 'required|unique:categories,slug',
-            'parent_id' => ['required', 'exists:categories,id'],
+            'parent_id' => ['required', Rule::in($categories_id)],
             'is_active' => 'nullable',
             'is_show' => 'nullable',
             'description' => 'nullable|string',
@@ -153,8 +160,15 @@ class CategoryController extends Controller
         } else {
             $request['is_show'] = false;
         };
-        $pCategories = Category::where('parent_id', 0)->pluck('id')->toArray();
-        $pCategories[] = 0;
+        //categories that can select as parent
+        $categories_id = [0];
+        $pCategories = Category::where('parent_id', 0)->with('children')->get();
+        $categories_id = array_merge($categories_id, $pCategories->pluck('id')->toArray());
+        foreach ($pCategories as $pCategory) {
+            if ($pCategory->children->isNotEmpty()) {
+                $categories_id = array_merge($categories_id, $pCategory->children->pluck('id')->toArray());
+            }
+        }
 
         $data = $request->validate([
             'name' => ['required', Rule::unique('categories')->ignore($category)->where(function ($query) use ($request) {
@@ -163,7 +177,7 @@ class CategoryController extends Controller
             'slug' => ['required', Rule::unique('categories')->ignore($category)],
             'is_active' => 'nullable',
             'is_show' => 'nullable',
-            'parent_id' => ['exists:categories,id', Rule::excludeIf($category->products->isNotEmpty() && $category->children->isNotEmpty())],
+            'parent_id' => [Rule::in($categories_id), Rule::excludeIf($category->products->isNotEmpty() && $category->children->isNotEmpty())],
             'description' => 'nullable|string',
             'icon' => 'nullable|string',
             'attribute_ids' => 'required|array|min:2',

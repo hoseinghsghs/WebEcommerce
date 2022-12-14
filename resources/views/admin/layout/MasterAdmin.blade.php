@@ -10,30 +10,30 @@
 
 <body class="theme-blush" id="cheack_collapsed">
 
-    <!-- Page Loader -->
-    @include('admin.partial.PageLoader')
-    <!-- Overlay For Sidebars -->
-    <div class=" overlay">
-    </div>
+<!-- Page Loader -->
+@include('admin.partial.PageLoader')
+<!-- Overlay For Sidebars -->
+<div class=" overlay">
+</div>
 
-    <!-- Main Search -->
-    @include('admin.partial.MainSearch')
-    <!-- Right Icon menu Sidebar -->
-    @include('admin.partial.RightIconSidebar')
+<!-- Main Search -->
+@include('admin.partial.MainSearch')
+<!-- Right Icon menu Sidebar -->
+@include('admin.partial.RightIconSidebar')
 
-    <!-- Left Sidebar -->
-    @include('admin.partial.LeftSidebar')
+<!-- Left Sidebar -->
+@include('admin.partial.LeftSidebar')
 
-    <!-- Right Sidebar -->
-    @include('admin.partial.RightSidebar')
-    <!-- Main Content -->
+<!-- Right Sidebar -->
+@include('admin.partial.RightSidebar')
+<!-- Main Content -->
 
-    @yield('Content')
+@yield('Content')
 
-    @include('sweetalert::alert')
-    <!-- Jquery Core Js -->
-    <script src="{{asset('js/admin.js')}}"></script>
-    <script>
+@include('sweetalert::alert')
+<!-- Jquery Core Js -->
+<script src="{{asset('js/admin.js')}}"></script>
+<script>
     @if(session('status'))
     swal({
         text: "{{ session('status') }}",
@@ -52,7 +52,7 @@
             sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
             dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
             s = '',
-            toFixedFix = function(n, prec) {
+            toFixedFix = function (n, prec) {
                 var k = Math.pow(10, prec);
                 return '' + Math.round(n * k) / k;
             };
@@ -67,13 +67,13 @@
         }
         return s.join(dec);
     }
-    </script>
-    <script>
-    $(document).ready(function() {
+</script>
+<script>
+    $(document).ready(function () {
 
         $('#summernote').summernote({
             height: 200,
-            fontNames: ['Arial', 'IRANSans', 'Comic Sans MS', 'Courier New' , 'IRANSansDN' ],
+            fontNames: ['Arial', 'IRANSans', 'Comic Sans MS', 'Courier New', 'IRANSansDN'],
             toolbar: [
                 ['style', ['style']],
                 ['font', ['bold', 'italic', 'underline', 'strikethrough',
@@ -90,12 +90,12 @@
             ]
         })
     });
-    </script>
-    <script>
-    $(document).ready(function() {
+</script>
+<script>
+    $(document).ready(function () {
         $('#summernote2').summernote({
             height: 200,
-            fontNames: ['Arial', 'IRANSans', 'Comic Sans MS', 'Courier New' , 'IRANSansDN' ],
+            fontNames: ['Arial', 'IRANSans', 'Comic Sans MS', 'Courier New', 'IRANSansDN'],
             toolbar: [
                 ['style', ['style']],
                 ['font', ['bold', 'italic', 'underline', 'strikethrough',
@@ -122,22 +122,15 @@
         $.notify({
             message: "رویداد جدید ثبت شد."
         });
-
     })
-    </script>
+</script>
 
+@flasher_render()
 
-    @flasher_render()
+@livewireScripts()
 
-    @livewireScripts()
+@stack('scripts')
 
-    @stack('scripts')
-
-    @flasher_livewire_render
-
-
-
-
+@flasher_livewire_render
 </body>
-
 </html>
