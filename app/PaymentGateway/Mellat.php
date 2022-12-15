@@ -25,8 +25,8 @@ $amount 		= $amounts; 							//-- مبلغ به ریال
 $callBackUrl	= route('home.payment_verify', ['gatewayName' => 'mellat']);	//-- لینک کال بک
 $localDate		= date('Ymd');
 $localTime		= date('Gis');
-$additionalData	= "";
-$payerId		= 0;
+$additionalData	= "testi";
+$payerId		= 12;
 
 //-- تبدیل اطلاعات به آرایه برای ارسال به بانک
 $parameters = array(
