@@ -1,6 +1,8 @@
 <?php
 
 namespace App\PaymentGateway;
+require_once("mellat/nusoap.php");
+use nusoap_client;
 
 use App\Models\Event;
 use Illuminate\Support\Facades\Log;
@@ -14,8 +16,7 @@ class Mellat extends Payment
     public function send($amounts, $addressId , $description , $ip)
     {
 
-    require_once("mellat/nusoap.php");
-		$v = verta();
+
 $terminalId		= "6814608";							//-- شناسه ترمینال
 $userName		= "lik404"; 							//-- نام کاربری
 $userPassword	= "31776521"; 							//-- کلمه عبور
