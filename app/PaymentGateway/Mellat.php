@@ -42,9 +42,12 @@ $parameters = array(
 	'payerId' 			=> $payerId
 );
 
-$client 	= new nusoap_client('https://bpm.shaparak.ir/pgwchannel/services/pgw?wsdl');
-$namespace 	='http://interfaces.core.sw.bps.com/';
-$result 	= $client->call('bpPayRequest', $parameters, $namespace);
+  try {
+        $client = new SoapClient('https://bpm.shaparak.ir/pgwchannel/services/pgw?wsdl', array('encoding'=>'UTF-8')); // اتصال به وب سرویس شاپرک با یونیکد UTF-8
+        $result = $client->bpPayRequest($parameters); // اتصال به متد پرداخت بانک ملت و ارسال پارامترهای پرداخت
+    } catch (Exception $e) {
+            dd($e->getMessage());
+    }
 
 //-- بررسی وجود خطا
 if ($client->fault)
