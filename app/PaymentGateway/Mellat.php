@@ -5,6 +5,7 @@ namespace App\PaymentGateway;
 use App\Models\Event;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use App\PaymentGateway\mellat\nusoap;
 use Verta;
 
 class Mellat extends Payment
