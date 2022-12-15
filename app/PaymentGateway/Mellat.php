@@ -49,7 +49,7 @@ $result 	= $client->call('bpPayRequest', $parameters, $namespace);
 //-- بررسی وجود خطا
 if ($client->fault)
 {
-	//-- نمایش خطا
+	dd($client);
 	die("خطا در اتصال به وب سرویس بانک");
 	} else {
 	$err = $client->getError();
