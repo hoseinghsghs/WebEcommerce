@@ -25,8 +25,8 @@ $amount 		= $amounts; 							//-- مبلغ به ریال
 $callBackUrl	= route('home.payment_verify', ['gatewayName' => 'mellat']);	//-- لینک کال بک
 $localDate		= date('Ymd');
 $localTime		= date('Gis');
-$additionalData	= "testi";
-$payerId		= 12;
+$additionalData	= $description;
+$payerId		= 0;
 
 //-- تبدیل اطلاعات به آرایه برای ارسال به بانک
 $parameters = array(
@@ -42,12 +42,9 @@ $parameters = array(
 	'payerId' 			=> $payerId
 );
 
-  try {
-        $client = new SoapClient('https://bpm.shaparak.ir/pgwchannel/services/pgw?wsdl', array('encoding'=>'UTF-8')); // اتصال به وب سرویس شاپرک با یونیکد UTF-8
-        $result = $client->bpPayRequest($parameters); // اتصال به متد پرداخت بانک ملت و ارسال پارامترهای پرداخت
-    } catch (Exception $e) {
-            dd($e->getMessage());
-    }
+$client 	= new nusoap_client('https://bpm.shaparak.ir/pgwchannel/services/pgw?wsdl');
+$namespace 	='http://interfaces.core.sw.bps.com/';
+$result 	= $client->call('bpPayRequest', $parameters, $namespace);
 
 //-- بررسی وجود خطا
 if ($client->fault)
