@@ -15,97 +15,61 @@ class Mellat extends Payment
 
     require_once("mellat/nusoap.php");
 		$v = verta();
-	//curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-	//$page = curl_exec ($ch);
+$terminalId		= "6814608";							//-- شناسه ترمینال
+$userName		= "lik404"; 							//-- نام کاربری
+$userPassword	= "31776521"; 							//-- کلمه عبور
+$orderId		= 10;								//-- شناسه فاکتور
+$amount 		= $amounts; 							//-- مبلغ به ریال
+$callBackUrl	= route('home.payment_verify', ['gatewayName' => 'mellat']);	//-- لینک کال بک
+$localDate		= date('Ymd');
+$localTime		= date('Gis');
+$additionalData	= "";
+$payerId		= 0;
 
-	$client = new soapclient('https://bpm.shaparak.ir/pgwchannel/services/pgw?wsdl');
-	$namespace='http://interfaces.core.sw.bps.com/';
+//-- تبدیل اطلاعات به آرایه برای ارسال به بانک
+$parameters = array(
+	'terminalId' 		=> $terminalId,
+	'userName' 			=> $userName,
+	'userPassword' 		=> $userPassword,
+	'orderId' 			=> $orderId,
+	'amount' 			=> $amount,
+	'localDate' 		=> $localDate,
+	'localTime' 		=> $localTime,
+	'additionalData' 	=> $additionalData,
+	'callBackUrl' 		=> $callBackUrl,
+	'payerId' 			=> $payerId
+);
 
-	///////////////// PAY REQUEST
+$client 	= new nusoap_client('https://bpm.shaparak.ir/pgwchannel/services/pgw?wsdl');
+$namespace 	='http://interfaces.core.sw.bps.com/';
+$result 	= $client->call('bpPayRequest', $parameters, $namespace);
 
-	if (isset($_POST['PayRequestButton'])) 
-	{ 
-        
-		$terminalId = $_POST['TerminalId'];
-		$userName = $_POST['UserName'];
-		$userPassword = $_POST['UserPassword'];
-		$orderId = $_POST['PayOrderId'];
-		$amount = $_POST['PayAmount'];
-		//$date =  date("YYMMDD");
-		//$time =  date("HHIISS");
-		$localDate = $_POST['PayDate'];
-		$localTime = $_POST['PayTime'];
-		$additionalData = $_POST['PayAdditionalData'];
-		$callBackUrl = $_POST['PayCallBackUrl'];
-		$payerId = $_POST['PayPayerId'];
+//-- بررسی وجود خطا
+if ($client->fault)
+{
+	//-- نمایش خطا
+	die("خطا در اتصال به وب سرویس بانک");
+	} else {
+	$err = $client->getError();
 
-		// Check for an error
-		$err = $client->getError();
-		if ($err) {
-			echo '<h2>Constructor error</h2><pre>' . $err . '</pre>';
-			die();
+	if ($err)
+	{
+		//-- نمایش خطا
+		die($err);
+	} else {
+		$res 		= explode (',',$result);
+		$ResCode 	= $res[0];
+
+		if ($ResCode == "0")
+		{
+			//-- انتقال به درگاه پرداخت
+			echo "<form name='myform' action='https://bpm.shaparak.ir/pgwchannel/startpay.mellat' method='POST'><input type='hidden' id='RefId' name='RefId' value='{$res[1]}'></form><script type='text/javascript'>window.onload = formSubmit; function formSubmit() { document.forms[0].submit(); }</script>";
+		} else {
+			//-- نمایش خطا
+			die($result);
 		}
-	  
-		$parameters = array(
-			'terminalId' => '6814608',
-			'userName' => 'lik404',
-			'userPassword' => '31776521',
-			'orderId' => '1001',
-			'amount' => $amounts,
-			'localDate' => $v->formatDate(),
-			'localTime' => $v->formatTime(),
-			'additionalData' => 'test',
-			'callBackUrl' => route('home.payment_verify', ['gatewayName' => 'mellat']),
-			'payerId' => '0');
-
-		// Call the SOAP method
-		$result = $client->call('bpPayRequest', $parameters, $namespace);
-		
-		// Check for a fault
-		if ($client->fault) {
-			echo '<h2>Fault</h2><pre>';
-			print_r($result);
-			echo '</pre>';
-			die();
-		} 
-		else {
-			// Check for errors
-			
-			$resultStr  = $result;
-
-			$err = $client->getError();
-			if ($err) {
-				// Display the error
-				echo '<h2>Error</h2><pre>' . $err . '</pre>';
-				die();
-			} 
-			else {
-				// Display the result
-
-				$res = explode (',',$resultStr);
-
-				echo "<script>alert('Pay Response is : " . $resultStr . "');</script>";
-				echo "Pay Response is : " . $resultStr;
-
-				$ResCode = $res[0];
-				
-				if ($ResCode == "0") {
-					// Update table, Save RefId
-					echo "<script language='javascript' type='text/javascript'>postRefId('" . $res[1] . "');</script>";
-				} 
-				else {
-				// log error in app
-					// Update table, log the error
-					// Show proper message to user
-				}
-			}// end Display the result
-		}// end Check for errors
 	}
-	else
-	{	
-		echo "<script>initData();</script>";
 	}
-	 
   }
 
   public function verify($token , $status)
