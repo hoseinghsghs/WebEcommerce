@@ -562,7 +562,7 @@ class nusoap_base {
 			case (is_array($val) || $type):
 				// detect if struct or array
 				$valueType = $this->isArraySimpleOrStruct($val);
-                if($valueType=='arraySimple' || ereg('^ArrayOf',$type)){
+                if($valueType=='arraySimple' || preg_match('^ArrayOf',$type)){
 			   		$this->debug("serialize_val: serialize array");
 					$i = 0;
 					if(is_array($val) && count($val)> 0){
