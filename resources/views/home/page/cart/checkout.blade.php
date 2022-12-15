@@ -448,10 +448,23 @@
                                             <h5 class="my-3"> انتخاب درگاه پرداخت</h5>
                                             </thead>
                                             <ul class="checkout-payment-methods">
+
+                                                 <li class="checkout-payment-method-item d-block">
+                                                    <label for="#" class="outline-radio">
+                                                        <input form="checkout" type="radio" name="payment_method"
+                                                               value="mellat" id="payment-option-online" checked>
+                                                        <span class="outline-radio-check"></span>
+                                                    </label>
+                                                    <label for="#" class="shipping-totals-title-row">
+                                                        <div class="shipping-totals-title">درگاه مستقیم بانک ملت
+                                                        </div>
+                                                    </label>
+                                                </li>
+
                                                 <li class="checkout-payment-method-item d-block">
                                                     <label for="#" class="outline-radio">
                                                         <input form="checkout" type="radio" name="payment_method"
-                                                               value="zarinpal" id="payment-option-online" checked>
+                                                               value="zarinpal" id="payment-option-online">
                                                         <span class="outline-radio-check"></span>
                                                     </label>
                                                     <label for="#" class="shipping-totals-title-row">

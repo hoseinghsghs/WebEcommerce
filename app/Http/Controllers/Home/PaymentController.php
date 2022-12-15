@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\PaymentGateway\Zarinpal;
 use App\PaymentGateway\Pay;
+use App\PaymentGateway\Mellat;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -99,6 +100,20 @@ class PaymentController extends Controller
         if (array_key_exists('error', $amounts)) {
             alert()->error($amounts['error'], 'دقت کنید')->showConfirmButton('تایید');
             return redirect()->route('home');
+        }
+
+        if ($request->payment_method == 'mellat') {
+           
+            $payGateway = new Mellat();
+            $payGatewayResult = $payGateway->send($amounts, $address_id, $description, $ip);
+
+            if (array_key_exists('error', $payGatewayResult)) {
+                alert()->error($payGatewayResult['error'])->showConfirmButton('تایید');
+                return redirect()->back();
+            } else {
+                Session::put('orderId', $payGatewayResult['orderId']);
+                return redirect()->to($payGatewayResult['success']);
+            }
         }
 
         if ($request->payment_method == 'paypal') {
