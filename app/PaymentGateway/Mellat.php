@@ -14,7 +14,7 @@ class Mellat extends Payment
     {
 
     require_once("mellat/nusoap.php");
-		
+		$v = verta();
 	//curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
 	//$page = curl_exec ($ch);
 
@@ -25,7 +25,7 @@ class Mellat extends Payment
 
 	if (isset($_POST['PayRequestButton'])) 
 	{ 
-        $v = verta();
+        
 		$terminalId = $_POST['TerminalId'];
 		$userName = $_POST['UserName'];
 		$userPassword = $_POST['UserPassword'];
@@ -54,7 +54,7 @@ class Mellat extends Payment
 			'amount' => $amounts,
 			'localDate' => $v->formatDate(),
 			'localTime' => $v->formatTime(),
-			'additionalData' => 'null',
+			'additionalData' => 'test',
 			'callBackUrl' => route('home.payment_verify', ['gatewayName' => 'mellat']),
 			'payerId' => '0');
 
