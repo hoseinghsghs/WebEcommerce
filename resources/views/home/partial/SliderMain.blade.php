@@ -17,13 +17,19 @@
                     </ol>
                     <div class="carousel-inner">
                         @foreach ($sliders as $slider)
-                            <a href="{{$slider->button_link}}">
-                                <div @class(["carousel-item carousel-item-h4","active"=>$loop->first])>
+                            <div @class(["carousel-item carousel-item-h4","active"=>$loop->first])>
+                                <a href="{{$slider->button_link}}">
                                     <picture>
-                                        <source srcset="{{url(env('BANNER_IMAGES_PATCH').$slider->image)}}" media="(min-width: 970px)">
-                                        <source srcset="{{route('fly-manipulation',['name'=>$slider->image,'width'=>1750,'height'=>700])}}" media="(min-width: 768px)">
-                                        <source srcset="{{route('fly-manipulation',['name'=>$slider->image,'width'=>2880,'height'=>500])}}" media="(min-width: 270px)">
-                                        <img class="d-block w-100 h-four-img" srcset="{{url(env('BANNER_IMAGES_PATCH').$slider->image)}}" alt="…">
+                                        <source srcset="{{url(env('BANNER_IMAGES_PATCH').$slider->image)}}"
+                                                media="(min-width: 970px)">
+                                        <source
+                                            srcset="{{route('fly-manipulation',['name'=>$slider->image,'width'=>1750,'height'=>700])}}"
+                                            media="(min-width: 768px)">
+                                        <source
+                                            srcset="{{route('fly-manipulation',['name'=>$slider->image,'width'=>2880,'height'=>500])}}"
+                                            media="(min-width: 270px)">
+                                        <img class="d-block w-100 h-four-img"
+                                             srcset="{{url(env('BANNER_IMAGES_PATCH').$slider->image)}}" alt="…">
                                     </picture>
                                     {{--<img src="{{route('fly-manipulation',['name'=>$slider->image,'width'=>360,'height'=>270])}}"
                                          class="d-block w-100 h-four-img" alt="{{$slider->title}}">--}}
@@ -39,8 +45,8 @@
                                                 @endisset {{$slider->button_text}}</a>
                                         @endisset
                                     </div>
-                                </div>
-                            </a>
+                                </a>
+                            </div>
                         @endforeach
                     </div>
                     @if(count($sliders)>1)
@@ -60,3 +66,4 @@
         </div>
     </div>
 </div>
+

@@ -152,7 +152,6 @@
                                 <!-- ویژگی های متغییر -->
                                 @foreach ($product_variation as $variation)
                                 <div class="col-md-12">
-                                    <hr>
                                     <div class="d-flex">
                                         <p class="mb-0 mr-3">
                                             <button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#collapse-{{ $variation->id }}">
@@ -166,6 +165,10 @@
                                         <div class="card card-body">
                                             <div class="row">
                                                 <div class="form-group col-sm-4">
+                                                    <label> عنوان </label>
+                                                    <input type="text" class="form-control" name="variation_values[{{ $variation->id }}][value]" value="{{ $variation->value }}">
+                                                </div>
+                                                <div class="form-group col-sm-4">
                                                     <label> قیمت </label>
                                                     <input dir="ltr" type="number" class="form-control price_values without-spin" id="variation_values[price][]" onkeyup="show_price(this.value,'formated_{{$variation->id}}_price')" onfocus="show_price(this.value,'formated_1_price')" name="variation_values[{{ $variation->id }}][price]" value="{{ $variation->price }}" required>
                                                     <span class="pt-1" id="formated_{{$variation->id}}_price"></span>
@@ -178,11 +181,11 @@
                                                     <label> sku </label>
                                                     <input dir="ltr" type="text" class="form-control" name="variation_values[{{ $variation->id }}][sku]" value="{{ $variation->sku }}">
                                                 </div>
-                                                <div class="form-group col-md-6 col-sm-4">
+                                                <div class="form-group col-sm-4">
                                                     <label> گارانتی </label>
                                                     <input type="text" class="form-control" name="variation_values[{{ $variation->id }}][guarantee]" value="{{ $variation->guarantee }}">
                                                 </div>
-                                                <div class="form-group col-md-6 col-sm-4">
+                                                <div class="form-group col-sm-4">
                                                     <label> مدت گارانتی </label>
                                                     <input type="text" class="form-control" name="variation_values[{{ $variation->id }}][time_guarantee]" value="{{ $variation->time_guarantee}}">
                                                 </div>

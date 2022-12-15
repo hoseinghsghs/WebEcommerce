@@ -26,8 +26,10 @@
                                             <table class="table table-profile-orders table-responsive-md table-hover">
                                                 <thead class="thead-light">
                                                 <tr>
-                                                    <th scope="col"> شماره <span class="d-none d-sm-inline-block">سفارش</span></th>
-                                                    <th scope="col"> تاریخ <span class="d-none d-sm-inline-block">ثبت سفارش</span> </th>
+                                                    <th scope="col"> شماره <span
+                                                            class="d-none d-sm-inline-block">سفارش</span></th>
+                                                    <th scope="col"> تاریخ <span class="d-none d-sm-inline-block">ثبت سفارش</span>
+                                                    </th>
                                                     <th scope="col">وضعیت</th>
                                                     <th scope="col">مجموع</th>
                                                     <th scope="col">جزئیات</th>
@@ -61,7 +63,9 @@
                                     </div>
                                 </div>
                             </div>
-                            {{$orders->onEachSide(1)->links()}}
+                            <div class="pagination-product">
+                                {{$orders->onEachSide(1)->links()}}
+                            </div>
                         </div>
                     </div>
                 </div>

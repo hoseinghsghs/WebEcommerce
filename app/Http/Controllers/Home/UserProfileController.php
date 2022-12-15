@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use App\Models\Order;
-use Illuminate\Http\Request;
 use Artesaos\SEOTools\Facades\SEOMeta;
 
 class UserProfileController extends Controller

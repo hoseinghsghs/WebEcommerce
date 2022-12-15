@@ -20,7 +20,7 @@
                             <div class="form-group">
                                 <div class="form-line">
                                     <select class="form-control ms" wire:model.deferred="category">
-                                        <option>دسته بندی</option>
+                                        <option value="">دسته بندی</option>
                                         @foreach ($categories->where('parent_id',0)->sortBy('order') as $category1)
                                             <optgroup label="{{$category1->name}}">
                                                 @if($category1->children->count()>0)

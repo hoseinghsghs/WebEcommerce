@@ -967,7 +967,7 @@ $(document).ready(function (e) {
         swipeRight: function () {
             this.parent().carousel("prev");
         },
-        threshold: 0,
+        threshold: 100,
         tap: function (event, target) {
             window.location = $(this)
                 .find(".carousel-item.active a")

@@ -807,7 +807,7 @@ $(document).ready(function (e) {
 
   /* if ($("#countdown-verify-end").length) {
       var $countdownOptionEnd = $("#countdown-verify-end");
-        $countdownOptionEnd.countdown({
+       $countdownOptionEnd.countdown({
           date: new Date().getTime() + 180 * 1000, // 1 minute later
           text: '<span class="day">%s</span><span class="hour">%s</span><span>: %s</span><span>%s</span>',
           end: function () {
@@ -967,7 +967,7 @@ $(document).ready(function (e) {
     swipeRight: function swipeRight() {
       this.parent().carousel("prev");
     },
-    threshold: 0,
+    threshold: 100,
     tap: function tap(event, target) {
       window.location = $(this).find(".carousel-item.active a").attr("href");
     },

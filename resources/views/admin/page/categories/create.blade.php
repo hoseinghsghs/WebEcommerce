@@ -222,9 +222,17 @@
             let parent_id = $(this).select2('data');
             if (parent_id[0].id !== '0') {
                 $('.sub-feature').show();
+                $('#attributeVariation').prop('required',true);
             } else {
                 $('.sub-feature').hide();
+                $('#attributeVariation').prop('required',false);
             }
         })
+        $(document).ready(function () {
+            if ($('#parent_id').select2('data')[0].id !== '0') {
+                $('.sub-feature').show();
+                $('#attributeVariation').prop('required',true);
+            }
+        });
     </script>
 @endpush
