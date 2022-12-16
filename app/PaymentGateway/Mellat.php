@@ -19,11 +19,11 @@ class Mellat extends Payment
 		$terminalId		= "6814608";							//-- شناسه ترمینال
 		$userName		= "lik404"; 							//-- نام کاربری
 		$userPassword	= "31776521"; 							//-- کلمه عبور
-		$orderId		= 10;								//-- شناسه فاکتور
+		$orderId		= 1012;								//-- شناسه فاکتور
 		$amount 		= $amounts; 							//-- مبلغ به ریال
 		$localDate		= date('Ymd');
 		$localTime		= date('Gis');
-		$additionalData	= $description;
+		$additionalData	= 'testi';
 		$callBackUrl	= route('home.payment_verify', ['gatewayName' => 'mellat']);	//-- لینک کال بک
 		$payerId		= 0;
 
