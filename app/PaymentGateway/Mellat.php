@@ -1,6 +1,7 @@
 <?php
 
 namespace App\PaymentGateway;
+require_once("mellat/nusoap.php");
 use nusoap_client;
 
 use App\Models\Event;
