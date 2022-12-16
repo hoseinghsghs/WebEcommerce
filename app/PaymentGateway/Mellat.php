@@ -1,13 +1,13 @@
 <?php
 
 namespace App\PaymentGateway;
+use nusoap_client;
+
 use App\Models\Event;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use App\PaymentGateway\mellat\nusoap;
 use Verta;
-require_once("mellat/nusoap.php");
-
 
 class Mellat extends Payment
 {
