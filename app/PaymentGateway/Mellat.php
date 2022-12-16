@@ -13,20 +13,19 @@ use Verta;
 class Mellat extends Payment
 {
     public $orderID;
+	
     public function send($amounts, $addressId , $description , $ip)
     {
-
-
-$terminalId		= "6814608";							//-- شناسه ترمینال
-$userName		= "lik404"; 							//-- نام کاربری
-$userPassword	= "31776521"; 							//-- کلمه عبور
-$orderId		= 10;								//-- شناسه فاکتور
-$amount 		= $amounts; 							//-- مبلغ به ریال
-$callBackUrl	= route('home.payment_verify', ['gatewayName' => 'mellat']);	//-- لینک کال بک
-$localDate		= date('Ymd');
-$localTime		= date('Gis');
-$additionalData	= $description;
-$payerId		= 0;
+		$terminalId		= "6814608";							//-- شناسه ترمینال
+		$userName		= "lik404"; 							//-- نام کاربری
+		$userPassword	= "31776521"; 							//-- کلمه عبور
+		$orderId		= 10;								//-- شناسه فاکتور
+		$amount 		= $amounts; 							//-- مبلغ به ریال
+		$localDate		= date('Ymd');
+		$localTime		= date('Gis');
+		$additionalData	= $description;
+		$callBackUrl	= route('home.payment_verify', ['gatewayName' => 'mellat']);	//-- لینک کال بک
+		$payerId		= 0;
 
 //-- تبدیل اطلاعات به آرایه برای ارسال به بانک
 $parameters = array(
@@ -45,11 +44,11 @@ $parameters = array(
 $client 	= new nusoap_client('https://bpm.shaparak.ir/pgwchannel/services/pgw?wsdl');
 $namespace 	='http://interfaces.core.sw.bps.com/';
 $result 	= $client->call('bpPayRequest', $parameters, $namespace);
-
+dd($client , $result );
 //-- بررسی وجود خطا
 if ($client->fault)
 {
-	dd($client);
+	
 	die("خطا در اتصال به وب سرویس بانک");
 	} else {
 	$err = $client->getError();
