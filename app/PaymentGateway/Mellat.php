@@ -45,6 +45,7 @@ $client 	= new nusoap_client('https://bpm.shaparak.ir/pgwchannel/services/pgw?ws
 $namespace 	='http://interfaces.core.sw.bps.com/';
 $result 	= $client->call('bpPayRequest', $parameters, $namespace);
 //-- بررسی وجود خطا
+dd($client , $result );
 if ($client->fault)
 {
 	
