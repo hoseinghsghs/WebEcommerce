@@ -72,7 +72,7 @@ require_once('class.wsdl.php');
 // class variable emulation
 // cf. http://www.webkreator.com/php/techniques/php-static-class-variables.html
 $GLOBALS['_transient']['static']['nusoap_base']['globalDebugLevel'] = 9;
-require_once('class.soap_server.php');
+
 /**
 *
 * nusoap_base
@@ -8145,4 +8145,5 @@ if (!extension_loaded('soap')) {
 	class soapclient extends nusoap_client {
 	}
 }
+require_once('class.soap_server.php');
 ?>
