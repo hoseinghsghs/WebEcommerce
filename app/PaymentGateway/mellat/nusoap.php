@@ -8145,5 +8145,4 @@ if (!extension_loaded('soap')) {
 	class soapclient extends nusoap_client {
 	}
 }
-require_once('class.soap_server.php');
 ?>
