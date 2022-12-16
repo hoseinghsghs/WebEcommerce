@@ -8,6 +8,7 @@ use App\Models\Event;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use App\PaymentGateway\mellat\nusoap;
+use SoapClient;
 use Verta;
 
 class Mellat extends Payment
@@ -41,7 +42,7 @@ $parameters = array(
 	'payerId' 			=> $payerId
 );
 
-$client 	= new nusoap_client('https://bpm.shaparak.ir/pgwchannel/services/pgw?wsdl');
+$client 	= new SoapClient('https://bpm.shaparak.ir/pgwchannel/services/pgw?wsdl');
 $namespace 	='http://interfaces.core.sw.bps.com/';
 $result 	= $client->call('bpPayRequest', $parameters, $namespace);
 //-- بررسی وجود خطا
