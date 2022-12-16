@@ -68,12 +68,12 @@ require_once('class.wsdl.php');
 
 // server class
 */
-require_once('class.soapclient.php');
-require_once('class.soap_server.php');
+
 // class variable emulation
 // cf. http://www.webkreator.com/php/techniques/php-static-class-variables.html
 $GLOBALS['_transient']['static']['nusoap_base']['globalDebugLevel'] = 9;
-
+require_once('class.soapclient.php');
+require_once('class.soap_server.php');
 /**
 *
 * nusoap_base
