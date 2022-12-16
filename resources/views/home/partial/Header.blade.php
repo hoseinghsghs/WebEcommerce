@@ -265,7 +265,7 @@
                                data-target="#collapse-{{$category1->id}}" aria-expanded="false"
                                aria-controls="collapse-{{$category1->id}}">
                                 @if(count($category1->children->where('is_active' , 1))>0)
-                                <i class="mdi mdi-chevron-down"></i>
+                                    <i class="mdi mdi-chevron-down"></i>
                                 @endif
                                 {{$category1->name}}
                             </a>
@@ -277,11 +277,11 @@
                                                     href="{{route('home.products.search',['slug'=>$category2->slug])}}"
                                                     class="category-level-2">{{$category2->name}}</a>
                                                 <ul>
+                                                    <li>
+                                                        <a href="{{route('home.products.search',['slug'=>$category2->slug])}}"
+                                                            class="category-level-3">همه موارد این دسته</a>
+                                                    </li>
                                                     @if(count($category2->children->where('is_active' , 1))>0)
-                                                        <li><a
-                                                                href="{{route('home.products.search',['slug'=>$category2->slug])}}"
-                                                                class="category-level-3">همه موارد این دسته</a>
-                                                        </li>
                                                         @foreach ($category2->children->sortBy('order')->where('is_active' , 1) as $category3 )
                                                             <li>
                                                                 <a href="{{route('home.products.index',['slug'=>$category3->slug])}}"
