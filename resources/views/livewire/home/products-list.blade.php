@@ -12,16 +12,16 @@
                             @if ($category)
                                 @foreach($nav_categories as $nav_category)
                                     @if($loop->last)
-                                        <li @class(["breadcrumb-item","active"=>!$filterd['search'] && !$filterd['tag']])>
+                                        <li class="breadcrumb-item">
                                             @if ($filterd['search'] || $filterd['tag'])
-                                                <a href="{{route('home.products.search',$nav_category->slug)}}">{{$nav_category->name}}</a>
+                                                <a href="{{route('home.products.search',$nav_category['slug'])}}">{{$nav_category['name']}}</a>
                                             @else
-                                                {{$nav_category->name}}
+                                                {{$nav_category['name']}}
                                             @endif
                                         </li>
                                     @else
-                                    <li @class(["breadcrumb-item","active"=> $category->id == $nav_category->id])>
-                                            <a href="{{route('home.products.search',$nav_category->slug)}}">{{$nav_category->name}}</a>
+                                    <li class="breadcrumb-item">
+                                            <a href="{{route('home.products.search',$nav_category['slug'])}}">{{$nav_category['name']}}</a>
                                     </li>
                                     @endif
                                 @endforeach
@@ -87,7 +87,7 @@
                                                         <a href="{{route('home.products.index',$child->slug)}}">
                                                             <div class="form-auth-row">
                                                                 <label for="#" class="ui-checkbox">
-                                                                    <input type="checkbox" id="check-{{$loop->index}}">
+                                                                    <input type="checkbox" id="check-{{$loop->index}}" disabled>
                                                                     <span class="ui-checkbox-check"></span>
                                                                 </label>
                                                                 <label for="check-{{$loop->index}}" class="remember-me"
@@ -100,7 +100,7 @@
                                                         <a href="{{route('home.products.search',['slug'=>$category->slug])}}">
                                                             <div class="form-auth-row">
                                                                 <label for="#" class="ui-checkbox">
-                                                                    <input type="checkbox" id="check-{{$loop->index}}">
+                                                                    <input type="checkbox" id="check-{{$loop->index}}" disabled>
                                                                     <span class="ui-checkbox-check"></span>
                                                                 </label>
                                                                 <label for="check-{{$loop->index}}" class="remember-me"
@@ -232,11 +232,8 @@
                 </div>
                 <div class="col-lg-9 col-md-9 col-xs-12 pl">
                     <div class="shop-archive-content d-block">
-                        <button class="btn mb-3 products-filter-btn d-md-none btn-sm" onclick="openSidebar(event)">
-                            <i class="fas fa-filter"></i> فیلتر
-                        </button>
                         <div class="archive-header d-flex flex-wrap align-items-center">
-                            <h2 class="archive-header-title ml-sm-auto">محصولات</h2>
+                            <h2 class="archive-header-title ml-auto mb-md-0">محصولات</h2>
                             @if ($initialFilter !== $filterd)
                                 <div class="ml-2">
                                     <button class="btn btn-range" wire:click="resetFilters()">
@@ -244,7 +241,10 @@
                                     </button>
                                 </div>
                             @endif
-                            <div class="d-flex align-items-center">
+                            <button class="btn mb-1 mb-md-0 ml-2 products-filter-btn d-md-none btn-sm" onclick="openSidebar(event)">
+                                <i class="fas fa-filter"></i> فیلتر
+                            </button>
+                            <div class="d-flex align-items-center mb-1 mb-md-0">
                                 <div class="sort-tabs mt-0 d-inline-block">
                                     <i class="fas fa-sort-amount-down"></i>
                                 </div>
@@ -258,7 +258,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="d-flex align-items-center">
+                            <div class="d-flex align-items-center mb-1 mb-md-0">
                                 <div class="sort-tabs mt-0 d-inline-block">
                                     <i class="fas fa-th"></i>
                                 </div>
