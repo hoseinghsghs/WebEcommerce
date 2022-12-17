@@ -151,7 +151,30 @@ class PaymentController extends Controller
         {
             $payGateway = new Mellat();
             $payGatewayResult = $payGateway->checkPayment($request->RefId, $request->ResCode , $request->SaleOrderId ,$request->SaleReferenceId);
-            dd($payGateway);
+            if ($payGatewayResult==false) {
+                alert()->error('خطا در پرداخت')->showConfirmButton('تایید');
+                return redirect()->route('home.user_profile.orders', ['order' => Session::pull('orderId')]);
+            } else {
+                try {
+                    Event::create([
+                        'title' => 'پرداخت نهایی انجام گرفت',
+                        'body' => 'آیدی کاربر' . " " . auth()->id() . " " . 'ملت',
+                        'user_id' => auth()->id(),
+                        'eventable_id' => auth()->id(),
+                        'eventable_type' => User::class,
+                    ]);
+                    Log::alert("پرداخت نهایی انجام گرفت", [
+                        'آیدی کاربر' => auth()->id(),
+                        'درگاه' => 'ملت',
+                    ]);
+                    Notification::route('cellphone', '09139035692')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
+                    Notification::route('cellphone', '09162418808')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
+                } catch (\Throwable $th) {
+                }
+
+                alert()->success('خرید با موفقیت انجام گرفت')->showConfirmButton('تایید');
+                return redirect()->route('home.user_profile.orders', ['order' => Session::pull('orderId')]);
+            }
         }
 
     public function paymentVerify(Request $request, $gatewayName)

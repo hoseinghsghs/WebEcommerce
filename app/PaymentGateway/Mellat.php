@@ -1,16 +1,8 @@
 <?php
 
 namespace App\PaymentGateway;
-//require_once("mellat/nusoap.php");
 
 use nusoap_client;
-
-use App\Models\Event;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Session;
-
-//use App\PaymentGateway\mellat\nusoap;
-use Verta;
 
 class Mellat extends Payment
 {
@@ -54,7 +46,7 @@ class Mellat extends Payment
 
             //-- تبدیل اطلاعات به آرایه برای ارسال به بانک
             $parameters = array(
-                'terminalId' => $terminalId,
+                'terminalId' => $this->terminal,
                 'userName' => $userName,
                 'userPassword' => $userPassword,
                 'orderId' => $orderId,
@@ -188,6 +180,7 @@ class Mellat extends Payment
         if ($params["ResCode"] == 0) {
             if ($this->verify($RefId, $ResCode, $SaleOrderId, $SaleReferenceId) == true) {
                 if ($this->settlePayment($RefId, $ResCode, $SaleOrderId, $SaleReferenceId) == true) {
+                    parent::updateOrder($RefId,$ResCode);
                     return array(
                         "status" => "success",
                         "trans" => $params["SaleReferenceId"]
@@ -195,6 +188,7 @@ class Mellat extends Payment
                 }
             }
         }
+        parent::updateOrderErorr($RefId,$ResCode);
         return false;
     }
 
