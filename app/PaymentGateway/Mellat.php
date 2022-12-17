@@ -31,9 +31,6 @@ class Mellat extends Payment
             alert()->error('', $createOrder['error'])->showConfirmButton('تایید');
             return redirect()->route('home');
         } else {
-            $terminalId = "6814608";                            //-- شناسه ترمینال
-            $userName = "lik404";                            //-- نام کاربری
-            $userPassword = "31776521";                            //-- کلمه عبور
             $orderId = $createOrder['orderId'];
             //-- شناسه فاکتور
             //$amount = $amounts['paying_amount'];
@@ -47,8 +44,8 @@ class Mellat extends Payment
             //-- تبدیل اطلاعات به آرایه برای ارسال به بانک
             $parameters = array(
                 'terminalId' => $this->terminal,
-                'userName' => $userName,
-                'userPassword' => $userPassword,
+                'userName' => $this->username,
+                'userPassword' => $this->password,
                 'orderId' => $orderId,
                 'amount' => $amount,
                 'localDate' => $localDate,
@@ -95,9 +92,9 @@ class Mellat extends Payment
         $userPassword = "31776521";                            //-- کلمه عبور
         $orderId = $orderid;
         $parameters = array(
-            'terminalId' => $terminalId,
-            'userName' => $userName,
-            'userPassword' => $userPassword,
+            'terminalId' => $this->terminal,
+            'userName' => $this->username,
+            'userPassword' => $this->username,
             'orderId' => $orderId,
             'saleOrderId' => $orderId,
             'saleReferenceId' => $SaleReferenceId);
