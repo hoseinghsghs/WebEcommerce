@@ -76,10 +76,10 @@ class Mellat extends Payment
                 }
             }
         }
-		}
+	}
     }
 
-    public function verify($token, $status ,$orderid)
+    public function verify($token, $status ,$orderid ,$SaleReferenceId)
     {
 		
         $terminalId = "6814608";                            //-- شناسه ترمینال
@@ -92,7 +92,7 @@ class Mellat extends Payment
             'userPassword' => $userPassword,
             'orderId' => $orderId,
             'saleOrderId' => $orderId,
-            'saleReferenceId' => $token);
+            'saleReferenceId' => $SaleReferenceId);
 
         // Call the SOAP method
 		$namespace = 'http://interfaces.core.sw.bps.com/';
@@ -121,12 +121,12 @@ class Mellat extends Payment
 
     }
 
-		protected function settlePayment($RefId, $ResCode , $SaleOrderId) 
+		protected function settlePayment($RefId, $ResCode , $SaleOrderId ,$SaleReferenceId) 
 	{
 		$client = new nusoap_client( 'https://bpm.shaparak.ir/pgwchannel/services/pgw?wsdl' ) ;
 		$orderId = $SaleOrderId;
 		$settleSaleOrderId = $SaleOrderId;
-		$settleSaleReferenceId = $RefId;
+		$settleSaleReferenceId = $SaleReferenceId;
 		$err = $client->getError();
 		if ($err) {
 			echo '<h2>Constructor error</h2><pre>' . $err . '</pre>';
@@ -164,17 +164,17 @@ class Mellat extends Payment
 	}
 
 
-	public function checkPayment($RefId, $ResCode , $SaleOrderId) 
+	public function checkPayment($RefId, $ResCode , $SaleOrderId , $SaleReferenceId ) 
 	{
 		$params["RefId"] = $RefId;
 		$params["ResCode"] = $ResCode ;
 		$params["SaleOrderId"] = $SaleOrderId;
-		$params["SaleReferenceId"] = $SaleOrderId ;
+		$params["SaleReferenceId"] = $SaleReferenceId ;
 		
 		if( $params["ResCode"] == 0 ) 
 		{
-			if( $this->verify($RefId, $ResCode , $SaleOrderId) == true ) {
-				if( $this->settlePayment($RefId, $ResCode , $SaleOrderId) == true ) {
+			if( $this->verify($RefId, $ResCode , $SaleOrderId , $SaleReferenceId ) == true ) {
+				if( $this->settlePayment($RefId, $ResCode , $SaleOrderId , $SaleReferenceId) == true ) {
 					return array(
 						"status"=>"success", 
 						"trans"=>$params["SaleReferenceId"]
@@ -185,8 +185,6 @@ class Mellat extends Payment
 		return false;
 	}	
 	
-
-
 
 }
 

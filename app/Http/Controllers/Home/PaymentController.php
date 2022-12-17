@@ -113,7 +113,7 @@ class PaymentController extends Controller
             } else {
                 Session::put('orderId', $payGatewayResult['orderId']);
                 echo "<form name='myform' action='https://bpm.shaparak.ir/pgwchannel/startpay.mellat' method='POST'><input type='hidden' id='RefId' name='RefId' value='{$payGatewayResult['success']}'></form><script type='text/javascript'>window.onload = formSubmit; function formSubmit() { document.forms[0].submit(); }</script>";
-                    return true;
+                 return ; 
             }
         }
 
@@ -151,7 +151,7 @@ class PaymentController extends Controller
         public function paymentVerifyMellat(Request $request)
         { 
             $payGateway = new Mellat();
-            $payGatewayResult = $payGateway->checkPayment($request->RefId, $request->ResCode , $request->SaleOrderId);
+            $payGatewayResult = $payGateway->checkPayment($request->RefId, $request->ResCode , $request->SaleOrderId ,$request->SaleReferenceId);
         }
 
             public function paymentVerify(Request $request, $gatewayName)
