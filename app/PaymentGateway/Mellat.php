@@ -96,7 +96,7 @@ class Mellat extends Payment
 
         // Call the SOAP method
 		$namespace = 'http://interfaces.core.sw.bps.com/';
-
+		$client = new nusoap_client( 'https://bpm.shaparak.ir/pgwchannel/services/pgw?wsdl' ) ;
         $result = $client->call('bpVerifyRequest', $parameters, $namespace);
 
         // Check for a fault
