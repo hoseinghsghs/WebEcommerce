@@ -147,6 +147,12 @@ class PaymentController extends Controller
 
     public function paymentVerify(Request $request, $gatewayName)
     {
+        dd($request->all());
+        if ($gatewayName == 'mellat') {
+            $payGateway = new Mellat();
+            $payGatewayResult = $payGateway->verify($request->token, $request->status);
+        }
+
         if ($gatewayName == 'pay') {
             $payGateway = new Pay();
 

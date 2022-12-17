@@ -17,6 +17,8 @@ class Mellat extends Payment
 
     public function send($amounts, $addressId, $description, $ip)
     {
+
+		$createOrder = parent::createOrder($addressId, $amounts, '0', 'mellat', $description, $ip);
         $terminalId = "6814608";                            //-- شناسه ترمینال
         $userName = "lik404";                            //-- نام کاربری
         $userPassword = "31776521";                            //-- کلمه عبور
@@ -24,7 +26,7 @@ class Mellat extends Payment
         $amount = $amounts['paying_amount'];                            //-- مبلغ به ریال
         $localDate = date('Ymd');
         $localTime = date('Gis');
-        $additionalData = 'testi';
+        $additionalData = $description;
         $callBackUrl = route('home.payment_verify', ['gatewayName' => 'mellat']);    //-- لینک کال بک
         $payerId = 0;
 
@@ -71,8 +73,6 @@ class Mellat extends Payment
 
     public function verify($token, $status)
     {
-        require_once("mellat/nusoap.php");
-
         $terminalId = $_POST['TerminalId'];
         $userName = $_POST['UserName'];
         $userPassword = $_POST['UserPassword'];
