@@ -15,7 +15,7 @@ class Payment
 {
     public function createOrder($addressId, $amounts, $token, $gateway_name, $description, $ip)
     {
-        try {
+        
             DB::beginTransaction();
 
             $order = Order::create([
@@ -59,7 +59,7 @@ class Payment
             ]);
 
             DB::commit();
-        } catch (\Exception $ex) {
+        
             DB::rollBack();
             try {
                 Log::info("مشکل ذخیره داده در دیتا بیس", [
@@ -70,7 +70,7 @@ class Payment
                 Log::info("مشکل ذخیره داده در دیتا بیس", [
                     'error' => $th->getMessage()
                 ]);
-            }
+          
 
             return ['error' => 'مشکل ارتباط با سرور سایت'];
         }
