@@ -152,7 +152,7 @@ class PaymentController extends Controller
             $payGatewayResult = $payGateway->checkPayment($request->RefId, $request->ResCode , $request->SaleOrderId ,$request->SaleReferenceId);
             if ($payGatewayResult==false) {
                 alert()->error('خطا در پرداخت')->showConfirmButton('تایید');
-                return redirect()->route('home.user_profile.orders', ['order' => Session::pull('orderId')]);
+                return redirect()->route('home.user_profile.orders', ['order' =>$request->SaleOrderId]);
             } else {
                 try {
                     Event::create([

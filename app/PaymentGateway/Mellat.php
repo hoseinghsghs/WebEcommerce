@@ -86,15 +86,11 @@ class Mellat extends Payment
 
     public function verify($token, $status, $orderid, $SaleReferenceId)
     {
-
-        $terminalId = "6814608";                            //-- شناسه ترمینال
-        $userName = "lik404";                            //-- نام کاربری
-        $userPassword = "31776521";                            //-- کلمه عبور
         $orderId = $orderid;
         $parameters = array(
             'terminalId' => $this->terminal,
             'userName' => $this->username,
-            'userPassword' => $this->username,
+            'userPassword' => $this->password,
             'orderId' => $orderId,
             'saleOrderId' => $orderId,
             'saleReferenceId' => $SaleReferenceId);
@@ -169,18 +165,13 @@ class Mellat extends Payment
 
     public function checkPayment($RefId, $ResCode, $SaleOrderId, $SaleReferenceId)
     {
-        $params["RefId"] = $RefId;
-        $params["ResCode"] = $ResCode;
-        $params["SaleOrderId"] = $SaleOrderId;
-        $params["SaleReferenceId"] = $SaleReferenceId;
-
-        if ($params["ResCode"] == 0) {
+        if ($RefId == 0) {
             if ($this->verify($RefId, $ResCode, $SaleOrderId, $SaleReferenceId) == true) {
                 if ($this->settlePayment($RefId, $ResCode, $SaleOrderId, $SaleReferenceId) == true) {
                     parent::updateOrder($RefId,$ResCode);
                     return array(
                         "status" => "success",
-                        "trans" => $params["SaleReferenceId"]
+                        "trans" => $SaleReferenceId
                     );
                 }
             }
