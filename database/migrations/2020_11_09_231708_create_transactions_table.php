@@ -26,7 +26,7 @@ class CreateTransactionsTable extends Migration
             $table->string('ip')->nullable();
             $table->text('description')->nullable();
             $table->text('description_erorr')->nullable();
-            $table->enum('gateway_name' , ['zarinpal' , 'pay' , 'پرداخت دستی' , 'سایر'] );
+            $table->enum('gateway_name' , ['zarinpal' , 'pay' , 'mellat', 'پرداخت دستی' , 'سایر'] );
             $table->tinyInteger('status')->default(0);
 
             $table->timestamps();
