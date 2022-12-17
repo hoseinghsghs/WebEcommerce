@@ -173,7 +173,7 @@ class PaymentController extends Controller
                 } catch (\Throwable $th) {
                 }
 
-                alert()->success('خرید با موفقیت انجام گرفت')->showConfirmButton('تایید');
+//                alert()->success('خرید با موفقیت انجام گرفت')->showConfirmButton('تایید');
                 dd(Session::pull('orderId'));
                 return redirect()->route('home.user_profile.orders', ['order' => Session::pull('orderId')]);
             }
