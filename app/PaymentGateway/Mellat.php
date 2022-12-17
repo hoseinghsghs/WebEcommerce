@@ -22,7 +22,7 @@ class Mellat extends Payment
         $terminalId = "6814608";                            //-- شناسه ترمینال
         $userName = "lik404";                            //-- نام کاربری
         $userPassword = "31776521";                            //-- کلمه عبور
-        $orderId = rand(4);                                //-- شناسه فاکتور
+        $orderId = rand(10 , 100 );                                //-- شناسه فاکتور
         $amount = $amounts['paying_amount'];                            //-- مبلغ به ریال
         $localDate = date('Ymd');
         $localTime = date('Gis');
