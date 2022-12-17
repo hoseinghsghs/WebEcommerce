@@ -31,7 +31,6 @@ class PaymentController extends Controller
         }
         if ($request->address_id && $request->address_id != 'new') {
             //آدرس دارد
-
             $validator = Validator::make($request->all(), [
                 'address_id' => 'required|integer',
                 'payment_method' => 'required',
@@ -103,7 +102,7 @@ class PaymentController extends Controller
         }
 
         if ($request->payment_method == 'mellat') {
-           
+
             $payGateway = new Mellat();
             $payGatewayResult = $payGateway->send($amounts, $address_id, $description, $ip);
 
@@ -236,7 +235,7 @@ class PaymentController extends Controller
     }
     public function checkCart()
     {
-        
+
         if (\Cart::isEmpty()) {
             return ['error' => 'سبد خرید شما خالی می باشد'];
         }

@@ -82,7 +82,6 @@ class ProductsList extends Component
             $round_max = ceil($max_price / $price_rank) * $price_rank;
             $this->filterd['price']['high'] = $round_max;
         }
-
         $this->initialFilter = $this->filterd;
     }
 
@@ -154,7 +153,7 @@ class ProductsList extends Component
         } else {
             $this->seoparameter();
             $products = Product::active()->filter($this->filterd)->latest()->paginate($this->filterd['displayCount']);
-            $categories = Category::where('parent_id', 0)->get();
+            $categories = Category::where('parent_id', 0)->active()->get();
             return view('livewire.home.products-list', compact('categories', 'products'))->extends('home.layout.MasterHome');
         }
     }

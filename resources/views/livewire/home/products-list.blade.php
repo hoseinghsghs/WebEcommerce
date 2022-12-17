@@ -64,7 +64,7 @@
                                         <div class="collapse show" id="headingOne">
                                             <div class="card-main mb-0">
                                                 @if($routeName == 'home.products.index')
-                                                    @foreach ($category->parent->children as $child)
+                                                    @foreach ($category->parent->children->where('is_active',1) as $child)
                                                         <a href="{{route('home.products.index',$child->slug)}}">
                                                             <div class="form-auth-row">
                                                                 @if($child->name == $category->name)
@@ -83,7 +83,7 @@
                                                         </a>
                                                     @endforeach
                                                 @elseif ($routeName == 'home.products.search' && isset($category))
-                                                    @foreach ($category->children as $child)
+                                                    @foreach ($category->children->where('is_active',1)  as $child)
                                                         <a href="{{route('home.products.index',$child->slug)}}">
                                                             <div class="form-auth-row">
                                                                 <label for="#" class="ui-checkbox">
@@ -233,17 +233,17 @@
                 <div class="col-lg-9 col-md-9 col-xs-12 pl">
                     <div class="shop-archive-content d-block">
                         <div class="archive-header d-flex flex-wrap align-items-center">
-                            <h2 class="archive-header-title ml-auto mb-md-0">محصولات</h2>
+                            <h2 class="archive-header-title ml-sm-auto mb-md-0">محصولات</h2>
+                            <button class="btn mb-1 mb-md-0 ml-2 products-filter-btn d-md-none btn-sm" onclick="openSidebar(event)">
+                                <i class="fas fa-filter"></i> فیلتر
+                            </button>
                             @if ($initialFilter !== $filterd)
-                                <div class="ml-2">
+                                <div class="ml-2 mb-1 mb-md-0">
                                     <button class="btn btn-range" wire:click="resetFilters()">
                                         X حذف فیلترها
                                     </button>
                                 </div>
                             @endif
-                            <button class="btn mb-1 mb-md-0 ml-2 products-filter-btn d-md-none btn-sm" onclick="openSidebar(event)">
-                                <i class="fas fa-filter"></i> فیلتر
-                            </button>
                             <div class="d-flex align-items-center mb-1 mb-md-0">
                                 <div class="sort-tabs mt-0 d-inline-block">
                                     <i class="fas fa-sort-amount-down"></i>
