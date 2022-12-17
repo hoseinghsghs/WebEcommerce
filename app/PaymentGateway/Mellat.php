@@ -67,7 +67,7 @@ class Mellat extends Payment
                 $ResCode = $res[0];
 
                 if ($ResCode == "0") {
-				return ['success' => $res[1] ];
+				return ['success' => $res[1] , 'orderId' => $orderId];
                     //-- انتقال به درگاه پرداخت
                     
                 } else {
