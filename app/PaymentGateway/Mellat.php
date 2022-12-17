@@ -17,13 +17,16 @@ class Mellat extends Payment
 
     public function send($amounts, $addressId, $description, $ip)
     {
-
 		$createOrder = parent::createOrder($addressId, $amounts, '0', 'mellat', $description, $ip);
 
+	   if (array_key_exists('error', $createOrder)) {
+            alert()->error('', $createOrder['error'])->showConfirmButton('تایید');
+            return redirect()->route('home');
+        }else{
         $terminalId = "6814608";                            //-- شناسه ترمینال
         $userName = "lik404";                            //-- نام کاربری
         $userPassword = "31776521";                            //-- کلمه عبور
-        $orderId = $createOrder->orderId; 
+        $orderId = $createOrder['orderId']; 
 		                               //-- شناسه فاکتور
         //$amount = $amounts['paying_amount']; 
 		$amount = '20000';                            //-- مبلغ به ریال
@@ -74,6 +77,7 @@ class Mellat extends Payment
                 }
             }
         }
+		}
     }
 
     public function verify($token, $status ,$orderid)
