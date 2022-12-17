@@ -91,7 +91,7 @@ class Mellat extends Payment
             'userName' => $userName,
             'userPassword' => $userPassword,
             'orderId' => $orderId,
-            'saleOrderId' => $verifySaleOrderId,
+            'saleOrderId' => $orderId,
             'saleReferenceId' => $token);
 
         // Call the SOAP method
