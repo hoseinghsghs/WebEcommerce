@@ -62,7 +62,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/php-flasher/flasher-toastr-laravel" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/darryldecode/cart" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/intervention/image" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/jantinnerezo/livewire-alert" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/tijsverkoyen/css-to-inline-styles" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/dragonmantank/cron-expression" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/hekmatinasser/notowo" />
@@ -192,6 +191,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/_laravel_idea" />
       <excludeFolder url="file://$MODULE_DIR$/storage/app" />
       <excludeFolder url="file://$MODULE_DIR$/storage/framework" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/econea/nusoap" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

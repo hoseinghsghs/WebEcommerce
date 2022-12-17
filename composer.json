@@ -13,6 +13,7 @@
         "beyondcode/laravel-websockets": "^2.0.0",
         "cviebrock/eloquent-sluggable": "^9.0",
         "darryldecode/cart": "^4.2",
+        "econea/nusoap": "^0.9.12",
         "guzzlehttp/guzzle": "^7.2",
         "hekmatinasser/verta": "^2.1",
         "intervention/image": "^2.7",

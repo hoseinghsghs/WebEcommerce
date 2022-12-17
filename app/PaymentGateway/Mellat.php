@@ -1,14 +1,14 @@
 <?php
 
 namespace App\PaymentGateway;
-require_once("mellat/nusoap.php");
+//require_once("mellat/nusoap.php");
 
 use nusoap_client;
 
 use App\Models\Event;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
-use App\PaymentGateway\mellat\nusoap;
+//use App\PaymentGateway\mellat\nusoap;
 use Verta;
 
 class Mellat extends Payment
@@ -21,7 +21,7 @@ class Mellat extends Payment
         $userName = "lik404";                            //-- نام کاربری
         $userPassword = "31776521";                            //-- کلمه عبور
         $orderId = 1012;                                //-- شناسه فاکتور
-        $amount = $amounts;                            //-- مبلغ به ریال
+        $amount = $amounts['paying_amount'];                            //-- مبلغ به ریال
         $localDate = date('Ymd');
         $localTime = date('Gis');
         $additionalData = 'testi';
@@ -47,7 +47,6 @@ class Mellat extends Payment
         $result = $client->call('bpPayRequest', $parameters, $namespace);
             // بررسی وجود خطا
         if ($client->fault) {
-            dd($client,$result);
             die("خطا در اتصال به وب سرویس بانک");
         } else {
             $err = $client->getError();
