@@ -28,7 +28,7 @@ class Mellat extends Payment
         $orderId = $createOrder['orderId']; 
 		                               //-- شناسه فاکتور
         //$amount = $amounts['paying_amount']; 
-		$amount = $amounts;                            //-- مبلغ به ریال
+		$amount = '20000';                            //-- مبلغ به ریال
         $localDate = date('Ymd');
         $localTime = date('Gis');
         $additionalData = $description;
