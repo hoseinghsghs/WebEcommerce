@@ -114,7 +114,7 @@
                                                                                 <td>{{ $address->address }}</td>
                                                                             </tr>
                                                                         </div>
-                                                                        <div class="h-50">fg
+                                                                        <div class="h-50">
                                                                             <div class="box-header mb-1">
                                                                                 <span
                                                                                     class="box-title">آدرس جایگزین</span>

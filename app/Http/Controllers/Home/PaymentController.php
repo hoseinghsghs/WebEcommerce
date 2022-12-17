@@ -91,7 +91,7 @@ class PaymentController extends Controller
 
         $checkCart = $this->checkCart();
         if (array_key_exists('error', $checkCart)) {
-            alert()->error('',$checkCart['error'])->showConfirmButton('تایید');
+            alert()->error('', $checkCart['error'])->showConfirmButton('تایید');
             return redirect()->route('home');
         }
 
@@ -102,18 +102,17 @@ class PaymentController extends Controller
         }
 
         if ($request->payment_method == 'mellat') {
-            
+
             $payGateway = new Mellat();
 
             $payGatewayResult = $payGateway->send($amounts, $address_id, $description, $ip);
-
             if (array_key_exists('error', $payGatewayResult)) {
                 alert()->error($payGatewayResult['error'])->showConfirmButton('تایید');
                 return redirect()->back();
             } else {
                 Session::put('orderId', $payGatewayResult['orderId']);
                 echo "<form name='myform' action='https://bpm.shaparak.ir/pgwchannel/startpay.mellat' method='POST'><input type='hidden' id='RefId' name='RefId' value='{$payGatewayResult['success']}'></form><script type='text/javascript'>window.onload = formSubmit; function formSubmit() { document.forms[0].submit(); }</script>";
-                 return ; 
+                return true;
             }
         }
 
@@ -149,13 +148,13 @@ class PaymentController extends Controller
 
 
         public function paymentVerifyMellat(Request $request)
-        { 
+        {
             $payGateway = new Mellat();
             $payGatewayResult = $payGateway->checkPayment($request->RefId, $request->ResCode , $request->SaleOrderId ,$request->SaleReferenceId);
         }
 
-            public function paymentVerify(Request $request, $gatewayName)
-            {
+    public function paymentVerify(Request $request, $gatewayName)
+    {
 
         if ($gatewayName == 'pay') {
             $payGateway = new Pay();
@@ -174,7 +173,7 @@ class PaymentController extends Controller
                     try {
                         Event::create([
                             'title' => 'پرداخت نهایی انجام گرفت',
-                            'body' =>  'آیدی کاربر' . " " . auth()->id() . " " . "پی پل",
+                            'body' => 'آیدی کاربر' . " " . auth()->id() . " " . "پی پل",
                             'user_id' => auth()->id(),
                             'eventable_id' => auth()->id(),
                             'eventable_type' => User::class,
@@ -187,11 +186,11 @@ class PaymentController extends Controller
                     } catch (\Throwable $th) {
                     }
 
-                        try{
-                    Notification::route('cellphone', '09139035692')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
-                    Notification::route('cellphone','09162418808')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
-                }catch (\Throwable $th) {
-                }
+                    try {
+                        Notification::route('cellphone', '09139035692')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
+                        Notification::route('cellphone', '09162418808')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
+                    } catch (\Throwable $th) {
+                    }
 
                     try {
                         return redirect()->route('home.user_profile.orders', ['order' => Session::pull('orderId')]);
@@ -218,7 +217,7 @@ class PaymentController extends Controller
                 try {
                     Event::create([
                         'title' => 'پرداخت نهایی انجام گرفت',
-                        'body' =>  'آیدی کاربر' . " " . auth()->id() . " " . 'زرین پال',
+                        'body' => 'آیدی کاربر' . " " . auth()->id() . " " . 'زرین پال',
                         'user_id' => auth()->id(),
                         'eventable_id' => auth()->id(),
                         'eventable_type' => User::class,
@@ -230,10 +229,10 @@ class PaymentController extends Controller
                 } catch (\Throwable $th) {
                 }
 
-                  try{
+                try {
                     Notification::route('cellphone', '09139035692')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
-                    Notification::route('cellphone','09162418808')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
-                }catch (\Throwable $th) {
+                    Notification::route('cellphone', '09162418808')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
+                } catch (\Throwable $th) {
                 }
                 alert()->success('خرید با موفقیت انجام گرفت')->showConfirmButton('تایید');
                 return redirect()->route('home.user_profile.orders', ['order' => Session::pull('orderId')]);
@@ -243,6 +242,7 @@ class PaymentController extends Controller
         alert()->error('مسیر بازگشت از درگاه پرداخت اشتباه می باشد', 'دقت کنید')->showConfirmButton('تایید');
         return redirect()->route('home.orders.checkout');
     }
+
     public function checkCart()
     {
 
@@ -254,8 +254,8 @@ class PaymentController extends Controller
             $price = $variation->is_sale ? $variation->sale_price : $variation->price;
 
             if (!Product::find($item->attributes->product_id)->is_active) {
-               \Cart::clear();
-               return ['error' => 'محصول مورد نظر یافت نشد'];
+                \Cart::clear();
+                return ['error' => 'محصول مورد نظر یافت نشد'];
             }
             if ($item->price != $price) {
                 \Cart::clear();
