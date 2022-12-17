@@ -18,7 +18,6 @@ class Mellat extends Payment
     public function send($amounts, $addressId, $description, $ip)
     {
 		$createOrder = parent::createOrder($addressId, $amounts, '0', 'mellat', $description, $ip);
-dd($createOrder);
 	   if (array_key_exists('error', $createOrder)) {
             alert()->error('', $createOrder['error'])->showConfirmButton('تایید');
             return redirect()->route('home');
