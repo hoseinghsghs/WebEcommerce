@@ -151,6 +151,7 @@ class PaymentController extends Controller
         {
             $payGateway = new Mellat();
             $payGatewayResult = $payGateway->checkPayment($request->RefId, $request->ResCode , $request->SaleOrderId ,$request->SaleReferenceId);
+            dd($payGateway);
         }
 
     public function paymentVerify(Request $request, $gatewayName)
