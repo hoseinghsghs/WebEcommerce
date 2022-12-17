@@ -102,7 +102,7 @@ class PaymentController extends Controller
         }
 
         if ($request->payment_method == 'mellat') {
-
+            
             $payGateway = new Mellat();
 
             $payGatewayResult = $payGateway->send($amounts, $address_id, $description, $ip);
@@ -112,6 +112,7 @@ class PaymentController extends Controller
                 return redirect()->back();
             } else {
                 Session::put('orderId', $payGatewayResult['orderId']);
+                dd('$request->payment_method');
                 echo "<form name='myform' action='https://bpm.shaparak.ir/pgwchannel/startpay.mellat' method='POST'><input type='hidden' id='RefId' name='RefId' value='{$payGatewayResult['success']}'></form><script type='text/javascript'>window.onload = formSubmit; function formSubmit() { document.forms[0].submit(); }</script>";
             }
         }
