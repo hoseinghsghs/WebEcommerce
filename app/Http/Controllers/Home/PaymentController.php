@@ -145,13 +145,16 @@ class PaymentController extends Controller
         return redirect()->back();
     }
 
-    public function paymentVerify(Request $request, $gatewayName)
-    {
-        dd($request->all());
-        if ($gatewayName == 'mellat') {
+
+        public function paymentVerifyMellat(Request $request)
+        { 
+            dd($request->all());
             $payGateway = new Mellat();
             $payGatewayResult = $payGateway->verify($request->token, $request->status);
         }
+
+            public function paymentVerify(Request $request, $gatewayName)
+            {
 
         if ($gatewayName == 'pay') {
             $payGateway = new Pay();
