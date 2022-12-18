@@ -117,23 +117,13 @@ class PaymentController extends Controller
             } else {
                 // Create new invoice.
                 $invoice = new Invoice;
-                $invoice->amount('1200');
+                $invoice->amount($amounts['paying_amount']);
                 $invoice->detail(['description' => $description]);
-//                $invoice->uuid($createOrder['orderId']);
 
                 return Payment::purchase($invoice, function ($driver, $transactionId) use ($mellat_payment, $createOrder) {
                     $mellat_payment->updateTransaction($createOrder['orderId'], $transactionId);
                 })->pay()->render();
 
-                /*$payGateway = new Mellat();
-
-                $payGatewayResult = $payGateway->send($amounts, $address_id, $description, $ip);
-                if (array_key_exists('error', $payGatewayResult)) {
-                    alert()->error($payGatewayResult['error'])->showConfirmButton('تایید');
-                    return redirect()->back();
-                } else {
-                    echo "<form name='myform' action='https://bpm.shaparak.ir/pgwchannel/startpay.mellat' method='POST'><input type='hidden' id='RefId' name='RefId' value='{$payGatewayResult['success']}'></form><script type='text/javascript'>window.onload = formSubmit; function formSubmit() { document.forms[0].submit(); }</script>";
-                }*/
             }
         }
 
@@ -170,11 +160,10 @@ class PaymentController extends Controller
 
     public function paymentVerifyMellat(Request $request)
     {
-        $mellat_payment = new mPayment();
-
         $transaction = Transaction::where('token', $request->RefId)->firstOrFail();
         Auth::loginUsingId($transaction->user_id);
 
+        $mellat_payment = new mPayment();
         try {
             // You need to verify the payment to ensure the invoice has been paid successfully.
             // We use transaction id to verify payments
@@ -192,11 +181,10 @@ class PaymentController extends Controller
                 'آیدی کاربر' => auth()->id(),
                 'درگاه' => 'ملت',
             ]);
-            Notification::route('cellphone', '09139035692')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
-            Notification::route('cellphone', '09162418808')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
+            Notification::route('cellphone', '09139035692')->notify(new OtpSms(auth()->user()->cellphone . "ملت سفارش جدید دارید"));
+            Notification::route('cellphone', '09162418808')->notify(new OtpSms(auth()->user()->cellphone . "ملت سفارش جدید دارید"));
             alert()->success('خرید با موفقیت انجام گرفت')->showConfirmButton('تایید');
             return redirect()->route('home.user_profile.orders', ['order' => $transaction->order_id]);
-//            echo $receipt->getReferenceId();
 
         } catch (InvalidPaymentException $exception) {
             /**
@@ -217,35 +205,7 @@ class PaymentController extends Controller
                 'درگاه' => 'ملت',
             ]);
             return redirect()->route('home.user_profile.orders', ['order' => $transaction->order_id]);
-//            echo $exception->getMessage();
         }
-
-        /*$payGateway = new Mellat();
-        $payGatewayResult = $payGateway->checkPayment($request->RefId, $request->ResCode, $request->SaleOrderId, $request->SaleReferenceId);
-        if ($payGatewayResult == false) {
-            alert()->error('خطا در پرداخت')->showConfirmButton('تایید');
-            return redirect()->route('home.user_profile.orders', ['order' => $request->SaleOrderId]);
-        } else {
-            try {
-                Event::create([
-                    'title' => 'پرداخت نهایی انجام گرفت',
-                    'body' => 'آیدی کاربر' . " " . auth()->id() . " " . 'ملت',
-                    'user_id' => auth()->id(),
-                    'eventable_id' => auth()->id(),
-                    'eventable_type' => User::class,
-                ]);
-                Log::alert("پرداخت نهایی انجام گرفت", [
-                    'آیدی کاربر' => auth()->id(),
-                    'درگاه' => 'ملت',
-                ]);
-                Notification::route('cellphone', '09139035692')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
-                Notification::route('cellphone', '09162418808')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
-            } catch (\Throwable $th) {
-            }
-
-                alert()->success('خرید با موفقیت انجام گرفت')->showConfirmButton('تایید');
-                return redirect()->route('home.user_profile.orders', ['order' =>$request->SaleOrderId ]);
-            }*/
     }
 
     public function paymentVerify(Request $request, $gatewayName)
