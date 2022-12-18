@@ -159,20 +159,20 @@ class PaymentController extends Controller
                 
                 try {
                      
-                    // Event::create([
-                    //     'title' => 'پرداخت نهایی انجام گرفت',
-                    //     'body' => 'آیدی کاربر' . " " . auth()->id() . " " . 'ملت',
-                    //     'user_id' => auth()->id(),
-                    //     'eventable_id' => auth()->id(),
-                    //     'eventable_type' => User::class,
-                    // ]);
-                    // Log::alert("پرداخت نهایی انجام گرفت", [
-                    //     'آیدی کاربر' => auth()->id(),
-                    //     'درگاه' => 'ملت',
-                    // ]);
+                    Event::create([
+                        'title' => 'پرداخت نهایی انجام گرفت',
+                        'body' => 'آیدی کاربر' . " " . auth()->id() . " " . 'ملت',
+                        'user_id' => auth()->id(),
+                        'eventable_id' => auth()->id(),
+                        'eventable_type' => User::class,
+                    ]);
+                    Log::alert("پرداخت نهایی انجام گرفت", [
+                        'آیدی کاربر' => auth()->id(),
+                        'درگاه' => 'ملت',
+                    ]);
                    
-                    // Notification::route('cellphone', '09139035692')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
-                    // Notification::route('cellphone', '09162418808')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
+                    Notification::route('cellphone', '09139035692')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
+                    Notification::route('cellphone', '09162418808')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
                 } catch (\Throwable $th) {
                     dd($th);
                 }
