@@ -150,14 +150,15 @@ class PaymentController extends Controller
         {
             $payGateway = new Mellat();
             $payGatewayResult = $payGateway->checkPayment($request->RefId, $request->ResCode , $request->SaleOrderId ,$request->SaleReferenceId);
+            dd(auth()->user());
+
             if ($payGatewayResult==false) {
-                dd('خطا');
                 alert()->error('خطا در پرداخت')->showConfirmButton('تایید');
                 return redirect()->route('home.user_profile.orders', ['order' =>$request->SaleOrderId]);
             } else {
                 
                 try {
-                     dd(auth()->user());
+                     
                     Event::create([
                         'title' => 'پرداخت نهایی انجام گرفت',
                         'body' => 'آیدی کاربر' . " " . auth()->id() . " " . 'ملت',
