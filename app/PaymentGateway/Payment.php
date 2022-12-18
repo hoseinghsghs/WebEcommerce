@@ -93,7 +93,16 @@ class Payment
         return ['success' => 'success!', 'orderId' => $order->id];
     }
 
-    public function updateOrder($token, $refId)
+
+     public function updateTransaction($OrderId , $token)
+    {
+        $transaction = Transaction::where('order_id', $OrderId)->firstOrFail();
+        $transaction->update([
+            'token' => $token
+        ]);
+    }
+
+    public function updateOrder($token, $SaleReferenceId)
     {
         try {
             DB::beginTransaction();
@@ -102,7 +111,7 @@ class Payment
 
             $transaction->update([
                 'status' => 1,
-                'ref_id' => $refId
+                'ref_id' => $SaleReferenceId
             ]);
 
             $order = Order::findOrFail($transaction->order_id);
