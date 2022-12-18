@@ -1,3 +1,40 @@
+<html>
+<head>
+	<title>BP PGW Test</title>
+	<link href="Css/Style.css" rel="stylesheet" type="text/css" />
+
+	<script language="javascript" type="text/javascript">    
+		function postRefId (refIdValue) {
+			var form = document.createElement("form");
+			form.setAttribute("method", "POST");
+			form.setAttribute("action", "https://bpm.shaparak.ir/pgwchannel/startpay.mellat");         
+			form.setAttribute("target", "_self");
+			var hiddenField = document.createElement("input");              
+			hiddenField.setAttribute("name", "RefId");
+			hiddenField.setAttribute("value", refIdValue);
+			form.appendChild(hiddenField);
+
+			document.body.appendChild(form);         
+			form.submit();
+			document.body.removeChild(form);
+		}
+		
+		function initData()
+		{
+			document.getElementById("PayDate").value = "20091005";
+			document.getElementById("PayTime").value = "140351";
+			document.getElementById("PayAmount").value = "100";
+			document.getElementById("PayOrderId").value = "1";
+			document.getElementById("PayAdditionalData").value = "Customer No: 15220";
+			document.getElementById("PayCallBackUrl").value = "http://www.yoursite.com/BPPHPSample/callback.php";
+			document.getElementById("PayPayerId").value = "0";
+		}
+	</script>
+</head>
+<body>
+
+</body>
+
 <?php
 namespace App\PaymentGateway;
 use nusoap_client;
@@ -252,30 +289,4 @@ class Mellat extends Payment
 
 ?>
 
-	<script language="javascript" type="text/javascript">    
-		function postRefId (refIdValue) {
-			var form = document.createElement("form");
-			form.setAttribute("method", "POST");
-			form.setAttribute("action", "https://bpm.shaparak.ir/pgwchannel/startpay.mellat");         
-			form.setAttribute("target", "_self");
-			var hiddenField = document.createElement("input");              
-			hiddenField.setAttribute("name", "RefId");
-			hiddenField.setAttribute("value", refIdValue);
-			form.appendChild(hiddenField);
-
-			document.body.appendChild(form);         
-			form.submit();
-			document.body.removeChild(form);
-		}
-		
-		function initData()
-		{
-			document.getElementById("PayDate").value = "20091005";
-			document.getElementById("PayTime").value = "140351";
-			document.getElementById("PayAmount").value = "100";
-			document.getElementById("PayOrderId").value = "1";
-			document.getElementById("PayAdditionalData").value = "Customer No: 15220";
-			document.getElementById("PayCallBackUrl").value = "http://www.yoursite.com/BPPHPSample/callback.php";
-			document.getElementById("PayPayerId").value = "0";
-		}
-	</script>
+</html>
