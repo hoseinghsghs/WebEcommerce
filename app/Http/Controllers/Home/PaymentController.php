@@ -150,7 +150,7 @@ class PaymentController extends Controller
         {
             $payGateway = new Mellat();
             $payGatewayResult = $payGateway->checkPayment($request->RefId, $request->ResCode , $request->SaleOrderId ,$request->SaleReferenceId);
-            dd(auth()->user());
+           
 
             if ($payGatewayResult==false) {
                 alert()->error('خطا در پرداخت')->showConfirmButton('تایید');
