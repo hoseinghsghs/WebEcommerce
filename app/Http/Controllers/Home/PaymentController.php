@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\Order;
 use App\Models\ProductVariation;
+use App\Models\Transaction;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\UserAddress;
@@ -160,14 +161,30 @@ class PaymentController extends Controller
 
     public function paymentVerifyMellat(Request $request)
     {
+        $mellat_payment = new mPayment();
         // You need to verify the payment to ensure the invoice has been paid successfully.
         // We use transaction id to verify payments
       // It is a good practice to add invoice amount as well.
+        $transaction = Transaction::where('token', $request->RefId)->firstOrFail();
         try {
             $receipt = Payment::amount($request->FinalAmount)->transactionId($request->RefId)->verify();
-
-            // You can show payment referenceId to the user.
-            echo $receipt->getReferenceId();
+            $mellat_payment->updateOrder($request->RefId,$receipt->getReferenceId());
+            Event::create([
+                'title' => 'پرداخت نهایی انجام گرفت',
+                'body' => 'آیدی کاربر' . " " . auth()->id() . " " . 'ملت',
+                'user_id' => auth()->id(),
+                'eventable_id' => auth()->id(),
+                'eventable_type' => User::class,
+            ]);
+            Log::alert("پرداخت نهایی انجام گرفت", [
+                'آیدی کاربر' => auth()->id(),
+                'درگاه' => 'ملت',
+            ]);
+            Notification::route('cellphone', '09139035692')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
+            Notification::route('cellphone', '09162418808')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
+            alert()->success('خرید با موفقیت انجام گرفت')->showConfirmButton('تایید');
+            return redirect()->route('home.user_profile.orders', ['order' =>$transaction->order_id]);
+//            echo $receipt->getReferenceId();
 
         } catch (InvalidPaymentException $exception) {
             /**
@@ -175,7 +192,20 @@ class PaymentController extends Controller
             We can catch the exception to handle invalid payments.
             getMessage method, returns a suitable message that can be used in user interface.
              **/
-            echo $exception->getMessage();
+            $mellat_payment->updateOrderErorr($request->RefId,$exception->getMessage());
+            Event::create([
+                'title' => 'پرداخت ناموفق',
+                'body' => 'آیدی کاربر' . " " . auth()->id() . " " . 'ملت'.' متن خطا: '.$exception->getMessage(),
+                'user_id' => auth()->id(),
+                'eventable_id' => auth()->id(),
+                'eventable_type' => User::class,
+            ]);
+            Log::alert("پرداخت با خطا مواجه شد", [
+                'آیدی کاربر' => auth()->id(),
+                'درگاه' => 'ملت',
+            ]);
+            return redirect()->route('home.user_profile.orders', ['order' =>$transaction->order_id]);
+//            echo $exception->getMessage();
         }
 
         /*$payGateway = new Mellat();
