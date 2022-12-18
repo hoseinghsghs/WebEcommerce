@@ -179,7 +179,7 @@ class Mellat extends Payment
                  
                  "; 
                     echo auth()->id();
-                 dd($refIdValu , auth()->id());
+                 dd($refIdValue , auth()->id());
                  
 	}
     public function checkPayment($RefId, $ResCode, $SaleOrderId, $SaleReferenceId)
