@@ -122,7 +122,7 @@ class PaymentController extends Controller
                 $invoice->uuid($createOrder['orderId']);
                 $invoice->amount('1200');
                 $invoice->detail(['description' => $description]);
-
+                dd($invoice->getUuid());
                 return Payment::purchase($invoice, function ($driver, $transactionId) use ($mellat_payment, $createOrder) {
                     $mellat_payment->updateTransaction($createOrder['orderId'], $transactionId);
                 })->pay()->render();
