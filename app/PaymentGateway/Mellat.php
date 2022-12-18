@@ -16,21 +16,9 @@ namespace App\PaymentGateway;
 			hiddenField.setAttribute("name", "RefId");
 			hiddenField.setAttribute("value", refIdValue);
 			form.appendChild(hiddenField);
-
 			document.body.appendChild(form);         
 			form.submit();
 			document.body.removeChild(form);
-		}
-		
-		function initData()
-		{
-			document.getElementById("PayDate").value = "20091005";
-			document.getElementById("PayTime").value = "140351";
-			document.getElementById("PayAmount").value = "100";
-			document.getElementById("PayOrderId").value = "1";
-			document.getElementById("PayAdditionalData").value = "Customer No: 15220";
-			document.getElementById("PayCallBackUrl").value = "http://www.yoursite.com/BPPHPSample/callback.php";
-			document.getElementById("PayPayerId").value = "0";
 		}
 	</script>
 </head>
