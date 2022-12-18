@@ -118,8 +118,11 @@ class PaymentController extends Controller
                 return redirect()->route('home');
             } else {
                 // Create new invoice.
-                $invoice = (new Invoice)->amount('1200')->detail(['description' => $description]);
+                $invoice = new Invoice;
                 $invoice->uuid($createOrder['orderId']);
+                $invoice->amount('1200');
+                $invoice->detail(['description' => $description]);
+
                 return Payment::purchase($invoice, function ($driver, $transactionId) use ($mellat_payment, $createOrder) {
                     $mellat_payment->updateTransaction($createOrder['orderId'], $transactionId);
                 })->pay()->render();
