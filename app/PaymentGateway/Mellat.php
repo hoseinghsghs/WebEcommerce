@@ -178,7 +178,7 @@ class Mellat extends Payment
                  <script type='text/javascript'>window.onload = formSubmit; function formSubmit() { document.forms[0].submit(); }</script>
                  
                  "; 
-                    echo "$refIdValu , auth()->id()";
+                    echo auth()->id();
                  dd($refIdValu , auth()->id());
                  
 	}
