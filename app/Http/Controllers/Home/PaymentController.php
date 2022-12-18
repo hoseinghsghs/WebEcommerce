@@ -171,8 +171,8 @@ class PaymentController extends Controller
                     //     'درگاه' => 'ملت',
                     // ]);
                    
-                    Notification::route('cellphone', '09139035692')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
-                    Notification::route('cellphone', '09162418808')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
+                    // Notification::route('cellphone', '09139035692')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
+                    // Notification::route('cellphone', '09162418808')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
                 } catch (\Throwable $th) {
                     dd($th);
                 }
