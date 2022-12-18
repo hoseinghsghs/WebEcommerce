@@ -174,7 +174,7 @@ class Mellat extends Payment
     public function checkPayment($RefId, $ResCode, $SaleOrderId, $SaleReferenceId)
     {
         if ($ResCode == 0) {
-             dd(auth()->user);
+             dd(auth()->id());
             if ($this->verify($RefId, $ResCode, $SaleOrderId, $SaleReferenceId) == true) {
                 if ($this->settlePayment($RefId, $ResCode, $SaleOrderId, $SaleReferenceId) == true) {
                     parent::updateOrder($RefId,$SaleReferenceId);
