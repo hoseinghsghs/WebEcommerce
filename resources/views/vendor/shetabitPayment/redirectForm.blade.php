@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Forwarding to secure payment provider</title>
+        <title>بازارسال به ارائه دهنده پرداخت امن</title>
         <style>
             .text-center {
                 text-align: center;
@@ -61,18 +61,18 @@
             <div class="bounce3"></div>
         </div>
         <form class="text-center mt-2" method="{{ $method }}" action="{{ $action }}">
-            <p>Forwarding to secure payment provider.</p>
+            <p>بازارسال به ارائه دهنده پرداخت امن.</p>
             <p>
-                If you are not automatically redirected to the payment website with in
+                اگر به طور خودکار به درگاه پرداخت هدایت نشدید در
                 <span id="countdown">10</span>
-                seconds...
+                چند ثانیه...
             </p>
 
             @foreach($inputs as $name => $value)
                 <input type="hidden" name="{{ $name }}" value="{{ $value }}">
             @endforeach
 
-            <button type="submit">Click here</button>
+            <button type="submit">اینجا کلیک کنید</button>
         </form>
         <script>
             // Total seconds to wait
