@@ -119,10 +119,10 @@ class PaymentController extends Controller
             } else {
                 // Create new invoice.
                 $invoice = new Invoice;
-                $invoice->uuid($createOrder['orderId']);
                 $invoice->amount('1200');
                 $invoice->detail(['description' => $description]);
-                dd($invoice->getUuid());
+//                $invoice->uuid($createOrder['orderId']);
+
                 return Payment::purchase($invoice, function ($driver, $transactionId) use ($mellat_payment, $createOrder) {
                     $mellat_payment->updateTransaction($createOrder['orderId'], $transactionId);
                 })->pay()->render();
@@ -172,13 +172,15 @@ class PaymentController extends Controller
 
     public function paymentVerifyMellat(Request $request)
     {
-        dd($request);
         $mellat_payment = new mPayment();
-        // You need to verify the payment to ensure the invoice has been paid successfully.
-        // We use transaction id to verify payments
-        // It is a good practice to add invoice amount as well.
+
         $transaction = Transaction::where('token', $request->RefId)->firstOrFail();
+        Auth::loginUsingId($transaction->user_id);
+
         try {
+            // You need to verify the payment to ensure the invoice has been paid successfully.
+            // We use transaction id to verify payments
+            // It is a good practice to add invoice amount as well.
             $receipt = Payment::amount($request->FinalAmount)->transactionId($request->RefId)->verify();
             $mellat_payment->updateOrder($request->RefId, $receipt->getReferenceId());
             Event::create([
