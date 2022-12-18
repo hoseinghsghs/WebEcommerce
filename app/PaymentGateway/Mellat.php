@@ -71,12 +71,21 @@ class Mellat extends Payment
                     $res = explode(',', $result);
                     $ResCode = $res[0];
 
+                    parent::updateTransaction($orderId,$res[1]);
+
                     if ($ResCode == "0") {
-                        //-- انتقال به درگاه پرداخت
+
                         return ['success' => $res[1], 'orderId' => $orderId];
+                        //-- انتقال به درگاه پرداخت
+
                     } else {
+                        try {
+                            $this->error($result , $res[1]);
+                        } catch (\Throwable $th) {
+                            alert()->error('خطا در اتصال به درگاه پرداخت بانک ملت');
+		                    return redirect()->back();
+                        }
                         //-- نمایش خطا
-                        die($result);
                     }
                 }
             }
@@ -161,13 +170,22 @@ class Mellat extends Payment
         return false;
     }
 
+	public function postRefId($refIdValue)
+	{
+			echo "<form name='myform' action='https://bpm.shaparak.ir/pgwchannel/startpay.mellat'
+                 method='POST'><input type='hidden' id='RefId' name='RefId' value='{$refIdValue}'>
+                 </form>
+                 <script type='text/javascript'>window.onload = formSubmit; function formSubmit() { document.forms[0].submit(); }</script>
 
+                 ";
+                    	}
     public function checkPayment($RefId, $ResCode, $SaleOrderId, $SaleReferenceId)
     {
-        if ($RefId == 0) {
+        if ($ResCode == 0) {
+
             if ($this->verify($RefId, $ResCode, $SaleOrderId, $SaleReferenceId) == true) {
                 if ($this->settlePayment($RefId, $ResCode, $SaleOrderId, $SaleReferenceId) == true) {
-                    parent::updateOrder($RefId,$ResCode);
+                    parent::updateOrder($RefId,$SaleReferenceId);
                     return array(
                         "status" => "success",
                         "trans" => $SaleReferenceId
@@ -175,9 +193,66 @@ class Mellat extends Payment
                 }
             }
         }
-        parent::updateOrderErorr($RefId,$ResCode);
+        parent::updateOrderErorr($RefId,0);
         return false;
     }
+
+    	protected function error($number ,$token)
+	{
+		$err = $this->response($number);
+        updateOrderErorr($token, $err);
+        alert()->error($err);
+		return redirect()->back();
+	}
+
+
+
+	protected function response($number)
+	{
+		switch($number) {
+			case 31 :
+				$err = "پاسخ نامعتبر است!";
+				break;
+			case 17 :
+				$err = "کاربر از انجام تراکنش منصرف شده است!";
+				break;
+			case 21 :
+				$err = "پذیرنده نامعتبر است!";
+				break;
+			case 25 :
+				$err = "مبلغ نامعتبر است!";
+				break;
+			case 34 :
+				$err = "خطای سیستمی!";
+				break;
+			case 41 :
+				$err = "شماره درخواست تکراری است!";
+				break;
+			case 421 :
+				$err = "ای پی نامعتبر است!";
+				break;
+			case 412 :
+				$err = "شناسه قبض نادرست است!";
+				break;
+			case 45 :
+				$err = "تراکنش از قبل ستل شده است";
+				break;
+			case 46 :
+				$err = "تراکنش ستل شده است";
+				break;
+			case 35 :
+				$err = "تاریخ نامعتبر است";
+				break;
+			case 32 :
+				$err = "فرمت اطلاعات وارد شده صحیح نمیباشد";
+				break;
+			case 43 :
+				$err = "درخواست verify قبلا صادر شده است";
+				break;
+
+		}
+		return $err ;
+	}
 
 
 }

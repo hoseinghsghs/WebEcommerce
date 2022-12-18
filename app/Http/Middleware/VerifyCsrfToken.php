@@ -13,7 +13,7 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
           
-    'payment-verify',
+    'payment-verify-mellat',
  
     ];
 }
