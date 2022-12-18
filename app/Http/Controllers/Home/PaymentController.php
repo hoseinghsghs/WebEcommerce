@@ -149,7 +149,6 @@ class PaymentController extends Controller
 
         public function paymentVerifyMellat(Request $request)
         {
-            dd(auth()->id());
             $payGateway = new Mellat();
             $payGatewayResult = $payGateway->checkPayment($request->RefId, $request->ResCode , $request->SaleOrderId ,$request->SaleReferenceId);
            
@@ -160,27 +159,27 @@ class PaymentController extends Controller
             } else {
                 
                 try {
-                     
+                     $order=Order::find($request->SaleOrderId);
                     Event::create([
                         'title' => 'پرداخت نهایی انجام گرفت',
-                        'body' => 'آیدی کاربر' . " " . auth()->id() . " " . 'ملت',
-                        'user_id' => auth()->id(),
-                        'eventable_id' => auth()->id(),
+                        'body' => 'آیدی کاربر' . " " . $order->user_id . " " . 'ملت',
+                        'user_id' => $order->user_id,
+                        'eventable_id' => $order->user_id,
                         'eventable_type' => User::class,
                     ]);
                     Log::alert("پرداخت نهایی انجام گرفت", [
-                        'آیدی کاربر' => auth()->id(),
+                        'آیدی کاربر' => $order->user_id,
                         'درگاه' => 'ملت',
                     ]);
-                   
-                    Notification::route('cellphone', '09139035692')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
-                    Notification::route('cellphone', '09162418808')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
+                   $user=User::find($order->user_id);
+                    Notification::route('cellphone', '09139035692')->notify(new OtpSms($user->cellphone . "زرین پال سفارش جدید دارید"));
+                    Notification::route('cellphone', '09162418808')->notify(new OtpSms($user->cellphone . "زرین پال سفارش جدید دارید"));
                 } catch (\Throwable $th) {
                     dd($th);
                 }
 
                 alert()->success('خرید با موفقیت انجام گرفت')->showConfirmButton('تایید');
-                return redirect()->route('home.user_profile.orders', ['order' =>$request->SaleOrderId ]);
+                return redirect()->route('home');
             }
         }
 
