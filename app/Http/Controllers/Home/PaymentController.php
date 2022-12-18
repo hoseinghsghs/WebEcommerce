@@ -110,8 +110,7 @@ class PaymentController extends Controller
                 alert()->error($payGatewayResult['error'])->showConfirmButton('تایید');
                 return redirect()->back();
             } else {
-                $payGatewayResult = $payGateway->postRefId($payGatewayResult['success']);
-                return  $payGatewayResult ;
+                echo "<form name='myform' action='https://bpm.shaparak.ir/pgwchannel/startpay.mellat' method='POST'><input type='hidden' id='RefId' name='RefId' value='{$payGatewayResult['success']}'></form><script type='text/javascript'>window.onload = formSubmit; function formSubmit() { document.forms[0].submit(); }</script>";
             }
         }
 
@@ -146,36 +145,30 @@ class PaymentController extends Controller
     }
 
 
-        public function paymentVerifyMellat(Request $request)
-        {
-            $payGateway = new Mellat();
-            $payGatewayResult = $payGateway->checkPayment($request->RefId, $request->ResCode , $request->SaleOrderId ,$request->SaleReferenceId);
-           
-
-            if ($payGatewayResult==false) {
-                alert()->error('خطا در پرداخت')->showConfirmButton('تایید');
-                return redirect()->route('home.user_profile.orders', ['order' =>$request->SaleOrderId]);
-            } else {
-                
-                try {
-                     
-                    Event::create([
-                        'title' => 'پرداخت نهایی انجام گرفت',
-                        'body' => 'آیدی کاربر' . " " . auth()->id() . " " . 'ملت',
-                        'user_id' => auth()->id(),
-                        'eventable_id' => auth()->id(),
-                        'eventable_type' => User::class,
-                    ]);
-                    Log::alert("پرداخت نهایی انجام گرفت", [
-                        'آیدی کاربر' => auth()->id(),
-                        'درگاه' => 'ملت',
-                    ]);
-                   
-                    Notification::route('cellphone', '09139035692')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
-                    Notification::route('cellphone', '09162418808')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
-                } catch (\Throwable $th) {
-                    dd($th);
-                }
+    public function paymentVerifyMellat(Request $request)
+    {
+        $payGateway = new Mellat();
+        $payGatewayResult = $payGateway->checkPayment($request->RefId, $request->ResCode, $request->SaleOrderId, $request->SaleReferenceId);
+        if ($payGatewayResult == false) {
+            alert()->error('خطا در پرداخت')->showConfirmButton('تایید');
+            return redirect()->route('home.user_profile.orders', ['order' => $request->SaleOrderId]);
+        } else {
+            try {
+                Event::create([
+                    'title' => 'پرداخت نهایی انجام گرفت',
+                    'body' => 'آیدی کاربر' . " " . auth()->id() . " " . 'ملت',
+                    'user_id' => auth()->id(),
+                    'eventable_id' => auth()->id(),
+                    'eventable_type' => User::class,
+                ]);
+                Log::alert("پرداخت نهایی انجام گرفت", [
+                    'آیدی کاربر' => auth()->id(),
+                    'درگاه' => 'ملت',
+                ]);
+                Notification::route('cellphone', '09139035692')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
+                Notification::route('cellphone', '09162418808')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
+            } catch (\Throwable $th) {
+            }
 
                 alert()->success('خرید با موفقیت انجام گرفت')->showConfirmButton('تایید');
                 return redirect()->route('home.user_profile.orders', ['order' =>$request->SaleOrderId ]);
