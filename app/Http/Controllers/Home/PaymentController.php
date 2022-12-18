@@ -109,23 +109,30 @@ class PaymentController extends Controller
         }
 
         if ($request->payment_method == 'mellat') {
+            //create order
             $mellat_payment = new mPayment();
+            $createOrder = $mellat_payment->createOrder($address_id, $amounts, '', 'mellat', $description, $ip);
 
-            // Create new invoice.
-            $invoice = (new Invoice)->amount('1200')->detail(['detailName' => $description]);
-            return Payment::purchase($invoice, function ($driver, $transactionId) use ($mellat_payment, $address_id, $amounts, $description, $ip) {
-                 $mellat_payment->createOrder($address_id, $amounts, $transactionId, 'mellat', $description, $ip);
-            })->pay()->render();
-
-            /*$payGateway = new Mellat();
-
-            $payGatewayResult = $payGateway->send($amounts, $address_id, $description, $ip);
-            if (array_key_exists('error', $payGatewayResult)) {
-                alert()->error($payGatewayResult['error'])->showConfirmButton('تایید');
-                return redirect()->back();
+            if (array_key_exists('error', $createOrder)) {
+                alert()->error('', $createOrder['error'])->showConfirmButton('تایید');
+                return redirect()->route('home');
             } else {
-                echo "<form name='myform' action='https://bpm.shaparak.ir/pgwchannel/startpay.mellat' method='POST'><input type='hidden' id='RefId' name='RefId' value='{$payGatewayResult['success']}'></form><script type='text/javascript'>window.onload = formSubmit; function formSubmit() { document.forms[0].submit(); }</script>";
-            }*/
+                // Create new invoice.
+                $invoice = (new Invoice)->amount('1200')->detail(['description' => $description])->uuid($createOrder['orderId']);
+                return Payment::purchase($invoice, function ($driver, $transactionId) use ($mellat_payment, $createOrder) {
+                    $mellat_payment->updateTransaction($createOrder['orderId'], $transactionId);
+                })->pay()->render();
+
+                /*$payGateway = new Mellat();
+
+                $payGatewayResult = $payGateway->send($amounts, $address_id, $description, $ip);
+                if (array_key_exists('error', $payGatewayResult)) {
+                    alert()->error($payGatewayResult['error'])->showConfirmButton('تایید');
+                    return redirect()->back();
+                } else {
+                    echo "<form name='myform' action='https://bpm.shaparak.ir/pgwchannel/startpay.mellat' method='POST'><input type='hidden' id='RefId' name='RefId' value='{$payGatewayResult['success']}'></form><script type='text/javascript'>window.onload = formSubmit; function formSubmit() { document.forms[0].submit(); }</script>";
+                }*/
+            }
         }
 
         if ($request->payment_method == 'paypal') {
@@ -161,14 +168,15 @@ class PaymentController extends Controller
 
     public function paymentVerifyMellat(Request $request)
     {
+        dd($request);
         $mellat_payment = new mPayment();
         // You need to verify the payment to ensure the invoice has been paid successfully.
         // We use transaction id to verify payments
-      // It is a good practice to add invoice amount as well.
+        // It is a good practice to add invoice amount as well.
         $transaction = Transaction::where('token', $request->RefId)->firstOrFail();
         try {
             $receipt = Payment::amount($request->FinalAmount)->transactionId($request->RefId)->verify();
-            $mellat_payment->updateOrder($request->RefId,$receipt->getReferenceId());
+            $mellat_payment->updateOrder($request->RefId, $receipt->getReferenceId());
             Event::create([
                 'title' => 'پرداخت نهایی انجام گرفت',
                 'body' => 'آیدی کاربر' . " " . auth()->id() . " " . 'ملت',
@@ -183,19 +191,19 @@ class PaymentController extends Controller
             Notification::route('cellphone', '09139035692')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
             Notification::route('cellphone', '09162418808')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
             alert()->success('خرید با موفقیت انجام گرفت')->showConfirmButton('تایید');
-            return redirect()->route('home.user_profile.orders', ['order' =>$transaction->order_id]);
+            return redirect()->route('home.user_profile.orders', ['order' => $transaction->order_id]);
 //            echo $receipt->getReferenceId();
 
         } catch (InvalidPaymentException $exception) {
             /**
-            when payment is not verified, it will throw an exception.
-            We can catch the exception to handle invalid payments.
-            getMessage method, returns a suitable message that can be used in user interface.
+             * when payment is not verified, it will throw an exception.
+             * We can catch the exception to handle invalid payments.
+             * getMessage method, returns a suitable message that can be used in user interface.
              **/
-            $mellat_payment->updateOrderErorr($request->RefId,$exception->getMessage());
+            $mellat_payment->updateOrderErorr($request->RefId, $exception->getMessage());
             Event::create([
                 'title' => 'پرداخت ناموفق',
-                'body' => 'آیدی کاربر' . " " . auth()->id() . " " . 'ملت'.' متن خطا: '.$exception->getMessage(),
+                'body' => 'آیدی کاربر' . " " . auth()->id() . " " . 'ملت' . ' متن خطا: ' . $exception->getMessage(),
                 'user_id' => auth()->id(),
                 'eventable_id' => auth()->id(),
                 'eventable_type' => User::class,
@@ -204,7 +212,7 @@ class PaymentController extends Controller
                 'آیدی کاربر' => auth()->id(),
                 'درگاه' => 'ملت',
             ]);
-            return redirect()->route('home.user_profile.orders', ['order' =>$transaction->order_id]);
+            return redirect()->route('home.user_profile.orders', ['order' => $transaction->order_id]);
 //            echo $exception->getMessage();
         }
 
