@@ -109,7 +109,8 @@ class PaymentController extends Controller
             if (array_key_exists('error', $payGatewayResult)) {
                 alert()->error($payGatewayResult['error'])->showConfirmButton('تایید');
                 return redirect()->back();
-            } else {
+            } 
+            else {
                 $payGatewayResult = $payGateway->postRefId($payGatewayResult['success']);
                 return  $payGatewayResult ;
             }

@@ -1,35 +1,9 @@
-<?php 
-namespace App\PaymentGateway;
-?>
-<html>
-<head>
-	<title>BP PGW Test</title>
-	<link href="Css/Style.css" rel="stylesheet" type="text/css" />
-
-	<script language="javascript" type="text/javascript">    
-		function postRefId (refIdValue) {
-			var form = document.createElement("form");
-			form.setAttribute("method", "POST");
-			form.setAttribute("action", "https://bpm.shaparak.ir/pgwchannel/startpay.mellat");         
-			form.setAttribute("target", "_self");
-			var hiddenField = document.createElement("input");              
-			hiddenField.setAttribute("name", "RefId");
-			hiddenField.setAttribute("value", refIdValue);
-			form.appendChild(hiddenField);
-			document.body.appendChild(form);         
-			form.submit();
-			document.body.removeChild(form);
-		}
-	</script>
-</head>
-<body>
-
-</body>
-
 <?php
 
+namespace App\PaymentGateway;
+
 use nusoap_client;
-use Illuminate\Support\Facades\Http;
+
 class Mellat extends Payment
 {
     /**
@@ -198,7 +172,15 @@ class Mellat extends Payment
 
 	public function postRefId($refIdValue) 
 	{
-       return "<script language='javascript' type='text/javascript'>postRefId('" . $refIdValue . "');</script>";
+			echo "<form name='myform' action='https://bpm.shaparak.ir/pgwchannel/startpay.mellat'
+                 method='POST'><input type='hidden' id='RefId' name='RefId' value='{$refIdValue}'>
+                 </form>
+                 <script type='text/javascript'>window.onload = formSubmit; function formSubmit() { document.forms[0].submit(); }</script>
+                 
+                 "; 
+                    echo "$refIdValu , auth()->id()";
+                 dd($refIdValu , auth()->id());
+                 
 	}
     public function checkPayment($RefId, $ResCode, $SaleOrderId, $SaleReferenceId)
     {  
@@ -278,6 +260,4 @@ class Mellat extends Payment
 
 }
 
-?>
 
-</html>
