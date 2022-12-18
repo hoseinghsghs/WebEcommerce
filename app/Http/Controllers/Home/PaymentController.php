@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
-use App\Models\Order;
 use App\Models\ProductVariation;
 use App\Models\Transaction;
 use App\Models\User;
@@ -14,7 +13,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\PaymentGateway\Zarinpal;
 use App\PaymentGateway\Pay;
-use App\PaymentGateway\Mellat;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
