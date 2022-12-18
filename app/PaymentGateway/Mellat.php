@@ -71,7 +71,7 @@ class Mellat extends Payment
                     $res = explode(',', $result);
                     $ResCode = $res[0];
 
-                    parent::updateOrder($orderId,$res[1]);
+                    parent::updateTransaction($orderId,$res[1]);
 
                     if ($ResCode == "0") {
 
