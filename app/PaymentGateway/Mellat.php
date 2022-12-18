@@ -1,3 +1,6 @@
+<?php 
+namespace App\PaymentGateway;
+?>
 <html>
 <head>
 	<title>BP PGW Test</title>
@@ -36,7 +39,7 @@
 </body>
 
 <?php
-namespace App\PaymentGateway;
+
 use nusoap_client;
 use Illuminate\Support\Facades\Http;
 class Mellat extends Payment
