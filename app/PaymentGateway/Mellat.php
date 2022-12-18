@@ -172,7 +172,7 @@ class Mellat extends Payment
 
 
     public function checkPayment($RefId, $ResCode, $SaleOrderId, $SaleReferenceId)
-    {
+    {dd(auth()->id());
         if ($ResCode == 0) {
              
             if ($this->verify($RefId, $ResCode, $SaleOrderId, $SaleReferenceId) == true) {
