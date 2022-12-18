@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Models\Order;
 use App\Models\ProductVariation;
 use App\Models\User;
 use App\Models\Product;
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\Notification;
 use App\Notifications\OtpSms;
 use Shetabit\Multipay\Invoice;
 use Shetabit\Payment\Facade\Payment;
+use App\PaymentGateway\Payment as mPayment;
 
 class PaymentController extends Controller
 {
@@ -104,14 +106,15 @@ class PaymentController extends Controller
         }
 
         if ($request->payment_method == 'mellat') {
+            $mellat_payment = new mPayment();
 
-            return Payment::purchase(
-                (new Invoice)->amount($amounts['paying_amount'])->detail(['detailName' => $description]),
-                function($driver, $transactionId) {
-                    // Store transactionId in database.
-                    // We need the transactionId to verify payment in the future.
-                }
-            )->pay()->render();
+            // Create new invoice.
+            $invoice = (new Invoice)->amount($amounts['paying_amount'])->detail(['detailName' => $description]);
+            return Payment::purchase($invoice, function ($driver, $transactionId) use ($invoice, $mellat_payment, $address_id, $amounts, $description, $ip) {
+                $result_order = $mellat_payment->createOrder($address_id, $amounts, $transactionId, 'mellat', $description, $ip);
+                $invoice->uuid($result_order['orderId']);
+            })->pay()->render();
+
             /*$payGateway = new Mellat();
 
             $payGatewayResult = $payGateway->send($amounts, $address_id, $description, $ip);
@@ -156,7 +159,13 @@ class PaymentController extends Controller
 
     public function paymentVerifyMellat(Request $request)
     {
-        $payGateway = new Mellat();
+        dd($request);
+        // You need to verify the payment to ensure the invoice has been paid successfully.
+        // We use transaction id to verify payments
+      // It is a good practice to add invoice amount as well.
+
+
+        /*$payGateway = new Mellat();
         $payGatewayResult = $payGateway->checkPayment($request->RefId, $request->ResCode, $request->SaleOrderId, $request->SaleReferenceId);
         if ($payGatewayResult == false) {
             alert()->error('خطا در پرداخت')->showConfirmButton('تایید');
@@ -181,8 +190,8 @@ class PaymentController extends Controller
 
                 alert()->success('خرید با موفقیت انجام گرفت')->showConfirmButton('تایید');
                 return redirect()->route('home.user_profile.orders', ['order' =>$request->SaleOrderId ]);
-            }
-        }
+            }*/
+    }
 
     public function paymentVerify(Request $request, $gatewayName)
     {
