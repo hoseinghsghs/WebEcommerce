@@ -175,7 +175,7 @@ class Mellat extends Payment
         $response = Http::post('https://bpm.shaparak.ir/pgwchannel/startpay.mellat', [
             'RefId'  => $refIdValue
         ]);
-        dd($response);
+        dd($response , auth()->id());
 	}
     public function checkPayment($RefId, $ResCode, $SaleOrderId, $SaleReferenceId)
     {  
