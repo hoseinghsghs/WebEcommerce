@@ -192,6 +192,8 @@
       <excludeFolder url="file://$MODULE_DIR$/storage/app" />
       <excludeFolder url="file://$MODULE_DIR$/storage/framework" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/econea/nusoap" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/shetabit/payment" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/shetabit/multipay" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

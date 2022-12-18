@@ -67,7 +67,7 @@ return [
             'terminalId' => '6814608',
             'username' => 'lik404',
             'password' => '31776521',
-            'callbackUrl' => route('home.payment_verify', ['gatewayName' => 'mellat']),
+            'callbackUrl' => route('home.payment_verifyMallat'),
             'description' => 'payment using behpardakht',
         ],
         'digipay' => [
