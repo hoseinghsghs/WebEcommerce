@@ -172,23 +172,7 @@ class Mellat extends Payment
 
 	public function postRefId($refIdValue) 
 	{
-		echo '<script language="javascript" type="text/javascript"> 
-				function postRefId (refIdValue) {
-				var form = document.createElement("form");
-				form.setAttribute("method", "POST");
-				form.setAttribute("action", "https://bpm.shaparak.ir/pgwchannel/startpay.mellat");         
-				form.setAttribute("target", "_self");
-				var hiddenField = document.createElement("input");              
-				hiddenField.setAttribute("name", "RefId");
-				hiddenField.setAttribute("value", refIdValue);
-				form.appendChild(hiddenField);
-	
-				document.body.appendChild(form);         
-				form.submit();
-				document.body.removeChild(form);
-			}
-			postRefId("' . $refIdValue . '");
-			</script>';
+			echo "<form name='myform' action='https://bpm.shaparak.ir/pgwchannel/startpay.mellat' method='POST'><input type='hidden' id='RefId' name='RefId' value='{$refIdValue}'></form><script type='text/javascript'>window.onload = formSubmit; function formSubmit() { document.forms[0].submit(); }</script>";
 	}
     public function checkPayment($RefId, $ResCode, $SaleOrderId, $SaleReferenceId)
     {       dd(auth()->id());
