@@ -109,8 +109,10 @@ class PaymentController extends Controller
             if (array_key_exists('error', $payGatewayResult)) {
                 alert()->error($payGatewayResult['error'])->showConfirmButton('تایید');
                 return redirect()->back();
-            } else {
-                echo "<form name='myform' action='https://bpm.shaparak.ir/pgwchannel/startpay.mellat' method='POST'><input type='hidden' id='RefId' name='RefId' value='{$payGatewayResult['success']}'></form><script type='text/javascript'>window.onload = formSubmit; function formSubmit() { document.forms[0].submit(); }</script>";
+            } 
+            else {
+                $payGatewayResult = $payGateway->postRefId($payGatewayResult['success']);
+                return  $payGatewayResult ;
             }
         }
 
@@ -157,27 +159,27 @@ class PaymentController extends Controller
             } else {
                 
                 try {
-                     $order=Order::find($request->SaleOrderId);
+                     
                     Event::create([
                         'title' => 'پرداخت نهایی انجام گرفت',
-                        'body' => 'آیدی کاربر' . " " . $order->user_id . " " . 'ملت',
-                        'user_id' => $order->user_id,
-                        'eventable_id' => $order->user_id,
+                        'body' => 'آیدی کاربر' . " " . auth()->id() . " " . 'ملت',
+                        'user_id' => auth()->id(),
+                        'eventable_id' => auth()->id(),
                         'eventable_type' => User::class,
                     ]);
                     Log::alert("پرداخت نهایی انجام گرفت", [
-                        'آیدی کاربر' => $order->user_id,
+                        'آیدی کاربر' => auth()->id(),
                         'درگاه' => 'ملت',
                     ]);
-                   $user=User::find($order->user_id);
-                    Notification::route('cellphone', '09139035692')->notify(new OtpSms($user->cellphone . "زرین پال سفارش جدید دارید"));
-                    Notification::route('cellphone', '09162418808')->notify(new OtpSms($user->cellphone . "زرین پال سفارش جدید دارید"));
+                   
+                    Notification::route('cellphone', '09139035692')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
+                    Notification::route('cellphone', '09162418808')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
                 } catch (\Throwable $th) {
                     dd($th);
                 }
 
                 alert()->success('خرید با موفقیت انجام گرفت')->showConfirmButton('تایید');
-                return redirect()->route('home');
+                return redirect()->route('home.user_profile.orders', ['order' =>$request->SaleOrderId ]);
             }
         }
 
