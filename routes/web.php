@@ -162,8 +162,8 @@ Route::get('/post', [HomePostController::class, 'index'])->name('home.posts.inde
 
 Route::get('/post/list/{post:category}', [HomePostController::class, 'list'])->name('home.posts.list');
 
-Route::get('/payment-verify/{gatewayName}', [PaymentController::class, 'paymentVerify'])->name('home.payment_verify');
-Route::post('/payment-verify-mellat', [PaymentController::class, 'paymentVerifyMellat'])->middleware('web' , 'auth')->name('home.payment_verifyMallat');
+Route::match(['get', 'post'],'/payment-verify/{gatewayName}', [PaymentController::class, 'paymentVerify'])->name('home.payment_verify');
+//Route::post('/payment-verify-mellat', [PaymentController::class, 'paymentVerifyMellat'])->middleware('web' , 'auth')->name('home.payment_verifyMallat');
 
 Route::get('/get-province-cities-list', [AddressController::class, 'getProvinceCitiesList']);
 
