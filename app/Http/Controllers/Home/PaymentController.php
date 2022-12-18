@@ -106,6 +106,7 @@ class PaymentController extends Controller
             $payGateway = new Mellat();
 
             $payGatewayResult = $payGateway->send($amounts, $address_id, $description, $ip);
+            dd(auth()->id());
             if (array_key_exists('error', $payGatewayResult)) {
                 alert()->error($payGatewayResult['error'])->showConfirmButton('تایید');
                 return redirect()->back();
