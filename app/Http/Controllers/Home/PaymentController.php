@@ -110,9 +110,9 @@ class PaymentController extends Controller
                 alert()->error($payGatewayResult['error'])->showConfirmButton('تایید');
                 return redirect()->back();
             } else {
-                return "<form name='myform' action='https://bpm.shaparak.ir/pgwchannel/startpay.mellat' method='POST'><input type='hidden' id='RefId' name='RefId' value='{$payGatewayResult['success']}'></form><script type='text/javascript'>window.onload = formSubmit; function formSubmit() { document.forms[0].submit(); }</script>";
-                     dd(auth()->id());
-                return true;
+                return "<form name='myform' action='https://bpm.shaparak.ir/pgwchannel/startpay.mellat' method='POST'>
+                    <input type='hidden' name='_token' id='csrf-token' value='".Session::token()."'/>
+                    <input type='hidden' id='RefId' name='RefId' value='{$payGatewayResult['success']}'></form><script type='text/javascript'>window.onload = formSubmit; function formSubmit() { document.forms[0].submit(); }</script>";
             }
         }
 
@@ -149,6 +149,7 @@ class PaymentController extends Controller
 
         public function paymentVerifyMellat(Request $request)
         {
+            dd(auth()->id());
             $payGateway = new Mellat();
             $payGatewayResult = $payGateway->checkPayment($request->RefId, $request->ResCode , $request->SaleOrderId ,$request->SaleReferenceId);
            
