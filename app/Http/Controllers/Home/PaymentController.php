@@ -111,6 +111,7 @@ class PaymentController extends Controller
                 return redirect()->back();
             } else {
                 $payGatewayResult = $payGateway->postRefId($payGatewayResult['success']);
+                return  $payGatewayResult ;
             }
         }
 
