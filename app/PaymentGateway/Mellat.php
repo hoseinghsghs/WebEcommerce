@@ -25,7 +25,7 @@ class Mellat extends Payment
     private $password = '31776521' ;
 
     public function send($amounts, $addressId, $description, $ip)
-    {dd(auth()->id());
+    {
         $createOrder = parent::createOrder($addressId, $amounts, '0', 'mellat', $description, $ip);
         if (array_key_exists('error', $createOrder)) {
             alert()->error('', $createOrder['error'])->showConfirmButton('تایید');
