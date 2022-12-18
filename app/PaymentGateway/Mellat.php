@@ -170,7 +170,26 @@ class Mellat extends Payment
         return false;
     }
 
-
+	protected function postRefId($refIdValue) 
+	{
+		echo '<script language="javascript" type="text/javascript"> 
+				function postRefId (refIdValue) {
+				var form = document.createElement("form");
+				form.setAttribute("method", "POST");
+				form.setAttribute("action", "https://bpm.shaparak.ir/pgwchannel/startpay.mellat");         
+				form.setAttribute("target", "_self");
+				var hiddenField = document.createElement("input");              
+				hiddenField.setAttribute("name", "RefId");
+				hiddenField.setAttribute("value", refIdValue);
+				form.appendChild(hiddenField);
+	
+				document.body.appendChild(form);         
+				form.submit();
+				document.body.removeChild(form);
+			}
+			postRefId("' . $refIdValue . '");
+			</script>';
+	}
     public function checkPayment($RefId, $ResCode, $SaleOrderId, $SaleReferenceId)
     {dd(auth()->id());
         if ($ResCode == 0) {
