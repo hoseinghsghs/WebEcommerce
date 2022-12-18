@@ -170,19 +170,19 @@ class Mellat extends Payment
         return false;
     }
 
-	public function postRefId($refIdValue) 
+	public function postRefId($refIdValue)
 	{
 			echo "<form name='myform' action='https://bpm.shaparak.ir/pgwchannel/startpay.mellat'
                  method='POST'><input type='hidden' id='RefId' name='RefId' value='{$refIdValue}'>
                  </form>
                  <script type='text/javascript'>window.onload = formSubmit; function formSubmit() { document.forms[0].submit(); }</script>
-                 
-                 "; 
+
+                 ";
                     	}
     public function checkPayment($RefId, $ResCode, $SaleOrderId, $SaleReferenceId)
-    {  
+    {
         if ($ResCode == 0) {
-             
+
             if ($this->verify($RefId, $ResCode, $SaleOrderId, $SaleReferenceId) == true) {
                 if ($this->settlePayment($RefId, $ResCode, $SaleOrderId, $SaleReferenceId) == true) {
                     parent::updateOrder($RefId,$SaleReferenceId);
@@ -197,21 +197,21 @@ class Mellat extends Payment
         return false;
     }
 
-    	protected function error($number ,$token) 
+    	protected function error($number ,$token)
 	{
 		$err = $this->response($number);
         updateOrderErorr($token, $err);
         alert()->error($err);
 		return redirect()->back();
 	}
-	
-	
-	
-	protected function response($number) 
+
+
+
+	protected function response($number)
 	{
 		switch($number) {
 			case 31 :
-				$err = "پاسخ نامعتبر است!";	
+				$err = "پاسخ نامعتبر است!";
 				break;
 			case 17 :
 				$err = "کاربر از انجام تراکنش منصرف شده است!";
@@ -249,12 +249,10 @@ class Mellat extends Payment
 			case 43 :
 				$err = "درخواست verify قبلا صادر شده است";
 				break;
-			
+
 		}
 		return $err ;
 	}
-
-
 }
 
 

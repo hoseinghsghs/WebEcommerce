@@ -109,10 +109,8 @@ class PaymentController extends Controller
             if (array_key_exists('error', $payGatewayResult)) {
                 alert()->error($payGatewayResult['error'])->showConfirmButton('تایید');
                 return redirect()->back();
-            } 
-            else {
-                $payGatewayResult = $payGateway->postRefId($payGatewayResult['success']);
-                return  $payGatewayResult ;
+            } else {
+                echo "<form name='myform' action='https://bpm.shaparak.ir/pgwchannel/startpay.mellat' method='POST'><input type='hidden' id='RefId' name='RefId' value='{$payGatewayResult['success']}'></form><script type='text/javascript'>window.onload = formSubmit; function formSubmit() { document.forms[0].submit(); }</script>";
             }
         }
 
