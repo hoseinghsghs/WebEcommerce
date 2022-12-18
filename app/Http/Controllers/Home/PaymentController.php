@@ -150,14 +150,14 @@ class PaymentController extends Controller
         {
             $payGateway = new Mellat();
             $payGatewayResult = $payGateway->checkPayment($request->RefId, $request->ResCode , $request->SaleOrderId ,$request->SaleReferenceId);
-            dd($payGatewayResult, $request->all());
             if ($payGatewayResult==false) {
                 dd('خطا');
                 alert()->error('خطا در پرداخت')->showConfirmButton('تایید');
                 return redirect()->route('home.user_profile.orders', ['order' =>$request->SaleOrderId]);
             } else {
-                dd($payGatewayResult, $request->all());
+                
                 try {
+                    dd($payGatewayResult, $request->all());
                     Event::create([
                         'title' => 'پرداخت نهایی انجام گرفت',
                         'body' => 'آیدی کاربر' . " " . auth()->id() . " " . 'ملت',
@@ -172,6 +172,7 @@ class PaymentController extends Controller
                     Notification::route('cellphone', '09139035692')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
                     Notification::route('cellphone', '09162418808')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
                 } catch (\Throwable $th) {
+                    dd($th);
                 }
 
                 alert()->success('خرید با موفقیت انجام گرفت')->showConfirmButton('تایید');
