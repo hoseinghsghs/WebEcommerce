@@ -170,8 +170,7 @@ class Mellat extends Payment
 
 	public function postRefId($refIdValue) 
 	{
-       echo "<script language='javascript' type='text/javascript'>postRefId('" . $refIdValue . "');</script>";
-        dd(auth()->id());
+       return "<script language='javascript' type='text/javascript'>postRefId('" . $refIdValue . "');</script>";
 	}
     public function checkPayment($RefId, $ResCode, $SaleOrderId, $SaleReferenceId)
     {  
