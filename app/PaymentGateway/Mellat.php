@@ -165,10 +165,10 @@ class Mellat extends Payment
 
     public function checkPayment($RefId, $ResCode, $SaleOrderId, $SaleReferenceId)
     {
-        if ($RefId == 0) {
+        if ($ResCode == 0) {
             if ($this->verify($RefId, $ResCode, $SaleOrderId, $SaleReferenceId) == true) {
                 if ($this->settlePayment($RefId, $ResCode, $SaleOrderId, $SaleReferenceId) == true) {
-                    parent::updateOrder($RefId,$ResCode);
+                    parent::updateOrder($RefId,1);
                     return array(
                         "status" => "success",
                         "trans" => $SaleReferenceId
@@ -176,7 +176,7 @@ class Mellat extends Payment
                 }
             }
         }
-        parent::updateOrderErorr($RefId,$ResCode);
+        parent::updateOrderErorr($RefId,0);
         return false;
     }
 
