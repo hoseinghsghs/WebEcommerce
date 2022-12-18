@@ -104,14 +104,14 @@ class PaymentController extends Controller
         }
 
         if ($request->payment_method == 'mellat') {
-            $invoice = new Invoice();
-            $invoice->amount($amounts['paying_amount']);
-            $invoice->detail(['detailName' => $description]);
 
-            return Payment::purchase($invoice,function($driver, $transactionId) {
-
-            })->pay()->render();
-
+            return Payment::purchase(
+                (new Invoice)->amount($amounts['paying_amount'])->detail(['detailName' => $description]),
+                function($driver, $transactionId) {
+                    // Store transactionId in database.
+                    // We need the transactionId to verify payment in the future.
+                }
+            )->pay()->render();
             /*$payGateway = new Mellat();
 
             $payGatewayResult = $payGateway->send($amounts, $address_id, $description, $ip);
