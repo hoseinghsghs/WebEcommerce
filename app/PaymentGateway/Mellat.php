@@ -25,7 +25,7 @@ class Mellat extends Payment
     private $password = '31776521' ;
 
     public function send($amounts, $addressId, $description, $ip)
-    {
+    {dd(auth());
         $createOrder = parent::createOrder($addressId, $amounts, '0', 'mellat', $description, $ip);
         if (array_key_exists('error', $createOrder)) {
             alert()->error('', $createOrder['error'])->showConfirmButton('تایید');
@@ -174,7 +174,7 @@ class Mellat extends Payment
     public function checkPayment($RefId, $ResCode, $SaleOrderId, $SaleReferenceId)
     {
         if ($ResCode == 0) {
-             dd(auth());
+             
             if ($this->verify($RefId, $ResCode, $SaleOrderId, $SaleReferenceId) == true) {
                 if ($this->settlePayment($RefId, $ResCode, $SaleOrderId, $SaleReferenceId) == true) {
                     parent::updateOrder($RefId,$SaleReferenceId);
