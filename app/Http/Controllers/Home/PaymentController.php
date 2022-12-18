@@ -109,7 +109,7 @@ class PaymentController extends Controller
             $mellat_payment = new mPayment();
 
             // Create new invoice.
-            $invoice = (new Invoice)->amount($amounts['paying_amount'])->detail(['detailName' => $description]);
+            $invoice = (new Invoice)->amount('1200')->detail(['detailName' => $description]);
             return Payment::purchase($invoice, function ($driver, $transactionId) use ($invoice, $mellat_payment, $address_id, $amounts, $description, $ip) {
                 $result_order = $mellat_payment->createOrder($address_id, $amounts, $transactionId, 'mellat', $description, $ip);
                 $invoice->uuid($result_order['orderId']);
