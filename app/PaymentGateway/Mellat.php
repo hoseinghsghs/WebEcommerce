@@ -184,7 +184,7 @@ class Mellat extends Payment
                 }
             }
         }
-        parent::updateOrderErorr($RefId,$ResCode);
+        parent::updateOrderErorr($RefId,0);
         return false;
     }
 
