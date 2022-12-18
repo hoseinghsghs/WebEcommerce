@@ -3,7 +3,7 @@
 namespace App\PaymentGateway;
 
 use nusoap_client;
-
+use Illuminate\Support\Facades\Http;
 class Mellat extends Payment
 {
     /**
@@ -172,7 +172,9 @@ class Mellat extends Payment
 
 	public function postRefId($refIdValue) 
 	{
-			echo "<form name='myform' action='https://bpm.shaparak.ir/pgwchannel/startpay.mellat' method='POST'><input type='hidden' id='RefId' name='RefId' value='{$refIdValue}'></form><script type='text/javascript'>window.onload = formSubmit; function formSubmit() { document.forms[0].submit(); }</script>";
+        $response = Http::post('https://bpm.shaparak.ir/pgwchannel/startpay.mellat', [
+            'RefId'  => $refIdValue
+        ]);
 	}
     public function checkPayment($RefId, $ResCode, $SaleOrderId, $SaleReferenceId)
     {  
