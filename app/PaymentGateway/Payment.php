@@ -96,7 +96,6 @@ class Payment
 
      public function updateTransaction($OrderId , $token)
     {
-        dd($OrderId , $token);
         $transaction = Transaction::where('order_id', $OrderId)->firstOrFail();
         $transaction->update([
             'token' => $token
