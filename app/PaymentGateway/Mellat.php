@@ -170,7 +170,7 @@ class Mellat extends Payment
         return false;
     }
 
-	protected function postRefId($refIdValue) 
+	public function postRefId($refIdValue) 
 	{
 		echo '<script language="javascript" type="text/javascript"> 
 				function postRefId (refIdValue) {
