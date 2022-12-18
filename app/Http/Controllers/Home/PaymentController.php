@@ -24,6 +24,8 @@ use App\Notifications\OtpSms;
 use Shetabit\Multipay\Invoice;
 use Shetabit\Payment\Facade\Payment;
 use App\PaymentGateway\Payment as mPayment;
+use Shetabit\Multipay\Exceptions\InvalidPaymentException;
+
 
 class PaymentController extends Controller
 {
@@ -110,10 +112,8 @@ class PaymentController extends Controller
 
             // Create new invoice.
             $invoice = (new Invoice)->amount('1200')->detail(['detailName' => $description]);
-            return Payment::purchase($invoice, function ($driver, $transactionId) use ($invoice, $mellat_payment, $address_id, $amounts, $description, $ip) {
-                dd($transactionId);
-                $result_order = $mellat_payment->createOrder($address_id, $amounts, $transactionId, 'mellat', $description, $ip);
-                $invoice->uuid($result_order['orderId']);
+            return Payment::purchase($invoice, function ($driver, $transactionId) use ($mellat_payment, $address_id, $amounts, $description, $ip) {
+                 $mellat_payment->createOrder($address_id, $amounts, $transactionId, 'mellat', $description, $ip);
             })->pay()->render();
 
             /*$payGateway = new Mellat();
@@ -160,11 +160,23 @@ class PaymentController extends Controller
 
     public function paymentVerifyMellat(Request $request)
     {
-        dd($request);
         // You need to verify the payment to ensure the invoice has been paid successfully.
         // We use transaction id to verify payments
       // It is a good practice to add invoice amount as well.
+        try {
+            $receipt = Payment::amount($request->FinalAmount)->transactionId($request->RefId)->verify();
 
+            // You can show payment referenceId to the user.
+            echo $receipt->getReferenceId();
+
+        } catch (InvalidPaymentException $exception) {
+            /**
+            when payment is not verified, it will throw an exception.
+            We can catch the exception to handle invalid payments.
+            getMessage method, returns a suitable message that can be used in user interface.
+             **/
+            echo $exception->getMessage();
+        }
 
         /*$payGateway = new Mellat();
         $payGatewayResult = $payGateway->checkPayment($request->RefId, $request->ResCode, $request->SaleOrderId, $request->SaleReferenceId);
