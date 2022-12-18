@@ -161,7 +161,6 @@ class PaymentController extends Controller
 
     public function paymentVerifyMellat(Request $request)
     {
-        dd($request,$request->all(),$request->RefId);
         $mellat_payment = new mPayment();
         // You need to verify the payment to ensure the invoice has been paid successfully.
         // We use transaction id to verify payments
