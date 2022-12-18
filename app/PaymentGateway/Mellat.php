@@ -253,8 +253,6 @@ class Mellat extends Payment
 		}
 		return $err ;
 	}
-
-
 }
 
 
