@@ -67,7 +67,7 @@ return [
             'terminalId' => '6814608',
             'username' => 'lik404',
             'password' => '31776521',
-            'callbackUrl' => url('/payment-verify-mellat'),
+            'callbackUrl' => 'https://www.likoshop.ir/payment-verify-mellat',
             'description' => 'payment using behpardakht',
         ],
         'digipay' => [
@@ -188,7 +188,7 @@ return [
             'callbackUrl' => 'http://yoursite.com/path/to',
             'description' => 'payment using poolam',
         ],
-          'sadad' => [
+        'sadad' => [
             'apiPaymentByIdentityUrl' => 'https://sadad.shaparak.ir/api/v0/PaymentByIdentity/PaymentRequest',
             'apiPaymentUrl' => 'https://sadad.shaparak.ir/api/v0/Request/PaymentRequest',
             'apiPurchaseByIdentityUrl' => 'https://sadad.shaparak.ir/vpg/api/v0/Request/PaymentRequest',
@@ -288,7 +288,7 @@ return [
             'description' => 'payment using sepordeh',
         ],
 
-        'rayanpay'=>[
+        'rayanpay' => [
             'apiPurchaseUrl' => 'https://bpm.shaparak.ir/pgwchannel/startpay.mellat',
             'apiTokenUrl' => 'https://pms.rayanpay.com/api/v1/auth/token/generate',
             'apiPayStart' => 'https://pms.rayanpay.com/api/v1/ipg/payment/start',
@@ -298,7 +298,7 @@ return [
             'password' => '',
             'callbackUrl' => '',
         ],
-        'sizpay'=>[
+        'sizpay' => [
             'apiPurchaseUrl' => 'https://rt.sizpay.ir/KimiaIPGRouteService.asmx?WSDL',
             'apiPaymentUrl' => 'https://rt.sizpay.ir/Route/Payment',
             'apiVerificationUrl' => 'https://rt.sizpay.ir/KimiaIPGRouteService.asmx?WSDL',
@@ -322,7 +322,7 @@ return [
             'apiPaymentUrl' => 'https://panel.aqayepardakht.ir/startpay/',
             'apiPaymentUrlSandbox' => 'https://panel.aqayepardakht.ir/startpay/sandbox/',
             'apiVerificationUrl' => 'https://panel.aqayepardakht.ir/api/v2/verify',
-            'mode' => 'normal' , //normal | sandbox
+            'mode' => 'normal', //normal | sandbox
             'callbackUrl' => '',
             'pin' => '',
             'invoice_id' => '',

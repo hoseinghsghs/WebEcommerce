@@ -450,36 +450,34 @@
                                             <ul class="checkout-payment-methods">
 
                                                  <li class="checkout-payment-method-item d-block">
-                                                    <label for="#" class="outline-radio">
+                                                    <label for="mellat" class="outline-radio">
                                                         <input form="checkout" type="radio" name="payment_method"
-                                                               value="mellat" id="payment-option-online" checked>
+                                                               value="mellat" id="mellat" checked>
                                                         <span class="outline-radio-check"></span>
                                                     </label>
-                                                    <label for="#" class="shipping-totals-title-row">
-                                                        <div class="shipping-totals-title">درگاه مستقیم بانک ملت
-                                                        </div>
+                                                    <label for="mellat" class="shipping-totals-title-row">
+                                                        <img src={{ asset('assets/home/images/paying/mellat.jpg') }} height="70px" width="70px"/>
                                                     </label>
                                                 </li>
 
                                                 <li class="checkout-payment-method-item d-block">
-                                                    <label for="#" class="outline-radio">
+                                                    <label for="zarinpal" class="outline-radio">
                                                         <input form="checkout" type="radio" name="payment_method"
-                                                               value="zarinpal" id="payment-option-online">
+                                                               value="zarinpal" id="zarinpal">
                                                         <span class="outline-radio-check"></span>
                                                     </label>
-                                                    <label for="#" class="shipping-totals-title-row">
-                                                        <div class="shipping-totals-title">درگاه پرداخت زرین پال
-                                                        </div>
+                                                    <label for="zarinpal" class="shipping-totals-title-row">
+                                                      <img src={{ asset('assets/home/images/paying/zarin.jpg') }}  width="90px"/>
                                                     </label>
                                                 </li>
                                                 <li class="checkout-payment-method-item d-block">
-                                                    <label for="#" class="outline-radio">
+                                                    <label for="paypal" class="outline-radio">
                                                         <input form="checkout" type="radio" name="payment_method"
-                                                               value="paypal" id="payment-option-online">
+                                                               value="paypal" id="paypal">
                                                         <span class="outline-radio-check"></span>
                                                     </label>
-                                                    <label for="#" class="shipping-totals-title-row">
-                                                        <div class="shipping-totals-title">درگاه پرداخت پی پال</div>
+                                                    <label for="paypal" class="shipping-totals-title-row">
+                                                        <img src={{ asset('assets/home/images/paying/pay.jpg') }} height="70px" width="70px"/>
                                                     </label>
                                                 </li>
                                             </ul>
