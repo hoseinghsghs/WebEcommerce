@@ -8752,7 +8752,7 @@ function skinChanger() {
 
 function CustomScrollbar() {
   $(".sidebar .menu .list").slimscroll({
-    height: "calc(112vh - 213px)",
+    height: "calc(112vh - 300px)",
     color: "#eeeeee",
     position: "right",
     size: "1px",
