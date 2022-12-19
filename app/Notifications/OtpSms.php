@@ -12,16 +12,17 @@ class OtpSms extends Notification
 {
     use Queueable;
 
-    public $otpcode;
-
+    public array $pattern_variable;
+    public string $pattern_code;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($code)
+    public function __construct($pattern_variable)
     {
-        $this->otpcode = $code;
+        $this->pattern_variable = $pattern_variable;
+        $this->pattern_code="w7crq4x8hwp667i";
     }
 
     /**
@@ -64,6 +65,6 @@ class OtpSms extends Notification
 
     public function toSms($notifiable)
     {
-        return $this->otpcode;
+        return ['numbers'=>[],'pattern_code'=>$this->pattern_code,'pattern_variables'=>$this->pattern_variable];
     }
 }

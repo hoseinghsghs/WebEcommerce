@@ -111,9 +111,9 @@ class Otp extends Model
         }
         try {
             if ($this->user) {
-                $this->user->notify(new OtpSms($this->code));
+                $this->user->notify(new OtpSms(['code'=>$this->code]));
             } else {
-                Notification::route('cellphone', $this->cellphone)->notify(new OtpSms($this->code));
+                Notification::route('cellphone', $this->cellphone)->notify(new OtpSms(['code'=>$this->code]));
             }
         } catch (\Exception $ex) {
             return false; //enable to send SMS

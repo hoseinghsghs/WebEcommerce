@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Channels\SmsChannel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -11,14 +12,19 @@ class InvoicePaid extends Notification
 {
     use Queueable;
 
+    public array $pattern_variables;
+    public array $numbers;
+    public string $pattern_code;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($pattern_variables,$pattern_code,$numbers=[])
     {
-        //
+        $this->pattern_variables = $pattern_variables;
+        $this->numbers=$numbers;
+        $this->pattern_code=$pattern_code;
     }
 
     /**
@@ -29,7 +35,7 @@ class InvoicePaid extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return [SmsChannel::class];
     }
 
     /**
@@ -54,8 +60,6 @@ class InvoicePaid extends Notification
      */
     public function toArray($notifiable)
     {
-        return [
-            //
-        ];
+        return ['numbers'=>$this->numbers,'pattern_code'=>$this->pattern_code,'pattern_variables'=>$this->pattern_variables];
     }
 }
