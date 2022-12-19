@@ -38,8 +38,8 @@
                             <div class="col-lg-3 col-md-3 col-sm-3">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <select data-placeholder="وضعیت" class="form-control ms"
-                                            wire:model.deferred="payment_status" class="form-control ms select2">
+                                        <select class="form-control ms"
+                                            wire:model="status">
                                             <option value="">وضعیت سفارش</option>
                                             <option value="0">در
                                                 انتظار پرداخت
@@ -54,12 +54,10 @@
                             <div class="col-lg-3 col-md-3 col-sm-3">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <select data-placeholder="وضعیت" class="form-control ms"
-                                            wire:model.deferred="status" class="form-control ms select2">
+                                        <select class="form-control ms" wire:model="payment_status">
                                             <option value="">وضعیت پرداخت</option>
                                             <option value="0">پرداخت ناموفق</option>
                                             <option value="1">پرداخت موفق</option>
-
                                         </select>
                                     </div>
                                 </div>
@@ -123,7 +121,7 @@
                                     <th>کد سفارش</th>
                                     <th>کاربر</th>
                                     <th>مبلغ پرداختی</th>
-                                    <th>وضعیت پرداهت</th>
+                                    <th>وضعیت پرداخت</th>
                                     <th>وضعیت سفارش</th>
                                     <th>تاریخ</th>
                                     <th class="text-center">عملیات</th>
@@ -163,8 +161,6 @@
                                     </td>
                                     <td>{{Hekmatinasser\Verta\Verta::instance($order->created_at)->format('Y/n/j')}}
                                     </td>
-
-
                                     <td class="text-center js-sweetalert">
                                         <a onclick="loadbtn(event)" href="{{route('admin.orders.edit',$order->id)}}"
                                             class="btn btn-raised btn-warning waves-effect">
@@ -191,7 +187,7 @@
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="card">
-                {{$orders->links()}}
+                {{$orders->onEachSide(1)->links()}}
             </div>
         </div>
     </div>
