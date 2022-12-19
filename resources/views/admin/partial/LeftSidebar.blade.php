@@ -180,7 +180,7 @@
             </li>
             @endcan
             <li>
-                <a target="_blank" href="https://www.goftino.com/login?r=/app/dashboard"><i class="zmdi zmdi-hc-fw"></i>
+                <a target="_blank" href="https://www.goftino.com/login?r=/app/dashboard"><i class="zmdi zmdi-hc-fw"></i>
                     <span>چت آنلاین</span>
                 </a>
             </li>

@@ -71,6 +71,7 @@
                                         <option {{$transaction->gateway_name == 'zarinpal' ? 'selected' : ''}}>zarinpal
                                         </option>
                                         <option {{$transaction->gateway_name == 'pay' ? 'selected' : ''}}>pay</option>
+                                        <option {{$transaction->gateway_name == 'mellat' ? 'selected' : ''}}>mellat</option>
                                         <option {{$transaction->gateway_name == 'پرداخت دستی' ? 'selected' : ''}}>پرداخت
                                             دستی
                                         </option>

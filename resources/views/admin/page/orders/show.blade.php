@@ -165,7 +165,7 @@
 <!-- فاکتور -->
 <div class="container-xl mt-4" style="margin-top: 100px; display:none ">
     <div class="row mt-4">
-        <div class="col-3 text-center"><img src="{{asset('storage/logo/'.$setting->logo)}}" alt="logo" /></div>
+        <div class="col-3 text-center"><img src="{{asset('storage/logo/'.$setting->logo)}}" alt="logo" height="45px"/></div>
         <div class="col-6 text-center">
             <h5 class="font-weight-bold">صورتحساب فروش </h5>
         </div>
@@ -188,15 +188,14 @@
                             <div class="col-4">
                                 <p>نام شخص حقیق / حقوقی:{{env('APP_NAME')}}</p>
                                 <p>آدرس کامل: {{ province_name($order->address->province_id) }}، شهر
-                                    {{ city_name($order->address->city_id) }}، {{ $order->address->address }}</p>
+                                    {{ city_name($order->address->city_id) }}، {{ $order->address->address }}
+                                </p>
                             </div>
                             <div class="col-4">
-                                <p>شماره اقتصادی:</p>
-                                <p>کد پستی:</p>
+                                <p>کد پستی: 8198137596</p>
                             </div>
                             <div class="col-4">
-                                <p>شماره ثبت / شناسه ملی:</p>
-                                <p>تلفن / نمابر:</p>
+                                <p>تلفن / نمابر: 09139035692,09162418808</p>
                             </div>
                         </div>
                     </td>
@@ -214,7 +213,8 @@
                             <div class="col-4">
                                 <p>نام شخص حقیق / حقوقی: {{$order->address->name}}</p>
                                 <p>آدرس کامل:{{ province_name($order->address->province_id) }}، شهر
-                                    {{ city_name($order->address->city_id) }}، {{ $order->address->address }}</p>
+                                    {{ city_name($order->address->city_id) }}، {{ $order->address->address }}
+                                </p>
                             </div>
                             <div class="col-4">
                                 <p>کد پستی:{{ $order->address->postal_code }}</p>
