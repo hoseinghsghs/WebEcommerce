@@ -65,7 +65,7 @@
             <p>
                 اگر به طور خودکار به درگاه پرداخت هدایت نشدید در
                 <span id="countdown">10</span>
-                چند ثانیه...
+                ... ثانیه
             </p>
 
             @foreach($inputs as $name => $value)

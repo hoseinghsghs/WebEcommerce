@@ -1458,6 +1458,7 @@
         },
         {
             "name": "google/apiclient-services",
+<<<<<<< HEAD
             "version": "v0.278.0",
             "source": {
                 "type": "git",
@@ -1468,6 +1469,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/3da85d2066b5a8042663e96e7cba3a3f83655961",
                 "reference": "3da85d2066b5a8042663e96e7cba3a3f83655961",
+=======
+            "version": "v0.279.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/googleapis/google-api-php-client-services.git",
+                "reference": "2105f08f4ee00c5847f980b5b4491346f4ceb60d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/2105f08f4ee00c5847f980b5b4491346f4ceb60d",
+                "reference": "2105f08f4ee00c5847f980b5b4491346f4ceb60d",
+>>>>>>> fcdd0fb44fc72f84c4f93b791ac6a66df4b74ab9
                 "shasum": ""
             },
             "require": {
@@ -1496,9 +1509,15 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.278.0"
             },
             "time": "2022-12-12T01:28:13+00:00"
+=======
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.279.0"
+            },
+            "time": "2022-12-18T01:18:15+00:00"
+>>>>>>> fcdd0fb44fc72f84c4f93b791ac6a66df4b74ab9
         },
         {
             "name": "google/auth",
@@ -11495,6 +11514,7 @@
         },
         {
             "name": "phpunit/php-code-coverage",
+<<<<<<< HEAD
             "version": "9.2.21",
             "source": {
                 "type": "git",
@@ -11505,6 +11525,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/3f893e19712bb0c8bc86665d1562e9fd509c4ef0",
                 "reference": "3f893e19712bb0c8bc86665d1562e9fd509c4ef0",
+=======
+            "version": "9.2.22",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
+                "reference": "e4bf60d2220b4baaa0572986b5d69870226b06df"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/e4bf60d2220b4baaa0572986b5d69870226b06df",
+                "reference": "e4bf60d2220b4baaa0572986b5d69870226b06df",
+>>>>>>> fcdd0fb44fc72f84c4f93b791ac6a66df4b74ab9
                 "shasum": ""
             },
             "require": {
@@ -11560,7 +11592,11 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.21"
+=======
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.22"
+>>>>>>> fcdd0fb44fc72f84c4f93b791ac6a66df4b74ab9
             },
             "funding": [
                 {
@@ -11568,7 +11604,11 @@
                     "type": "github"
                 }
             ],
+<<<<<<< HEAD
             "time": "2022-12-14T13:26:54+00:00"
+=======
+            "time": "2022-12-18T16:40:55+00:00"
+>>>>>>> fcdd0fb44fc72f84c4f93b791ac6a66df4b74ab9
         },
         {
             "name": "phpunit/php-file-iterator",
