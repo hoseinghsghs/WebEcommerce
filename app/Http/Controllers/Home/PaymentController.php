@@ -160,11 +160,11 @@ class PaymentController extends Controller
 
     public function paymentVerifyMellat(Request $request)
     {
+        $mellat_payment = new mPayment();
         try {
             $transaction = Transaction::where('token', $request->RefId)->firstOrFail();
             Auth::loginUsingId($transaction->user_id);
             throw_unless($request->SaleReferenceId || $request->FinalAmount, new InvalidPaymentException('خطا در پرداخت'));
-            $mellat_payment = new mPayment();
             // You need to verify the payment to ensure the invoice has been paid successfully.
             // We use transaction id to verify payments
             // It is a good practice to add invoice amount as well.
