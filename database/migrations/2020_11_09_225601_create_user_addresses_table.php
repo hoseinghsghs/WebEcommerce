@@ -18,8 +18,8 @@ class CreateUserAddressesTable extends Migration
             $table->string('name');
             $table->string('unit')->nullable();
             $table->string('cellphone2');
-            $table->text('lastaddress'); 
-            
+            $table->text('lastaddress')->nullable();
+
             $table->string('title');
             $table->text('address');
             $table->string('postal_code');

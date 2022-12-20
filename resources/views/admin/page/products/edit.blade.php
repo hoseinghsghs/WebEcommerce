@@ -211,7 +211,6 @@
                                                         <input type="text" class="form-control" id="variationInputDateOnSaleTo-{{ $variation->id }}" value="{{ $variation->date_on_sale_to == null ? null : $variation->date_on_sale_to }}">
                                                         <input type="hidden" id="variationInputDateOnSaleTo-alt-{{ $variation->id }}" name="variation_values[{{ $variation->id }}][date_on_sale_to]" value="{{ $variation->date_on_sale_to ?? null }}">
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>

@@ -1055,9 +1055,9 @@
         padding-right: 45px;
     }
 
-    /* .page-account-box .ds-userlogin .account-box .Login-to-account .account-box-content{
-        padding: 0;
-    } */
+     .page-account-box .ds-userlogin .account-box .Login-to-account .account-box-content{
+        padding: 15px 10px;
+    }
 
     .message-light .account-box-verify-content {
         padding: 0;

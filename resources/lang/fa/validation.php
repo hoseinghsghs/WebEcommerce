@@ -178,7 +178,7 @@ return array(
         "otp_code" => "کد تایید",
         "address_id" => "آدرس",
         "cellphone2" => "تلفن ثابت",
-        "lastaddress" => "آدرس اضطراری",
+        "lastaddress" => "آدرس جایگزین",
         "unit" => 'واحد',
     ),
 );

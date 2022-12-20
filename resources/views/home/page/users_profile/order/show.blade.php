@@ -53,7 +53,7 @@
                                             <table class="table table-borderless">
                                                 <thead>
                                                 <tr>
-                                                    <th scope="col">تصویر </th>
+                                                    <th scope="col">تصویر</th>
                                                     <th scope="col">نام محصول</th>
                                                     <th scope="col">جمع</th>
                                                 </tr>
@@ -61,17 +61,20 @@
                                                 <tbody>
                                                 @foreach ($order->orderItems as $item)
                                                     <tr>
-                                                         <td class="product-name">
-                                                             <a
+                                                        <td class="product-name">
+                                                            <a
                                                                 href="{{route('home.products.show' , ['product' => $item->product->slug])}}">
-                                                              <img src="{{asset('storage/primary_image/'.$item->product->primary_image)}}" alt="{{$item->product->name}}" width="48" class="img-fluid rounded" style="min-height: 3rem;">
-                                                              </a>
-                                                         </td>
+                                                                <img
+                                                                    src="{{asset('storage/primary_image/'.$item->product->primary_image)}}"
+                                                                    alt="{{$item->product->name}}" width="48"
+                                                                    class="img-fluid rounded" style="min-height: 3rem;">
+                                                            </a>
+                                                        </td>
                                                         <td class="product-name">
                                                             <a style="color: #17a2b8"
-                                                                href="{{route('home.products.show' , ['product' => $item->product->slug])}}">
+                                                               href="{{route('home.products.show' , ['product' => $item->product->slug])}}">
                                                                 ({{$item->product->name}})
-                                                        </br>
+                                                                </br>
                                                                 <span class="text-muted">
                                                                 {{$item->quantity}} عدد
                                                                 * {{number_format($item->price)}} تومان
@@ -237,11 +240,7 @@
                                             <div class="box-header">
                                                 <span class="box-title">آدرس جایگزین</span>
                                             </div>
-                                            <tr>
-                                                <td>
-                                                    {{ $order->address->lastaddress }}
-                                                </td>
-                                            </tr>
+                                            {{ $order->address->lastaddress }}
                                         </div>
                                     </div>
                                 </div>
@@ -254,7 +253,8 @@
     </div><!-- فاکتور -->
     <div class="container-xl mt-4" style="margin-top: 100px; display:none ">
         <div class="row mt-4">
-            <div class="col-3 text-center"><img src="{{asset('storage/logo/'.$setting->logo)}}" alt="logo" height="45px"/></div>
+            <div class="col-3 text-center"><img src="{{asset('storage/logo/'.$setting->logo)}}" alt="logo"
+                                                height="45px"/></div>
             <div class="col-6 text-center">
                 <h5 class="font-weight-bold">صورتحساب فروش </h5>
             </div>

@@ -57,7 +57,7 @@ class PaymentController extends Controller
                 'unit' => 'nullable|string',
                 'city_id' => 'required|integer',
                 'address' => 'required|string',
-                'lastaddress' => 'required|string',
+                'lastaddress' => 'nullable|string',
                 'postal_code' => 'required|ir_postal_code:without_seprate',
                 "payment_method" => 'required',
             ]);

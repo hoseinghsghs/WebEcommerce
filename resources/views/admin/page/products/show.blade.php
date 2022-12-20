@@ -46,7 +46,6 @@
                                     <spam class=" badge badge-success badge-pill">فعال</spam>
                                     @else
                                     <spam class=" badge badge-danger badge-pill">غیر فعال</spam>
-
                                     @endif
                                 </div>
                             </button>
@@ -60,7 +59,7 @@
                             <button type="button" class="list-group-item list-group-item-action">
                                 <div class="row clearfix">
                                     <div class="col-6"><strong>نام برند :</strong></div>
-                                    <div class="col-6">{{$product->brand->name}}</div>
+                                    <div class="col-6">@if($product->brand->isNotEmpty()){{$product->brand->name}}@endif</div>
                                 </div>
                             </button>
                             <button type="button" class="list-group-item list-group-item-action">

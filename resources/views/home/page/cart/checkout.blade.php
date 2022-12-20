@@ -110,30 +110,20 @@
                                                                             <div class="box-header mb-1">
                                                                                 <span class="box-title">آدرس اصلی</span>
                                                                             </div>
-                                                                            <tr>
-                                                                                <td>{{ $address->address }}</td>
-                                                                            </tr>
+                                                                            {{ $address->address }}
                                                                         </div>
                                                                         <div class="h-50">
                                                                             <div class="box-header mb-1">
                                                                                 <span
                                                                                     class="box-title">آدرس جایگزین</span>
                                                                             </div>
-                                                                            <tr>
-                                                                                <td>
-                                                                                    {{ $address->lastaddress }}
-                                                                                </td>
-                                                                            </tr>
+                                                                            {{ $address->lastaddress }}
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-12 col-12 mt-3 mb-4">
-                                                                        <tr>
-                                                                            <td>
-                                                                                <a href="{{ route('home.addreses.edit', ['address' => $address->id]) }}"
-                                                                                   class="edit-address-link btn-Order btn liko-danger-btn btn btn-sm">ویرایش
-                                                                                    آدرس</a>
-                                                                            </td>
-                                                                        </tr>
+                                                                        <a href="{{ route('home.addreses.edit', ['address' => $address->id]) }}"
+                                                                           class="edit-address-link btn-Order btn liko-danger-btn btn btn-sm">ویرایش
+                                                                            آدرس</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -151,7 +141,7 @@
                                                                         </label>
                                                                         <input type="text" id="name" name="title"
                                                                                value="{{ old('title') }}"
-                                                                               class="input-name-checkout form-control m-0">
+                                                                               class="input-name-checkout form-control @error('title') is-invalid @enderror m-0">
                                                                         @error('title')
                                                                         <small
                                                                             class="text-danger">{{ $message }}</small>
@@ -165,7 +155,7 @@
                                                                         </label>
                                                                         <input type="text" id="name" name="name"
                                                                                value="{{ old('name') }}"
-                                                                               class="input-name-checkout form-control m-0">
+                                                                               class="input-name-checkout form-control @error('name') is-invalid @enderror m-0">
                                                                         @error('name')
                                                                         <small
                                                                             class="text-danger">{{ $message }}</small>
@@ -178,7 +168,7 @@
                                                                         <input type="number" dir="ltr"
                                                                                id="phone-number" name="cellphone"
                                                                                value="{{ old('cellphone') }}"
-                                                                               class="input-name-checkout form-control m-0 text-left">
+                                                                               class="input-name-checkout form-control m-0 text-center @error('cellphone') is-invalid @enderror">
                                                                         @error('cellphone')
                                                                         <small
                                                                             class="text-danger">{{ $message }}</small>
@@ -193,7 +183,7 @@
                                                                                placeholder="تلفن ثابت با پیش شماره استان"
                                                                                name="cellphone2"
                                                                                value="{{ old('cellphone2') }}"
-                                                                               class="input-name-checkout form-control m-0 text-center">
+                                                                               class="input-name-checkout form-control m-0 text-center @error('cellphone2') is-invalid @enderror">
                                                                         @error('cellphone2')
                                                                         <small
                                                                             class="text-danger">{{ $message }}</small>
@@ -204,10 +194,10 @@
                                                                             <label for="province">استان
                                                                                 <abbr class="required text-danger"
                                                                                       title="ضروری">*</abbr>
-                                                                            </label>
+                                                                            </label>@enderror
                                                                             <select id="province_id"
                                                                                     name="province_id"
-                                                                                    class="form-control m-0 province-select">
+                                                                                    class="form-control m-0 province-select @error('province_id') is-invalid @enderror">
                                                                                 <option selected="selected"
                                                                                         disabled>
                                                                                     استان
@@ -233,7 +223,7 @@
                                                                                 <abbr class="required text-danger"
                                                                                       title="ضروری">*</abbr></label>
                                                                             <select name="city_id" id="city"
-                                                                                    class="city-select form-control m-0">
+                                                                                    class="city-select form-control m-0 @error('city_id') is-invalid @enderror">
                                                                             </select>
                                                                             @error('city_id')
                                                                             <small
@@ -247,7 +237,7 @@
                                                                             <input type="text" id="apt-id"
                                                                                    name="unit"
                                                                                    value="{{ old('unit') }}"
-                                                                                   class="input-name-checkout js-input-apt-id form-control m-0">
+                                                                                   class="input-name-checkout js-input-apt-id form-control m-0 @error('unit') is-invalid @enderror">
                                                                             @error('unit')
                                                                             <small
                                                                                 class="text-danger">{{ $message }}</small>
@@ -260,7 +250,7 @@
                                                                                 title="ضروری">*</abbr></label>
                                                                         <input type="number" dir="ltr"
                                                                                id="post-code" name="postal_code"
-                                                                               class="input-name-checkout form-control m-0 text-center"
+                                                                               class="input-name-checkout form-control m-0 text-center @error('postal_code') is-invalid @enderror"
                                                                                value="{{ old('postal_code') }}"
                                                                                placeholder="کدپستی را بدون خط تیره وارد کنید">
                                                                         @error('postal_code')
@@ -275,7 +265,7 @@
                                                                         </label>
                                                                         <textarea rows="5" cols="30" id="address"
                                                                                   name="address"
-                                                                                  class="textarea-name-checkout form-control m-0 ">{{ old('address') }}</textarea>
+                                                                                  class="textarea-name-checkout form-control m-0 @error('address') is-invalid @enderror">{{ old('address') }}</textarea>
                                                                         @error('address')
                                                                         <small
                                                                             class="text-danger">{{ $message }}</small>
@@ -285,7 +275,7 @@
                                                                         <label for="address">آدرس جایگزین</label>
                                                                         <textarea rows="5" cols="30" id="address"
                                                                                   name="lastaddress"
-                                                                                  class="textarea-name-checkout form-control mb-0"
+                                                                                  class="textarea-name-checkout form-control mb-0 @error('lastaddress') is-invalid @enderror"
                                                                                   placeholder="آدرس جایگزین در صورت ضرورت...">{{ old('lastaddress') }}</textarea>
                                                                         @error('lastaddress')
                                                                         <small
@@ -303,9 +293,9 @@
                                                     <span class="optional">(اختیاری)</span>
                                                 </label>
                                                 <textarea id="description" rows="5" cols="30" name="description"
-                                                          class="textarea-name-checkout form-control mb-0"
+                                                          class="textarea-name-checkout form-control mb-0 @error('description') is-invalid @enderror"
                                                           style="border-radius: 1rem;" value="{{old('description')}}"
-                                                          placeholder="توضیحات ضروری دریافت محصول"></textarea>
+                                                          placeholder="توضیحات ضروری دریافت محصول">{{old('description')}}</textarea>
                                                 @error('description')
                                                 <span class="text-danger mb-2">{{ $message }}</span>
                                                 @enderror
@@ -330,8 +320,7 @@
                                                     <tr class="checkout-cart-item">
                                                         <td class="product-name"><span>{{$item->name}}</span>
                                                             *
-                                                            <strong>{{$item->quantity}}
-                                                            </strong>
+                                                            <strong>{{$item->quantity}}</strong>
                                                         </td>
                                                         <td class="product-price text-info">
                                                         <span class="amount">{{number_format($item->price*$item->quantity)}}
@@ -410,7 +399,6 @@
                                                     </td>
                                                 </tr>
                                                 </tfoot>
-
                                             </table>
                                         </div>
                                         <div class="col-lg-6 mt-4">
@@ -444,19 +432,18 @@
                                                     </div>
                                                 </div>
                                             @endif
-                                            <thead>
                                             <h5 class="my-3"> انتخاب درگاه پرداخت</h5>
-                                            </thead>
                                             <ul class="checkout-payment-methods">
-
-                                                 <li class="checkout-payment-method-item d-block">
+                                                <li class="checkout-payment-method-item d-block">
                                                     <label for="mellat" class="outline-radio">
                                                         <input form="checkout" type="radio" name="payment_method"
                                                                value="mellat" id="mellat" checked>
                                                         <span class="outline-radio-check"></span>
                                                     </label>
                                                     <label for="mellat" class="shipping-totals-title-row">
-                                                        <img src={{ asset('assets/home/images/paying/mellat.jpg') }} height="70px" width="70px"/>
+                                                        <img
+                                                            src={{ asset('assets/home/images/paying/mellat.jpg') }} height="70px"
+                                                            width="70px"/>
                                                     </label>
                                                 </li>
 
@@ -467,7 +454,8 @@
                                                         <span class="outline-radio-check"></span>
                                                     </label>
                                                     <label for="zarinpal" class="shipping-totals-title-row">
-                                                      <img src={{ asset('assets/home/images/paying/zarin.jpg') }}  width="90px"/>
+                                                        <img
+                                                            src={{ asset('assets/home/images/paying/zarin.jpg') }}  width="90px"/>
                                                     </label>
                                                 </li>
                                                 <li class="checkout-payment-method-item d-block">
@@ -477,12 +465,13 @@
                                                         <span class="outline-radio-check"></span>
                                                     </label>
                                                     <label for="paypal" class="shipping-totals-title-row">
-                                                        <img src={{ asset('assets/home/images/paying/pay.jpg') }} height="70px" width="70px"/>
+                                                        <img
+                                                            src={{ asset('assets/home/images/paying/pay.jpg') }} height="70px"
+                                                            width="70px"/>
                                                     </label>
                                                 </li>
                                             </ul>
                                             <div class="form-auth-row">
-
                                                 <label for="#" class="ui-checkbox mt-1">
                                                     <input type="checkbox" value="1"
                                                            oninvalid="this.setCustomValidity('تیک قوانین و حریم خصوصی را پس از مطالعه بزنید')"
@@ -516,7 +505,6 @@
     <!-- checkout------------------------------>
 @endsection
 @push('scripts')
-
     <script>
         var previous;
         $('#address-option').on('focus', function () {
@@ -542,12 +530,8 @@
                 confirmButtonText: 'تایید',
                 timerProgressBar: true
             });
-
-
         })
-    </script>
 
-    <script>
         $('.province-select').change(function () {
 
             var provinceID = $(this).val();
@@ -563,7 +547,6 @@
                                 $(".city-select").append('<option value="' + city.id + '">' +
                                     city.name + '</option>');
                             });
-
                         } else {
                             $(".city-select").empty();
                         }
@@ -573,45 +556,13 @@
                 $(".city-select").empty();
             }
         });
-    </script>
 
-    <script>
-        $('.province-select').change(function () {
-
-            var provinceID = $(this).val();
-            if (provinceID) {
-                $.ajax({
-                    type: "GET",
-                    url: "{{ url('/get-province-cities-list') }}?province_id=" + provinceID,
-                    success: function (res) {
-                        if (res) {
-                            $(".city-select").empty();
-
-                            $.each(res, function (key, city) {
-                                $(".city-select").append('<option value="' + city.id + '">' +
-                                    city.name + '</option>');
-                            });
-
-                        } else {
-                            $(".city-select").empty();
-                        }
-                    }
-                });
-            } else {
-                $(".city-select").empty();
-            }
-        });
-    </script>
-    <script>
         $('#address-checkout').click(function () {
             $('#address-form').toggle();
 
         })
-    </script>
 
-    <script>
         $(document).ready(function (e) {
-
             if ($('#zarinpal').hasClass('collapse')) {
                 $('#pay-methode').val('zarinpal');
             }
@@ -626,8 +577,6 @@
             } else {
                 $('#sub-address').hide();
             }
-
-
         })
 
         $('#zarinpal').click(function () {
@@ -638,5 +587,4 @@
             $('#pay-methode').val('pay');
         })
     </script>
-
 @endpush
