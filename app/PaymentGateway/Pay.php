@@ -69,13 +69,12 @@ class Pay extends Payment
                     \Cart::clear();
                     return ['success' => ' پرداخت با موفقیت انجام شد.شماره تراکنش' . $result->transId];
                 } else {
-
-                    $updateOrder = parent::updateOrderErorr($token, $result->errorCode);
+                    $updateOrder = parent::updateOrderErorr($token, json_encode($result));
                     return ['error' => 'پرداخت با خطا مواجه شد'];
                 }
             } else {
                 if ($status == 0) {
-                    dd($result);
+
                     $updateOrder = parent::updateOrderErorr($token, $result->errorCode);
                     return ['error' => 'پرداخت با خطا مواجه شد'];
                 }
