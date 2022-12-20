@@ -181,10 +181,10 @@ class PaymentController extends Controller
                 'آیدی کاربر' => auth()->id(),
                 'درگاه' => 'ملت',
             ]);
-            Notification::route('cellphone', '09139035692')->notify(new InvoicePaid(["code" => auth()->user()->cellphone . "ملت سفارش جدید دارید"], "d4xs7j00wyjhsn9"));
-            Notification::route('cellphone', '09162418808')->notify(new InvoicePaid(["code" => auth()->user()->cellphone . "ملت سفارش جدید دارید"], "d4xs7j00wyjhsn9"));
+            Notification::route('cellphone', '09139035692')->notify(new InvoicePaid(["code" => auth()->user()->cellphone . "ملت سفارش جدید دارید"], "d4xs7j00wyjhsn9", ['09139035692']));
+            Notification::route('cellphone', '09162418808')->notify(new InvoicePaid(["code" => auth()->user()->cellphone . "ملت سفارش جدید دارید"], "d4xs7j00wyjhsn9", ['09162418808']));
             \auth()->user()->notify(new InvoicePaid(["order" => $transaction->order_id], "d4xs7j00wyjhsn9"));
-            //            Notification::route('cellphone', '09162418808')->notify(new OtpSms(auth()->user()->cellphone . "ملت سفارش جدید دارید"));
+            Notification::route('cellphone', '09162418808')->notify(new OtpSms(auth()->user()->cellphone . "ملت سفارش جدید دارید"));
             alert()->success('خرید با موفقیت انجام گرفت')->showConfirmButton('تایید');
             return redirect()->route('home.user_profile.orders', ['order' => $transaction->order_id]);
         } catch (InvalidPaymentException $exception) {
