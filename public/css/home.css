@@ -40694,7 +40694,7 @@ button.products-filter-btn {
 }
 
 #goftino_w {
-    z-index: 100 !important;
+    z-index: 1001 !important;
 }
 
 @media (max-width: 992px) {
