@@ -85,7 +85,7 @@ class OrderController extends Controller
         ]);
         if ($order->status == "محصول ارسال شد") {
             try {
-                Notification::route('cellphone', '09139035692')->notify(new InvoicePaid(["code" => $order->user->cellphone . "زرین پال سفارش جدید دارید"], "j3tlqr5zjecppsf", ['09139035692', '09162418808']));
+                $order->user->notify(new InvoicePaid(["order" => $order->id], "j3tlqr5zjecppsf"));
             } catch (\Throwable $th) {
             }
         };
