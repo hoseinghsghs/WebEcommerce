@@ -37,7 +37,7 @@ class Zarinpal extends Payment
             return ['error' => "خطای اتصال به درگاه بانکی"];
             // return ['error' => "cURL Error #:" . $err];
         } else {
-//            dd($result);
+            //            dd($result);
             if ($result["Status"] == 100) {
 
                 $createOrder = parent::createOrder($addressId, $amounts, $result["Authority"], 'zarinpal', $description, $ip);
@@ -103,7 +103,7 @@ class Zarinpal extends Payment
                 \Cart::clear();
                 return ['success' => 'Transation success. RefID:' . $result['RefID']];
             } else {
-                $updateOrder = parent::updateOrderErorr($authority, $result['Status']);
+                $updateOrder = parent::updateOrderErorr($authority, json_encode($result, JSON_UNESCAPED_UNICODE));
                 return ['error' => 'پرداخت با خطا مواجه شد'];
             }
         }
