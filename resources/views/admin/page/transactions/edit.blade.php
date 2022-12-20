@@ -83,6 +83,14 @@
                                     @enderror
                                 </div>
 
+                                @if($transaction->description_erorr)
+                                  <div class="form-group form-float">
+                                    <div class="form-line">
+                                        کد خطا :
+                                      {{$transaction->description_erorr}}
+                                    </div>
+                                  </div>
+                                @endif
                                 <div class="row clearfix">
                                     <div class="col-lg-3 col-md-6">
                                         <div class="checkbox">
