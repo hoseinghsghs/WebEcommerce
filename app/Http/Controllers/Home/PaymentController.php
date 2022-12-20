@@ -124,7 +124,6 @@ class PaymentController extends Controller
                 return Payment::purchase($invoice, function ($driver, $transactionId) use ($mellat_payment, $createOrder) {
                     $mellat_payment->updateTransaction($createOrder['orderId'], $transactionId);
                 })->pay()->render();
-
             }
         }
 
@@ -182,12 +181,11 @@ class PaymentController extends Controller
                 'آیدی کاربر' => auth()->id(),
                 'درگاه' => 'ملت',
             ]);
-            Notification::route('cellphone', '09139035692')->notify(new InvoicePaid(["code" => auth()->user()->cellphone . "ملت سفارش جدید دارید"], "w7crq4x8hwp667i", ['09139035692', '09162418808']));
+            Notification::route('cellphone', '09139035692')->notify(new InvoicePaid(["code" => auth()->user()->cellphone . "ملت سفارش جدید دارید"], "d4xs7j00wyjhsn9", ['09139035692', '09162418808']));
             \auth()->user()->notify(new InvoicePaid(["order" => $transaction->order_id], "d4xs7j00wyjhsn9"));
-//            Notification::route('cellphone', '09162418808')->notify(new OtpSms(auth()->user()->cellphone . "ملت سفارش جدید دارید"));
+            //            Notification::route('cellphone', '09162418808')->notify(new OtpSms(auth()->user()->cellphone . "ملت سفارش جدید دارید"));
             alert()->success('خرید با موفقیت انجام گرفت')->showConfirmButton('تایید');
             return redirect()->route('home.user_profile.orders', ['order' => $transaction->order_id]);
-
         } catch (InvalidPaymentException $exception) {
             /**
              * when payment is not verified, it will throw an exception.
@@ -241,11 +239,11 @@ class PaymentController extends Controller
 
                         ]);
 
-                        Notification::route('cellphone', '09139035692')->notify(new InvoicePaid(["code" => auth()->user()->cellphone . "پی سفارش جدید دارید"], "w7crq4x8hwp667i", ['09139035692', '09162418808']));
+                        Notification::route('cellphone', '09139035692')->notify(new InvoicePaid(["code" => auth()->user()->cellphone . "پی سفارش جدید دارید"], "d4xs7j00wyjhsn9", ['09139035692', '09162418808']));
                         \auth()->user()->notify(new InvoicePaid(["order" => Session::get('orderId')], "d4xs7j00wyjhsn9"));
 
-//                        Notification::route('cellphone', '09139035692')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
-//                        Notification::route('cellphone', '09162418808')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
+                        //                        Notification::route('cellphone', '09139035692')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
+                        //                        Notification::route('cellphone', '09162418808')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
 
                         return redirect()->route('home.user_profile.orders', ['order' => Session::pull('orderId')]);
                     } catch (\Throwable $th) {
@@ -282,10 +280,10 @@ class PaymentController extends Controller
                         'درگاه' => 'زرین پال',
                     ]);
 
-                    Notification::route('cellphone', '09139035692')->notify(new InvoicePaid(["code" => auth()->user()->cellphone . "زرین پال سفارش جدید دارید"], "w7crq4x8hwp667i", ['09139035692', '09162418808']));
+                    Notification::route('cellphone', '09139035692')->notify(new InvoicePaid(["code" => auth()->user()->cellphone . "زرین پال سفارش جدید دارید"], "d4xs7j00wyjhsn9", ['09139035692', '09162418808']));
                     \auth()->user()->notify(new InvoicePaid(["order" => Session::get('orderId')], "d4xs7j00wyjhsn9"));
-//                    Notification::route('cellphone', '09139035692')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
-//                    Notification::route('cellphone', '09162418808')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
+                    //                    Notification::route('cellphone', '09139035692')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
+                    //                    Notification::route('cellphone', '09162418808')->notify(new OtpSms(auth()->user()->cellphone . "زرین پال سفارش جدید دارید"));
                 } catch (\Throwable $th) {
                     alert()->warning('', $th->getMessage())->showConfirmButton('تایید');
                     return redirect()->route('home.user_profile.orders', ['order' => Session::pull('orderId')]);

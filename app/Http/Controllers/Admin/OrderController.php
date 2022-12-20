@@ -7,6 +7,8 @@ use App\Models\Order;
 use Flasher\Toastr\Prime\ToastrFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\InvoicePaid;
 
 class OrderController extends Controller
 {
@@ -49,8 +51,8 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Order $order)
-    { 
-        return view('admin.page.orders.show' , compact('order'));
+    {
+        return view('admin.page.orders.show', compact('order'));
     }
 
     /**
@@ -61,7 +63,7 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        return view('admin.page.orders.edit' , compact('order'));
+        return view('admin.page.orders.edit', compact('order'));
     }
 
     /**
@@ -71,17 +73,25 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order ,ToastrFactory $flasher)
+    public function update(Request $request, Order $order, ToastrFactory $flasher)
     {
         $request->validate([
             'status' => 'required'
-            ]);
-        $order->update([
-        'status' => $request->status,
-        'description' => $request->description,
         ]);
-            $flasher->addSuccess('سفارش ویرایش شد.');
-            return redirect()->route('admin.orders.index');
+
+        $order->update([
+            'status' => $request->status,
+            'description' => $request->description,
+        ]);
+        if ($order->status == "محصول ارسال شد") {
+            try {
+                Notification::route('cellphone', '09139035692')->notify(new InvoicePaid(["code" => auth()->user()->cellphone . "زرین پال سفارش جدید دارید"], "j3tlqr5zjecppsf", ['09139035692', '09162418808']));
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
+        };
+        $flasher->addSuccess('سفارش ویرایش شد.');
+        return redirect()->route('admin.orders.index');
     }
 
     /**
