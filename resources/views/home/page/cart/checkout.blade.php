@@ -194,7 +194,7 @@
                                                                             <label for="province">استان
                                                                                 <abbr class="required text-danger"
                                                                                       title="ضروری">*</abbr>
-                                                                            </label>@enderror
+                                                                            </label>
                                                                             <select id="province_id"
                                                                                     name="province_id"
                                                                                     class="form-control m-0 province-select @error('province_id') is-invalid @enderror">
