@@ -19,8 +19,6 @@ class HomeController extends Controller
 {
     public function index()
     {
-        Notification::route('cellphone', '09139035692')->notify(new InvoicePaid([], "", ['09139035692',"09027761630"],"سفارش حدید از در گاه ملت"));
-
         $settings = Setting::findOrNew(1);
         SEOTools::setDescription($settings->description);
         SEOTools::opengraph()->setUrl(env('APP_URL'));
