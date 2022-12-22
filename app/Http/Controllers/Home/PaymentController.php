@@ -20,7 +20,6 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Notification;
-use App\Notifications\OtpSms;
 use Shetabit\Multipay\Invoice;
 use Shetabit\Payment\Facade\Payment;
 use App\PaymentGateway\Payment as mPayment;

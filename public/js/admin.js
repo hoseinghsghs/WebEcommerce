@@ -8751,8 +8751,10 @@ function skinChanger() {
 }
 
 function CustomScrollbar() {
+  var ad = window.innerHeight - 80;
+  console.log(ad);
   $(".sidebar .menu .list").slimscroll({
-    height: "calc(100vh - 80px)",
+    height: "".concat(ad, "px"),
     color: "#eeeeee",
     position: "right",
     size: "1px",

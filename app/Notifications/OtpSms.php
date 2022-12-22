@@ -58,9 +58,7 @@ class OtpSms extends Notification
      */
     public function toArray($notifiable)
     {
-        return [
-
-        ];
+        return [];
     }
 
     public function toSms($notifiable)
