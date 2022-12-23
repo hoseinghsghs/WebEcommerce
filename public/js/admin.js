@@ -8759,7 +8759,7 @@ function CustomScrollbar() {
     position: "right",
     size: "1px",
     alwaysVisible: !1,
-    touchScrollStep: 300,
+    touchScrollStep: 100,
     borderRadius: "3px",
     railBorderRadius: "0"
   }), $(".navbar-right .dropdown-menu .body").slimscroll({
