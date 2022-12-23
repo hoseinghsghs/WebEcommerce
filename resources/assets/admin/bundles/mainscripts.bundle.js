@@ -28,6 +28,7 @@ function CustomScrollbar() {
         position: "right",
         size: "1px",
         alwaysVisible: !1,
+        touchScrollStep: 300,
         borderRadius: "3px",
         railBorderRadius: "0",
     }),
