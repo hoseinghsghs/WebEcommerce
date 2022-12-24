@@ -2,12 +2,12 @@
 @section('title', "خانه - مقایسه")
 @section('content')
 <!-- product-comparison-------------------->
-<main class="main-row p-0">
+<main class="main-row ">
     <div class="container-main">
         <div class="col-12">
             <div id="breadcrumb">
                 <i class="mdi mdi-home"></i>
-                <nav aria-label="breadcrumb" class="p-1">
+                <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item"><a href="{{route('home')}}">خانه</a></li>
                         <li class="breadcrumb-item"><a href="{{route('home.user_profile')}}">پروفایل</a></li>
