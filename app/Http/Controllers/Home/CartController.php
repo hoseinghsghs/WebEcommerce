@@ -75,11 +75,9 @@ class CartController extends Controller
             alert()->warning('سبد خرید شما خالی میباشد')->showConfirmButton('تایید');
             return redirect()->route('home');
         }
-
         $addresses = UserAddress::where('user_id', auth()->id())->get();
-        // dd($addresses->all());
-        SEOMeta::setRobots('noindex, nofollow');
         $provinces = Province::all();
+        SEOMeta::setRobots('noindex, nofollow');
 
         return view('home.page.cart.checkout', compact('addresses', 'provinces'));
     }

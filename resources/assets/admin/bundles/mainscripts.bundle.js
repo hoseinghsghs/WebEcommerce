@@ -18,13 +18,17 @@ function skinChanger() {
                 a.addClass("bbg-" + b.data("bbg"));
         });
 }
+
 function CustomScrollbar() {
+    let ad = window.innerHeight - 80;
+    console.log(ad);
     $(".sidebar .menu .list").slimscroll({
-        height: "calc(100vh - 80px)",
+        height: `${ad}px`,
         color: "#eeeeee",
         position: "right",
         size: "1px",
         alwaysVisible: !1,
+        touchScrollStep: 100,
         borderRadius: "3px",
         railBorderRadius: "0",
     }),
@@ -53,6 +57,7 @@ function CustomScrollbar() {
             railBorderRadius: "0",
         });
 }
+
 function CustomJs() {
     $(".light_dark input").on("change", function () {
         "dark" == $(this).val()
@@ -75,6 +80,7 @@ function CustomJs() {
             $(".chat_list").toggleClass("open");
         });
 }
+
 if ("undefined" == typeof jQuery)
     throw new Error("jQuery plugins need to be before this file");
 ($.AdminAero = {}),
@@ -106,7 +112,7 @@ if ("undefined" == typeof jQuery)
             scrollBorderRadius: "0",
             scrollRailBorderRadius: "0",
         },
-        dropdownMenu: { effectIn: "fadeIn", effectOut: "fadeOut" },
+        dropdownMenu: {effectIn: "fadeIn", effectOut: "fadeOut"},
     }),
     ($.AdminAero.leftSideBar = {
         activate: function () {
@@ -116,12 +122,12 @@ if ("undefined" == typeof jQuery)
             $(window).on("click", function (d) {
                 var e = $(d.target);
                 "i" === d.target.nodeName.toLowerCase() &&
-                    (e = $(d.target).parent()),
-                    !e.hasClass("bars") &&
-                        a.isOpen() &&
-                        0 === e.parents("#leftsidebar").length &&
-                        (e.hasClass("js-right-sidebar") || c.fadeOut(),
-                        b.removeClass("overlay-open"));
+                (e = $(d.target).parent()),
+                !e.hasClass("bars") &&
+                a.isOpen() &&
+                0 === e.parents("#leftsidebar").length &&
+                (e.hasClass("js-right-sidebar") || c.fadeOut(),
+                    b.removeClass("overlay-open"));
             }),
                 $.each($(".menu-toggle.toggled"), function (a, b) {
                     $(b).next().slideToggle(0);
@@ -141,7 +147,7 @@ if ("undefined" == typeof jQuery)
                             $(".menu-toggle.toggled").not(d).next(),
                             function (a, b) {
                                 $(b).is(":visible") &&
-                                    ($(b).prev().toggleClass("toggled"),
+                                ($(b).prev().toggleClass("toggled"),
                                     $(b).slideUp());
                             }
                         );
@@ -160,17 +166,17 @@ if ("undefined" == typeof jQuery)
                 c = $(".navbar .navbar-header .bars"),
                 d = b.width();
             a &&
-                b
-                    .find(".content, .sidebar")
-                    .addClass("no-animate")
-                    .delay(1e3)
-                    .queue(function () {
-                        $(this).removeClass("no-animate").dequeue();
-                    }),
+            b
+                .find(".content, .sidebar")
+                .addClass("no-animate")
+                .delay(1e3)
+                .queue(function () {
+                    $(this).removeClass("no-animate").dequeue();
+                }),
                 d < 1170
                     ? (d > 767 && b.addClass("ls-toggle-menu"),
-                      b.addClass("ls-closed"),
-                      c.fadeIn())
+                        b.addClass("ls-closed"),
+                        c.fadeIn())
                     : (b.removeClass("ls-closed ls-toggle-menu"), c.fadeOut());
         },
         isOpen: function () {
@@ -185,12 +191,12 @@ if ("undefined" == typeof jQuery)
             $(window).on("click", function (d) {
                 var e = $(d.target);
                 "i" === d.target.nodeName.toLowerCase() &&
-                    (e = $(d.target).parent()),
-                    !e.hasClass("js-right-sidebar") &&
-                        a.isOpen() &&
-                        0 === e.parents("#rightsidebar").length &&
-                        (e.hasClass("bars") || c.fadeOut(),
-                        b.removeClass("open"));
+                (e = $(d.target).parent()),
+                !e.hasClass("js-right-sidebar") &&
+                a.isOpen() &&
+                0 === e.parents("#rightsidebar").length &&
+                (e.hasClass("bars") || c.fadeOut(),
+                    b.removeClass("open"));
             }),
                 $(".js-right-sidebar").on("click", function () {
                     b.toggleClass("open"),
@@ -213,9 +219,9 @@ if ("undefined" == typeof jQuery)
                     var a = $(".navbar-toggle").is(":visible"),
                         b = $(".navbar-collapse");
                     a &&
-                        b.slideUp(function () {
-                            b.removeClass("in").removeAttr("style");
-                        });
+                    b.slideUp(function () {
+                        b.removeClass("in").removeAttr("style");
+                    });
                 });
         },
     }),
@@ -241,36 +247,36 @@ var edge = "Microsoft Edge",
         return /edge/i.test(a)
             ? edge
             : /rv:11/i.test(a)
-            ? ie11
-            : /msie 10/i.test(a)
-            ? ie10
-            : /opr/i.test(a)
-            ? opera
-            : /chrome/i.test(a)
-            ? chrome
-            : /firefox/i.test(a)
-            ? firefox
-            : navigator.userAgent.match(/Version\/[\d\.]+.*Safari/)
-            ? safari
-            : void 0;
+                ? ie11
+                : /msie 10/i.test(a)
+                    ? ie10
+                    : /opr/i.test(a)
+                        ? opera
+                        : /chrome/i.test(a)
+                            ? chrome
+                            : /firefox/i.test(a)
+                                ? firefox
+                                : navigator.userAgent.match(/Version\/[\d\.]+.*Safari/)
+                                    ? safari
+                                    : void 0;
     },
     getClassName: function () {
         var a = this.getBrowser();
         return a === edge
             ? "edge"
             : a === ie11
-            ? "ie11"
-            : a === ie10
-            ? "ie10"
-            : a === opera
-            ? "opera"
-            : a === chrome
-            ? "chrome"
-            : a === firefox
-            ? "firefox"
-            : a === safari
-            ? "safari"
-            : "";
+                ? "ie11"
+                : a === ie10
+                    ? "ie10"
+                    : a === opera
+                        ? "opera"
+                        : a === chrome
+                            ? "chrome"
+                            : a === firefox
+                                ? "firefox"
+                                : a === safari
+                                    ? "safari"
+                                    : "";
     },
 }),
     $(function () {
@@ -399,12 +405,12 @@ var edge = "Microsoft Edge",
                 (a.target != this &&
                     "close" != a.target.id &&
                     27 != a.keyCode) ||
-                    $(this).removeClass("open");
+                $(this).removeClass("open");
             });
     }),
     $(function () {
         "#dark" == location.hash &&
-            ($("body").addClass("theme-dark"),
+        ($("body").addClass("theme-dark"),
             $("#darktheme").prop("checked", !0),
             $(".menu ul.list a").each(function () {
                 var a = $(this).attr("href") + "#dark";

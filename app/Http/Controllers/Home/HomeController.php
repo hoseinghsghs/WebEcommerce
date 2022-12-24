@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Home;
 
-use App\Events\NotificationMessage;
 use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use App\Models\Brand;
-use Illuminate\Http\Request;
+use App\Notifications\InvoicePaid;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Product;
@@ -14,9 +13,7 @@ use App\Models\Service;
 use App\Models\Setting;
 use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\SEOTools;
-use Artesaos\SEOTools\Facades\SEOMeta;
-
-use function PHPSTORM_META\type;
+use Illuminate\Support\Facades\Notification;
 
 class HomeController extends Controller
 {
