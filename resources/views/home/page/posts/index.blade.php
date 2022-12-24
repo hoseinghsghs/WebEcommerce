@@ -17,7 +17,7 @@
         <div class="d-block">
             <section class="content-widget">
                   @if(count($posts)===0)
-                 <p>هیچ رکوردی وجود ندارد</p>
+                 <p style="text-align: center">هیچ رکوردی وجود ندارد</p>
                  @else
                 @foreach ($posts as $post)
                 <div class="col-12 col-md-4 col-lg-4 col-xl-4 items-2 pr">
