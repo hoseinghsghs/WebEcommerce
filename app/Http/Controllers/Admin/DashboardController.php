@@ -28,7 +28,7 @@ class DashboardController extends Controller
             } else {
                 $lastyear = [0];
             }
-            
+
 
             $farvardin = $ordibehasht = $khordad = $tir = $mordad = $shahrivar = $mehr = $abaan = $azar = $dey = $bahman = $esfand = 0;
             foreach ($lastyear as $key => $value) {
@@ -64,7 +64,7 @@ class DashboardController extends Controller
             $lastyear = [0];
             $month_visits = [0];
         }
-        
+
         $from = Carbon::now()->subDays(30);
         $to = Carbon::now();
         //هزینه های سفارشات
@@ -98,24 +98,24 @@ class DashboardController extends Controller
         try {
             $more = Analytics::fetchMostVisitedPages(Period::days(30), $maxResults = 3);
         } catch (\Throwable $th) {
-         $more1 = [
-                        0 => [
-                            "url" => "/",
-                            "pageTitle" => "قطعی اتباط",
-                            "pageViews" => 10,
-                            ],
-                        1 => [
-                            "url" => "/blog/3",
-                            "pageTitle" => "قطعی اتباط",
-                            "pageViews" => 10 ,
-                        ],
-                        2 => [
-                            "url" => "/blog/4",
-                            "pageTitle" => "قطعی اتباط",
-                            "pageViews" => 10,
-                        ],
-                    ];
-        $more= collect($more1);
+            $more1 = [
+                0 => [
+                    "url" => "/",
+                    "pageTitle" => "قطعی اتباط",
+                    "pageViews" => 10,
+                ],
+                1 => [
+                    "url" => "/blog/3",
+                    "pageTitle" => "قطعی اتباط",
+                    "pageViews" => 10,
+                ],
+                2 => [
+                    "url" => "/blog/4",
+                    "pageTitle" => "قطعی اتباط",
+                    "pageViews" => 10,
+                ],
+            ];
+            $more = collect($more1);
         };
 
 
