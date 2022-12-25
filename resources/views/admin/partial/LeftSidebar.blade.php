@@ -182,7 +182,7 @@
              @can('analytics')
                 <li @class(['active'=>request()->routeIs('admin.analytics.*')])><a href={{ route('admin.analytics.show') }}><i
                             class="zmdi zmdi-chart"></i><span>آنالیز بازدید ها
-                        ها</span></a>
+                        </span></a>
                 </li>
             @endcan
             @can('tags')
