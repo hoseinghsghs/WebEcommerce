@@ -179,6 +179,12 @@
                     </ul>
                 </li>
             @endcan
+             @can('analytics')
+                <li @class(['active'=>request()->routeIs('admin.analytics.*')])><a href={{ route('admin.analytics.show') }}><i
+                            class="zmdi zmdi-chart"></i><span>آنالیز بازدید ها
+                        ها</span></a>
+                </li>
+            @endcan
             @can('tags')
                 <li @class(['active'=>request()->routeIs('admin.tags.*')])><a href={{ route('admin.tags.create') }}><i
                             class="zmdi zmdi-label"></i><span>تگ
@@ -186,7 +192,7 @@
                 </li>
             @endcan
             <li>
-                <a target="_blank" href="https://www.goftino.com/login?r=/app/dashboard"><i class="zmdi zmdi-accounts-alt"></i>
+                <a target="_blank" href="https://www.goftino.com/login?r=/app/dashboard"><i class="zmdi zmdi-file-text"></i>
                     <span>چت آنلاین</span>
                 </a>
             </li>

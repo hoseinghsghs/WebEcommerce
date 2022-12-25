@@ -1,6 +1,7 @@
 <?php
 
 use App\Events\NotificationMessage;
+use App\Http\Controllers\Admin\AnalyticsController;
 use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;
@@ -42,7 +43,7 @@ use Illuminate\Support\Facades\Session;
 use Artesaos\SEOTools\Facades\SEOMeta;
 
 //fortify routes
-require_once __DIR__.'/fortify.php';
+require_once __DIR__ . '/fortify.php';
 //admin routes
 Route::prefix('Admin-panel/managment')->name('admin.')->middleware(['auth', 'has_role'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('home');
@@ -51,7 +52,7 @@ Route::prefix('Admin-panel/managment')->name('admin.')->middleware(['auth', 'has
     Route::resource('brands',         BrandController::class)->middleware('permission:brands');
     Route::resource('attributes',     AttributeController::class)->except(['show', 'destroy'])->middleware('permission:attributes');
     Route::post('/categories/order', [CategoryController::class, 'saveOrder'])->name('category.order');
-    Route::resource('categories',       CategoryController::class)->except(['destroy','show'])->middleware('permission:categories');
+    Route::resource('categories',       CategoryController::class)->except(['destroy', 'show'])->middleware('permission:categories');
     Route::resource('banners',          BannerController::class)->except(['show', 'destroy'])->middleware('permission:banners');
     Route::resource('services',         ServiceController::class)->except(['show'])->middleware('permission:services');
     Route::resource('posts',            PostController::class)->except('show')->middleware('permission:posts');
@@ -59,12 +60,13 @@ Route::prefix('Admin-panel/managment')->name('admin.')->middleware(['auth', 'has
     Route::resource('questions',         QuestionController::class)->middleware('permission:questions');
     Route::resource('coupons',          CouponController::class)->middleware('permission:coupons');
     Route::resource('products',         ProductController::class)->middleware('permission:products');
-    Route::get('archives',         [ProductController::class , 'archive'])->name('archive')->middleware('permission:products');
+    Route::get('archives',         [ProductController::class, 'archive'])->name('archive')->middleware('permission:products');
     Route::resource('orders',           OrderController::class)->middleware('permission:orders');
     Route::resource('transactions',     TransactionController::class)->middleware('permission:transactions');
-    Route::resource('users',            UserController::class)->except('create','destroy')->middleware('permission:users');
+    Route::resource('users',            UserController::class)->except('create', 'destroy')->middleware('permission:users');
     Route::resource('roles',   RoleController::class)->except('show')->middleware('permission:roles');
     Route::view('permissions', 'admin.page.permissions.index')->name('permissions')->middleware('permission:permissions');
+    Route::get('analytics',         [AnalyticsController::class, 'show'])->name('analytics.show')->middleware('permission:analytics');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -126,7 +128,7 @@ Route::get('/assets/ajax', function () {
 Route::prefix('profile')->name('home.')->middleware(['auth'])->group(function () {
     Route::get('/', [UserProfileController::class, 'index'])->name('user_profile');
     Route::get('/editProfile', [UserProfileController::class, 'editProfile'])->name('user_profile.edit');
-//    Route::post('/forgot-password', [UserProfileController::class, 'forgetPassword'])->name('password.email');
+    //    Route::post('/forgot-password', [UserProfileController::class, 'forgetPassword'])->name('password.email');
     Route::get('/wishlist', [WishListController::class, 'usersProfileIndex'])->name('profile.wishlist.index');
     Route::get('/add-to-wishlist/{product:id}', [WishListController::class, 'add'])->name('home.wishlist.add');
     Route::get('/addreses',  [AddressController::class, 'index'])->name('addreses.index');
@@ -171,8 +173,8 @@ Route::get('/get-province-cities-list', [AddressController::class, 'getProvinceC
 Route::post('/checkcoupon', [PaymentController::class, 'checkCoupon'])->name('home.orders.checkcoupon')->middleware('auth');
 
 //faq
-Route::get('/faq' , [FaqController::class , 'index'] )->name('faq');
-Route::get('/privacy' , [FaqController::class , 'privacy'] )->name('privacy');
-Route::get('/rules' , [FaqController::class , 'rules'] )->name('ruls');
+Route::get('/faq', [FaqController::class, 'index'])->name('faq');
+Route::get('/privacy', [FaqController::class, 'privacy'])->name('privacy');
+Route::get('/rules', [FaqController::class, 'rules'])->name('ruls');
 
-Route::get('/image_manipulation/{name}', [ImageController::class,'flyManipulation'])->name('fly-manipulation');
+Route::get('/image_manipulation/{name}', [ImageController::class, 'flyManipulation'])->name('fly-manipulation');
