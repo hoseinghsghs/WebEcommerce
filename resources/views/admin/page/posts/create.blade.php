@@ -64,11 +64,8 @@
                                     <span class="text-danger m-0">{{$message}}</span>
                                     @enderror
                                 </div>
-
-
-
                                 <div class="body">
-                                    <textarea id="summernote" name="body" rows="8" style="z-index:1000 ;" required>
+                                    <textarea name="body" class="summernote-editor" rows="8" style="z-index:1000 ;" required>
                                     {{ old('body') }}
                                     </textarea>
                                 </div>
@@ -102,10 +99,3 @@
     </div>
 </section>
 @endsection
-@push('scripts')
-<script>
-$(document).ready(function() {
-    $('#summernote').summernote();
-});
-</script>
-@endpush

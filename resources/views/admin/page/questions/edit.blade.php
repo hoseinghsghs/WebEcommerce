@@ -86,10 +86,10 @@
                             </div>
                             <div class="row clearfix">
                                 <div class="col-md-12">
-                                    <label for="text">دیدگاه</label>
+                                    <label for="summernote2">دیدگاه</label>
                                     <div class="form-group">
                                         <textarea name="text" id="summernote2" minlength="3" required
-                                            class="form-control"><?= old('text') ?? $question->text ?></textarea>
+                                            class="form-control summernote-editor"><?= old('text') ?? $question->text ?></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -107,10 +107,10 @@
                             @csrf
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    <label for="text">دیدگاه</label>
+                                    <label for="summernote">دیدگاه</label>
                                     <div class="form-group">
                                         <textarea name="text" id="summernote" minlength="5" required
-                                            placeholder="پاسخ ادمین...." class="form-control"></textarea>
+                                            placeholder="پاسخ ادمین...." class="form-control summernote-editor"></textarea>
                                     </div>
                                 </div>
                                 <button type="submit onclick=" loadbtn(event)

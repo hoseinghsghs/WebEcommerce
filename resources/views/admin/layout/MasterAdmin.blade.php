@@ -30,9 +30,9 @@
 
 @yield('Content')
 
-@include('sweetalert::alert')
 <!-- Jquery Core Js -->
 <script src="{{asset('js/admin.js')}}"></script>
+@include('sweetalert::alert')
 <script>
     @if(session('status'))
     swal({
@@ -67,50 +67,7 @@
         }
         return s.join(dec);
     }
-</script>
-<script>
-    $(document).ready(function () {
 
-        $('#summernote').summernote({
-            height: 200,
-            fontNames: ['Arial', 'IRANSans', 'Comic Sans MS', 'Courier New', 'IRANSansDN'],
-            toolbar: [
-                ['style', ['style']],
-                ['font', ['bold', 'italic', 'underline', 'strikethrough',
-                    'clear'
-                ]
-                ],
-                ['fontname', ['fontname']],
-                ['fontsize', ['fontsize']],
-                ['color', ['color']],
-                ['para', ['ol', 'ul', 'paragraph', 'height']],
-                ['table', ['table']],
-                ['insert', ['link']],
-                ['view', ['fullscreen', 'codeview']]
-            ]
-        })
-    });
-</script>
-<script>
-    $(document).ready(function () {
-        $('#summernote2').summernote({
-            height: 200,
-            fontNames: ['Arial', 'IRANSans', 'Comic Sans MS', 'Courier New', 'IRANSansDN'],
-            toolbar: [
-                ['style', ['style']],
-                ['font', ['bold', 'italic', 'underline', 'strikethrough',
-                    'clear'
-                ]],
-                ['fontname', ['fontname']],
-                ['fontsize', ['fontsize']],
-                ['color', ['color']],
-                ['para', ['ol', 'ul', 'paragraph', 'height']],
-                ['table', ['table']],
-                ['insert', ['link']],
-                ['view', ['fullscreen', 'codeview']]
-            ]
-        })
-    });
     window.addEventListener('say-sound', event => {
         var audio = new Audio(window.location.origin + '/assets/admin/sound/beep.mp3');
         audio.play();

@@ -125,13 +125,13 @@
                         </div>
                         <div class="form-group col-md-12">
                             <div class="form-line" wire:ignore>
-                                <label class="form-label">حریم خصوصی</label>
+                                <label for="privacy-summernote" class="form-label summernote-editor">حریم خصوصی</label>
                                 <textarea id="privacy-summernote">{{$site_privacy}}</textarea>
                             </div>
                         </div>
                         <div class="form-group col-md-12">
                             <div class="form-line" wire:ignore>
-                                <label class="form-label">قوانین و مقررات</label>
+                                <label for="rules-summernote" class="form-label summernote-editor">قوانین و مقررات</label>
                                 <textarea id="rules-summernote">{{$site_rules}}</textarea>
                             </div>
                         </div>
@@ -227,21 +227,11 @@
 @push('scripts')
 <script>
     $(document).ready(function() {
-        $('#privacy-summernote').summernote({
-            height: 100,
-            callbacks: {
-                onChange: function(contents, $editable) {
-                    Livewire.emit('privacyChanged',contents);
-                }
-            }
+        $('#privacy-summernote').on('summernote.change', function (we, contents, $editable) {
+            Livewire.emit('privacyChanged',contents);
         });
-        $('#rules-summernote').summernote({
-            height: 100,
-            callbacks: {
-                onChange: function(contents, $editable) {
-                    Livewire.emit('rulesChanged',contents);
-                }
-            }
+        $('#rules-summernote').on('summernote.change', function (we, contents, $editable) {
+            Livewire.emit('rulesChanged',contents);
         });
     });
 </script>

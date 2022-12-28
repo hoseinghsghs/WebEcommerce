@@ -58,7 +58,7 @@ Route::prefix('Admin-panel/managment')->name('admin.')->middleware(['auth', 'has
     Route::resource('comments',         CommentController::class)->middleware('permission:comments');
     Route::resource('questions',         QuestionController::class)->middleware('permission:questions');
     Route::resource('coupons',          CouponController::class)->middleware('permission:coupons');
-    Route::resource('products',         ProductController::class)->middleware('permission:products');
+    Route::resource('products',         ProductController::class)->middleware('permission:products')->except(['store','destroy']);
     Route::get('archives',         [ProductController::class , 'archive'])->name('archive')->middleware('permission:products');
     Route::resource('orders',           OrderController::class)->middleware('permission:orders');
     Route::resource('transactions',     TransactionController::class)->middleware('permission:transactions');

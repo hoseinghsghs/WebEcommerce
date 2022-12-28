@@ -34,6 +34,7 @@ return array(
     "different"        => ":attribute و :other باید متفاوت باشند.",
     "digits"           => ":attribute باید :digits رقم باشد.",
     "digits_between"   => ":attribute باید بین :min و :max رقم باشد.",
+    "distinct"         => "فیلد :attribute تکراری می باشد",
     "email"            => "فرمت :attribute معتبر نیست.",
     "exists"           => ":attribute انتخاب شده، معتبر نیست.",
     "image"            => ":attribute باید تصویر باشد.",

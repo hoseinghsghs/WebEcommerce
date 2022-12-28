@@ -38,6 +38,16 @@
     text-align: right;
 }
 
+.is-invalid .select2-selection,
+.needs-validation ~ span > .select2-dropdown {
+    border-color: red !important;
+}
+.is-invalid .note-editor{
+    border-color: red !important;
+}.is-invalid .dropify-wrapper{
+    border-color: red !important;
+}
+
 /* bootstrap select */
 .bootstrap-select.btn-group .dropdown-toggle .filter-option {
     white-space: nowrap;
@@ -84,13 +94,13 @@
     transition: 0.3s;
 }
 
-.switchToggle input:checked+label,
-.switchToggle input:checked+input+label {
+.switchToggle input:checked + label,
+.switchToggle input:checked + input + label {
     background: #d1d1d1;
 }
 
-.switchToggle input+label:before,
-.switchToggle input+input+label:before {
+.switchToggle input + label:before,
+.switchToggle input + input + label:before {
     content: "فعال";
     position: absolute;
     top: 5px;
@@ -103,8 +113,8 @@
     color: #fff;
 }
 
-.switchToggle input:checked+label:before,
-.switchToggle input:checked+input+label:before {
+.switchToggle input:checked + label:before,
+.switchToggle input:checked + input + label:before {
     content: "غیرفعال";
     position: absolute;
     top: 5px;
@@ -117,8 +127,8 @@
     color: #7f7777;
 }
 
-.switchToggle input:checked+label:after,
-.switchToggle input:checked+input+label:after {
+.switchToggle input:checked + label:after,
+.switchToggle input:checked + input + label:after {
     left: calc(100% - 2px);
     transform: translateX(-100%);
 }

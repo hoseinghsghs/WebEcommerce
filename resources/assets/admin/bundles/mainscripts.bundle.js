@@ -21,14 +21,12 @@ function skinChanger() {
 
 function CustomScrollbar() {
     let ad = window.innerHeight - 80;
-    console.log(ad);
     $(".sidebar .menu .list").slimscroll({
         height: `${ad}px`,
         color: "#eeeeee",
         position: "right",
         size: "1px",
         alwaysVisible: !1,
-        touchScrollStep: 100,
         borderRadius: "3px",
         railBorderRadius: "0",
     }),
