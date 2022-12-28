@@ -26,4 +26,16 @@
         </div>
     </section>
 @endsection
+@push('styles')
+    <link rel=" stylesheet" href={{ asset('assets\admin\css\dropzone.min.css') }} type="text/css"/>
+    <style>
+        .dropzone {
+            border-radius: 5px;
+            border-style: solid !important;
+            border-width: 2px !important;
+            border-color: #D2D5D6 !important;
+            background-color: white !important;
+        }
+    </style>
+@endpush
 

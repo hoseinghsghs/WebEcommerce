@@ -4,7 +4,6 @@
 <meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
 <title>@yield('title')</title>
 <link rel="icon" href="{{asset('/favicon.ico')}}" type="image/x-icon"> <!-- Favicon-->
-<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-
+<link href="{{ asset('fonts/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
 <!-- Custom Css -->
 <link rel="stylesheet" href="{{asset('css/admin.css')}}">

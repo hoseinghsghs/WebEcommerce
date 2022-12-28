@@ -28,7 +28,7 @@ class DashboardController extends Controller
             } else {
                 $lastyear = [0];
             }
-            
+
 
             $farvardin = $ordibehasht = $khordad = $tir = $mordad = $shahrivar = $mehr = $abaan = $azar = $dey = $bahman = $esfand = 0;
             foreach ($lastyear as $key => $value) {
@@ -64,7 +64,7 @@ class DashboardController extends Controller
             $lastyear = [0];
             $month_visits = [0];
         }
-        
+
         $from = Carbon::now()->subDays(30);
         $to = Carbon::now();
         //هزینه های سفارشات
@@ -95,32 +95,7 @@ class DashboardController extends Controller
         $unsuccessTransactionsChart = $this->chart($unsuccessTransactions, $month);
         array_unshift($unsuccessTransactionsChart, "data2");
         //پربازدید ترین صفحات
-        try {
-            $more = Analytics::fetchMostVisitedPages(Period::days(30), $maxResults = 3);
-        } catch (\Throwable $th) {
-         $more1 = [
-                        0 => [
-                            "url" => "/",
-                            "pageTitle" => "قطعی اتباط",
-                            "pageViews" => 10,
-                            ],
-                        1 => [
-                            "url" => "/blog/3",
-                            "pageTitle" => "قطعی اتباط",
-                            "pageViews" => 10 ,
-                        ],
-                        2 => [
-                            "url" => "/blog/4",
-                            "pageTitle" => "قطعی اتباط",
-                            "pageViews" => 10,
-                        ],
-                    ];
-        $more= collect($more1);
-        };
 
-
-
-        //  dd($successTransactionsChart , $unsuccessTransactionsChart);
         return view(
             'admin.page.dashboard',
             compact(
@@ -136,8 +111,6 @@ class DashboardController extends Controller
                 'amunt_delivery_orders',
                 'successsend_order',
                 'returned_order',
-                'month_visits',
-                'more',
 
             ),
 

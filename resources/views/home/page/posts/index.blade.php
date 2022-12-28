@@ -2,10 +2,10 @@
 @section('title', "خانه - پست ها")
 @section('content')
 <!-- Start of Main -->
-<main class="main-row p-0">
+<main class="main-row">
     <div id="breadcrumb">
         <i class="mdi mdi-home"></i>
-        <nav aria-label="breadcrumb" class="p-1">
+        <nav aria-label="breadcrumb">
             <ol class="breadcrumb m-0">
                 <li class="breadcrumb-item"><a href="{{route('home')}}">خانه</a></li>
                 <li class="breadcrumb-item"><a href="{{route('home.posts.index')}}">بلاگ</a>
@@ -16,6 +16,9 @@
     <div class="container-main">
         <div class="d-block">
             <section class="content-widget">
+                  @if(count($posts)===0)
+                 <p style="text-align: center">هیچ رکوردی وجود ندارد</p>
+                 @else
                 @foreach ($posts as $post)
                 <div class="col-12 col-md-4 col-lg-4 col-xl-4 items-2 pr">
                     <article class="blog-item">
@@ -36,6 +39,7 @@
                     </article>
                 </div>
                 @endforeach
+                @endif
             </section>
             <div class="pagination-product pr-3 pl-3 pr">
                 <nav aria-label="Page navigation example">

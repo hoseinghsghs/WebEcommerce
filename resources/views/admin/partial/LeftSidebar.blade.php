@@ -4,7 +4,7 @@
         <button class="btn-menu ls-toggle-btn" type="button"><i class="zmdi zmdi-menu"></i></button>
         <a href="{{route('home')}}"><img
                 src="{{$setting->logo ? asset('storage/logo/'.$setting->logo):'/images/logo.png'}}"
-                style="margin-right:20px;max-height: 3rem;" alt="meta-webs"><span class="m-l-10"></span></a>
+                style="margin-right:20px;max-height: 3rem;" height="37px" alt="meta-webs"><span class="m-l-10"></span></a>
     </div>
     <div class="menu">
         <ul class="list" id="myList">
@@ -179,6 +179,12 @@
                     </ul>
                 </li>
             @endcan
+             @can('analytics')
+                <li @class(['active'=>request()->routeIs('admin.analytics.*')])><a href={{ route('admin.analytics.show') }}><i
+                            class="zmdi zmdi-chart"></i><span>آنالیز بازدید ها
+                        </span></a>
+                </li>
+            @endcan
             @can('tags')
                 <li @class(['active'=>request()->routeIs('admin.tags.*')])><a href={{ route('admin.tags.create') }}><i
                             class="zmdi zmdi-label"></i><span>تگ
@@ -186,7 +192,7 @@
                 </li>
             @endcan
             <li>
-                <a target="_blank" href="https://www.goftino.com/login?r=/app/dashboard"><i class="zmdi zmdi-hc-fw"></i>
+                <a target="_blank" href="https://www.goftino.com/login?r=/app/dashboard"><i class="zmdi zmdi-file-text"></i>
                     <span>چت آنلاین</span>
                 </a>
             </li>
