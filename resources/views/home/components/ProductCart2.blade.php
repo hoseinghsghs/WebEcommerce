@@ -4,7 +4,7 @@
         </div>
         <a href="{{route('home.products.show' , ['product' => $Product_special->slug])}}">
             <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$Product_special->primary_image)}}"
-                 style="padding: 2rem;" class="img-fluid" alt="">
+                 style="padding: 1rem;" class="img-fluid" alt="">
         </a>
         <h2 class="post-title pt-0">
             <a href="{{route('home.products.show' , ['product' => $Product_special->slug])}}">
