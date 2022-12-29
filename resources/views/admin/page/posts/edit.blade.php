@@ -77,8 +77,8 @@
 
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <label class="form-label">متن خبر</label>
-                                        <textarea id="summernote" name="body" rows="4" class="form-control"
+                                        <label for="summernote" class="form-label">متن خبر</label>
+                                        <textarea id="summernote" name="body" rows="4" class="form-control summernote-editor"
                                             minlength="5" required>{{old('body')??$post->body}}</textarea>
                                     </div>
                                 </div>
@@ -115,10 +115,3 @@
     </div>
 </section>
 @endsection
-@push('scripts')
-<script>
-$(document).ready(function() {
-    $('#summernote').summernote();
-});
-</script>
-@endpush

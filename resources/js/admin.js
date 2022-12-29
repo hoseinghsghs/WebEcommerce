@@ -46,6 +46,7 @@ require("../assets/admin/js/pages/forms/advanced-form-elements.js");
 require("../assets/admin/js/jquery.czMore-latest.js");
 require("../assets/admin/js/rating.js");
 window.Swal = require("../assets/home/js/vendor/sweetalert2.all.min.js");
+require("../assets/admin/js/pages/ecommerce"); // custom javascript
 //window.Echo = new Echo({
 //   broadcaster: "pusher",
 //    key: process.env.MIX_PUSHER_APP_KEY,

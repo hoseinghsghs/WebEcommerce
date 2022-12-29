@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Flasher\Toastr\Prime\ToastrFactory;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProductController extends Controller
 {
@@ -36,75 +37,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        Session::forget('images');
-        $brands = Brand::all();
-        $tags = Tag::all();
-        $categories = Category::where('parent_id', 0)->with('children.children')->get();
-        return view('admin.page.products.create', compact('brands', 'tags', 'categories'));
+        return view('admin.page.products.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreProductRequest $request, ToastrFactory $flasher)
-    {
-        $request->whenHas('is_active', function ($input) use ($request) {
-            $request['is_active'] = false;
-        }, function () use ($request) {
-            $request['is_active'] = true;
-        });
-
-        try {
-            DB::beginTransaction();
-
-            if (isset($request->primary_image)) {
-                $ImageController = new ImageController();
-                $image_name = $ImageController->UploadeImage($request->primary_image, "primary_image", 900, 800);
-            } else {
-                $image_name = null;
-            }
-            $product = Product::create([
-                'name' => $request->name,
-                'position' => $request->position,
-                'brand_id' => $request->brand_id,
-                'category_id' => $request->category_id,
-                'primary_image' => $image_name,
-                'description' => $request->description,
-                'is_active' => $request->is_active,
-                'delivery_amount' => $request->delivery_amount,
-                'delivery_amount_per_product' => $request->delivery_amount_per_product,
-            ]);
-            $imagesStore = Session::pull('images', []);
-
-            foreach ($imagesStore as $imageStore) {
-                ProductImage::create([
-                    'product_id' => $product->id,
-                    'image' => $imageStore
-                ]);
-            }
-
-            $productAttributeController = new ProductAttributeController();
-            $productAttributeController->store($request->attribute_ids, $product);
-
-            $category = Category::find($request->category_id);
-            $productVariationController = new ProductVariationController();
-            $productVariationController->store($request->variation_values, $category->attributes()->wherePivot('is_variation', 1)->first()->id, $product);
-            if ($request->tag_ids && count($request->tag_ids) > 0) {
-                $product->tags()->attach($request->tag_ids);
-            }
-            DB::commit();
-        } catch (\Exception $ex) {
-            DB::rollBack();
-            $flasher->addError('مشکل در ایجاد محصول');
-            return redirect()->back();
-        }
-        Session::forget('images');
-        $flasher->addSuccess('محصول مورد نظر ایجاد شد');
-        return redirect()->route('admin.products.index');
-    }
     /**
      * Display the specified resource.
      *

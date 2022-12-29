@@ -60,7 +60,7 @@ class Category extends Model
     {
         return $query->where('parent_id', 0)->get();
     }
-    
+
      public function parent()
      {
          return $this->belongsTo(Category::class,'parent_id');
@@ -78,10 +78,4 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
-
-    public function productsFromParent()
-    {
-        return $this->hasManyThrough(Product::class,Category::class,'parent_id','category_id','id','id');
-    }
-
 }

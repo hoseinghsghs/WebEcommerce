@@ -4,6 +4,7 @@
 //Last change:  15/12/2019
 //Primary use:	Aero - Responsive Bootstrap 4 Template
 //should be included in all pages. It controls some layout
+/*
 $(function() {
     "use strict";
     initSparkline();
@@ -29,7 +30,7 @@ function initMap() {
                 "IN": 2000000,
                 "GB": 120,
         };
-        
+
         if( $('#world-map-markers').length > 0 ){
             $('#world-map-markers').vectorMap(
             {
@@ -55,31 +56,31 @@ function initMap() {
                             'stroke-opacity': 0.4
                         },
                     },
-            
+
                 markers : [{
                     latLng : [21.00, 78.00],
                     name : 'INDIA : 350'
-                
+
                 },
                 {
                     latLng : [-33.00, 151.00],
                     name : 'Australia : 250'
-                    
+
                 },
                 {
                     latLng : [36.77, -119.41],
                     name : 'USA : 250'
-                
+
                 },
                 {
                     latLng : [55.37, -3.41],
                     name : 'UK   : 250'
-                
+
                 },
                 {
                     latLng : [25.20, 55.27],
                     name : 'UAE : 250'
-                
+
                 }],
 
                 series: {
@@ -161,4 +162,23 @@ function MorrisArea() {
         hideHover: 'auto'
         });
     }, 500);
-}
+}*/
+$(document).ready(function () {
+    $('.summernote-editor').summernote({
+        height: 200,
+        fontNames: ['Arial', 'IRANSans', 'Comic Sans MS', 'Courier New', 'IRANSansDN'],
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'italic', 'underline', 'strikethrough',
+                'clear'
+            ]],
+            ['fontname', ['fontname']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ['para', ['ol', 'ul', 'paragraph', 'height']],
+            ['table', ['table']],
+            ['insert', ['link']],
+            ['view', ['fullscreen', 'codeview']]
+        ]
+    })
+});

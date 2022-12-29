@@ -6,7 +6,7 @@
         : "object" == typeof module && module.exports
         ? (module.exports = b(require("jquery")))
         : b(a.jQuery);
-})(this, function (a) {
+})/*(this, function (a) {
     !(function (a) {
         "use strict";
 
@@ -1989,7 +1989,7 @@
                 });
             });
     })(a);
-}),
+})*/,
     (function (a) {
         a.fn.extend({
             slimScroll: function (b) {
