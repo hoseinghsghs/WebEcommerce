@@ -90,7 +90,7 @@
                     </div>
                     <a href="{{route('home.products.show' , ['product' => $product->slug])}}">
                         <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}"
-                             alt="{{$product->slug}}" height="77%" width="77%" class="pr-2">
+                             alt="{{$product->slug}}"  width="100%" class="pr-2">
                     </a>
                 </div>
             </a>
