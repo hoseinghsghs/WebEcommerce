@@ -43,7 +43,7 @@
             @endif
         </div>
          <div >
-                        <ul class="d-flex justify-content-center">
+                        <ul class="d-flex justify-content-center mb-0">
                             <!-- علاقه مندی -->
                             @if (Auth::check())
                                 @if ($product->checkUserWishlist(1))
