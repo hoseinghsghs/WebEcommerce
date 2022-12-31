@@ -5,10 +5,6 @@
                 @if ($product->quantity_check && $product->sale_check)
                     <div class="promotion-badge">فروش ویژه</div>
                 @endif
-                <span><span data-rating-stars="5" data-rating-readonly="true"
-                            data-rating-value="{{ceil($product->rates->avg('satisfaction'))}}">
-                    </span></span>
-
                 <div class="position-relative d-inline-block">
                     <div style="position: absolute;left:0;top:1rem">
                         <ul>
