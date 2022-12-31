@@ -1,4 +1,4 @@
-<div class="col-lg-3 col-md-4 col-sm-6 col-6 p-1 order-1 d-block mb-3">
+<div class="col-lg-2 col-md-4 col-sm-6 col-6 p-1 order-1 d-block mb-3">
     <section class="product-box product product-type-simple h-100 ">
         <div class="thumb">
             <a href="{{route('home.products.show' , ['product' => $product->slug])}}" class="d-block">
