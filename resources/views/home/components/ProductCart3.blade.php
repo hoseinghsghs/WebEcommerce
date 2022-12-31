@@ -2,9 +2,7 @@
     <section class="product-box product product-type-simple h-100 ">
         <div class="thumb">
             <a href="{{route('home.products.show' , ['product' => $product->slug])}}" class="d-block">
-                @if ($product->quantity_check && $product->sale_check)
-                    <div class="promotion-badge">فروش ویژه</div>
-                @endif
+              
                 <div class="position-relative d-inline-block">
                     <div style="position: absolute;left:0;top:1rem">
                         <ul>
@@ -103,9 +101,8 @@
         <div class="price">
             @if ($product->quantity_check)
                 @if ($product->sale_check)
-                    <del><span>{{number_format($product->sale_check->price)}} تومان </span></del>
-                    <ins><span
-                            class="amount">{{number_format($product->sale_check->sale_price)}}<span>تومان</span></span>
+               
+
                         @php
                             $percents=$product->discountPercent();
                         @endphp
@@ -114,11 +111,14 @@
                                 @if (count($percents)==1)
                                     <span>{{$percents[0]}}٪</span>
                                 @else
-                                    <span>{{end($percents)}}٪ - {{$percents[0]}}٪</span>
+                                    <span>{{end($percents)}}٪</span>
                                 @endif
                             </div>
                         @endif
-                    </ins>
+ <ins><span
+                            class="amount">{{number_format($product->sale_check->sale_price)}}<span>تومان</span></span>
+                            </ins>
+                    <del><span>{{number_format($product->sale_check->price)}} تومان </span></del> 
                 @else
                     <ins><span class="amount">{{ number_format($product->price_check->price) }}<span>تومان</span></span>
                     </ins>
