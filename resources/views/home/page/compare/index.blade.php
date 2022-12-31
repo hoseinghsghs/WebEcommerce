@@ -131,7 +131,7 @@
                                 @foreach ($products as $product)
                             <td>
                                 <center>
-                                    {{$product->description}}
+                                    {!!$product->description!!}
                                 </center>
                             </td>
                             @endforeach
