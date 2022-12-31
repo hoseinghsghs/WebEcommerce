@@ -4,12 +4,50 @@
             <a href="{{route('home.products.show' , ['product' => $product->slug])}}" class="d-block">
               
                 <div class="position-relative d-inline-block">
-                    <div style="position: absolute;left:0;top:1rem">
-                        <ul>
+                   
+                    <a href="{{route('home.products.show' , ['product' => $product->slug])}}">
+                        <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}"
+                             alt="{{$product->slug}}"  width="100%" class="pr-2">
+                    </a>
+                </div>
+            </a>
+        </div>
+        <div class="title">
+            <a href="{{route('home.products.show' , ['product' => $product->slug])}}">{{$product->name}}</a>
+        </div>
+        <div class="price">
+            @if ($product->quantity_check)
+                @if ($product->sale_check)
+                        @php
+                            $percents=$product->discountPercent();
+                        @endphp
+                        @if ($product->quantity_check && $product->sale_check && $percents)
+                            <div class="discount-d">
+                                @if (count($percents)==1)
+                                    <span>{{$percents[0]}}٪</span>
+                                @else
+                                    <span>{{end($percents)}}٪</span>
+                                @endif
+                            </div>
+                        @endif
+                            <ins><span
+                            class="amount">{{number_format($product->sale_check->sale_price)}}<span>تومان</span></span>
+                            </ins>
+                    <del><span>{{number_format($product->sale_check->price)}} تومان </span></del> 
+                @else
+                    <ins><span class="amount">{{ number_format($product->price_check->price) }}<span>تومان</span></span>
+                    </ins>
+                @endif
+            @else
+                <ins><span>ناموجود</span></ins>
+            @endif
+        </div>
+         <div >
+                        <ul class="d-flex justify-content-center">
                             <!-- علاقه مندی -->
                             @if (Auth::check())
                                 @if ($product->checkUserWishlist(1))
-                                    <li class="action-item like">
+                                    <li class="action-item like" style="display: inline-block">
                                         <button data-product="{{$product->id}}"
                                                 class="btn btn-link add-product-wishes active"
                                                 type="submit">
@@ -18,7 +56,7 @@
                                     </li>
 
                                 @else
-                                    <li class="action-item like">
+                                    <li class="action-item like" style="display: inline-block">
                                         <button data-product="{{$product->id}}" class="btn btn-link add-product-wishes"
                                                 type="submit">
                                             <i class="fa fa-heart-o"></i>
@@ -26,7 +64,7 @@
                                     </li>
                                 @endif
                             @else
-                                <li class="action-item like">
+                                <li class="action-item like" style="display: inline-block">
                                     <button data-product="{{$product->id}}" class="btn btn-link add-product-wishes"
                                             type="submit">
                                         <i class="fa fa-heart-o"></i>
@@ -88,44 +126,5 @@
                             @endif
                         </ul>
                     </div>
-                    <a href="{{route('home.products.show' , ['product' => $product->slug])}}">
-                        <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}"
-                             alt="{{$product->slug}}"  width="100%" class="pr-2">
-                    </a>
-                </div>
-            </a>
-        </div>
-        <div class="title">
-            <a href="{{route('home.products.show' , ['product' => $product->slug])}}">{{$product->name}}</a>
-        </div>
-        <div class="price">
-            @if ($product->quantity_check)
-                @if ($product->sale_check)
-               
-
-                        @php
-                            $percents=$product->discountPercent();
-                        @endphp
-                        @if ($product->quantity_check && $product->sale_check && $percents)
-                            <div class="discount-d">
-                                @if (count($percents)==1)
-                                    <span>{{$percents[0]}}٪</span>
-                                @else
-                                    <span>{{end($percents)}}٪</span>
-                                @endif
-                            </div>
-                        @endif
- <ins><span
-                            class="amount">{{number_format($product->sale_check->sale_price)}}<span>تومان</span></span>
-                            </ins>
-                    <del><span>{{number_format($product->sale_check->price)}} تومان </span></del> 
-                @else
-                    <ins><span class="amount">{{ number_format($product->price_check->price) }}<span>تومان</span></span>
-                    </ins>
-                @endif
-            @else
-                <ins><span>ناموجود</span></ins>
-            @endif
-        </div>
     </section>
 </div>
