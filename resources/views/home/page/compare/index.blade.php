@@ -122,20 +122,7 @@
                             </td>
                             @endforeach
                         </tr>
-                        <!-- توضیح محصول -->
-                        <tr>
-                            <th>
-                                <center>
-                                    توضیحات
-                                </center>
-                                @foreach ($products as $product)
-                            <td>
-                                <center>
-                                    {!!$product->description!!}
-                                </center>
-                            </td>
-                            @endforeach
-                        </tr>
+                       
                         <!-- ویژگی ها -->
                         <tr>
                             <th>
