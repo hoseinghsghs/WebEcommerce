@@ -3,19 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Brand;
 use App\Models\Category;
-use App\Models\Tag;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreProductRequest;
-use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
 use App\Models\ProductImage;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Flasher\Toastr\Prime\ToastrFactory;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class ProductController extends Controller
 {
@@ -31,16 +25,6 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('admin.page.products.create');
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -53,68 +37,6 @@ class ProductController extends Controller
         $images = $product->images;
         $tags = $product->tags;
         return view('admin.page.products.show', compact('product', 'product_attributes', 'product_variation', 'images', 'tags'));
-    }
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
-    {
-        $brands = Brand::all();
-        $tags = Tag::all();
-        $categories = Category::where('parent_id', 0)->with('children.children')->get();;
-        $product_attributes = $product->attributes()->with('attribute')->get();
-        $product_variation = $product->variations()->with('attribute')->get();
-        // dd($brands);
-        return view('admin.page.products.edit', compact('brands', 'tags', 'categories', 'product', 'product_attributes', 'product_variation'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateProductRequest $request, Product $product, ToastrFactory $flasher)
-    {
-        $request->whenHas('is_active', function ($input) use ($request) {
-            $request['is_active'] = false;
-        }, function () use ($request) {
-            $request['is_active'] = true;
-        });
-
-        try {
-            DB::beginTransaction();
-
-            $product->update([
-                'name' => $request->name,
-                'position' => $request->position,
-                'brand_id' => $request->brand_id,
-                'description' => $request->description,
-                'is_active' => $request->is_active,
-                'delivery_amount' => $request->delivery_amount,
-                'delivery_amount_per_product' => $request->delivery_amount_per_product,
-            ]);
-
-            $productAttributeController = new ProductAttributeController();
-            $productAttributeController->update($request->attribute_values);
-
-            $productVariationController = new ProductVariationController();
-            $productVariationController->update($request->variation_values);
-
-            $product->tags()->sync($request->tag_ids);
-
-            DB::commit();
-        } catch (\Exception $ex) {
-            DB::rollBack();
-            $flasher->addError('مشکل در ویرایش محصول');
-            return redirect()->back();
-        }
-        $flasher->addSuccess('محصول مورد نظر ویرایش شد');
-        return redirect()->route('admin.products.index');
     }
 
     /**

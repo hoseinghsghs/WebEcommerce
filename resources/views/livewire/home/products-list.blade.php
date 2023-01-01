@@ -295,7 +295,7 @@
         </div>
     </div>
     <!-- mobile product filter sidebar -->
-    <div id="filter-sidebar" class="sidebar bg-light p-2">
+    <div id="filter-sidebar" class="sidebar bg-light p-2" wire:ignore.self>
         <div class="shop-archive-sidebar">
             <div class="pl-2 pb-2">
                 <button class="sidebar-close mr-auto" onclick="closeSidebar(event)"><span
@@ -484,7 +484,7 @@
             </div>
         </div>
     </div>
-    <div onclick="closeSidebar(event)" class="filter-sidebar-overlay d-none"></div>
+    <div onclick="closeSidebar(event)" class="filter-sidebar-overlay d-none" wire:ignore></div>
     <!-- end mobile product filter sidebar -->
 </div>
 

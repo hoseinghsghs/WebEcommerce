@@ -32,8 +32,8 @@ class CreateProduct extends Component
     public $category_variation;
     public array $attribute_values = [];
     public array $variations = [['name' => '', 'price' => null, 'quantity' => null, 'sku' => '', 'guarantee' => '', 'time_guarantee' => '']];
-    public int|null $delivery_amount = null;
-    public int|null $delivery_amount_per_product = null;
+    public string|null $delivery_amount = null;
+    public string|null $delivery_amount_per_product = null;
     public $primary_image;
 
     protected $validationAttributes = [
@@ -97,7 +97,7 @@ class CreateProduct extends Component
         $this->category_variation = $category->attributes()->wherePivot('is_variation', 1)->first();
     }
 
-    public function updatedVariations($index)
+    public function updatedVariations()
     {
         $this->validateOnly("variations.*.sku");
     }
@@ -159,6 +159,6 @@ class CreateProduct extends Component
         $brands = Brand::all();
         $tags = Tag::all();
         $categories = Category::where('parent_id', 0)->with('children.children')->get();
-        return view('livewire.admin.products.create-product', compact('brands', 'tags', 'categories'));
+        return view('livewire.admin.products.create-product', compact('brands', 'tags', 'categories'))->extends('admin.layout.MasterAdmin')->section('Content');
     }
 }
