@@ -24,21 +24,18 @@ class ProductVariationController extends Controller
         }
     }
 
-    public function update($variationIds)
+    public function update($variations)
     {
-
-        foreach($variationIds as $key => $variation){
-            // $date_from=str_replace("/","-",$variation['date_on_sale_from']);
-            // $date_to=str_replace("/","-",$variation['date_on_sale_to']);
+        foreach($variations as $key => $variation){
             $productVariation = ProductVariation::findOrFail($key);
             $productVariation->update([
-                'value'=>$variation['value'],
+                'value'=>$variation['name'],
                 'price' => $variation['price'],
                 'quantity' => $variation['quantity'],
                 'sku' => $variation['sku'],
                 'guarantee' => $variation['guarantee'],
                 'time_guarantee' => $variation['time_guarantee'],
-                'sale_price' => $variation['sale_price'],
+                'sale_price' => $variation['sale_price']==''?null:$variation['sale_price'],
                 'date_on_sale_from' => $variation['date_on_sale_from'],
                 'date_on_sale_to' => $variation['date_on_sale_to'],
             ]);
