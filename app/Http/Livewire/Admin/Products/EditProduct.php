@@ -11,6 +11,7 @@ use App\Models\Tag;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
+use phpseclib3\Crypt\EC\Curves\prime192v1;
 
 
 class EditProduct extends Component
@@ -26,6 +27,8 @@ class EditProduct extends Component
     public array $variations = [];
     public string|null $delivery_amount = null;
     public string|null $delivery_amount_per_product = null;
+    public $product_var;
+
     protected $validationAttributes = [
         'attribute_values.*.value' => '',
         'variations.*.time_guarantee' => 'زمان گارانتی',
@@ -59,8 +62,12 @@ class EditProduct extends Component
             'variations.*.quantity' => 'required|integer',
             'variations.*.sku' => Rule::forEach(function ($value, $attribute) {
                 $res = explode('.', $attribute);
-                $variation = ProductVariation::findOrFail($res[1]);
-                return ['nullable', 'string', 'distinct', Rule::unique('product_variations', 'sku')->where(fn($query) => $query->where('sku', '<>', null))->ignore($variation)];
+                $variation = ProductVariation::find($res[1]);
+                if ($variation) {
+                    return ['nullable', 'string', 'distinct', Rule::unique('product_variations', 'sku')->where(fn($query) => $query->where('sku', '<>', null))->ignore($variation)];
+                } else {
+                    return ['nullable', 'string', 'distinct', Rule::unique('product_variations', 'sku')->where(fn($query) => $query->where('sku', '<>', null))];
+                }
             }),
             'variations.*.guarantee' => 'nullable|string',
             'variations.*.time_guarantee' => 'nullable|string',
@@ -83,6 +90,7 @@ class EditProduct extends Component
 
     public function mount()
     {
+        $this->product_var = $this->product->category->attributes()->wherePivot('is_variation', 1)->first();
         $this->name = $this->product->name;
         $this->position = $this->product->position;
         $this->status = !$this->product->is_active;
@@ -97,9 +105,8 @@ class EditProduct extends Component
             $this->attribute_values[$attribute->id] = ['attribute_name' => $attribute->attribute->name, 'value' => $attribute->value];
         }
 
-        $product_variation = $this->product->variations()->get();
-        foreach ($product_variation as $variation) {
-            $this->variations[$variation->id]['variation_name'] = $variation->attribute->name;
+        $product_variations = $this->product->variations()->get();
+        foreach ($product_variations as $variation) {
             $this->variations[$variation->id]['name'] = $variation->value;
             $this->variations[$variation->id]['price'] = $variation->price;
             $this->variations[$variation->id]['quantity'] = $variation->quantity;
@@ -110,6 +117,17 @@ class EditProduct extends Component
             $this->variations[$variation->id]['date_on_sale_from'] = $variation->date_on_sale_from;
             $this->variations[$variation->id]['date_on_sale_to'] = $variation->date_on_sale_to;
         }
+    }
+
+    public function addVariation()
+    {
+        $this->variations[] = ['name' => null, 'price' => null, 'quantity' => null, 'sku' => null, 'guarantee' => null,
+            'time_guarantee'=>null, 'sale_price' => null, 'date_on_sale_from' => null, 'date_on_sale_to' => null];
+    }
+
+    public function removeVariation($index)
+    {
+        unset($this->variations[$index]);
     }
 
     public function updatedVariations()
@@ -137,7 +155,7 @@ class EditProduct extends Component
             $productAttributeController->update($this->attribute_values);
 
             $productVariationController = new ProductVariationController();
-            $productVariationController->update($this->variations);
+            $productVariationController->update($this->variations,$this->product,$this->product_var->id);
 
             $this->product->tags()->sync($this->tags_id);
 

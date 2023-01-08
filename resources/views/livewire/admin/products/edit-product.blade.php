@@ -150,154 +150,161 @@
                                 </div>
                                 <!-- ویژگی های ثابت -->
                                 <!-- ویژگی های متغییر -->
+                                <button class="btn btn-sm btn-success" type="button" wire:click="addVariation">
+                                    + {{$product_var->name}}</button>
                                 @foreach ($variations as $id => $variation)
                                     <div class="col-md-12">
                                         <div class="d-flex">
                                             <p class="mb-0 mr-3">
-                                                <button class="btn btn-sm btn-primary" type="button"
+                                                <button class="btn btn-sm btn-info" type="button"
                                                         aria-expanded="false"
                                                         data-toggle="collapse"
                                                         data-target="#collapse-{{ $id }}">
-                                                    قیمت و موجودی برای متغیر ( {{ $variation['variation_name'] }} )
+                                                    <i class="zmdi zmdi-caret-left align-middle"></i> قیمت و موجودی
+                                                    برای {{ $product_var->name }}
+                                                    : {{array_key_exists('name',$variation)? $variation['name']:null}}
                                                 </button>
                                             </p>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                        <div @class(["mt-2 rounded bg-light","collapse"]) id="collapse-{{ $id }}"
+                                        <div @class(["p-2 mb-2 rounded bg-light","collapse"=>$variation['name']]) id="collapse-{{ $id }}"
                                              wire:ignore.self>
-                                            <div class="card card-body">
-                                                <div class="row">
-                                                    <div class="form-group col-md-3 col-sm-4">
-                                                        <label for="variation_values-{{ $id }}"> عنوان <abbr
-                                                                class="text-danger"
-                                                                title="ضروری">*</abbr></label>
-                                                        <input type="text"
-                                                               @class(["form-control","is-invalid"=>$errors->has("variations.$id.name")])
-                                                               id="variation_values-{{ $id }}"
-                                                               wire:model.defer="variations.{{$id}}.name">
-                                                        @error("variations.$id.name")
-                                                        <div class="invalid-feedback">{{$message}}</div>
-                                                        @enderror
-                                                    </div>
-                                                    <div class="form-group col-md-3 col-sm-4">
-                                                        <label> قیمت <abbr class="text-danger"
-                                                                           title="ضروری">*</abbr></label>
-                                                        <input dir="ltr" type="number"
-                                                               @class(["form-control without-spin","is-invalid"=>$errors->has("variations.$id.price")])
-                                                               wire:model="variations.{{$id}}.price" required>
-                                                        @if(key_exists('price',$variation) && $variation['price'])
-                                                            <span
-                                                                class="pt-1">{{number_format($variation['price'])}} تومان </span>
-                                                        @endif
-                                                        @error("variations.$id.price")
-                                                        <div class="invalid-feedback">{{$message}}</div>
-                                                        @enderror
-                                                    </div>
-                                                    <div class="form-group col-md-3 col-sm-4">
-                                                        <label> تعداد <abbr class="text-danger" title="ضروری">*</abbr>
-                                                        </label>
-                                                        <input dir="ltr"
-                                                               @class(["form-control without-spin","is-invalid"=>$errors->has("variations.$id.quantity")])
-                                                               wire:model.defer="variations.{{$id}}.quantity"
-                                                               type="number" required>
-                                                    </div>
-                                                    <div class="form-group col-md-3 col-sm-4">
-                                                        <label>شناسه انبار</label>
-                                                        <input dir="ltr" type="text"
-                                                               @class(["form-control","is-invalid"=>$errors->has("variations.$id.sku")])
-                                                               wire:model="variations.{{$id}}.sku">
-                                                        @error("variations.$id.sku")
-                                                        <div class="invalid-feedback">{{$message}}</div>
-                                                        @enderror
-                                                    </div>
-                                                    <div class="form-group col-md-6 col-sm-4">
-                                                        <label> گارانتی </label>
-                                                        <input type="text"
-                                                               @class(["form-control","is-invalid"=>$errors->has("variations.$id.guarantee")])
-                                                               wire:model.defer="variations.{{$id}}.guarantee">
-                                                        @error("variations.$id.guarantee")
-                                                        <div class="invalid-feedback">{{$message}}</div>
-                                                        @enderror
-                                                    </div>
-                                                    <div class="form-group col-md-6 col-sm-4">
-                                                        <label> مدت گارانتی </label>
-                                                        <input type="text"
-                                                               @class(["form-control","is-invalid"=>$errors->has("variations.$id.time_guarantee")])
-                                                               wire:model.defer="variations.{{$id}}.time_guarantee">
-                                                        @error("variations.$id.time_guarantee")
-                                                        <div class="invalid-feedback">{{$message}}</div>
-                                                        @enderror
-                                                    </div>
-                                                    {{-- Sale Section --}}
-                                                    <div class="col-md-12">
-                                                        <p> حراج : </p>
-                                                    </div>
-                                                    <div class="form-group col-md-4">
-                                                        <label> قیمت حراجی </label>
-                                                        <input type="number" dir="ltr"
-                                                               @class(["form-control without-spin","is-invalid"=>$errors->has("variations.$id.sale_price")])
-                                                               wire:model="variations.{{$id}}.sale_price">
-                                                        @if($variation['sale_price'])
-                                                            <span
-                                                                class="pt-1">{{number_format($variation['sale_price'])}} تومان </span>
-                                                        @endif
-                                                        @error("variations.$id.sale_price")
-                                                        <div class="invalid-feedback">{{$message}}</div>
-                                                        @enderror
-                                                    </div>
-                                                    <div @class(["form-group col-md-4 ","is-invalid"=>$errors->has("variations.$id.date_on_sale_from")])>
-                                                        <label> تاریخ شروع حراجی </label>
-                                                        <div class="input-group" wire:ignore>
-                                                            <div class="input-group-prepend"
-                                                                 onclick="$('{{ '#variationInputDateOnSaleFrom-'.$id }}').focus();">
+                                            @if($loop->count > 1)
+                                                <button type="button" class="close text-danger" style="opacity: 1;"
+                                                        wire:click="removeVariation({{$id}})">&times;
+                                                </button>
+                                            @endif
+                                            <div class="row">
+                                                <div class="form-group col-md-3 col-sm-4">
+                                                    <label for="variation_values-{{ $id }}"> عنوان <abbr
+                                                            class="text-danger"
+                                                            title="ضروری">*</abbr></label>
+                                                    <input type="text"
+                                                           @class(["form-control","is-invalid"=>$errors->has("variations.$id.name")])
+                                                           id="variation_values-{{ $id }}"
+                                                           wire:model.defer="variations.{{$id}}.name">
+                                                    @error("variations.$id.name")
+                                                    <div class="invalid-feedback">{{$message}}</div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group col-md-3 col-sm-4">
+                                                    <label> قیمت <abbr class="text-danger"
+                                                                       title="ضروری">*</abbr></label>
+                                                    <input dir="ltr" type="number"
+                                                           @class(["form-control without-spin","is-invalid"=>$errors->has("variations.$id.price")])
+                                                           wire:model="variations.{{$id}}.price" required>
+                                                    @if(key_exists('price',$variation) && $variation['price'])
+                                                        <span
+                                                            class="pt-1">{{number_format($variation['price'])}} تومان </span>
+                                                    @endif
+                                                    @error("variations.$id.price")
+                                                    <div class="invalid-feedback">{{$message}}</div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group col-md-3 col-sm-4">
+                                                    <label> تعداد <abbr class="text-danger" title="ضروری">*</abbr>
+                                                    </label>
+                                                    <input dir="ltr"
+                                                           @class(["form-control without-spin","is-invalid"=>$errors->has("variations.$id.quantity")])
+                                                           wire:model.defer="variations.{{$id}}.quantity"
+                                                           type="number" required>
+                                                </div>
+                                                <div class="form-group col-md-3 col-sm-4">
+                                                    <label>شناسه انبار</label>
+                                                    <input dir="ltr" type="text"
+                                                           @class(["form-control","is-invalid"=>$errors->has("variations.$id.sku")])
+                                                           wire:model="variations.{{$id}}.sku">
+                                                    @error("variations.$id.sku")
+                                                    <div class="invalid-feedback">{{$message}}</div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-4">
+                                                    <label> گارانتی </label>
+                                                    <input type="text"
+                                                           @class(["form-control","is-invalid"=>$errors->has("variations.$id.guarantee")])
+                                                           wire:model.defer="variations.{{$id}}.guarantee">
+                                                    @error("variations.$id.guarantee")
+                                                    <div class="invalid-feedback">{{$message}}</div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-4">
+                                                    <label> مدت گارانتی </label>
+                                                    <input type="text"
+                                                           @class(["form-control","is-invalid"=>$errors->has("variations.$id.time_guarantee")])
+                                                           wire:model.defer="variations.{{$id}}.time_guarantee">
+                                                    @error("variations.$id.time_guarantee")
+                                                    <div class="invalid-feedback">{{$message}}</div>
+                                                    @enderror
+                                                </div>
+                                                {{-- Sale Section --}}
+                                                <div class="col-md-12">
+                                                    <p> حراج : </p>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label> قیمت حراجی </label>
+                                                    <input type="number" dir="ltr"
+                                                           @class(["form-control without-spin","is-invalid"=>$errors->has("variations.$id.sale_price")])
+                                                           wire:model="variations.{{$id}}.sale_price">
+                                                    @if(key_exists('sale_price',$variation) && $variation['sale_price'])
+                                                        <span
+                                                            class="pt-1">{{number_format($variation['sale_price'])}} تومان </span>
+                                                    @endif
+                                                    @error("variations.$id.sale_price")
+                                                    <div class="invalid-feedback">{{$message}}</div>
+                                                    @enderror
+                                                </div>
+                                                <div @class(["form-group col-md-4 ","is-invalid"=>$errors->has("variations.$id.date_on_sale_from")])>
+                                                    <label> تاریخ شروع حراجی </label>
+                                                    <div class="input-group" wire:ignore>
+                                                        <div class="input-group-prepend"
+                                                             onclick="$('{{ '#variationInputDateOnSaleFrom-'.$id }}').focus();">
                                                             <span class="input-group-text" id="basic-addon1"><i
                                                                     class="zmdi zmdi-calendar-alt"></i></span>
-                                                            </div>
-                                                            <input type="hidden"
-                                                                   id="variationInputDateOnSaleFrom-alt-{{ $id }}"
-                                                                   name="variation_values[{{ $id }}][date_on_sale_from]">
-                                                            <input type="text" class="form-control"
-                                                                   id="variationInputDateOnSaleFrom-{{ $id }}"
-                                                                   value="{{ $variation['date_on_sale_from'] ?? null }}"
-                                                                   autocomplete="off">
-                                                            <div class="input-group-append">
+                                                        </div>
+                                                        <input type="hidden"
+                                                               id="variationInputDateOnSaleFrom-alt-{{ $id }}"
+                                                               name="variation_values[{{ $id }}][date_on_sale_from]">
+                                                        <input type="text" class="form-control"
+                                                               id="variationInputDateOnSaleFrom-{{ $id }}"
+                                                               value="{{ $variation['date_on_sale_from'] ?? null }}"
+                                                               autocomplete="off">
+                                                        <div class="input-group-append">
                                                             <span class="input-group-text" id="basic-addon1"
                                                                   style="cursor: pointer;"
                                                                   onclick="destroyDatePicker({{$id}},'from')"><i
                                                                     class="zmdi zmdi-close"></i></span>
-                                                            </div>
                                                         </div>
-                                                        @error("variations.$id.date_on_sale_from")
-                                                        <small class="text-danger">{{$message}}</small>
-                                                        @enderror
                                                     </div>
-                                                    <div @class(["form-group col-md-4 ","is-invalid"=>$errors->has("variations.$id.date_on_sale_to")])>
-                                                        <label> تاریخ پایان حراجی </label>
-                                                        <div class="input-group" wire:ignore>
-                                                            <div class="input-group-prepend"
-                                                                 onclick="$('{{ '#variationInputDateOnSaleTo-'.$id }}').focus();">
+                                                    @error("variations.$id.date_on_sale_from")
+                                                    <small class="text-danger">{{$message}}</small>
+                                                    @enderror
+                                                </div>
+                                                <div @class(["form-group col-md-4 ","is-invalid"=>$errors->has("variations.$id.date_on_sale_to")])>
+                                                    <label> تاریخ پایان حراجی </label>
+                                                    <div class="input-group" wire:ignore>
+                                                        <div class="input-group-prepend"
+                                                             onclick="$('{{ '#variationInputDateOnSaleTo-'.$id }}').focus();">
                                                             <span class="input-group-text" id="basic-addon1"><i
                                                                     class="zmdi zmdi-calendar"></i></span>
-                                                            </div>
-                                                            <input type="hidden"
-                                                                   id="variationInputDateOnSaleTo-alt-{{ $id }}"
-                                                                   name="variation_values[{{ $id }}][date_on_sale_to]">
-                                                            <input type="text" class="form-control"
-                                                                   id="variationInputDateOnSaleTo-{{ $id }}"
-                                                                   value="{{ $variation['date_on_sale_to'] ?? null }}"
-                                                                   autocomplete="off">
-                                                            <div class="input-group-append">
+                                                        </div>
+                                                        <input type="hidden"
+                                                               id="variationInputDateOnSaleTo-alt-{{ $id }}"
+                                                               name="variation_values[{{ $id }}][date_on_sale_to]">
+                                                        <input type="text" class="form-control"
+                                                               id="variationInputDateOnSaleTo-{{ $id }}"
+                                                               value="{{ $variation['date_on_sale_to'] ?? null }}"
+                                                               autocomplete="off">
+                                                        <div class="input-group-append">
                                                             <span class="input-group-text" id="basic-addon1"
                                                                   style="cursor: pointer;"
                                                                   onclick="destroyDatePicker({{$id}},'to')"><i
                                                                     class="zmdi zmdi-close"></i></span>
-                                                            </div>
                                                         </div>
-                                                        @error("variations.$id.date_on_sale_to")
-                                                        <small class="text-danger">{{$message}}</small>
-                                                        @enderror
                                                     </div>
+                                                    @error("variations.$id.date_on_sale_to")
+                                                    <small class="text-danger">{{$message}}</small>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
@@ -339,7 +346,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <button class="btn btn-raised btn-success waves-effect" type="submit"
+                                    <button class="btn btn-raised btn-primary waves-effect" type="submit"
                                             wire:loading.attr="disabled"><i wire:loading
                                                                             class='zmdi zmdi-hc-fw zmdi-hc-spin'></i>
                                         ویرایش
