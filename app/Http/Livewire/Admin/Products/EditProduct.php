@@ -11,7 +11,6 @@ use App\Models\Tag;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
-use phpseclib3\Crypt\EC\Curves\prime192v1;
 
 
 class EditProduct extends Component

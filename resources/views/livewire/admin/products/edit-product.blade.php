@@ -150,7 +150,7 @@
                                 </div>
                                 <!-- ویژگی های ثابت -->
                                 <!-- ویژگی های متغییر -->
-                                <button class="btn btn-sm btn-success" type="button" wire:click="addVariation">
+                                <button class="btn btn-sm btn-success" wire:loading.attr="disabled" wire:target="addVariation"  type="button" wire:click="addVariation">
                                     + {{$product_var->name}}</button>
                                 @foreach ($variations as $id => $variation)
                                     <div class="col-md-12">
@@ -171,7 +171,7 @@
                                         <div @class(["p-2 mb-2 rounded bg-light","collapse"=>$variation['name']]) id="collapse-{{ $id }}"
                                              wire:ignore.self>
                                             @if($loop->count > 1)
-                                                <button type="button" class="close text-danger" style="opacity: 1;"
+                                                <button wire:loading.attr="disabled" wire:target="removeVariation" type="button" class="close text-danger" style="opacity: 1;"
                                                         wire:click="removeVariation({{$id}})">&times;
                                                 </button>
                                             @endif

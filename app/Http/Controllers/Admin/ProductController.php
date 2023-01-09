@@ -80,7 +80,6 @@ class ProductController extends Controller
         return response()->json(['success' => "تصویر حذف شد"]);
     }
 
-    //دسته بندی
     public function editCategory(Request $request, Product $product)
     {
         $categories = Category::where('parent_id', 0)->with('children.children')->get();

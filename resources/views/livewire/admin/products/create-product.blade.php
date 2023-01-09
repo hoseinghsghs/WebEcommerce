@@ -169,7 +169,7 @@
                                     </div>
                                     <p>ویژگی متغییر برای <span id="variationName"
                                                                class="font-weight-bold">{{$category_variation->name}}</span>
-                                        <button class="btn btn-sm btn-info" type="button" wire:click="addVariation">
+                                        <button wire:loading.attr="disabled" wire:target="addVariation" class="btn btn-sm btn-info" type="button" wire:click="addVariation">
                                             افزودن
                                         </button>
                                     </p>
@@ -177,7 +177,7 @@
                                     @foreach($variations as $key=>$var)
                                         <div class="p-2 mb-2 rounded bg-light">
                                             @if(!$loop->first)
-                                                <button type="button" class="close text-danger" style="opacity: 1;"
+                                                <button wire:loading.attr="disabled" wire:target="removeVariation" type="button" class="close text-danger" style="opacity: 1;"
                                                         wire:click="removeVariation({{$key}})">&times;
                                                 </button>
                                             @endif
